@@ -3,6 +3,7 @@ package com.ifenglian.commonlib.base;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 
 /**
  * 文 件 名: BaseApplication
@@ -21,6 +22,7 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        Log.d("AAA", "master");
         MultiDex.install(base);
     }
 
