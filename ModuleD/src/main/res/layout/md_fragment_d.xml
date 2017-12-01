@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="缩略图" />
+
+        <Button
+            android:id="@+id/btn_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="progress" />
+
+        <Button
+            android:id="@+id/btn_loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LoadingLayout" />
+
+        <Button
+            android:id="@+id/btn_round_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RoundImageView" />
+
+        <Button
+            android:id="@+id/btn_ruler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="薄荷尺子" />
+
+        <Button
+            android:id="@+id/btn_baidu_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="百度loading" />
+
+        <Button
+            android:id="@+id/btn_photo_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="底部弹出dialog" />
+
+        <Button
+            android:id="@+id/btn_alert_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="中间弹出dialog" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

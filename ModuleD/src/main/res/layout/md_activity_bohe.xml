@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--数字和单位-->
+    <com.ifenglian.commonlib.widget.view.boheruler.KgNumberLayout
+        android:id="@+id/knl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/br"
+        android:layout_marginBottom="20dp"
+        app:kgTextSize="20sp"
+        app:scaleTextSize="50sp" />
+
+    <!--尺子-->
+    <com.ifenglian.commonlib.widget.view.boheruler.Ruler
+        android:id="@+id/br"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:background="@color/colorDirtyWithe"
+        app:bigScaleLength="40dp"
+        app:bigScaleWidth="2.5dp"
+        app:count="10"
+        app:currentScale="666"
+        app:cursorDrawable="@drawable/cursor_shape"
+        app:cursorHeight="45dp"
+        app:cursorWidth="4dp"
+        app:maxScale="2000"
+        app:minScale="464"
+        app:numberTextSize="22sp"
+        app:scaleInterval="11.5dp"
+        app:smallScaleLength="20dp"
+        app:smallScaleWidth="1.5dp"
+        app:textMarginTop="80dp" />
+
+
+</RelativeLayout>

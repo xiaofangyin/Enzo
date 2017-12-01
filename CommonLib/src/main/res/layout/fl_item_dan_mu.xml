@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fl_danmu_bg_round_shape"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/fl_dan_mu_avatar"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_margin="4dp"
+        android:src="@mipmap/fl_user_avatar_circle" />
+
+    <TextView
+        android:id="@+id/fl_dan_mu_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:textColor="#ffffff" />
+</LinearLayout>

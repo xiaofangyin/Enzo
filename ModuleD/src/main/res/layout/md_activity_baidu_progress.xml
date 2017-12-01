@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.ifenglian.commonlib.widget.view.progress.BaiDuProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
+
+    <com.ifenglian.commonlib.widget.view.progress.BaiDuProgressBar2
+        android:layout_width="500px"
+        android:layout_height="100px"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
+
+    <com.ifenglian.commonlib.widget.view.progress.BaiDuProgressBar3
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
+
+    <com.ifenglian.commonlib.widget.view.progress.BaiDuProgressBar4
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center" />
+</LinearLayout>

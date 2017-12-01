@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@mipmap/fl_icon_btn_send_dan_mu_pressed" android:state_pressed="true" />
+    <item android:drawable="@mipmap/fl_icon_btn_send_dan_mu_normal" />
+
+</selector>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f3f6f6"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/fl_dan_mu_dialog_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/fl_shape_send_dan_mu_edit_text_bg"
+            android:gravity="top"
+            android:hint="回复帖子"
+            android:maxHeight="80dp"
+            android:maxLength="20"
+            android:padding="10dp"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:id="@+id/fl_send_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/fl_selector_send_dan_mu" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

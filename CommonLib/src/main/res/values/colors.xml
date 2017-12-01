@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorGray">#e2e5e2</color>
+    <color name="colorDirtyWithe">#f6f9f6</color>
+    <color name="colorForgiven">#4bbb74</color>
+    <color name="colorLightBlack">#2B2E2B</color>
+
+    <color name="colorRed">#fd5e5e</color>
+    <color name="colorBlue">#5e78fe</color>
+    <color name="colorYellow">#fdc242</color>
+
+    <color name="main_bottom_tab_textcolor_normal">#999999</color>
+    <color name="main_bottom_tab_textcolor_selected">#3ab6fc</color>
+
+    <color name="alert_dialog_cancel_normal">#999999</color>
+    <color name="alert_dialog_cancel_pressed">#cc999999</color>
+    <color name="alert_dialog_confirm_normal">#59a7ff</color>
+    <color name="alert_dialog_confirm_pressed">#cc59a7ff</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="bg_blue">#ff0694f5</color>
+    <color name="shouye_renmen_tv">#2b2b2b</color>
+    <color name="lv_divider">#dad9e2</color>
+    <color name="shouye_lv_tv">#909090</color>
+</resources>

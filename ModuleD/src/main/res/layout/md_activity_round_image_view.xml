@@ -1,0 +1,48 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/meinv1" />
+
+        <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/meinv2" />
+
+        <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/meinv2" />
+
+        <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
+            android:id="@+id/id_meinv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@mipmap/meinv3"
+            zhy:borderRadius="20dp"
+            zhy:type="round" />
+
+        <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@mipmap/meinv3"
+            zhy:borderRadius="60dp"
+            zhy:type="round" />
+    </LinearLayout>
+
+</ScrollView>

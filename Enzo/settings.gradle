@@ -1,0 +1,8 @@
+include ':app', ':Main', ':ModuleA', ':ModuleB', ':ModuleC', ':ModuleD', ':FLKit', ':CommonLib'
+project(':Main').projectDir = new File('../Main')
+project(':ModuleA').projectDir = new File('../ModuleA')
+project(':ModuleB').projectDir = new File('../ModuleB')
+project(':ModuleC').projectDir = new File('../ModuleC')
+project(':ModuleD').projectDir = new File('../ModuleD')
+project(':FLKit').projectDir = new File('../FLKit')
+project(':CommonLib').projectDir = new File('../CommonLib')

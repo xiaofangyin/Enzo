@@ -1,0 +1,9 @@
+<resources>
+    <declare-styleable name="SGLSeekBar">
+        <attr name="cells" format="integer" />
+        <attr name="lineHeight" format="dimension" />
+        <attr name="lineColorSelected" format="color" />
+        <attr name="lineColorUnSelected" format="color" />
+        <attr name="circleColorEdge" format="color" />
+    </declare-styleable>
+</resources>
