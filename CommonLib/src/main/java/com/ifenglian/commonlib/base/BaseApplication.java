@@ -3,6 +3,7 @@ package com.ifenglian.commonlib.base;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 
 /**
  * 文 件 名: BaseApplication
