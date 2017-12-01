@@ -88,13 +88,11 @@ public class SAMainActivity extends BaseActivity {
 
             @Override
             public void success() {
-                //成功
                 Log.e("AAA", "SAMainActivity success...");
             }
 
             @Override
             public void fail() {
-                //失败
                 Log.e("AAA", "SAMainActivity fail...");
             }
         });
