@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
@@ -78,9 +77,6 @@ public abstract class BaseDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        if (Build.VERSION.SDK_INT <= 10) {
-            return super.onCreateDialog(savedInstanceState);
-        }
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View body = inflater.inflate(getLayoutRes(), null, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -90,16 +86,6 @@ public abstract class BaseDialog extends DialogFragment {
         setCancelable(mBackCancel);
         bindView(body);
         return dialog;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup view, Bundle bundle) {
-        if (Build.VERSION.SDK_INT > 10) {
-            return super.onCreateView(inflater, view, bundle);
-        }
-        View body = inflater.inflate(getLayoutRes(), null, false);
-        bindView(body);
-        return body;
     }
 
     public void bindView(View v) {
