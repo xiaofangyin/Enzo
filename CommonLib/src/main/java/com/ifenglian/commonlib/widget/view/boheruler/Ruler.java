@@ -168,6 +168,7 @@ public class Ruler extends View {
                 //处理松手后的Fling
                 mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                 int velocityX = (int) mVelocityTracker.getXVelocity();
+                Log.e(TAG, "velocityX: " + velocityX + "...mMaximumVelocity: " + mMaximumVelocity + "...mMinimumVelocity: " + mMinimumVelocity);
                 if (Math.abs(velocityX) > mMinimumVelocity) {
                     fling(-velocityX);
                 } else {
@@ -189,7 +190,7 @@ public class Ruler extends View {
     }
 
     private void scrollBackToCurrentScale() {
-        Log.e("AAA", "scrollBackToCurrentScale float: " + mCurrentScale + "...int: " + Math.round(mCurrentScale));
+        Log.e(TAG, "scrollBackToCurrentScale float: " + mCurrentScale + "...int: " + Math.round(mCurrentScale));
         mCurrentScale = Math.round(mCurrentScale);
         mOverScroller.startScroll(getScrollX(), 0, scaleToScrollX(mCurrentScale) - getScrollX(), 0, 1000);
         if (mRulerCallback != null) {
