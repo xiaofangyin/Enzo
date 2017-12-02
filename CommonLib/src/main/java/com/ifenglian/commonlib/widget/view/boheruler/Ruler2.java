@@ -3,8 +3,10 @@ package com.ifenglian.commonlib.widget.view.boheruler;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.annotation.Px;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -24,18 +26,16 @@ import com.ifenglian.commonlib.R;
 public class Ruler2 extends View {
 
     private final String TAG = "ruler";
-    //画笔
     private Paint mSmallScalePaint, mBigScalePaint, mTextPaint;
-    //当前刻度值
-    private float mCurrentScale = 0;
+    private float mCurrentScale;
     //最大刻度数
-    private int mMaxLength = 0;
+    private int mMaxLength;
     //长度、最小可滑动值、最大可滑动值
-    private int mLength, mMinPositionX = 0, mMaxPositionX = 0;
+    private int mLength, mMinPositionX, mMaxPositionX;
     //控制滑动
     private OverScroller mOverScroller;
     //记录落点
-    private float mLastX = 0;
+    private float mLastX;
     //惯性最大最小速度
     private int mMaximumVelocity, mMinimumVelocity;
     //速度获取
@@ -52,6 +52,8 @@ public class Ruler2 extends View {
     private int mSmallScaleLength, mBigScaleLength;
     //数字Text距离顶部高度
     private int mTextMarginTop = 80;
+    //光标drawable
+    private Drawable mCursorDrawable;
 
     public Ruler2(Context context) {
         this(context, null);
@@ -69,6 +71,7 @@ public class Ruler2 extends View {
 
     private void init(Context context) {
         initPaints();
+        initDrawable();
         mMinScale = 0;
         mMaxScale = 500;
         mMaxLength = mMaxScale - mMinScale;
@@ -100,6 +103,10 @@ public class Ruler2 extends View {
         mTextPaint.setTextAlign(Paint.Align.CENTER);
     }
 
+    private void initDrawable() {
+        mCursorDrawable = ContextCompat.getDrawable(getContext(), R.drawable.cursor_shape);
+    }
+
     //获取控件宽高，设置相应信息
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -119,8 +126,8 @@ public class Ruler2 extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawScale(canvas);
+        mCursorDrawable.draw(canvas);
     }
-
 
     private void drawScale(Canvas canvas) {
         for (float i = mMinScale; i <= mMaxScale; i++) {
@@ -161,13 +168,13 @@ public class Ruler2 extends View {
                 if (Math.abs(velocityX) > mMinimumVelocity) {
                     fling(-velocityX);
                 } else {
-//                    scrollBackToCurrentScale();
+                    scrollBackToCurrentScale();
                 }
                 mVelocityTracker.clear();
                 break;
             case MotionEvent.ACTION_CANCEL:
                 if (!mOverScroller.isFinished()) {
-//                    mOverScroller.abortAnimation();
+                    mOverScroller.abortAnimation();
                 }
                 break;
         }
@@ -179,6 +186,11 @@ public class Ruler2 extends View {
         mOverScroller.fling(getScrollX(), 0, vX, 0, mMinPositionX, mMaxPositionX, 0, 0);
     }
 
+    private void scrollBackToCurrentScale() {
+        mCurrentScale = Math.round(mCurrentScale);
+        mOverScroller.startScroll(getScrollX(), 0, scaleToScrollX(mCurrentScale) - getScrollX(), 0, 1000);
+    }
+
     @Override
     public void computeScroll() {
         if (mOverScroller.computeScrollOffset()) {
@@ -186,7 +198,6 @@ public class Ruler2 extends View {
         }
     }
 
-    //重写滑动方法，设置到边界的时候不滑。滑动完输出刻度
     @Override
     public void scrollTo(@Px int x, @Px int y) {
         if (x < mMinPositionX) {
@@ -210,6 +221,13 @@ public class Ruler2 extends View {
      */
     private float scrollXtoScale(int scrollX) {
         return ((float) (scrollX - mMinPositionX) / mLength) * mMaxLength + mMinScale;
+    }
+
+    /**
+     * 把Scale转化为ScrollX
+     */
+    private int scaleToScrollX(float scale) {
+        return (int) ((scale - mMinScale) / mMaxLength * mLength + mMinPositionX);
     }
 
     private int dp2px(float dp) {

@@ -38,9 +38,21 @@
         app:smallScaleWidth="1.5dp"
         app:textMarginTop="80dp" />
 
-    <com.ifenglian.commonlib.widget.view.boheruler.Ruler2
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorDirtyWithe" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <com.ifenglian.commonlib.widget.view.boheruler.Ruler2
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/colorDirtyWithe" />
+
+        <ImageView
+            android:layout_width="4dp"
+            android:layout_height="46dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/cursor_shape" />
+    </RelativeLayout>
+
 </LinearLayout>
