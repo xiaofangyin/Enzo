@@ -165,7 +165,7 @@ public class Ruler extends View {
                 scrollBy((int) (moveX), 0);
                 break;
             case MotionEvent.ACTION_UP:
-                //处理松手后的Fling
+                //处理松手后的Fling 1000 表示1000毫秒内运动了多少像素
                 mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                 int velocityX = (int) mVelocityTracker.getXVelocity();
                 Log.e(TAG, "velocityX: " + velocityX + "...mMaximumVelocity: " + mMaximumVelocity + "...mMinimumVelocity: " + mMinimumVelocity);
