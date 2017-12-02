@@ -82,4 +82,9 @@ public class KgNumberLayout extends RelativeLayout implements RulerCallback {
     public void onScaleChanging(float scale) {
         tv_scale.setText(String.valueOf(scale / 10));
     }
+
+    @Override
+    public void afterScaleChanged(float scale) {
+
+    }
 }

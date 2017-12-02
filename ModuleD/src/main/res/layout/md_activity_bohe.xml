@@ -44,6 +44,7 @@
         android:layout_marginTop="30dp">
 
         <com.ifenglian.commonlib.widget.view.boheruler.Ruler2
+            android:id="@+id/ruler2"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@color/colorDirtyWithe" />

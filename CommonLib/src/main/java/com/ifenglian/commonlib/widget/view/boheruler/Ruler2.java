@@ -84,7 +84,7 @@ public class Ruler2 extends View {
     private void initPaints() {
         mSmallScalePaint = new Paint();
         mSmallScalePaint.setAntiAlias(true);
-        mSmallScalePaint.setStrokeWidth(dp2px(1.5f));
+        mSmallScalePaint.setStrokeWidth(dp2px(2f));
         mSmallScalePaint.setColor(getResources().getColor(R.color.colorGray));
         mSmallScalePaint.setStrokeCap(Paint.Cap.ROUND);
 
@@ -182,6 +182,9 @@ public class Ruler2 extends View {
         Log.e("AAA", "scrollBackToCurrentScale float: " + mCurrentScale + "...int: " + Math.round(mCurrentScale));
         mCurrentScale = Math.round(mCurrentScale);
         mOverScroller.startScroll(getScrollX(), 0, scaleToScrollX(mCurrentScale) - getScrollX(), 0, 1000);
+        if (mRulerCallback != null) {
+            mRulerCallback.afterScaleChanged(mCurrentScale);
+        }
     }
 
     @Override
@@ -189,9 +192,7 @@ public class Ruler2 extends View {
         if (mOverScroller.computeScrollOffset()) {
             scrollTo(mOverScroller.getCurrX(), mOverScroller.getCurrY());
 
-            //这是最后OverScroller的最后一次滑动，如果这次滑动完了mCurrentScale不是整数，则把尺子移动到最近的整数位置
-            if (!mOverScroller.computeScrollOffset() && mCurrentScale != Math.round(mCurrentScale)) {
-                //Fling完进行一次检测回滚
+            if (!mOverScroller.computeScrollOffset()) {
                 scrollBackToCurrentScale();
             }
         }
@@ -235,5 +236,9 @@ public class Ruler2 extends View {
 
     private int sp2px(float sp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, getContext().getResources().getDisplayMetrics());
+    }
+
+    public void setRulerCallback(RulerCallback RulerCallback) {
+        this.mRulerCallback = RulerCallback;
     }
 }
