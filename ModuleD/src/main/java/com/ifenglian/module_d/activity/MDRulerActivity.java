@@ -1,11 +1,9 @@
 package com.ifenglian.module_d.activity;
 
-import android.util.Log;
+import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.widget.view.boheruler.Ruler;
-import com.ifenglian.commonlib.widget.view.boheruler.KgNumberLayout;
-import com.ifenglian.commonlib.widget.view.boheruler.Ruler2;
 import com.ifenglian.commonlib.widget.view.boheruler.RulerCallback;
 import com.ifenglian.module_d.R;
 
@@ -24,9 +22,7 @@ public class MDRulerActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        Ruler mBooheeRuler = findViewById(R.id.br);
-        KgNumberLayout mKgNumberLayout = findViewById(R.id.knl);
-        mKgNumberLayout.bindRuler(mBooheeRuler);
+
     }
 
     @Override
@@ -36,16 +32,17 @@ public class MDRulerActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        Ruler2 ruler2 = findViewById(R.id.ruler2);
+        Ruler ruler2 = findViewById(R.id.ruler2);
+        final TextView tvValue = findViewById(R.id.tv_value);
         ruler2.setRulerCallback(new RulerCallback() {
             @Override
             public void onScaleChanging(float scale) {
-                Log.e("AAA", "onScaleChanging scale: " + scale);
+                tvValue.setText(String.valueOf(scale));
             }
 
             @Override
             public void afterScaleChanged(float scale) {
-                Log.e("AAA", "afterScaleChanged scale: " + scale);
+
             }
         });
     }

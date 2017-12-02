@@ -1,270 +1,267 @@
 package com.ifenglian.commonlib.widget.view.boheruler;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.Nullable;
+import android.support.annotation.Px;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
+import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
-import android.widget.RelativeLayout;
+import android.widget.OverScroller;
 
 import com.ifenglian.commonlib.R;
 
 /**
- * 用于包着尺子的外壳，用于画选取光标、外壳
+ * 文 件 名: Ruler2
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/12/2
+ * 邮   箱: xiaofy@ifenglian.com
  */
+public class Ruler extends View {
 
-public class Ruler extends RelativeLayout {
     private final String TAG = "ruler";
-    //内部的尺子
-    private InnerRuler mInnerRuler;
-    //最小最大刻度值(以0.1kg为单位)
-    private int mMinScale = 464, mMaxScale = 2000;
-    //中间光标画笔
-    private Paint mOutLinePaint;
-    //光标宽度、高度
-    private int mCursorWidth = 8, mCursorHeight = 70;
-    //大小刻度的长度
-    private int mSmallScaleLength = 30, mBigScaleLength = 60;
-    //大小刻度的粗细
-    private int mSmallScaleWidth = 3, mBigScaleWidth = 5;
-    //数字字体大小
-    private int mTextSize = 28;
-    //数字Text距离顶部高度
-    private int mTextMarginTop = 120;
-    //刻度间隔
-    private int mInterval = 18;
-    //数字Text颜色
-    private
-    @ColorInt
-    int mTextColor = getResources().getColor(R.color.colorLightBlack);
-    //刻度颜色
-    private
-    @ColorInt
-    int mScaleColor = getResources().getColor(R.color.colorGray);
-    //初始的当前刻度
-    private float mCurrentScale = 0;
+    private Paint mSmallScalePaint, mBigScalePaint, mTextPaint;
+    private float mCurrentScale;
+    //最大刻度数
+    private int mMaxLength;
+    //长度、最小可滑动值、最大可滑动值
+    private int mLength, mMinPositionX, mMaxPositionX;
+    //控制滑动
+    private OverScroller mOverScroller;
+    //记录落点
+    private float mLastX;
+    //惯性最大最小速度
+    private int mMaximumVelocity, mMinimumVelocity;
+    //速度获取
+    private VelocityTracker mVelocityTracker;
+    //回调接口
+    private RulerCallback mRulerCallback;
     //一格大刻度多少格小刻度
     private int mCount = 10;
-    //光标drawable
-    private Drawable mCursorDrawable;
+    //最小最大刻度值(以0.1kg为单位)
+    private int mMinScale, mMaxScale;
+    //刻度间隔
+    private int mInterval;
+    //大小刻度的长度
+    private int mSmallScaleLength, mBigScaleLength;
+    //数字Text距离顶部高度
+    private int mTextMarginTop;
 
     public Ruler(Context context) {
-        super(context);
-        initRuler(context);
+        this(context, null);
+        init(context);
     }
 
-    public Ruler(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initAttrs(context, attrs);
-        initRuler(context);
+    public Ruler(Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public Ruler(Context context, AttributeSet attrs, int defStyleAttr) {
+    public Ruler(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initAttrs(context, attrs);
-        initRuler(context);
+        init(context);
     }
 
-    private void initAttrs(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Ruler, 0, 0);
-        mMinScale = typedArray.getInteger(R.styleable.Ruler_minScale, mMinScale);
-        mMaxScale = typedArray.getInteger(R.styleable.Ruler_maxScale, mMaxScale);
-        mCursorWidth = typedArray.getDimensionPixelSize(R.styleable.Ruler_cursorWidth, mCursorWidth);
-        mCursorHeight = typedArray.getDimensionPixelSize(R.styleable.Ruler_cursorHeight, mCursorHeight);
-        mSmallScaleWidth = typedArray.getDimensionPixelSize(R.styleable.Ruler_smallScaleWidth, mSmallScaleWidth);
-        mSmallScaleLength = typedArray.getDimensionPixelSize(R.styleable.Ruler_smallScaleLength, mSmallScaleLength);
-        mBigScaleWidth = typedArray.getDimensionPixelSize(R.styleable.Ruler_bigScaleWidth, mBigScaleWidth);
-        mBigScaleLength = typedArray.getDimensionPixelSize(R.styleable.Ruler_bigScaleLength, mBigScaleLength);
-        mTextSize = typedArray.getDimensionPixelSize(R.styleable.Ruler_numberTextSize, mTextSize);
-        mTextMarginTop = typedArray.getDimensionPixelSize(R.styleable.Ruler_textMarginTop, mTextMarginTop);
-        mInterval = typedArray.getDimensionPixelSize(R.styleable.Ruler_scaleInterval, mInterval);
-        mTextColor = typedArray.getColor(R.styleable.Ruler_numberTextColor, mTextColor);
-        mScaleColor = typedArray.getColor(R.styleable.Ruler_scaleColor, mScaleColor);
-        mCurrentScale = typedArray.getFloat(R.styleable.Ruler_currentScale, (mMaxScale + mMinScale) / 2);
-        mCount = typedArray.getInt(R.styleable.Ruler_count, mCount);
-        mCursorDrawable = typedArray.getDrawable(R.styleable.Ruler_cursorDrawable);
-        if (mCursorDrawable == null) {
-            mCursorDrawable = ContextCompat.getDrawable(getContext(), R.drawable.cursor_shape);
-        }
-        typedArray.recycle();
-    }
+    private void init(Context context) {
+        initPaints();
+        mCount = 10;
+        mMinScale = 0;
+        mMaxScale = 500;
+        mCurrentScale = 110;
+        mMaxLength = mMaxScale - mMinScale;
 
-    private void initRuler(Context context) {
-        mInnerRuler = new InnerRuler(context, this);
-        //设置全屏，加入InnerRuler
-        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        mInnerRuler.setLayoutParams(layoutParams);
-        addView(mInnerRuler);
-        //设置ViewGroup可画
-        setWillNotDraw(false);
+        mOverScroller = new OverScroller(context);
+        mVelocityTracker = VelocityTracker.obtain();
+        mMaximumVelocity = ViewConfiguration.get(context).getScaledMaximumFlingVelocity();
+        mMinimumVelocity = ViewConfiguration.get(context).getScaledMinimumFlingVelocity();
 
-        initPaint();
-        initDrawable();
-    }
-
-    //在宽高初始化之后定义光标Drawable的边界
-    private void initDrawable() {
-        getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+        //第一次进入，跳转到设定刻度
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public boolean onPreDraw() {
-                getViewTreeObserver().removeOnPreDrawListener(this);
-                mCursorDrawable.setBounds((getWidth() - mCursorWidth) / 2, 0
-                        , (getWidth() + mCursorWidth) / 2, mCursorHeight);
-                return false;
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                goToScale(mCurrentScale);
             }
         });
     }
 
-    private void initPaint() {
-        mOutLinePaint = new Paint();
-        mOutLinePaint.setStrokeWidth(0);
-        mOutLinePaint.setColor(mScaleColor);
+    //初始化画笔
+    private void initPaints() {
+        mSmallScalePaint = new Paint();
+        mSmallScalePaint.setAntiAlias(true);
+        mSmallScalePaint.setStrokeWidth(dp2px(2f));
+        mSmallScalePaint.setColor(getResources().getColor(R.color.colorGray));
+        mSmallScalePaint.setStrokeCap(Paint.Cap.ROUND);
+
+        mBigScalePaint = new Paint();
+        mBigScalePaint.setAntiAlias(true);
+        mBigScalePaint.setStrokeWidth(dp2px(3));
+        mBigScalePaint.setColor(getResources().getColor(R.color.colorGray));
+        mBigScalePaint.setStrokeCap(Paint.Cap.ROUND);
+
+        mTextPaint = new Paint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setColor(getResources().getColor(R.color.colorLightBlack));
+        mTextPaint.setTextSize(sp2px(24));
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+    }
+
+    //获取控件宽高，设置相应信息
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mInterval = dp2px(10);
+        mSmallScaleLength = dp2px(20);
+        mBigScaleLength = dp2px(40);
+        mTextMarginTop = dp2px(80);
+
+        mLength = (mMaxScale - mMinScale) * mInterval;
+        int mHalfWidth = w / 2;
+        mMinPositionX = -mHalfWidth;
+        mMaxPositionX = mLength - mHalfWidth;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //画上面的轮廓线
-        canvas.drawLine(0, 0, canvas.getWidth(), 0, mOutLinePaint);
+        drawScale(canvas);
+    }
+
+    private void drawScale(Canvas canvas) {
+        for (float i = mMinScale; i <= mMaxScale; i++) {
+            float locationX = (i - mMinScale) * mInterval;
+            if (locationX > getScrollX() && locationX < (getScrollX() + canvas.getWidth())) {
+                if (i % mCount == 0) {
+                    canvas.drawLine(locationX, 0, locationX, mBigScaleLength, mBigScalePaint);
+                    canvas.drawText(String.valueOf(i / 10), locationX, mTextMarginTop, mTextPaint);
+                } else {
+                    canvas.drawLine(locationX, 0, locationX, mSmallScaleLength, mSmallScalePaint);
+                }
+            }
+        }
     }
 
     @Override
-    protected void dispatchDraw(Canvas canvas) {
-        super.dispatchDraw(canvas);
-        //画中间的选定光标，要在这里画，因为dispatchDraw()执行在onDraw()后面，这样子光标才能不被尺子的刻度遮蔽
-        mCursorDrawable.draw(canvas);
-
+    public boolean onTouchEvent(MotionEvent event) {
+        float currentX = event.getX();
+        mVelocityTracker.addMovement(event);
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (!mOverScroller.isFinished()) {
+                    mOverScroller.abortAnimation();
+                }
+                mVelocityTracker.clear();
+                mVelocityTracker.addMovement(event);
+                mLastX = currentX;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float moveX = mLastX - currentX;
+                mLastX = currentX;
+                scrollBy((int) (moveX), 0);
+                break;
+            case MotionEvent.ACTION_UP:
+                //处理松手后的Fling
+                mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
+                int velocityX = (int) mVelocityTracker.getXVelocity();
+                if (Math.abs(velocityX) > mMinimumVelocity) {
+                    fling(-velocityX);
+                } else {
+                    scrollBackToCurrentScale();
+                }
+                mVelocityTracker.clear();
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                if (!mOverScroller.isFinished()) {
+                    mOverScroller.abortAnimation();
+                }
+                break;
+        }
+        return true;
     }
 
-    //设置回调
-    public void setCallback(RulerCallback rulerCallback) {
-        mInnerRuler.setRulerCallback(rulerCallback);
+    private void fling(int vX) {
+        mOverScroller.fling(getScrollX(), 0, vX, 0, mMinPositionX, mMaxPositionX, 0, 0);
     }
 
-    //设置当前进度
+    private void scrollBackToCurrentScale() {
+        Log.e("AAA", "scrollBackToCurrentScale float: " + mCurrentScale + "...int: " + Math.round(mCurrentScale));
+        mCurrentScale = Math.round(mCurrentScale);
+        mOverScroller.startScroll(getScrollX(), 0, scaleToScrollX(mCurrentScale) - getScrollX(), 0, 1000);
+        if (mRulerCallback != null) {
+            mRulerCallback.afterScaleChanged(mCurrentScale);
+        }
+    }
+
+    @Override
+    public void computeScroll() {
+        if (mOverScroller.computeScrollOffset()) {
+            scrollTo(mOverScroller.getCurrX(), mOverScroller.getCurrY());
+
+            if (!mOverScroller.computeScrollOffset()) {
+                scrollBackToCurrentScale();
+            }
+        }
+    }
+
+    @Override
+    public void scrollTo(@Px int x, @Px int y) {
+        if (x < mMinPositionX) {
+            x = mMinPositionX;
+        }
+        if (x > mMaxPositionX) {
+            x = mMaxPositionX;
+        }
+        super.scrollTo(x, y);
+
+        mCurrentScale = scrollXtoScale(x);
+        if (mRulerCallback != null) {
+            mRulerCallback.onScaleChanging(Math.round(mCurrentScale));
+        }
+    }
+
+    /**
+     * 把滑动偏移量scrollX转化为刻度Scale
+     */
+    private float scrollXtoScale(int scrollX) {
+        return ((float) (scrollX - mMinPositionX) / mLength) * mMaxLength + mMinScale;
+    }
+
+    /**
+     * 把Scale转化为ScrollX
+     */
+    private int scaleToScrollX(float scale) {
+        return (int) ((scale - mMinScale) / mMaxLength * mLength + mMinPositionX);
+    }
+
+    //设置尺子当前刻度
     public void setCurrentScale(float currentScale) {
-        mCurrentScale = currentScale;
-        mInnerRuler.setCurrentScale(currentScale);
+        this.mCurrentScale = currentScale;
+        goToScale(mCurrentScale);
     }
 
-    //如果控件尺寸变化，中间光标的位置也要重新定义
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        initDrawable();
+    //直接跳转到当前刻度
+    public void goToScale(float scale) {
+        mCurrentScale = Math.round(scale);
+        scrollTo(scaleToScrollX(mCurrentScale), 0);
+        if (mRulerCallback != null) {
+            mRulerCallback.onScaleChanging(mCurrentScale);
+        }
     }
 
-    public float getCurrentScale() {
-        return mCurrentScale;
+    private int dp2px(float dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getContext().getResources().getDisplayMetrics());
     }
 
-    public void setMinScale(int minScale) {
-        this.mMinScale = minScale;
+    private int sp2px(float sp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, getContext().getResources().getDisplayMetrics());
     }
 
-    public int getMinScale() {
-        return mMinScale;
-    }
-
-    public void setMaxScale(int maxScale) {
-        this.mMaxScale = maxScale;
-    }
-
-    public int getMaxScale() {
-        return mMaxScale;
-    }
-
-    public void setCursorWidth(int cursorWidth) {
-        this.mCursorWidth = cursorWidth;
-    }
-
-    public int getCursorWidth() {
-        return mCursorWidth;
-    }
-
-    public void setCursorHeight(int cursorHeight) {
-        this.mCursorHeight = cursorHeight;
-    }
-
-    public int getCursorHeight() {
-        return mCursorHeight;
-    }
-
-
-    public void setBigScaleLength(int bigScaleLength) {
-        this.mBigScaleLength = bigScaleLength;
-    }
-
-    public int getBigScaleLength() {
-        return mBigScaleLength;
-    }
-
-    public void setBigScaleWidth(int bigScaleWidth) {
-        this.mBigScaleWidth = bigScaleWidth;
-    }
-
-    public int getBigScaleWidth() {
-        return mBigScaleWidth;
-    }
-
-    public void setSmallScaleLength(int smallScaleLength) {
-        this.mSmallScaleLength = smallScaleLength;
-    }
-
-    public int getSmallScaleLength() {
-        return mSmallScaleLength;
-    }
-
-    public void setSmallScaleWidth(int smallScaleWidth) {
-        this.mSmallScaleWidth = smallScaleWidth;
-    }
-
-    public int getSmallScaleWidth() {
-        return mSmallScaleWidth;
-    }
-
-    public void setTextMarginTop(int textMarginTop) {
-        this.mTextMarginTop = textMarginTop;
-    }
-
-    public int getTextMarginTop() {
-        return mTextMarginTop;
-    }
-
-    public void setTextSize(int textSize) {
-        this.mTextSize = textSize;
-    }
-
-    public int getTextSize() {
-        return mTextSize;
-    }
-
-    public void setInterval(int interval) {
-        this.mInterval = interval;
-    }
-
-    public int getInterval() {
-        return mInterval;
-    }
-
-    public int getTextColor() {
-        return mTextColor;
-    }
-
-    public int getScaleColor() {
-        return mScaleColor;
-    }
-
-    public void setCount(int mCount) {
-        this.mCount = mCount;
-    }
-
-    public int getCount() {
-        return mCount;
+    public void setRulerCallback(RulerCallback RulerCallback) {
+        this.mRulerCallback = RulerCallback;
     }
 }
