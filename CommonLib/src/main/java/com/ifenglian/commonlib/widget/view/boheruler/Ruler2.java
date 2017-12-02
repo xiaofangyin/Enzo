@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewTreeObserver;
 import android.widget.OverScroller;
 
 import com.ifenglian.commonlib.R;
@@ -68,16 +69,25 @@ public class Ruler2 extends View {
 
     private void init(Context context) {
         initPaints();
+        mCount = 10;
         mMinScale = 0;
         mMaxScale = 500;
+        mCurrentScale = 110;
         mMaxLength = mMaxScale - mMinScale;
-        mCurrentScale = 50;
-        mCount = 10;
 
         mOverScroller = new OverScroller(context);
         mVelocityTracker = VelocityTracker.obtain();
         mMaximumVelocity = ViewConfiguration.get(context).getScaledMaximumFlingVelocity();
         mMinimumVelocity = ViewConfiguration.get(context).getScaledMinimumFlingVelocity();
+
+        //第一次进入，跳转到设定刻度
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                goToScale(mCurrentScale);
+            }
+        });
     }
 
     //初始化画笔
@@ -228,6 +238,21 @@ public class Ruler2 extends View {
      */
     private int scaleToScrollX(float scale) {
         return (int) ((scale - mMinScale) / mMaxLength * mLength + mMinPositionX);
+    }
+
+    //设置尺子当前刻度
+    public void setCurrentScale(float currentScale) {
+        this.mCurrentScale = currentScale;
+        goToScale(mCurrentScale);
+    }
+
+    //直接跳转到当前刻度
+    public void goToScale(float scale) {
+        mCurrentScale = Math.round(scale);
+        scrollTo(scaleToScrollX(mCurrentScale), 0);
+        if (mRulerCallback != null) {
+            mRulerCallback.onScaleChanging(mCurrentScale);
+        }
     }
 
     private int dp2px(float dp) {
