@@ -7,7 +7,6 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.Px;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -239,7 +238,6 @@ public class InnerRuler extends View {
     @Override
     public void computeScroll() {
         if (mOverScroller.computeScrollOffset()) {
-            Log.d(TAG, "computeScroll mOverScroller.getCurrX():" + mOverScroller.getCurrX());
             scrollTo(mOverScroller.getCurrX(), mOverScroller.getCurrY());
 
             //这是最后OverScroller的最后一次滑动，如果这次滑动完了mCurrentScale不是整数，则把尺子移动到最近的整数位置

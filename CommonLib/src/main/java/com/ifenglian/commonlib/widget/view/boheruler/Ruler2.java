@@ -3,11 +3,10 @@ package com.ifenglian.commonlib.widget.view.boheruler;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.annotation.Px;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -51,9 +50,7 @@ public class Ruler2 extends View {
     //大小刻度的长度
     private int mSmallScaleLength, mBigScaleLength;
     //数字Text距离顶部高度
-    private int mTextMarginTop = 80;
-    //光标drawable
-    private Drawable mCursorDrawable;
+    private int mTextMarginTop;
 
     public Ruler2(Context context) {
         this(context, null);
@@ -71,7 +68,6 @@ public class Ruler2 extends View {
 
     private void init(Context context) {
         initPaints();
-        initDrawable();
         mMinScale = 0;
         mMaxScale = 500;
         mMaxLength = mMaxScale - mMinScale;
@@ -87,11 +83,13 @@ public class Ruler2 extends View {
     //初始化画笔
     private void initPaints() {
         mSmallScalePaint = new Paint();
+        mSmallScalePaint.setAntiAlias(true);
         mSmallScalePaint.setStrokeWidth(dp2px(1.5f));
         mSmallScalePaint.setColor(getResources().getColor(R.color.colorGray));
         mSmallScalePaint.setStrokeCap(Paint.Cap.ROUND);
 
         mBigScalePaint = new Paint();
+        mBigScalePaint.setAntiAlias(true);
         mBigScalePaint.setStrokeWidth(dp2px(3));
         mBigScalePaint.setColor(getResources().getColor(R.color.colorGray));
         mBigScalePaint.setStrokeCap(Paint.Cap.ROUND);
@@ -101,10 +99,6 @@ public class Ruler2 extends View {
         mTextPaint.setColor(getResources().getColor(R.color.colorLightBlack));
         mTextPaint.setTextSize(sp2px(24));
         mTextPaint.setTextAlign(Paint.Align.CENTER);
-    }
-
-    private void initDrawable() {
-        mCursorDrawable = ContextCompat.getDrawable(getContext(), R.drawable.cursor_shape);
     }
 
     //获取控件宽高，设置相应信息
@@ -126,7 +120,6 @@ public class Ruler2 extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawScale(canvas);
-        mCursorDrawable.draw(canvas);
     }
 
     private void drawScale(Canvas canvas) {
@@ -179,7 +172,6 @@ public class Ruler2 extends View {
                 break;
         }
         return true;
-
     }
 
     private void fling(int vX) {
@@ -187,6 +179,7 @@ public class Ruler2 extends View {
     }
 
     private void scrollBackToCurrentScale() {
+        Log.e("AAA", "scrollBackToCurrentScale float: " + mCurrentScale + "...int: " + Math.round(mCurrentScale));
         mCurrentScale = Math.round(mCurrentScale);
         mOverScroller.startScroll(getScrollX(), 0, scaleToScrollX(mCurrentScale) - getScrollX(), 0, 1000);
     }
@@ -195,6 +188,12 @@ public class Ruler2 extends View {
     public void computeScroll() {
         if (mOverScroller.computeScrollOffset()) {
             scrollTo(mOverScroller.getCurrX(), mOverScroller.getCurrY());
+
+            //这是最后OverScroller的最后一次滑动，如果这次滑动完了mCurrentScale不是整数，则把尺子移动到最近的整数位置
+            if (!mOverScroller.computeScrollOffset() && mCurrentScale != Math.round(mCurrentScale)) {
+                //Fling完进行一次检测回滚
+                scrollBackToCurrentScale();
+            }
         }
     }
 
