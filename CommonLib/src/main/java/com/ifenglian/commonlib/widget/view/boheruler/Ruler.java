@@ -217,7 +217,9 @@ public class Ruler extends View {
         if (x > mMaxPositionX) {
             x = mMaxPositionX;
         }
-        super.scrollTo(x, y);
+        if (x != getScrollX()) {
+            super.scrollTo(x, y);
+        }
 
         mCurrentScale = scrollXtoScale(x);
         if (mRulerCallback != null) {
