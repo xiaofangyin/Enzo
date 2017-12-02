@@ -22,7 +22,6 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        Log.d("AAA", "master");
         MultiDex.install(base);
     }
 
