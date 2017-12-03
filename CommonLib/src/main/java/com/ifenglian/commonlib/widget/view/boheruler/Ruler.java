@@ -187,6 +187,7 @@ public class Ruler extends View {
 
     private void fling(int vX) {
         mOverScroller.fling(getScrollX(), 0, vX, 0, mMinPositionX, mMaxPositionX, 0, 0);
+        invalidate();
     }
 
     private void scrollBackToCurrentScale() {
@@ -202,7 +203,7 @@ public class Ruler extends View {
     public void computeScroll() {
         if (mOverScroller.computeScrollOffset()) {
             scrollTo(mOverScroller.getCurrX(), mOverScroller.getCurrY());
-
+            postInvalidate();
             if (!mOverScroller.computeScrollOffset()) {
                 scrollBackToCurrentScale();
             }
