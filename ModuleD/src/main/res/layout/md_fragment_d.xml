@@ -37,7 +37,7 @@
             android:id="@+id/btn_ruler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="薄荷尺子" />
+            android:text="尺子" />
 
         <Button
             android:id="@+id/btn_baidu_progress"

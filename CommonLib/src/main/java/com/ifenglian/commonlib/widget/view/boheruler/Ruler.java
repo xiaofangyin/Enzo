@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.annotation.Px;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -168,7 +167,6 @@ public class Ruler extends View {
                 //处理松手后的Fling 1000 表示1000毫秒内运动了多少像素
                 mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                 int velocityX = (int) mVelocityTracker.getXVelocity();
-                Log.e(TAG, "velocityX: " + velocityX + "...mMaximumVelocity: " + mMaximumVelocity + "...mMinimumVelocity: " + mMinimumVelocity);
                 if (Math.abs(velocityX) > mMinimumVelocity) {
                     fling(-velocityX);
                 } else {
@@ -191,12 +189,11 @@ public class Ruler extends View {
     }
 
     private void scrollBackToCurrentScale() {
-        Log.e(TAG, "scrollBackToCurrentScale float: " + mCurrentScale + "...int: " + Math.round(mCurrentScale));
         mCurrentScale = Math.round(mCurrentScale);
         mOverScroller.startScroll(getScrollX(), 0, scaleToScrollX(mCurrentScale) - getScrollX(), 0, 1000);
         invalidate();
         if (mRulerCallback != null) {
-            mRulerCallback.afterScaleChanged(mCurrentScale);
+            mRulerCallback.afterScaleChanged(mCurrentScale / 10);
         }
     }
 
@@ -225,7 +222,7 @@ public class Ruler extends View {
 
         mCurrentScale = scrollXtoScale(x);
         if (mRulerCallback != null) {
-            mRulerCallback.onScaleChanging(Math.round(mCurrentScale));
+            mRulerCallback.onScaleChanging(Math.round(mCurrentScale) / 10f);
         }
     }
 
@@ -254,7 +251,7 @@ public class Ruler extends View {
         mCurrentScale = Math.round(scale);
         scrollTo(scaleToScrollX(mCurrentScale), 0);
         if (mRulerCallback != null) {
-            mRulerCallback.onScaleChanging(mCurrentScale);
+            mRulerCallback.onScaleChanging(mCurrentScale / 10);
         }
     }
 
