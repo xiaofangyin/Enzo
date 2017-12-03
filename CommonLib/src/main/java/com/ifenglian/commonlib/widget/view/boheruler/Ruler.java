@@ -194,6 +194,7 @@ public class Ruler extends View {
         Log.e(TAG, "scrollBackToCurrentScale float: " + mCurrentScale + "...int: " + Math.round(mCurrentScale));
         mCurrentScale = Math.round(mCurrentScale);
         mOverScroller.startScroll(getScrollX(), 0, scaleToScrollX(mCurrentScale) - getScrollX(), 0, 1000);
+        invalidate();
         if (mRulerCallback != null) {
             mRulerCallback.afterScaleChanged(mCurrentScale);
         }
