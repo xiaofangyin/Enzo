@@ -18,7 +18,7 @@ import android.widget.OverScroller;
 import com.ifenglian.commonlib.R;
 
 /**
- * 文 件 名: Ruler2
+ * 文 件 名: Ruler
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/2
  * 邮   箱: xiaofy@ifenglian.com
@@ -205,7 +205,7 @@ public class Ruler extends View {
         if (mOverScroller.computeScrollOffset()) {
             scrollTo(mOverScroller.getCurrX(), mOverScroller.getCurrY());
             postInvalidate();
-            if (!mOverScroller.computeScrollOffset()) {
+            if (!mOverScroller.computeScrollOffset() && mCurrentScale != Math.round(mCurrentScale)) {
                 scrollBackToCurrentScale();
             }
         }

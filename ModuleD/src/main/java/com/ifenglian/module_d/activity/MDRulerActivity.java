@@ -3,6 +3,7 @@ package com.ifenglian.module_d.activity;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseActivity;
+import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.commonlib.widget.view.boheruler.Ruler;
 import com.ifenglian.commonlib.widget.view.boheruler.RulerCallback;
 import com.ifenglian.module_d.R;
@@ -42,7 +43,7 @@ public class MDRulerActivity extends BaseActivity {
 
             @Override
             public void afterScaleChanged(float scale) {
-
+                ToastUtils.showShortToast(String.valueOf(scale));
             }
         });
     }
