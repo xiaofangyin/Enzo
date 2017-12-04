@@ -35,8 +35,6 @@ public class Ruler extends View {
     private OverScroller mOverScroller;
     //记录落点
     private float mLastX;
-    //惯性最大最小速度
-    private int mMaximumVelocity, mMinimumVelocity;
     //速度获取
     private VelocityTracker mVelocityTracker;
     //回调接口
@@ -70,14 +68,12 @@ public class Ruler extends View {
         initPaints();
         mCount = 10;
         mMinScale = 0;
-        mMaxScale = 500;
+        mMaxScale = 1000;
         mCurrentScale = 110;
         mMaxLength = mMaxScale - mMinScale;
 
         mOverScroller = new OverScroller(context);
         mVelocityTracker = VelocityTracker.obtain();
-        mMaximumVelocity = ViewConfiguration.get(context).getScaledMaximumFlingVelocity();
-        mMinimumVelocity = ViewConfiguration.get(context).getScaledMinimumFlingVelocity();
 
         //第一次进入，跳转到设定刻度
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -132,7 +128,7 @@ public class Ruler extends View {
     }
 
     private void drawScale(Canvas canvas) {
-        for (float i = mMinScale; i <= mMaxScale; i++) {
+        for (int i = mMinScale; i <= mMaxScale; i++) {
             float locationX = (i - mMinScale) * mInterval;
             if (locationX > getScrollX() && locationX < (getScrollX() + canvas.getWidth())) {
                 if (i % mCount == 0) {
@@ -165,9 +161,9 @@ public class Ruler extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 //处理松手后的Fling 1000 表示1000毫秒内运动了多少像素
-                mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
+                mVelocityTracker.computeCurrentVelocity(1000, ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity());
                 int velocityX = (int) mVelocityTracker.getXVelocity();
-                if (Math.abs(velocityX) > mMinimumVelocity) {
+                if (Math.abs(velocityX) > ViewConfiguration.get(getContext()).getScaledMinimumFlingVelocity()) {
                     fling(-velocityX);
                 } else {
                     scrollBackToCurrentScale();
