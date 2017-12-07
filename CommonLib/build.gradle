@@ -36,5 +36,6 @@ dependencies {
     api rootProject.ext.dependencies.cardview
     api rootProject.ext.dependencies.constraint
     api rootProject.ext.dependencies.picasso
+    api rootProject.ext.dependencies.lottie
     api project(':FLKit')
 }

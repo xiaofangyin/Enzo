@@ -8,12 +8,13 @@ import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.widget.view.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.activity.MCBaiDuProgressActivity;
+import com.ifenglian.module_d.activity.MDBaiDuProgressActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
 import com.ifenglian.module_d.activity.MDRulerActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDProgressActivity;
+import com.ifenglian.module_d.activity.MDSimpleActivity;
 
 /**
  * 文 件 名: MDFragment
@@ -30,6 +31,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initView(View rootView) {
+        rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
         rootView.findViewById(R.id.btn_album).setOnClickListener(this);
         rootView.findViewById(R.id.btn_progress).setOnClickListener(this);
         rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
@@ -53,7 +55,10 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_album) {
+        if (id == R.id.btn_lottie) {
+            Intent intent = new Intent(getContext(), MDSimpleActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_album) {
             Intent intent = new Intent(getContext(), MDPhotosActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_progress) {
@@ -69,9 +74,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), MDRulerActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_baidu_progress) {
-            Intent intent = new Intent(getContext(), MCBaiDuProgressActivity.class);
+            Intent intent = new Intent(getContext(), MDBaiDuProgressActivity.class);
             startActivity(intent);
-        }else if (id == R.id.btn_photo_select) {
+        } else if (id == R.id.btn_photo_select) {
             BottomAlertDialog dialog = new BottomAlertDialog(getContext());
             dialog.show();
         } else if (id == R.id.btn_alert_view) {

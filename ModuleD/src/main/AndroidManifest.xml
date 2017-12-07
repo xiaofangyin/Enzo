@@ -10,12 +10,13 @@
         android:allowBackup="true"
         android:supportsRtl="true">
 
+        <activity android:name=".activity.MDSimpleActivity" />
         <activity android:name=".activity.MDPhotosActivity" />
         <activity android:name=".activity.MDProgressActivity" />
         <activity android:name=".activity.MDLoadingLayoutActivity" />
         <activity android:name=".activity.MDRoundImageViewActivity" />
         <activity android:name=".activity.MDRulerActivity" />
-        <activity android:name=".activity.MCBaiDuProgressActivity" />
+        <activity android:name=".activity.MDBaiDuProgressActivity" />
 
     </application>
 </manifest>
