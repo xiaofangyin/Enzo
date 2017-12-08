@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0%"
-                android:textColor="#ffffff"
+                android:textColor="#666666"
                 android:textSize="12sp" />
 
             <ProgressBar
@@ -52,33 +52,6 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
-
-            <!--
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <Button
-                    android:id="@+id/btnStartStop"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="25dp"
-                    android:text="暂停"
-                    android:textSize="12sp"
-                    android:textColor="#ffffff"
-                    />
-                <Button
-                    android:id="@+id/btnCancel"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="25dp"
-                    android:text="取消"
-                    android:textSize="12sp"
-                    android:textColor="#ffffff"
-                    />
-            </LinearLayout>
-             -->
         </LinearLayout>
 
     </LinearLayout>

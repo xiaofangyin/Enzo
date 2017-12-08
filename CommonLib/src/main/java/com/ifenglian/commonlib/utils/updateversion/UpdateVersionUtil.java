@@ -15,6 +15,7 @@ import java.io.File;
  * @author wenjie 版本更新的工具类
  */
 public class UpdateVersionUtil {
+    public static String DOWN_LOAD_APP_NAME = "enzo-app.apk";
 
     /**
      * 接口回调
@@ -30,9 +31,6 @@ public class UpdateVersionUtil {
      */
     public static void localCheckedVersion(final Context context, final UpdateListener updateListener) {
         try {
-//			JSONObject jsonObject = JsonUtil.stringToJson(resultData);
-//			JSONArray array = jsonObject.getJSONArray("data");
-//			VersionInfo mVersionInfo = JsonUtil.jsonToBean(array.getJSONObject(0).toString(), VersionInfo.class);
             VersionInfo mVersionInfo = new VersionInfo();
             mVersionInfo.setDownloadUrl("http://gdown.baidu.com/data/wisegame/57a788487345e938/QQ_358.apk");
             mVersionInfo.setVersionDesc("\n更新内容：\n1、增加xxxxx功能\n2、增加xxxx显示！\n3、用户界面优化！\n4、xxxxxx！");
@@ -68,10 +66,10 @@ public class UpdateVersionUtil {
      * @param versionInfo 更新内容
      */
     public static void showDialog(final Context context, final VersionInfo versionInfo) {
-        final File file = new File(SDCardUtils.getRootDirectory() + "/updateVersion/gdmsaec-app.apk");
+        final File file = new File(SDCardUtils.getRootDirectory() + "/updateVersion", DOWN_LOAD_APP_NAME);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("最新版本：").append(versionInfo.getVersionName());
-        if (file.exists() && file.getName().equals("gdmsaec-app.apk")) {
+        if (file.exists() && file.getName().equals(DOWN_LOAD_APP_NAME)) {
             stringBuilder.append("\n").append("新版本已经下载，是否安装？");
         } else {
             stringBuilder.append("\n").append("新版本大小：").append(versionInfo.getVersionSize());
@@ -85,7 +83,7 @@ public class UpdateVersionUtil {
             @Override
             public void onPosClick() {
                 //新版本已经下载
-                if (file.exists() && file.getName().equals("gdmsaec-app.apk")) {
+                if (file.exists() && file.getName().equals(DOWN_LOAD_APP_NAME)) {
                     Intent intent = ApkUtils.getInstallIntent(file);
                     context.startActivity(intent);
                 } else {
