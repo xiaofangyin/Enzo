@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,12 +32,6 @@ public class UpdateVersionUtil {
      */
     public interface UpdateListener {
         void onUpdateReturned(int updateStatus, VersionInfo versionInfo);
-    }
-
-    public UpdateListener updateListener;
-
-    public void setUpdateListener(UpdateListener updateListener) {
-        this.updateListener = updateListener;
     }
 
     /**
@@ -100,7 +93,6 @@ public class UpdateVersionUtil {
             mVersionInfo.setId("1");
             int clientVersionCode = ApkUtils.getVersionCode(context);
             int serverVersionCode = mVersionInfo.getVersionCode();
-            Log.e("AAA", "clientVersionCode: " + clientVersionCode + "...serverVersionCode: " + serverVersionCode);
             //有新版本
             if (clientVersionCode < serverVersionCode) {
                 int i = NetworkUtil.checkedNetWorkType(context);
