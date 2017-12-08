@@ -1,11 +1,9 @@
 package com.ifenglian.commonlib.utils.updateversion;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.lang.reflect.Method;
 
 /**
  * @author wenjie 版本更新的工具类
@@ -176,15 +173,8 @@ public class UpdateVersionUtil {
      */
     public static void collapseStatusBar(Context context) {
         try {
-            @SuppressLint("WrongConstant")
-            Object statusBarManager = context.getSystemService("statusbar");
-            Method collapse;
-            if (Build.VERSION.SDK_INT <= 16) {
-                collapse = statusBarManager.getClass().getMethod("collapse");
-            } else {
-                collapse = statusBarManager.getClass().getMethod("collapsePanels");
-            }
-            collapse.invoke(statusBarManager);
+            Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+            context.sendBroadcast(it);
         } catch (Exception localException) {
             localException.printStackTrace();
         }
