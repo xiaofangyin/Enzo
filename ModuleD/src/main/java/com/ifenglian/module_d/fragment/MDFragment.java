@@ -5,15 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.view.alertdialog.BottomAlertDialog;
+import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
 import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBaiDuProgressActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
-import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
-import com.ifenglian.module_d.activity.MDRulerActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDProgressActivity;
+import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
+import com.ifenglian.module_d.activity.MDRulerActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
 
@@ -82,11 +82,20 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_photo_select) {
-            BottomAlertDialog dialog = new BottomAlertDialog(getContext());
-            dialog.show();
+//            BottomAlertDialog dialog = new BottomAlertDialog(getContext());
+//            dialog.show();
         } else if (id == R.id.btn_alert_view) {
-            CenterAlertDialog dialog = new CenterAlertDialog(getContext());
-            dialog.show();
+            new CenterAlertDialog(getActivity(), "确认", "确定退出吗？", "取消", "确定", new AlertDialogCallBack() {
+                @Override
+                public void onNegClick() {
+
+                }
+
+                @Override
+                public void onPosClick() {
+
+                }
+            }).show();
         }
     }
 }

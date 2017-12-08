@@ -35,28 +35,4 @@ public class BottomAlertDialog extends BaseBottomDialog {
         llContent.removeAllViews();
         llContent.addView(view);
     }
-
-    @Override
-    public int[] setClickIDs() {
-        return new int[]{R.id.button1, R.id.button2, R.id.button3};
-    }
-
-    @Override
-    public void onClick(View view) {
-        int i = view.getId();
-        if (i == R.id.button1) {
-            dismiss();
-
-
-        } else if (i == R.id.button2) {
-            dismiss();
-
-
-        } else if (i == R.id.button3) {
-            dismiss();
-
-
-        }
-    }
-
 }

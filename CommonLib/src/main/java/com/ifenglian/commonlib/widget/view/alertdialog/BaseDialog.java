@@ -12,7 +12,7 @@ import com.ifenglian.commonlib.R;
  * 创建日期: 2017/4/26
  * 邮   箱: xiaofy@ifenglian.com
  */
-public abstract class BaseDialog extends Dialog implements View.OnClickListener {
+public abstract class BaseDialog extends Dialog {
 
     public BaseDialog(Context context) {
         this(context, R.style.BaseDialogTheme);
@@ -25,7 +25,6 @@ public abstract class BaseDialog extends Dialog implements View.OnClickListener 
         }
         setContentView(bindView());
         findView();
-        initListener();
     }
 
     protected int setWindowAnimation() {
@@ -38,20 +37,7 @@ public abstract class BaseDialog extends Dialog implements View.OnClickListener 
 
     }
 
-    protected void addExtView(View view){
+    protected void addExtView(View view) {
 
-    }
-
-    protected int[] setClickIDs() {
-        return null;
-    }
-
-    private void initListener() {
-        int ids[] = setClickIDs();// 设置点击ID
-        if (ids != null && ids.length > 0) {
-            for (int id : ids) {
-                findViewById(id).setOnClickListener(this);
-            }
-        }
     }
 }
