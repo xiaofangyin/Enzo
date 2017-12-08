@@ -4,18 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-/**
- * @项目名: WinfoSeaMap
- * @包名: com.winfo.seamap.utils
- * @类名: PreferenceUtils
- * @创建者: yanfeijun
- * @创建时间: 2015-9-15	上午10:55:24
- * @描述: SharedPreferences工具类
- * @svn版本: $Rev: 93 $
- * @更新人: $Author: wenjie $
- * @更新时间: $Date: 2015-09-24 15:48:12 +0800 (Thu, 24 Sep 2015) $
- * @更新描述: TODO
- */
 public class PreferenceUtils {
     private static SharedPreferences mSp;
     private final static String SP_NAME = "config";

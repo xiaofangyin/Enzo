@@ -7,18 +7,6 @@ import android.os.StatFs;
 
 import java.io.File;
 
-/**
- * @项目名: gdmsaec-app
- * @包名: com.winfo.gdmsaec.app.utils
- * @类名: SDCardUtils
- * @创建者: yanfeijun
- * @创建时间: 2015-10-20	下午3:38:10
- * @描述: SD卡工具类
- * @svn版本: $Rev$
- * @更新人: $Author$
- * @更新时间: $Date$
- * @更新描述: TODO
- */
 public class SDCardUtils {
 
     public static String getPath() {

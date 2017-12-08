@@ -9,18 +9,6 @@ import android.net.Uri;
 
 import java.io.File;
 
-/**
- * @项目名: gdmsaec-app
- * @包名: com.winfo.gdmsaec.app.utils
- * @类名: ApkUtils
- * @创建者: yanfeijun
- * @创建时间: 2015-10-14	上午10:57:36
- * @描述: 获取app相关信息的工具类
- * @svn版本: $Rev: 1161 $
- * @更新人: $Author: wenjie $
- * @更新时间: $Date: 2016-01-25 14:21:41 +0800 (Mon, 25 Jan 2016) $
- * @更新描述: TODO
- */
 public class ApkUtils {
     private static final String TAG = ApkUtils.class.getSimpleName();
 
@@ -87,6 +75,5 @@ public class ApkUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
-
 
 }
