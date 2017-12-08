@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.ifenglian.commonlib.R;
@@ -26,6 +27,7 @@ import okhttp3.Response;
  */
 public class UpdateVersionService extends Service {
 
+    private static String TAG = UpdateVersionService.class.getSimpleName();
 
     private NotificationManager nm;
     private Notification notification;
@@ -64,7 +66,7 @@ public class UpdateVersionService extends Service {
     }
 
     public void downLoadFile(String url) {
-        OkHttpUtils.get(url).tag(this).execute(new DownloadFileCallBack(SDCardUtils.getRootDirectory() + "/updateVersion", "gdmsaec-app.apk"));
+        OkHttpUtils.get(url).tag(TAG).execute(new DownloadFileCallBack(SDCardUtils.getRootDirectory() + "/updateVersion", "gdmsaec-app.apk"));
     }
 
     private class DownloadFileCallBack extends FileCallback {
@@ -75,16 +77,16 @@ public class UpdateVersionService extends Service {
 
         @Override
         public void onBefore(BaseRequest request) {
+            Log.d(TAG, "onBefore...");
             notification.contentView.setTextViewText(R.id.msg, "开始下载：智慧海事");
             nm.notify(titleId, notification);
         }
 
         @Override
         public void onResponse(boolean isFromCache, File file, Request request, Response response) {
+            Log.d(TAG, "onResponse...");
             // 更改文字
             notification.contentView.setTextViewText(R.id.msg, "下载完成!点击安装");
-//                notification.contentView.setViewVisibility(R.id.btnStartStop, View.GONE);
-//                notification.contentView.setViewVisibility(R.id.btnCancel,View.GONE);
             // 发送消息
             nm.notify(0, notification);
             stopSelf();
@@ -97,6 +99,7 @@ public class UpdateVersionService extends Service {
 
         @Override
         public void downloadProgress(long currentSize, long totalSize, float progress, long networkSpeed) {
+            Log.d(TAG, "downloadProgress...");
             if (initTotal == 0) {//说明第一次开始下载
                 initTotal = totalSize;
             }
@@ -115,6 +118,7 @@ public class UpdateVersionService extends Service {
 
         @Override
         public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+            Log.d(TAG, "onError...");
             notification.contentView.setTextViewText(R.id.msg, "网络异常！请检查网络设置！");
 //            //网络连接错误
 //            if (e.get == 0) {

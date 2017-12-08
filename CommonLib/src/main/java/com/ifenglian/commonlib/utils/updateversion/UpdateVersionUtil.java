@@ -6,9 +6,6 @@ import android.content.Intent;
 import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
 import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.File;
 
 /**
@@ -24,48 +21,6 @@ public class UpdateVersionUtil {
     public interface UpdateListener {
         void onUpdateReturned(int updateStatus, VersionInfo versionInfo);
     }
-
-    /**
-     * 网络测试 检测版本
-     *
-     * @param context 上下文
-     */
-    public static void checkVersion(final Context context, final UpdateListener updateListener) {
-        HttpRequest.get(ServerReqAddress.UPDATA_VERSION_REQ, new HttpRequest.RequestCallBackListener() {
-
-            @Override
-            public void onSuccess(String resultData) {
-                try {
-                    JSONObject jsonObject = JsonUtil.stringToJson(resultData);
-                    JSONArray array = jsonObject.getJSONArray("data");
-                    VersionInfo mVersionInfo = JsonUtil.jsonToBean(array.getJSONObject(0).toString(), VersionInfo.class);
-                    int clientVersionCode = ApkUtils.getVersionCode(context);
-                    int serverVersionCode = mVersionInfo.getVersionCode();
-                    //有新版本
-                    if (clientVersionCode < serverVersionCode) {
-                        int i = NetworkUtil.checkedNetWorkType(context);
-                        if (i == NetworkUtil.NOWIFI) {
-                            updateListener.onUpdateReturned(UpdateStatus.NOWIFI, mVersionInfo);
-                        } else if (i == NetworkUtil.WIFI) {
-                            updateListener.onUpdateReturned(UpdateStatus.YES, mVersionInfo);
-                        }
-                    } else {
-                        //无新本
-                        updateListener.onUpdateReturned(UpdateStatus.NO, null);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    updateListener.onUpdateReturned(UpdateStatus.ERROR, null);
-                }
-            }
-
-            @Override
-            public void onFailure(String error) {
-                updateListener.onUpdateReturned(UpdateStatus.TIMEOUT, null);
-            }
-        });
-    }
-
 
     /**
      * 本地测试
