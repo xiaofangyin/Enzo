@@ -37,5 +37,4 @@ dependencies {
     api rootProject.ext.dependencies.picasso
     api rootProject.ext.dependencies.lottie
     api project(':FLKit')
-    implementation project(':myokhttp')
 }
