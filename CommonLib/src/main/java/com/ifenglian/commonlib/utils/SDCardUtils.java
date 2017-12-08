@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.utils.updateversion;
+package com.ifenglian.commonlib.utils;
 
 import android.annotation.TargetApi;
 import android.os.Build;

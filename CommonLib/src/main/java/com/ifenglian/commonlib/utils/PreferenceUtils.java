@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.utils.updateversion;
+package com.ifenglian.commonlib.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

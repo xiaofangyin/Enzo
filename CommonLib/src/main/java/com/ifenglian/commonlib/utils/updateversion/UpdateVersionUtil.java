@@ -3,6 +3,9 @@ package com.ifenglian.commonlib.utils.updateversion;
 import android.content.Context;
 import android.content.Intent;
 
+import com.ifenglian.commonlib.utils.ApkUtils;
+import com.ifenglian.commonlib.utils.NetworkUtil;
+import com.ifenglian.commonlib.utils.SDCardUtils;
 import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
 import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 
