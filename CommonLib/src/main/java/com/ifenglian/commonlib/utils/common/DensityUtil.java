@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.utils;
+package com.ifenglian.commonlib.utils.common;
 
 import android.app.Activity;
 import android.content.Context;

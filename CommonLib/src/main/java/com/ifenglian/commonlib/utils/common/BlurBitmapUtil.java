@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.utils;
+package com.ifenglian.commonlib.utils.common;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

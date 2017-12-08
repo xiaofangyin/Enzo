@@ -11,9 +11,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.ifenglian.commonlib.R;
-import com.ifenglian.commonlib.utils.ApkUtils;
-import com.ifenglian.commonlib.utils.PreferenceUtils;
-import com.ifenglian.commonlib.utils.SDCardUtils;
+import com.ifenglian.commonlib.utils.common.ApkUtils;
+import com.ifenglian.commonlib.utils.common.PreferenceUtils;
+import com.ifenglian.commonlib.utils.common.SDCardUtils;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.FileCallback;
 import com.lzy.okhttputils.request.BaseRequest;
