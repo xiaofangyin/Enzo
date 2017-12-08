@@ -52,8 +52,8 @@ android {
     productFlavors {
         beta {//用于公司内日常发包测试
             applicationId "com.ifenglian.enzotest"
-            versionCode 237
-            versionName "4.0.8.237"
+            versionCode 1
+            versionName "1.0.0.1"
 
             manifestPlaceholders.put("AMAP_KAY_VALUE",'5d093b10b2f886a36d3018d0b6cdf358')
             //网络环境是否为正式环境

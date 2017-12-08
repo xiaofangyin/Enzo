@@ -15,6 +15,7 @@ import com.ifenglian.module_d.activity.MDRulerActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDProgressActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
+import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
 
 /**
  * 文 件 名: MDFragment
@@ -38,6 +39,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_round_image_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
         rootView.findViewById(R.id.btn_baidu_progress).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
         rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
         rootView.findViewById(R.id.btn_alert_view).setOnClickListener(this);
     }
@@ -75,6 +77,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_baidu_progress) {
             Intent intent = new Intent(getContext(), MDBaiDuProgressActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_update_version) {
+            Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_photo_select) {
             BottomAlertDialog dialog = new BottomAlertDialog(getContext());
