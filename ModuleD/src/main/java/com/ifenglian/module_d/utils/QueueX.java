@@ -60,49 +60,4 @@ public class QueueX {
     public boolean isFull() {
         return (nItems == maxSize);
     }
-
-    public int queueSize() {
-        return nItems;
-    }
-
-    public int getMaxSize() {
-        return maxSize;
-    }
-
-    public void setMaxSize(int maxSize) {
-        this.maxSize = maxSize;
-    }
-
-    public Long[] getQueueArray() {
-        return queueArray;
-    }
-
-    public void setQueueArray(Long[] queueArray) {
-        this.queueArray = queueArray;
-    }
-
-    public int getFront() {
-        return front;
-    }
-
-    public void setFront(int front) {
-        this.front = front;
-    }
-
-    public int getRear() {
-        return rear;
-    }
-
-    public void setRear(int rear) {
-        this.rear = rear;
-    }
-
-    public int getnItems() {
-        return nItems;
-    }
-
-    public void setnItems(int nItems) {
-        this.nItems = nItems;
-    }
-
 }
