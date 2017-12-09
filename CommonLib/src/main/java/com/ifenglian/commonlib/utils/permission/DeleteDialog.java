@@ -24,7 +24,7 @@ public class DeleteDialog {
     private void init() {
         mDialog = new Dialog(mContext, R.style.custom_dialog2);
 
-        View mDialogContentView = LayoutInflater.from(mContext).inflate(R.layout.dialog_delete, null);
+        View mDialogContentView = LayoutInflater.from(mContext).inflate(R.layout.clib_dialog_delete, null);
         Button btn_confirm = mDialogContentView.findViewById(R.id.btn_dialog_delete_comfrim);
         tv_content = mDialogContentView.findViewById(R.id.tv_dialog_delete);
         btn_confirm.setOnClickListener(new View.OnClickListener() {

@@ -30,9 +30,9 @@ public class LoadingLayout extends FrameLayout {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadingLayout);
         try {
-            int emptyView = a.getResourceId(R.styleable.LoadingLayout_com_emptyView, R.layout.loading_view_empty);
-            int errorView = a.getResourceId(R.styleable.LoadingLayout_com_errorView, R.layout.loading_view_error);
-            int loadingView = a.getResourceId(R.styleable.LoadingLayout_com_loadingView, R.layout.loading_view_loading);
+            int emptyView = a.getResourceId(R.styleable.LoadingLayout_com_emptyView, R.layout.clib_loading_view_empty);
+            int errorView = a.getResourceId(R.styleable.LoadingLayout_com_errorView, R.layout.clib_loading_view_error);
+            int loadingView = a.getResourceId(R.styleable.LoadingLayout_com_loadingView, R.layout.clib_loading_view_loading);
 
             LayoutInflater inflater = LayoutInflater.from(getContext());
             inflater.inflate(emptyView, this, true);

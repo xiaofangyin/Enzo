@@ -30,7 +30,7 @@ public class BottomAlertDialog extends Dialog {
         super(context, R.style.BaseDialogTheme);
         mBuilder = builder;
         getWindow().setWindowAnimations(R.style.photo_choose_dialog_anim_style);
-        setContentView(R.layout.alert_dialog_bottom);
+        setContentView(R.layout.clib_alert_dialog_bottom);
         configScreenSize(context);
         findView();
     }
@@ -47,7 +47,7 @@ public class BottomAlertDialog extends Dialog {
             layoutParams.setMargins(0, 0,
                     0, DensityUtil.dip2px(getContext(), 0.5f));
             textView.setLayoutParams(layoutParams);
-            textView.setBackground(getContext().getResources().getDrawable(R.drawable.photo_choose_selector));
+            textView.setBackground(getContext().getResources().getDrawable(R.drawable.clib_photo_choose_selector));
             textView.setTextSize(16);
             textView.setTextColor(0xff333333);
             textView.setGravity(Gravity.CENTER);

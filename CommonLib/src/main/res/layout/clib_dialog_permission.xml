@@ -7,7 +7,7 @@
     android:layout_marginLeft="72dp"
     android:layout_marginRight="72dp"
     android:layout_marginTop="36dp"
-    android:background="@drawable/shape_bottom_top_line"
+    android:background="@drawable/clib_shape_bottom_top_line"
     android:gravity="center"
     android:minHeight="100dp"
     android:minWidth="260dp"

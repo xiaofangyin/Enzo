@@ -40,7 +40,7 @@ public class UpdateVersionService extends Service {
         notification.icon = R.mipmap.ic_launcher;
         notification.tickerText = "开始下载";
         notification.when = System.currentTimeMillis();
-        notification.contentView = new RemoteViews(getPackageName(), R.layout.notifycation);
+        notification.contentView = new RemoteViews(getPackageName(), R.layout.clib_notifycation);
 
     }
 

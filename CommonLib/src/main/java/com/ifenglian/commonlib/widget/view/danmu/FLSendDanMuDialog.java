@@ -44,7 +44,7 @@ public class FLSendDanMuDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog mDialog = new Dialog(getActivity(), R.style.FL_SEND_DAN_MU);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
-        View rootView = View.inflate(getActivity(), R.layout.fl_send_dan_mu_dialog_layout, null);
+        View rootView = View.inflate(getActivity(), R.layout.clib_fl_send_dan_mu_dialog_layout, null);
         mDialog.setContentView(rootView);
         mDialog.setCanceledOnTouchOutside(true); // 外部点击取消
         // 设置宽度为屏宽, 靠近屏幕底部。

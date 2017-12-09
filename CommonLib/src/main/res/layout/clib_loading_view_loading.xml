@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/loading_layout_anim_list" />
+            android:background="@drawable/clib_loading_layout_anim_list" />
 
         <TextView
             android:id="@+id/tv_loading"

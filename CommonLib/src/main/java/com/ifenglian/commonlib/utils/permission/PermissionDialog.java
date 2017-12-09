@@ -23,7 +23,7 @@ public class PermissionDialog {
 
     private void init() {
         mDialog = new Dialog(mContext, R.style.custom_dialog2);
-        View mDialogContentView = LayoutInflater.from(mContext).inflate(R.layout.dialog_permission, null);
+        View mDialogContentView = LayoutInflater.from(mContext).inflate(R.layout.clib_dialog_permission, null);
         Button btn_confirm = mDialogContentView.findViewById(R.id.btn_dialog_permission_comfrim);
         tv_content = mDialogContentView.findViewById(R.id.tv_dialog_permission_content);
         btn_confirm.setOnClickListener(new View.OnClickListener() {
