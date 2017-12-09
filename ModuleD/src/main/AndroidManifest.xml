@@ -16,7 +16,6 @@
         <activity android:name=".activity.MDLoadingLayoutActivity" />
         <activity android:name=".activity.MDRoundImageViewActivity" />
         <activity android:name=".activity.MDRulerActivity" />
-        <activity android:name=".activity.MDBaiDuProgressActivity" />
         <activity android:name=".activity.MDUpdateVersionActivity" />
 
     </application>

@@ -10,7 +10,6 @@ import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
 import com.ifenglian.commonlib.widget.view.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.activity.MDBaiDuProgressActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDProgressActivity;
@@ -40,7 +39,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
         rootView.findViewById(R.id.btn_round_image_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_baidu_progress).setOnClickListener(this);
         rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
         rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
         rootView.findViewById(R.id.btn_alert_view).setOnClickListener(this);
@@ -76,9 +74,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_ruler) {
             Intent intent = new Intent(getContext(), MDRulerActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_baidu_progress) {
-            Intent intent = new Intent(getContext(), MDBaiDuProgressActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_update_version) {
             Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);

@@ -46,12 +46,6 @@
             android:text="尺子" />
 
         <Button
-            android:id="@+id/btn_baidu_progress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="百度loading" />
-
-        <Button
             android:id="@+id/btn_update_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
