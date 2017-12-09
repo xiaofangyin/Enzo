@@ -31,11 +31,11 @@ public class ToastUtils {
         toast.setView(view);
     }
 
-    public static void showShortToast(CharSequence msg) {
+    public static void showToast(CharSequence msg) {
         showToast(BaseApplication.getInstance(), msg, Toast.LENGTH_SHORT);
     }
 
-    public static void showShortToast(int resId) {
+    public static void showToast(int resId) {
         showToast(BaseApplication.getInstance(), resId, Toast.LENGTH_SHORT);
     }
 

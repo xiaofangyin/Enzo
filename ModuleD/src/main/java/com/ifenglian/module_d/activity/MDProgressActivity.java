@@ -57,7 +57,7 @@ public class MDProgressActivity extends BaseActivity {
             @Override
             public void onProgressChanged(SGLSeekBar seekBar, int percent) {
                 Log.d("AAA", "percent: " + percent);
-                ToastUtils.showShortToast(String.valueOf(percent));
+                ToastUtils.showToast(String.valueOf(percent));
             }
 
             @Override

@@ -43,7 +43,7 @@ public class MDRulerActivity extends BaseActivity {
 
             @Override
             public void afterScaleChanged(float scale) {
-                ToastUtils.showShortToast(String.valueOf(scale));
+                ToastUtils.showToast(String.valueOf(scale));
             }
         });
     }

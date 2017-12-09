@@ -50,19 +50,19 @@ public class MDUpdateVersionActivity extends BaseActivity {
                                 break;
                             case UpdateStatus.NO:
                                 //没有新版本
-                                ToastUtils.showShortToast("已经是最新版本了!");
+                                ToastUtils.showToast("已经是最新版本了!");
                                 break;
                             case UpdateStatus.NOWIFI:
                                 //当前是非wifi网络
-                                ToastUtils.showShortToast("只有在wifi下更新！");
+                                ToastUtils.showToast("只有在wifi下更新！");
                                 break;
                             case UpdateStatus.ERROR:
                                 //检测失败
-                                ToastUtils.showShortToast("检测失败，请稍后重试！");
+                                ToastUtils.showToast("检测失败，请稍后重试！");
                                 break;
                             case UpdateStatus.TIMEOUT:
                                 //链接超时
-                                ToastUtils.showShortToast("链接超时，请检查网络设置!");
+                                ToastUtils.showToast("链接超时，请检查网络设置!");
                                 break;
                         }
                     }

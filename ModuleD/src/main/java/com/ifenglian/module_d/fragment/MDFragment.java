@@ -88,7 +88,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                     setOnItemClickListener(new BottomAlertDialog.OnItemClickListener() {
                         @Override
                         public void onItemClick(int i, String data) {
-                            ToastUtils.showShortToast(data);
+                            ToastUtils.showToast(data);
                         }
                     }).
                     build();
