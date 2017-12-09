@@ -110,6 +110,7 @@ public class UpdateVersionService extends Service {
     @Override
     public void onDestroy() {
         //下载完成时，清楚该通知，自动安装
+        mCurrentProgress = 0;
         nm.cancel(titleId);
         super.onDestroy();
     }
