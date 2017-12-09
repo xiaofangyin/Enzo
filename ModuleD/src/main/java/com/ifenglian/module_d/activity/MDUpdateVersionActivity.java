@@ -1,5 +1,9 @@
 package com.ifenglian.module_d.activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
@@ -29,7 +33,7 @@ public class MDUpdateVersionActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        verifyStoragePermissions(MDUpdateVersionActivity.this);
     }
 
     @Override
@@ -55,6 +59,7 @@ public class MDUpdateVersionActivity extends BaseActivity {
                             case UpdateStatus.NOWIFI:
                                 //当前是非wifi网络
                                 ToastUtils.showToast("只有在wifi下更新！");
+                                UpdateVersionUtil.showDialog(MDUpdateVersionActivity.this, versionInfo);
                                 break;
                             case UpdateStatus.ERROR:
                                 //检测失败
@@ -69,5 +74,22 @@ public class MDUpdateVersionActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    public static void verifyStoragePermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
     }
 }
