@@ -106,7 +106,7 @@ public class FLDanMuView extends RelativeLayout {
     };
 
     private View createDanMuView(int row) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.clib_fl_item_dan_mu, this, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.lib_fl_item_dan_mu, this, false);
         TextView tvContent = (TextView) view.findViewById(R.id.fl_dan_mu_content);
         tvContent.setText(danMuList.get(mCurrentIndex).getContent());
         ImageView ivAvatar = (ImageView) view.findViewById(R.id.fl_dan_mu_avatar);

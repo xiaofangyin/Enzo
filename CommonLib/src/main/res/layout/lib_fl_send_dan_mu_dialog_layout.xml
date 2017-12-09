@@ -19,7 +19,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/clib_fl_shape_send_dan_mu_edit_text_bg"
+            android:background="@drawable/lib_fl_shape_send_dan_mu_edit_text_bg"
             android:gravity="top"
             android:hint="回复帖子"
             android:maxHeight="80dp"
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/clib_fl_selector_send_dan_mu" />
+                android:background="@drawable/lib_fl_selector_send_dan_mu" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

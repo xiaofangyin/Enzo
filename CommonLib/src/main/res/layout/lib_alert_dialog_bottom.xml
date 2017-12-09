@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/clib_photo_choose_selector"
+        android:background="@drawable/lib_photo_choose_selector"
         android:gravity="center"
         android:text="取消"
         android:textColor="#333333"

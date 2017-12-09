@@ -3,7 +3,7 @@
     android:id="@+id/ll_alert_view_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/clib_alert_dialog_shape_content_bg"
+    android:background="@drawable/lib_alert_dialog_shape_content_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -63,10 +63,10 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@drawable/clib_alert_dialog_selector_button_left"
+            android:background="@drawable/lib_alert_dialog_selector_button_left"
             android:gravity="center"
             android:text="取消"
-            android:textColor="@drawable/clib_selector_text_color_alert_dialog_cancel"
+            android:textColor="@drawable/lib_selector_text_color_alert_dialog_cancel"
             android:textSize="18sp" />
 
         <View
@@ -80,10 +80,10 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@drawable/clib_alert_dialog_selector_button_right"
+            android:background="@drawable/lib_alert_dialog_selector_button_right"
             android:gravity="center"
             android:text="确定"
-            android:textColor="@drawable/clib_selector_text_color_alert_dialog_confirm"
+            android:textColor="@drawable/lib_selector_text_color_alert_dialog_confirm"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

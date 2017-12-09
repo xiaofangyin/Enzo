@@ -19,7 +19,7 @@
             android:layout_width="4dp"
             android:layout_height="46dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/clib_cursor_shape" />
+            android:background="@drawable/lib_cursor_shape" />
     </RelativeLayout>
 
     <TextView

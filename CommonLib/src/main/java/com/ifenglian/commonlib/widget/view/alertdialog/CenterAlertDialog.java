@@ -23,7 +23,7 @@ public class CenterAlertDialog extends Dialog {
 
     public CenterAlertDialog(Context context, String title, String content, String cancel, String confirm, AlertDialogCallBack callBack) {
         super(context, R.style.BaseDialogTheme);
-        setContentView(R.layout.clib_alert_dialog_center);
+        setContentView(R.layout.lib_alert_dialog_center);
         configScreenSize(context);
         mTitle = title;
         mContent = content;
