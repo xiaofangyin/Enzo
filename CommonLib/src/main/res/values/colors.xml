@@ -9,17 +9,10 @@
     <color name="colorForgiven">#4bbb74</color>
     <color name="colorLightBlack">#2B2E2B</color>
 
-    <color name="colorRed">#fd5e5e</color>
-    <color name="colorBlue">#5e78fe</color>
-    <color name="colorYellow">#fdc242</color>
-
-    <color name="main_bottom_tab_textcolor_normal">#999999</color>
-    <color name="main_bottom_tab_textcolor_selected">#3ab6fc</color>
-
-    <color name="alert_dialog_cancel_normal">#999999</color>
-    <color name="alert_dialog_cancel_pressed">#cc999999</color>
-    <color name="alert_dialog_confirm_normal">#59a7ff</color>
-    <color name="alert_dialog_confirm_pressed">#cc59a7ff</color>
+    <color name="color999">#999999</color>
+    <color name="color999_80">#cc999999</color>
+    <color name="colorBlue">#59a7ff</color>
+    <color name="colorBlue_80">#cc59a7ff</color>
 
     <color name="transparent">#00000000</color>
 

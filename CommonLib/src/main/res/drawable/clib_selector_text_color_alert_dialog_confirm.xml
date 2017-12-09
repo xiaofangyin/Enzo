@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:color="@color/alert_dialog_confirm_pressed" android:state_pressed="true"/>
-    <item android:color="@color/alert_dialog_confirm_normal" android:state_pressed="false"/>
+    <item android:color="@color/colorBlue_80" android:state_pressed="true"/>
+    <item android:color="@color/colorBlue" android:state_pressed="false"/>
 
 </selector>  
