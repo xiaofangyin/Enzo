@@ -1,8 +1,5 @@
 package com.ifenglian.commonlib.net;
 
-import android.os.Environment;
-import android.support.annotation.NonNull;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +38,7 @@ public class DownloadUtil {
      * @param saveDir  储存下载文件的SDCard目录
      * @param listener 下载监听
      */
-    public void download(final String url, final String saveDir, final OnDownloadListener listener) {
+    public void download(final String url, final String saveDir, final String fileName, final OnDownloadListener listener) {
         Request request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -61,7 +58,7 @@ public class DownloadUtil {
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
-                    File file = new File(savePath, getNameFromUrl(url));
+                    File file = new File(savePath, fileName);
                     fos = new FileOutputStream(file);
                     long sum = 0;
                     while ((len = is.read(buf)) != -1) {
@@ -101,20 +98,11 @@ public class DownloadUtil {
      */
     private String isExistDir(String saveDir) throws IOException {
         // 下载位置
-        File downloadFile = new File(Environment.getExternalStorageDirectory(), saveDir);
+        File downloadFile = new File(saveDir);
         if (!downloadFile.mkdirs()) {
             downloadFile.createNewFile();
         }
         return downloadFile.getAbsolutePath();
-    }
-
-    /**
-     * @param url
-     * @return 从下载连接中解析出文件名
-     */
-    @NonNull
-    private String getNameFromUrl(String url) {
-        return url.substring(url.lastIndexOf("/") + 1);
     }
 
     public interface OnDownloadListener {
