@@ -9,9 +9,9 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.ifenglian.commonlib.BaseCallBack;
+import com.ifenglian.commonlib.net.BaseCallBack;
 import com.ifenglian.commonlib.R;
-import com.ifenglian.commonlib.utils.OkHttpManager;
+import com.ifenglian.commonlib.net.OkHttpManager;
 import com.ifenglian.commonlib.utils.common.ApkUtils;
 import com.ifenglian.commonlib.utils.common.PreferenceUtils;
 import com.ifenglian.commonlib.utils.common.SDCardUtils;

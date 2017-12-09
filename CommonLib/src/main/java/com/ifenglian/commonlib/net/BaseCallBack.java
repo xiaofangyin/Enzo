@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib;
+package com.ifenglian.commonlib.net;
 
 import com.google.gson.internal.$Gson$Types;
 

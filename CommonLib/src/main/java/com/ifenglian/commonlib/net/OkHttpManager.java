@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.utils;
+package com.ifenglian.commonlib.net;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import com.ifenglian.commonlib.BaseCallBack;
 
 import java.io.File;
 import java.io.FileOutputStream;
