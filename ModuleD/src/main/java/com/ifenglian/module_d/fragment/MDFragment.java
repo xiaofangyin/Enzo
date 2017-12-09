@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
+import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
+import com.ifenglian.commonlib.widget.view.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBaiDuProgressActivity;
@@ -82,8 +84,20 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_photo_select) {
-//            BottomAlertDialog dialog = new BottomAlertDialog(getContext());
-//            dialog.show();
+            BottomAlertDialog.Builder builder = new BottomAlertDialog.Builder(getActivity());
+            BottomAlertDialog dialog = builder.
+                    add("啦啦啦").
+                    add("略略略").
+                    add("嘿嘿嘿").
+                    cancel("取消").
+                    setOnItemClickListener(new BottomAlertDialog.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int i, String data) {
+                            ToastUtils.showShortToast(data);
+                        }
+                    }).
+                    build();
+            dialog.show();
         } else if (id == R.id.btn_alert_view) {
             new CenterAlertDialog(getActivity(), "确认", "确定退出吗？", "取消", "确定", new AlertDialogCallBack() {
                 @Override

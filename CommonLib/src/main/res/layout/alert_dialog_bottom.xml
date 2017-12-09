@@ -9,32 +9,10 @@
         android:id="@+id/ll_alert_dialog_bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/button1"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/photo_choose_selector"
-            android:gravity="center"
-            android:text="选项1"
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="1dp"
-            android:background="@drawable/photo_choose_selector"
-            android:gravity="center"
-            android:text="选项2"
-            android:textColor="#333333"
-            android:textSize="14sp" />
-    </LinearLayout>
+        android:orientation="vertical" />
 
     <TextView
-        android:id="@+id/button3"
+        android:id="@+id/tv_cancel"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="12dp"
