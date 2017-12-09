@@ -13,7 +13,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
-        <activity android:name=".utils.permission.PermissionActivity" />
         <service android:name=".utils.updateversion.UpdateVersionService" />
     </application>
 

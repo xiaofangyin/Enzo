@@ -8,8 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.utils.permission.Permission;
-import com.ifenglian.commonlib.utils.permission.PermissionResult;
 import com.ifenglian.commonlib.widget.view.viewpagerindicator.ViewPagerIndicator;
 import com.ifenglian.main.R;
 import com.ifenglian.main.adapter.SAHomeFragmentAdapter;
@@ -26,8 +24,6 @@ import java.util.List;
  * 邮   箱: xiaofy@ifenglian.com
  */
 public class SAMainActivity extends BaseActivity {
-
-    private String[] REQUEST_PERMISSIONS = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE};
 
     private List<String> itemTitles = Arrays.asList("短信", "收藏", "推荐", "发现");
     private ViewPager mViewPager;
@@ -46,8 +42,6 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        checkPermission();
-
         FragmentPagerAdapter mAdapter = new SAHomeFragmentAdapter(getSupportFragmentManager(), getFragments());
         mViewPager.setAdapter(mAdapter);
         //设置Tab上的标题
@@ -80,22 +74,6 @@ public class SAMainActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         Log.e("AAA", "SAMainActivity onNewIntent...");
-        checkPermission();
-    }
-
-    private void checkPermission() {
-        Permission.checkPermission(this, REQUEST_PERMISSIONS, new PermissionResult() {
-
-            @Override
-            public void success() {
-                Log.e("AAA", "SAMainActivity success...");
-            }
-
-            @Override
-            public void fail() {
-                Log.e("AAA", "SAMainActivity fail...");
-            }
-        });
     }
 
     private List<Fragment> getFragments() {
