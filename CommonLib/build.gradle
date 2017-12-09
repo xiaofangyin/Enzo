@@ -36,7 +36,6 @@ dependencies {
     api rootProject.ext.dependencies.constraint
     api rootProject.ext.dependencies.picasso
     api rootProject.ext.dependencies.lottie
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     api project(':FLKit')
-    implementation files('libs/gson-2.8.2.jar')
 }

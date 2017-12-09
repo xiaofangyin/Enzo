@@ -29,7 +29,8 @@ public class UpdateVersionUtil {
     public static void localCheckedVersion(final Context context, final UpdateListener updateListener) {
         try {
             VersionInfo mVersionInfo = new VersionInfo();
-            mVersionInfo.setDownloadUrl("http://gdown.baidu.com/data/wisegame/57a788487345e938/QQ_358.apk");
+//            mVersionInfo.setDownloadUrl("http://gdown.baidu.com/data/wisegame/57a788487345e938/QQ_358.apk");
+            mVersionInfo.setDownloadUrl("http://p3.exmmw.cn/p1/wq/360yingshidaquan.apk");
             mVersionInfo.setVersionDesc("\n更新内容：\n1、增加xxxxx功能\n2、增加xxxx显示！\n3、用户界面优化！\n4、xxxxxx！");
             mVersionInfo.setVersionCode(2);
             mVersionInfo.setVersionName("v2020");

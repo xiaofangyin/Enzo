@@ -1,5 +1,7 @@
 package com.ifenglian.commonlib.net;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,12 +45,14 @@ public class DownloadUtil {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.e("AAA", "DownloadUtil onFailed...");
                 // 下载失败
                 listener.onDownloadFailed();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                Log.e("AAA", "DownloadUtil onResponse...");
                 InputStream is = null;
                 byte[] buf = new byte[2048];
                 int len = 0;

@@ -22,7 +22,7 @@ public class UpdateVersionService extends Service {
     private NotificationManager nm;
     private Notification notification;
     //标题标识
-    private int titleId = 0;
+    private int titleId = 1314;
     //安装文件
     private File updateFile;
     //下载进度
@@ -69,7 +69,7 @@ public class UpdateVersionService extends Service {
                         // 更改文字
                         notification.contentView.setTextViewText(R.id.update_msg, "下载完成!点击安装");
                         // 发送消息
-                        nm.notify(0, notification);
+                        nm.notify(titleId, notification);
                         stopSelf();
                         //收起通知栏
                         UpdateVersionUtil.collapseStatusBar(UpdateVersionService.this);
@@ -89,7 +89,7 @@ public class UpdateVersionService extends Service {
                             // 更改进度条
                             notification.contentView.setProgressBar(R.id.update_progress_bar, 100, progress, false);
                             // 发送消息
-                            nm.notify(0, notification);
+                            nm.notify(titleId, notification);
                         }
                     }
 
@@ -99,7 +99,7 @@ public class UpdateVersionService extends Service {
                         mCurrentProgress = 0;
                         notification.contentView.setTextViewText(R.id.update_msg, "网络异常！请检查网络设置！");
                         // 发送消息
-                        nm.notify(0, notification);
+                        nm.notify(titleId, notification);
                     }
                 });
     }
