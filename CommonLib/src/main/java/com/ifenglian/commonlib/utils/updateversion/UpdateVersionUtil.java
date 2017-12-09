@@ -11,9 +11,6 @@ import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 
 import java.io.File;
 
-/**
- * @author wenjie 版本更新的工具类
- */
 public class UpdateVersionUtil {
     public static String DOWN_LOAD_APP_NAME = "enzo-app.apk";
 

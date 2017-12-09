@@ -17,10 +17,6 @@ import com.ifenglian.commonlib.utils.common.SDCardUtils;
 
 import java.io.File;
 
-/**
- * @author wenjie
- *         下载新版本的服务类
- */
 public class UpdateVersionService extends Service {
 
     private NotificationManager nm;
@@ -35,7 +31,6 @@ public class UpdateVersionService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         updateFile = new File(SDCardUtils.getRootDirectory() + "/updateVersion", UpdateVersionUtil.DOWN_LOAD_APP_NAME);
 
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -49,6 +44,7 @@ public class UpdateVersionService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.e("AAA", "UpdateVersionService onStartCommand...");
         Bundle bundle = intent.getExtras();
         String url = bundle.getString("downloadUrl");
 
@@ -70,7 +66,7 @@ public class UpdateVersionService extends Service {
                         Log.e("AAA", "onSuccess...");
                         mCurrentProgress = 0;
                         // 更改文字
-                        notification.contentView.setTextViewText(R.id.msg, "下载完成!点击安装");
+                        notification.contentView.setTextViewText(R.id.update_msg, "下载完成!点击安装");
                         // 发送消息
                         nm.notify(0, notification);
                         stopSelf();
@@ -86,9 +82,9 @@ public class UpdateVersionService extends Service {
                         Log.e("AAA", "inProgress... progress: " + progress);
                         if (mCurrentProgress != progress) {
                             mCurrentProgress = progress;
-                            notification.contentView.setTextViewText(R.id.msg, "正在下载：一起去吃鸡");
+                            notification.contentView.setTextViewText(R.id.update_msg, "正在下载：一起去吃鸡");
                             // 更改文字
-                            notification.contentView.setTextViewText(R.id.bartext, progress + "%");
+                            notification.contentView.setTextViewText(R.id.update_percent, progress + "%");
                             // 更改进度条
                             notification.contentView.setProgressBar(R.id.progressBar1, 100, progress, false);
                             // 发送消息
@@ -100,7 +96,7 @@ public class UpdateVersionService extends Service {
                     public void onDownloadFailed() {
                         Log.e("AAA", "onFailure...");
                         mCurrentProgress = 0;
-                        notification.contentView.setTextViewText(R.id.msg, "网络异常！请检查网络设置！");
+                        notification.contentView.setTextViewText(R.id.update_msg, "网络异常！请检查网络设置！");
                         // 发送消息
                         nm.notify(0, notification);
                     }

@@ -1,10 +1,5 @@
 package com.ifenglian.commonlib.utils.updateversion;
 
-/**
- * 
- * @author wenjie
- *	检测版本的状态类
- */
 public interface UpdateStatus {
 	/**
 	 * 没有新版本
