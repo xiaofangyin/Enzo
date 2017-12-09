@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#666666"
+            android:text="正在下载"
             android:textSize="14sp" />
 
         <TextView
@@ -29,11 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0%"
+            android:layout_marginBottom="4dp"
             android:textColor="#666666"
             android:textSize="12sp" />
 
         <ProgressBar
-            android:id="@+id/progressBar1"
+            android:id="@+id/update_progress_bar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="5dp" />

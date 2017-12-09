@@ -56,6 +56,7 @@ public class UpdateVersionService extends Service {
     }
 
     public void downLoadFile(String url) {
+        Log.e("AAA", "UpdateVersionService downLoadFile url: " + url);
         DownloadUtil.get().download(url,
                 SDCardUtils.getRootDirectory() + "/updateVersion",
                 UpdateVersionUtil.DOWN_LOAD_APP_NAME,
@@ -63,7 +64,7 @@ public class UpdateVersionService extends Service {
 
                     @Override
                     public void onDownloadSuccess() {
-                        Log.e("AAA", "onSuccess...");
+                        Log.e("AAA", "UpdateVersionService onSuccess...");
                         mCurrentProgress = 0;
                         // 更改文字
                         notification.contentView.setTextViewText(R.id.update_msg, "下载完成!点击安装");
@@ -79,14 +80,14 @@ public class UpdateVersionService extends Service {
 
                     @Override
                     public void onDownloading(int progress) {
-                        Log.e("AAA", "inProgress... progress: " + progress);
+                        Log.e("AAA", "UpdateVersionService inProgress... progress: " + progress);
                         if (mCurrentProgress != progress) {
                             mCurrentProgress = progress;
                             notification.contentView.setTextViewText(R.id.update_msg, "正在下载：一起去吃鸡");
                             // 更改文字
                             notification.contentView.setTextViewText(R.id.update_percent, progress + "%");
                             // 更改进度条
-                            notification.contentView.setProgressBar(R.id.progressBar1, 100, progress, false);
+                            notification.contentView.setProgressBar(R.id.update_progress_bar, 100, progress, false);
                             // 发送消息
                             nm.notify(0, notification);
                         }
@@ -94,7 +95,7 @@ public class UpdateVersionService extends Service {
 
                     @Override
                     public void onDownloadFailed() {
-                        Log.e("AAA", "onFailure...");
+                        Log.e("AAA", "UpdateVersionService onFailure...");
                         mCurrentProgress = 0;
                         notification.contentView.setTextViewText(R.id.update_msg, "网络异常！请检查网络设置！");
                         // 发送消息
