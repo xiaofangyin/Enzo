@@ -63,6 +63,19 @@ public class UpdateVersionService extends Service {
                 new DownloadUtil.OnDownloadListener() {
 
                     @Override
+                    public void onDownloadStart() {
+                        Log.e("AAA", "UpdateVersionService onDownloadStart...");
+                        mCurrentProgress = 0;
+                        notification.contentView.setTextViewText(R.id.update_msg, "正在下载：一起去吃鸡");
+                        // 更改文字
+                        notification.contentView.setTextViewText(R.id.update_percent, 0 + "%");
+                        // 更改进度条
+                        notification.contentView.setProgressBar(R.id.update_progress_bar, 100, 0, false);
+                        // 发送消息
+                        nm.notify(titleId, notification);
+                    }
+
+                    @Override
                     public void onDownloadSuccess() {
                         Log.e("AAA", "UpdateVersionService onSuccess...");
                         mCurrentProgress = 0;

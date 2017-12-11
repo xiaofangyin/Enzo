@@ -53,6 +53,7 @@ public class DownloadUtil {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("AAA", "DownloadUtil onResponse...");
+                listener.onDownloadStart();
                 InputStream is = null;
                 byte[] buf = new byte[2048];
                 int len = 0;
@@ -110,6 +111,11 @@ public class DownloadUtil {
     }
 
     public interface OnDownloadListener {
+        /**
+         * 开始下载
+         */
+        void onDownloadStart();
+
         /**
          * 下载成功
          */
