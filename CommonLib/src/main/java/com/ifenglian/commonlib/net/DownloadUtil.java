@@ -41,6 +41,7 @@ public class DownloadUtil {
      * @param listener 下载监听
      */
     public void download(final String url, final String saveDir, final String fileName, final OnDownloadListener listener) {
+        listener.onDownloadStart();
         Request request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -53,7 +54,6 @@ public class DownloadUtil {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("AAA", "DownloadUtil onResponse...");
-                listener.onDownloadStart();
                 InputStream is = null;
                 byte[] buf = new byte[2048];
                 int len = 0;
