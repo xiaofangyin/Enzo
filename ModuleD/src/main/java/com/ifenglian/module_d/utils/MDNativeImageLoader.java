@@ -18,11 +18,11 @@ public class MDNativeImageLoader {
 
     private LruCache<String, Bitmap> mMemoryCache;
     private ExecutorService mImageThreadPool = null;
-    private Context context;
+    private Context mContext;
     private Handler mHandler;
 
     public MDNativeImageLoader(Context context) {
-        this.context = context;
+        this.mContext = context;
         // 系统分配给每个应用程序的最大内存
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
         int mCacheSize = maxMemory / 8;
@@ -39,10 +39,8 @@ public class MDNativeImageLoader {
 
     /**
      * 获取线程池的方法，因为涉及到并发的问题，我们加上同步锁
-     *
-     * @return
      */
-    public ExecutorService getThreadPool() {
+    private ExecutorService getThreadPool() {
         if (mImageThreadPool == null) {
             synchronized (ExecutorService.class) {
                 if (mImageThreadPool == null) {
@@ -55,11 +53,8 @@ public class MDNativeImageLoader {
 
     /**
      * 添加Bitmap到内存缓存
-     *
-     * @param key
-     * @param bitmap
      */
-    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+    private void addBitmapToMemoryCache(String key, Bitmap bitmap) {
         if (getBitmapFromMemCache(key) == null && bitmap != null) {
             mMemoryCache.put(key, bitmap);
         }
@@ -67,22 +62,15 @@ public class MDNativeImageLoader {
 
     /**
      * 从内存缓存中获取一个Bitmap
-     *
-     * @param key
-     * @return
      */
-    public Bitmap getBitmapFromMemCache(String key) {
+    private Bitmap getBitmapFromMemCache(String key) {
         return mMemoryCache.get(key);
     }
 
     /**
      * 先从内存缓存中获取Bitmap
-     *
-     * @param url
-     * @param listener
-     * @return
      */
-    public Bitmap downloadImage(final String url, final OnImageLoaderListener listener, final String ImageId) {
+    public Bitmap downloadImage(final String url, final String ImageId, final OnImageLoaderListener listener) {
         final String subUrl = url.substring(url.lastIndexOf("/") + 1, url.length());
         Bitmap bitmap = showCacheBitmap(subUrl);
         if (bitmap != null) {
@@ -109,9 +97,6 @@ public class MDNativeImageLoader {
 
     /**
      * 获取Bitmap
-     *
-     * @param url
-     * @return
      */
     public Bitmap showCacheBitmap(String url) {
         if (getBitmapFromMemCache(url) != null) {
@@ -122,7 +107,7 @@ public class MDNativeImageLoader {
 
     // 从数据库里去图片
     private Bitmap getBitmapFromDB(String ImageId) {
-        Bitmap bit = Thumbnails.getThumbnail(context.getContentResolver(),
+        Bitmap bit = Thumbnails.getThumbnail(mContext.getContentResolver(),
                 Integer.valueOf(ImageId), Thumbnails.MINI_KIND, new BitmapFactory.Options());
         return bit;
     }
@@ -137,13 +122,7 @@ public class MDNativeImageLoader {
         }
     }
 
-    /**
-     * 异步下载图片的回调接口
-     *
-     * @author len
-     */
     public interface OnImageLoaderListener {
         void onImageLoader(Bitmap bitmap, String url);
     }
-
 }

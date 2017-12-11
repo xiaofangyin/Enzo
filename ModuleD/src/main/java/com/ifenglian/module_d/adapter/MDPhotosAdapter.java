@@ -111,14 +111,14 @@ public class MDPhotosAdapter extends BaseAdapter implements OnScrollListener {
             String mImageUrl = itemList.get(i).getImagePath();
             final ImageView mImageView = (ImageView) gridView.findViewWithTag(mImageUrl);
             final MDImageItem item = itemList.get(i);
-            bitmap = mImageDownLoader.downloadImage(mImageUrl, new MDNativeImageLoader.OnImageLoaderListener() {
+            bitmap = mImageDownLoader.downloadImage(mImageUrl, String.valueOf(item.getImageId()), new MDNativeImageLoader.OnImageLoaderListener() {
                 @Override
                 public void onImageLoader(Bitmap bitmap, String url) {
                     if (mImageView != null && bitmap != null) {
                         mImageView.setImageBitmap(bitmap);
                     }
                 }
-            },item.getImageId() + "");
+            });
 
             if (bitmap != null) {
                 mImageView.setImageBitmap(bitmap);
