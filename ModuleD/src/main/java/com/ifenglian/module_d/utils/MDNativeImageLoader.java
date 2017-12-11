@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
-import android.os.Message;
+import android.os.Looper;
 import android.provider.MediaStore.Images.Thumbnails;
 import android.support.v4.util.LruCache;
 
@@ -19,6 +19,7 @@ public class MDNativeImageLoader {
     private LruCache<String, Bitmap> mMemoryCache;
     private ExecutorService mImageThreadPool = null;
     private Context context;
+    private Handler mHandler;
 
     public MDNativeImageLoader(Context context) {
         this.context = context;
@@ -33,6 +34,7 @@ public class MDNativeImageLoader {
                 return value.getRowBytes() * value.getHeight();
             }
         };
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     /**
@@ -86,22 +88,16 @@ public class MDNativeImageLoader {
         if (bitmap != null) {
             return bitmap;
         } else {
-            final Handler handler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    listener.onImageLoader((Bitmap) msg.obj, url);
-                }
-            };
-
             getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
-                    Bitmap bitmap1 = getBitmapFromDB(ImageId);
-                    Message msg = handler.obtainMessage();
-                    msg.obj = bitmap1;
-                    handler.sendMessage(msg);
-
+                    final Bitmap bitmap1 = getBitmapFromDB(ImageId);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onImageLoader(bitmap1, url);
+                        }
+                    });
                     // 将Bitmap 加入内存缓存
                     addBitmapToMemoryCache(subUrl, bitmap1);
                 }
