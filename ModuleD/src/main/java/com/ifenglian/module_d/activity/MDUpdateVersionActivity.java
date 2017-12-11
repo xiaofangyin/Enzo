@@ -22,6 +22,11 @@ import com.ifenglian.module_d.R;
  */
 public class MDUpdateVersionActivity extends BaseActivity {
 
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     public int getLayoutId() {
         return R.layout.md_activity_upate_version;
@@ -87,11 +92,6 @@ public class MDUpdateVersionActivity extends BaseActivity {
             }
         });
     }
-
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
