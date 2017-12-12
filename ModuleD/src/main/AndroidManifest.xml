@@ -20,6 +20,7 @@
         <activity android:name=".activity.MDRoundImageViewActivity" />
         <activity android:name=".activity.MDRulerActivity" />
         <activity android:name=".activity.MDUpdateVersionActivity" />
+        <activity android:name=".activity.MDJniActivity" />
 
     </application>
 </manifest>

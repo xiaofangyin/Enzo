@@ -7,6 +7,7 @@ import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.commonlib.widget.view.boheruler.Ruler;
 import com.ifenglian.commonlib.widget.view.boheruler.RulerCallback;
 import com.ifenglian.module_d.R;
+import com.ifenglian.module_d.jni.DataProvider;
 
 /**
  * 文 件 名: MDRulerActivity
@@ -28,7 +29,9 @@ public class MDRulerActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        DataProvider provider = new DataProvider();
+        int result = provider.add(9, 8);
+        ToastUtils.showToast(String.valueOf(result));
     }
 
     @Override

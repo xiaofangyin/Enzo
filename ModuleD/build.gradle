@@ -11,6 +11,18 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        ndk {
+            moduleName"hello"
+            ldLibs "log", "z", "m"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            // Android.mk 的相对路径
+            path "src/main/jni/Android.mk"
+        }
     }
 
     buildTypes {
