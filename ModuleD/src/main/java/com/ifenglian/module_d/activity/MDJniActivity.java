@@ -1,5 +1,6 @@
 package com.ifenglian.module_d.activity;
 
+import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
@@ -13,7 +14,7 @@ import com.ifenglian.module_d.jni.DataProvider;
  * 创建日期: 2017/12/12
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDJniActivity extends BaseActivity{
+public class MDJniActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
@@ -35,15 +36,24 @@ public class MDJniActivity extends BaseActivity{
 
     }
 
-    public void btn_add(View v){
+    public void btn_add(View v) {
         DataProvider provider = new DataProvider();
         int result = provider.add(9, 8);
         ToastUtils.showToast(String.valueOf(result));
     }
 
-    public void btn_hello(View v){
+    public void btn_hello(View v) {
         DataProvider provider = new DataProvider();
         String result = provider.helloFromC("heiheihei");
         ToastUtils.showToast(result);
+    }
+
+    public void btn_int_array(View v) {
+        DataProvider provider = new DataProvider();
+        int[] array = new int[]{6, 8, 4, 5, 9};
+        provider.getIntArray(array);
+        for (int anArray : array) {
+            Log.d("AAA", String.valueOf(anArray));
+        }
     }
 }

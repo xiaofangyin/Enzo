@@ -38,3 +38,14 @@ JNIEXPORT jstring JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_helloFro
      strcat(cstr," haha");
      return (*env)->NewStringUTF(env,cstr);
   };
+
+JNIEXPORT jintArray JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_getIntArray
+  (JNIEnv * env, jobject obj, jintArray intArray){
+     int length = (*env)->GetArrayLength(env,intArray);
+     int* element = (*env)->GetIntArrayElements(env, intArray, 0);
+     int i = 0;
+     for(;i < length;i++){
+        *(element + i) += 10;
+     }
+     return intArray;
+  };

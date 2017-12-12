@@ -15,4 +15,10 @@
         android:layout_height="wrap_content"
         android:onClick="btn_hello"
         android:text="hello" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btn_int_array"
+        android:text="btn_int_array" />
 </LinearLayout>

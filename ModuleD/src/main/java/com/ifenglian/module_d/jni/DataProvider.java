@@ -15,4 +15,6 @@ public class DataProvider {
     public native int add(int x, int y);
 
     public native String helloFromC(String str);
+
+    public native int[] getIntArray(int[] array);
 }
