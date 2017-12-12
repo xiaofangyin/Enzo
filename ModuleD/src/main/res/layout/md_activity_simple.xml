@@ -44,6 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="data123.json"
+        app:lottie_fileName="data_123.json"
         app:lottie_loop="true" />
 </LinearLayout>
