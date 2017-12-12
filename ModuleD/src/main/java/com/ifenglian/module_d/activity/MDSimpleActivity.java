@@ -27,13 +27,13 @@ public class MDSimpleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // md_activity_simple.xml中 lottie_fileName="data.json"
+        // md_activity_simple.xml中 lottie_fileName="data_123.json"
         // 所以只需要在 app/src/main/assets 中添加AE 生成的 json文件，重命名为data.json就可以显示动画
         setContentView(R.layout.md_activity_simple);
 
         animation_view_click = findViewById(R.id.animation_view_click);
         tv_seek = findViewById(R.id.md_seed);
-        LottieComposition.fromAssetFileName(this, "data.json", new LottieComposition.OnCompositionLoadedListener() {
+        LottieComposition.fromAssetFileName(this, "data_123.json", new LottieComposition.OnCompositionLoadedListener() {
             @Override
             public void onCompositionLoaded(LottieComposition composition) {
                 Log.d("AAA", "onCompositionLoaded...");
