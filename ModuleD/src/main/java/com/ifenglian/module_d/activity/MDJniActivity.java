@@ -40,4 +40,10 @@ public class MDJniActivity extends BaseActivity{
         int result = provider.add(9, 8);
         ToastUtils.showToast(String.valueOf(result));
     }
+
+    public void btn_hello(View v){
+        DataProvider provider = new DataProvider();
+        String result = provider.helloFromC("heiheihei");
+        ToastUtils.showToast(result);
+    }
 }

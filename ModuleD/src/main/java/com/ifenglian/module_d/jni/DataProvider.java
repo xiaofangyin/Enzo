@@ -8,8 +8,11 @@ package com.ifenglian.module_d.jni;
  */
 public class DataProvider {
 
-    static{
+    static {
         System.loadLibrary("hello");
     }
-    public native int add(int x,int y);
+
+    public native int add(int x, int y);
+
+    public native String helloFromC(String str);
 }
