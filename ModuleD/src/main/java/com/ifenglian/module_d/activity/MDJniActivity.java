@@ -51,8 +51,8 @@ public class MDJniActivity extends BaseActivity {
     public void btn_int_array(View v) {
         DataProvider provider = new DataProvider();
         int[] array = new int[]{6, 8, 4, 5, 9};
-        provider.getIntArray(array);
-        for (int anArray : array) {
+        int[] result = provider.getIntArray(array);
+        for (int anArray : result) {
             Log.d("AAA", String.valueOf(anArray));
         }
     }

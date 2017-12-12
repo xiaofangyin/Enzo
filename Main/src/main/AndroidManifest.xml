@@ -8,7 +8,8 @@
 
         <activity
             android:name=".activity.SAMainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

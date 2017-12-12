@@ -2,7 +2,7 @@
     package="com.ifenglian.module_d">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -13,14 +13,30 @@
         android:allowBackup="true"
         android:supportsRtl="true">
 
-        <activity android:name=".activity.MDSimpleActivity" />
-        <activity android:name=".activity.MDPhotosActivity" />
-        <activity android:name=".activity.MDProgressActivity" />
-        <activity android:name=".activity.MDLoadingLayoutActivity" />
-        <activity android:name=".activity.MDRoundImageViewActivity" />
-        <activity android:name=".activity.MDRulerActivity" />
-        <activity android:name=".activity.MDUpdateVersionActivity" />
-        <activity android:name=".activity.MDJniActivity" />
+        <activity
+            android:name=".activity.MDSimpleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDPhotosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDProgressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDLoadingLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDRoundImageViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDRulerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDUpdateVersionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDJniActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
