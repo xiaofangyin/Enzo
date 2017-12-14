@@ -10,6 +10,12 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="navigation" />
+
+        <Button
             android:id="@+id/btn_jni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

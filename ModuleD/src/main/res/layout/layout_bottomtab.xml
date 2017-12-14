@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="#ffffff"
+    android:orientation="horizontal">
+
+    <com.ifenglian.module_d.activity.TabButton
+        android:id="@+id/tab_first"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:clickcolor="#FF3F9FE0"
+        app:clickimage="@mipmap/sa_tab_home_select"
+        app:image="@mipmap/sa_tab_home_normal"
+        app:text="家庭"
+        app:text_size="12dp" />
+
+    <com.ifenglian.module_d.activity.TabButton
+        android:id="@+id/tab_second"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:clickcolor="#FF3F9FE0"
+        app:clickimage="@mipmap/sa_tab_security_select"
+        app:image="@mipmap/sa_tab_security_normal"
+        app:text="安全"
+        app:text_size="12dp" />
+
+    <com.ifenglian.module_d.activity.TabButton
+        android:id="@+id/tab_third"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:clickcolor="#FF3F9FE0"
+        app:clickimage="@mipmap/sa_tab_find_select"
+        app:image="@mipmap/sa_tab_find_normal"
+        app:text="发现"
+        app:text_size="12dp" />
+
+    <com.ifenglian.module_d.activity.TabButton
+        android:id="@+id/tab_fourth"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:clickcolor="#FF3F9FE0"
+        app:clickimage="@mipmap/sa_tab_personalcenter_select"
+        app:image="@mipmap/sa_tab_personalcenter_normal"
+        app:text="我的"
+        app:text_size="12dp" />
+
+</LinearLayout>

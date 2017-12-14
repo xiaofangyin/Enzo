@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+   <declare-styleable name="TabButton">
+       <!--初始显示的图标-->
+       <attr name="image" format="reference"/>
+       <!--选中之后显示的图标-->
+       <attr name="clickimage" format="reference"/>
+       <!--选中之后显示的颜色-->
+       <attr name="clickcolor" format="color"/>
+       <!--图标下显示的文字，不要太长！-->
+       <attr name="text" format="string"/>
+       <!--文字的大小-->
+       <attr name="text_size" format="dimension"/>
+   </declare-styleable>
+
+</resources>
