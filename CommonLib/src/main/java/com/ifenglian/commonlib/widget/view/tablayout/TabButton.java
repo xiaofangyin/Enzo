@@ -61,6 +61,7 @@ public class TabButton extends RelativeLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
+        setBackgroundColor(0xFFFFFFFF);
         View view = LayoutInflater.from(context).inflate(R.layout.lib_tab_button, this);
         ivIcon = view.findViewById(R.id.iv_tab_button);
         tvDesc = view.findViewById(R.id.tv_tab_button);
@@ -100,8 +101,6 @@ public class TabButton extends RelativeLayout {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Log.e("AAA", "onDraw ...");
-//        drawText(canvas);//绘制原文本
-//        drawBitmap(canvas, mDrawBitmap);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         }
@@ -144,8 +143,8 @@ public class TabButton extends RelativeLayout {
                 ivIcon.getTop(),
                 ivIcon.getRight() + width,
                 ivIcon.getTop() + width * 2);
+        Log.e("AAA", "right: " + ivIcon.getRight() + "=====top: " + ivIcon.getTop());
         canvas.drawOval(messageRectF, paint);
-        Log.e("AAA", "right: " + ivIcon.getRight() + "=========top: " + ivIcon.getTop());
         //画数字
         float x = messageRectF.right - messageRectF.width() / 2f;
         float y = messageRectF.bottom - messageRectF.height() / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
@@ -158,6 +157,7 @@ public class TabButton extends RelativeLayout {
      * @param number
      */
     public void addMessageNumber(int number) {
+        Log.e("AAA", "addMessageNumber: " + number);
         mMessageNumber += number;
         invalidateView();
     }
@@ -188,9 +188,13 @@ public class TabButton extends RelativeLayout {
                     float value = (float) valueAnimator.getAnimatedValue();
                     ViewHelper.setScaleX(getChildAt(0), value);
                     ViewHelper.setScaleY(getChildAt(0), value);
+                    invalidateView();
                 }
             });
             valueAnimator.start();
+        } else {
+            ViewHelper.setScaleX(getChildAt(0), endValue);
+            ViewHelper.setScaleY(getChildAt(0), endValue);
         }
     }
 

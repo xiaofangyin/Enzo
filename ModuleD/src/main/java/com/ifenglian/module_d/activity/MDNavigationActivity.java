@@ -1,6 +1,7 @@
 package com.ifenglian.module_d.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -81,6 +82,7 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
         });
         mTabLayout.setCurrentItem(0);
         mTabLayout.setMessageNum(3, 9);
+
     }
 
 
