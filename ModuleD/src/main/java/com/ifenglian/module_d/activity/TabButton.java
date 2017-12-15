@@ -3,16 +3,16 @@ package com.ifenglian.module_d.activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.os.Looper;
-import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.commonlib.utils.common.DensityUtil;
@@ -85,6 +85,7 @@ public class TabButton extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        Log.e("AAA","onSizeChanged ...");
         int iconWidth = mBitmap.getWidth();
         int left = w / 2 - iconWidth / 2;
         int top = h / 2 - (mTextRect.height() + iconWidth) / 2;
@@ -93,11 +94,21 @@ public class TabButton extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        Log.e("AAA","onDraw ...");
         drawText(canvas);//绘制原文本
         drawBitmap(canvas, mDrawBitmap);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         }
+    }
+
+    public void init(String text,int normal,int selected){
+        Log.e("AAA","init ...");
+        mText = text;
+        mBitmap = BitmapFactory.decodeResource(getResources(),normal);
+        mClickBitmap = BitmapFactory.decodeResource(getResources(),selected);
+        mDrawBitmap = mBitmap;
     }
 
     /**
@@ -239,26 +250,4 @@ public class TabButton extends View {
             postInvalidate();
         }
     }
-
-
-    private static final String INSTANCE_STATUS = "instance_status";
-    private static final String STATUS_ALPHA = "status_alpha";
-
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(INSTANCE_STATUS, super.onSaveInstanceState());
-        return bundle;
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Parcelable state) {
-        if (state instanceof Bundle) {
-            Bundle bundle = (Bundle) state;
-            super.onRestoreInstanceState(bundle.getParcelable(INSTANCE_STATUS));
-            return;
-        }
-        super.onRestoreInstanceState(state);
-    }
-
 }
