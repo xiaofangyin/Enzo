@@ -101,7 +101,7 @@ public class TabButton extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int padding = DensityUtil.dip2px(getContext(),4);
+        int padding = DensityUtil.dip2px(getContext(), 4);
         int iconWidth = mBitmap.getWidth();
 
         int left = getMeasuredWidth() / 2 - iconWidth / 2;
@@ -174,7 +174,7 @@ public class TabButton extends View {
         Paint textPaint = new Paint();
         Rect textRect = new Rect();
         String text = mMessageNumber > 99 ? "99+" : mMessageNumber + "";
-        int textSize = 0;
+        int textSize;
         if (text.length() == 1) {
             textSize = DensityUtil.dip2px(getContext(), 12);
         } else if (text.length() == 2) {
@@ -192,14 +192,16 @@ public class TabButton extends View {
         textPaint.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
 
-
         //画圆
-        int width = DensityUtil.dip2px(getContext(), 18);
+        int width = DensityUtil.dip2px(getContext(), 8);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(mColor_message);
 
-        RectF messageRectF = new RectF(mBitmapRect.right - width, mBitmapRect.top, mBitmapRect.right, mBitmapRect.top + width);
+        RectF messageRectF = new RectF(mBitmapRect.right - width,
+                mBitmapRect.top,
+                mBitmapRect.right + width,
+                mBitmapRect.top + width * 2);
         canvas.drawOval(messageRectF, paint);
 
         //画数字

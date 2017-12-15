@@ -39,7 +39,7 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
         mTabButtonList.add((TabButton) findViewById(R.id.tab_fourth));
 
         mTabButtonList.get(0).setAlpha(1.0f);
-
+        mTabButtonList.get(3).addMessageNumber(19);
     }
 
     private void pagerAdapter() {
