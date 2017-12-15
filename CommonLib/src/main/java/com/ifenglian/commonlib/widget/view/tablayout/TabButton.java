@@ -47,6 +47,11 @@ public class TabButton extends View {
     //记录消息数量
     private int mMessageNumber;
 
+    private boolean isSelected;
+    private Paint mMessagePaint;
+    private Rect mMessageRect;
+    private RectF mMessageRectF;
+
     public TabButton(Context context) {
         this(context, null);
     }
@@ -84,6 +89,11 @@ public class TabButton extends View {
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
 
+        //数字画笔内容大小等创建
+        mMessagePaint = new Paint();
+        mMessageRect = new Rect();
+        mMessageRectF = new RectF();
+
         mDrawBitmap = mBitmap;
     }
 
@@ -91,6 +101,14 @@ public class TabButton extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         Log.e("AAA", "onSizeChanged ...");
+        if (isSelected) {
+            Matrix matrix = new Matrix();
+            matrix.postScale(1.2f, 1.2f);
+            mDrawBitmap = Bitmap.createBitmap(mClickBitmap, 0, 0, mClickBitmap.getWidth(), mClickBitmap.getHeight(),
+                    matrix, true);
+        } else {
+            mDrawBitmap = mBitmap;
+        }
     }
 
     @Override
@@ -130,9 +148,6 @@ public class TabButton extends View {
      * 画消息数量
      */
     private void drawMessages(Canvas canvas) {
-        //数字画笔内容大小等创建
-        Paint textPaint = new Paint();
-        Rect textRect = new Rect();
         String text = mMessageNumber > 99 ? "99+" : mMessageNumber + "";
         int textSize;
         if (text.length() == 1) {
@@ -143,14 +158,14 @@ public class TabButton extends View {
             textSize = DensityUtil.dip2px(getContext(), 9);
         }
 
-        textPaint.setColor(0xDDFFFFFF);
-        textPaint.setFakeBoldText(true);
-        textPaint.setAntiAlias(true);
-        textPaint.setTextSize(textSize);
-        textPaint.setTypeface(Typeface.MONOSPACE);
-        textPaint.getTextBounds(text, 0, text.length(), textRect);
-        textPaint.setTextAlign(Paint.Align.CENTER);
-        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+        mMessagePaint.setColor(0xDDFFFFFF);
+        mMessagePaint.setFakeBoldText(true);
+        mMessagePaint.setAntiAlias(true);
+        mMessagePaint.setTextSize(textSize);
+        mMessagePaint.setTypeface(Typeface.MONOSPACE);
+        mMessagePaint.getTextBounds(text, 0, text.length(), mMessageRect);
+        mMessagePaint.setTextAlign(Paint.Align.CENTER);
+        Paint.FontMetrics fontMetrics = mMessagePaint.getFontMetrics();
 
         //画圆
         int width = DensityUtil.dip2px(getContext(), 8);
@@ -158,22 +173,21 @@ public class TabButton extends View {
         paint.setAntiAlias(true);
         paint.setColor(0xFFFF0000);
 
-        RectF messageRectF = new RectF(getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width,
-                getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2,
-                getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width,
-                getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2);
-        canvas.drawOval(messageRectF, paint);
+        mMessageRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width;
+        mMessageRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
+        mMessageRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width;
+        mMessageRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2;
+
+        canvas.drawOval(mMessageRectF, paint);
 
         //画数字
-        float x = messageRectF.right - messageRectF.width() / 2f;
-        float y = messageRectF.bottom - messageRectF.height() / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
-        canvas.drawText(text, x, y, textPaint);
+        float x = mMessageRectF.right - mMessageRectF.width() / 2f;
+        float y = mMessageRectF.bottom - mMessageRectF.height() / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
+        canvas.drawText(text, x, y, mMessagePaint);
     }
 
     /**
      * 消息数量变化并刷新
-     *
-     * @param number
      */
     public void addMessageNumber(int number) {
         mMessageNumber += number;
@@ -182,13 +196,12 @@ public class TabButton extends View {
 
     public void setSelected(boolean selected) {
         Log.e("AAA", "setSelected: " + selected);
+        isSelected = selected;
         if (selected) {
             mTextPaint.setColor(mClickColor);
-
             startScaleAnim(1.0f, 1.2f, mClickBitmap);
         } else {
             mTextPaint.setColor(mColor);
-
             startScaleAnim(1.2f, 1f, mBitmap);
         }
         invalidateView();
@@ -202,14 +215,9 @@ public class TabButton extends View {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     float value = (float) valueAnimator.getAnimatedValue();
-                    // 定义矩阵对象
                     Matrix matrix = new Matrix();
-                    // 缩放原图
                     matrix.postScale(value, value);
-                    //bmp.getWidth(), bmp.getHeight()分别表示缩放后的位图宽高
-                    mDrawBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(),
-                            matrix, true);
-                    Log.e("AAA", "bitmap width: " + mDrawBitmap.getWidth());
+                    mDrawBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                     invalidateView();
                 }
             });
