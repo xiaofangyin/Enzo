@@ -163,7 +163,6 @@ public class TabButton extends View {
         canvas.drawBitmap(bitmapTem, 0, 0, null);
     }
 
-
     /**
      * 画消息数量
      *
@@ -208,7 +207,6 @@ public class TabButton extends View {
         float x = messageRectF.right - messageRectF.width() / 2f;
         float y = messageRectF.bottom - messageRectF.height() / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
         canvas.drawText(text, x, y, textPaint);
-
     }
 
     /**
@@ -264,6 +262,5 @@ public class TabButton extends View {
         }
         super.onRestoreInstanceState(state);
     }
-
 
 }
