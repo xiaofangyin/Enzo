@@ -46,6 +46,10 @@ public class TabButton extends RelativeLayout {
     private int mMessageNumber;
     private ImageView ivIcon;
     private TextView tvDesc;
+    private Paint textPaint;
+    private Rect textRect;
+    private Paint ovalPaint;
+    private RectF messageRectF;
 
     public TabButton(Context context) {
         this(context, null);
@@ -84,6 +88,10 @@ public class TabButton extends RelativeLayout {
         }
         a.recycle();
 
+        textPaint = new Paint();
+        textRect = new Rect();
+        ovalPaint = new Paint();
+        messageRectF = new RectF();
 
         ivIcon.setImageBitmap(mBitmap);
         tvDesc.setTextColor(mColor);
@@ -112,8 +120,6 @@ public class TabButton extends RelativeLayout {
     private void drawMessages(Canvas canvas) {
         Log.e("AAA", "drawMessages ...");
         //数字画笔内容大小等创建
-        Paint textPaint = new Paint();
-        Rect textRect = new Rect();
         String text = mMessageNumber > 99 ? "99+" : mMessageNumber + "";
         int textSize;
         if (text.length() == 1) {
@@ -133,18 +139,17 @@ public class TabButton extends RelativeLayout {
         textPaint.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
 
+        ovalPaint.setAntiAlias(true);
+        ovalPaint.setColor(0xFFFF0000);
+
         //画圆
         int width = DensityUtil.dip2px(getContext(), 8);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(0xFFFF0000);
-
-        RectF messageRectF = new RectF(ivIcon.getRight() - width,
-                ivIcon.getTop(),
-                ivIcon.getRight() + width,
-                ivIcon.getTop() + width * 2);
-        Log.e("AAA", "right: " + ivIcon.getRight() + "=====top: " + ivIcon.getTop());
-        canvas.drawOval(messageRectF, paint);
+        float scale = getChildAt(0).getScaleX() - 1f;
+        messageRectF.left = ivIcon.getRight() - width + width * scale;
+        messageRectF.top = ivIcon.getTop() - width * scale;
+        messageRectF.right = ivIcon.getRight() + width + width * scale;
+        messageRectF.bottom = ivIcon.getTop() + width * 2 - width * scale;
+        canvas.drawOval(messageRectF, ovalPaint);
         //画数字
         float x = messageRectF.right - messageRectF.width() / 2f;
         float y = messageRectF.bottom - messageRectF.height() / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
