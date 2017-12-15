@@ -92,7 +92,7 @@ public class TabButton extends View {
         Log.e("AAA", "onSizeChanged ...");
         if (isSelected) {
             Matrix matrix = new Matrix();
-            matrix.postScale(1.2f, 1.2f);
+            matrix.postScale(1.15f, 1.15f);
             mDrawBitmap = Bitmap.createBitmap(mSelectedBitmap, 0, 0, mSelectedBitmap.getWidth(), mSelectedBitmap.getHeight(),
                     matrix, true);
         } else {
@@ -188,10 +188,10 @@ public class TabButton extends View {
         isSelected = selected;
         if (selected) {
             mTextPaint.setColor(mSelectedColor);
-            startScaleAnim(1.0f, 1.2f, mSelectedBitmap);
+            startScaleAnim(1.0f, 1.15f, mSelectedBitmap);
         } else {
             mTextPaint.setColor(mNormalColor);
-            startScaleAnim(1.2f, 1f, mNormalBitmap);
+            startScaleAnim(1.15f, 1f, mNormalBitmap);
         }
         invalidateView();
     }
