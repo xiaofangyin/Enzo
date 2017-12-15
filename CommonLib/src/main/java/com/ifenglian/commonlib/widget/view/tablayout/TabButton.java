@@ -44,6 +44,7 @@ public class TabButton extends RelativeLayout {
     private String mText = "";
     //记录消息数量
     private int mMessageNumber;
+    private int mIconWidth;
     private ImageView ivIcon;
     private TextView tvDesc;
     private Paint textPaint;
@@ -93,6 +94,7 @@ public class TabButton extends RelativeLayout {
         ovalPaint = new Paint();
         ovalRectF = new RectF();
 
+        mIconWidth = mBitmap.getWidth();
         ivIcon.setImageBitmap(mBitmap);
         tvDesc.setTextColor(mColor);
         tvDesc.setText(mText);
@@ -145,10 +147,10 @@ public class TabButton extends RelativeLayout {
         //画圆
         int width = DensityUtil.dip2px(getContext(), 8);
         float scale = getChildAt(0).getScaleX() - 1f;
-        ovalRectF.left = ivIcon.getRight() - width + width * scale;
-        ovalRectF.top = ivIcon.getTop() - width * scale;
-        ovalRectF.right = ivIcon.getRight() + width + width * scale;
-        ovalRectF.bottom = ivIcon.getTop() + width * 2 - width * scale;
+        ovalRectF.left = ivIcon.getRight() - width + mIconWidth * scale / 2;
+        ovalRectF.top = ivIcon.getTop() - mIconWidth * scale / 2;
+        ovalRectF.right = ivIcon.getRight() + width + mIconWidth * scale / 2;
+        ovalRectF.bottom = ivIcon.getTop() + width * 2 - mIconWidth * scale / 2;
         canvas.drawOval(ovalRectF, ovalPaint);
         //画数字
         float x = ovalRectF.right - ovalRectF.width() / 2f;
