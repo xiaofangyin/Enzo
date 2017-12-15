@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -40,17 +41,11 @@ public class TabButton extends View {
     //显示的文本
     private String mText = "";
     //画图位置
-    private Rect mBitmapRect;
     private Rect mTextRect;
     //文本的画笔
     private Paint mTextPaint;
     //记录消息数量
     private int mMessageNumber;
-    private int mIconWidth;
-    //icon离左、上的距离
-    private int mMarginLeft, mMarginTop;
-
-    private boolean isSelected;
 
     public TabButton(Context context) {
         this(context, null);
@@ -82,8 +77,6 @@ public class TabButton extends View {
         }
         a.recycle();
 
-        mBitmapRect = new Rect();
-
         mTextRect = new Rect();
         mTextPaint = new Paint();
         mTextPaint.setColor(mColor);
@@ -98,21 +91,6 @@ public class TabButton extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         Log.e("AAA", "onSizeChanged ...");
-        mIconWidth = mBitmap.getWidth();
-        mMarginLeft = w / 2 - mIconWidth / 2;
-        mMarginTop = h / 2 - (mTextRect.height() + mIconWidth) / 2;
-        if (isSelected) {
-            int scaleValue = (int) (mIconWidth * 0.2f / 2);
-            mBitmapRect.left = mMarginLeft - scaleValue;
-            mBitmapRect.top = mMarginTop - scaleValue;
-            mBitmapRect.right = mMarginLeft + mIconWidth + scaleValue;
-            mBitmapRect.bottom = mMarginTop + mIconWidth + scaleValue;
-        } else {
-            mBitmapRect.left = mMarginLeft;
-            mBitmapRect.top = mMarginTop;
-            mBitmapRect.right = mMarginLeft + mIconWidth;
-            mBitmapRect.bottom = mMarginTop + mIconWidth;
-        }
     }
 
     @Override
@@ -128,12 +106,11 @@ public class TabButton extends View {
 
     /**
      * 绘制文本
-     *
-     * @param canvas
      */
     private void drawText(Canvas canvas) {
+        int marginTop = getHeight() / 2 - (mTextRect.height() + mDrawBitmap.getHeight()) / 2;
         int x = getMeasuredWidth() / 2 - mTextRect.width() / 2;
-        int y = mBitmapRect.bottom + mTextRect.height();
+        int y = marginTop + mDrawBitmap.getHeight() + mTextRect.height();
         canvas.drawText(mText, x, y, mTextPaint);
     }
 
@@ -141,10 +118,12 @@ public class TabButton extends View {
      * 画图标
      */
     private void drawBitmap(Canvas canvas, Bitmap bitmap) {
+        int marginLeft = getWidth() / 2 - bitmap.getWidth() / 2;
+        int marginTop = getHeight() / 2 - (mTextRect.height() + mDrawBitmap.getHeight()) / 2;
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
-        canvas.drawBitmap(bitmap, null, mBitmapRect, paint);
+        canvas.drawBitmap(bitmap, marginLeft, marginTop, paint);
     }
 
     /**
@@ -179,10 +158,10 @@ public class TabButton extends View {
         paint.setAntiAlias(true);
         paint.setColor(0xFFFF0000);
 
-        RectF messageRectF = new RectF(mBitmapRect.right - width,
-                mBitmapRect.top,
-                mBitmapRect.right + width,
-                mBitmapRect.top + width * 2);
+        RectF messageRectF = new RectF(getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width,
+                getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2,
+                getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width,
+                getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2);
         canvas.drawOval(messageRectF, paint);
 
         //画数字
@@ -202,23 +181,20 @@ public class TabButton extends View {
     }
 
     public void setSelected(boolean selected) {
-        isSelected = selected;
         Log.e("AAA", "setSelected: " + selected);
         if (selected) {
             mTextPaint.setColor(mClickColor);
-            mDrawBitmap = mClickBitmap;
 
-            startScaleAnim(0f, 0.2f);
+            startScaleAnim(1.0f, 1.2f, mClickBitmap);
         } else {
             mTextPaint.setColor(mColor);
-            mDrawBitmap = mBitmap;
 
-            startScaleAnim(0.2f, 0f);
+            startScaleAnim(1.2f, 1f, mBitmap);
         }
         invalidateView();
     }
 
-    private void startScaleAnim(float startValue, float endValue) {
+    private void startScaleAnim(float startValue, float endValue, final Bitmap bitmap) {
         if (getWidth() > 0) {
             ValueAnimator valueAnimator = ValueAnimator.ofFloat(startValue, endValue);
             valueAnimator.setDuration(200);
@@ -226,14 +202,15 @@ public class TabButton extends View {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     float value = (float) valueAnimator.getAnimatedValue();
-                    if (mBitmapRect != null) {
-                        int scaleValue = (int) (mIconWidth * value / 2);
-                        mBitmapRect.left = mMarginLeft - scaleValue;
-                        mBitmapRect.top = mMarginTop - scaleValue;
-                        mBitmapRect.right = mMarginLeft + mIconWidth + scaleValue;
-                        mBitmapRect.bottom = mMarginTop + mIconWidth + scaleValue;
-                        invalidateView();
-                    }
+                    // 定义矩阵对象
+                    Matrix matrix = new Matrix();
+                    // 缩放原图
+                    matrix.postScale(value, value);
+                    //bmp.getWidth(), bmp.getHeight()分别表示缩放后的位图宽高
+                    mDrawBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(),
+                            matrix, true);
+                    Log.e("AAA", "bitmap width: " + mDrawBitmap.getWidth());
+                    invalidateView();
                 }
             });
             valueAnimator.start();
