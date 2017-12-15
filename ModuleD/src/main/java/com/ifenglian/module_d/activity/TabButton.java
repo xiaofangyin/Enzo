@@ -5,9 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
@@ -21,10 +18,9 @@ import android.view.View;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
 import com.ifenglian.module_d.R;
 
-/**
- * Created by MJJ on 2015/7/29.
- */
 public class TabButton extends View {
+
+    private Bitmap mDrawBitmap;
     //初始显示的图标
     private Bitmap mBitmap;
     //选中之后显示的图标
@@ -32,15 +28,11 @@ public class TabButton extends View {
     //未选中的颜色
     private int mColor = 0xFFAAAAAA;
     //选中之后的颜色
-    private int mClickColor = 0xFF3F9FE0;
-    //圆形消息的颜色
-    private int mColor_message = 0xFFFF0000;
+    private int mClickColor = 0xFF30B5FF;
     //字体大小
     private float mTextSize;
     //显示的文本
     private String mText = "";
-    //选中图标的透明度，0f为未选中，1f为选中
-    private float mAlpha = 0f;
     //画图位置
     private Rect mBitmapRect;
     private Rect mTextRect;
@@ -59,12 +51,10 @@ public class TabButton extends View {
 
     public TabButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         TypedArray a = context.obtainStyledAttributes(attrs,
                 R.styleable.TabButton);
 
         int n = a.getIndexCount();
-
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
             if (attr == R.styleable.TabButton_image) {
@@ -72,8 +62,8 @@ public class TabButton extends View {
                 mBitmap = drawable.getBitmap();
 
             } else if (attr == R.styleable.TabButton_clickimage) {
-                BitmapDrawable clickdrawable = (BitmapDrawable) a.getDrawable(attr);
-                mClickBitmap = clickdrawable.getBitmap();
+                BitmapDrawable clickDrawable = (BitmapDrawable) a.getDrawable(attr);
+                mClickBitmap = clickDrawable.getBitmap();
 
             } else if (attr == R.styleable.TabButton_clickcolor) {
                 mClickColor = a.getColor(attr, 0xFF3F9FE0);
@@ -87,39 +77,32 @@ public class TabButton extends View {
             }
 
         }
-
         a.recycle();
 
         mTextRect = new Rect();
         mTextPaint = new Paint();
+        mTextPaint.setColor(mColor);
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
 
+        mDrawBitmap = mBitmap;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int padding = DensityUtil.dip2px(getContext(), 4);
         int iconWidth = mBitmap.getWidth();
 
         int left = getMeasuredWidth() / 2 - iconWidth / 2;
         int top = getMeasuredHeight() / 2 - (mTextRect.height() + iconWidth) / 2;
         mBitmapRect = new Rect(left, top, left + iconWidth, top + iconWidth);
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int alpha = (int) Math.ceil(255 * mAlpha);
-
-        drawText(canvas, 255, mColor);//绘制原文本
-        drawText(canvas, alpha, mClickColor);//绘制变色后的文本
-
-        drawBitmap(canvas, 255, mColor, mBitmap);
-        drawBitmap(canvas, alpha, mClickColor, mClickBitmap);
-
+        drawText(canvas);//绘制原文本
+        drawBitmap(canvas, mColor, mDrawBitmap);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         }
@@ -129,44 +112,24 @@ public class TabButton extends View {
      * 绘制文本
      *
      * @param canvas
-     * @param alpha
-     * @param color
      */
-    private void drawText(Canvas canvas, int alpha, int color) {
-        mTextPaint.setColor(color);
-        mTextPaint.setAlpha(alpha);
+    private void drawText(Canvas canvas) {
         int x = getMeasuredWidth() / 2 - mTextRect.width() / 2;
         int y = mBitmapRect.bottom + mTextRect.height();
         canvas.drawText(mText, x, y, mTextPaint);
-
     }
 
     /**
      * 画图标
-     *
-     * @param canvas
-     * @param alpha
-     * @param color
-     * @param bitmap
      */
-    private void drawBitmap(Canvas canvas, int alpha, int color, Bitmap bitmap) {
-        Bitmap bitmapTem = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas canvasTem = new Canvas(bitmapTem);
+    private void drawBitmap(Canvas canvas, int color, Bitmap bitmap) {
         Paint paint = new Paint();
-        canvasTem.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        paint.setColor(color);
-        paint.setAlpha(alpha);
-        canvasTem.drawRect(mBitmapRect, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        canvasTem.drawBitmap(bitmap, null, mBitmapRect, paint);
-        canvas.drawBitmap(bitmapTem, 0, 0, null);
+        paint.setAntiAlias(true);
+        canvas.drawBitmap(bitmap, null, mBitmapRect, paint);
     }
 
     /**
      * 画消息数量
-     *
-     * @param canvas
      */
     private void drawMessages(Canvas canvas) {
         //数字画笔内容大小等创建
@@ -195,7 +158,7 @@ public class TabButton extends View {
         int width = DensityUtil.dip2px(getContext(), 8);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(mColor_message);
+        paint.setColor(0xFFFF0000);
 
         RectF messageRectF = new RectF(mBitmapRect.right - width,
                 mBitmapRect.top,
@@ -221,11 +184,15 @@ public class TabButton extends View {
 
     /**
      * 接收透明度变化并刷新
-     *
-     * @param alpha
      */
-    public void setAlpha(float alpha) {
-        this.mAlpha = alpha;
+    public void setSelected(boolean selected) {
+        if (selected) {
+            mTextPaint.setColor(mClickColor);
+            mDrawBitmap = mClickBitmap;
+        } else {
+            mTextPaint.setColor(mColor);
+            mDrawBitmap = mBitmap;
+        }
         invalidateView();
     }
 
@@ -248,7 +215,6 @@ public class TabButton extends View {
     protected Parcelable onSaveInstanceState() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(INSTANCE_STATUS, super.onSaveInstanceState());
-        bundle.putFloat(STATUS_ALPHA, mAlpha);
         return bundle;
     }
 
@@ -256,7 +222,6 @@ public class TabButton extends View {
     protected void onRestoreInstanceState(Parcelable state) {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
-            mAlpha = bundle.getFloat(STATUS_ALPHA);
             super.onRestoreInstanceState(bundle.getParcelable(INSTANCE_STATUS));
             return;
         }

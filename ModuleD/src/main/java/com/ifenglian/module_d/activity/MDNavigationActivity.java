@@ -3,6 +3,7 @@ package com.ifenglian.module_d.activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.module_d.R;
@@ -38,7 +39,7 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
         mTabButtonList.add((TabButton) findViewById(R.id.tab_third));
         mTabButtonList.add((TabButton) findViewById(R.id.tab_fourth));
 
-        mTabButtonList.get(0).setAlpha(1.0f);
+        mTabButtonList.get(0).setSelected(true);
         mTabButtonList.get(3).addMessageNumber(8);
     }
 
@@ -68,15 +69,13 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (positionOffsetPixels != 0) {
-            mTabButtonList.get(position).setAlpha(1 - positionOffset);
-            mTabButtonList.get(position + 1).setAlpha(positionOffset);
-        }
+
     }
 
     @Override
     public void onPageSelected(int position) {
-
+        Log.e("AAA", "onPageSelected: " + position);
+        changeAlpha(position);
     }
 
     @Override
@@ -85,10 +84,11 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void changeAlpha(int number) {
+        Log.e("AAA", "changeAlpha: " + number);
         for (TabButton btn : mTabButtonList) {
-            btn.setAlpha(0f);
+            btn.setSelected(false);
         }
-        mTabButtonList.get(number).setAlpha(1.0f);
+        mTabButtonList.get(number).setSelected(true);
     }
 
 }
