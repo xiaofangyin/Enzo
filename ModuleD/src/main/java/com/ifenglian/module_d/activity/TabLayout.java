@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class TabLayout extends FrameLayout implements View.OnClickListener {
 
-    private int mLastPosition;
-    private List<TabButton> tabList;
+    private int mLastPosition = 0;
+    private List<TabButton> mTabList;
 
     public TabLayout(Context context) {
         this(context, null);
@@ -36,19 +36,19 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
     }
 
     private void init(Context context) {
-        tabList = new ArrayList<>();
+        mTabList = new ArrayList<>();
         View view = LayoutInflater.from(context).inflate(R.layout.layout_bottomtab, this);
         TabButton tab1 = view.findViewById(R.id.tab_first);
         TabButton tab2 = view.findViewById(R.id.tab_second);
         TabButton tab3 = view.findViewById(R.id.tab_third);
         TabButton tab4 = view.findViewById(R.id.tab_fourth);
-        tabList.add(tab1);
-        tabList.add(tab2);
-        tabList.add(tab3);
-        tabList.add(tab4);
-        for (int i = 0; i < tabList.size(); i++) {
-            tabList.get(i).setOnClickListener(this);
-            tabList.get(i).setTag(i);
+        mTabList.add(tab1);
+        mTabList.add(tab2);
+        mTabList.add(tab3);
+        mTabList.add(tab4);
+        for (int i = 0; i < mTabList.size(); i++) {
+            mTabList.get(i).setOnClickListener(this);
+            mTabList.get(i).setTag(i);
         }
     }
 
@@ -58,24 +58,24 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         if (number != mLastPosition) {
             setCurrentItem(number);
             if (mListener != null) {
-                mListener.onTabClick(tabList.get(number), number);
+                mListener.onTabClick(mTabList.get(number), number);
             }
         } else {
             if (mListener != null) {
-                mListener.onTabReClick(tabList.get(number), number);
+                mListener.onTabReClick(mTabList.get(number), number);
             }
         }
     }
 
     public void setCurrentItem(int currentItem) {
-        tabList.get(mLastPosition).setSelected(false);
-        tabList.get(currentItem).setSelected(true);
+        mTabList.get(mLastPosition).setSelected(false);
+        mTabList.get(currentItem).setSelected(true);
         mLastPosition = currentItem;
     }
 
     public void setMessageNum(int position, int messageNum) {
-        if (position < tabList.size()) {
-            tabList.get(position).addMessageNumber(messageNum);
+        if (position < mTabList.size()) {
+            mTabList.get(position).addMessageNumber(messageNum);
         }
     }
 

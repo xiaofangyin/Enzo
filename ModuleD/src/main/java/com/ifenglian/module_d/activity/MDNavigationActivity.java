@@ -69,6 +69,7 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
                 Log.e("AAA", "onTabReClick: " + position);
             }
         });
+        mTabLayout.setCurrentItem(0);
         mTabLayout.setMessageNum(3, 9);
     }
 
