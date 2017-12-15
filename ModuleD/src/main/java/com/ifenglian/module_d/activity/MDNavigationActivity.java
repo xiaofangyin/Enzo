@@ -15,10 +15,13 @@ import java.util.List;
 
 
 public class MDNavigationActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+
     private ViewPager mViewPager;
     private List<android.support.v4.app.Fragment> mFragmentList;
 
     private List<TabButton> mTabButtonList = new ArrayList<TabButton>();
+
+    private int mCurrentTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +43,12 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
         mTabButtonList.add((TabButton) findViewById(R.id.tab_fourth));
 
         mTabButtonList.get(0).setSelected(true);
+        mCurrentTab = 0;
         mTabButtonList.get(3).addMessageNumber(8);
     }
 
     private void pagerAdapter() {
-        mFragmentList = new ArrayList<android.support.v4.app.Fragment>();
+        mFragmentList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             mFragmentList.add(new Fragment(i));
         }
@@ -63,7 +67,9 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         int number = (Integer) v.getTag();
-        changeAlpha(number);
+        mTabButtonList.get(mCurrentTab).setSelected(false);
+        mTabButtonList.get(number).setSelected(true);
+        mCurrentTab = number;
         mViewPager.setCurrentItem(number, false);
     }
 
@@ -75,20 +81,14 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onPageSelected(int position) {
         Log.e("AAA", "onPageSelected: " + position);
-        changeAlpha(position);
+        mTabButtonList.get(mCurrentTab).setSelected(false);
+        mTabButtonList.get(position).setSelected(true);
+        mCurrentTab = position;
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
 
-    }
-
-    public void changeAlpha(int number) {
-        Log.e("AAA", "changeAlpha: " + number);
-        for (TabButton btn : mTabButtonList) {
-            btn.setSelected(false);
-        }
-        mTabButtonList.get(number).setSelected(true);
     }
 
 }

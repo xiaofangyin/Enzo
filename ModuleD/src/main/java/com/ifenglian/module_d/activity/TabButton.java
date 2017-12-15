@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.ifenglian.commonlib.utils.common.DensityUtil;
 import com.ifenglian.module_d.R;
+import com.nineoldandroids.animation.ValueAnimator;
 
 public class TabButton extends View {
 
@@ -51,31 +52,23 @@ public class TabButton extends View {
 
     public TabButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.TabButton);
-
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabButton);
         int n = a.getIndexCount();
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
             if (attr == R.styleable.TabButton_image) {
                 BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);
                 mBitmap = drawable.getBitmap();
-
             } else if (attr == R.styleable.TabButton_clickimage) {
                 BitmapDrawable clickDrawable = (BitmapDrawable) a.getDrawable(attr);
                 mClickBitmap = clickDrawable.getBitmap();
-
             } else if (attr == R.styleable.TabButton_clickcolor) {
                 mClickColor = a.getColor(attr, 0xFF3F9FE0);
-
             } else if (attr == R.styleable.TabButton_text) {
                 mText = a.getString(attr);
-
             } else if (attr == R.styleable.TabButton_text_size) {
                 mTextSize = a.getDimension(attr, 12);
-
             }
-
         }
         a.recycle();
 
@@ -90,19 +83,18 @@ public class TabButton extends View {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
         int iconWidth = mBitmap.getWidth();
-
-        int left = getMeasuredWidth() / 2 - iconWidth / 2;
-        int top = getMeasuredHeight() / 2 - (mTextRect.height() + iconWidth) / 2;
+        int left = w / 2 - iconWidth / 2;
+        int top = h / 2 - (mTextRect.height() + iconWidth) / 2;
         mBitmapRect = new Rect(left, top, left + iconWidth, top + iconWidth);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         drawText(canvas);//绘制原文本
-        drawBitmap(canvas, mColor, mDrawBitmap);
+        drawBitmap(canvas, mDrawBitmap);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         }
@@ -122,9 +114,10 @@ public class TabButton extends View {
     /**
      * 画图标
      */
-    private void drawBitmap(Canvas canvas, int color, Bitmap bitmap) {
+    private void drawBitmap(Canvas canvas, Bitmap bitmap) {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
+        paint.setDither(true);
         canvas.drawBitmap(bitmap, null, mBitmapRect, paint);
     }
 
@@ -189,9 +182,49 @@ public class TabButton extends View {
         if (selected) {
             mTextPaint.setColor(mClickColor);
             mDrawBitmap = mClickBitmap;
+
+            if (getWidth() != 0) {
+                final int iconWidth = mBitmap.getWidth();
+                final int left = getMeasuredWidth() / 2 - iconWidth / 2;
+                final int top = getMeasuredHeight() / 2 - (mTextRect.height() + iconWidth) / 2;
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.2f);
+                valueAnimator.setDuration(200);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        float value = (float) valueAnimator.getAnimatedValue();
+                        if (mBitmapRect != null) {
+                            int scaleValue = (int) (iconWidth * value / 2);
+                            mBitmapRect.set(left - scaleValue, top - scaleValue, left + iconWidth + scaleValue, top + iconWidth + scaleValue);
+                            invalidateView();
+                        }
+                    }
+                });
+                valueAnimator.start();
+            }
         } else {
             mTextPaint.setColor(mColor);
             mDrawBitmap = mBitmap;
+
+            if (getWidth() != 0) {
+                final int iconWidth = mBitmap.getWidth();
+                final int left = getMeasuredWidth() / 2 - iconWidth / 2;
+                final int top = getMeasuredHeight() / 2 - (mTextRect.height() + iconWidth) / 2;
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0.2f, 0.0f);
+                valueAnimator.setDuration(200);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        float value = (float) valueAnimator.getAnimatedValue();
+                        if (mBitmapRect != null) {
+                            int scaleValue = (int) (iconWidth * value / 2);
+                            mBitmapRect.set(left - scaleValue, top - scaleValue, left + iconWidth + scaleValue, top + iconWidth + scaleValue);
+                            invalidateView();
+                        }
+                    }
+                });
+                valueAnimator.start();
+            }
         }
         invalidateView();
     }
