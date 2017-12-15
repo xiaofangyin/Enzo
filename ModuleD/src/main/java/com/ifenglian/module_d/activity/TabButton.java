@@ -3,7 +3,6 @@ package com.ifenglian.module_d.activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -40,7 +39,10 @@ public class TabButton extends View {
     //文本的画笔
     private Paint mTextPaint;
     //记录消息数量
-    private int mMessageNumber = 0;
+    private int mMessageNumber;
+    private int mIconWidth;
+    //icon离左、上的距离
+    private int mMarginLeft, mMarginTop;
 
     public TabButton(Context context) {
         this(context, null);
@@ -85,17 +87,17 @@ public class TabButton extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.e("AAA","onSizeChanged ...");
-        int iconWidth = mBitmap.getWidth();
-        int left = w / 2 - iconWidth / 2;
-        int top = h / 2 - (mTextRect.height() + iconWidth) / 2;
-        mBitmapRect = new Rect(left, top, left + iconWidth, top + iconWidth);
+        Log.e("AAA", "onSizeChanged ...");
+        mIconWidth = mBitmap.getWidth();
+        mMarginLeft = w / 2 - mIconWidth / 2;
+        mMarginTop = h / 2 - (mTextRect.height() + mIconWidth) / 2;
+        mBitmapRect = new Rect(mMarginLeft, mMarginTop, mMarginLeft + mIconWidth, mMarginTop + mIconWidth);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.e("AAA","onDraw ...");
+        Log.e("AAA", "onDraw ...");
         drawText(canvas);//绘制原文本
         drawBitmap(canvas, mDrawBitmap);
         if (mMessageNumber > 0) {
@@ -187,9 +189,6 @@ public class TabButton extends View {
             mDrawBitmap = mClickBitmap;
 
             if (getWidth() != 0) {
-                final int iconWidth = mBitmap.getWidth();
-                final int left = getMeasuredWidth() / 2 - iconWidth / 2;
-                final int top = getMeasuredHeight() / 2 - (mTextRect.height() + iconWidth) / 2;
                 ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.2f);
                 valueAnimator.setDuration(200);
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -197,8 +196,11 @@ public class TabButton extends View {
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
                         float value = (float) valueAnimator.getAnimatedValue();
                         if (mBitmapRect != null) {
-                            int scaleValue = (int) (iconWidth * value / 2);
-                            mBitmapRect.set(left - scaleValue, top - scaleValue, left + iconWidth + scaleValue, top + iconWidth + scaleValue);
+                            int scaleValue = (int) (mIconWidth * value / 2);
+                            mBitmapRect.set(mMarginLeft - scaleValue,
+                                    mMarginTop - scaleValue,
+                                    mMarginLeft + mIconWidth + scaleValue,
+                                    mMarginTop + mIconWidth + scaleValue);
                             invalidateView();
                         }
                     }
@@ -210,9 +212,6 @@ public class TabButton extends View {
             mDrawBitmap = mBitmap;
 
             if (getWidth() != 0) {
-                final int iconWidth = mBitmap.getWidth();
-                final int left = getMeasuredWidth() / 2 - iconWidth / 2;
-                final int top = getMeasuredHeight() / 2 - (mTextRect.height() + iconWidth) / 2;
                 ValueAnimator valueAnimator = ValueAnimator.ofFloat(0.2f, 0.0f);
                 valueAnimator.setDuration(200);
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -220,8 +219,11 @@ public class TabButton extends View {
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
                         float value = (float) valueAnimator.getAnimatedValue();
                         if (mBitmapRect != null) {
-                            int scaleValue = (int) (iconWidth * value / 2);
-                            mBitmapRect.set(left - scaleValue, top - scaleValue, left + iconWidth + scaleValue, top + iconWidth + scaleValue);
+                            int scaleValue = (int) (mIconWidth * value / 2);
+                            mBitmapRect.set(mMarginLeft - scaleValue,
+                                    mMarginTop - scaleValue,
+                                    mMarginLeft + mIconWidth + scaleValue,
+                                    mMarginTop + mIconWidth + scaleValue);
                             invalidateView();
                         }
                     }

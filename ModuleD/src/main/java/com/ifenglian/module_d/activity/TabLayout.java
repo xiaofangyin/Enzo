@@ -73,6 +73,12 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         mLastPosition = currentItem;
     }
 
+    public void setMessageNum(int position, int messageNum) {
+        if (position < tabList.size()) {
+            tabList.get(position).addMessageNumber(messageNum);
+        }
+    }
+
     private OnTabClickListener mListener;
 
     public void setOnTabClickListener(OnTabClickListener listener) {

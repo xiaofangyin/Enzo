@@ -47,7 +47,7 @@
         app:clickcolor="#FF30B5FF"
         app:clickimage="@mipmap/sa_tab_personalcenter_select"
         app:image="@mipmap/sa_tab_personalcenter_normal"
-        app:text="我的"
+        app:text="我"
         app:text_size="12dp" />
 
 </LinearLayout>
