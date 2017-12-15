@@ -1,4 +1,4 @@
-package com.ifenglian.module_d.activity;
+package com.ifenglian.commonlib.widget.view.tablayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,8 +14,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
-import com.ifenglian.module_d.R;
 import com.nineoldandroids.animation.ValueAnimator;
 
 public class TabButton extends View {

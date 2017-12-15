@@ -9,7 +9,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.ifenglian.module_d.activity.TabLayout
+    <com.ifenglian.commonlib.widget.view.tablayout.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"/>

@@ -1,4 +1,4 @@
-package com.ifenglian.module_d.activity;
+package com.ifenglian.commonlib.widget.view.tablayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.ifenglian.module_d.R;
+import com.ifenglian.commonlib.R;
 
 import java.util.ArrayList;
 import java.util.List;

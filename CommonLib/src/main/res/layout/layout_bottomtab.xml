@@ -6,7 +6,7 @@
     android:background="#ffffff"
     android:orientation="horizontal">
 
-    <com.ifenglian.module_d.activity.TabButton
+    <com.ifenglian.commonlib.widget.view.tablayout.TabButton
         android:id="@+id/tab_first"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
         app:text="家庭"
         app:text_size="12dp" />
 
-    <com.ifenglian.module_d.activity.TabButton
+    <com.ifenglian.commonlib.widget.view.tablayout.TabButton
         android:id="@+id/tab_second"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -28,7 +28,7 @@
         app:text="安全"
         app:text_size="12dp" />
 
-    <com.ifenglian.module_d.activity.TabButton
+    <com.ifenglian.commonlib.widget.view.tablayout.TabButton
         android:id="@+id/tab_third"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -39,7 +39,7 @@
         app:text="发现"
         app:text_size="12dp" />
 
-    <com.ifenglian.module_d.activity.TabButton
+    <com.ifenglian.commonlib.widget.view.tablayout.TabButton
         android:id="@+id/tab_fourth"
         android:layout_width="0dp"
         android:layout_height="match_parent"

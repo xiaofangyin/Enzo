@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.PagerAdapter;
 import com.ifenglian.module_d.fragment.Fragment;
