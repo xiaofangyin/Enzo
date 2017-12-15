@@ -18,6 +18,7 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
     private List<android.support.v4.app.Fragment> mFragmentList;
 
     private List<TabButton> mTabButtonList = new ArrayList<TabButton>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,21 +30,13 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.action_add){
-//            mTabButtonList.get(mViewPager.getCurrentItem()).addMessageNumber(1);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     private void initView() {
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.viewpager);
 
-        mTabButtonList.add((TabButton)findViewById(R.id.tab_first));
-        mTabButtonList.add((TabButton)findViewById(R.id.tab_second));
-        mTabButtonList.add((TabButton)findViewById(R.id.tab_third));
-        mTabButtonList.add((TabButton)findViewById(R.id.tab_fourth));
+        mTabButtonList.add((TabButton) findViewById(R.id.tab_first));
+        mTabButtonList.add((TabButton) findViewById(R.id.tab_second));
+        mTabButtonList.add((TabButton) findViewById(R.id.tab_third));
+        mTabButtonList.add((TabButton) findViewById(R.id.tab_fourth));
 
         mTabButtonList.get(0).setAlpha(1.0f);
 
@@ -51,15 +44,15 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
 
     private void pagerAdapter() {
         mFragmentList = new ArrayList<android.support.v4.app.Fragment>();
-        for (int i=0;i<4;i++){
+        for (int i = 0; i < 4; i++) {
             mFragmentList.add(new Fragment(i));
         }
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),mFragmentList);
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
     }
 
     private void initEvent() {
-        for(int i = 0; i < mTabButtonList.size(); i++){
+        for (int i = 0; i < mTabButtonList.size(); i++) {
             mTabButtonList.get(i).setOnClickListener(this);
             mTabButtonList.get(i).setTag(i);
         }
@@ -68,19 +61,16 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-
         int number = (Integer) v.getTag();
         changeAlpha(number);
-        mViewPager.setCurrentItem(number,false);
-
+        mViewPager.setCurrentItem(number, false);
     }
-
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (positionOffsetPixels != 0){
+        if (positionOffsetPixels != 0) {
             mTabButtonList.get(position).setAlpha(1 - positionOffset);
-            mTabButtonList.get(position+1).setAlpha(positionOffset);
+            mTabButtonList.get(position + 1).setAlpha(positionOffset);
         }
     }
 
@@ -94,8 +84,8 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    public void changeAlpha(int number){
-        for (TabButton btn:mTabButtonList){
+    public void changeAlpha(int number) {
+        for (TabButton btn : mTabButtonList) {
             btn.setAlpha(0f);
         }
         mTabButtonList.get(number).setAlpha(1.0f);
