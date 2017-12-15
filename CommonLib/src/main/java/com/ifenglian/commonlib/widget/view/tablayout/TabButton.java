@@ -12,16 +12,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
 import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
 
 /**
  * 文 件 名: TabButton
@@ -29,7 +24,7 @@ import com.nineoldandroids.view.ViewHelper;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class TabButton extends RelativeLayout {
+public class TabButton extends View {
 
     private Bitmap mDrawBitmap;
     //初始显示的图标
@@ -40,17 +35,22 @@ public class TabButton extends RelativeLayout {
     private int mColor = 0xFFAAAAAA;
     //选中之后的颜色
     private int mClickColor = 0xFF30B5FF;
+    //字体大小
+    private float mTextSize;
     //显示的文本
     private String mText = "";
+    //画图位置
+    private Rect mBitmapRect;
+    private Rect mTextRect;
+    //文本的画笔
+    private Paint mTextPaint;
     //记录消息数量
     private int mMessageNumber;
     private int mIconWidth;
-    private ImageView ivIcon;
-    private TextView tvDesc;
-    private Paint textPaint;
-    private Rect textRect;
-    private Paint ovalPaint;
-    private RectF ovalRectF;
+    //icon离左、上的距离
+    private int mMarginLeft, mMarginTop;
+
+    private boolean isSelected;
 
     public TabButton(Context context) {
         this(context, null);
@@ -62,15 +62,6 @@ public class TabButton extends RelativeLayout {
 
     public TabButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
-    }
-
-    private void init(Context context, AttributeSet attrs) {
-        setBackgroundColor(0xFFFFFFFF);
-        View view = LayoutInflater.from(context).inflate(R.layout.lib_tab_button, this);
-        ivIcon = view.findViewById(R.id.iv_tab_button);
-        tvDesc = view.findViewById(R.id.tv_tab_button);
-
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabButton);
         int n = a.getIndexCount();
         for (int i = 0; i < n; i++) {
@@ -85,19 +76,21 @@ public class TabButton extends RelativeLayout {
                 mClickColor = a.getColor(attr, 0xFF3F9FE0);
             } else if (attr == R.styleable.TabButton_text) {
                 mText = a.getString(attr);
+            } else if (attr == R.styleable.TabButton_text_size) {
+                mTextSize = a.getDimension(attr, 12);
             }
         }
         a.recycle();
 
-        textPaint = new Paint();
-        textRect = new Rect();
-        ovalPaint = new Paint();
-        ovalRectF = new RectF();
+        mBitmapRect = new Rect();
 
-        mIconWidth = mBitmap.getWidth();
-        ivIcon.setImageBitmap(mBitmap);
-        tvDesc.setTextColor(mColor);
-        tvDesc.setText(mText);
+        mTextRect = new Rect();
+        mTextPaint = new Paint();
+        mTextPaint.setColor(mColor);
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
+        mTextPaint.setAntiAlias(true);//抗锯齿
+
         mDrawBitmap = mBitmap;
     }
 
@@ -105,23 +98,62 @@ public class TabButton extends RelativeLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         Log.e("AAA", "onSizeChanged ...");
+        mIconWidth = mBitmap.getWidth();
+        mMarginLeft = w / 2 - mIconWidth / 2;
+        mMarginTop = h / 2 - (mTextRect.height() + mIconWidth) / 2;
+        if (isSelected) {
+            int scaleValue = (int) (mIconWidth * 0.2f / 2);
+            mBitmapRect.left = mMarginLeft - scaleValue;
+            mBitmapRect.top = mMarginTop - scaleValue;
+            mBitmapRect.right = mMarginLeft + mIconWidth + scaleValue;
+            mBitmapRect.bottom = mMarginTop + mIconWidth + scaleValue;
+        } else {
+            mBitmapRect.left = mMarginLeft;
+            mBitmapRect.top = mMarginTop;
+            mBitmapRect.right = mMarginLeft + mIconWidth;
+            mBitmapRect.bottom = mMarginTop + mIconWidth;
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Log.e("AAA", "onDraw ...");
+        drawText(canvas);//绘制原文本
+        drawBitmap(canvas, mDrawBitmap);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         }
     }
 
     /**
+     * 绘制文本
+     *
+     * @param canvas
+     */
+    private void drawText(Canvas canvas) {
+        int x = getMeasuredWidth() / 2 - mTextRect.width() / 2;
+        int y = mBitmapRect.bottom + mTextRect.height();
+        canvas.drawText(mText, x, y, mTextPaint);
+    }
+
+    /**
+     * 画图标
+     */
+    private void drawBitmap(Canvas canvas, Bitmap bitmap) {
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setDither(true);
+        canvas.drawBitmap(bitmap, null, mBitmapRect, paint);
+    }
+
+    /**
      * 画消息数量
      */
     private void drawMessages(Canvas canvas) {
-        Log.e("AAA", "drawMessages ...");
         //数字画笔内容大小等创建
+        Paint textPaint = new Paint();
+        Rect textRect = new Rect();
         String text = mMessageNumber > 99 ? "99+" : mMessageNumber + "";
         int textSize;
         if (text.length() == 1) {
@@ -141,20 +173,21 @@ public class TabButton extends RelativeLayout {
         textPaint.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
 
-        ovalPaint.setAntiAlias(true);
-        ovalPaint.setColor(0xFFFF0000);
-
         //画圆
         int width = DensityUtil.dip2px(getContext(), 8);
-        float scale = getChildAt(0).getScaleX() - 1f;
-        ovalRectF.left = ivIcon.getRight() - width + mIconWidth * scale / 2;
-        ovalRectF.top = ivIcon.getTop() - mIconWidth * scale / 2;
-        ovalRectF.right = ivIcon.getRight() + width + mIconWidth * scale / 2;
-        ovalRectF.bottom = ivIcon.getTop() + width * 2 - mIconWidth * scale / 2;
-        canvas.drawOval(ovalRectF, ovalPaint);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(0xFFFF0000);
+
+        RectF messageRectF = new RectF(mBitmapRect.right - width,
+                mBitmapRect.top,
+                mBitmapRect.right + width,
+                mBitmapRect.top + width * 2);
+        canvas.drawOval(messageRectF, paint);
+
         //画数字
-        float x = ovalRectF.right - ovalRectF.width() / 2f;
-        float y = ovalRectF.bottom - ovalRectF.height() / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
+        float x = messageRectF.right - messageRectF.width() / 2f;
+        float y = messageRectF.bottom - messageRectF.height() / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
         canvas.drawText(text, x, y, textPaint);
     }
 
@@ -164,23 +197,23 @@ public class TabButton extends RelativeLayout {
      * @param number
      */
     public void addMessageNumber(int number) {
-        Log.e("AAA", "addMessageNumber: " + number);
         mMessageNumber += number;
         invalidateView();
     }
 
     public void setSelected(boolean selected) {
+        isSelected = selected;
         Log.e("AAA", "setSelected: " + selected);
         if (selected) {
+            mTextPaint.setColor(mClickColor);
             mDrawBitmap = mClickBitmap;
-            ivIcon.setImageBitmap(mDrawBitmap);
-            tvDesc.setTextColor(mClickColor);
-            startScaleAnim(1.0f, 1.15f);
+
+            startScaleAnim(0f, 0.2f);
         } else {
+            mTextPaint.setColor(mColor);
             mDrawBitmap = mBitmap;
-            ivIcon.setImageBitmap(mDrawBitmap);
-            tvDesc.setTextColor(mColor);
-            startScaleAnim(1.15f, 1.0f);
+
+            startScaleAnim(0.2f, 0f);
         }
         invalidateView();
     }
@@ -193,15 +226,17 @@ public class TabButton extends RelativeLayout {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     float value = (float) valueAnimator.getAnimatedValue();
-                    ViewHelper.setScaleX(getChildAt(0), value);
-                    ViewHelper.setScaleY(getChildAt(0), value);
-                    invalidateView();
+                    if (mBitmapRect != null) {
+                        int scaleValue = (int) (mIconWidth * value / 2);
+                        mBitmapRect.left = mMarginLeft - scaleValue;
+                        mBitmapRect.top = mMarginTop - scaleValue;
+                        mBitmapRect.right = mMarginLeft + mIconWidth + scaleValue;
+                        mBitmapRect.bottom = mMarginTop + mIconWidth + scaleValue;
+                        invalidateView();
+                    }
                 }
             });
             valueAnimator.start();
-        } else {
-            ViewHelper.setScaleX(getChildAt(0), endValue);
-            ViewHelper.setScaleY(getChildAt(0), endValue);
         }
     }
 
