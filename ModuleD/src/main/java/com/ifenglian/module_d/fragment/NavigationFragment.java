@@ -8,7 +8,10 @@ import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.module_d.R;
 
 /**
- * Created by MJJ on 2015/7/29.
+ * 文 件 名: NavigationFragment
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/4/1
+ * 邮   箱: xiaofy@ifenglian.com
  */
 public class NavigationFragment extends BaseFragment {
 

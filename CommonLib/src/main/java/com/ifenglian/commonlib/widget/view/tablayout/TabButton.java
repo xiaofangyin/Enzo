@@ -18,6 +18,12 @@ import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
 import com.nineoldandroids.animation.ValueAnimator;
 
+/**
+ * 文 件 名: TabButton
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/4/1
+ * 邮   箱: xiaofy@ifenglian.com
+ */
 public class TabButton extends View {
 
     private Bitmap mDrawBitmap;
