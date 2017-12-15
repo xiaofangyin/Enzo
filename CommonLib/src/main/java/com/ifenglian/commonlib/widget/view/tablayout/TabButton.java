@@ -28,23 +28,14 @@ import com.nineoldandroids.animation.ValueAnimator;
 public class TabButton extends View {
 
     private Bitmap mDrawBitmap;
-    //初始显示的图标
-    private Bitmap mBitmap;
-    //选中之后显示的图标
-    private Bitmap mClickBitmap;
-    //未选中的颜色
-    private int mColor = 0xFFAAAAAA;
-    //选中之后的颜色
-    private int mClickColor = 0xFF30B5FF;
-    //字体大小
+    private Bitmap mNormalBitmap;
+    private Bitmap mSelectedBitmap;
+    private int mNormalColor = 0xFFAAAAAA;
+    private int mSelectedColor = 0xFF30B5FF;
     private float mTextSize;
-    //显示的文本
     private String mText = "";
-    //画图位置
     private Rect mTextRect;
-    //文本的画笔
     private Paint mTextPaint;
-    //记录消息数量
     private int mMessageNumber;
 
     private boolean isSelected;
@@ -68,12 +59,12 @@ public class TabButton extends View {
             int attr = a.getIndex(i);
             if (attr == R.styleable.TabButton_image) {
                 BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);
-                mBitmap = drawable.getBitmap();
+                mNormalBitmap = drawable.getBitmap();
             } else if (attr == R.styleable.TabButton_clickimage) {
                 BitmapDrawable clickDrawable = (BitmapDrawable) a.getDrawable(attr);
-                mClickBitmap = clickDrawable.getBitmap();
+                mSelectedBitmap = clickDrawable.getBitmap();
             } else if (attr == R.styleable.TabButton_clickcolor) {
-                mClickColor = a.getColor(attr, 0xFF3F9FE0);
+                mSelectedColor = a.getColor(attr, 0xFF3F9FE0);
             } else if (attr == R.styleable.TabButton_text) {
                 mText = a.getString(attr);
             } else if (attr == R.styleable.TabButton_text_size) {
@@ -84,7 +75,7 @@ public class TabButton extends View {
 
         mTextRect = new Rect();
         mTextPaint = new Paint();
-        mTextPaint.setColor(mColor);
+        mTextPaint.setColor(mNormalColor);
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
@@ -94,7 +85,7 @@ public class TabButton extends View {
         mMessageRect = new Rect();
         mMessageRectF = new RectF();
 
-        mDrawBitmap = mBitmap;
+        mDrawBitmap = mNormalBitmap;
     }
 
     @Override
@@ -104,10 +95,10 @@ public class TabButton extends View {
         if (isSelected) {
             Matrix matrix = new Matrix();
             matrix.postScale(1.2f, 1.2f);
-            mDrawBitmap = Bitmap.createBitmap(mClickBitmap, 0, 0, mClickBitmap.getWidth(), mClickBitmap.getHeight(),
+            mDrawBitmap = Bitmap.createBitmap(mSelectedBitmap, 0, 0, mSelectedBitmap.getWidth(), mSelectedBitmap.getHeight(),
                     matrix, true);
         } else {
-            mDrawBitmap = mBitmap;
+            mDrawBitmap = mNormalBitmap;
         }
     }
 
@@ -198,11 +189,11 @@ public class TabButton extends View {
         Log.e("AAA", "setSelected: " + selected);
         isSelected = selected;
         if (selected) {
-            mTextPaint.setColor(mClickColor);
-            startScaleAnim(1.0f, 1.2f, mClickBitmap);
+            mTextPaint.setColor(mSelectedColor);
+            startScaleAnim(1.0f, 1.2f, mSelectedBitmap);
         } else {
-            mTextPaint.setColor(mColor);
-            startScaleAnim(1.2f, 1f, mBitmap);
+            mTextPaint.setColor(mNormalColor);
+            startScaleAnim(1.2f, 1f, mNormalBitmap);
         }
         invalidateView();
     }
