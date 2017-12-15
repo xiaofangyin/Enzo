@@ -80,6 +80,8 @@ public class TabButton extends View {
         }
         a.recycle();
 
+        mBitmapRect = new Rect();
+
         mTextRect = new Rect();
         mTextPaint = new Paint();
         mTextPaint.setColor(mColor);
@@ -97,7 +99,7 @@ public class TabButton extends View {
         mIconWidth = mBitmap.getWidth();
         mMarginLeft = w / 2 - mIconWidth / 2;
         mMarginTop = h / 2 - (mTextRect.height() + mIconWidth) / 2;
-        mBitmapRect = new Rect(mMarginLeft, mMarginTop, mMarginLeft + mIconWidth, mMarginTop + mIconWidth);
+        mBitmapRect.set(mMarginLeft, mMarginTop, mMarginLeft + mIconWidth, mMarginTop + mIconWidth);
     }
 
     @Override
@@ -186,10 +188,8 @@ public class TabButton extends View {
         invalidateView();
     }
 
-    /**
-     * 接收透明度变化并刷新
-     */
     public void setSelected(boolean selected) {
+        Log.e("AAA", "setSelected: " + selected);
         if (selected) {
             mTextPaint.setColor(mClickColor);
             mDrawBitmap = mClickBitmap;
@@ -214,10 +214,10 @@ public class TabButton extends View {
                     float value = (float) valueAnimator.getAnimatedValue();
                     if (mBitmapRect != null) {
                         int scaleValue = (int) (mIconWidth * value / 2);
-                        mBitmapRect.set(mMarginLeft - scaleValue,
-                                mMarginTop - scaleValue,
-                                mMarginLeft + mIconWidth + scaleValue,
-                                mMarginTop + mIconWidth + scaleValue);
+                        mBitmapRect.left = mMarginLeft - scaleValue;
+                        mBitmapRect.top = mMarginTop - scaleValue;
+                        mBitmapRect.right = mMarginLeft + mIconWidth + scaleValue;
+                        mBitmapRect.bottom = mMarginTop + mIconWidth + scaleValue;
                         invalidateView();
                     }
                 }
