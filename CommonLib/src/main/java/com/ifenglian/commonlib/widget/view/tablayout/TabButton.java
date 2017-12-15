@@ -84,8 +84,6 @@ public class TabButton extends View {
         mMessagePaint = new Paint();
         mMessageRect = new Rect();
         mMessageRectF = new RectF();
-
-        mDrawBitmap = mNormalBitmap;
     }
 
     @Override
