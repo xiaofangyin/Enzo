@@ -37,7 +37,7 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
 
     private void init(Context context) {
         mTabList = new ArrayList<>();
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_bottomtab, this);
+        View view = LayoutInflater.from(context).inflate(R.layout.lib_tab_layout, this);
         TabButton tab1 = view.findViewById(R.id.tab_first);
         TabButton tab2 = view.findViewById(R.id.tab_second);
         TabButton tab3 = view.findViewById(R.id.tab_third);
