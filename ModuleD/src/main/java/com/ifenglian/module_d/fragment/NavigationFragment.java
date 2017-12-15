@@ -1,0 +1,36 @@
+package com.ifenglian.module_d.fragment;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import com.ifenglian.commonlib.base.BaseFragment;
+import com.ifenglian.module_d.R;
+
+/**
+ * Created by MJJ on 2015/7/29.
+ */
+public class NavigationFragment extends BaseFragment {
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.md_navigation_fragment;
+    }
+
+    @Override
+    public void initView(View rootView) {
+        Bundle bundle = getArguments();
+        TextView tvContent = rootView.findViewById(R.id.tv_content);
+        tvContent.setText(String.valueOf(bundle.getInt("number")));
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initListener(View rootView) {
+
+    }
+}

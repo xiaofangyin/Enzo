@@ -188,50 +188,36 @@ public class TabButton extends View {
             mTextPaint.setColor(mClickColor);
             mDrawBitmap = mClickBitmap;
 
-            if (getWidth() != 0) {
-                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.2f);
-                valueAnimator.setDuration(200);
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        float value = (float) valueAnimator.getAnimatedValue();
-                        if (mBitmapRect != null) {
-                            int scaleValue = (int) (mIconWidth * value / 2);
-                            mBitmapRect.set(mMarginLeft - scaleValue,
-                                    mMarginTop - scaleValue,
-                                    mMarginLeft + mIconWidth + scaleValue,
-                                    mMarginTop + mIconWidth + scaleValue);
-                            invalidateView();
-                        }
-                    }
-                });
-                valueAnimator.start();
-            }
+            startScaleAnim(0f, 0.2f);
         } else {
             mTextPaint.setColor(mColor);
             mDrawBitmap = mBitmap;
 
-            if (getWidth() != 0) {
-                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0.2f, 0.0f);
-                valueAnimator.setDuration(200);
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        float value = (float) valueAnimator.getAnimatedValue();
-                        if (mBitmapRect != null) {
-                            int scaleValue = (int) (mIconWidth * value / 2);
-                            mBitmapRect.set(mMarginLeft - scaleValue,
-                                    mMarginTop - scaleValue,
-                                    mMarginLeft + mIconWidth + scaleValue,
-                                    mMarginTop + mIconWidth + scaleValue);
-                            invalidateView();
-                        }
-                    }
-                });
-                valueAnimator.start();
-            }
+            startScaleAnim(0.2f, 0f);
         }
         invalidateView();
+    }
+
+    private void startScaleAnim(float startValue, float endValue) {
+        if (getWidth() > 0) {
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(startValue, endValue);
+            valueAnimator.setDuration(200);
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float value = (float) valueAnimator.getAnimatedValue();
+                    if (mBitmapRect != null) {
+                        int scaleValue = (int) (mIconWidth * value / 2);
+                        mBitmapRect.set(mMarginLeft - scaleValue,
+                                mMarginTop - scaleValue,
+                                mMarginLeft + mIconWidth + scaleValue,
+                                mMarginTop + mIconWidth + scaleValue);
+                        invalidateView();
+                    }
+                }
+            });
+            valueAnimator.start();
+        }
     }
 
     /**

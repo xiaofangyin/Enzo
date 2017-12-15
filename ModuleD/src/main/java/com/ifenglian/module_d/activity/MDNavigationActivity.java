@@ -9,7 +9,7 @@ import android.view.View;
 import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.PagerAdapter;
-import com.ifenglian.module_d.fragment.Fragment;
+import com.ifenglian.module_d.fragment.NavigationFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,11 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
     private void pagerAdapter() {
         mFragmentList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            mFragmentList.add(new Fragment(i));
+            NavigationFragment fragment = new NavigationFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("number", i);
+            fragment.setArguments(bundle);
+            mFragmentList.add(fragment);
         }
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
