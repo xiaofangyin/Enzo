@@ -1,7 +1,6 @@
 package com.ifenglian.module_d.activity;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,18 +19,7 @@ import java.util.List;
  */
 public class TabLayout extends FrameLayout implements View.OnClickListener {
 
-    private ViewPager mViewPager;
-    private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
     private int mLastPosition;
-
-    private String mTitles[] = {"家庭", "安全", "发现", "我"};
-    private int mIconRes[][] = {
-            {R.mipmap.sa_tab_home_normal, R.mipmap.sa_tab_home_select},
-            {R.mipmap.sa_tab_security_normal, R.mipmap.sa_tab_security_select},
-            {R.mipmap.sa_tab_find_normal, R.mipmap.sa_tab_find_select},
-            {R.mipmap.sa_tab_personalcenter_normal, R.mipmap.sa_tab_personalcenter_select}
-    };
-
     private List<TabButton> tabList;
 
     public TabLayout(Context context) {
@@ -54,10 +42,6 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         TabButton tab2 = view.findViewById(R.id.tab_second);
         TabButton tab3 = view.findViewById(R.id.tab_third);
         TabButton tab4 = view.findViewById(R.id.tab_fourth);
-        tab1.init(mTitles[0], mIconRes[0][0], mIconRes[0][1]);
-        tab2.init(mTitles[1], mIconRes[1][0], mIconRes[1][1]);
-        tab3.init(mTitles[2], mIconRes[2][0], mIconRes[2][1]);
-        tab4.init(mTitles[3], mIconRes[3][0], mIconRes[3][1]);
         tabList.add(tab1);
         tabList.add(tab2);
         tabList.add(tab3);
@@ -68,45 +52,36 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         }
     }
 
-    public void setViewPager(ViewPager viewPager) {
-        mViewPager = viewPager;
-        if (viewPager != null && viewPager.getAdapter() != null) {
-            viewPager.addOnPageChangeListener(new InternalViewPagerListener());
-        }
-    }
-
     @Override
     public void onClick(View v) {
         int number = (int) v.getTag();
-        tabList.get(mLastPosition).setSelected(false);
-        tabList.get(number).setSelected(true);
-        mLastPosition = number;
-        mViewPager.setCurrentItem(mLastPosition, false);
-    }
-
-    private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            if (mViewPagerPageChangeListener != null) {
-                mViewPagerPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+        if (number != mLastPosition) {
+            setCurrentItem(number);
+            if (mListener != null) {
+                mListener.onTabClick(tabList.get(number), number);
+            }
+        } else {
+            if (mListener != null) {
+                mListener.onTabReClick(tabList.get(number), number);
             }
         }
-
-        @Override
-        public void onPageSelected(int position) {
-            tabList.get(mLastPosition).setSelected(false);
-            tabList.get(position).setSelected(true);
-            mLastPosition = position;
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
     }
 
-    public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
-        mViewPagerPageChangeListener = listener;
+    public void setCurrentItem(int currentItem) {
+        tabList.get(mLastPosition).setSelected(false);
+        tabList.get(currentItem).setSelected(true);
+        mLastPosition = currentItem;
+    }
+
+    private OnTabClickListener mListener;
+
+    public void setOnTabClickListener(OnTabClickListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnTabClickListener {
+        void onTabClick(View view, int position);
+
+        void onTabReClick(View view, int position);
     }
 }

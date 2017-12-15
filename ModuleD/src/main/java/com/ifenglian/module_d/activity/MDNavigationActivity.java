@@ -3,6 +3,7 @@ package com.ifenglian.module_d.activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.module_d.R;
@@ -39,7 +40,35 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
         }
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
-        mTabLayout.setViewPager(mViewPager);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.e("AAA", "onPageSelected: " + position);
+                mTabLayout.setCurrentItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mTabLayout.setOnTabClickListener(new TabLayout.OnTabClickListener() {
+            @Override
+            public void onTabClick(View view, int position) {
+                Log.e("AAA", "onTabClick: " + position);
+                mViewPager.setCurrentItem(position, false);
+            }
+
+            @Override
+            public void onTabReClick(View view, int position) {
+                Log.e("AAA", "onTabReClick: " + position);
+            }
+        });
     }
 
 

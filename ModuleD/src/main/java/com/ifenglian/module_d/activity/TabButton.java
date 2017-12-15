@@ -103,14 +103,6 @@ public class TabButton extends View {
         }
     }
 
-    public void init(String text,int normal,int selected){
-        Log.e("AAA","init ...");
-        mText = text;
-        mBitmap = BitmapFactory.decodeResource(getResources(),normal);
-        mClickBitmap = BitmapFactory.decodeResource(getResources(),selected);
-        mDrawBitmap = mBitmap;
-    }
-
     /**
      * 绘制文本
      *
