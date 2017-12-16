@@ -29,7 +29,6 @@ public class TabButton extends View {
     private Bitmap mSelectedBitmap;
     private int mNormalColor = 0xFFAAAAAA;
     private int mSelectedColor = 0xFF30B5FF;
-    private float mTextSize;
     private String mText = "";
     private Rect mTextRect;
     private Paint mTextPaint;
@@ -63,7 +62,6 @@ public class TabButton extends View {
 
         mRedPointPaint = new Paint();
         mRedPointRectF = new RectF();
-
     }
 
     public void initIcon(int normalIcon, int selectedIcon) {
@@ -74,15 +72,10 @@ public class TabButton extends View {
 
     public void initText(String text, int textSize, int normalColor, int selectedColor) {
         mText = text;
-        mTextSize = textSize;
         mNormalColor = normalColor;
         mSelectedColor = selectedColor;
-    }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setTextSize(textSize);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
     }
