@@ -205,14 +205,14 @@ public class TabButton extends View {
         mTextPaint.setColor(selected ? mSelectedColor : mNormalColor);
         if (animate) {
             if (selected) {
-                startScaleAnim(1.0f, 1.2f, mSelectedBitmap);
+                startScaleAnim(1.0f, 1.15f, mSelectedBitmap);
             } else {
-                startScaleAnim(1.2f, 1f, mNormalBitmap);
+                startScaleAnim(1.15f, 1f, mNormalBitmap);
             }
         } else {
             if (selected) {
                 Matrix matrix = new Matrix();
-                matrix.postScale(1.2f, 1.2f);
+                matrix.postScale(1.15f, 1.15f);
                 mDrawBitmap = Bitmap.createBitmap(mSelectedBitmap, 0, 0, mSelectedBitmap.getWidth(), mSelectedBitmap.getHeight(),
                         matrix, true);
             } else {
