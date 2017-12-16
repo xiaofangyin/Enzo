@@ -46,6 +46,7 @@ public class MDNavigationActivity extends BaseActivity {
         switchFragment(0);
         mTabLayout.setCurrentItem(0, false);
         mHandler.sendEmptyMessage(0);
+        mTabLayout.showRedPoint(2, true);
     }
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) {

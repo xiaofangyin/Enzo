@@ -90,6 +90,12 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         }
     }
 
+    public void showRedPoint(int position, boolean showRedPoint) {
+        if (position < mTabList.size()) {
+            mTabList.get(position).showRedPoint(showRedPoint);
+        }
+    }
+
     private OnTabClickListener mListener;
 
     public void setOnTabClickListener(OnTabClickListener listener) {

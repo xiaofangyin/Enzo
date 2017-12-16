@@ -40,6 +40,10 @@ public class TabButton extends View {
     private Rect mMessageRect;
     private RectF mMessageRectF;
 
+    private Paint mRedPointPaint;
+    private RectF mRedPointRectF;
+    private boolean mShowRedPoint;
+
     public TabButton(Context context) {
         this(context, null);
     }
@@ -57,6 +61,10 @@ public class TabButton extends View {
         mMessagePaint = new Paint();
         mMessageRect = new Rect();
         mMessageRectF = new RectF();
+
+        mRedPointPaint = new Paint();
+        mRedPointRectF = new RectF();
+
     }
 
     public void initIcon(int normalIcon, int selectedIcon) {
@@ -75,7 +83,6 @@ public class TabButton extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.e("AAA", "onSizeChanged ...");
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
@@ -84,11 +91,12 @@ public class TabButton extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.e("AAA", "onDraw ...");
         drawText(canvas);//绘制原文本
         drawBitmap(canvas, mDrawBitmap);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
+        } else if (mShowRedPoint) {
+            drawRedPoint(canvas);
         }
     }
 
@@ -112,6 +120,23 @@ public class TabButton extends View {
         paint.setAntiAlias(true);
         paint.setDither(true);
         canvas.drawBitmap(bitmap, marginLeft, marginTop, paint);
+    }
+
+    /**
+     * 画小红点
+     */
+    private void drawRedPoint(Canvas canvas) {
+        mRedPointPaint.setStyle(Paint.Style.FILL);
+        mRedPointPaint.setColor(0xFFFF0000);
+        mRedPointPaint.setAntiAlias(true);
+        mRedPointPaint.setDither(true);
+
+        int width = DensityUtil.dip2px(getContext(), 3);
+        mRedPointRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width;
+        mRedPointRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
+        mRedPointRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width;
+        mRedPointRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2;
+        canvas.drawOval(mRedPointRectF, mRedPointPaint);
     }
 
     /**
@@ -139,21 +164,21 @@ public class TabButton extends View {
 
         //画圆
         int width = DensityUtil.dip2px(getContext(), 8);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setDither(true);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(0xFFFF0000);
         mMessageRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width;
         mMessageRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
         mMessageRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width;
         mMessageRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2;
-        canvas.drawOval(mMessageRectF, paint);
+
+        mRedPointPaint.setStyle(Paint.Style.FILL);
+        mRedPointPaint.setColor(0xFFFF0000);
+        mRedPointPaint.setAntiAlias(true);
+        mRedPointPaint.setDither(true);
+        canvas.drawOval(mMessageRectF, mRedPointPaint);
         //苗边
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(DensityUtil.dip2px(getContext(), 1f));
-        paint.setColor(0xFFFFFFFF);
-        canvas.drawOval(mMessageRectF, paint);
+        mRedPointPaint.setStyle(Paint.Style.STROKE);
+        mRedPointPaint.setStrokeWidth(DensityUtil.dip2px(getContext(), 1f));
+        mRedPointPaint.setColor(0xFFFFFFFF);
+        canvas.drawOval(mMessageRectF, mRedPointPaint);
 
         //画数字
         float x = mMessageRectF.right - mMessageRectF.width() / 2f;
@@ -169,8 +194,14 @@ public class TabButton extends View {
         invalidateView();
     }
 
+    /**
+     * 小红点
+     */
+    public void showRedPoint(boolean showRedPoint) {
+        mShowRedPoint = showRedPoint;
+    }
+
     public void setSelected(boolean selected, boolean animate) {
-        Log.e("AAA", "setSelected: " + selected);
         mTextPaint.setColor(selected ? mSelectedColor : mNormalColor);
         if (animate) {
             if (selected) {
