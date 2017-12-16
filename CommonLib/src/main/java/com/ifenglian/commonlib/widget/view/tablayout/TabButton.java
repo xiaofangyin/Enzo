@@ -125,7 +125,7 @@ public class TabButton extends View {
         } else if (text.length() == 2) {
             textSize = DensityUtil.sp2px(getContext(), 10);
         } else {
-            textSize = DensityUtil.sp2px(getContext(), 9);
+            textSize = DensityUtil.sp2px(getContext(), 8);
         }
 
         mMessagePaint.setColor(0xDDFFFFFF);
