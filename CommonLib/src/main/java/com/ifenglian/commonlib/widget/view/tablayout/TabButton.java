@@ -54,7 +54,6 @@ public class TabButton extends View {
         super(context, attrs, defStyleAttr);
         mTextRect = new Rect();
         mTextPaint = new Paint();
-        mTextPaint.setColor(mNormalColor);
         //数字画笔内容大小等创建
         mMessagePaint = new Paint();
         mMessageRect = new Rect();
@@ -76,6 +75,7 @@ public class TabButton extends View {
         mSelectedColor = selectedColor;
 
         mTextPaint.setTextSize(textSize);
+        mTextPaint.setColor(normalColor);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
     }
