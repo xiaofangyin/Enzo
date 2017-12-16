@@ -141,13 +141,18 @@ public class TabButton extends View {
         int width = DensityUtil.dip2px(getContext(), 8);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
+        paint.setDither(true);
+        paint.setStyle(Paint.Style.FILL);
         paint.setColor(0xFFFF0000);
-
         mMessageRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width;
         mMessageRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
         mMessageRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width;
         mMessageRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2;
-
+        canvas.drawOval(mMessageRectF, paint);
+        //苗边
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(DensityUtil.dip2px(getContext(), 1f));
+        paint.setColor(0xFFFFFFFF);
         canvas.drawOval(mMessageRectF, paint);
 
         //画数字
