@@ -121,11 +121,11 @@ public class TabButton extends View {
         String text = mMessageNumber > 99 ? "99+" : mMessageNumber + "";
         int textSize;
         if (text.length() == 1) {
-            textSize = DensityUtil.dip2px(getContext(), 12);
+            textSize = DensityUtil.sp2px(getContext(), 12);
         } else if (text.length() == 2) {
-            textSize = DensityUtil.dip2px(getContext(), 10);
+            textSize = DensityUtil.sp2px(getContext(), 10);
         } else {
-            textSize = DensityUtil.dip2px(getContext(), 9);
+            textSize = DensityUtil.sp2px(getContext(), 9);
         }
 
         mMessagePaint.setColor(0xDDFFFFFF);
