@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.ifenglian.commonlib.R;
-import com.ifenglian.commonlib.utils.common.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +55,7 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         mTabList.add(tab3);
         mTabList.add(tab4);
         for (int i = 0; i < mTabList.size(); i++) {
-            mTabList.get(i).initIcon(mIconRes[i][0], mIconRes[i][1]);
-            mTabList.get(i).initText(mTitles[i], DensityUtil.sp2px(getContext(), 12), 0xFFAAAAAA, 0xFF30B5FF);
+            mTabList.get(i).initTab(mTitles[i],mIconRes[i][0], mIconRes[i][1]);
             mTabList.get(i).setOnClickListener(this);
             mTabList.get(i).setTag(i);
         }

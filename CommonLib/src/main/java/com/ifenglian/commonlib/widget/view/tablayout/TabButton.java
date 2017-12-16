@@ -24,11 +24,12 @@ import com.nineoldandroids.animation.ValueAnimator;
  */
 public class TabButton extends View {
 
+    private static final int NORMAL_TEXT_COLOR = 0xFFAAAAAA;
+    private static final int SELECTED_TEXT_COLOR = 0xFF30B5FF;
     private Bitmap mDrawBitmap;
     private Bitmap mNormalBitmap;
     private Bitmap mSelectedBitmap;
-    private int mNormalColor = 0xFFAAAAAA;
-    private int mSelectedColor = 0xFF30B5FF;
+
     private String mText = "";
     private Rect mTextRect;
     private Paint mTextPaint;
@@ -63,19 +64,14 @@ public class TabButton extends View {
         mRedPointRectF = new RectF();
     }
 
-    public void initIcon(int normalIcon, int selectedIcon) {
+    public void initTab(String text, int normalIcon, int selectedIcon) {
         mNormalBitmap = BitmapFactory.decodeResource(getResources(), normalIcon);
         mSelectedBitmap = BitmapFactory.decodeResource(getResources(), selectedIcon);
         mDrawBitmap = mNormalBitmap;
-    }
 
-    public void initText(String text, int textSize, int normalColor, int selectedColor) {
         mText = text;
-        mNormalColor = normalColor;
-        mSelectedColor = selectedColor;
-
-        mTextPaint.setTextSize(textSize);
-        mTextPaint.setColor(normalColor);
+        mTextPaint.setTextSize(DensityUtil.sp2px(getContext(), 12));
+        mTextPaint.setColor(NORMAL_TEXT_COLOR);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
     }
@@ -195,7 +191,7 @@ public class TabButton extends View {
     }
 
     public void setSelected(boolean selected, boolean animate) {
-        mTextPaint.setColor(selected ? mSelectedColor : mNormalColor);
+        mTextPaint.setColor(selected ? SELECTED_TEXT_COLOR : NORMAL_TEXT_COLOR);
         if (animate) {
             if (selected) {
                 startScaleAnim(1.0f, 1.15f, mSelectedBitmap);
