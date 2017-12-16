@@ -20,7 +20,7 @@ import com.ifenglian.module_d.fragment.NavigationFragment;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDNavigationActivity extends BaseActivity implements View.OnClickListener {
+public class MDNavigationActivity extends BaseActivity {
 
     private int mCurrentTab = -1;
     private TabLayout mTabLayout;
@@ -143,11 +143,6 @@ public class MDNavigationActivity extends BaseActivity implements View.OnClickLi
         if (fourthFragment != null) {
             fragmentTransaction.hide(fourthFragment);
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
 }
