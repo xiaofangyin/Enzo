@@ -1,12 +1,15 @@
 package com.ifenglian.module_d.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.fragment.NavigationFragment;
@@ -17,9 +20,10 @@ import com.ifenglian.module_d.fragment.NavigationFragment;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDNavigationActivity extends AppCompatActivity implements View.OnClickListener {
+public class MDNavigationActivity extends BaseActivity implements View.OnClickListener {
 
     private int mCurrentTab = -1;
+    private TabLayout mTabLayout;
     private FragmentManager mFragmentManager;
     private NavigationFragment firstFragment;
     private NavigationFragment secondFragment;
@@ -27,15 +31,34 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
     private NavigationFragment fourthFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.md_activity_main);
-        initView();
+    public int getLayoutId() {
+        return R.layout.md_activity_main;
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         mFragmentManager = getSupportFragmentManager();
-        TabLayout mTabLayout = findViewById(R.id.tab_layout);
+        mTabLayout = findViewById(R.id.tab_layout);
+    }
+
+    @Override
+    public void initData() {
+        switchFragment(0);
+        mTabLayout.setCurrentItem(0, false);
+        mHandler.sendEmptyMessage(0);
+    }
+
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mTabLayout.addMessageNum(3, 1);
+            mHandler.sendEmptyMessageDelayed(0, 2000);
+        }
+    };
+
+    @Override
+    public void initListener() {
         mTabLayout.setOnTabClickListener(new TabLayout.OnTabClickListener() {
             @Override
             public void onTabClick(View view, int position) {
@@ -48,9 +71,6 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
                 Log.e("AAA", "onTabReClick: " + position);
             }
         });
-        mTabLayout.setCurrentItem(0, false);
-        mTabLayout.setMessageNum(3, 15);
-        switchFragment(0);
     }
 
     public void switchFragment(int tab) {
