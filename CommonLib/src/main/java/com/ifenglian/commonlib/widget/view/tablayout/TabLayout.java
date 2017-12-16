@@ -55,7 +55,7 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         mTabList.add(tab3);
         mTabList.add(tab4);
         for (int i = 0; i < mTabList.size(); i++) {
-            mTabList.get(i).initTab(mTitles[i],mIconRes[i][0], mIconRes[i][1]);
+            mTabList.get(i).initTab(mTitles[i], mIconRes[i][0], mIconRes[i][1]);
             mTabList.get(i).setOnClickListener(this);
             mTabList.get(i).setTag(i);
         }
@@ -83,13 +83,13 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
     }
 
     public void addMessageNum(int position, int messageNum) {
-        if (position < mTabList.size()) {
+        if (position >= 0 && position < mTabList.size()) {
             mTabList.get(position).addMessageNumber(messageNum);
         }
     }
 
     public void showRedPoint(int position, boolean showRedPoint) {
-        if (position < mTabList.size()) {
+        if (position >= 0 && position < mTabList.size()) {
             mTabList.get(position).showRedPoint(showRedPoint);
         }
     }
