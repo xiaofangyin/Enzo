@@ -18,7 +18,6 @@ import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
 import com.ifenglian.module_d.activity.MDRulerActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
-import com.ifenglian.module_d.activity.MDNavigationActivity;
 
 /**
  * 文 件 名: MDFragment
@@ -62,8 +61,8 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_navigation_view) {
-            Intent intent = new Intent(getContext(), MDNavigationActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getContext(), MDNavigationActivity.class);
+//            startActivity(intent);
         } else if (id == R.id.btn_jni) {
             Intent intent = new Intent(getContext(), MDJniActivity.class);
             startActivity(intent);
