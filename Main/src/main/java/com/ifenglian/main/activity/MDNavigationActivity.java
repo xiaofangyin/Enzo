@@ -1,4 +1,4 @@
-package com.ifenglian.module_d.activity;
+package com.ifenglian.main.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,8 +11,7 @@ import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
-import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.fragment.NavigationFragment;
+import com.ifenglian.main.R;
 
 /**
  * 文 件 名: MDNavigationActivity

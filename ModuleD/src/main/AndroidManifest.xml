@@ -14,7 +14,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDNavigationActivity"
+            android:name="com.ifenglian.main.activity.MDNavigationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDSimpleActivity"

@@ -1,11 +1,11 @@
-package com.ifenglian.module_d.fragment;
+package com.ifenglian.main.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.module_d.R;
+import com.ifenglian.main.R;
 
 /**
  * 文 件 名: NavigationFragment
