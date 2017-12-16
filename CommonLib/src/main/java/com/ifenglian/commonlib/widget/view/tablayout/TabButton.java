@@ -33,12 +33,12 @@ public class TabButton extends View {
     private String mText = "";
     private Rect mTextRect;
     private Paint mTextPaint;
-    private int mMessageNumber;
+    private Paint mBitmapPaint;
 
+    private int mMessageNumber;
     private Paint mMessagePaint;
     private Rect mMessageRect;
     private RectF mMessageRectF;
-
     private Paint mRedPointPaint;
     private RectF mRedPointRectF;
     private boolean mShowRedPoint;
@@ -55,6 +55,8 @@ public class TabButton extends View {
         super(context, attrs, defStyleAttr);
         mTextRect = new Rect();
         mTextPaint = new Paint();
+        mBitmapPaint = new Paint();
+
         //数字画笔内容大小等创建
         mMessagePaint = new Paint();
         mMessageRect = new Rect();
@@ -105,10 +107,9 @@ public class TabButton extends View {
     private void drawBitmap(Canvas canvas) {
         int marginLeft = getWidth() / 2 - mDrawBitmap.getWidth() / 2;
         int marginTop = getHeight() / 2 - (mTextRect.height() + mDrawBitmap.getHeight()) / 2;
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setDither(true);
-        canvas.drawBitmap(mDrawBitmap, marginLeft, marginTop, paint);
+        mBitmapPaint.setAntiAlias(true);
+        mBitmapPaint.setDither(true);
+        canvas.drawBitmap(mDrawBitmap, marginLeft, marginTop, mBitmapPaint);
     }
 
     /**
