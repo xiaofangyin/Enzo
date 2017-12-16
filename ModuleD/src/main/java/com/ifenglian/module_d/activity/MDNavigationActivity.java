@@ -1,18 +1,15 @@
 package com.ifenglian.module_d.activity;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.adapter.PagerAdapter;
 import com.ifenglian.module_d.fragment.NavigationFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 文 件 名: MDNavigationActivity
@@ -22,56 +19,28 @@ import java.util.List;
  */
 public class MDNavigationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ViewPager mViewPager;
-    private TabLayout mTabLayout;
-    private List<android.support.v4.app.Fragment> mFragmentList;
+    private int mCurrentTab = -1;
+    private FragmentManager mFragmentManager;
+    private NavigationFragment firstFragment;
+    private NavigationFragment secondFragment;
+    private NavigationFragment thirdFragment;
+    private NavigationFragment fourthFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.md_activity_main);
         initView();
-        pagerAdapter();
     }
 
     private void initView() {
-        mViewPager = findViewById(R.id.viewpager);
-        mTabLayout = findViewById(R.id.tab_layout);
-    }
-
-    private void pagerAdapter() {
-        mFragmentList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            NavigationFragment fragment = new NavigationFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("number", i);
-            fragment.setArguments(bundle);
-            mFragmentList.add(fragment);
-        }
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), mFragmentList);
-        mViewPager.setAdapter(adapter);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Log.e("AAA", "onPageSelected: " + position);
-                mTabLayout.setCurrentItem(position, true);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        mFragmentManager = getSupportFragmentManager();
+        TabLayout mTabLayout = findViewById(R.id.tab_layout);
         mTabLayout.setOnTabClickListener(new TabLayout.OnTabClickListener() {
             @Override
             public void onTabClick(View view, int position) {
                 Log.e("AAA", "onTabClick: " + position);
-                mViewPager.setCurrentItem(position, false);
+                switchFragment(position);
             }
 
             @Override
@@ -81,9 +50,80 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
         });
         mTabLayout.setCurrentItem(0, false);
         mTabLayout.setMessageNum(3, 15);
-
+        switchFragment(0);
     }
 
+    public void switchFragment(int tab) {
+        if (isFinishing() || mCurrentTab == tab) {
+            return;
+        }
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        hideFragments(fragmentTransaction);
+        switch (tab) {
+            case 0:
+                if (firstFragment == null) {
+                    firstFragment = new NavigationFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("number", 0);
+                    firstFragment.setArguments(bundle);
+                    fragmentTransaction.add(R.id.fl_content, firstFragment);
+                } else {
+                    fragmentTransaction.show(firstFragment);
+                }
+                break;
+            case 1:
+                if (secondFragment == null) {
+                    secondFragment = new NavigationFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("number", 1);
+                    secondFragment.setArguments(bundle);
+                    fragmentTransaction.add(R.id.fl_content, secondFragment);
+                } else {
+                    fragmentTransaction.show(secondFragment);
+                }
+                break;
+            case 2:
+                if (thirdFragment == null) {
+                    thirdFragment = new NavigationFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("number", 2);
+                    thirdFragment.setArguments(bundle);
+                    fragmentTransaction.add(R.id.fl_content, thirdFragment);
+                } else {
+                    fragmentTransaction.show(thirdFragment);
+                }
+                break;
+            case 3:
+                if (fourthFragment == null) {
+                    fourthFragment = new NavigationFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("number", 3);
+                    fourthFragment.setArguments(bundle);
+                    fragmentTransaction.add(R.id.fl_content, fourthFragment);
+                } else {
+                    fragmentTransaction.show(fourthFragment);
+                }
+                break;
+        }
+        fragmentTransaction.commitAllowingStateLoss();
+        mFragmentManager.executePendingTransactions();
+        mCurrentTab = tab;
+    }
+
+    private void hideFragments(FragmentTransaction fragmentTransaction) {
+        if (firstFragment != null) {
+            fragmentTransaction.hide(firstFragment);
+        }
+        if (secondFragment != null) {
+            fragmentTransaction.hide(secondFragment);
+        }
+        if (thirdFragment != null) {
+            fragmentTransaction.hide(thirdFragment);
+        }
+        if (fourthFragment != null) {
+            fragmentTransaction.hide(fourthFragment);
+        }
+    }
 
     @Override
     public void onClick(View v) {
