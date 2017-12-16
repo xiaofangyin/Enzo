@@ -12,6 +12,7 @@ import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
+import com.ifenglian.module_d.activity.MDNavigationActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDProgressActivity;
 import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
@@ -61,8 +62,8 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_navigation_view) {
-//            Intent intent = new Intent(getContext(), MDNavigationActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(getContext(), MDNavigationActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_jni) {
             Intent intent = new Intent(getContext(), MDJniActivity.class);
             startActivity(intent);
