@@ -50,6 +50,12 @@ public class TabButton extends View {
 
     public TabButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mTextRect = new Rect();
+        mTextPaint = new Paint();
+        //数字画笔内容大小等创建
+        mMessagePaint = new Paint();
+        mMessageRect = new Rect();
+        mMessageRectF = new RectF();
     }
 
     public void initIcon(int normalIcon, int selectedIcon) {
@@ -69,18 +75,10 @@ public class TabButton extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         Log.e("AAA", "onSizeChanged ...");
-        mTextRect = new Rect();
-        mTextPaint = new Paint();
         mTextPaint.setColor(mNormalColor);
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
-
-        //数字画笔内容大小等创建
-        mMessagePaint = new Paint();
-        mMessageRect = new Rect();
-        mMessageRectF = new RectF();
-
     }
 
     @Override
@@ -168,15 +166,13 @@ public class TabButton extends View {
 
     public void setSelected(boolean selected, boolean animate) {
         Log.e("AAA", "setSelected: " + selected);
+        mTextPaint.setColor(selected ? mSelectedColor : mNormalColor);
         if (animate) {
             if (selected) {
-                mTextPaint.setColor(mSelectedColor);
                 startScaleAnim(1.0f, 1.2f, mSelectedBitmap);
             } else {
-                mTextPaint.setColor(mNormalColor);
                 startScaleAnim(1.2f, 1f, mNormalBitmap);
             }
-            invalidateView();
         } else {
             if (selected) {
                 Matrix matrix = new Matrix();
@@ -187,6 +183,7 @@ public class TabButton extends View {
                 mDrawBitmap = mNormalBitmap;
             }
         }
+        invalidateView();
     }
 
     private void startScaleAnim(float startValue, float endValue, final Bitmap bitmap) {
