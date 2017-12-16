@@ -11,7 +11,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Looper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.commonlib.utils.common.DensityUtil;
@@ -199,6 +198,7 @@ public class TabButton extends View {
      */
     public void showRedPoint(boolean showRedPoint) {
         mShowRedPoint = showRedPoint;
+        invalidateView();
     }
 
     public void setSelected(boolean selected, boolean animate) {
