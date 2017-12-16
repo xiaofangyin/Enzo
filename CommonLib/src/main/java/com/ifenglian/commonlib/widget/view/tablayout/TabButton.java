@@ -80,7 +80,7 @@ public class TabButton extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawText(canvas);//绘制原文本
-        drawBitmap(canvas, mDrawBitmap);
+        drawBitmap(canvas);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         } else if (mShowRedPoint) {
@@ -101,13 +101,13 @@ public class TabButton extends View {
     /**
      * 画图标
      */
-    private void drawBitmap(Canvas canvas, Bitmap bitmap) {
-        int marginLeft = getWidth() / 2 - bitmap.getWidth() / 2;
-        int marginTop = getHeight() / 2 - (mTextRect.height() + bitmap.getHeight()) / 2;
+    private void drawBitmap(Canvas canvas) {
+        int marginLeft = getWidth() / 2 - mDrawBitmap.getWidth() / 2;
+        int marginTop = getHeight() / 2 - (mTextRect.height() + mDrawBitmap.getHeight()) / 2;
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
-        canvas.drawBitmap(bitmap, marginLeft, marginTop, paint);
+        canvas.drawBitmap(mDrawBitmap, marginLeft, marginTop, paint);
     }
 
     /**
