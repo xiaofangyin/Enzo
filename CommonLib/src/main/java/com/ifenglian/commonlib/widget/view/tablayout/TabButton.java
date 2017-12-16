@@ -130,11 +130,11 @@ public class TabButton extends View {
         mRedPointPaint.setAntiAlias(true);
         mRedPointPaint.setDither(true);
 
-        int width = DensityUtil.dip2px(getContext(), 3);
-        mRedPointRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width;
+        int radius = DensityUtil.dip2px(getContext(), 3);
+        mRedPointRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - radius;
         mRedPointRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
-        mRedPointRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width;
-        mRedPointRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2;
+        mRedPointRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + radius;
+        mRedPointRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + radius * 2;
         canvas.drawOval(mRedPointRectF, mRedPointPaint);
     }
 
@@ -162,11 +162,11 @@ public class TabButton extends View {
         Paint.FontMetrics fontMetrics = mMessagePaint.getFontMetrics();
 
         //画圆
-        int width = DensityUtil.dip2px(getContext(), 8);
-        mMessageRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - width;
+        int radius = DensityUtil.dip2px(getContext(), 8);
+        mMessageRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - radius;
         mMessageRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
-        mMessageRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + width;
-        mMessageRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + width * 2;
+        mMessageRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + radius;
+        mMessageRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + radius * 2;
 
         mRedPointPaint.setStyle(Paint.Style.FILL);
         mRedPointPaint.setColor(0xFFFF0000);
