@@ -36,7 +36,6 @@ public class TabButton extends View {
     private Paint mTextPaint;
     private int mMessageNumber;
 
-    private boolean isSelected;
     private Paint mMessagePaint;
     private Rect mMessageRect;
     private RectF mMessageRectF;
@@ -56,6 +55,7 @@ public class TabButton extends View {
     public void initIcon(int normalIcon, int selectedIcon) {
         mNormalBitmap = BitmapFactory.decodeResource(getResources(), normalIcon);
         mSelectedBitmap = BitmapFactory.decodeResource(getResources(), selectedIcon);
+        mDrawBitmap = mNormalBitmap;
     }
 
     public void initText(String text, int textSize, int normalColor, int selectedColor) {
@@ -81,14 +81,6 @@ public class TabButton extends View {
         mMessageRect = new Rect();
         mMessageRectF = new RectF();
 
-        if (isSelected) {
-            Matrix matrix = new Matrix();
-            matrix.postScale(1.15f, 1.15f);
-            mDrawBitmap = Bitmap.createBitmap(mSelectedBitmap, 0, 0, mSelectedBitmap.getWidth(), mSelectedBitmap.getHeight(),
-                    matrix, true);
-        } else {
-            mDrawBitmap = mNormalBitmap;
-        }
     }
 
     @Override
@@ -174,18 +166,26 @@ public class TabButton extends View {
         invalidateView();
     }
 
-    public void setSelected(boolean selected,boolean animate) {
+    public void setSelected(boolean selected, boolean animate) {
         Log.e("AAA", "setSelected: " + selected);
-        isSelected = selected;
-        if(animate){
+        if (animate) {
             if (selected) {
                 mTextPaint.setColor(mSelectedColor);
-                startScaleAnim(1.0f, 1.15f, mSelectedBitmap);
+                startScaleAnim(1.0f, 1.2f, mSelectedBitmap);
             } else {
                 mTextPaint.setColor(mNormalColor);
-                startScaleAnim(1.15f, 1f, mNormalBitmap);
+                startScaleAnim(1.2f, 1f, mNormalBitmap);
             }
             invalidateView();
+        } else {
+            if (selected) {
+                Matrix matrix = new Matrix();
+                matrix.postScale(1.2f, 1.2f);
+                mDrawBitmap = Bitmap.createBitmap(mSelectedBitmap, 0, 0, mSelectedBitmap.getWidth(), mSelectedBitmap.getHeight(),
+                        matrix, true);
+            } else {
+                mDrawBitmap = mNormalBitmap;
+            }
         }
     }
 
