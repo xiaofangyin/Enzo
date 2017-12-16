@@ -81,6 +81,7 @@ public class TabButton extends View {
         super.onDraw(canvas);
         drawText(canvas);//绘制原文本
         drawBitmap(canvas);
+
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         } else if (mShowRedPoint) {
