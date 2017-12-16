@@ -103,7 +103,7 @@ public class TabButton extends View {
      */
     private void drawBitmap(Canvas canvas, Bitmap bitmap) {
         int marginLeft = getWidth() / 2 - bitmap.getWidth() / 2;
-        int marginTop = getHeight() / 2 - (mTextRect.height() + mDrawBitmap.getHeight()) / 2;
+        int marginTop = getHeight() / 2 - (mTextRect.height() + bitmap.getHeight()) / 2;
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
