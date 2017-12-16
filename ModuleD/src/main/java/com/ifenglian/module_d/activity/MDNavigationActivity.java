@@ -59,7 +59,7 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onPageSelected(int position) {
                 Log.e("AAA", "onPageSelected: " + position);
-                mTabLayout.setCurrentItem(position);
+                mTabLayout.setCurrentItem(position, true);
             }
 
             @Override
@@ -79,7 +79,7 @@ public class MDNavigationActivity extends AppCompatActivity implements View.OnCl
                 Log.e("AAA", "onTabReClick: " + position);
             }
         });
-        mTabLayout.setCurrentItem(0);
+        mTabLayout.setCurrentItem(0, false);
         mTabLayout.setMessageNum(3, 15);
 
     }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.ifenglian.commonlib.R;
+import com.ifenglian.commonlib.utils.common.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,14 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
 
     private int mLastPosition = 0;
     private List<TabButton> mTabList;
+
+    private String mTitles[] = {"家庭", "安全", "发现", "我"};
+    private int mIconRes[][] = {
+            {R.mipmap.sa_tab_home_normal, R.mipmap.sa_tab_home_select},
+            {R.mipmap.sa_tab_security_normal, R.mipmap.sa_tab_security_select},
+            {R.mipmap.sa_tab_find_normal, R.mipmap.sa_tab_find_select},
+            {R.mipmap.sa_tab_personalcenter_normal, R.mipmap.sa_tab_personalcenter_select}
+    };
 
     public TabLayout(Context context) {
         this(context, null);
@@ -47,6 +56,8 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         mTabList.add(tab3);
         mTabList.add(tab4);
         for (int i = 0; i < mTabList.size(); i++) {
+            mTabList.get(i).initIcon(mIconRes[i][0], mIconRes[i][1]);
+            mTabList.get(i).initText(mTitles[i], DensityUtil.sp2px(getContext(), 12), 0xFFAAAAAA, 0xFF30B5FF);
             mTabList.get(i).setOnClickListener(this);
             mTabList.get(i).setTag(i);
         }
@@ -56,7 +67,7 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
     public void onClick(View v) {
         int number = (int) v.getTag();
         if (number != mLastPosition) {
-            setCurrentItem(number);
+            setCurrentItem(number, true);
             if (mListener != null) {
                 mListener.onTabClick(mTabList.get(number), number);
             }
@@ -67,9 +78,9 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         }
     }
 
-    public void setCurrentItem(int currentItem) {
-        mTabList.get(mLastPosition).setSelected(false);
-        mTabList.get(currentItem).setSelected(true);
+    public void setCurrentItem(int currentItem, boolean animate) {
+        mTabList.get(mLastPosition).setSelected(false, animate);
+        mTabList.get(currentItem).setSelected(true, animate);
         mLastPosition = currentItem;
     }
 

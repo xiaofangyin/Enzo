@@ -1,21 +1,19 @@
 package com.ifenglian.commonlib.widget.view.tablayout;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
 import com.nineoldandroids.animation.ValueAnimator;
 
@@ -53,26 +51,24 @@ public class TabButton extends View {
 
     public TabButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabButton);
-        int n = a.getIndexCount();
-        for (int i = 0; i < n; i++) {
-            int attr = a.getIndex(i);
-            if (attr == R.styleable.TabButton_image) {
-                BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);
-                mNormalBitmap = drawable.getBitmap();
-            } else if (attr == R.styleable.TabButton_clickimage) {
-                BitmapDrawable clickDrawable = (BitmapDrawable) a.getDrawable(attr);
-                mSelectedBitmap = clickDrawable.getBitmap();
-            } else if (attr == R.styleable.TabButton_clickcolor) {
-                mSelectedColor = a.getColor(attr, 0xFF3F9FE0);
-            } else if (attr == R.styleable.TabButton_text) {
-                mText = a.getString(attr);
-            } else if (attr == R.styleable.TabButton_text_size) {
-                mTextSize = a.getDimension(attr, 12);
-            }
-        }
-        a.recycle();
+    }
 
+    public void initIcon(int normalIcon, int selectedIcon) {
+        mNormalBitmap = BitmapFactory.decodeResource(getResources(), normalIcon);
+        mSelectedBitmap = BitmapFactory.decodeResource(getResources(), selectedIcon);
+    }
+
+    public void initText(String text, int textSize, int normalColor, int selectedColor) {
+        mText = text;
+        mTextSize = textSize;
+        mNormalColor = normalColor;
+        mSelectedColor = selectedColor;
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        Log.e("AAA", "onSizeChanged ...");
         mTextRect = new Rect();
         mTextPaint = new Paint();
         mTextPaint.setColor(mNormalColor);
@@ -84,12 +80,7 @@ public class TabButton extends View {
         mMessagePaint = new Paint();
         mMessageRect = new Rect();
         mMessageRectF = new RectF();
-    }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        Log.e("AAA", "onSizeChanged ...");
         if (isSelected) {
             Matrix matrix = new Matrix();
             matrix.postScale(1.15f, 1.15f);
@@ -183,17 +174,19 @@ public class TabButton extends View {
         invalidateView();
     }
 
-    public void setSelected(boolean selected) {
+    public void setSelected(boolean selected,boolean animate) {
         Log.e("AAA", "setSelected: " + selected);
         isSelected = selected;
-        if (selected) {
-            mTextPaint.setColor(mSelectedColor);
-            startScaleAnim(1.0f, 1.15f, mSelectedBitmap);
-        } else {
-            mTextPaint.setColor(mNormalColor);
-            startScaleAnim(1.15f, 1f, mNormalBitmap);
+        if(animate){
+            if (selected) {
+                mTextPaint.setColor(mSelectedColor);
+                startScaleAnim(1.0f, 1.15f, mSelectedBitmap);
+            } else {
+                mTextPaint.setColor(mNormalColor);
+                startScaleAnim(1.15f, 1f, mNormalBitmap);
+            }
+            invalidateView();
         }
-        invalidateView();
     }
 
     private void startScaleAnim(float startValue, float endValue, final Bitmap bitmap) {
