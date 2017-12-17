@@ -36,19 +36,19 @@ public class MDJniActivity extends BaseActivity {
 
     }
 
-    public void btn_add(View v) {
+    public void getInt(View v) {
         DataProvider provider = new DataProvider();
         int result = provider.javaCallCGetInt(9, 8);
-        ToastUtils.showToast(String.valueOf(result));
+        ToastUtils.showToast("9 + 8 = " + result);
     }
 
-    public void btn_hello(View v) {
+    public void getString(View v) {
         DataProvider provider = new DataProvider();
         String result = provider.javaCallCGetString("heiheihei");
         ToastUtils.showToast(result);
     }
 
-    public void btn_int_array(View v) {
+    public void getIntArray(View v) {
         DataProvider provider = new DataProvider();
         int[] array = new int[]{6, 8, 4, 5, 9};
         int[] result = provider.javaCallCGetIntArray(array);
@@ -57,7 +57,7 @@ public class MDJniActivity extends BaseActivity {
         }
     }
 
-    public void btn_c_call_java1(View v){
+    public void c_call_java1(View v) {
         DataProvider provider = new DataProvider();
         provider.method1();
     }

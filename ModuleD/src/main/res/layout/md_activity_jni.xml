@@ -7,24 +7,24 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="btn_add"
+        android:onClick="getInt"
         android:text="get_int" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="btn_hello"
+        android:onClick="getString"
         android:text="get_string" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="btn_int_array"
+        android:onClick="getIntArray"
         android:text="get_int_array" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="btn_c_call_java1"
+        android:onClick="c_call_java1"
         android:text="c_call_java1" />
 </LinearLayout>

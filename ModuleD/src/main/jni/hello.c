@@ -8,11 +8,6 @@
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
-JNIEXPORT jint JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_javaCallCGetInt
-  (JNIEnv * env, jobject obj, jint x, jint y){
-    return x+y;
-  };
-
 char*   Jstring2CStr(JNIEnv*   env,   jstring   jstr)
 {
 	 char*   rtn   =   NULL;  // 创建了空的字符串
@@ -32,6 +27,21 @@ char*   Jstring2CStr(JNIEnv*   env,   jstring   jstr)
 	 return rtn;
 }
 
+/*
+ * Class:     com_ifenglian_module_d_jni_DataProvider
+ * Method:    javaCallCGetInt
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_javaCallCGetInt
+  (JNIEnv * env, jobject obj, jint x, jint y){
+    return x+y;
+  };
+
+/*
+ * Class:     com_ifenglian_module_d_jni_DataProvider
+ * Method:    javaCallCGetString
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
 JNIEXPORT jstring JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_javaCallCGetString
   (JNIEnv * env, jobject obj, jstring jstr){
      char* cstr = Jstring2CStr(env,jstr);
@@ -39,6 +49,11 @@ JNIEXPORT jstring JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_javaCall
      return (*env)->NewStringUTF(env,cstr);
   };
 
+/*
+ * Class:     com_ifenglian_module_d_jni_DataProvider
+ * Method:    javaCallCGetIntArray
+ * Signature: ([I)[I
+ */
 JNIEXPORT jintArray JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_javaCallCGetIntArray
   (JNIEnv * env, jobject obj, jintArray intArray){
      int length = (*env)->GetArrayLength(env,intArray);

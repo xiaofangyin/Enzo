@@ -1,6 +1,6 @@
 package com.ifenglian.module_d.jni;
 
-import android.util.Log;
+import com.ifenglian.commonlib.utils.toast.ToastUtils;
 
 /**
  * 文 件 名: DataProvider
@@ -21,16 +21,15 @@ public class DataProvider {
     public native int[] javaCallCGetIntArray(int[] array);
 
 
-
     //获取方法签名
     //xiaofydembp:debug xiaofangyin$ javap -s com.ifenglian.module_d.jni.DataProvider
     public void cCallJava1() {    //()V
-        Log.e("AAA","=====helloFromJava=====");
+        ToastUtils.showToast("=====helloFromJava=====");
     }
 
     public int cCallJava2(int x, int y) {   // (II)I
         int result = x + y;
-        System.out.println("result=" + result);
+        ToastUtils.showToast("x + y = " + (x + y));
         return result;
     }
 
