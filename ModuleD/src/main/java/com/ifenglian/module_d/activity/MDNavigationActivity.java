@@ -7,9 +7,9 @@ import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
+import com.ifenglian.commonlib.widget.view.tablayout.TabView;
 import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.fragment.NavigationFragment;
@@ -70,13 +70,13 @@ public class MDNavigationActivity extends BaseActivity {
     public void initListener() {
         mTabLayout.setOnTabClickListener(new TabLayout.OnTabClickListener() {
             @Override
-            public void onTabClick(View view, int position) {
+            public void onTabClick(TabView view, int position) {
                 Log.e("AAA", "onTabClick: " + position);
                 switchFragment(position);
             }
 
             @Override
-            public void onTabReClick(View view, int position) {
+            public void onTabReClick(TabView view, int position) {
                 Log.e("AAA", "onTabReClick: " + position);
             }
         });

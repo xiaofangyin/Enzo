@@ -17,11 +17,11 @@ import java.util.List;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class TabLayout extends LinearLayout implements TabLayoutController, View.OnClickListener {
+public class TabLayout extends LinearLayout implements ITabLayout, View.OnClickListener {
 
     private boolean isShow = true;
     private int mLastPosition = -1;
-    private List<TabButton> mTabList;
+    private List<TabView> mTabList;
     private ObjectAnimator objectAnimator;
 
     public TabLayout(Context context) {
@@ -60,16 +60,16 @@ public class TabLayout extends LinearLayout implements TabLayoutController, View
     @Override
     public void initData(String[] titles, int[][] iconRes) {
         for (int i = 0; i < titles.length; i++) {
-            TabButton button = new TabButton(getContext());
-            button.initTab(titles[i], iconRes[i][0], iconRes[i][1]);
-            button.setOnClickListener(this);
-            button.setTag(i);
+            TabView tab = new TabView(getContext());
+            tab.initTab(titles[i], iconRes[i][0], iconRes[i][1]);
+            tab.setOnClickListener(this);
+            tab.setTag(i);
 
             LayoutParams layoutParams = new LayoutParams(0, LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;
-            button.setLayoutParams(layoutParams);
-            addView(button);
-            mTabList.add(button);
+            tab.setLayoutParams(layoutParams);
+            addView(tab);
+            mTabList.add(tab);
         }
     }
 
@@ -155,8 +155,8 @@ public class TabLayout extends LinearLayout implements TabLayoutController, View
     }
 
     public interface OnTabClickListener {
-        void onTabClick(View view, int position);
+        void onTabClick(TabView view, int position);
 
-        void onTabReClick(View view, int position);
+        void onTabReClick(TabView view, int position);
     }
 }

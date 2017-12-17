@@ -1,12 +1,12 @@
 package com.ifenglian.commonlib.widget.view.tablayout;
 
 /**
- * 文 件 名: TabLayoutController
+ * 文 件 名: ITabLayout
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/17
  * 邮   箱: xiaofy@ifenglian.com
  */
-public interface TabLayoutController {
+public interface ITabLayout {
     void initData(String[] titles, int[][] iconRes);
 
     void setCurrentItem(int currentItem, boolean animate);

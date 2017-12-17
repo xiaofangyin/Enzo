@@ -22,7 +22,7 @@ import com.nineoldandroids.animation.ValueAnimator;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class TabButton extends View {
+public class TabView extends View {
 
     private static final int NORMAL_TEXT_COLOR = 0xFFAAAAAA;
     private static final int SELECTED_TEXT_COLOR = 0xFF30B5FF;
@@ -43,15 +43,15 @@ public class TabButton extends View {
     private RectF mRedPointRectF;
     private boolean mShowRedPoint;
 
-    public TabButton(Context context) {
+    public TabView(Context context) {
         this(context, null);
     }
 
-    public TabButton(Context context, AttributeSet attrs) {
+    public TabView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TabButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TabView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mTextRect = new Rect();
         mTextPaint = new Paint();
