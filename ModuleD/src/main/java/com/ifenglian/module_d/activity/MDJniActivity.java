@@ -38,22 +38,27 @@ public class MDJniActivity extends BaseActivity {
 
     public void btn_add(View v) {
         DataProvider provider = new DataProvider();
-        int result = provider.add(9, 8);
+        int result = provider.javaCallCGetInt(9, 8);
         ToastUtils.showToast(String.valueOf(result));
     }
 
     public void btn_hello(View v) {
         DataProvider provider = new DataProvider();
-        String result = provider.helloFromC("heiheihei");
+        String result = provider.javaCallCGetString("heiheihei");
         ToastUtils.showToast(result);
     }
 
     public void btn_int_array(View v) {
         DataProvider provider = new DataProvider();
         int[] array = new int[]{6, 8, 4, 5, 9};
-        int[] result = provider.getIntArray(array);
+        int[] result = provider.javaCallCGetIntArray(array);
         for (int anArray : result) {
             Log.d("AAA", String.valueOf(anArray));
         }
+    }
+
+    public void btn_c_call_java1(View v){
+        DataProvider provider = new DataProvider();
+        provider.method1();
     }
 }
