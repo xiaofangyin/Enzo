@@ -109,7 +109,11 @@ JNIEXPORT void JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_method2
  */
 JNIEXPORT void JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_method3
   (JNIEnv * env, jobject obj){
-
+	jclass clazz=(*env)->FindClass(env,"com/ifenglian/module_d/jni/DataProvider");
+	jmethodID methodID=(*env)->GetMethodID(env,clazz,"cCallJava3","(Ljava/lang/String;)V");
+	// jstring   把char*转换成jstr
+	jstring jstr=(*env)->NewStringUTF(env,"我是c ");
+	(*env)->CallVoidMethod(env,obj,methodID,jstr);
 };
 
 /*

@@ -34,7 +34,7 @@ public class DataProvider {
     }
 
     public void cCallJava3(String s) {  //(Ljava/lang/String;)V
-        System.out.println(s + "hello");
+        ToastUtils.showToast(s + " 我是java");
     }
 
     public static void cCallJavaStatic() {  // ()V
