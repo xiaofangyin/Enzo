@@ -20,7 +20,7 @@ import java.util.List;
 public class TabLayout extends LinearLayout implements TabLayoutController, View.OnClickListener {
 
     private boolean isShow = true;
-    private int mLastPosition = 0;
+    private int mLastPosition = -1;
     private List<TabButton> mTabList;
     private ObjectAnimator objectAnimator;
 
@@ -75,9 +75,13 @@ public class TabLayout extends LinearLayout implements TabLayoutController, View
 
     @Override
     public void setCurrentItem(int currentItem, boolean animate) {
-        mTabList.get(mLastPosition).setSelected(false, animate);
-        mTabList.get(currentItem).setSelected(true, animate);
-        mLastPosition = currentItem;
+        if (mLastPosition >= 0 && mLastPosition < mTabList.size()) {
+            mTabList.get(mLastPosition).setSelected(false, animate);
+        }
+        if (currentItem >= 0 && currentItem < mTabList.size()) {
+            mTabList.get(currentItem).setSelected(true, animate);
+            mLastPosition = currentItem;
+        }
     }
 
     @Override
