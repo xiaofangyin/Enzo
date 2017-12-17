@@ -102,9 +102,16 @@ public class TabLayout extends LinearLayout implements TabLayoutController, View
     }
 
     @Override
-    public void showRedPoint(int position, boolean showRedPoint) {
+    public void showRedPoint(int position) {
         if (position >= 0 && position < mTabList.size()) {
-            mTabList.get(position).showRedPoint(showRedPoint);
+            mTabList.get(position).showRedPoint(true);
+        }
+    }
+
+    @Override
+    public void hideRedPoint(int position) {
+        if (position >= 0 && position < mTabList.size()) {
+            mTabList.get(position).showRedPoint(false);
         }
     }
 

@@ -17,7 +17,9 @@ public interface TabLayoutController {
 
     void resetMessageNum(int position);
 
-    void showRedPoint(int position, boolean showRedPoint);
+    void showRedPoint(int position);
+
+    void hideRedPoint(int position);
 
     void showTabLayout();
 
