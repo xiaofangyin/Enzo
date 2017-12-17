@@ -184,6 +184,16 @@ public class TabButton extends View {
         invalidateView();
     }
 
+    public void setMessageNumber(int number) {
+        mMessageNumber = number;
+        invalidateView();
+    }
+
+    public void resetMessageNumber() {
+        mMessageNumber = 0;
+        invalidateView();
+    }
+
     /**
      * 小红点
      */

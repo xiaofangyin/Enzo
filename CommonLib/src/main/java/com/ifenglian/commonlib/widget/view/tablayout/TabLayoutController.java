@@ -13,6 +13,10 @@ public interface TabLayoutController {
 
     void addMessageNum(int position, int messageNum);
 
+    void setMessageNum(int position, int messageNum);
+
+    void resetMessageNum(int position);
+
     void showRedPoint(int position, boolean showRedPoint);
 
     void showTabLayout();

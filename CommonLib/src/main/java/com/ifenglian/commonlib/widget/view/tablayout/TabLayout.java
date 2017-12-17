@@ -88,6 +88,20 @@ public class TabLayout extends LinearLayout implements TabLayoutController, View
     }
 
     @Override
+    public void setMessageNum(int position, int messageNum) {
+        if (position >= 0 && position < mTabList.size()) {
+            mTabList.get(position).setMessageNumber(messageNum);
+        }
+    }
+
+    @Override
+    public void resetMessageNum(int position) {
+        if (position >= 0 && position < mTabList.size()) {
+            mTabList.get(position).resetMessageNumber();
+        }
+    }
+
+    @Override
     public void showRedPoint(int position, boolean showRedPoint) {
         if (position >= 0 && position < mTabList.size()) {
             mTabList.get(position).showRedPoint(showRedPoint);
