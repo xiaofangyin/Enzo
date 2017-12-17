@@ -4,9 +4,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.ifenglian.commonlib.R;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
  */
 public class TabLayout extends FrameLayout implements View.OnClickListener {
 
+    private boolean isShow = true;
     private int mLastPosition = 0;
     private List<TabButton> mTabList;
 
@@ -29,6 +32,7 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
             {R.mipmap.sa_tab_find_normal, R.mipmap.sa_tab_find_select},
             {R.mipmap.sa_tab_personalcenter_normal, R.mipmap.sa_tab_personalcenter_select}
     };
+    private ObjectAnimator objectAnimator;
 
     public TabLayout(Context context) {
         this(context, null);
@@ -92,6 +96,33 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         if (position >= 0 && position < mTabList.size()) {
             mTabList.get(position).showRedPoint(showRedPoint);
         }
+    }
+
+    public void showTabLayout() {
+        if (!isShow) {
+            isShow = true;
+            getObjectAnimator().reverse();
+        }
+    }
+
+    public void hideTabLayout() {
+        if (isShow) {
+            isShow = false;
+            getObjectAnimator().start();
+        }
+    }
+
+    private ObjectAnimator getObjectAnimator() {
+        if (objectAnimator == null) {
+            objectAnimator = ObjectAnimator.ofFloat(
+                    TabLayout.this,
+                    "translationY",
+                    0,
+                    TabLayout.this.getHeight());
+            objectAnimator.setDuration(300);
+            objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        }
+        return objectAnimator;
     }
 
     private OnTabClickListener mListener;

@@ -146,4 +146,11 @@ public class MDNavigationActivity extends BaseActivity {
         }
     }
 
+    public void showTabLayout(boolean show) {
+        if (show) {
+            mTabLayout.showTabLayout();
+        } else {
+            mTabLayout.hideTabLayout();
+        }
+    }
 }
