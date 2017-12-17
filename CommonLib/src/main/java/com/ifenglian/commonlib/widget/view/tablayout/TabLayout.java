@@ -58,7 +58,7 @@ public class TabLayout extends LinearLayout implements TabLayoutController, View
     }
 
     @Override
-    public void setData(String[] titles, int[][] iconRes) {
+    public void initData(String[] titles, int[][] iconRes) {
         for (int i = 0; i < titles.length; i++) {
             TabButton button = new TabButton(getContext());
             button.initTab(titles[i], iconRes[i][0], iconRes[i][1]);

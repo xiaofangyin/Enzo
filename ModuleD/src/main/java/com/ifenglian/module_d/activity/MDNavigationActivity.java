@@ -46,7 +46,7 @@ public class MDNavigationActivity extends BaseActivity {
     public void initView() {
         mFragmentManager = getSupportFragmentManager();
         mTabLayout = findViewById(R.id.tab_layout);
-        mTabLayout.setData(mTitles, mIconRes);
+        mTabLayout.initData(mTitles, mIconRes);
     }
 
     @Override
