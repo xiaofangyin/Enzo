@@ -81,10 +81,8 @@ public class NavigationFragment extends BaseFragment {
             super.onScrolled(recyclerView, dx, dy);
             if (dy > 8) {//列表向上滑动
                 ((MDNavigationActivity) NavigationFragment.this.getActivity()).showTabLayout(false);
-//                mNavigationController.hideBottomLayout();
             } else if (dy < -8) {//列表向下滑动
                 ((MDNavigationActivity) NavigationFragment.this.getActivity()).showTabLayout(true);
-//                mNavigationController.showBottomLayout();
             }
         }
     }
