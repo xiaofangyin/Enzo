@@ -123,5 +123,10 @@ JNIEXPORT void JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_method3
  */
 JNIEXPORT void JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_method4
   (JNIEnv * env, jobject obj){
-
+// 第一步 加载类的字节码
+	jclass clazz=(*env)->FindClass(env,"com/ifenglian/module_d/jni/DataProvider");
+	//  找到静态方法
+	jmethodID methodID=(*env)->GetStaticMethodID(env,clazz,"cCallJavaStatic","()V");
+	// 步骤3 调用静态方法  第二个参数 jclass
+	(*env)->CallStaticVoidMethod(env,clazz,methodID);
 };

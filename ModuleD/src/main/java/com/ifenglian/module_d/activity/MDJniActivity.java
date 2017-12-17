@@ -71,4 +71,9 @@ public class MDJniActivity extends BaseActivity {
         DataProvider provider = new DataProvider();
         provider.method3();
     }
+
+    public void c_call_java_static(View v) {
+        DataProvider provider = new DataProvider();
+        provider.method4();
+    }
 }

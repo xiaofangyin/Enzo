@@ -39,4 +39,10 @@
         android:layout_height="wrap_content"
         android:onClick="c_call_java3"
         android:text="c_call_java3" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="c_call_java_static"
+        android:text="c_call_java_static" />
 </LinearLayout>

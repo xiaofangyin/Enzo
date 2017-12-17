@@ -38,7 +38,7 @@ public class DataProvider {
     }
 
     public static void cCallJavaStatic() {  // ()V
-        System.out.println("helloStatic");
+        ToastUtils.showToast("=====C调用静态方法=====");
     }
 
     public native void method1();
