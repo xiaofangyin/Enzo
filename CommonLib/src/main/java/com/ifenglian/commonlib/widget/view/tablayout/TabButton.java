@@ -198,8 +198,10 @@ public class TabButton extends View {
      * 小红点
      */
     public void showRedPoint(boolean show) {
-        mShowRedPoint = show;
-        invalidateView();
+        if (mShowRedPoint != show) {
+            mShowRedPoint = show;
+            invalidateView();
+        }
     }
 
     public void setSelected(boolean selected, boolean animate) {
