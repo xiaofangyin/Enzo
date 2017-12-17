@@ -22,7 +22,8 @@ public class DataProvider {
 
 
     //获取方法签名
-    //xiaofydembp:debug xiaofangyin$ javap -s com.ifenglian.module_d.jni.DataProvider
+    // 目录：moduleD/build/intermediates/classes/debug
+    // 指令：xiaofydembp:debug xiaofangyin$ javap -s com.ifenglian.module_d.jni.DataProvider
     public void cCallJava1() {    //()V
         ToastUtils.showToast("=====helloFromJava=====");
     }
