@@ -2,12 +2,10 @@ package com.ifenglian.commonlib.widget.view.tablayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-import com.ifenglian.commonlib.R;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 import java.util.ArrayList;
@@ -19,19 +17,11 @@ import java.util.List;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class TabLayout extends FrameLayout implements TabLayoutController,View.OnClickListener {
+public class TabLayout extends LinearLayout implements TabLayoutController, View.OnClickListener {
 
     private boolean isShow = true;
     private int mLastPosition = 0;
     private List<TabButton> mTabList;
-
-    private String mTitles[] = {"家庭", "安全", "发现", "我"};
-    private int mIconRes[][] = {
-            {R.mipmap.sa_tab_home_normal, R.mipmap.sa_tab_home_select},
-            {R.mipmap.sa_tab_security_normal, R.mipmap.sa_tab_security_select},
-            {R.mipmap.sa_tab_find_normal, R.mipmap.sa_tab_find_select},
-            {R.mipmap.sa_tab_personalcenter_normal, R.mipmap.sa_tab_personalcenter_select}
-    };
     private ObjectAnimator objectAnimator;
 
     public TabLayout(Context context) {
@@ -44,25 +34,12 @@ public class TabLayout extends FrameLayout implements TabLayoutController,View.O
 
     public TabLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init();
     }
 
-    private void init(Context context) {
+    private void init() {
+        setOrientation(LinearLayout.HORIZONTAL);
         mTabList = new ArrayList<>();
-        View view = LayoutInflater.from(context).inflate(R.layout.lib_tab_layout, this);
-        TabButton tab1 = view.findViewById(R.id.tab_first);
-        TabButton tab2 = view.findViewById(R.id.tab_second);
-        TabButton tab3 = view.findViewById(R.id.tab_third);
-        TabButton tab4 = view.findViewById(R.id.tab_fourth);
-        mTabList.add(tab1);
-        mTabList.add(tab2);
-        mTabList.add(tab3);
-        mTabList.add(tab4);
-        for (int i = 0; i < mTabList.size(); i++) {
-            mTabList.get(i).initTab(mTitles[i], mIconRes[i][0], mIconRes[i][1]);
-            mTabList.get(i).setOnClickListener(this);
-            mTabList.get(i).setTag(i);
-        }
     }
 
     @Override
@@ -77,6 +54,22 @@ public class TabLayout extends FrameLayout implements TabLayoutController,View.O
             if (mListener != null) {
                 mListener.onTabReClick(mTabList.get(number), number);
             }
+        }
+    }
+
+    @Override
+    public void setData(String[] titles, int[][] iconRes) {
+        for (int i = 0; i < titles.length; i++) {
+            TabButton button = new TabButton(getContext());
+            button.initTab(titles[i], iconRes[i][0], iconRes[i][1]);
+            button.setOnClickListener(this);
+            button.setTag(i);
+
+            LayoutParams layoutParams = new LayoutParams(0, LayoutParams.MATCH_PARENT);
+            layoutParams.weight = 1;
+            button.setLayoutParams(layoutParams);
+            addView(button);
+            mTabList.add(button);
         }
     }
 

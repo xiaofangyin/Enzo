@@ -7,6 +7,7 @@ package com.ifenglian.commonlib.widget.view.tablayout;
  * 邮   箱: xiaofy@ifenglian.com
  */
 public interface TabLayoutController {
+    void setData(String[] titles,int[][] iconRes);
     void setCurrentItem(int currentItem, boolean animate);
 
     void addMessageNum(int position, int messageNum);

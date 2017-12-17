@@ -22,6 +22,13 @@ import com.ifenglian.module_d.fragment.NavigationFragment;
  */
 public class MDNavigationActivity extends BaseActivity {
 
+    private String mTitles[] = {"家庭", "安全", "发现", "我"};
+    private int mIconRes[][] = {
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_home_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_home_select},
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_security_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_security_select},
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_find_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_find_select},
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_select}
+    };
     private int mCurrentTab = -1;
     private TabLayout mTabLayout;
     private FragmentManager mFragmentManager;
@@ -39,6 +46,7 @@ public class MDNavigationActivity extends BaseActivity {
     public void initView() {
         mFragmentManager = getSupportFragmentManager();
         mTabLayout = findViewById(R.id.tab_layout);
+        mTabLayout.setData(mTitles, mIconRes);
     }
 
     @Override
