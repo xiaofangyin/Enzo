@@ -19,7 +19,7 @@ import java.util.List;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class TabLayout extends FrameLayout implements View.OnClickListener {
+public class TabLayout extends FrameLayout implements TabLayoutController,View.OnClickListener {
 
     private boolean isShow = true;
     private int mLastPosition = 0;
@@ -80,24 +80,28 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         }
     }
 
+    @Override
     public void setCurrentItem(int currentItem, boolean animate) {
         mTabList.get(mLastPosition).setSelected(false, animate);
         mTabList.get(currentItem).setSelected(true, animate);
         mLastPosition = currentItem;
     }
 
+    @Override
     public void addMessageNum(int position, int messageNum) {
         if (position >= 0 && position < mTabList.size()) {
             mTabList.get(position).addMessageNumber(messageNum);
         }
     }
 
+    @Override
     public void showRedPoint(int position, boolean showRedPoint) {
         if (position >= 0 && position < mTabList.size()) {
             mTabList.get(position).showRedPoint(showRedPoint);
         }
     }
 
+    @Override
     public void showTabLayout() {
         if (!isShow) {
             isShow = true;
@@ -105,6 +109,7 @@ public class TabLayout extends FrameLayout implements View.OnClickListener {
         }
     }
 
+    @Override
     public void hideTabLayout() {
         if (isShow) {
             isShow = false;
