@@ -27,4 +27,10 @@
         android:layout_height="wrap_content"
         android:onClick="c_call_java1"
         android:text="c_call_java1" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="c_call_java2"
+        android:text="c_call_java2" />
 </LinearLayout>

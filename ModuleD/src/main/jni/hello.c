@@ -94,7 +94,12 @@ JNIEXPORT void JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_method1
  */
 JNIEXPORT void JNICALL Java_com_ifenglian_module_1d_jni_DataProvider_method2
   (JNIEnv * env, jobject obj){
-
+	// 1 加载类的字节码
+	jclass clazz=(*env)->FindClass(env,"com/ifenglian/module_d/jni/DataProvider");
+	// 2 加载方法
+	jmethodID methodID=(*env)->GetMethodID(env,clazz,"cCallJava2","(II)I");
+	// 3 调用方法
+	(*env)->CallIntMethod(env,obj,methodID,3,5);
 };
 
 /*
