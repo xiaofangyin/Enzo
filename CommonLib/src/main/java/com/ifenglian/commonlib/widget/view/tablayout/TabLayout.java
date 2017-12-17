@@ -44,15 +44,15 @@ public class TabLayout extends LinearLayout implements TabLayoutController, View
 
     @Override
     public void onClick(View v) {
-        int number = (int) v.getTag();
-        if (number != mLastPosition) {
-            setCurrentItem(number, true);
+        int position = (int) v.getTag();
+        if (position != mLastPosition) {
+            setCurrentItem(position, true);
             if (mListener != null) {
-                mListener.onTabClick(mTabList.get(number), number);
+                mListener.onTabClick(mTabList.get(position), position);
             }
         } else {
             if (mListener != null) {
-                mListener.onTabReClick(mTabList.get(number), number);
+                mListener.onTabReClick(mTabList.get(position), position);
             }
         }
     }
