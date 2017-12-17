@@ -11,7 +11,7 @@ import com.ifenglian.commonlib.utils.toast.ToastUtils;
 public class DataProvider {
 
     static {
-        System.loadLibrary("hello");
+        System.loadLibrary("MyJni");
     }
 
     public native int javaCallCGetInt(int x, int y);

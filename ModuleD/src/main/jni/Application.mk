@@ -1,2 +1,2 @@
-APP_MODULES := hello
+APP_MODULES := MyJni
 APP_ABI := all
