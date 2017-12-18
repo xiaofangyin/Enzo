@@ -1,5 +1,12 @@
 //
 // Created by 肖方银 on 2017/12/12.
+// 生成头文件:
+// 目录：/Users/xiaofangyin/AndroidStudioProjects/Enzo/ModuleD/src/main/java
+// 指令：javah com.ifenglian.module_d.jni.DataProvider
+//
+// 获取方法签名
+// 目录：moduleD/build/intermediates/classes/debug
+// 指令：xiaofydembp:debug xiaofangyin$ javap -s com.ifenglian.module_d.jni.DataProvider
 //
 #include <jni.h>
 
