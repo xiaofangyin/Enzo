@@ -5,9 +5,12 @@
 // 指令：javah com.ifenglian.module_d.jni.DataProvider
 //
 // 获取方法签名
-// 目录：moduleD/build/intermediates/classes/debug
+// 目录：/Users/xiaofangyin/AndroidStudioProjects/Enzo/ModuleD/build/intermediates/classes/debug
 // 指令：xiaofydembp:debug xiaofangyin$ javap -s com.ifenglian.module_d.jni.DataProvider
 //
+// NDK
+// 目录：/Users/xiaofangyin/AndroidStudioProjects/Enzo/ModuleD/src/main/jni
+// 指令：ndk-build
 #include <jni.h>
 
 #include <android/log.h>
