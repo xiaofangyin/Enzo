@@ -175,10 +175,7 @@ public class MDBleActivity extends BaseActivity {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 isServiceConnected = true;
 
-                boolean serviceFound;
                 Log.d(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
-
-
                 Log.d(TAG, "onServicesDiscovered: " + "读取数据0");
                 Log.d(TAG, "mBluetoothGatt: " + (mBluetoothGatt == null) + "=== isServiceConnected: " + isServiceConnected);
 
@@ -194,18 +191,12 @@ public class MDBleActivity extends BaseActivity {
                             boolean b1 = descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
                             if (b1) {
                                 mBluetoothGatt.writeDescriptor(descriptor);
-                                Log.d(TAG, "startRead: " + "监听收数据");
+                                Log.d(TAG, "onServicesDiscovered: " + "监听收数据");
                             }
-
                         }
-
                     }
                 }
-
-                serviceFound = true;
-
             }
-
         }
 
         @Override
