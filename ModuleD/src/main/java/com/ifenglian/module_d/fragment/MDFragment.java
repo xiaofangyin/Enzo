@@ -10,6 +10,7 @@ import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
 import com.ifenglian.commonlib.widget.view.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
+import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDNavigationActivity;
@@ -35,6 +36,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initView(View rootView) {
+        rootView.findViewById(R.id.btn_ble).setOnClickListener(this);
         rootView.findViewById(R.id.btn_navigation_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
         rootView.findViewById(R.id.btn_album).setOnClickListener(this);
@@ -61,7 +63,10 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_navigation_view) {
+        if (id == R.id.btn_ble) {
+            Intent intent = new Intent(getContext(), MDBleActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_navigation_view) {
             Intent intent = new Intent(getContext(), MDNavigationActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_jni) {

@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ifenglian.module_d">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,7 +17,13 @@
         android:supportsRtl="true">
 
         <activity
+            android:name=".activity.MDBleActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.MDNavigationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDJniActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDSimpleActivity"
@@ -37,9 +46,7 @@
         <activity
             android:name=".activity.MDUpdateVersionActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MDJniActivity"
-            android:screenOrientation="portrait" />
+
 
     </application>
 </manifest>
