@@ -342,7 +342,9 @@ public class MDBleActivity extends BaseActivity {
     public void stopConnect(View view) {
         if (mBluetoothGatt != null) {
             tvConnectStatus.setText("未连接");
+            mBluetoothGatt.disconnect();
             mBluetoothGatt.close();
+            mBluetoothGatt = null;
         }
     }
 
