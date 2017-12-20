@@ -341,6 +341,7 @@ public class MDBleActivity extends BaseActivity {
 
     public void stopConnect(View view) {
         if (mBluetoothGatt != null) {
+            isServiceConnected = false;
             tvConnectStatus.setText("未连接");
             mBluetoothGatt.disconnect();
             mBluetoothGatt.close();
