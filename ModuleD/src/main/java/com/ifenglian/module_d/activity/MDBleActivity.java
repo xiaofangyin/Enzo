@@ -71,12 +71,8 @@ public class MDBleActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
-        final BluetoothManager bluetoothManager =
-                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
-
-
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 1);
@@ -101,7 +97,6 @@ public class MDBleActivity extends BaseActivity {
             if (name != null) {
                 deviceName.setText(name);
                 if (name.contains("xiao")) {
-//                if (name.contains("xiaomi")) {
                     mDevice = device;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
                 }
@@ -126,7 +121,6 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
-            Log.e(TAG, "onConnectionStateChange: " + Thread.currentThread());
             Log.d(TAG, "onConnectionStateChange: status: " + status + " ... newState: " + newState);
 
             if (status != BluetoothGatt.GATT_SUCCESS) {
@@ -138,9 +132,6 @@ public class MDBleActivity extends BaseActivity {
                     mBluetoothGatt.close();
                     mBluetoothGatt = null;
                 }
-//                if (mDevice != null) {
-//                    mBluetoothGatt = mDevice.connectGatt(MDBleActivity.this, false, mGattCallback);
-//                }
                 Log.e(TAG, err);
                 return;
             }
@@ -162,16 +153,12 @@ public class MDBleActivity extends BaseActivity {
                     mBluetoothGatt = null;
                 }
                 gatt.close();
-//                if (mDevice != null) {
-//                    mBluetoothGatt = mDevice.connectGatt(MDBleActivity.this, false, mGattCallback);
-//                }
             }
         }
 
         //发现服务回调。
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-            Log.e(TAG, "onServicesDiscovered: " + Thread.currentThread());
             Log.d(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 isServiceConnected = true;
@@ -185,7 +172,6 @@ public class MDBleActivity extends BaseActivity {
                     BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
                     boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
                     if (b) {
-
                         List<BluetoothGattDescriptor> descriptors = characteristic.getDescriptors();
                         for (BluetoothGattDescriptor descriptor : descriptors) {
 
@@ -203,30 +189,27 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicRead(gatt, characteristic, status);
-            Log.e(TAG, "onCharacteristicRead: " + Thread.currentThread());
-            Log.d(TAG, "read value: " + characteristic.getValue());
-            if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.d(TAG, "read value: " + characteristic.getValue());
+            if (UUID_CHARACTERISTIC.equals(characteristic.getUuid().toString())) {
+                if (status == BluetoothGatt.GATT_SUCCESS) {
+                    Log.d(TAG, "read value: " + characteristic.getValue());
+                }
             }
         }
 
         @Override
         public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             super.onDescriptorWrite(gatt, descriptor, status);
-            Log.e(TAG, "onDescriptorWrite: " + Thread.currentThread());
             Log.d(TAG, "onDescriptorWrite: " + "设置成功");
         }
 
         @Override
         public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             super.onDescriptorRead(gatt, descriptor, status);
-            Log.e(TAG, "onDescriptorRead: " + Thread.currentThread());
         }
 
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicWrite(gatt, characteristic, status);
-            Log.e(TAG, "onCharacteristicWrite: " + Thread.currentThread());
             Log.d(TAG, "onCharacteristicWrite: " + "发送成功");
 
             boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
@@ -235,7 +218,6 @@ public class MDBleActivity extends BaseActivity {
 
         @Override
         public final void onCharacteristicChanged(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
-            Log.e(TAG, "onCharacteristicChanged: " + Thread.currentThread());
             byte[] value = characteristic.getValue();
             Log.d(TAG, "onCharacteristicChanged: " + value);
             final String s0 = Integer.toHexString(value[0] & 0xFF);
@@ -255,7 +237,6 @@ public class MDBleActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // User chose not to enable Bluetooth.
         if (requestCode == 1 && resultCode == Activity.RESULT_CANCELED) {
             finish();
             return;
