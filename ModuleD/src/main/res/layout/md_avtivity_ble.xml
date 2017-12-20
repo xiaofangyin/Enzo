@@ -7,20 +7,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:onClick="startScan"
-            android:text="扫描" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="连接状态: "
             android:textSize="18sp" />
 
@@ -37,12 +30,23 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#eeeeee"
-        android:padding="1dp">
+        android:orientation="horizontal">
 
         <ListView
             android:id="@+id/lv_scan_list"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="#333333" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:padding="6dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
             android:background="#333333" />
     </LinearLayout>
 
@@ -51,6 +55,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:onClick="startScan"
+            android:text="扫描" />
 
         <Button
             android:layout_width="wrap_content"
@@ -87,9 +99,9 @@
             android:id="@+id/et_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#333333"
             android:gravity="top"
-            android:padding="10dp"
-            android:background="#333333" />
+            android:padding="10dp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -55,6 +55,7 @@ public class MDBleActivity extends BaseActivity {
     private List<BluetoothDevice> deviceList;
     private EditText editText;
     private TextView tvConnectStatus;
+    private TextView tvContent;
 
     @Override
     public int getLayoutId() {
@@ -72,6 +73,7 @@ public class MDBleActivity extends BaseActivity {
             }
         }
         tvConnectStatus = findViewById(R.id.tv_connect_name);
+        tvContent = findViewById(R.id.tv_content);
         listView = findViewById(R.id.lv_scan_list);
         editText = findViewById(R.id.et_data);
     }
@@ -241,7 +243,9 @@ public class MDBleActivity extends BaseActivity {
                 @Override
                 public void run() {
                     String text = "收到: " + s0 + "、" + s;
-                    editText.setText(text);
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(tvContent.getText().toString()).append(text).append("\n");
+                    tvContent.setText(builder.toString());
                 }
             });
             for (byte b : value) {
@@ -291,6 +295,9 @@ public class MDBleActivity extends BaseActivity {
             BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
 
             String text = editText.getText().toString();
+            StringBuilder builder = new StringBuilder();
+            builder.append(tvContent.getText().toString()).append("发送: ").append(text).append("\n");
+            tvContent.setText(builder.toString());
             characteristic.setValue(text.getBytes());
             characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
             mBluetoothGatt.writeCharacteristic(characteristic);
