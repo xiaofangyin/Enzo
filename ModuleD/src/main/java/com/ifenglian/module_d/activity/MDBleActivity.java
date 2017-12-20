@@ -334,6 +334,7 @@ public class MDBleActivity extends BaseActivity {
             characteristic.setValue(text.getBytes());
             characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
             mBluetoothGatt.writeCharacteristic(characteristic);
+            editText.setText("");
         }
     }
 
