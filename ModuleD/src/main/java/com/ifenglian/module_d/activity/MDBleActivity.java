@@ -174,6 +174,12 @@ public class MDBleActivity extends BaseActivity {
                 }, 2000);
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {//当设备无法连接
                 Log.d(TAG, "onConnectionStateChange: " + "当设备无法连接");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvConnectStatus.setText("未连接");
+                    }
+                });
                 if (mBluetoothGatt != null) {
                     mBluetoothGatt.disconnect();
                     mBluetoothGatt.close();
@@ -199,6 +205,7 @@ public class MDBleActivity extends BaseActivity {
                 if (mBluetoothGatt != null && isServiceConnected) {
                     BluetoothGattService gattService = mBluetoothGatt.getService(UUID_SERVICE);
                     BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
+                    //设置当指定characteristic值变化时，发出通知
                     boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
                     if (b) {
                         List<BluetoothGattDescriptor> descriptors = characteristic.getDescriptors();
@@ -344,14 +351,13 @@ public class MDBleActivity extends BaseActivity {
             isServiceConnected = false;
             tvConnectStatus.setText("未连接");
             mBluetoothGatt.disconnect();
-            mBluetoothGatt.close();
-            mBluetoothGatt = null;
         }
     }
 
     @Override
     protected void onDestroy() {
         if (mBluetoothGatt != null) {
+            mBluetoothGatt.disconnect();
             mBluetoothGatt.close();
         }
         super.onDestroy();
