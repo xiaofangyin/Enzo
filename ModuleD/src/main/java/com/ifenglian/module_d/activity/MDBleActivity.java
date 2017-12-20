@@ -149,7 +149,12 @@ public class MDBleActivity extends BaseActivity {
                     mBluetoothGatt.close();
                     mBluetoothGatt = null;
                 }
-                Log.e(TAG, err);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvConnectStatus.setText("未连接");
+                    }
+                });
                 return;
             }
 
@@ -286,6 +291,7 @@ public class MDBleActivity extends BaseActivity {
     }
 
     private void scanLeDevice() {
+        deviceList.clear();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
