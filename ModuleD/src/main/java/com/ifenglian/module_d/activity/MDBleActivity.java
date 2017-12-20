@@ -254,7 +254,7 @@ public class MDBleActivity extends BaseActivity {
                 public void run() {
                     byte[] text = characteristic.getValue();
                     StringBuilder builder = new StringBuilder();
-                    builder.append(tvContent.getText().toString()).append("发送: ").append(Arrays.toString(text)).append("\n");
+                    builder.append(tvContent.getText().toString()).append("发送: ").append(new String(text)).append("\n");
                     tvContent.setText(builder.toString());
                 }
             });
@@ -280,7 +280,7 @@ public class MDBleActivity extends BaseActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String text = "收到: " + Arrays.toString(value);
+                    String text = "收到: " + new String(value);
                     StringBuilder builder = new StringBuilder();
                     builder.append(tvContent.getText().toString()).append(text).append("\n");
                     tvContent.setText(builder.toString());
