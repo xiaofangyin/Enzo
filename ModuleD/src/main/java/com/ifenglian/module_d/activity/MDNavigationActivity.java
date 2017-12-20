@@ -29,7 +29,6 @@ public class MDNavigationActivity extends BaseActivity {
             {com.ifenglian.commonlib.R.mipmap.sa_tab_find_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_find_select},
             {com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_select}
     };
-    private int mCurrentTab = -1;
     private TabLayout mTabLayout;
     private FragmentManager mFragmentManager;
     private NavigationFragment firstFragment;
@@ -83,7 +82,7 @@ public class MDNavigationActivity extends BaseActivity {
     }
 
     public void switchFragment(int tab) {
-        if (isFinishing() || mCurrentTab == tab) {
+        if (isFinishing()) {
             return;
         }
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
@@ -136,7 +135,6 @@ public class MDNavigationActivity extends BaseActivity {
         }
         fragmentTransaction.commitAllowingStateLoss();
         mFragmentManager.executePendingTransactions();
-        mCurrentTab = tab;
     }
 
     private void hideFragments(FragmentTransaction fragmentTransaction) {
