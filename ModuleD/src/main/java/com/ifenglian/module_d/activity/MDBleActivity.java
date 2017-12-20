@@ -135,6 +135,11 @@ public class MDBleActivity extends BaseActivity {
     };
 
     private BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
+
+        /**
+         * 0: 断开连接或未连接成功
+         * 2: 已连接状态，表明连接成功
+         */
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
@@ -190,9 +195,6 @@ public class MDBleActivity extends BaseActivity {
                         tvConnectStatus.setText(gatt.getDevice().getName());
                     }
                 });
-                Log.d(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
-                Log.d(TAG, "onServicesDiscovered: " + "读取数据0");
-                Log.d(TAG, "mBluetoothGatt: " + (mBluetoothGatt == null) + "=== isServiceConnected: " + isServiceConnected);
 
                 if (mBluetoothGatt != null && isServiceConnected) {
                     BluetoothGattService gattService = mBluetoothGatt.getService(UUID_SERVICE);
@@ -246,9 +248,9 @@ public class MDBleActivity extends BaseActivity {
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicRead(gatt, characteristic, status);
             Log.e(TAG, "onCharacteristicRead...read value: " + Arrays.toString(characteristic.getValue()) + "...status: " + status);
-            if (UUID_CHARACTERISTIC.equals(characteristic.getUuid().toString())) {
+            if (UUID_CHARACTERISTIC.toString().equals(characteristic.getUuid().toString())) {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
-                    Log.d(TAG, "read value: " + characteristic.getValue());
+                    Log.d(TAG, "read value: " + Arrays.toString(characteristic.getValue()));
                 }
             }
         }
