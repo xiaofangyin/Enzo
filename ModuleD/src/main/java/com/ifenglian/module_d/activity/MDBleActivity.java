@@ -41,6 +41,17 @@ import java.util.UUID;
  */
 public class MDBleActivity extends BaseActivity {
 
+    /**
+     * BluetoothGatt常规用到的几个操作示例:
+     * <p>
+     * connect() ：连接远程设备。
+     * discoverServices() : 搜索连接设备所支持的service。
+     * disconnect()：断开与远程设备的GATT连接。
+     * close()：关闭GATT Client端。
+     * readCharacteristic(characteristic) ：读取指定的characteristic。
+     * setCharacteristicNotification(characteristic, enabled) ：设置当指定characteristic值变化时，发出通知。
+     * getServices() ：获取远程设备所支持的services。
+     */
     private BluetoothAdapter mBluetoothAdapter;
     private Handler mHandler = new Handler();
     private boolean mScanning;
