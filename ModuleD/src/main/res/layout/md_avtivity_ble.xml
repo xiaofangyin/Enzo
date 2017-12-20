@@ -50,6 +50,7 @@
             android:layout_weight="1"
             android:background="#333333"
             android:gravity="top"
+            android:hint="请输入内容"
             android:padding="10dp" />
     </LinearLayout>
 
@@ -61,32 +62,36 @@
 
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:onClick="startScan"
             android:text="扫描" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:onClick="startSend"
-            android:text="发送" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:onClick="startRead"
             android:text="读取" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:onClick="stopConnect"
             android:text="断开" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:onClick="startSend"
+            android:text="发送" />
     </LinearLayout>
 
     <LinearLayout

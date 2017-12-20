@@ -315,7 +315,7 @@ public class MDBleActivity extends BaseActivity {
         Log.e(TAG, "startRead...");
         if (mBluetoothGatt != null && isServiceConnected) {
             BluetoothGattService gattService = mBluetoothGatt.getService(UUID_SERVICE);
-            BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_DESCRIPTOR);
+            BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
             boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
             if (b) {
                 List<BluetoothGattDescriptor> descriptors = characteristic.getDescriptors();
@@ -331,18 +331,18 @@ public class MDBleActivity extends BaseActivity {
         }
     }
 
+    public void stopConnect(View view) {
+        if (mBluetoothGatt != null) {
+            tvConnectStatus.setText("未连接");
+            mBluetoothGatt.close();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         if (mBluetoothGatt != null) {
             mBluetoothGatt.close();
         }
         super.onDestroy();
-    }
-
-    public void stopConnect(View view) {
-        if (mBluetoothGatt != null) {
-            tvConnectStatus.setText("未连接");
-            mBluetoothGatt.close();
-        }
     }
 }
