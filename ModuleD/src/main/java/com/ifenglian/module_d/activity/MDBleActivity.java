@@ -29,6 +29,7 @@ import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDBleAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -137,7 +138,7 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
-            Log.d(TAG, "onConnectionStateChange: status: " + status + " ... newState: " + newState);
+            Log.e(TAG, "onConnectionStateChange: status: " + status + " ... newState: " + newState);
 
             if (status != BluetoothGatt.GATT_SUCCESS) {
                 String err = "Cannot connect device with error status: " + status;
@@ -174,11 +175,16 @@ public class MDBleActivity extends BaseActivity {
 
         //发现服务回调。
         @Override
-        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-            Log.d(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
+        public void onServicesDiscovered(final BluetoothGatt gatt, int status) {
+            Log.e(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 isServiceConnected = true;
-                tvConnectStatus.setText(gatt.getDevice().getName());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvConnectStatus.setText(gatt.getDevice().getName());
+                    }
+                });
                 Log.d(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
                 Log.d(TAG, "onServicesDiscovered: " + "读取数据0");
                 Log.d(TAG, "mBluetoothGatt: " + (mBluetoothGatt == null) + "=== isServiceConnected: " + isServiceConnected);
@@ -203,8 +209,30 @@ public class MDBleActivity extends BaseActivity {
         }
 
         @Override
+        public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
+            super.onDescriptorWrite(gatt, descriptor, status);
+            Log.e(TAG, "onDescriptorWrite...");
+        }
+
+        @Override
+        public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
+            super.onDescriptorRead(gatt, descriptor, status);
+            Log.e(TAG, "onDescriptorRead...");
+        }
+
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            super.onCharacteristicWrite(gatt, characteristic, status);
+            Log.e(TAG, "onCharacteristicWrite... " + "发送成功");
+
+            boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
+            mBluetoothGatt.readCharacteristic(characteristic);
+        }
+
+        @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicRead(gatt, characteristic, status);
+            Log.e(TAG, "onCharacteristicRead...read value: " + Arrays.toString(characteristic.getValue()) + "...status: " + status);
             if (UUID_CHARACTERISTIC.equals(characteristic.getUuid().toString())) {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     Log.d(TAG, "read value: " + characteristic.getValue());
@@ -213,44 +241,18 @@ public class MDBleActivity extends BaseActivity {
         }
 
         @Override
-        public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
-            super.onDescriptorWrite(gatt, descriptor, status);
-            Log.d(TAG, "onDescriptorWrite: " + "设置成功");
-        }
-
-        @Override
-        public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
-            super.onDescriptorRead(gatt, descriptor, status);
-        }
-
-        @Override
-        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            super.onCharacteristicWrite(gatt, characteristic, status);
-            Log.d(TAG, "onCharacteristicWrite: " + "发送成功");
-
-            boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
-            mBluetoothGatt.readCharacteristic(characteristic);
-        }
-
-        @Override
         public final void onCharacteristicChanged(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
-            byte[] value = characteristic.getValue();
-            Log.d(TAG, "onCharacteristicChanged: " + value);
-            final String s0 = Integer.toHexString(value[0] & 0xFF);
-            final String s = Integer.toHexString(value[1] & 0xFF);
-            Log.d(TAG, "onCharacteristicChanged: " + s0 + "、" + s);
+            final byte[] value = characteristic.getValue();
+            Log.e(TAG, "onCharacteristicChanged: " + Arrays.toString(value));
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String text = "收到: " + s0 + "、" + s;
+                    String text = "收到: " + Arrays.toString(value);
                     StringBuilder builder = new StringBuilder();
                     builder.append(tvContent.getText().toString()).append(text).append("\n");
                     tvContent.setText(builder.toString());
                 }
             });
-            for (byte b : value) {
-                Log.d(TAG, "onCharacteristicChanged: " + b);
-            }
         }
     };
 
