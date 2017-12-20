@@ -221,10 +221,18 @@ public class MDBleActivity extends BaseActivity {
         }
 
         @Override
-        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+        public void onCharacteristicWrite(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicWrite(gatt, characteristic, status);
             Log.e(TAG, "onCharacteristicWrite... " + "发送成功");
-
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    byte[] text = characteristic.getValue();
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(tvContent.getText().toString()).append("发送: ").append(Arrays.toString(text)).append("\n");
+                    tvContent.setText(builder.toString());
+                }
+            });
             boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
             mBluetoothGatt.readCharacteristic(characteristic);
         }
@@ -297,9 +305,6 @@ public class MDBleActivity extends BaseActivity {
             BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
 
             String text = editText.getText().toString();
-            StringBuilder builder = new StringBuilder();
-            builder.append(tvContent.getText().toString()).append("发送: ").append(text).append("\n");
-            tvContent.setText(builder.toString());
             characteristic.setValue(text.getBytes());
             characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
             mBluetoothGatt.writeCharacteristic(characteristic);
