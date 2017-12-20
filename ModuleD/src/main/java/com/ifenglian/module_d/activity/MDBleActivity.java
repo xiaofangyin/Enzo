@@ -338,26 +338,6 @@ public class MDBleActivity extends BaseActivity {
         }
     }
 
-    public void startRead(View view) {
-        Log.e(TAG, "startRead...");
-        if (mBluetoothGatt != null && isServiceConnected) {
-            BluetoothGattService gattService = mBluetoothGatt.getService(UUID_SERVICE);
-            BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
-            boolean b = mBluetoothGatt.setCharacteristicNotification(characteristic, true);
-            if (b) {
-                List<BluetoothGattDescriptor> descriptors = characteristic.getDescriptors();
-                for (BluetoothGattDescriptor descriptor : descriptors) {
-
-                    boolean b1 = descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
-                    if (b1) {
-                        mBluetoothGatt.writeDescriptor(descriptor);
-                        Log.d(TAG, "startRead: " + "监听收数据");
-                    }
-                }
-            }
-        }
-    }
-
     public void stopConnect(View view) {
         if (mBluetoothGatt != null) {
             isServiceConnected = false;
