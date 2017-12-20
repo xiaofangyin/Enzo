@@ -19,11 +19,14 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.module_d.R;
+import com.ifenglian.module_d.adapter.MDBleAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,6 +51,9 @@ public class MDBleActivity extends BaseActivity {
     private TextView textView1;
     private String TAG = "AAA";
     private boolean isServiceConnected;
+    private ListView listView;
+    private MDBleAdapter adapter;
+    private List<BluetoothDevice> deviceList;
 
     @Override
     public int getLayoutId() {
@@ -64,13 +70,16 @@ public class MDBleActivity extends BaseActivity {
                 requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 1);
             }
         }
-        deviceName = (TextView) findViewById(R.id.device_name);
-        textView1 = (TextView) findViewById(R.id.recieve_text);
-
+        deviceName = findViewById(R.id.device_name);
+        textView1 = findViewById(R.id.recieve_text);
+        listView = findViewById(R.id.lv_scan_list);
     }
 
     @Override
     public void initData() {
+        adapter = new MDBleAdapter();
+        deviceList = new ArrayList<>();
+        listView.setAdapter(adapter);
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
@@ -93,14 +102,18 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
             Log.d(TAG, "onLeScan:  " + device.getName() + " === " + "MAC: " + device.getAddress() + "=== rssi ===" + rssi);
-            String name = device.getName();
-            if (name != null) {
-                deviceName.setText(name);
-                if (name.contains("xiao")) {
-                    mDevice = device;
-                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                }
+            if(!deviceList.contains(device)){
+                deviceList.add(device);
+                adapter.setData(deviceList);
             }
+//            String name = device.getName();
+//            if (name != null) {
+//                deviceName.setText(name);
+//                if (name.contains("xiao")) {
+//                    mDevice = device;
+//                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
+//                }
+//            }
         }
     };
 
