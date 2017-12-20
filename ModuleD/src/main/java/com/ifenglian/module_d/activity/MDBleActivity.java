@@ -19,6 +19,8 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,15 +47,14 @@ public class MDBleActivity extends BaseActivity {
     final UUID UUID_CHARACTERISTIC = UUID.fromString("00002902-0000-1000-8000-00805f9b34fc");  // 用于发送数据到设备
     final UUID UUID_DESCRIPTOR = UUID.fromString("00002902-0000-1000-8000-00805f9b34fd"); // 用于接收设备推送的数据
 
-    private BluetoothDevice mDevice;
     private BluetoothGatt mBluetoothGatt;
-    private TextView deviceName;
-    private TextView textView1;
     private String TAG = "AAA";
     private boolean isServiceConnected;
     private ListView listView;
     private MDBleAdapter adapter;
     private List<BluetoothDevice> deviceList;
+    private EditText editText;
+    private TextView tvConnectStatus;
 
     @Override
     public int getLayoutId() {
@@ -70,9 +71,9 @@ public class MDBleActivity extends BaseActivity {
                 requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 1);
             }
         }
-        deviceName = findViewById(R.id.device_name);
-        textView1 = findViewById(R.id.recieve_text);
+        tvConnectStatus = findViewById(R.id.tv_connect_name);
         listView = findViewById(R.id.lv_scan_list);
+        editText = findViewById(R.id.et_data);
     }
 
     @Override
@@ -80,6 +81,7 @@ public class MDBleActivity extends BaseActivity {
         adapter = new MDBleAdapter();
         deviceList = new ArrayList<>();
         listView.setAdapter(adapter);
+
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
@@ -90,7 +92,27 @@ public class MDBleActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e(TAG, "startConnect...");
+                tvConnectStatus.setText("正在连接...");
+                final BluetoothDevice device = deviceList.get(position);
+                if (device != null) {
+                    if (mBluetoothGatt != null) {
+                        mBluetoothGatt.disconnect();
+                        mBluetoothGatt.close();
+                        mBluetoothGatt = null;
+                    }
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mBluetoothGatt = device.connectGatt(MDBleActivity.this, false, mGattCallback);
+                        }
+                    }, 2000);
+                }
+            }
+        });
     }
 
     @Override
@@ -102,33 +124,12 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
             Log.d(TAG, "onLeScan:  " + device.getName() + " === " + "MAC: " + device.getAddress() + "=== rssi ===" + rssi);
-            if(!deviceList.contains(device)){
+            if (!deviceList.contains(device)) {
                 deviceList.add(device);
                 adapter.setData(deviceList);
             }
-//            String name = device.getName();
-//            if (name != null) {
-//                deviceName.setText(name);
-//                if (name.contains("xiao")) {
-//                    mDevice = device;
-//                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
-//                }
-//            }
         }
     };
-
-    private void scanLeDevice() {
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mScanning = false;
-                mBluetoothAdapter.stopLeScan(mLeScanCallback);
-            }
-        }, 30000);
-        mScanning = true;
-        // 定义一个回调接口供扫描结束处理
-        mBluetoothAdapter.startLeScan(mLeScanCallback);
-    }
 
     private BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
         @Override
@@ -175,7 +176,7 @@ public class MDBleActivity extends BaseActivity {
             Log.d(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 isServiceConnected = true;
-
+                tvConnectStatus.setText(gatt.getDevice().getName());
                 Log.d(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
                 Log.d(TAG, "onServicesDiscovered: " + "读取数据0");
                 Log.d(TAG, "mBluetoothGatt: " + (mBluetoothGatt == null) + "=== isServiceConnected: " + isServiceConnected);
@@ -239,7 +240,8 @@ public class MDBleActivity extends BaseActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    textView1.setText("收到: " + s0 + "、" + s);
+                    String text = "收到: " + s0 + "、" + s;
+                    editText.setText(text);
                 }
             });
             for (byte b : value) {
@@ -257,23 +259,6 @@ public class MDBleActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void startConnect(View view) {
-        Log.e(TAG, "startConnect...");
-        if (mDevice != null) {
-            if (mBluetoothGatt != null) {
-                mBluetoothGatt.disconnect();
-                mBluetoothGatt.close();
-                mBluetoothGatt = null;
-            }
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mBluetoothGatt = mDevice.connectGatt(MDBleActivity.this, false, mGattCallback);
-                }
-            }, 2000);
-        }
-    }
-
     public void startScan(View view) {
         Log.e(TAG, "startScan...");
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
@@ -286,15 +271,27 @@ public class MDBleActivity extends BaseActivity {
         scanLeDevice();
     }
 
+    private void scanLeDevice() {
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScanning = false;
+                mBluetoothAdapter.stopLeScan(mLeScanCallback);
+            }
+        }, 10000);
+        mScanning = true;
+        // 定义一个回调接口供扫描结束处理
+        mBluetoothAdapter.startLeScan(mLeScanCallback);
+    }
+
     public void startSend(View view) {
         Log.e(TAG, "startSend...");
         if (mBluetoothGatt != null && isServiceConnected) {
             BluetoothGattService gattService = mBluetoothGatt.getService(UUID_SERVICE);
             BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
-            byte[] bytes = new byte[2];
-            bytes[0] = 04;
-            bytes[1] = 01;
-            characteristic.setValue(bytes);
+
+            String text = editText.getText().toString();
+            characteristic.setValue(text.getBytes());
             characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
             mBluetoothGatt.writeCharacteristic(characteristic);
         }
