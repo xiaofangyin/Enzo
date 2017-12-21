@@ -34,27 +34,8 @@ public class TabLayout extends LinearLayout implements ITabLayout, View.OnClickL
 
     public TabLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    private void init() {
         setOrientation(LinearLayout.HORIZONTAL);
         mTabList = new ArrayList<>();
-    }
-
-    @Override
-    public void onClick(View v) {
-        int position = (int) v.getTag();
-        if (position != mLastPosition) {
-            setCurrentItem(position, true);
-            if (mListener != null) {
-                mListener.onTabClick(mTabList.get(position), position);
-            }
-        } else {
-            if (mListener != null) {
-                mListener.onTabReClick(mTabList.get(position), position);
-            }
-        }
     }
 
     @Override
@@ -70,6 +51,21 @@ public class TabLayout extends LinearLayout implements ITabLayout, View.OnClickL
             tab.setLayoutParams(layoutParams);
             addView(tab);
             mTabList.add(tab);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int position = (int) v.getTag();
+        if (position != mLastPosition) {
+            setCurrentItem(position, true);
+            if (mListener != null) {
+                mListener.onTabClick(mTabList.get(position), position);
+            }
+        } else {
+            if (mListener != null) {
+                mListener.onTabReClick(mTabList.get(position), position);
+            }
         }
     }
 
