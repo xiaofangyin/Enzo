@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.widget.view.autoscrolltextview.AutoScrollTextView;
+import com.ifenglian.commonlib.widget.view.timeclock.SHScheduleBean;
 import com.ifenglian.commonlib.widget.view.timeclock.SHTimePicker;
 import com.ifenglian.module_a.R;
 
@@ -71,6 +72,29 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-
+        rootView.findViewById(R.id.btn_fun1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                picker.setModeType(SHScheduleBean.SCHEDULE_HOME_MODE);
+            }
+        });
+        rootView.findViewById(R.id.btn_fun2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                picker.setModeType(SHScheduleBean.SCHEDULE_INFRARED_NIGHTLIGHT);
+            }
+        });
+        rootView.findViewById(R.id.btn_fun3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                picker.setModeType(SHScheduleBean.SCHEDULE_LIGHT_SENSOR_NIGHTLIGHT);
+            }
+        });
+        rootView.findViewById(R.id.btn_fun4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                picker.setModeType(SHScheduleBean.SCHEDULE_OUTSIDE_MODE);
+            }
+        });
     }
 }
