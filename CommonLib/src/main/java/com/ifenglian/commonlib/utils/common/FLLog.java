@@ -3,10 +3,8 @@ package com.ifenglian.commonlib.utils.common;
 import android.text.TextUtils;
 import android.util.Log;
 
-/**
- * 作者： quietUncle on 2016/2/26
- */
 public class FLLog {
+
     public static String tagPrefix = "FL";//log前缀
     public static boolean debug = true;
 
