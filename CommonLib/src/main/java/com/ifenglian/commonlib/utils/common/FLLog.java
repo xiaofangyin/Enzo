@@ -34,7 +34,7 @@ public class FLLog {
         if (!debug) {
             return;
         }
-        String msg = o + "";
+        String msg = o.toString();
         String tag = getTag(getCallerStackTraceElement());
         switch (type) {
             case "i":
