@@ -17,7 +17,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -25,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseActivity;
+import com.ifenglian.commonlib.utils.common.FLLog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDBleAdapter;
 
@@ -109,7 +109,7 @@ public class MDBleActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e(TAG, "startConnect...");
+                FLLog.e("startConnect...");
                 tvConnectStatus.setText("正在连接...");
                 final BluetoothDevice device = deviceList.get(position);
                 if (device != null) {
@@ -137,7 +137,7 @@ public class MDBleActivity extends BaseActivity {
     final BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
         @Override
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
-            Log.d(TAG, "onLeScan:  " + device.getName() + " === " + "MAC: " + device.getAddress() + "=== rssi ===" + rssi);
+            FLLog.d("onLeScan:  " + device.getName() + " === " + "MAC: " + device.getAddress() + "=== rssi ===" + rssi);
             if (!deviceList.contains(device)) {
                 deviceList.add(device);
                 adapter.setData(deviceList);
@@ -154,11 +154,11 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
-            Log.e(TAG, "onConnectionStateChange: status: " + status + " ... newState: " + newState);
+            FLLog.e("onConnectionStateChange: status: " + status + " ... newState: " + newState);
 
             if (status != BluetoothGatt.GATT_SUCCESS) {
                 String err = "Cannot connect device with error status: " + status;
-                Log.d(TAG, "err: " + err);
+                FLLog.d("err: " + err);
                 gatt.close();
                 if (mBluetoothGatt != null) {
                     mBluetoothGatt.disconnect();
@@ -175,16 +175,16 @@ public class MDBleActivity extends BaseActivity {
             }
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {//当蓝牙设备已经连接
-                Log.d(TAG, "onConnectionStateChange: " + "连接成功");
+                FLLog.d("onConnectionStateChange: " + "连接成功");
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(TAG, "discover value: " + mBluetoothGatt.discoverServices());
+                        FLLog.d("discover value: " + mBluetoothGatt.discoverServices());
 
                     }
                 }, 2000);
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {//当设备无法连接
-                Log.d(TAG, "onConnectionStateChange: " + "当设备无法连接");
+                FLLog.d("onConnectionStateChange: " + "当设备无法连接");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -203,7 +203,7 @@ public class MDBleActivity extends BaseActivity {
         //发现服务回调。
         @Override
         public void onServicesDiscovered(final BluetoothGatt gatt, int status) {
-            Log.e(TAG, "onServicesDiscovered: " + "发现服务 : " + status);
+            FLLog.e("onServicesDiscovered: " + "发现服务 : " + status);
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 isServiceConnected = true;
                 runOnUiThread(new Runnable() {
@@ -225,7 +225,7 @@ public class MDBleActivity extends BaseActivity {
                             boolean b1 = descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
                             if (b1) {
                                 mBluetoothGatt.writeDescriptor(descriptor);
-                                Log.d(TAG, "onServicesDiscovered: " + "监听收数据");
+                                FLLog.d("onServicesDiscovered: " + "监听收数据");
                             }
                         }
                     }
@@ -236,19 +236,19 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             super.onDescriptorWrite(gatt, descriptor, status);
-            Log.e(TAG, "onDescriptorWrite...");
+            FLLog.e("onDescriptorWrite...");
         }
 
         @Override
         public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             super.onDescriptorRead(gatt, descriptor, status);
-            Log.e(TAG, "onDescriptorRead...");
+            FLLog.e("onDescriptorRead...");
         }
 
         @Override
         public void onCharacteristicWrite(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicWrite(gatt, characteristic, status);
-            Log.e(TAG, "onCharacteristicWrite... " + "发送成功");
+            FLLog.e("onCharacteristicWrite... " + "发送成功");
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -265,10 +265,10 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicRead(gatt, characteristic, status);
-            Log.e(TAG, "onCharacteristicRead...read value: " + Arrays.toString(characteristic.getValue()) + "...status: " + status);
+            FLLog.e("onCharacteristicRead...read value: " + Arrays.toString(characteristic.getValue()) + "...status: " + status);
             if (UUID_CHARACTERISTIC.toString().equals(characteristic.getUuid().toString())) {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
-                    Log.d(TAG, "read value: " + Arrays.toString(characteristic.getValue()));
+                    FLLog.d("read value: " + Arrays.toString(characteristic.getValue()));
                 }
             }
         }
@@ -276,7 +276,7 @@ public class MDBleActivity extends BaseActivity {
         @Override
         public final void onCharacteristicChanged(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
             final byte[] value = characteristic.getValue();
-            Log.e(TAG, "onCharacteristicChanged: " + Arrays.toString(value));
+            FLLog.e("onCharacteristicChanged: " + Arrays.toString(value));
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -299,7 +299,7 @@ public class MDBleActivity extends BaseActivity {
     }
 
     public void startScan(View view) {
-        Log.e(TAG, "startScan...");
+        FLLog.e("startScan...");
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 1);
@@ -325,7 +325,7 @@ public class MDBleActivity extends BaseActivity {
     }
 
     public void startSend(View view) {
-        Log.e(TAG, "startSend...");
+        FLLog.e("startSend...");
         if (mBluetoothGatt != null && isServiceConnected) {
             BluetoothGattService gattService = mBluetoothGatt.getService(UUID_SERVICE);
             BluetoothGattCharacteristic characteristic = gattService.getCharacteristic(UUID_CHARACTERISTIC);
