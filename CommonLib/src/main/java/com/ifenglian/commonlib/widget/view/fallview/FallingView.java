@@ -73,17 +73,16 @@ public class FallingView extends View {
      * 向View添加下落物体对象
      *
      * @param fallBuilder 下落物体对象
-     * @param num        数量
+     * @param num         数量
      */
     public void addFallObject(final FallObject.Builder fallBuilder, final int num) {
         getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 getViewTreeObserver().removeOnPreDrawListener(this);
+                fallBuilder.setParentSize(viewWidth, viewHeight);
                 for (int i = 0; i < num; i++) {
-                    fallBuilder.setParentSize(viewWidth, viewHeight);
-                    FallObject newFallObject = fallBuilder.build();
-                    fallObjects.add(newFallObject);
+                    fallObjects.add(fallBuilder.build());
                 }
                 invalidate();
                 return true;
