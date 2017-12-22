@@ -14,7 +14,7 @@ public class FallingView extends View {
 
     private static final int defaultWidth = 600;//默认宽度
     private static final int defaultHeight = 1000;//默认高度
-    private static final int intervalTime = 5;//重绘间隔时间
+    private static final int intervalTime = 10;//重绘间隔时间
     private List<FallObject> fallObjects;
     private int viewWidth;
     private int viewHeight;
@@ -66,23 +66,15 @@ public class FallingView extends View {
                 fallObjects.get(i).drawObject(canvas);
             }
             // 隔一段时间重绘一次, 动画效果
-            getHandler().postDelayed(runnable, intervalTime);
+            postInvalidateDelayed(intervalTime);
         }
     }
-
-    // 重绘线程
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            invalidate();
-        }
-    };
 
     /**
      * 向View添加下落物体对象
      *
      * @param fallObject 下落物体对象
-     * @param num
+     * @param num        数量
      */
     public void addFallObject(final FallObject fallObject, final int num) {
         getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {

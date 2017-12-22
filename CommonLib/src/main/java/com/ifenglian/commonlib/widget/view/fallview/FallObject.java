@@ -6,8 +6,6 @@ import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
-import com.ifenglian.commonlib.utils.common.FLLog;
-
 import java.util.Random;
 
 public class FallObject {
@@ -103,8 +101,8 @@ public class FallObject {
         /**
          * 设置物体的初始下落速度
          *
-         * @param speed
-         * @return
+         * @param speed 下落速度
+         * @return Builder
          */
         public Builder setSpeed(int speed) {
             this.initSpeed = speed;
@@ -114,9 +112,9 @@ public class FallObject {
         /**
          * 设置物体的初始下落速度
          *
-         * @param speed
+         * @param speed         下落速度
          * @param isRandomSpeed 物体初始下降速度比例是否随机
-         * @return
+         * @return Builder
          */
         public Builder setSpeed(int speed, boolean isRandomSpeed) {
             this.initSpeed = speed;
@@ -214,7 +212,6 @@ public class FallObject {
         } else {
             presentSpeed = initSpeed;
         }
-        FLLog.d("presentSpeed: " + presentSpeed);
     }
 
     /**
@@ -253,11 +250,8 @@ public class FallObject {
 
     /**
      * drawable图片资源转bitmap
-     *
-     * @param drawable
-     * @return
      */
-    public static Bitmap drawableToBitmap(Drawable drawable) {
+    static Bitmap drawableToBitmap(Drawable drawable) {
         Bitmap bitmap = Bitmap.createBitmap(
                 drawable.getIntrinsicWidth(),
                 drawable.getIntrinsicHeight(),
@@ -275,9 +269,9 @@ public class FallObject {
      * @param bitmap 目标bitmap
      * @param newW   目标宽度
      * @param newH   目标高度
-     * @return
+     * @return Bitmap
      */
-    public static Bitmap changeBitmapSize(Bitmap bitmap, int newW, int newH) {
+    static Bitmap changeBitmapSize(Bitmap bitmap, int newW, int newH) {
         int oldW = bitmap.getWidth();
         int oldH = bitmap.getHeight();
         // 计算缩放比例
