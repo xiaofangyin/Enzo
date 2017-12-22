@@ -14,14 +14,13 @@ public class FallingView extends View {
 
     private static final int defaultWidth = 600;//默认宽度
     private static final int defaultHeight = 1000;//默认高度
-    private static final int intervalTime = 10;//重绘间隔时间
+    private static final int intervalTime = 12;//重绘间隔时间
     private List<FallObject> fallObjects;
     private int viewWidth;
     private int viewHeight;
 
     public FallingView(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public FallingView(Context context, @Nullable AttributeSet attrs) {
