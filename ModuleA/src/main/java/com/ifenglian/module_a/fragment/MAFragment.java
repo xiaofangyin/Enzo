@@ -77,7 +77,7 @@ public class MAFragment extends BaseFragment {
         Drawable drawable = getResources().getDrawable(R.mipmap.icon_snow);
         FallObject.Builder builder = new FallObject.Builder(drawable);
         FallObject fallObject = builder.build();
-        builder.setSpeed(6, true);
+        builder.setSpeed(8, true);
         builder.setSize(drawable.getBounds().width(), drawable.getBounds().height(), true);
         builder.setWind(5, true, true);
         fallingView.addFallObject(fallObject, 30);
