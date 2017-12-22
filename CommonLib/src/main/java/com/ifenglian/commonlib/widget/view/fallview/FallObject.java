@@ -24,7 +24,6 @@ public class FallObject {
     private float angle;//物体下落角度
 
     private Bitmap bitmap;
-    Builder builder;
 
     private boolean isSpeedRandom;//物体初始下降速度比例是否随机
     private boolean isSizeRandom;//物体初始大小比例是否随机
@@ -36,34 +35,26 @@ public class FallObject {
     private static final int defaultWindSpeed = 10;//默认单位风速
     private static final float HALF_PI = (float) Math.PI / 2;//π/2
 
-    public FallObject(Builder builder, int parentWidth, int parentHeight) {
-        this.parentWidth = parentWidth;
-        this.parentHeight = parentHeight;
+    private FallObject(Builder builder) {
+        this.parentWidth = builder.parentWidth;
+        this.parentHeight = builder.parentHeight;
         random = new Random();
-        presentX = random.nextInt(parentWidth);
-        presentY = random.nextInt(parentHeight) - parentHeight;
+        if (builder.parentWidth != 0 && builder.parentHeight != 0) {
+            presentX = random.nextInt(builder.parentWidth);
+            presentY = random.nextInt(builder.parentHeight) - parentHeight;
+        }
 
-        this.builder = builder;
+        bitmap = builder.bitmap;
         isSpeedRandom = builder.isSpeedRandom;
         isSizeRandom = builder.isSizeRandom;
         isWindRandom = builder.isWindRandom;
         isWindChange = builder.isWindChange;
 
         initSpeed = builder.initSpeed;
+        initWindLevel = builder.initWindLevel;
         randomSpeed();
         randomSize();
         randomWind();
-    }
-
-    private FallObject(Builder builder) {
-        this.builder = builder;
-        initSpeed = builder.initSpeed;
-        bitmap = builder.bitmap;
-
-        isSpeedRandom = builder.isSpeedRandom;
-        isSizeRandom = builder.isSizeRandom;
-        isWindRandom = builder.isWindRandom;
-        isWindChange = builder.isWindChange;
     }
 
     public static final class Builder {
@@ -75,6 +66,8 @@ public class FallObject {
         private boolean isSizeRandom;
         private boolean isWindRandom;
         private boolean isWindChange;
+        private int parentWidth;//父容器宽度
+        private int parentHeight;//父容器高度
 
         public Builder(Bitmap bitmap) {
             this.initSpeed = defaultSpeed;
@@ -136,6 +129,12 @@ public class FallObject {
         public Builder setSize(int w, int h, boolean isRandomSize) {
             this.bitmap = changeBitmapSize(this.bitmap, w, h);
             this.isSizeRandom = isRandomSize;
+            return this;
+        }
+
+        public Builder setParentSize(int w, int h) {
+            parentWidth = w;
+            parentHeight = h;
             return this;
         }
 
@@ -221,11 +220,9 @@ public class FallObject {
     private void randomSize() {
         if (isSizeRandom) {
             float r = (random.nextInt(10) + 1) * 0.1f;
-            float rW = r * builder.bitmap.getWidth();
-            float rH = r * builder.bitmap.getHeight();
-            bitmap = changeBitmapSize(builder.bitmap, (int) rW, (int) rH);
-        } else {
-            bitmap = builder.bitmap;
+            float rW = r * bitmap.getWidth();
+            float rH = r * bitmap.getHeight();
+            bitmap = changeBitmapSize(bitmap, (int) rW, (int) rH);
         }
         objectWidth = bitmap.getWidth();
         objectHeight = bitmap.getHeight();
