@@ -5,19 +5,16 @@ import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FallingView extends View {
 
-    private static final int defaultWidth = 600;//默认宽度
-    private static final int defaultHeight = 1000;//默认高度
     private static final int intervalTime = 12;//重绘间隔时间
     private List<FallObject> fallObjects;
-    private int viewWidth;
-    private int viewHeight;
+    private FallObject.Builder mBuilder;
+    private int mNum;
 
     public FallingView(Context context) {
         this(context, null);
@@ -25,35 +22,16 @@ public class FallingView extends View {
 
     public FallingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
-    }
-
-    private void init() {
         fallObjects = new ArrayList<>();
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int height = measureSize(defaultHeight, heightMeasureSpec);
-        int width = measureSize(defaultWidth, widthMeasureSpec);
-        setMeasuredDimension(width, height);
-
-        viewWidth = width;
-        viewHeight = height;
-    }
-
-    private int measureSize(int defaultSize, int measureSpec) {
-        int result = defaultSize;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
-
-        if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else if (specMode == MeasureSpec.AT_MOST) {
-            result = Math.min(result, specSize);
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mBuilder.setParentSize(w, h);
+        for (int i = 0; i < mNum; i++) {
+            fallObjects.add(mBuilder.build());
         }
-        return result;
     }
 
     @Override
@@ -76,17 +54,7 @@ public class FallingView extends View {
      * @param num         数量
      */
     public void addFallObject(final FallObject.Builder fallBuilder, final int num) {
-        getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                getViewTreeObserver().removeOnPreDrawListener(this);
-                fallBuilder.setParentSize(viewWidth, viewHeight);
-                for (int i = 0; i < num; i++) {
-                    fallObjects.add(fallBuilder.build());
-                }
-                invalidate();
-                return true;
-            }
-        });
+        mBuilder = fallBuilder;
+        mNum = num;
     }
 }
