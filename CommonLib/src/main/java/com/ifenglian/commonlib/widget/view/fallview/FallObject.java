@@ -198,6 +198,7 @@ public class FallObject {
      * 重置object位置
      */
     private void reset() {
+        presentX = random.nextInt(parentWidth);
         presentY = -objectHeight;
         randomSpeed();//记得重置时速度也一起重置，这样效果会好很多
         randomWind();//记得重置一下初始角度，不然雪花会越下越少（因为角度累加会让雪花越下越偏）
