@@ -21,10 +21,6 @@
             android:name=".activity.SAMainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.SAMainActivity2"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

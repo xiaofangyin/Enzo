@@ -1,34 +1,43 @@
 package com.ifenglian.main.activity;
 
-import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.KeyEvent;
 
 import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
-import com.ifenglian.commonlib.widget.view.viewpagerindicator.ViewPagerIndicator;
+import com.ifenglian.commonlib.widget.view.nopreloadviewpager.NoScrollViewPager;
+import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
+import com.ifenglian.commonlib.widget.view.tablayout.TabView;
 import com.ifenglian.main.R;
 import com.ifenglian.main.adapter.SAHomeFragmentAdapter;
 import com.ifenglian.main.plugin.SAFactoryManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * 文 件 名: SAMainActivity
  * 创 建 人: xiaofangyin
- * 创建日期: 2017/11/18
+ * 创建日期: 2017/12/23
  * 邮   箱: xiaofy@ifenglian.com
  */
 public class SAMainActivity extends BaseActivity {
 
-    private List<String> itemTitles = Arrays.asList("短信", "收藏", "推荐", "发现");
-    private ViewPager mViewPager;
-    private ViewPagerIndicator mIndicator;
+    private String mTitles[] = {"家庭", "安全", "发现", "我"};
+    private int mIconRes[][] = {
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_home_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_home_select},
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_security_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_security_select},
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_find_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_find_select},
+            {com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_select}
+    };
+    private TabLayout mTabLayout;
+    private NoScrollViewPager viewPager;
+    private FragmentManager mFragmentManager;
 
     @Override
     public int getLayoutId() {
@@ -37,44 +46,52 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mViewPager = findViewById(R.id.view_pager);
-        mIndicator = findViewById(R.id.indicator);
+        mFragmentManager = getSupportFragmentManager();
+        mTabLayout = findViewById(R.id.tab_layout);
+        mTabLayout.initData(mTitles, mIconRes);
+        viewPager = findViewById(R.id.view_pager);
     }
 
     @Override
     public void initData() {
-        FragmentPagerAdapter mAdapter = new SAHomeFragmentAdapter(getSupportFragmentManager(), getFragments());
-        mViewPager.setAdapter(mAdapter);
-        //设置Tab上的标题
-        mIndicator.setTabItemTitles(itemTitles);
-        //设置关联的ViewPager
-        mIndicator.setViewPager(mViewPager, 0);
+        SAHomeFragmentAdapter adapter = new SAHomeFragmentAdapter(mFragmentManager, getFragments());
+        viewPager.setAdapter(adapter);
+        mTabLayout.setCurrentItem(0, false);
+        mTabLayout.showRedPoint(2);
+        mHandler.sendEmptyMessage(0);
     }
+
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mTabLayout.addMessageNum(3, 1);
+            mHandler.sendEmptyMessageDelayed(0, 2000);
+        }
+    };
 
     @Override
     public void initListener() {
-        mIndicator.setOnPageChangeListener(new ViewPagerIndicator.PageChangeListener() {
+        mTabLayout.setOnTabClickListener(new TabLayout.OnTabClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+            public void onTabClick(TabView view, int position) {
+                Log.e("AAA", "onTabClick: " + position);
+                viewPager.setCurrentItem(position, false);
             }
 
             @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void onTabReClick(TabView view, int position) {
+                Log.e("AAA", "onTabReClick: " + position);
             }
         });
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        Log.e("AAA", "SAMainActivity onNewIntent...");
+    public void showTabLayout(boolean show) {
+        if (show) {
+            mTabLayout.showTabLayout();
+        } else {
+            mTabLayout.hideTabLayout();
+        }
     }
 
     private List<Fragment> getFragments() {
