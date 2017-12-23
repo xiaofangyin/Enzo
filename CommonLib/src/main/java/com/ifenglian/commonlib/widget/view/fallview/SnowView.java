@@ -9,18 +9,24 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FallingView extends View {
+/**
+ * 文 件 名: SnowView
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/4/1
+ * 邮   箱: xiaofy@ifenglian.com
+ */
+public class SnowView extends View {
 
     private static final int intervalTime = 8;//重绘间隔时间
-    private List<FallObject> fallObjects;
-    private FallObject.Builder mBuilder;
+    private List<SnowModel> fallObjects;
+    private SnowModel.Builder mBuilder;
     private int mNum;
 
-    public FallingView(Context context) {
+    public SnowView(Context context) {
         this(context, null);
     }
 
-    public FallingView(Context context, @Nullable AttributeSet attrs) {
+    public SnowView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         fallObjects = new ArrayList<>();
     }
@@ -53,7 +59,7 @@ public class FallingView extends View {
      * @param fallBuilder 下落物体对象
      * @param num         数量
      */
-    public void addFallObject(final FallObject.Builder fallBuilder, final int num) {
+    public void addFallObject(final SnowModel.Builder fallBuilder, final int num) {
         mBuilder = fallBuilder;
         mNum = num;
     }

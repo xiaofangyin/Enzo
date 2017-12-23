@@ -3,12 +3,17 @@ package com.ifenglian.commonlib.widget.view.fallview;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.PixelFormat;
-import android.graphics.drawable.Drawable;
 
 import java.util.Random;
 
-public class FallObject {
+/**
+ * 文 件 名: SnowModel
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/4/1
+ * 邮   箱: xiaofy@ifenglian.com
+ */
+public class SnowModel {
+
     private Random random;
     private int parentWidth;//父容器宽度
     private int parentHeight;//父容器高度
@@ -35,7 +40,7 @@ public class FallObject {
     private static final int defaultWindSpeed = 10;//默认单位风速
     private static final float HALF_PI = (float) Math.PI / 2;//π/2
 
-    private FallObject(Builder builder) {
+    private SnowModel(Builder builder) {
         this.parentWidth = builder.parentWidth;
         this.parentHeight = builder.parentHeight;
         random = new Random();
@@ -71,17 +76,6 @@ public class FallObject {
             this.initSpeed = defaultSpeed;
             this.initWindLevel = defaultWindLevel;
             this.bitmap = bitmap;
-
-            this.isSpeedRandom = false;
-            this.isSizeRandom = false;
-            this.isWindRandom = false;
-            this.isWindChange = false;
-        }
-
-        public Builder(Drawable drawable) {
-            this.initSpeed = defaultSpeed;
-            this.initWindLevel = defaultWindLevel;
-            this.bitmap = drawableToBitmap(drawable);
 
             this.isSpeedRandom = false;
             this.isSizeRandom = false;
@@ -150,8 +144,8 @@ public class FallObject {
             return this;
         }
 
-        public FallObject build() {
-            return new FallObject(this);
+        public SnowModel build() {
+            return new SnowModel(this);
         }
     }
 
@@ -242,21 +236,6 @@ public class FallObject {
         } else if (angle < -HALF_PI) {
             angle = -HALF_PI;
         }
-    }
-
-    /**
-     * drawable图片资源转bitmap
-     */
-    static Bitmap drawableToBitmap(Drawable drawable) {
-        Bitmap bitmap = Bitmap.createBitmap(
-                drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(),
-                drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
-                        : Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        drawable.draw(canvas);
-        return bitmap;
     }
 
     /**

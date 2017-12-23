@@ -1,12 +1,13 @@
 package com.ifenglian.module_d.fragment;
 
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.view.fallview.FallObject;
-import com.ifenglian.commonlib.widget.view.fallview.FallingView;
+import com.ifenglian.commonlib.widget.view.fallview.SnowModel;
+import com.ifenglian.commonlib.widget.view.fallview.SnowView;
 import com.ifenglian.module_d.R;
 
 /**
@@ -17,7 +18,7 @@ import com.ifenglian.module_d.R;
  */
 public class MDViewPagerFragment1 extends BaseFragment {
 
-    private FallingView fallingView;
+    private SnowView fallingView;
 
     @Override
     public int getLayoutId() {
@@ -32,10 +33,10 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        Drawable drawable = getResources().getDrawable(R.mipmap.md_icon_snow);
-        FallObject.Builder builder = new FallObject.Builder(drawable);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.md_icon_snow);
+        SnowModel.Builder builder = new SnowModel.Builder(bitmap);
         builder.setSpeed(5, true);
-        builder.setSize(drawable.getBounds().width(), drawable.getBounds().height(), true);
+        builder.setSize(bitmap.getWidth(), bitmap.getHeight(), true);
         builder.setWind(8, true, true);
         fallingView.addFallObject(builder, 50);
     }
