@@ -30,7 +30,7 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.sa_activity_main;
     }
 
     @Override
