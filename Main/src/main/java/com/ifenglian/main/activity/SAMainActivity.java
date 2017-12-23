@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.ifenglian.commonlib.base.BaseActivity;
+import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.commonlib.widget.view.viewpagerindicator.ViewPagerIndicator;
 import com.ifenglian.main.R;
 import com.ifenglian.main.adapter.SAHomeFragmentAdapter;
@@ -81,5 +83,22 @@ public class SAMainActivity extends BaseActivity {
             fragments.add(SAFactoryManager.getInstance().getFactoryList().get(i).getFragment());
         }
         return fragments;
+    }
+
+    private long firstTime = 0; //点击两次退出应用计时
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                ToastUtils.showToast("再按一次退出程序");
+                firstTime = System.currentTimeMillis();
+                return true;
+            } else {
+                System.exit(0);
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

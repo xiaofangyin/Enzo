@@ -3,6 +3,7 @@ package com.ifenglian.main.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 
 import com.ifenglian.commonlib.base.BaseActivity;
@@ -41,5 +42,10 @@ public class SASplashActivity extends BaseActivity {
     @Override
     public void initListener() {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyCode == KeyEvent.KEYCODE_BACK;
     }
 }
