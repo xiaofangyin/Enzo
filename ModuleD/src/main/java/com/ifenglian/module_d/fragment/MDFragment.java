@@ -13,13 +13,13 @@ import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
-import com.ifenglian.module_d.activity.MDNavigationActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDProgressActivity;
 import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
 import com.ifenglian.module_d.activity.MDRulerActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
+import com.ifenglian.module_d.activity.MDViewPagerIndicatorActivity;
 
 /**
  * 文 件 名: MDFragment
@@ -67,7 +67,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), MDBleActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_navigation_view) {
-            Intent intent = new Intent(getContext(), MDNavigationActivity.class);
+            Intent intent = new Intent(getContext(), MDViewPagerIndicatorActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_jni) {
             Intent intent = new Intent(getContext(), MDJniActivity.class);

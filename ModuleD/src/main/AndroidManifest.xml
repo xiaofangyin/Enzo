@@ -23,6 +23,9 @@
             android:name=".activity.MDNavigationActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.MDViewPagerIndicatorActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.MDJniActivity"
             android:screenOrientation="portrait" />
         <activity

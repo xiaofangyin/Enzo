@@ -12,7 +12,7 @@ import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.widget.view.tablayout.TabView;
 import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.fragment.NavigationFragment;
+import com.ifenglian.module_d.fragment.MDViewPagerFragment;
 
 /**
  * 文 件 名: MDNavigationActivity
@@ -31,10 +31,10 @@ public class MDNavigationActivity extends BaseActivity {
     };
     private TabLayout mTabLayout;
     private FragmentManager mFragmentManager;
-    private NavigationFragment firstFragment;
-    private NavigationFragment secondFragment;
-    private NavigationFragment thirdFragment;
-    private NavigationFragment fourthFragment;
+    private MDViewPagerFragment firstFragment;
+    private MDViewPagerFragment secondFragment;
+    private MDViewPagerFragment thirdFragment;
+    private MDViewPagerFragment fourthFragment;
 
     @Override
     public int getLayoutId() {
@@ -90,7 +90,7 @@ public class MDNavigationActivity extends BaseActivity {
         switch (tab) {
             case 0:
                 if (firstFragment == null) {
-                    firstFragment = new NavigationFragment();
+                    firstFragment = new MDViewPagerFragment();
                     Bundle bundle = new Bundle();
                     bundle.putInt("number", 0);
                     firstFragment.setArguments(bundle);
@@ -101,7 +101,7 @@ public class MDNavigationActivity extends BaseActivity {
                 break;
             case 1:
                 if (secondFragment == null) {
-                    secondFragment = new NavigationFragment();
+                    secondFragment = new MDViewPagerFragment();
                     Bundle bundle = new Bundle();
                     bundle.putInt("number", 1);
                     secondFragment.setArguments(bundle);
@@ -112,7 +112,7 @@ public class MDNavigationActivity extends BaseActivity {
                 break;
             case 2:
                 if (thirdFragment == null) {
-                    thirdFragment = new NavigationFragment();
+                    thirdFragment = new MDViewPagerFragment();
                     Bundle bundle = new Bundle();
                     bundle.putInt("number", 2);
                     thirdFragment.setArguments(bundle);
@@ -123,7 +123,7 @@ public class MDNavigationActivity extends BaseActivity {
                 break;
             case 3:
                 if (fourthFragment == null) {
-                    fourthFragment = new NavigationFragment();
+                    fourthFragment = new MDViewPagerFragment();
                     Bundle bundle = new Bundle();
                     bundle.putInt("number", 3);
                     fourthFragment.setArguments(bundle);

@@ -10,15 +10,14 @@ import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.activity.MDNavigationActivity;
 
 /**
- * 文 件 名: NavigationFragment
+ * 文 件 名: MDViewPagerFragment
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class NavigationFragment extends BaseFragment {
+public class MDViewPagerFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
@@ -27,10 +26,9 @@ public class NavigationFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new TestAdapter());
         recyclerView.addItemDecoration(new DividerItemDecoration(rootView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.addOnScrollListener(new ListScrollListener());
     }
 
     @Override
@@ -68,22 +66,6 @@ public class NavigationFragment extends BaseFragment {
         @Override
         public int getItemCount() {
             return 100;
-        }
-    }
-
-    /**
-     * 监听列表的滑动来控制底部导航栏的显示与隐藏
-     */
-    private class ListScrollListener extends RecyclerView.OnScrollListener {
-
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-            if (dy > 8) {//列表向上滑动
-                ((MDNavigationActivity) NavigationFragment.this.getActivity()).showTabLayout(false);
-            } else if (dy < -8) {//列表向下滑动
-                ((MDNavigationActivity) NavigationFragment.this.getActivity()).showTabLayout(true);
-            }
         }
     }
 }
