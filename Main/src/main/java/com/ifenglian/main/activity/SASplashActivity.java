@@ -32,7 +32,7 @@ public class SASplashActivity extends BaseActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), SAMainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SAMainActivity2.class);
                 startActivity(intent);
                 finish();
             }
