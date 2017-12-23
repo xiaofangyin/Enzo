@@ -12,6 +12,9 @@ import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
+import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
+import com.ifenglian.module_d.activity.MDPhotosActivity;
+import com.ifenglian.module_d.activity.MDSimpleActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -28,6 +31,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
+        rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_album).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ble).setOnClickListener(this);
         rootView.findViewById(R.id.btn_jni).setOnClickListener(this);
         rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
@@ -47,7 +53,16 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_ble) {
+        if (id == R.id.btn_lottie) {
+            Intent intent = new Intent(getContext(), MDSimpleActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_album) {
+            Intent intent = new Intent(getContext(), MDPhotosActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_loading_layout) {
+            Intent intent = new Intent(getContext(), MDLoadingLayoutActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_ble) {
             Intent intent = new Intent(getContext(), MDBleActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_jni) {
