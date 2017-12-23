@@ -5,6 +5,18 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btn_ble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ble" />
+
+    <Button
+        android:id="@+id/btn_jni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="jni" />
+
+    <Button
         android:id="@+id/btn_photo_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
