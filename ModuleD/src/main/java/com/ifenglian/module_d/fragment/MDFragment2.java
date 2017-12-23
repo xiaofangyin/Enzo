@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 文 件 名: MDFragment
+ * 文 件 名: MDFragment2
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofy@ifenglian.com
@@ -70,9 +70,10 @@ public class MDFragment2 extends BaseFragment {
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            fragments.add(new MDViewPagerFragment());
-        }
+        fragments.add(new MDViewPagerFragment1());
+        fragments.add(new MDViewPagerFragment2());
+        fragments.add(new MDViewPagerFragment3());
+        fragments.add(new MDViewPagerFragment4());
         return fragments;
     }
 }
