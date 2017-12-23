@@ -32,7 +32,7 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        Drawable drawable = getResources().getDrawable(R.mipmap.icon_snow);
+        Drawable drawable = getResources().getDrawable(R.mipmap.md_icon_snow);
         FallObject.Builder builder = new FallObject.Builder(drawable);
         builder.setSpeed(8, true);
         builder.setSize(drawable.getBounds().width(), drawable.getBounds().height(), true);

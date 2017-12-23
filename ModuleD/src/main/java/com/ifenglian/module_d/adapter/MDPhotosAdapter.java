@@ -76,7 +76,7 @@ public class MDPhotosAdapter extends BaseAdapter implements OnScrollListener {
             if (bitmap != null) {
                 gridHolder.imageView.setImageBitmap(bitmap);
             } else {
-                gridHolder.imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.sa_default_photo));
+                gridHolder.imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.md_icon_default));
             }
         }
         return convertView;
@@ -123,7 +123,7 @@ public class MDPhotosAdapter extends BaseAdapter implements OnScrollListener {
             if (bitmap != null) {
                 mImageView.setImageBitmap(bitmap);
             } else {
-                mImageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.sa_default_photo));
+                mImageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.md_icon_default));
             }
         }
     }

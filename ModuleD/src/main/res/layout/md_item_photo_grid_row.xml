@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@mipmap/sa_default_photo"
+        android:background="@mipmap/md_icon_default"
         android:scaleType="centerCrop" />
 
 </com.ifenglian.commonlib.widget.view.squarelayout.SquareLayout>

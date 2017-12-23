@@ -11,7 +11,7 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_margin="4dp"
-        android:src="@mipmap/fl_user_avatar_circle" />
+        android:src="@mipmap/lib_user_avatar_circle" />
 
     <TextView
         android:id="@+id/fl_dan_mu_content"

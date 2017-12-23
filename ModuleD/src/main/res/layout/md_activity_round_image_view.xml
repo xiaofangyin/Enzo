@@ -13,26 +13,26 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
-            android:src="@mipmap/meinv1" />
+            android:src="@mipmap/md_meinv1" />
 
         <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:src="@mipmap/meinv2" />
+            android:src="@mipmap/md_meinv2" />
 
         <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_margin="10dp"
-            android:src="@mipmap/meinv2" />
+            android:src="@mipmap/md_meinv2" />
 
         <com.ifenglian.commonlib.widget.view.roundimageview.RoundImageView
             android:id="@+id/id_meinv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:src="@mipmap/meinv3"
+            android:src="@mipmap/md_meinv3"
             zhy:borderRadius="20dp"
             zhy:type="round" />
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:src="@mipmap/meinv3"
+            android:src="@mipmap/md_meinv3"
             zhy:borderRadius="60dp"
             zhy:type="round" />
     </LinearLayout>

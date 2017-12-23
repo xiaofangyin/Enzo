@@ -34,14 +34,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:src="@mipmap/sr_tool_edit_dan_mu" />
+                android:src="@mipmap/lib_tool_edit_dan_mu" />
 
             <ImageView
                 android:id="@+id/sr_iv_show_dan_mu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:src="@mipmap/sr_tool_close_dan_mu" />
+                android:src="@mipmap/lib_tool_close_dan_mu" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

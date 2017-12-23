@@ -62,8 +62,8 @@ public class SRSpeedTestView extends View {
         whiteCircleRadius = dp2Px(6.5f);
         redCircleRadius = dp2Px(10f);
 
-        bitmapBg1 = BitmapFactory.decodeResource(getResources(), R.mipmap.sr_speed_test_bg);
-        bitmapBg2 = BitmapFactory.decodeResource(getResources(), R.mipmap.sr_speed_test_bg2);
+        bitmapBg1 = BitmapFactory.decodeResource(getResources(), R.mipmap.lib_speed_test_bg);
+        bitmapBg2 = BitmapFactory.decodeResource(getResources(), R.mipmap.lib_speed_test_bg2);
 
         //三角形path
         int triangleWidth = dp2Px(10);
