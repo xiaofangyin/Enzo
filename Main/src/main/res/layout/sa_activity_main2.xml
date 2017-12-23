@@ -1,11 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.ifenglian.commonlib.widget.view.nopreloadviewpager.NoScrollViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <com.ifenglian.commonlib.widget.view.tablayout.TabLayout
         android:id="@+id/tab_layout"
@@ -13,4 +15,4 @@
         android:layout_height="56dp"
         android:layout_gravity="bottom"
         android:background="#ffffff" />
-</FrameLayout>
+</LinearLayout>
