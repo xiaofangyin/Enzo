@@ -28,7 +28,6 @@ public class MDViewPagerFragment1 extends BaseFragment {
     @Override
     public void initView(View rootView) {
         fallingView = rootView.findViewById(R.id.fall_view);
-
     }
 
     @Override
