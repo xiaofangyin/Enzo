@@ -16,12 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 文 件 名: MDFragment2
+ * 文 件 名: MDFragment
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDFragment2 extends BaseFragment {
+public class MDFragment extends BaseFragment {
 
     private List<String> itemTitles = Arrays.asList("短信", "收藏", "推荐", "发现");
     private ViewPager mViewPager;
