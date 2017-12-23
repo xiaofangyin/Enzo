@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginHostDelegate;
-import com.ifenglian.module_d.fragment.MDFragment;
+import com.ifenglian.module_d.fragment.MDFragment2;
 
 /**
  * 文 件 名: MDFactoryManager
@@ -38,6 +38,6 @@ public class MDFactoryManager extends FLPluginFactory {
 
     @Override
     public Fragment getFragment() {
-        return new MDFragment();
+        return new MDFragment2();
     }
 }
