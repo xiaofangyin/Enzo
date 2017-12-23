@@ -79,7 +79,7 @@ public class MAFragment extends BaseFragment {
         builder.setSpeed(8, true);
         builder.setSize(drawable.getBounds().width(), drawable.getBounds().height(), true);
         builder.setWind(10, true, true);
-        fallingView.addFallObject(builder, 30);
+        fallingView.addFallObject(builder, 50);
     }
 
     @Override

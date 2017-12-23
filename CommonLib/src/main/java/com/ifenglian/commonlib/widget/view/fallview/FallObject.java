@@ -39,10 +39,8 @@ public class FallObject {
         this.parentWidth = builder.parentWidth;
         this.parentHeight = builder.parentHeight;
         random = new Random();
-        if (builder.parentWidth != 0 && builder.parentHeight != 0) {
-            presentX = random.nextInt(builder.parentWidth);
-            presentY = random.nextInt(builder.parentHeight) - parentHeight;
-        }
+        presentX = random.nextInt(builder.parentWidth);
+        presentY = random.nextInt(builder.parentHeight) - parentHeight;
 
         bitmap = builder.bitmap;
         isSpeedRandom = builder.isSpeedRandom;
