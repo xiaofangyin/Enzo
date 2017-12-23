@@ -34,9 +34,9 @@ public class MDViewPagerFragment1 extends BaseFragment {
     public void initData(Bundle savedInstanceState) {
         Drawable drawable = getResources().getDrawable(R.mipmap.md_icon_snow);
         FallObject.Builder builder = new FallObject.Builder(drawable);
-        builder.setSpeed(8, true);
+        builder.setSpeed(5, true);
         builder.setSize(drawable.getBounds().width(), drawable.getBounds().height(), true);
-        builder.setWind(10, true, true);
+        builder.setWind(8, true, true);
         fallingView.addFallObject(builder, 50);
     }
 
