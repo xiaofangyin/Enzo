@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FallingView extends View {
 
-    private static final int intervalTime = 12;//重绘间隔时间
+    private static final int intervalTime = 8;//重绘间隔时间
     private List<FallObject> fallObjects;
     private FallObject.Builder mBuilder;
     private int mNum;
