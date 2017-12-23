@@ -1,6 +1,5 @@
 package com.ifenglian.module_a.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,8 +7,6 @@ import android.widget.Toast;
 
 import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.widget.view.autoscrolltextview.AutoScrollTextView;
-import com.ifenglian.commonlib.widget.view.fallview.FallObject;
-import com.ifenglian.commonlib.widget.view.fallview.FallingView;
 import com.ifenglian.commonlib.widget.view.timeclock.SHScheduleBean;
 import com.ifenglian.commonlib.widget.view.timeclock.SHTimePicker;
 import com.ifenglian.module_a.R;
@@ -29,7 +26,6 @@ public class MAFragment extends BaseFragment {
     private SHTimePicker picker;
     private TextView tvStartTime;
     private TextView tvEndTime;
-    private FallingView fallingView;
 
     @Override
     public int getLayoutId() {
@@ -42,7 +38,6 @@ public class MAFragment extends BaseFragment {
         picker = rootView.findViewById(R.id.picker);
         tvStartTime = rootView.findViewById(R.id.tv_start_time);
         tvEndTime = rootView.findViewById(R.id.tv_end_time);
-        fallingView = rootView.findViewById(R.id.fall_view);
     }
 
     @Override
@@ -73,13 +68,6 @@ public class MAFragment extends BaseFragment {
             }
         });
         picker.initTime(6, 25, 15, 35);
-
-        Drawable drawable = getResources().getDrawable(R.mipmap.icon_snow);
-        FallObject.Builder builder = new FallObject.Builder(drawable);
-        builder.setSpeed(8, true);
-        builder.setSize(drawable.getBounds().width(), drawable.getBounds().height(), true);
-        builder.setWind(10, true, true);
-        fallingView.addFallObject(builder, 50);
     }
 
     @Override
