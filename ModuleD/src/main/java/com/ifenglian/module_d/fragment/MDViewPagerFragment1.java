@@ -1,19 +1,12 @@
 package com.ifenglian.module_d.fragment;
 
-import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.utils.common.DensityUtil;
-import com.ifenglian.commonlib.utils.toast.ToastUtils;
-import com.ifenglian.commonlib.widget.view.progress.CircularProgressBar;
-import com.ifenglian.commonlib.widget.view.progress.CircularProgressBarWithRate;
-import com.ifenglian.commonlib.widget.view.progress.HorizontalProgressBar;
-import com.ifenglian.commonlib.widget.view.progress.SGLSeekBar;
+import com.ifenglian.commonlib.widget.view.fallview.FallObject;
+import com.ifenglian.commonlib.widget.view.fallview.FallingView;
 import com.ifenglian.module_d.R;
 
 /**
@@ -22,13 +15,9 @@ import com.ifenglian.module_d.R;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDViewPagerFragment1 extends BaseFragment implements View.OnClickListener {
+public class MDViewPagerFragment1 extends BaseFragment {
 
-    private int progress = 0;
-    private SGLSeekBar seekBar;
-    private HorizontalProgressBar mCustomProgressBar;
-    private CircularProgressBar mCircularProgressBar;
-    private CircularProgressBarWithRate mRateTextCircularProgressBar;
+    private FallingView fallingView;
 
     @Override
     public int getLayoutId() {
@@ -37,60 +26,22 @@ public class MDViewPagerFragment1 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
-        seekBar = rootView.findViewById(R.id.seek_bar);
-        mCircularProgressBar = rootView.findViewById(R.id.circular_progress_bar);
-        mCircularProgressBar.setMax(100);
+        fallingView = rootView.findViewById(R.id.fall_view);
 
-        mRateTextCircularProgressBar = rootView.findViewById(R.id.rate_progress_bar);
-        mRateTextCircularProgressBar.setMax(100);
-        mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(getActivity(), 10));
-
-        mCustomProgressBar = rootView.findViewById(R.id.web_view_progress_bar);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mHandler.sendEmptyMessageDelayed(progress++, 30);
+        Drawable drawable = getResources().getDrawable(R.mipmap.icon_snow);
+        FallObject.Builder builder = new FallObject.Builder(drawable);
+        builder.setSpeed(8, true);
+        builder.setSize(drawable.getBounds().width(), drawable.getBounds().height(), true);
+        builder.setWind(10, true, true);
+        fallingView.addFallObject(builder, 50);
     }
 
     @Override
     public void initListener(View rootView) {
-        seekBar.setOnSeekChangedListener(new SGLSeekBar.OnSeekBarChangedListener() {
-            @Override
-            public void onProgressChanged(SGLSeekBar seekBar, int percent) {
-                Log.d("AAA", "percent: " + percent);
-                ToastUtils.showToast(String.valueOf(percent));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SGLSeekBar seekBar, int percent) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SGLSeekBar seekBar, int percent) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onClick(View v) {
 
     }
-
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            mCircularProgressBar.setProgress(msg.what);
-            mRateTextCircularProgressBar.setProgress(msg.what);
-            mCustomProgressBar.setProgress(msg.what);
-            if (progress >= 100) {
-                progress = 0;
-            }
-            mHandler.sendEmptyMessageDelayed(progress++, 100);
-        }
-    };
 }

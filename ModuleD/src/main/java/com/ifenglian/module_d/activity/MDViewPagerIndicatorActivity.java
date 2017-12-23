@@ -10,7 +10,7 @@ import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.widget.view.viewpagerindicator.ViewPagerIndicator;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDViewPagerIndicatorAdapter;
-import com.ifenglian.module_d.fragment.MDViewPagerFragment1;
+import com.ifenglian.module_d.fragment.MDViewPagerFragment2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,7 +78,7 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            fragments.add(new MDViewPagerFragment1());
+            fragments.add(new MDViewPagerFragment2());
         }
         return fragments;
     }
