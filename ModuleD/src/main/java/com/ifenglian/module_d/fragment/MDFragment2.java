@@ -29,7 +29,7 @@ public class MDFragment2 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.md_activity_indicator;
+        return R.layout.md_fragment_indicator;
     }
 
     @Override

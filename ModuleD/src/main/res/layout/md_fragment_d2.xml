@@ -17,12 +17,6 @@
         android:text="缩略图" />
 
     <Button
-        android:id="@+id/btn_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="progress" />
-
-    <Button
         android:id="@+id/btn_loading_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

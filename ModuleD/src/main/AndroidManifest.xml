@@ -20,9 +20,6 @@
             android:name=".activity.MDBleActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDNavigationActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDViewPagerIndicatorActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -33,9 +30,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDPhotosActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MDProgressActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDLoadingLayoutActivity"
