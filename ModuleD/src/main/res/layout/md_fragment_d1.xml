@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ifenglian.commonlib.widget.view.fallview.SnowView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fall_view"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:background="@mipmap/md_snow_bg">
+
+    <com.ifenglian.commonlib.widget.view.fallview.SnowView
+        android:id="@+id/fall_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>
+
