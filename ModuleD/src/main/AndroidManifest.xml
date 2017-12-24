@@ -38,9 +38,6 @@
             android:name=".activity.MDRoundImageViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDRulerActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDUpdateVersionActivity"
             android:screenOrientation="portrait" />
 

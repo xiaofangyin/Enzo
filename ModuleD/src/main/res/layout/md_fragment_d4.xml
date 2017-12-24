@@ -5,6 +5,18 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btn_round_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RoundImageView" />
+
+    <Button
+        android:id="@+id/btn_update_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="版本更新" />
+
+    <Button
         android:id="@+id/btn_lottie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
