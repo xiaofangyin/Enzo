@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.ifenglian.commonlib.R;
-import com.ifenglian.commonlib.net.DownloadUtil;
+import com.ifenglian.commonlib.net.download.DownloadUtil;
 import com.ifenglian.commonlib.utils.common.ApkUtils;
 import com.ifenglian.commonlib.utils.common.PreferenceUtils;
 import com.ifenglian.commonlib.utils.common.SDCardUtils;
