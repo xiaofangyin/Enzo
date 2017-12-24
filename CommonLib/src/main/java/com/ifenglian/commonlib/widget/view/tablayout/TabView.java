@@ -204,6 +204,18 @@ public class TabView extends View {
         }
     }
 
+    /**
+     * 没有放大
+     */
+    public void setSelected(boolean selected) {
+        mTextPaint.setColor(selected ? SELECTED_TEXT_COLOR : NORMAL_TEXT_COLOR);
+        mDrawBitmap = selected ? mSelectedBitmap : mNormalBitmap;
+        invalidateView();
+    }
+
+    /**
+     * 放大
+     */
     public void setSelected(boolean selected, boolean animate) {
         mTextPaint.setColor(selected ? SELECTED_TEXT_COLOR : NORMAL_TEXT_COLOR);
         if (animate) {

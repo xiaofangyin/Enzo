@@ -72,10 +72,12 @@ public class TabLayout extends LinearLayout implements ITabLayout, View.OnClickL
     @Override
     public void setCurrentItem(int currentItem, boolean animate) {
         if (mLastPosition >= 0 && mLastPosition < mTabList.size()) {
-            mTabList.get(mLastPosition).setSelected(false, animate);
+            //mTabList.get(mLastPosition).setSelected(false, animate);
+            mTabList.get(mLastPosition).setSelected(false);
         }
         if (currentItem >= 0 && currentItem < mTabList.size()) {
-            mTabList.get(currentItem).setSelected(true, animate);
+            //mTabList.get(currentItem).setSelected(true, animate);
+            mTabList.get(currentItem).setSelected(true);
             mLastPosition = currentItem;
         }
     }

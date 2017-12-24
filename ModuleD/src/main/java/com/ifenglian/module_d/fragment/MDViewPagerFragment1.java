@@ -32,11 +32,11 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.md_icon_snow);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.md_icon_snow);
         SnowModel.Builder builder = new SnowModel.Builder(bitmap);
-        builder.setSpeed(5, true);
-        builder.setSize(bitmap.getWidth(), bitmap.getHeight(), true);
-        builder.setWind(8, true, true);
+        builder.setSpeed(5, true)
+                .setSize(bitmap.getWidth(), bitmap.getHeight(), true)
+                .setWind(8, true, true);
         fallingView.addFallObject(builder, 50);
     }
 
