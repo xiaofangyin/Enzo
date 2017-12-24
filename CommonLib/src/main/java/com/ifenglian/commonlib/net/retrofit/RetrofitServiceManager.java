@@ -1,7 +1,5 @@
 package com.ifenglian.commonlib.net.retrofit;
 
-import com.ifenglian.commonlib.net.ApiConfig;
-
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;

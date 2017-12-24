@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.net;
+package com.ifenglian.commonlib.net.retrofit;
 
 public class ApiConfig {
     /**

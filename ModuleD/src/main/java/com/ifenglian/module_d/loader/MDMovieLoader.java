@@ -31,10 +31,6 @@ public class MDMovieLoader extends ObjectLoader {
 
     /**
      * 获取电影列表
-     *
-     * @param start
-     * @param count
-     * @return
      */
     public Observable<List<Movie>> getMovie(int start, int count) {
         return observe(mMovieService.getTop250(start, count))
@@ -54,7 +50,6 @@ public class MDMovieLoader extends ObjectLoader {
             }
         });
     }
-
 
     public interface MovieService {
 
