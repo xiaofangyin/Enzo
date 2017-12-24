@@ -1,6 +1,7 @@
 package com.ifenglian.commonlib.widget.view.fallview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -19,8 +20,8 @@ public class SnowView extends View {
 
     private static final int intervalTime = 8;//重绘间隔时间
     private List<SnowModel> fallObjects;
-    private SnowModel.Builder mBuilder;
     private int mNum;
+    private Bitmap mBitmap;
 
     public SnowView(Context context) {
         this(context, null);
@@ -34,9 +35,13 @@ public class SnowView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mBuilder.setParentSize(w, h);
+        SnowModel.Builder builder = new SnowModel.Builder(mBitmap);
+        builder.setSpeed(5, true)
+                .setParentSize(w, h)
+                .setSize(mBitmap.getWidth(), mBitmap.getHeight(), true)
+                .setWind(8, true, true);
         for (int i = 0; i < mNum; i++) {
-            fallObjects.add(mBuilder.build());
+            fallObjects.add(builder.build());
         }
     }
 
@@ -56,11 +61,11 @@ public class SnowView extends View {
     /**
      * 向View添加下落物体对象
      *
-     * @param fallBuilder 下落物体对象
-     * @param num         数量
+     * @param bitmap 下落物体对象
+     * @param num    数量
      */
-    public void addFallObject(final SnowModel.Builder fallBuilder, final int num) {
-        mBuilder = fallBuilder;
+    public void addFallObject(Bitmap bitmap, int num) {
+        mBitmap = bitmap;
         mNum = num;
     }
 }
