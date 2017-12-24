@@ -147,6 +147,7 @@ public class Ruler extends View {
         mVelocityTracker.addMovement(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                getParent().requestDisallowInterceptTouchEvent(true);
                 if (!mOverScroller.isFinished()) {
                     mOverScroller.abortAnimation();
                 }
@@ -169,11 +170,13 @@ public class Ruler extends View {
                     scrollBackToCurrentScale();
                 }
                 mVelocityTracker.clear();
+                getParent().requestDisallowInterceptTouchEvent(false);
                 break;
             case MotionEvent.ACTION_CANCEL:
                 if (!mOverScroller.isFinished()) {
                     mOverScroller.abortAnimation();
                 }
+                getParent().requestDisallowInterceptTouchEvent(false);
                 break;
         }
         return true;

@@ -6,10 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
+import com.ifenglian.commonlib.widget.view.boheruler.Ruler;
+import com.ifenglian.commonlib.widget.view.boheruler.RulerCallback;
 import com.ifenglian.commonlib.widget.view.progress.CircularProgressBar;
 import com.ifenglian.commonlib.widget.view.progress.CircularProgressBarWithRate;
 import com.ifenglian.commonlib.widget.view.progress.HorizontalProgressBar;
@@ -29,6 +32,8 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
     private HorizontalProgressBar mCustomProgressBar;
     private CircularProgressBar mCircularProgressBar;
     private CircularProgressBarWithRate mRateTextCircularProgressBar;
+    private Ruler ruler;
+    private TextView tvValue;
 
     @Override
     public int getLayoutId() {
@@ -46,6 +51,9 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
         mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(getActivity(), 10));
 
         mCustomProgressBar = rootView.findViewById(R.id.web_view_progress_bar);
+
+        ruler = rootView.findViewById(R.id.ruler2);
+        tvValue = rootView.findViewById(R.id.tv_value);
     }
 
     @Override
@@ -70,6 +78,18 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
             @Override
             public void onStopTrackingTouch(SGLSeekBar seekBar, int percent) {
 
+            }
+        });
+
+        ruler.setRulerCallback(new RulerCallback() {
+            @Override
+            public void onScaleChanging(float scale) {
+                tvValue.setText(String.valueOf(scale));
+            }
+
+            @Override
+            public void afterScaleChanged(float scale) {
+                ToastUtils.showToast(String.valueOf(scale));
             }
         });
     }
