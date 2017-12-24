@@ -17,9 +17,6 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDMovieActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDBleActivity"
             android:screenOrientation="portrait" />
         <activity
