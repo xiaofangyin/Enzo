@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/md_snow_bg">
 
-    <com.ifenglian.commonlib.widget.view.fallview.SnowView
+    <com.ifenglian.commonlib.widget.view.snowview.SnowView
         android:id="@+id/fall_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

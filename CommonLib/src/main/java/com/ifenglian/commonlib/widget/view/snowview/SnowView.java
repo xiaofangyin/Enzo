@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.view.fallview;
+package com.ifenglian.commonlib.widget.view.snowview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
