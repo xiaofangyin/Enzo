@@ -2,6 +2,7 @@ package com.ifenglian.commonlib.utils.common;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
@@ -12,6 +13,28 @@ import android.graphics.drawable.Drawable;
  * 邮   箱: xiaofy@ifenglian.com
  */
 public class BitmapUtils {
+
+    /**
+     * 改变bitmap的大小
+     *
+     * @param bitmap 目标bitmap
+     * @param newW   目标宽度
+     * @param newH   目标高度
+     * @return Bitmap
+     */
+    public static Bitmap changeBitmapSize(Bitmap bitmap, int newW, int newH) {
+        int oldW = bitmap.getWidth();
+        int oldH = bitmap.getHeight();
+        // 计算缩放比例
+        float scaleWidth = ((float) newW) / oldW;
+        float scaleHeight = ((float) newH) / oldH;
+        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 得到新的图片
+        bitmap = Bitmap.createBitmap(bitmap, 0, 0, oldW, oldH, matrix, true);
+        return bitmap;
+    }
 
     /**
      * drawable图片资源转bitmap

@@ -2,7 +2,8 @@ package com.ifenglian.commonlib.widget.view.snowview;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
+
+import com.ifenglian.commonlib.utils.common.BitmapUtils;
 
 import java.util.Random;
 
@@ -170,7 +171,7 @@ public class SnowModel {
             float r = (random.nextInt(10) + 1) * 0.1f;
             float rW = r * bitmap.getWidth();
             float rH = r * bitmap.getHeight();
-            bitmap = changeBitmapSize(bitmap, (int) rW, (int) rH);
+            bitmap = BitmapUtils.changeBitmapSize(bitmap, (int) rW, (int) rH);
         }
         snowWidth = bitmap.getWidth();
         snowHeight = bitmap.getHeight();
@@ -189,25 +190,4 @@ public class SnowModel {
         }
     }
 
-    /**
-     * 改变bitmap的大小
-     *
-     * @param bitmap 目标bitmap
-     * @param newW   目标宽度
-     * @param newH   目标高度
-     * @return Bitmap
-     */
-    static Bitmap changeBitmapSize(Bitmap bitmap, int newW, int newH) {
-        int oldW = bitmap.getWidth();
-        int oldH = bitmap.getHeight();
-        // 计算缩放比例
-        float scaleWidth = ((float) newW) / oldW;
-        float scaleHeight = ((float) newH) / oldH;
-        // 取得想要缩放的matrix参数
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-        // 得到新的图片
-        bitmap = Bitmap.createBitmap(bitmap, 0, 0, oldW, oldH, matrix, true);
-        return bitmap;
-    }
 }
