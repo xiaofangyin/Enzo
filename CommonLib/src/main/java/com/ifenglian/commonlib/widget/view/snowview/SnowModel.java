@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 
+import com.ifenglian.commonlib.utils.common.FLLog;
+
 import java.util.Random;
 
 /**
@@ -21,7 +23,6 @@ public class SnowModel {
     private float objectHeight;//下落物体高度
 
     private int initSpeed;//初始下降速度
-    private int initWindLevel;//初始风力等级
 
     private float presentX;//当前位置X坐标
     private float presentY;//当前位置Y坐标
@@ -32,11 +33,9 @@ public class SnowModel {
 
     private boolean isSpeedRandom;//物体初始下降速度比例是否随机
     private boolean isSizeRandom;//物体初始大小比例是否随机
-    private boolean isWindRandom;//物体初始风向和风力大小比例是否随机
     private boolean isWindChange;//物体下落过程中风向和风力是否产生随机变化
 
     private static final int defaultSpeed = 10;//默认下降速度
-    private static final int defaultWindLevel = 0;//默认风力等级
     private static final int defaultWindSpeed = 10;//默认单位风速
     private static final float HALF_PI = (float) Math.PI / 2;//π/2
 
@@ -50,11 +49,9 @@ public class SnowModel {
         bitmap = builder.bitmap;
         isSpeedRandom = builder.isSpeedRandom;
         isSizeRandom = builder.isSizeRandom;
-        isWindRandom = builder.isWindRandom;
         isWindChange = builder.isWindChange;
 
         initSpeed = builder.initSpeed;
-        initWindLevel = builder.initWindLevel;
         randomSpeed();
         randomSize();
         randomWind();
@@ -62,24 +59,20 @@ public class SnowModel {
 
     public static final class Builder {
         private int initSpeed;
-        private int initWindLevel;
         private Bitmap bitmap;
 
         private boolean isSpeedRandom;
         private boolean isSizeRandom;
-        private boolean isWindRandom;
         private boolean isWindChange;
         private int parentWidth;//父容器宽度
         private int parentHeight;//父容器高度
 
         public Builder(Bitmap bitmap) {
             this.initSpeed = defaultSpeed;
-            this.initWindLevel = defaultWindLevel;
             this.bitmap = bitmap;
 
             this.isSpeedRandom = false;
             this.isSizeRandom = false;
-            this.isWindRandom = false;
             this.isWindChange = false;
         }
 
@@ -127,20 +120,6 @@ public class SnowModel {
         public Builder setParentSize(int w, int h) {
             parentWidth = w;
             parentHeight = h;
-            return this;
-        }
-
-        /**
-         * 设置风力等级、方向以及随机因素
-         *
-         * @param level        风力等级（绝对值为 5 时效果会比较好），为正时风从左向右吹（物体向X轴正方向偏移），为负时则相反
-         * @param isWindRandom 物体初始风向和风力大小比例是否随机
-         * @param isWindChange 在物体下落过程中风的风向和风力是否会产生随机变化
-         */
-        public Builder setWind(int level, boolean isWindRandom, boolean isWindChange) {
-            this.initWindLevel = level;
-            this.isWindRandom = isWindRandom;
-            this.isWindChange = isWindChange;
             return this;
         }
 
@@ -224,12 +203,8 @@ public class SnowModel {
      * 随机风的风向和风力大小比例，即随机物体初始下落角度
      */
     private void randomWind() {
-        if (isWindRandom) {
-            angle = (float) ((random.nextBoolean() ? -1 : 1) * Math.random() * initWindLevel / 50);
-        } else {
-            angle = (float) initWindLevel / 50;
-        }
-
+        angle = (float) ((random.nextBoolean() ? -1 : 1) * Math.random() / 12);
+        FLLog.e("angle: " + angle);
         //限制angle的最大最小值
         if (angle > HALF_PI) {
             angle = HALF_PI;
