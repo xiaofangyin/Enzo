@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 
-import com.ifenglian.commonlib.utils.common.FLLog;
-
 import java.util.Random;
 
 /**
