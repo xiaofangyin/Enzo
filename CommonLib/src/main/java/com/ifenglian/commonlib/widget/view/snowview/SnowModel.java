@@ -17,8 +17,8 @@ public class SnowModel {
     private Random random;
     private int parentWidth;//父容器宽度
     private int parentHeight;//父容器高度
-    private float objectWidth;//下落物体宽度
-    private float objectHeight;//下落物体高度
+    private float snowWidth;//下落物体宽度
+    private float snowHeight;//下落物体高度
 
     private int initSpeed;//初始下降速度
 
@@ -65,24 +65,12 @@ public class SnowModel {
         private int parentWidth;//父容器宽度
         private int parentHeight;//父容器高度
 
-        public Builder(Bitmap bitmap) {
+        Builder(Bitmap bitmap) {
             this.initSpeed = defaultSpeed;
             this.bitmap = bitmap;
-
             this.isSpeedRandom = false;
             this.isSizeRandom = false;
             this.isWindChange = false;
-        }
-
-        /**
-         * 设置物体的初始下落速度
-         *
-         * @param speed 下落速度
-         * @return Builder
-         */
-        public Builder setSpeed(int speed) {
-            this.initSpeed = speed;
-            return this;
         }
 
         /**
@@ -92,32 +80,23 @@ public class SnowModel {
          * @param isRandomSpeed 物体初始下降速度比例是否随机
          * @return Builder
          */
-        public Builder setSpeed(int speed, boolean isRandomSpeed) {
+        Builder setSpeed(int speed, boolean isRandomSpeed) {
             this.initSpeed = speed;
             this.isSpeedRandom = isRandomSpeed;
             return this;
         }
 
-        /**
-         * 设置物体大小
-         */
-        public Builder setSize(int w, int h) {
-            this.bitmap = changeBitmapSize(this.bitmap, w, h);
-            return this;
-        }
-
-        /**
-         * 设置物体大小
-         */
-        public Builder setSize(int w, int h, boolean isRandomSize) {
-            this.bitmap = changeBitmapSize(this.bitmap, w, h);
-            this.isSizeRandom = isRandomSize;
-            return this;
-        }
-
-        public Builder setParentSize(int w, int h) {
+        Builder setParentSize(int w, int h) {
             parentWidth = w;
             parentHeight = h;
+            return this;
+        }
+
+        /**
+         * 设置物体大小随机
+         */
+        Builder randomSize() {
+            this.isSizeRandom = true;
             return this;
         }
 
@@ -129,15 +108,15 @@ public class SnowModel {
     /**
      * 绘制物体对象
      */
-    public void drawObject(Canvas canvas) {
-        moveObject();
+    public void drawSnow(Canvas canvas) {
+        moveSnow();
         canvas.drawBitmap(bitmap, presentX, presentY, null);
     }
 
     /**
      * 移动物体对象
      */
-    private void moveObject() {
+    private void moveSnow() {
         moveX();
         moveY();
         if (presentY > parentHeight || presentX < -bitmap.getWidth() || presentX > parentWidth + bitmap.getWidth()) {
@@ -167,7 +146,7 @@ public class SnowModel {
      */
     private void reset() {
         presentX = random.nextInt(parentWidth);
-        presentY = -objectHeight;
+        presentY = -snowHeight;
         randomSpeed();//重置速度
         randomWind();//重置初始角度
     }
@@ -193,8 +172,8 @@ public class SnowModel {
             float rH = r * bitmap.getHeight();
             bitmap = changeBitmapSize(bitmap, (int) rW, (int) rH);
         }
-        objectWidth = bitmap.getWidth();
-        objectHeight = bitmap.getHeight();
+        snowWidth = bitmap.getWidth();
+        snowHeight = bitmap.getHeight();
     }
 
     /**

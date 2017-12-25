@@ -38,7 +38,7 @@ public class SnowView extends View {
         SnowModel.Builder builder = new SnowModel.Builder(mBitmap);
         builder.setSpeed(8, true)
                 .setParentSize(w, h)
-                .setSize(mBitmap.getWidth(), mBitmap.getHeight(), true);
+                .randomSize();
         for (int i = 0; i < mNum; i++) {
             fallObjects.add(builder.build());
         }
@@ -50,7 +50,7 @@ public class SnowView extends View {
         if (fallObjects.size() > 0) {
             for (int i = 0; i < fallObjects.size(); i++) {
                 //然后进行绘制
-                fallObjects.get(i).drawObject(canvas);
+                fallObjects.get(i).drawSnow(canvas);
             }
             // 隔一段时间重绘一次, 动画效果
             postInvalidateDelayed(intervalTime);
