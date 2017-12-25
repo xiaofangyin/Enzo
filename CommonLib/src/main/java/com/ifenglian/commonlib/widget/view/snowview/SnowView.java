@@ -38,7 +38,7 @@ public class SnowView extends View {
         SnowModel.Builder builder = new SnowModel.Builder(mBitmap);
         builder.setSpeed(8, true)
                 .setParentSize(w, h)
-                .randomSize();
+                .randomSize(true);
         for (int i = 0; i < mNum; i++) {
             fallObjects.add(builder.build());
         }

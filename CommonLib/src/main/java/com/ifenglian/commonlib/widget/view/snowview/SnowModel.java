@@ -87,16 +87,16 @@ public class SnowModel {
         }
 
         Builder setParentSize(int w, int h) {
-            parentWidth = w;
-            parentHeight = h;
+            this.parentWidth = w;
+            this.parentHeight = h;
             return this;
         }
 
         /**
          * 设置物体大小随机
          */
-        Builder randomSize() {
-            this.isSizeRandom = true;
+        Builder randomSize(boolean random) {
+            this.isSizeRandom = random;
             return this;
         }
 
