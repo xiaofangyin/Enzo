@@ -170,8 +170,8 @@ public class SnowModel {
     private void reset() {
         presentX = random.nextInt(parentWidth);
         presentY = -objectHeight;
-        randomSpeed();//记得重置时速度也一起重置，这样效果会好很多
-        randomWind();//记得重置一下初始角度，不然雪花会越下越少（因为角度累加会让雪花越下越偏）
+        randomSpeed();//重置速度
+        randomWind();//重置初始角度
     }
 
     /**
@@ -179,7 +179,7 @@ public class SnowModel {
      */
     private void randomSpeed() {
         if (isSpeedRandom) {
-            presentSpeed = (float) ((random.nextInt(3) + 1) * 0.1 + 1) * initSpeed;//这些随机数大家可以按自己的需要进行调整
+            presentSpeed = (float) ((Math.random() + 1) / 2) * initSpeed;
         } else {
             presentSpeed = initSpeed;
         }
@@ -204,7 +204,6 @@ public class SnowModel {
      */
     private void randomWind() {
         angle = (float) ((random.nextBoolean() ? -1 : 1) * Math.random() / 12);
-        FLLog.e("angle: " + angle);
         //限制angle的最大最小值
         if (angle > HALF_PI) {
             angle = HALF_PI;

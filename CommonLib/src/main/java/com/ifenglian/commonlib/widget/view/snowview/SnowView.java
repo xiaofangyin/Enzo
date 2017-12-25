@@ -36,7 +36,7 @@ public class SnowView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         SnowModel.Builder builder = new SnowModel.Builder(mBitmap);
-        builder.setSpeed(5, true)
+        builder.setSpeed(8, true)
                 .setParentSize(w, h)
                 .setSize(mBitmap.getWidth(), mBitmap.getHeight(), true);
         for (int i = 0; i < mNum; i++) {
