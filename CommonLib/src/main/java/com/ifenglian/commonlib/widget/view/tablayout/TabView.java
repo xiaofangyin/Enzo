@@ -65,16 +65,16 @@ public class TabView extends View {
         mRedPointRectF = new RectF();
     }
 
-    public void initTab(String text, int normalColor, int selectedColor, int normalIcon, int selectedIcon) {
-        mTextColorNormal = normalColor;
-        mTextColorSelected = selectedColor;
-        mNormalBitmap = BitmapFactory.decodeResource(getResources(), normalIcon);
-        mSelectedBitmap = BitmapFactory.decodeResource(getResources(), selectedIcon);
+    public void initTab(String text, int[] textColors, int[] iconRes) {
+        mTextColorNormal = textColors[0];
+        mTextColorSelected = textColors[1];
+        mNormalBitmap = BitmapFactory.decodeResource(getResources(), iconRes[0]);
+        mSelectedBitmap = BitmapFactory.decodeResource(getResources(), iconRes[1]);
         mDrawBitmap = mNormalBitmap;
 
         mText = text;
         mTextPaint.setTextSize(DensityUtil.sp2px(getContext(), 12));
-        mTextPaint.setColor(normalColor);
+        mTextPaint.setColor(mTextColorNormal);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
     }
