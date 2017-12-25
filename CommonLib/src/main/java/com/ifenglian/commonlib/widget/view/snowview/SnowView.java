@@ -63,7 +63,7 @@ public class SnowView extends View {
      * @param bitmap 下落物体对象
      * @param num    数量
      */
-    public void addFallObject(Bitmap bitmap, int num) {
+    public void initSnow(Bitmap bitmap, int num) {
         mBitmap = bitmap;
         mNum = num;
     }

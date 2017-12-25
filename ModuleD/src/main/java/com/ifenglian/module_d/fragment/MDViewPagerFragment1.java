@@ -32,7 +32,7 @@ public class MDViewPagerFragment1 extends BaseFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.md_icon_snow);
-        fallingView.addFallObject(bitmap, 60);
+        fallingView.initSnow(bitmap, 60);
     }
 
     @Override
