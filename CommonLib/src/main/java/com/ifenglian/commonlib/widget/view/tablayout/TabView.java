@@ -65,11 +65,11 @@ public class TabView extends View {
         mRedPointRectF = new RectF();
     }
 
-    public void initTab(String text, int normalIcon, int selectedIcon, int normalColor, int selectedColor) {
-        mNormalBitmap = BitmapFactory.decodeResource(getResources(), normalIcon);
-        mSelectedBitmap = BitmapFactory.decodeResource(getResources(), selectedIcon);
+    public void initTab(String text, int normalColor, int selectedColor, int normalIcon, int selectedIcon) {
         mTextColorNormal = normalColor;
         mTextColorSelected = selectedColor;
+        mNormalBitmap = BitmapFactory.decodeResource(getResources(), normalIcon);
+        mSelectedBitmap = BitmapFactory.decodeResource(getResources(), selectedIcon);
         mDrawBitmap = mNormalBitmap;
 
         mText = text;
