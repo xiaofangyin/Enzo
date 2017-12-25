@@ -55,10 +55,10 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mTabLayout.initData(mTitles, mTextColors, mIconRes);
-
         SAHomeFragmentAdapter adapter = new SAHomeFragmentAdapter(mFragmentManager, getFragments());
         viewPager.setAdapter(adapter);
+
+        mTabLayout.initData(mTitles, mTextColors, mIconRes);
         mTabLayout.setCurrentItem(0, false);
         mTabLayout.showRedPoint(2);
         mHandler.sendEmptyMessage(0);
