@@ -24,12 +24,11 @@ import com.nineoldandroids.animation.ValueAnimator;
  */
 public class TabView extends View {
 
-    private static final int NORMAL_TEXT_COLOR = 0xFFAAAAAA;
-    private static final int SELECTED_TEXT_COLOR = 0xFF30B5FF;
     private Bitmap mDrawBitmap;
     private Bitmap mNormalBitmap;
     private Bitmap mSelectedBitmap;
-
+    private int mTextColorNormal;
+    private int mTextColorSelected;
     private String mText = "";
     private Rect mTextRect;
     private Paint mTextPaint;
@@ -66,14 +65,16 @@ public class TabView extends View {
         mRedPointRectF = new RectF();
     }
 
-    public void initTab(String text, int normalIcon, int selectedIcon) {
+    public void initTab(String text, int normalIcon, int selectedIcon, int normalColor, int selectedColor) {
         mNormalBitmap = BitmapFactory.decodeResource(getResources(), normalIcon);
         mSelectedBitmap = BitmapFactory.decodeResource(getResources(), selectedIcon);
+        mTextColorNormal = normalColor;
+        mTextColorSelected = selectedColor;
         mDrawBitmap = mNormalBitmap;
 
         mText = text;
         mTextPaint.setTextSize(DensityUtil.sp2px(getContext(), 12));
-        mTextPaint.setColor(NORMAL_TEXT_COLOR);
+        mTextPaint.setColor(normalColor);
         mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
         mTextPaint.setAntiAlias(true);//抗锯齿
     }
@@ -208,7 +209,7 @@ public class TabView extends View {
      * 没有放大
      */
     public void setSelected(boolean selected) {
-        mTextPaint.setColor(selected ? SELECTED_TEXT_COLOR : NORMAL_TEXT_COLOR);
+        mTextPaint.setColor(selected ? mTextColorSelected : mTextColorNormal);
         mDrawBitmap = selected ? mSelectedBitmap : mNormalBitmap;
         invalidateView();
     }
@@ -217,7 +218,7 @@ public class TabView extends View {
      * 放大
      */
     public void setSelected(boolean selected, boolean animate) {
-        mTextPaint.setColor(selected ? SELECTED_TEXT_COLOR : NORMAL_TEXT_COLOR);
+        mTextPaint.setColor(selected ? mTextColorSelected : mTextColorNormal);
         if (animate) {
             if (selected) {
                 startScaleAnim(1.0f, 1.15f, mSelectedBitmap);

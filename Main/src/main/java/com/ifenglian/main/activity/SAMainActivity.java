@@ -29,12 +29,14 @@ import java.util.List;
 public class SAMainActivity extends BaseActivity {
 
     private String mTitles[] = {"家庭", "安全", "发现", "我"};
+    private int mTextColors[] = {0xFFAAAAAA, 0xFF30B5FF};
     private int mIconRes[][] = {
             {com.ifenglian.commonlib.R.mipmap.sa_tab_home_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_home_select},
             {com.ifenglian.commonlib.R.mipmap.sa_tab_security_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_security_select},
             {com.ifenglian.commonlib.R.mipmap.sa_tab_find_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_find_select},
             {com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_select}
     };
+
     private TabLayout mTabLayout;
     private NoScrollViewPager viewPager;
     private FragmentManager mFragmentManager;
@@ -48,12 +50,13 @@ public class SAMainActivity extends BaseActivity {
     public void initView() {
         mFragmentManager = getSupportFragmentManager();
         mTabLayout = findViewById(R.id.tab_layout);
-        mTabLayout.initData(mTitles, mIconRes);
         viewPager = findViewById(R.id.view_pager);
     }
 
     @Override
     public void initData() {
+        mTabLayout.initData(mTitles, mTextColors, mIconRes);
+
         SAHomeFragmentAdapter adapter = new SAHomeFragmentAdapter(mFragmentManager, getFragments());
         viewPager.setAdapter(adapter);
         mTabLayout.setCurrentItem(0, false);

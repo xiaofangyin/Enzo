@@ -39,10 +39,10 @@ public class TabLayout extends LinearLayout implements ITabLayout, View.OnClickL
     }
 
     @Override
-    public void initData(String[] titles, int[][] iconRes) {
+    public void initData(String[] titles, int[] textColors, int[][] iconRes) {
         for (int i = 0; i < titles.length; i++) {
             TabView tab = new TabView(getContext());
-            tab.initTab(titles[i], iconRes[i][0], iconRes[i][1]);
+            tab.initTab(titles[i], iconRes[i][0], iconRes[i][1], textColors[0], textColors[1]);
             tab.setOnClickListener(this);
             tab.setTag(i);
 

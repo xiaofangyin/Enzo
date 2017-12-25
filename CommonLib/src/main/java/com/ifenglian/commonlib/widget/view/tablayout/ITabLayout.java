@@ -7,7 +7,8 @@ package com.ifenglian.commonlib.widget.view.tablayout;
  * 邮   箱: xiaofy@ifenglian.com
  */
 public interface ITabLayout {
-    void initData(String[] titles, int[][] iconRes);
+
+    void initData(String[] titles, int[] textColors, int[][] iconRes);
 
     void setCurrentItem(int currentItem, boolean animate);
 
