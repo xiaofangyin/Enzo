@@ -65,12 +65,6 @@ public class SmoothCheckBox extends View implements Checkable {
         init(attrs);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public SmoothCheckBox(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
-    }
-
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.SmoothCheckBox);
         int tickColor = ta.getColor(R.styleable.SmoothCheckBox_color_tick, COLOR_TICK);
