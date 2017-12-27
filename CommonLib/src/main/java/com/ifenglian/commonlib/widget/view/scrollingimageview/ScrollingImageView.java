@@ -42,21 +42,25 @@ public class ScrollingImageView extends View {
 
     public ScrollingImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ParallaxView, 0, 0);
-        int initialState = 0;
+        init(context, attrs);
+    }
+
+    private void init(Context context, AttributeSet attrs) {
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ScrollingImageView, 0, 0);
+        int initialState;
         try {
-            initialState = ta.getInt(R.styleable.ParallaxView_initialState, 0);
-            speed = ta.getDimension(R.styleable.ParallaxView_speed, 10);
-            int sceneLength = ta.getInt(R.styleable.ParallaxView_sceneLength, 1000);
-            final int randomnessResourceId = ta.getResourceId(R.styleable.ParallaxView_randomness, 0);
+            initialState = ta.getInt(R.styleable.ScrollingImageView_initialState, 0);
+            speed = ta.getDimension(R.styleable.ScrollingImageView_speed, 10);
+            int sceneLength = ta.getInt(R.styleable.ScrollingImageView_sceneLength, 1000);
+            final int randomnessResourceId = ta.getResourceId(R.styleable.ScrollingImageView_randomness, 0);
             int[] randomness = new int[0];
             if (randomnessResourceId > 0) {
                 randomness = getResources().getIntArray(randomnessResourceId);
             }
 
-            int type = isInEditMode() ? TypedValue.TYPE_STRING : ta.peekValue(R.styleable.ParallaxView_src).type;
+            int type = isInEditMode() ? TypedValue.TYPE_STRING : ta.peekValue(R.styleable.ScrollingImageView_src).type;
             if (type == TypedValue.TYPE_REFERENCE) {
-                int resourceId = ta.getResourceId(R.styleable.ParallaxView_src, 0);
+                int resourceId = ta.getResourceId(R.styleable.ScrollingImageView_src, 0);
                 TypedArray typedArray = getResources().obtainTypedArray(resourceId);
                 try {
                     int bitmapsSize = 0;
@@ -89,7 +93,7 @@ public class ScrollingImageView extends View {
                     typedArray.recycle();
                 }
             } else if (type == TypedValue.TYPE_STRING) {
-                final Bitmap bitmap = BITMAP_LOADER.loadBitmap(getContext(), ta.getResourceId(R.styleable.ParallaxView_src, 0));
+                final Bitmap bitmap = BITMAP_LOADER.loadBitmap(getContext(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
                 if (bitmap != null) {
                     bitmaps = singletonList(bitmap);
                     scene = new int[]{0};
