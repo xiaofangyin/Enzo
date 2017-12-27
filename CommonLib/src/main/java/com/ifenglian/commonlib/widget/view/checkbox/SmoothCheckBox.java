@@ -265,7 +265,6 @@ public class SmoothCheckBox extends View implements Checkable {
 
     private void drawTickPath(Canvas canvas) {
         mTickPath.reset();
-        // draw left of the tick
         if (mDrewDistance < mLeftLineDistance) {
             float step = (mWidth / 20.0f) < 3 ? 3 : (mWidth / 20.0f);
             mDrewDistance += step;
@@ -280,7 +279,6 @@ public class SmoothCheckBox extends View implements Checkable {
                 mDrewDistance = mLeftLineDistance;
             }
         } else {
-
             mTickPath.moveTo(mTickPoints[0].x, mTickPoints[0].y);
             mTickPath.lineTo(mTickPoints[1].x, mTickPoints[1].y);
             canvas.drawPath(mTickPath, mTickPaint);
@@ -305,14 +303,8 @@ public class SmoothCheckBox extends View implements Checkable {
             }
         }
 
-        // invalidate
         if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    postInvalidate();
-                }
-            }, 10);
+            postInvalidate();
         }
     }
 
