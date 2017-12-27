@@ -40,7 +40,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
     private Point mCenterPoint;
     private Path mTickPath;
 
-    private float mLeftLineDistance, mRightLineDistance, mDrewDistance;
+    private float mLeftLineDistance, mRightLineDistance, mDrawDistance;
     private float mScaleVal = 1.0f, mFloorScale = 1.0f;
     private int mStrokeWidth;
     private int mCheckedColor, mUnCheckedColor, mFloorColor, mFloorUnCheckedColor;
@@ -101,7 +101,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
     public void onClick(View v) {
         toggle();
         mTickDrawing = false;
-        mDrewDistance = 0;
+        mDrawDistance = 0;
         if (isChecked()) {
             startCheckedAnimation();
         } else {
@@ -162,31 +162,31 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
     private void drawTickPath(Canvas canvas) {
         mTickPath.reset();
         float step = 4;
-        if (mDrewDistance < mLeftLineDistance) {
-            mDrewDistance += step;
-            float stopX = mTickPoints[0].x + (mTickPoints[1].x - mTickPoints[0].x) * mDrewDistance / mLeftLineDistance;
-            float stopY = mTickPoints[0].y + (mTickPoints[1].y - mTickPoints[0].y) * mDrewDistance / mLeftLineDistance;
+        if (mDrawDistance < mLeftLineDistance) {
+            mDrawDistance += step;
+            float stopX = mTickPoints[0].x + (mTickPoints[1].x - mTickPoints[0].x) * mDrawDistance / mLeftLineDistance;
+            float stopY = mTickPoints[0].y + (mTickPoints[1].y - mTickPoints[0].y) * mDrawDistance / mLeftLineDistance;
 
             mTickPath.moveTo(mTickPoints[0].x, mTickPoints[0].y);
             mTickPath.lineTo(stopX, stopY);
             canvas.drawPath(mTickPath, mTickPaint);
 
-            if (mDrewDistance > mLeftLineDistance) {
-                mDrewDistance = mLeftLineDistance;
+            if (mDrawDistance > mLeftLineDistance) {
+                mDrawDistance = mLeftLineDistance;
             }
         } else {
             mTickPath.moveTo(mTickPoints[0].x, mTickPoints[0].y);
             mTickPath.lineTo(mTickPoints[1].x, mTickPoints[1].y);
             canvas.drawPath(mTickPath, mTickPaint);
-            if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
-                float stopX = mTickPoints[1].x + (mTickPoints[2].x - mTickPoints[1].x) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
-                float stopY = mTickPoints[1].y - (mTickPoints[1].y - mTickPoints[2].y) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
+            if (mDrawDistance < mLeftLineDistance + mRightLineDistance) {
+                float stopX = mTickPoints[1].x + (mTickPoints[2].x - mTickPoints[1].x) * (mDrawDistance - mLeftLineDistance) / mRightLineDistance;
+                float stopY = mTickPoints[1].y - (mTickPoints[1].y - mTickPoints[2].y) * (mDrawDistance - mLeftLineDistance) / mRightLineDistance;
 
                 mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
                 mTickPath.lineTo(stopX, stopY);
                 canvas.drawPath(mTickPath, mTickPaint);
 
-                mDrewDistance += step;
+                mDrawDistance += step;
             } else {
                 mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
                 mTickPath.lineTo(mTickPoints[2].x, mTickPoints[2].y);
@@ -194,7 +194,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
             }
         }
 
-        if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
+        if (mDrawDistance < mLeftLineDistance + mRightLineDistance) {
             postInvalidate();
         }
     }
@@ -309,7 +309,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
         if (animate) {
             mTickDrawing = false;
             mChecked = checked;
-            mDrewDistance = 0f;
+            mDrawDistance = 0f;
             if (checked) {
                 startCheckedAnimation();
             } else {
@@ -329,7 +329,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
         mFloorScale = 1.0f;
         mScaleVal = isChecked() ? 0f : 1.0f;
         mFloorColor = isChecked() ? mCheckedColor : mFloorUnCheckedColor;
-        mDrewDistance = isChecked() ? (mLeftLineDistance + mRightLineDistance) : 0;
+        mDrawDistance = isChecked() ? (mLeftLineDistance + mRightLineDistance) : 0;
     }
 
     private int measureSize(int measureSpec) {
