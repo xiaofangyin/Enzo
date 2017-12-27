@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scrolling_image_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
 
+        <com.ifenglian.commonlib.widget.view.scrollingimageview.ScrollingImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="1dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_background" />
 
+        <com.ifenglian.commonlib.widget.view.scrollingimageview.ScrollingImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="1.9dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_foreground" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@mipmap/md_scrolling_van" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <com.ifenglian.commonlib.widget.view.scrollingimageview.ScrollingImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="-1dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_background" />
+
+        <com.ifenglian.commonlib.widget.view.scrollingimageview.ScrollingImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="-1.9dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_foreground" />
+    </FrameLayout>
 </LinearLayout>
