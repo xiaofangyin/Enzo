@@ -45,7 +45,7 @@ public class SmoothCheckBox extends View implements Checkable {
 
     private float mLeftLineDistance, mRightLineDistance, mDrewDistance;
     private float mScaleVal = 1.0f, mFloorScale = 1.0f;
-    private int mAnimDuration, mStrokeWidth;
+    private int mStrokeWidth, mTickWidth;
     private int mCheckedColor, mUnCheckedColor, mFloorColor, mFloorUnCheckedColor;
 
     private boolean mChecked;
@@ -74,11 +74,11 @@ public class SmoothCheckBox extends View implements Checkable {
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.SmoothCheckBox);
         int tickColor = ta.getColor(R.styleable.SmoothCheckBox_color_tick, COLOR_TICK);
-        mAnimDuration = ta.getInt(R.styleable.SmoothCheckBox_duration, DEF_ANIM_DURATION);
         mFloorColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked_stroke, COLOR_FLOOR_UNCHECKED);
         mCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_checked, COLOR_CHECKED);
         mUnCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked, COLOR_UNCHECKED);
-        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, DensityUtil.dip2px(getContext(), 0));
+        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, DensityUtil.dip2px(getContext(), 1));
+        mTickWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_tick_width, DensityUtil.dip2px(getContext(), 1.8f));
         ta.recycle();
 
         mFloorUnCheckedColor = mFloorColor;
@@ -115,6 +115,164 @@ public class SmoothCheckBox extends View implements Checkable {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mStrokeWidth = (mStrokeWidth == 0 ? w / 10 : mStrokeWidth);
+        mCenterPoint.x = w / 2;
+        mCenterPoint.y = h / 2;
+
+        mTickPoints[0].x = Math.round((float) w / 30 * 8);
+        mTickPoints[0].y = Math.round((float) h / 30 * 14);
+        mTickPoints[1].x = Math.round((float) w / 30 * 13);
+        mTickPoints[1].y = Math.round((float) h / 30 * 20);
+        mTickPoints[2].x = Math.round((float) w / 30 * 22);
+        mTickPoints[2].y = Math.round((float) h / 30 * 12);
+
+        mLeftLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[1].x - mTickPoints[0].x, 2) +
+                Math.pow(mTickPoints[1].y - mTickPoints[0].y, 2));
+        mRightLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[2].x - mTickPoints[1].x, 2) +
+                Math.pow(mTickPoints[2].y - mTickPoints[1].y, 2));
+        mTickPaint.setStrokeWidth(mTickWidth);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(measureSize(widthMeasureSpec), measureSize(heightMeasureSpec));
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        drawBorder(canvas);
+        drawCenter(canvas);
+        drawTick(canvas);
+    }
+
+    private void drawCenter(Canvas canvas) {
+        mPaint.setColor(mUnCheckedColor);
+        float radius = (mCenterPoint.x - mStrokeWidth) * mScaleVal;
+        canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, radius, mPaint);
+    }
+
+    private void drawBorder(Canvas canvas) {
+        mFloorPaint.setColor(mFloorColor);
+        int radius = mCenterPoint.x;
+        canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, radius * mFloorScale, mFloorPaint);
+    }
+
+    private void drawTick(Canvas canvas) {
+        if (mTickDrawing && isChecked()) {
+            drawTickPath(canvas);
+        }
+    }
+
+    private void drawTickPath(Canvas canvas) {
+        mTickPath.reset();
+        float step = 4;
+        if (mDrewDistance < mLeftLineDistance) {
+            mDrewDistance += step;
+            float stopX = mTickPoints[0].x + (mTickPoints[1].x - mTickPoints[0].x) * mDrewDistance / mLeftLineDistance;
+            float stopY = mTickPoints[0].y + (mTickPoints[1].y - mTickPoints[0].y) * mDrewDistance / mLeftLineDistance;
+
+            mTickPath.moveTo(mTickPoints[0].x, mTickPoints[0].y);
+            mTickPath.lineTo(stopX, stopY);
+            canvas.drawPath(mTickPath, mTickPaint);
+
+            if (mDrewDistance > mLeftLineDistance) {
+                mDrewDistance = mLeftLineDistance;
+            }
+        } else {
+            mTickPath.moveTo(mTickPoints[0].x, mTickPoints[0].y);
+            mTickPath.lineTo(mTickPoints[1].x, mTickPoints[1].y);
+            canvas.drawPath(mTickPath, mTickPaint);
+            if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
+                float stopX = mTickPoints[1].x + (mTickPoints[2].x - mTickPoints[1].x) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
+                float stopY = mTickPoints[1].y - (mTickPoints[1].y - mTickPoints[2].y) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
+
+                mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
+                mTickPath.lineTo(stopX, stopY);
+                canvas.drawPath(mTickPath, mTickPaint);
+
+                mDrewDistance += step;
+            } else {
+                mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
+                mTickPath.lineTo(mTickPoints[2].x, mTickPoints[2].y);
+                canvas.drawPath(mTickPath, mTickPaint);
+            }
+        }
+
+        if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
+            postInvalidate();
+        }
+    }
+
+    private void startCheckedAnimation() {
+        ValueAnimator animator = ValueAnimator.ofFloat(1.0f, 0f);
+        animator.setDuration(DEF_ANIM_DURATION / 2);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mScaleVal = (float) animation.getAnimatedValue();
+                mFloorColor = getGradientColor(mUnCheckedColor, mCheckedColor, 1 - mScaleVal);
+                postInvalidate();
+            }
+        });
+        animator.start();
+
+        ValueAnimator floorAnimator = ValueAnimator.ofFloat(1.0f, 0.8f, 1.0f);
+        floorAnimator.setDuration(DEF_ANIM_DURATION);
+        floorAnimator.setInterpolator(new LinearInterpolator());
+        floorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mFloorScale = (float) animation.getAnimatedValue();
+                postInvalidate();
+            }
+        });
+        floorAnimator.start();
+
+        drawTickDelayed();
+    }
+
+    private void startUnCheckedAnimation() {
+        ValueAnimator animator = ValueAnimator.ofFloat(0f, 1.0f);
+        animator.setDuration(DEF_ANIM_DURATION);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mScaleVal = (float) animation.getAnimatedValue();
+                mFloorColor = getGradientColor(mCheckedColor, mFloorUnCheckedColor, mScaleVal);
+                postInvalidate();
+            }
+        });
+        animator.start();
+
+        ValueAnimator floorAnimator = ValueAnimator.ofFloat(1.0f, 0.8f, 1.0f);
+        floorAnimator.setDuration(DEF_ANIM_DURATION);
+        floorAnimator.setInterpolator(new LinearInterpolator());
+        floorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mFloorScale = (float) animation.getAnimatedValue();
+                postInvalidate();
+            }
+        });
+        floorAnimator.start();
+    }
+
+    private void drawTickDelayed() {
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mTickDrawing = true;
+                postInvalidate();
+            }
+        }, DEF_ANIM_DURATION);
     }
 
     @Override
@@ -202,163 +360,6 @@ public class SmoothCheckBox extends View implements Checkable {
         return result;
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mStrokeWidth = (mStrokeWidth == 0 ? w / 10 : mStrokeWidth);
-        mCenterPoint.x = w / 2;
-        mCenterPoint.y = h / 2;
-
-        mTickPoints[0].x = Math.round((float) w / 30 * 8);
-        mTickPoints[0].y = Math.round((float) h / 30 * 14);
-        mTickPoints[1].x = Math.round((float) w / 30 * 13);
-        mTickPoints[1].y = Math.round((float) h / 30 * 20);
-        mTickPoints[2].x = Math.round((float) w / 30 * 22);
-        mTickPoints[2].y = Math.round((float) h / 30 * 12);
-
-        mLeftLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[1].x - mTickPoints[0].x, 2) +
-                Math.pow(mTickPoints[1].y - mTickPoints[0].y, 2));
-        mRightLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[2].x - mTickPoints[1].x, 2) +
-                Math.pow(mTickPoints[2].y - mTickPoints[1].y, 2));
-        mTickPaint.setStrokeWidth(mStrokeWidth);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(measureSize(widthMeasureSpec), measureSize(heightMeasureSpec));
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        drawBorder(canvas);
-        drawCenter(canvas);
-        drawTick(canvas);
-    }
-
-    private void drawCenter(Canvas canvas) {
-        mPaint.setColor(mUnCheckedColor);
-        float radius = (mCenterPoint.x - mStrokeWidth) * mScaleVal;
-        canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, radius, mPaint);
-    }
-
-    private void drawBorder(Canvas canvas) {
-        mFloorPaint.setColor(mFloorColor);
-        int radius = mCenterPoint.x;
-        canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, radius * mFloorScale, mFloorPaint);
-    }
-
-    private void drawTick(Canvas canvas) {
-        if (mTickDrawing && isChecked()) {
-            drawTickPath(canvas);
-        }
-    }
-
-    private void drawTickPath(Canvas canvas) {
-        mTickPath.reset();
-        float step = 4;
-        if (mDrewDistance < mLeftLineDistance) {
-            mDrewDistance += step;
-            float stopX = mTickPoints[0].x + (mTickPoints[1].x - mTickPoints[0].x) * mDrewDistance / mLeftLineDistance;
-            float stopY = mTickPoints[0].y + (mTickPoints[1].y - mTickPoints[0].y) * mDrewDistance / mLeftLineDistance;
-
-            mTickPath.moveTo(mTickPoints[0].x, mTickPoints[0].y);
-            mTickPath.lineTo(stopX, stopY);
-            canvas.drawPath(mTickPath, mTickPaint);
-
-            if (mDrewDistance > mLeftLineDistance) {
-                mDrewDistance = mLeftLineDistance;
-            }
-        } else {
-            mTickPath.moveTo(mTickPoints[0].x, mTickPoints[0].y);
-            mTickPath.lineTo(mTickPoints[1].x, mTickPoints[1].y);
-            canvas.drawPath(mTickPath, mTickPaint);
-            if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
-                float stopX = mTickPoints[1].x + (mTickPoints[2].x - mTickPoints[1].x) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
-                float stopY = mTickPoints[1].y - (mTickPoints[1].y - mTickPoints[2].y) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
-
-                mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
-                mTickPath.lineTo(stopX, stopY);
-                canvas.drawPath(mTickPath, mTickPaint);
-
-                mDrewDistance += step;
-            } else {
-                mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
-                mTickPath.lineTo(mTickPoints[2].x, mTickPoints[2].y);
-                canvas.drawPath(mTickPath, mTickPaint);
-            }
-        }
-
-        if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
-            postInvalidate();
-        }
-    }
-
-    private void startCheckedAnimation() {
-        ValueAnimator animator = ValueAnimator.ofFloat(1.0f, 0f);
-        animator.setDuration(mAnimDuration / 2);
-        animator.setInterpolator(new LinearInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mScaleVal = (float) animation.getAnimatedValue();
-                mFloorColor = getGradientColor(mUnCheckedColor, mCheckedColor, 1 - mScaleVal);
-                postInvalidate();
-            }
-        });
-        animator.start();
-
-        ValueAnimator floorAnimator = ValueAnimator.ofFloat(1.0f, 0.8f, 1.0f);
-        floorAnimator.setDuration(mAnimDuration);
-        floorAnimator.setInterpolator(new LinearInterpolator());
-        floorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mFloorScale = (float) animation.getAnimatedValue();
-                postInvalidate();
-            }
-        });
-        floorAnimator.start();
-
-        drawTickDelayed();
-    }
-
-    private void startUnCheckedAnimation() {
-        ValueAnimator animator = ValueAnimator.ofFloat(0f, 1.0f);
-        animator.setDuration(mAnimDuration);
-        animator.setInterpolator(new LinearInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mScaleVal = (float) animation.getAnimatedValue();
-                mFloorColor = getGradientColor(mCheckedColor, mFloorUnCheckedColor, mScaleVal);
-                postInvalidate();
-            }
-        });
-        animator.start();
-
-        ValueAnimator floorAnimator = ValueAnimator.ofFloat(1.0f, 0.8f, 1.0f);
-        floorAnimator.setDuration(mAnimDuration);
-        floorAnimator.setInterpolator(new LinearInterpolator());
-        floorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mFloorScale = (float) animation.getAnimatedValue();
-                postInvalidate();
-            }
-        });
-        floorAnimator.start();
-    }
-
-    private void drawTickDelayed() {
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mTickDrawing = true;
-                postInvalidate();
-            }
-        }, mAnimDuration);
-    }
 
     private static int getGradientColor(int startColor, int endColor, float percent) {
         int startA = Color.alpha(startColor);
