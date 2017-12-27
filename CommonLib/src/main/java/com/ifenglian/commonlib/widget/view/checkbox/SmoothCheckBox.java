@@ -1,7 +1,6 @@
 package com.ifenglian.commonlib.widget.view.checkbox;
 
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -9,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -26,7 +24,7 @@ import com.ifenglian.commonlib.utils.common.DensityUtil;
  * 创建日期: 2017/12/27
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class SmoothCheckBox extends View implements Checkable {
+public class SmoothCheckBox extends View implements Checkable, View.OnClickListener {
     private static final String KEY_INSTANCE_STATE = "InstanceState";
 
     private static final int COLOR_TICK = Color.WHITE;
@@ -42,10 +40,9 @@ public class SmoothCheckBox extends View implements Checkable {
     private Point mCenterPoint;
     private Path mTickPath;
 
-
     private float mLeftLineDistance, mRightLineDistance, mDrewDistance;
     private float mScaleVal = 1.0f, mFloorScale = 1.0f;
-    private int mStrokeWidth, mTickWidth;
+    private int mStrokeWidth;
     private int mCheckedColor, mUnCheckedColor, mFloorColor, mFloorUnCheckedColor;
 
     private boolean mChecked;
@@ -68,11 +65,11 @@ public class SmoothCheckBox extends View implements Checkable {
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.SmoothCheckBox);
         int tickColor = ta.getColor(R.styleable.SmoothCheckBox_color_tick, COLOR_TICK);
+        int tickWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_tick_width, DensityUtil.dip2px(getContext(), 1.8f));
         mFloorColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked_stroke, COLOR_FLOOR_UNCHECKED);
         mCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_checked, COLOR_CHECKED);
         mUnCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked, COLOR_UNCHECKED);
         mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, DensityUtil.dip2px(getContext(), 1));
-        mTickWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_tick_width, DensityUtil.dip2px(getContext(), 1.8f));
         ta.recycle();
 
         mFloorUnCheckedColor = mFloorColor;
@@ -80,6 +77,7 @@ public class SmoothCheckBox extends View implements Checkable {
         mTickPaint.setStyle(Paint.Style.STROKE);
         mTickPaint.setStrokeCap(Paint.Cap.ROUND);
         mTickPaint.setColor(tickColor);
+        mTickPaint.setStrokeWidth(tickWidth);
 
         mFloorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mFloorPaint.setStyle(Paint.Style.FILL);
@@ -96,25 +94,24 @@ public class SmoothCheckBox extends View implements Checkable {
         mTickPoints[1] = new Point();
         mTickPoints[2] = new Point();
 
-        setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggle();
-                mTickDrawing = false;
-                mDrewDistance = 0;
-                if (isChecked()) {
-                    startCheckedAnimation();
-                } else {
-                    startUnCheckedAnimation();
-                }
-            }
-        });
+        setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        toggle();
+        mTickDrawing = false;
+        mDrewDistance = 0;
+        if (isChecked()) {
+            startCheckedAnimation();
+        } else {
+            startUnCheckedAnimation();
+        }
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mStrokeWidth = (mStrokeWidth == 0 ? w / 10 : mStrokeWidth);
         mCenterPoint.x = w / 2;
         mCenterPoint.y = h / 2;
 
@@ -129,7 +126,6 @@ public class SmoothCheckBox extends View implements Checkable {
                 Math.pow(mTickPoints[1].y - mTickPoints[0].y, 2));
         mRightLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[2].x - mTickPoints[1].x, 2) +
                 Math.pow(mTickPoints[2].y - mTickPoints[1].y, 2));
-        mTickPaint.setStrokeWidth(mTickWidth);
     }
 
     @Override
