@@ -283,14 +283,12 @@ public class SmoothCheckBox extends View implements Checkable {
                 float stopX = mTickPoints[1].x + (mTickPoints[2].x - mTickPoints[1].x) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
                 float stopY = mTickPoints[1].y - (mTickPoints[1].y - mTickPoints[2].y) * (mDrewDistance - mLeftLineDistance) / mRightLineDistance;
 
-                mTickPath.reset();
                 mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
                 mTickPath.lineTo(stopX, stopY);
                 canvas.drawPath(mTickPath, mTickPaint);
 
                 mDrewDistance += step;
             } else {
-                mTickPath.reset();
                 mTickPath.moveTo(mTickPoints[1].x, mTickPoints[1].y);
                 mTickPath.lineTo(mTickPoints[2].x, mTickPoints[2].y);
                 canvas.drawPath(mTickPath, mTickPaint);
