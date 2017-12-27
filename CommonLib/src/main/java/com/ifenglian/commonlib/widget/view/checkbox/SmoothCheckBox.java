@@ -45,7 +45,7 @@ public class SmoothCheckBox extends View implements Checkable {
 
     private float mLeftLineDistance, mRightLineDistance, mDrewDistance;
     private float mScaleVal = 1.0f, mFloorScale = 1.0f;
-    private int mWidth, mAnimDuration, mStrokeWidth;
+    private int mAnimDuration, mStrokeWidth;
     private int mCheckedColor, mUnCheckedColor, mFloorColor, mFloorUnCheckedColor;
 
     private boolean mChecked;
@@ -157,12 +157,6 @@ public class SmoothCheckBox extends View implements Checkable {
         }
     }
 
-    /**
-     * checked with animation
-     *
-     * @param checked checked
-     * @param animate change with animation
-     */
     public void setChecked(boolean checked, boolean animate) {
         if (animate) {
             mTickDrawing = false;
@@ -209,30 +203,30 @@ public class SmoothCheckBox extends View implements Checkable {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(measureSize(widthMeasureSpec), measureSize(heightMeasureSpec));
-    }
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mStrokeWidth = (mStrokeWidth == 0 ? w / 10 : mStrokeWidth);
+        mCenterPoint.x = w / 2;
+        mCenterPoint.y = h / 2;
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        mWidth = getMeasuredWidth();
-        mStrokeWidth = (mStrokeWidth == 0 ? getMeasuredWidth() / 10 : mStrokeWidth);
-        mCenterPoint.x = mWidth / 2;
-        mCenterPoint.y = getMeasuredHeight() / 2;
-
-        mTickPoints[0].x = Math.round((float) getMeasuredWidth() / 30 * 8);
-        mTickPoints[0].y = Math.round((float) getMeasuredHeight() / 30 * 14);
-        mTickPoints[1].x = Math.round((float) getMeasuredWidth() / 30 * 13);
-        mTickPoints[1].y = Math.round((float) getMeasuredHeight() / 30 * 20);
-        mTickPoints[2].x = Math.round((float) getMeasuredWidth() / 30 * 22);
-        mTickPoints[2].y = Math.round((float) getMeasuredHeight() / 30 * 12);
+        mTickPoints[0].x = Math.round((float) w / 30 * 8);
+        mTickPoints[0].y = Math.round((float) h / 30 * 14);
+        mTickPoints[1].x = Math.round((float) w / 30 * 13);
+        mTickPoints[1].y = Math.round((float) h / 30 * 20);
+        mTickPoints[2].x = Math.round((float) w / 30 * 22);
+        mTickPoints[2].y = Math.round((float) h / 30 * 12);
 
         mLeftLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[1].x - mTickPoints[0].x, 2) +
                 Math.pow(mTickPoints[1].y - mTickPoints[0].y, 2));
         mRightLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[2].x - mTickPoints[1].x, 2) +
                 Math.pow(mTickPoints[2].y - mTickPoints[1].y, 2));
         mTickPaint.setStrokeWidth(mStrokeWidth);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(measureSize(widthMeasureSpec), measureSize(heightMeasureSpec));
     }
 
     @Override
