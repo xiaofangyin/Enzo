@@ -34,7 +34,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
     private static final int COLOR_FLOOR_UNCHECKED = Color.parseColor("#80DFDFDF");
 
     private static final int DEF_DRAW_SIZE = 25;
-    private static final int DEF_ANIM_DURATION = 150;
+    private static final int DEF_ANIM_DURATION = 200;
 
     private Paint mPaint, mTickPaint, mFloorPaint;
     private Point[] mTickPoints;
