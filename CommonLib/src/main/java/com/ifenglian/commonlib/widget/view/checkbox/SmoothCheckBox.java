@@ -202,7 +202,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
 
     private void startCheckedAnimation() {
         ValueAnimator animator = ValueAnimator.ofFloat(1.0f, 0f);
-        animator.setDuration(DEF_ANIM_DURATION / 2);
+        animator.setDuration(DEF_ANIM_DURATION);
         animator.setInterpolator(new LinearInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
