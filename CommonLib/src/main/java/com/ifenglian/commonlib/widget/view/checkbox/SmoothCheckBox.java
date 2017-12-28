@@ -137,12 +137,12 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
 
     @Override
     protected void onDraw(Canvas canvas) {
-        drawBorder(canvas);
+        drawFloor(canvas);
         drawCenter(canvas);
         drawTick(canvas);
     }
 
-    private void drawBorder(Canvas canvas) {
+    private void drawFloor(Canvas canvas) {
         mFloorPaint.setColor(mFloorColor);
         int radius = mCenterPoint.x;
         canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, radius * mFloorScale, mFloorPaint);
