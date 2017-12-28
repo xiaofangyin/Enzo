@@ -3,6 +3,7 @@ package com.ifenglian.module_d.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -99,8 +100,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
     }
 
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
