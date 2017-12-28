@@ -111,6 +111,12 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(measureSize(widthMeasureSpec), measureSize(heightMeasureSpec));
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mCenterPoint.x = w / 2;
@@ -127,12 +133,6 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
                 Math.pow(mTickPoints[1].y - mTickPoints[0].y, 2));
         mRightLineDistance = (float) Math.sqrt(Math.pow(mTickPoints[2].x - mTickPoints[1].x, 2) +
                 Math.pow(mTickPoints[2].y - mTickPoints[1].y, 2));
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(measureSize(widthMeasureSpec), measureSize(heightMeasureSpec));
     }
 
     @Override
