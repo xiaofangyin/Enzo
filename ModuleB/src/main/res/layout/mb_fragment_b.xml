@@ -28,27 +28,27 @@
             android:orientation="horizontal">
 
             <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_margin="5dp"
                 app:color_checked="@color/colorAccent" />
 
             <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_margin="5dp"
                 app:color_checked="#447eeb" />
 
             <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_margin="5dp"
                 android:paddingBottom="10dp"
                 app:color_checked="#149A45" />
 
             <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_margin="5dp" />
         </LinearLayout>
 
