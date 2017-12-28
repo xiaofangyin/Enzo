@@ -17,6 +17,7 @@ import android.widget.Checkable;
 
 import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
+import com.nineoldandroids.animation.TypeEvaluator;
 
 /**
  * 文 件 名: SmoothCheckBox
@@ -207,7 +208,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mScaleVal = (float) animation.getAnimatedValue();
-                mFloorColor = getGradientColor(mUnCheckedColor, mCheckedColor, 1 - mScaleVal);
+                mFloorColor = te.evaluate(1 - mScaleVal, mUnCheckedColor, mCheckedColor);
                 postInvalidate();
             }
         });
@@ -236,7 +237,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mScaleVal = (float) animation.getAnimatedValue();
-                mFloorColor = getGradientColor(mCheckedColor, mFloorUnCheckedColor, mScaleVal);
+                mFloorColor = te.evaluate(mScaleVal, mCheckedColor, mFloorUnCheckedColor);
                 postInvalidate();
             }
         });
@@ -350,24 +351,16 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
         return result;
     }
 
-
-    private static int getGradientColor(int startColor, int endColor, float percent) {
-        int startA = Color.alpha(startColor);
-        int startR = Color.red(startColor);
-        int startG = Color.green(startColor);
-        int startB = Color.blue(startColor);
-
-        int endA = Color.alpha(endColor);
-        int endR = Color.red(endColor);
-        int endG = Color.green(endColor);
-        int endB = Color.blue(endColor);
-
-        int currentA = (int) (startA * (1 - percent) + endA * percent);
-        int currentR = (int) (startR * (1 - percent) + endR * percent);
-        int currentG = (int) (startG * (1 - percent) + endG * percent);
-        int currentB = (int) (startB * (1 - percent) + endB * percent);
-        return Color.argb(currentA, currentR, currentG, currentB);
-    }
+    TypeEvaluator<Integer> te = new TypeEvaluator<Integer>() {
+        @Override
+        public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+            int alpha = (int) (Color.alpha(startValue) + fraction * (Color.alpha(endValue) - Color.alpha(startValue)));
+            int red = (int) (Color.red(startValue) + fraction * (Color.red(endValue) - Color.red(startValue)));
+            int green = (int) (Color.green(startValue) + fraction * (Color.green(endValue) - Color.green(startValue)));
+            int blue = (int) (Color.blue(startValue) + fraction * (Color.blue(endValue) - Color.blue(startValue)));
+            return Color.argb(alpha, red, green, blue);
+        }
+    };
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener l) {
         this.mListener = l;
