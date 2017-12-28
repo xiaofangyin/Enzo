@@ -22,13 +22,6 @@ import static java.util.Collections.singletonList;
 
 public class ScrollingImageView extends View {
 
-    public static ScrollingImageViewBitmapLoader BITMAP_LOADER = new ScrollingImageViewBitmapLoader() {
-        @Override
-        public Bitmap loadBitmap(Context context, int resourceId) {
-            return BitmapFactory.decodeResource(context.getResources(), resourceId);
-        }
-    };
-
     private List<Bitmap> bitmaps;
     private float speed;
     private int[] scene;
@@ -76,7 +69,7 @@ public class ScrollingImageView extends View {
                             multiplier = Math.max(1, randomness[i]);
                         }
 
-                        Bitmap bitmap = BITMAP_LOADER.loadBitmap(getContext(), typedArray.getResourceId(i, 0));
+                        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), typedArray.getResourceId(i, 0));
                         for (int m = 0; m < multiplier; m++) {
                             bitmaps.add(bitmap);
                         }
@@ -93,7 +86,7 @@ public class ScrollingImageView extends View {
                     typedArray.recycle();
                 }
             } else if (type == TypedValue.TYPE_STRING) {
-                final Bitmap bitmap = BITMAP_LOADER.loadBitmap(getContext(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
+                Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
                 if (bitmap != null) {
                     bitmaps = singletonList(bitmap);
                     scene = new int[]{0};
