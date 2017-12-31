@@ -5,10 +5,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.KeyEvent;
 
 import com.ifenglian.commonlib.base.BaseActivity;
+import com.ifenglian.commonlib.utils.common.LogUtil;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.commonlib.widget.view.nopreloadviewpager.NoScrollViewPager;
 import com.ifenglian.commonlib.widget.view.tablayout.TabLayout;
@@ -78,13 +78,13 @@ public class SAMainActivity extends BaseActivity {
         mTabLayout.setOnTabClickListener(new TabLayout.OnTabClickListener() {
             @Override
             public void onTabClick(TabView view, int position) {
-                Log.e("AAA", "onTabClick: " + position);
+                LogUtil.e("onTabClick: " + position);
                 viewPager.setCurrentItem(position, false);
             }
 
             @Override
             public void onTabReClick(TabView view, int position) {
-                Log.e("AAA", "onTabReClick: " + position);
+                LogUtil.e("onTabReClick: " + position);
             }
         });
     }

@@ -3,7 +3,7 @@ package com.ifenglian.commonlib.utils.common;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class FLLog {
+public class LogUtil {
 
     public static String tagPrefix = "FL";//log前缀
     public static boolean debug = true;

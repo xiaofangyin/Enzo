@@ -1,9 +1,9 @@
 package com.ifenglian.module_d.activity;
 
-import android.util.Log;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
+import com.ifenglian.commonlib.utils.common.LogUtil;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.jni.DataProvider;
@@ -53,7 +53,7 @@ public class MDJniActivity extends BaseActivity {
         int[] array = new int[]{6, 8, 4, 5, 9};
         int[] result = provider.javaCallCGetIntArray(array);
         for (int anArray : result) {
-            Log.d("AAA", String.valueOf(anArray));
+            LogUtil.e( String.valueOf(anArray));
         }
     }
 

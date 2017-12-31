@@ -36,7 +36,6 @@ public class MDSimpleActivity extends AppCompatActivity {
         LottieComposition.fromAssetFileName(this, "data_123.json", new LottieComposition.OnCompositionLoadedListener() {
             @Override
             public void onCompositionLoaded(LottieComposition composition) {
-                Log.d("AAA", "onCompositionLoaded...");
                 animation_view_click.setComposition(composition);
                 animation_view_click.loop(true);
                 animation_view_click.playAnimation();

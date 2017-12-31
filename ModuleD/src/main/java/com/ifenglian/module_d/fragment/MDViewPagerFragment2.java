@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
+import com.ifenglian.commonlib.utils.common.LogUtil;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.commonlib.widget.view.boheruler.Ruler;
 import com.ifenglian.commonlib.widget.view.boheruler.RulerCallback;
@@ -66,7 +66,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
         seekBar.setOnSeekChangedListener(new SGLSeekBar.OnSeekBarChangedListener() {
             @Override
             public void onProgressChanged(SGLSeekBar seekBar, int percent) {
-                Log.d("AAA", "percent: " + percent);
+                LogUtil.d("percent: " + percent);
                 ToastUtils.showToast(String.valueOf(percent));
             }
 
