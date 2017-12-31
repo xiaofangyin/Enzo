@@ -22,7 +22,6 @@ public class ScrollingImageView extends View {
     private List<Bitmap> bitmaps;
     private float speed;
     private int[] scene;
-    private int arrayIndex = 0;
     private int maxBitmapHeight = 0;
 
     private Rect clipBounds = new Rect();
@@ -70,17 +69,14 @@ public class ScrollingImageView extends View {
 
             canvas.getClipBounds(clipBounds);
 
-            while (offset <= -getBitmap(arrayIndex).getWidth()) {
-                offset += getBitmap(arrayIndex).getWidth();
-                arrayIndex = (arrayIndex + 1) % scene.length;
+            while (offset <= -bitmaps.get(0).getWidth()) {
+                offset += getBitmap(0).getWidth();
             }
 
             float left = offset;
-            for (int i = 0; left < clipBounds.width(); i++) {
-                Bitmap bitmap = getBitmap((arrayIndex + i) % scene.length);
-                int width = bitmap.getWidth();
-                canvas.drawBitmap(bitmap, getBitmapLeft(width, left), 0, null);
-                left += width;
+            while (left < clipBounds.width()) {
+                canvas.drawBitmap(bitmaps.get(0), getBitmapLeft(bitmaps.get(0).getWidth(), left), 0, null);
+                left += bitmaps.get(0).getWidth();
             }
 
             if (isStarted && speed != 0) {
