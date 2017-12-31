@@ -15,12 +15,12 @@ import static java.lang.Math.abs;
 
 public class ScrollingImageView extends View {
 
-    private Bitmap bitmap;
+    private Bitmap mBitmap;
     private Rect clipBounds;
 
     private float speed;
     private float offset;
-    private int maxBitmapHeight;
+    private int mBitmapHeight;
     private boolean isStarted;
 
     public ScrollingImageView(Context context, AttributeSet attrs) {
@@ -34,8 +34,8 @@ public class ScrollingImageView extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ScrollingImageView, 0, 0);
         try {
             speed = ta.getDimension(R.styleable.ScrollingImageView_speed, 10);
-            bitmap = BitmapFactory.decodeResource(getContext().getResources(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
-            maxBitmapHeight = bitmap.getHeight();
+            mBitmap = BitmapFactory.decodeResource(getContext().getResources(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
+            mBitmapHeight = mBitmap.getHeight();
         } finally {
             ta.recycle();
         }
@@ -46,7 +46,7 @@ public class ScrollingImageView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), maxBitmapHeight);
+        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), mBitmapHeight);
     }
 
     @Override
@@ -59,14 +59,16 @@ public class ScrollingImageView extends View {
 
             canvas.getClipBounds(clipBounds);
 
-            while (offset <= -bitmap.getWidth()) {
-                offset += bitmap.getWidth();
+            while (offset <= -mBitmap.getWidth()) {
+                offset += mBitmap.getWidth();
             }
 
             float left = offset;
+            //例如图片长2750 clipBounds.width()为1080，当offset(left)为-2600时，(left + mBitmap.getWidth()) = (-2600 + 2750) = 150；
+            //150 < 1080成立，while条件成立，canvas又从150位置开始绘制bitmap
             while (left < clipBounds.width()) {
-                canvas.drawBitmap(bitmap, getBitmapLeft(bitmap.getWidth(), left), 0, null);
-                left += bitmap.getWidth();
+                canvas.drawBitmap(mBitmap, getBitmapLeft(mBitmap.getWidth(), left), 0, null);
+                left += mBitmap.getWidth();
             }
 
             if (isStarted && speed != 0) {
