@@ -64,8 +64,9 @@ public class ScrollingImageView extends View {
             }
 
             float left = offset;
-            //例如图片长2750 clipBounds.width()为1080，当offset(left)为-2600时，(left + mBitmap.getWidth()) = (-2600 + 2750) = 150；
-            //150 < 1080成立，while条件成立，canvas又从150位置开始绘制bitmap
+            //例如图片长2750 clipBounds.width()为1080，当offset(left)为-2600时，while判断条件成立，执行绘制bitmap;
+            //(left + mBitmap.getWidth()) = (-2600 + 2750) = 150,150 < 1080成立，while判断条件又成立，canvas又从150位置开始绘制bitmap，
+            //这样就把图片的首跟尾衔接起来了
             while (left < clipBounds.width()) {
                 canvas.drawBitmap(mBitmap, getBitmapLeft(mBitmap.getWidth(), left), 0, null);
                 left += mBitmap.getWidth();
