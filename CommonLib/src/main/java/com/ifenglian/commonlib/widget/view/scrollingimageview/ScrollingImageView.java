@@ -20,7 +20,6 @@ public class ScrollingImageView extends View {
 
     private float speed;
     private float offset;
-    private int mBitmapHeight;
     private boolean isStarted;
 
     public ScrollingImageView(Context context, AttributeSet attrs) {
@@ -35,7 +34,6 @@ public class ScrollingImageView extends View {
         try {
             speed = ta.getDimension(R.styleable.ScrollingImageView_speed, 10);
             mBitmap = BitmapFactory.decodeResource(getContext().getResources(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
-            mBitmapHeight = mBitmap.getHeight();
         } finally {
             ta.recycle();
         }
@@ -46,7 +44,8 @@ public class ScrollingImageView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), mBitmapHeight);
+        int height = mBitmap == null ? 0 : mBitmap.getHeight();
+        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), height);
     }
 
     @Override
