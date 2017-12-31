@@ -71,7 +71,7 @@ public class ScrollingImageView extends View {
 
             if (isStarted && speed != 0) {
                 offset -= abs(speed);
-                postInvalidateOnAnimation();
+                invalidate();
             }
         }
     }
@@ -87,7 +87,7 @@ public class ScrollingImageView extends View {
     public void start() {
         if (!isStarted) {
             isStarted = true;
-            postInvalidateOnAnimation();
+            invalidate();
         }
     }
 
@@ -101,7 +101,7 @@ public class ScrollingImageView extends View {
     public void setSpeed(float speed) {
         this.speed = speed;
         if (isStarted) {
-            postInvalidateOnAnimation();
+            invalidate();
         }
     }
 }
