@@ -1,6 +1,7 @@
 package com.ifenglian.enzo;
 
 import com.ifenglian.commonlib.base.BaseApplication;
+import com.ifenglian.commonlib.env.EnvConstants;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.main.plugin.SAFactoryManager;
 import com.ifenglian.module_a.plugin.MAFactoryManager;
@@ -22,7 +23,12 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        initEnv();
         initFactory();
+    }
+
+    private void initEnv() {
+        EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN);
     }
 
     private void initFactory() {

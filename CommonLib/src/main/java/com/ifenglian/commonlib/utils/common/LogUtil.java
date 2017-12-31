@@ -3,10 +3,11 @@ package com.ifenglian.commonlib.utils.common;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.ifenglian.commonlib.env.EnvConstants;
+
 public class LogUtil {
 
     public static String tagPrefix = "FL";//log前缀
-    public static boolean debug = true;
 
     public static void d(Object o) {
         logger("d", o);
@@ -29,7 +30,7 @@ public class LogUtil {
      * @param o    logger内容
      */
     private static void logger(String type, Object o) {
-        if (!debug) {
+        if (!EnvConstants.getInstance().isLogOpen()) {
             return;
         }
         String msg = o.toString();
