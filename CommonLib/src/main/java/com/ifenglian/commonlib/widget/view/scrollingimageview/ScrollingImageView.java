@@ -11,22 +11,16 @@ import android.view.View;
 
 import com.ifenglian.commonlib.R;
 
-import java.util.Collections;
-import java.util.List;
-
 import static java.lang.Math.abs;
-import static java.util.Collections.singletonList;
 
 public class ScrollingImageView extends View {
 
-    private List<Bitmap> bitmaps;
+    private Bitmap bitmap;
+    private Rect clipBounds;
+
     private float speed;
-    private int[] scene;
-    private int maxBitmapHeight = 0;
-
-    private Rect clipBounds = new Rect();
-    private float offset = 0;
-
+    private float offset;
+    private int maxBitmapHeight;
     private boolean isStarted;
 
     public ScrollingImageView(Context context, AttributeSet attrs) {
@@ -35,17 +29,13 @@ public class ScrollingImageView extends View {
     }
 
     private void init(Context context, AttributeSet attrs) {
+        clipBounds = new Rect();
+
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ScrollingImageView, 0, 0);
         try {
             speed = ta.getDimension(R.styleable.ScrollingImageView_speed, 10);
-            Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
-            if (bitmap != null) {
-                bitmaps = singletonList(bitmap);
-                scene = new int[]{0};
-                maxBitmapHeight = bitmaps.get(0).getHeight();
-            } else {
-                bitmaps = Collections.emptyList();
-            }
+            bitmap = BitmapFactory.decodeResource(getContext().getResources(), ta.getResourceId(R.styleable.ScrollingImageView_src, 0));
+            maxBitmapHeight = bitmap.getHeight();
         } finally {
             ta.recycle();
         }
@@ -63,20 +53,20 @@ public class ScrollingImageView extends View {
     public void onDraw(Canvas canvas) {
         if (!isInEditMode()) {
             super.onDraw(canvas);
-            if (canvas == null || bitmaps.isEmpty()) {
+            if (canvas == null) {
                 return;
             }
 
             canvas.getClipBounds(clipBounds);
 
-            while (offset <= -bitmaps.get(0).getWidth()) {
-                offset += getBitmap(0).getWidth();
+            while (offset <= -bitmap.getWidth()) {
+                offset += bitmap.getWidth();
             }
 
             float left = offset;
             while (left < clipBounds.width()) {
-                canvas.drawBitmap(bitmaps.get(0), getBitmapLeft(bitmaps.get(0).getWidth(), left), 0, null);
-                left += bitmaps.get(0).getWidth();
+                canvas.drawBitmap(bitmap, getBitmapLeft(bitmap.getWidth(), left), 0, null);
+                left += bitmap.getWidth();
             }
 
             if (isStarted && speed != 0) {
@@ -84,10 +74,6 @@ public class ScrollingImageView extends View {
                 postInvalidateOnAnimation();
             }
         }
-    }
-
-    private Bitmap getBitmap(int sceneIndex) {
-        return bitmaps.get(scene[sceneIndex]);
     }
 
     private float getBitmapLeft(float layerWidth, float left) {
