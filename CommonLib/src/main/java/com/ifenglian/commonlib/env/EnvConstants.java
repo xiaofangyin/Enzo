@@ -10,9 +10,9 @@ public class EnvConstants {
 
     private static EnvConstants mInstance;
     //网络环境是否为正式环境
-    private boolean LOG_OPEN;
-    //是否开启log
     private boolean PROD_ENV;
+    //是否开启log
+    private boolean LOG_OPEN;
 
     private EnvConstants() {
 
