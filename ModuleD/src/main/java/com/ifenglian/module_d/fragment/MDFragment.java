@@ -76,15 +76,17 @@ public class MDFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (anim != null && !anim.isRunning())
+        if (anim != null && !anim.isRunning()) {
             anim.start();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (anim != null && anim.isRunning())
+        if (anim != null && anim.isRunning()) {
             anim.stop();
+        }
     }
 
     private List<Fragment> getFragments() {

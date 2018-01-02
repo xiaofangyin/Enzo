@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ifenglian.commonlib.utils.common.LogUtil;
+
 /**
  * 文 件 名: BaseFragment
  * 创 建 人: xiaofangyin
@@ -27,5 +29,17 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         initView(view);
         initData(savedInstanceState);
         initListener(view);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.e(BaseFragment.this.getClass().getSimpleName() + "...onResume...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.e(BaseFragment.this.getClass().getSimpleName() + "...onPause...");
     }
 }
