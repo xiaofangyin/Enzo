@@ -18,7 +18,6 @@ import com.ifenglian.commonlib.R;
  */
 public class FlickeringTextView extends AppCompatTextView {
 
-    private int mViewWidth;
     private TextPaint mPaint;
     private LinearGradient mLinearGradient;
     private Matrix mGradientMatrix;
@@ -55,9 +54,9 @@ public class FlickeringTextView extends AppCompatTextView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mGradientMatrix != null) {
-            mTranslate += mViewWidth / 5;
-            if (mTranslate > mViewWidth * 2) {
-                mTranslate = -mViewWidth;
+            mTranslate += getWidth() / 5;
+            if (mTranslate > getWidth() * 2) {
+                mTranslate = -getWidth();
             }
             mGradientMatrix.setTranslate(mTranslate, 0);
             mLinearGradient.setLocalMatrix(mGradientMatrix);
@@ -68,22 +67,17 @@ public class FlickeringTextView extends AppCompatTextView {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if (mViewWidth == 0) {
-            mViewWidth = getMeasuredWidth();
-            if (mViewWidth > 0) {
-                mPaint = getPaint();
-                mLinearGradient = new LinearGradient(
-                        0,//渐变起初点坐标x位置
-                        0,//渐变起初点坐标y位置
-                        mViewWidth,//渐变终点
-                        0,//渐变终点
-                        new int[]{textColor, flickeringColor, textColor},//参与渐变效果的颜色集合
-                        null,//每个颜色处于的渐变相对位置
-                        Shader.TileMode.CLAMP//平铺方式
-                );
-                mPaint.setShader(mLinearGradient);
-                mGradientMatrix = new Matrix();
-            }
-        }
+        mPaint = getPaint();
+        mLinearGradient = new LinearGradient(
+                0,//渐变起初点坐标x位置
+                0,//渐变起初点坐标y位置
+                w,//渐变终点
+                0,//渐变终点
+                new int[]{textColor, flickeringColor, textColor},//参与渐变效果的颜色集合
+                null,//每个颜色处于的渐变相对位置
+                Shader.TileMode.CLAMP//平铺方式
+        );
+        mPaint.setShader(mLinearGradient);
+        mGradientMatrix = new Matrix();
     }
 }
