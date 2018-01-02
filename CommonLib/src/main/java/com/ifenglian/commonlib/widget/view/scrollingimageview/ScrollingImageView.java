@@ -78,9 +78,9 @@ public class ScrollingImageView extends View {
         }
     }
 
-    private float getBitmapLeft(float layerWidth, float left) {
+    private float getBitmapLeft(float bitmapWidth, float left) {
         if (speed < 0) {
-            return clipBounds.width() - layerWidth - left;
+            return clipBounds.width() - bitmapWidth - left;
         } else {
             return left;
         }
