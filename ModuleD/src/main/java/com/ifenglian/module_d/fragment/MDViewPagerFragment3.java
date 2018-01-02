@@ -12,7 +12,7 @@ import com.ifenglian.module_d.R;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDViewPagerFragment3 extends BaseFragment implements View.OnClickListener {
+public class MDViewPagerFragment3 extends BaseFragment {
 
     @Override
     public int getLayoutId() {
@@ -34,9 +34,4 @@ public class MDViewPagerFragment3 extends BaseFragment implements View.OnClickLi
 
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-
-    }
 }
