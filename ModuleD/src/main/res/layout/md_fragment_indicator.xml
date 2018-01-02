@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/lib_gradient_color_list"
     android:orientation="vertical">
 
     <com.ifenglian.commonlib.widget.view.viewpagerindicator.ViewPagerIndicator
