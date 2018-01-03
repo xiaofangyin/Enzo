@@ -60,8 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:src="@mipmap/md_layer_1"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/md_layer_1" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -104,4 +104,9 @@
             scrolling_image_view:speed="1.7dp"
             scrolling_image_view:src="@mipmap/md_layer_7" />
     </FrameLayout>
+
+    <com.ifenglian.commonlib.widget.view.waveview.WaveView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_marginTop="20dp" />
 </LinearLayout>
