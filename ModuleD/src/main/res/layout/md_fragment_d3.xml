@@ -107,7 +107,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/iv_avatar"
@@ -120,9 +121,8 @@
         <com.ifenglian.commonlib.widget.view.waveview.WaveView
             android:id="@+id/wave_view"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="20dp" />
+            android:layout_height="20dp"
+            android:layout_gravity="bottom" />
     </FrameLayout>
 
 </LinearLayout>
