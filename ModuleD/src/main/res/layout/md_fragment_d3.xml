@@ -105,8 +105,24 @@
             scrolling_image_view:src="@mipmap/md_layer_7" />
     </FrameLayout>
 
-    <com.ifenglian.commonlib.widget.view.waveview.WaveView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_marginTop="20dp" />
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/md_snow_bg" />
+
+        <com.ifenglian.commonlib.widget.view.waveview.WaveView
+            android:id="@+id/wave_view"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="20dp" />
+    </FrameLayout>
+
 </LinearLayout>

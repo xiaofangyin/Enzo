@@ -2,8 +2,11 @@ package com.ifenglian.module_d.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.ifenglian.commonlib.base.BaseFragment;
+import com.ifenglian.commonlib.widget.view.waveview.WaveView;
 import com.ifenglian.module_d.R;
 
 /**
@@ -21,6 +24,16 @@ public class MDViewPagerFragment3 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
+        final ImageView ivAvatar = rootView.findViewById(R.id.iv_avatar);
+        WaveView waveView = rootView.findViewById(R.id.wave_view);
+        final FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) ivAvatar.getLayoutParams();
+        waveView.setOnWaveAnimationListener(new WaveView.OnWaveAnimationListener() {
+            @Override
+            public void OnWaveAnimation(float y) {
+                lp.setMargins(0, 0, 0, (int) y + 2);
+                ivAvatar.setLayoutParams(lp);
+            }
+        });
 
     }
 
