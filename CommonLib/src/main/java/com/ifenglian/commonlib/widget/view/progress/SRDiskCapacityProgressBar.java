@@ -19,9 +19,9 @@ import android.view.View;
  */
 public class SRDiskCapacityProgressBar extends View {
 
-    private long mCurrentProgress = 50;//进度默认为1
-    private long mTotalProgress = 100;//进度默认为1
-    private Paint paint;//进度条的画笔
+    private long mCurrentProgress = 50;
+    private long mTotalProgress = 100;
+    private Paint paint;
     private TextPaint mTextPaint;
     private RectF rectF;
     private String text = "2G/32G";
@@ -66,6 +66,7 @@ public class SRDiskCapacityProgressBar extends View {
         paint.setColor(0xFFCFCFCF);
         rectF.set(0, 0, getWidth(), getHeight());
         canvas.drawRoundRect(rectF, getHeight() / 2, getHeight() / 2, paint);
+
         paint.setColor(0xFF30B5FF);
         rectF.set(0, 0, getWidth() * mCurrentProgress / mTotalProgress, getHeight());
         canvas.drawRoundRect(rectF, getHeight() / 2, getHeight() / 2, paint);
@@ -74,7 +75,6 @@ public class SRDiskCapacityProgressBar extends View {
         float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
         canvas.drawText(text, getWidth() / 2, baseline, mTextPaint);
     }
-
 
     public void setProgress(long progress, long totalProgress) {
         mCurrentProgress = progress;
