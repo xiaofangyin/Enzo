@@ -39,6 +39,12 @@
         android:layout_height="10dp"
         android:layout_margin="20dp" />
 
+    <com.ifenglian.commonlib.widget.view.progress.SRDiskCapacitySeekBar
+        android:id="@+id/disk_capacity_progress"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_margin="20dp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
