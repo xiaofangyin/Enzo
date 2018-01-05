@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.text.TextPaint;
@@ -24,6 +25,7 @@ public class SRDiskCapacityProgressBar extends View {
     private Paint paint;
     private TextPaint mTextPaint;
     private RectF rectF;
+    private Path path;
     private String text = "2G/32G";
 
     public SRDiskCapacityProgressBar(Context context) {
@@ -52,7 +54,9 @@ public class SRDiskCapacityProgressBar extends View {
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextPaint.setTextSize(sp2px(12));
         mTextPaint.setColor(Color.WHITE);
+
         rectF = new RectF();
+        path = new Path();
     }
 
     @Override
@@ -69,7 +73,9 @@ public class SRDiskCapacityProgressBar extends View {
 
         paint.setColor(0xFF30B5FF);
         rectF.set(0, 0, getWidth() * mCurrentProgress / mTotalProgress, getHeight());
-        canvas.drawRoundRect(rectF, getHeight() / 2, getHeight() / 2, paint);
+        float[] radii = {getHeight() / 2, getHeight() / 2, 0f, 0f, 0f, 0f, getHeight() / 2, getHeight() / 2};
+        path.addRoundRect(rectF, radii, Path.Direction.CW);
+        canvas.drawPath(path, paint);
 
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
         float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
