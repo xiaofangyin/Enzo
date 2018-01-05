@@ -15,22 +15,22 @@ import android.view.View;
  * 创建日期: 2018/1/5
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class SRDiskCapacitySeekBar extends View {
+public class SRDiskCapacityProgressBar extends View {
 
     private long mCurrentProgress = 50;//进度默认为1
     private long mTotalProgress = 100;//进度默认为1
     private Paint paint;//进度条的画笔
     private RectF rectF;
 
-    public SRDiskCapacitySeekBar(Context context) {
+    public SRDiskCapacityProgressBar(Context context) {
         this(context, null);
     }
 
-    public SRDiskCapacitySeekBar(Context context, @Nullable AttributeSet attrs) {
+    public SRDiskCapacityProgressBar(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SRDiskCapacitySeekBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SRDiskCapacityProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
