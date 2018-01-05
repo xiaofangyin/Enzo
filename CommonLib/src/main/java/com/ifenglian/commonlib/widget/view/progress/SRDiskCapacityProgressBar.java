@@ -86,6 +86,7 @@ public class SRDiskCapacityProgressBar extends View {
         mCurrentProgress = progress;
         mTotalProgress = totalProgress;
         text = progress + "/" + totalProgress;
+        invalidate();
     }
 
     private float dip2px(Context context, float dip) {
