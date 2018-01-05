@@ -41,8 +41,8 @@
 
     <com.ifenglian.commonlib.widget.view.progress.SRDiskCapacityProgressBar
         android:id="@+id/disk_capacity_progress"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
+        android:layout_width="120dp"
+        android:layout_height="12dp"
         android:layout_margin="20dp" />
 
     <RelativeLayout

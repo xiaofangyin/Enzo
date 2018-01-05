@@ -2,9 +2,11 @@ package com.ifenglian.commonlib.widget.view.progress;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -20,7 +22,9 @@ public class SRDiskCapacityProgressBar extends View {
     private long mCurrentProgress = 50;//进度默认为1
     private long mTotalProgress = 100;//进度默认为1
     private Paint paint;//进度条的画笔
+    private TextPaint mTextPaint;
     private RectF rectF;
+    private String text = "2G/32G";
 
     public SRDiskCapacityProgressBar(Context context) {
         this(context, null);
@@ -42,6 +46,12 @@ public class SRDiskCapacityProgressBar extends View {
         paint.setAntiAlias(true);// 抗锯齿
         paint.setDither(true);// 使用抖动效果
 
+        mTextPaint = new TextPaint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setDither(true);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint.setTextSize(sp2px(12));
+        mTextPaint.setColor(Color.WHITE);
         rectF = new RectF();
     }
 
@@ -59,14 +69,25 @@ public class SRDiskCapacityProgressBar extends View {
         paint.setColor(0xFF30B5FF);
         rectF.set(0, 0, getWidth() * mCurrentProgress / mTotalProgress, getHeight());
         canvas.drawRoundRect(rectF, getHeight() / 2, getHeight() / 2, paint);
+
+        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+        float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
+        canvas.drawText(text, getWidth() / 2, baseline, mTextPaint);
     }
+
 
     public void setProgress(long progress, long totalProgress) {
         mCurrentProgress = progress;
         mTotalProgress = totalProgress;
+        text = progress + "/" + totalProgress;
     }
 
     private float dip2px(Context context, float dip) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, context.getResources().getDisplayMetrics());
+    }
+
+    private int sp2px(float spValue) {
+        final float fontScale = getContext().getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
     }
 }
