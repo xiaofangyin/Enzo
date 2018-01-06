@@ -21,7 +21,7 @@ import android.view.View;
  */
 public class SRDiskCapacityProgressBar extends View {
 
-    private long mCurrentProgress = 98;
+    private long mCurrentProgress = 50;
     private long mTotalProgress = 100;
     private int mWidth, mHeight;
     private Paint paint;
@@ -71,8 +71,8 @@ public class SRDiskCapacityProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-         //设置View的离屏缓冲。在绘图的时候新建一个“层”，所有的操作都在该层而不会影响该层以外的图像
-         //必须设置，否则设置的PorterDuffXfermode会无效
+        //设置View的离屏缓冲。在绘图的时候新建一个“层”，所有的操作都在该层而不会影响该层以外的图像
+        //必须设置，否则设置的PorterDuffXfermode会无效
         int sc = canvas.saveLayer(0, 0, mWidth, mHeight, paint, Canvas.ALL_SAVE_FLAG);
         paint.setColor(0xFFCFCFCF);
         rectF.set(0, 0, mWidth, mHeight);
