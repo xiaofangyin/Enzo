@@ -71,6 +71,8 @@ public class SRDiskCapacityProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+         //设置View的离屏缓冲。在绘图的时候新建一个“层”，所有的操作都在该层而不会影响该层以外的图像
+         //必须设置，否则设置的PorterDuffXfermode会无效
         int sc = canvas.saveLayer(0, 0, mWidth, mHeight, paint, Canvas.ALL_SAVE_FLAG);
         paint.setColor(0xFFCFCFCF);
         rectF.set(0, 0, mWidth, mHeight);
@@ -85,7 +87,6 @@ public class SRDiskCapacityProgressBar extends View {
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
         float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
         canvas.drawText(text, mWidth / 2, baseline, mTextPaint);
-
 
         //还原画布，与canvas.saveLayer配套使用
         canvas.restoreToCount(sc);
