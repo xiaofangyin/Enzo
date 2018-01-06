@@ -4,7 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.text.TextPaint;
@@ -20,14 +21,14 @@ import android.view.View;
  */
 public class SRDiskCapacityProgressBar extends View {
 
-    private long mCurrentProgress = 50;
+    private long mCurrentProgress = 98;
     private long mTotalProgress = 100;
     private int mWidth, mHeight;
     private Paint paint;
     private TextPaint mTextPaint;
     private RectF rectF;
-    private Path path;
     private String text = "16G/32G";
+    private PorterDuffXfermode porterDuffXfermode;
 
     public SRDiskCapacityProgressBar(Context context) {
         this(context, null);
@@ -57,7 +58,7 @@ public class SRDiskCapacityProgressBar extends View {
         mTextPaint.setColor(Color.WHITE);
 
         rectF = new RectF();
-        path = new Path();
+        porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
     }
 
     @Override
@@ -70,21 +71,24 @@ public class SRDiskCapacityProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        int sc = canvas.saveLayer(0, 0, mWidth, mHeight, paint, Canvas.ALL_SAVE_FLAG);
         paint.setColor(0xFFCFCFCF);
         rectF.set(0, 0, mWidth, mHeight);
         canvas.drawRoundRect(rectF, mHeight / 2, mHeight / 2, paint);
 
         paint.setColor(0xFF30B5FF);
+        paint.setXfermode(porterDuffXfermode);
         rectF.set(0, 0, mWidth * mCurrentProgress / mTotalProgress, mHeight);
-        float[] radii = {mHeight / 2, mHeight / 2, 0f, 0f, 0f, 0f, mHeight / 2, mHeight / 2};
-        //Direction.CCW 逆时针方向
-        //Direction.CW 顺时针方向
-        path.addRoundRect(rectF, radii, Path.Direction.CW);
-        canvas.drawPath(path, paint);
+        canvas.drawRect(rectF, paint);
+        paint.setXfermode(null);
 
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
         float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
         canvas.drawText(text, mWidth / 2, baseline, mTextPaint);
+
+
+        //还原画布，与canvas.saveLayer配套使用
+        canvas.restoreToCount(sc);
     }
 
     public void setProgress(long progress, long totalProgress) {
