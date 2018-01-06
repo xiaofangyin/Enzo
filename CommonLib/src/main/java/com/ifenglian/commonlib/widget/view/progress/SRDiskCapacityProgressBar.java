@@ -26,7 +26,7 @@ public class SRDiskCapacityProgressBar extends View {
     private TextPaint mTextPaint;
     private RectF rectF;
     private Path path;
-    private String text = "2G/32G";
+    private String text = "16G/32G";
 
     public SRDiskCapacityProgressBar(Context context) {
         this(context, null);
@@ -74,6 +74,8 @@ public class SRDiskCapacityProgressBar extends View {
         paint.setColor(0xFF30B5FF);
         rectF.set(0, 0, getWidth() * mCurrentProgress / mTotalProgress, getHeight());
         float[] radii = {getHeight() / 2, getHeight() / 2, 0f, 0f, 0f, 0f, getHeight() / 2, getHeight() / 2};
+        //Direction.CCW 逆时针方向
+        //Direction.CW 顺时针方向
         path.addRoundRect(rectF, radii, Path.Direction.CW);
         canvas.drawPath(path, paint);
 
