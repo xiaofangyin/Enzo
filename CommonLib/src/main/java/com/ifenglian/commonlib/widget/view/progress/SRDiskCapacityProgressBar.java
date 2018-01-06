@@ -22,6 +22,7 @@ public class SRDiskCapacityProgressBar extends View {
 
     private long mCurrentProgress = 50;
     private long mTotalProgress = 100;
+    private int mWidth, mHeight;
     private Paint paint;
     private TextPaint mTextPaint;
     private RectF rectF;
@@ -60,20 +61,22 @@ public class SRDiskCapacityProgressBar extends View {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w;
+        mHeight = h;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         paint.setColor(0xFFCFCFCF);
-        rectF.set(0, 0, getWidth(), getHeight());
-        canvas.drawRoundRect(rectF, getHeight() / 2, getHeight() / 2, paint);
+        rectF.set(0, 0, mWidth, mHeight);
+        canvas.drawRoundRect(rectF, mHeight / 2, mHeight / 2, paint);
 
         paint.setColor(0xFF30B5FF);
-        rectF.set(0, 0, getWidth() * mCurrentProgress / mTotalProgress, getHeight());
-        float[] radii = {getHeight() / 2, getHeight() / 2, 0f, 0f, 0f, 0f, getHeight() / 2, getHeight() / 2};
+        rectF.set(0, 0, mWidth * mCurrentProgress / mTotalProgress, mHeight);
+        float[] radii = {mHeight / 2, mHeight / 2, 0f, 0f, 0f, 0f, mHeight / 2, mHeight / 2};
         //Direction.CCW 逆时针方向
         //Direction.CW 顺时针方向
         path.addRoundRect(rectF, radii, Path.Direction.CW);
@@ -81,7 +84,7 @@ public class SRDiskCapacityProgressBar extends View {
 
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
         float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
-        canvas.drawText(text, getWidth() / 2, baseline, mTextPaint);
+        canvas.drawText(text, mWidth / 2, baseline, mTextPaint);
     }
 
     public void setProgress(long progress, long totalProgress) {
