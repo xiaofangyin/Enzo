@@ -17,6 +17,7 @@ import com.ifenglian.commonlib.widget.view.progress.CircularProgressBar;
 import com.ifenglian.commonlib.widget.view.progress.CircularProgressBarWithRate;
 import com.ifenglian.commonlib.widget.view.progress.HorizontalProgressBar;
 import com.ifenglian.commonlib.widget.view.progress.SGLSeekBar;
+import com.ifenglian.commonlib.widget.view.progress.SRDiskCapacityProgressBar;
 import com.ifenglian.module_d.R;
 
 /**
@@ -30,6 +31,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
     private int progress = 0;
     private SGLSeekBar seekBar;
     private HorizontalProgressBar mCustomProgressBar;
+    private SRDiskCapacityProgressBar mDiskProgressBar;
     private CircularProgressBar mCircularProgressBar;
     private CircularProgressBarWithRate mRateTextCircularProgressBar;
     private Ruler ruler;
@@ -51,7 +53,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
         mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(getActivity(), 10));
 
         mCustomProgressBar = rootView.findViewById(R.id.web_view_progress_bar);
-
+        mDiskProgressBar = rootView.findViewById(R.id.disk_capacity_progress);
         ruler = rootView.findViewById(R.id.ruler2);
         tvValue = rootView.findViewById(R.id.tv_value);
     }
@@ -59,6 +61,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
     @Override
     public void initData(Bundle savedInstanceState) {
         mHandler.sendEmptyMessageDelayed(progress++, 30);
+        mDiskProgressBar.setProgress(16179869184L, 34359738368L);
     }
 
     @Override
