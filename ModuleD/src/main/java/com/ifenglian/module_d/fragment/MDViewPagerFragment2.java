@@ -61,7 +61,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
     @Override
     public void initData(Bundle savedInstanceState) {
         mHandler.sendEmptyMessageDelayed(progress++, 30);
-        mDiskProgressBar.setProgress(16179869184L, 34359738368L);
+        mDiskProgressBar.setProgress(40772, 90772);
     }
 
     @Override

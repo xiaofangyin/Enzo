@@ -12,6 +12,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.text.DecimalFormat;
+
 /**
  * 文 件 名: SRDiskCapacitySeekBar
  * 创 建 人: xiaofangyin
@@ -20,7 +22,7 @@ import android.view.View;
  */
 public class SRDiskCapacityProgressBar extends View {
 
-    private long mFreeProgress;
+    private long mCurrentProgress;
     private long mTotalProgress;
     private int mWidth, mHeight;
     private Paint paint;
@@ -28,6 +30,7 @@ public class SRDiskCapacityProgressBar extends View {
     private RectF rectF;
     private String text = "/";
     private PorterDuffXfermode porterDuffXfermode;
+    private DecimalFormat decimalFormat;
 
     public SRDiskCapacityProgressBar(Context context) {
         this(context, null);
@@ -58,6 +61,9 @@ public class SRDiskCapacityProgressBar extends View {
 
         rectF = new RectF();
         porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
+        //0 阿拉伯数字
+        //# 阿拉伯数字，如果不存在则显示为空
+        decimalFormat = new DecimalFormat("0.##");
     }
 
     @Override
@@ -79,55 +85,32 @@ public class SRDiskCapacityProgressBar extends View {
 
         paint.setColor(0xFF30B5FF);
         paint.setXfermode(porterDuffXfermode);
-        rectF.set(0, 0, mWidth * mFreeProgress / mTotalProgress, mHeight);
+        rectF.set(0, 0, mTotalProgress == 0 ? 0 : mWidth * mCurrentProgress / mTotalProgress, mHeight);
         canvas.drawRect(rectF, paint);
         paint.setXfermode(null);
 
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
+        float baseline = mHeight / 2 + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
         canvas.drawText(text, mWidth / 2, baseline, mTextPaint);
 
         //还原画布，与canvas.saveLayer配套使用
         canvas.restoreToCount(sc);
     }
 
-    public void setProgress(long free, long totalProgress) {
-        mFreeProgress = free;
+    public void setProgress(long progress, long totalProgress) {
+        mCurrentProgress = progress;
         mTotalProgress = totalProgress;
-        text = getPrintSize(free) + "/" + getPrintSize(totalProgress);
+        text = getPrintSize(progress) + "/" + getPrintSize(totalProgress);
         invalidate();
     }
 
     /**
-     * 把字节转化为KB、MB、GB
+     * MB、GB单位换算
+     *
+     * @param size 单位 MB
      */
     private String getPrintSize(long size) {
-        //如果字节数少于1024，则直接以B为单位，否则先除于1024，后3位因太少无意义
-        if (size < 1024) {
-            return String.valueOf(size) + "B";
-        } else {
-            size = size / 1024;
-        }
-        //如果原字节数除于1024之后，少于1024，则可以直接以KB作为单位
-        //因为还没有到达要使用另一个单位的时候
-        //接下去以此类推
-        if (size < 1024) {
-            return String.valueOf(size) + "KB";
-        } else {
-            size = size / 1024;
-        }
-        if (size < 1024) {
-            //因为如果以MB为单位的话，要保留最后1位小数，
-            //因此，把此数乘以100之后再取余
-            size = size * 100;
-            return String.valueOf((size / 100)) + "."
-                    + String.valueOf((size % 100)) + "MB";
-        } else {
-            //否则如果要以GB为单位的，先除于1024再作同样的处理
-            size = size * 100 / 1024;
-            return String.valueOf((size / 100)) + "."
-                    + String.valueOf((size % 100)) + "GB";
-        }
+        return decimalFormat.format(size * 1f / 1024) + "GB";
     }
 
     private int sp2px(float spValue) {
