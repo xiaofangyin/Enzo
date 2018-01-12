@@ -6,7 +6,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.view.waveview.WaveView;
+import com.ifenglian.commonlib.widget.waveview.WaveView;
 import com.ifenglian.module_d.R;
 
 /**

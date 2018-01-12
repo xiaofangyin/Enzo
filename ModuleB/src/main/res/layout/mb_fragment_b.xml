@@ -11,12 +11,12 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <com.ifenglian.commonlib.widget.view.timeclock.SHTimeClock
+        <com.ifenglian.commonlib.widget.timeclock.SHTimeClock
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="30dp" />
 
-        <com.ifenglian.commonlib.widget.view.togglebutton.FlToggleButton
+        <com.ifenglian.commonlib.widget.togglebutton.FlToggleButton
             android:layout_width="51dp"
             android:layout_height="30dp"
             android:layout_margin="20dp" />
@@ -27,32 +27,32 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
+            <com.ifenglian.commonlib.widget.checkbox.SmoothCheckBox
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_margin="5dp"
                 app:color_checked="@color/colorAccent" />
 
-            <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
+            <com.ifenglian.commonlib.widget.checkbox.SmoothCheckBox
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_margin="5dp"
                 app:color_checked="#447eeb" />
 
-            <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
+            <com.ifenglian.commonlib.widget.checkbox.SmoothCheckBox
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_margin="5dp"
                 android:paddingBottom="10dp"
                 app:color_checked="#149A45" />
 
-            <com.ifenglian.commonlib.widget.view.checkbox.SmoothCheckBox
+            <com.ifenglian.commonlib.widget.checkbox.SmoothCheckBox
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_margin="5dp" />
         </LinearLayout>
 
-        <com.ifenglian.commonlib.widget.view.flickeringtextview.FlickeringTextView
+        <com.ifenglian.commonlib.widget.flickeringtextview.FlickeringTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

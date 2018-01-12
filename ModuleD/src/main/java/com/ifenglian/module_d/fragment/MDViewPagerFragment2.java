@@ -11,13 +11,13 @@ import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.utils.common.DensityUtil;
 import com.ifenglian.commonlib.utils.common.LogUtil;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
-import com.ifenglian.commonlib.widget.view.boheruler.Ruler;
-import com.ifenglian.commonlib.widget.view.boheruler.RulerCallback;
-import com.ifenglian.commonlib.widget.view.progress.CircularProgressBar;
-import com.ifenglian.commonlib.widget.view.progress.CircularProgressBarWithRate;
-import com.ifenglian.commonlib.widget.view.progress.HorizontalProgressBar;
-import com.ifenglian.commonlib.widget.view.progress.SGLSeekBar;
-import com.ifenglian.commonlib.widget.view.progress.SRDiskCapacityProgressBar;
+import com.ifenglian.commonlib.widget.boheruler.Ruler;
+import com.ifenglian.commonlib.widget.boheruler.RulerCallback;
+import com.ifenglian.commonlib.widget.progress.CircularProgressBar;
+import com.ifenglian.commonlib.widget.progress.CircularProgressBarWithRate;
+import com.ifenglian.commonlib.widget.progress.HorizontalProgressBar;
+import com.ifenglian.commonlib.widget.progress.SGLSeekBar;
+import com.ifenglian.commonlib.widget.progress.SRDiskCapacityProgressBar;
 import com.ifenglian.module_d.R;
 
 /**

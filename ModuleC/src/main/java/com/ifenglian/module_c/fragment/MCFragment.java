@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.view.danmu.FLDanMuBean;
-import com.ifenglian.commonlib.widget.view.danmu.FLDanMuView;
-import com.ifenglian.commonlib.widget.view.danmu.FLSendDanMuDialog;
-import com.ifenglian.commonlib.widget.view.speedtest.SRSpeedTestView;
+import com.ifenglian.commonlib.widget.danmu.FLDanMuBean;
+import com.ifenglian.commonlib.widget.danmu.FLDanMuView;
+import com.ifenglian.commonlib.widget.danmu.FLSendDanMuDialog;
+import com.ifenglian.commonlib.widget.speedtest.SRSpeedTestView;
 import com.ifenglian.module_c.R;
 
 import java.util.ArrayList;

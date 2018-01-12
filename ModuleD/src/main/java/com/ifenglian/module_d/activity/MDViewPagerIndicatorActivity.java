@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.widget.view.viewpagerindicator.ViewPagerIndicator;
+import com.ifenglian.commonlib.widget.viewpagerindicator.ViewPagerIndicator;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDViewPagerIndicatorAdapter;
 import com.ifenglian.module_d.fragment.MDViewPagerFragment2;

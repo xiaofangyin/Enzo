@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ifenglian.commonlib.widget.view.loadinglayout.LoadingLayout
+    <com.ifenglian.commonlib.widget.loadinglayout.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

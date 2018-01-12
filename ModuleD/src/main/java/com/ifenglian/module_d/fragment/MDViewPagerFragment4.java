@@ -6,9 +6,9 @@ import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
-import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
-import com.ifenglian.commonlib.widget.view.alertdialog.BottomAlertDialog;
-import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
+import com.ifenglian.commonlib.widget.alertdialog.AlertDialogCallBack;
+import com.ifenglian.commonlib.widget.alertdialog.BottomAlertDialog;
+import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;

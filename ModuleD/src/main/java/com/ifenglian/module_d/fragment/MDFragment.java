@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.view.viewpagerindicator.ViewPagerIndicator;
+import com.ifenglian.commonlib.widget.viewpagerindicator.ViewPagerIndicator;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDViewPagerIndicatorAdapter;
 

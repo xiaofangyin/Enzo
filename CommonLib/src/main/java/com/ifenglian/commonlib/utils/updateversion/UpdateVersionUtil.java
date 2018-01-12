@@ -6,8 +6,8 @@ import android.content.Intent;
 import com.ifenglian.commonlib.utils.common.ApkUtils;
 import com.ifenglian.commonlib.utils.common.NetworkUtil;
 import com.ifenglian.commonlib.utils.common.SDCardUtils;
-import com.ifenglian.commonlib.widget.view.alertdialog.AlertDialogCallBack;
-import com.ifenglian.commonlib.widget.view.alertdialog.CenterAlertDialog;
+import com.ifenglian.commonlib.widget.alertdialog.AlertDialogCallBack;
+import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
 
 import java.io.File;
 

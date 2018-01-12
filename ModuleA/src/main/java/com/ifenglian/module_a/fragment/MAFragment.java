@@ -6,9 +6,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.view.autoscrolltextview.AutoScrollTextView;
-import com.ifenglian.commonlib.widget.view.timeclock.SHScheduleBean;
-import com.ifenglian.commonlib.widget.view.timeclock.SHTimePicker;
+import com.ifenglian.commonlib.widget.autoscrolltextview.AutoScrollTextView;
+import com.ifenglian.commonlib.widget.timeclock.SHScheduleBean;
+import com.ifenglian.commonlib.widget.timeclock.SHTimePicker;
 import com.ifenglian.module_a.R;
 
 import java.util.ArrayList;

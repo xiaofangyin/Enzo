@@ -5,7 +5,7 @@ import android.os.Looper;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.widget.view.loadinglayout.LoadingLayout;
+import com.ifenglian.commonlib.widget.loadinglayout.LoadingLayout;
 import com.ifenglian.module_d.R;
 
 /**
