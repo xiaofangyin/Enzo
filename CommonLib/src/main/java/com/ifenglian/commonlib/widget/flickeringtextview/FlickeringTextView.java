@@ -18,7 +18,6 @@ import com.ifenglian.commonlib.R;
  */
 public class FlickeringTextView extends AppCompatTextView {
 
-    private TextPaint mPaint;
     private LinearGradient mLinearGradient;
     private Matrix mGradientMatrix;
     private int mTranslate;
@@ -67,7 +66,7 @@ public class FlickeringTextView extends AppCompatTextView {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mPaint = getPaint();
+        TextPaint mPaint = getPaint();
         mLinearGradient = new LinearGradient(
                 0,//渐变起初点坐标x位置
                 0,//渐变起初点坐标y位置
