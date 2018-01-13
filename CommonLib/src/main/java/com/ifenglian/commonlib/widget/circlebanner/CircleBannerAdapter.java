@@ -22,11 +22,16 @@ public class CircleBannerAdapter extends PagerAdapter {
     private ArrayList<Object> mViewCaches;
     private List<String> mData;
     private Context context;
+    private CircleBanner.ImageClickListener mClickListener;
 
     CircleBannerAdapter(List<String> data, Context context) {
         this.mViewCaches = new ArrayList<>();
         this.mData = data;
         this.context = context;
+    }
+
+    public void setOnImageClickListener(CircleBanner.ImageClickListener clickListener) {
+        mClickListener = clickListener;
     }
 
     @Override
@@ -44,7 +49,7 @@ public class CircleBannerAdapter extends PagerAdapter {
 
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         if (mData != null && mData.size() > 0) {
             ImageView imageView;
             if (mViewCaches.isEmpty()) {
@@ -55,7 +60,14 @@ public class CircleBannerAdapter extends PagerAdapter {
                 imageView = (ImageView) mViewCaches.remove(0);
             }
             Picasso.with(context).load(mData.get(position % mData.size())).into(imageView);
-
+            if (mClickListener != null) {
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mClickListener.onImageClick(mData.get(position % mData.size()), position % mData.size());
+                    }
+                });
+            }
             container.addView(imageView);
             return imageView;
         } else {

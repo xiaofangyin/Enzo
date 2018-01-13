@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ifenglian.commonlib.R;
+import com.ifenglian.commonlib.utils.toast.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,12 @@ public class CircleBanner extends RelativeLayout {
         CircleBannerAdapter adapter = new CircleBannerAdapter(data, getContext());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
+        adapter.setOnImageClickListener(new ImageClickListener() {
+            @Override
+            public void onImageClick(String url, int position) {
+                ToastUtils.showToast("position: " + position + " url:" + url);
+            }
+        });
 
         indicators = new ImageView[data.size()];
         indicatorLayout.removeAllViews();
@@ -155,6 +162,10 @@ public class CircleBanner extends RelativeLayout {
         int halfValue = Integer.MAX_VALUE / 2;
         int position = halfValue % mData.size();
         return halfValue - position;
+    }
+
+    public interface ImageClickListener {
+        void onImageClick(String url, int position);
     }
 
     private int dip2px(Context context, int dip) {
