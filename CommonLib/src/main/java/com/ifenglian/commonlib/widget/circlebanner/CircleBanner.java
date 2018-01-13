@@ -34,16 +34,11 @@ public class CircleBanner extends ViewPager {
         if (data != null && data.size() > 0) {
             this.mData = data;
             mUIHandler = new Handler(Looper.getMainLooper());
-            // new一个Adapter
             CircleBannerAdapter adapter = new CircleBannerAdapter(data, getContext());
-            // 设置adapter
             setAdapter(adapter);
-            // 设置监听器
             addOnPageChangeListener(mOnPageChangeListener);
-            // 设置默认位置为中间位置
             setCurrentItem(getInitPosition());
             if (data.size() >= 1) {
-                // 开始自动播放
                 startAdvertPlay();
             }
         }
