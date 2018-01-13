@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ifenglian.commonlib.R;
+import com.ifenglian.commonlib.utils.common.LogUtil;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
 
 import java.util.ArrayList;
@@ -111,6 +112,7 @@ public class CircleBanner extends RelativeLayout {
 
         @Override
         public void onPageScrollStateChanged(int state) {
+            LogUtil.d("onPageScrollStateChanged: " + state);
             if (state == ViewPager.SCROLL_STATE_IDLE) {
                 startAdvertPlay();
             } else {
