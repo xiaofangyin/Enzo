@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.ifenglian.commonlib.widget.circlebanner.CircleViewPager
+    <com.ifenglian.commonlib.widget.circlebanner.CircleBanner
         android:id="@+id/md_circle_banner"
         android:layout_width="match_parent"
         android:layout_height="200dp" />

@@ -1,7 +1,7 @@
 package com.ifenglian.module_d.activity;
 
 import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.widget.circlebanner.CircleViewPager;
+import com.ifenglian.commonlib.widget.circlebanner.CircleBanner;
 import com.ifenglian.module_d.R;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MDCircleBannerActivity extends BaseActivity{
 
-    private CircleViewPager circleBanner;
+    private CircleBanner circleBanner;
 
     @Override
     public int getLayoutId() {
@@ -30,6 +30,8 @@ public class MDCircleBannerActivity extends BaseActivity{
     @Override
     public void initData() {
         List<String> data = new ArrayList<>();
+        data.add("http://onq81n53u.bkt.clouddn.com/photo1.jpg");
+        data.add("http://onq81n53u.bkt.clouddn.com/photo2.jpg");
         data.add("http://onq81n53u.bkt.clouddn.com/photo1.jpg");
         data.add("http://onq81n53u.bkt.clouddn.com/photo2.jpg");
         circleBanner.play(data);
