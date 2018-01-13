@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -50,7 +49,8 @@ public class CircleBanner extends RelativeLayout {
         indicatorLayout = new LinearLayout(context);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+        layoutParams.rightMargin = dip2px(context, 10);
         layoutParams.bottomMargin = dip2px(context, 10);
         indicatorLayout.setLayoutParams(layoutParams);
         addView(indicatorLayout);
@@ -63,7 +63,6 @@ public class CircleBanner extends RelativeLayout {
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
 
-        // 设置指示器
         indicators = new ImageView[data.size()];
         indicatorLayout.removeAllViews();
         for (int i = 0; i < indicators.length; i++) {
@@ -93,14 +92,13 @@ public class CircleBanner extends RelativeLayout {
 
         @Override
         public void onPageSelected(int position) {
-            Log.d("TAG", position + "");
-            // 获取当前的位置
             mSelectedIndex = position;
             setIndicator(position % mData.size());
         }
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
         }
 
         @Override
@@ -113,17 +111,14 @@ public class CircleBanner extends RelativeLayout {
         }
     };
 
-    /**
-     * 自动播放任务
-     */
     private Runnable timerTask = new Runnable() {
         @Override
         public void run() {
             if (mSelectedIndex == Integer.MAX_VALUE) {
-                // 当滑到最右边时，返回返回第一个元素
-                // 当然，几乎不可能滑到
                 int rightPos = mSelectedIndex % mData.size();
-                viewPager.setCurrentItem(getInitPosition() + rightPos + 1, true);
+                viewPager.setCurrentItem(getInitPosition() + rightPos + 1, false);
+            } else if (mSelectedIndex == 0) {
+                viewPager.setCurrentItem(getInitPosition() - 1, false);
             } else {
                 // 常规执行这里
                 viewPager.setCurrentItem(mSelectedIndex + 1, true);
@@ -152,19 +147,12 @@ public class CircleBanner extends RelativeLayout {
         }
     }
 
-    /**
-     * 获取banner的初始位置,即0-Integer.MAX_VALUE之间的大概中间位置
-     * 保证初始位置和数据源的第1个元素的取余为0
-     *
-     * @return position
-     */
     private int getInitPosition() {
         if (mData.isEmpty()) {
             return 0;
         }
         int halfValue = Integer.MAX_VALUE / 2;
         int position = halfValue % mData.size();
-        // 保证初始位置和数据源的第1个元素的取余为0
         return halfValue - position;
     }
 

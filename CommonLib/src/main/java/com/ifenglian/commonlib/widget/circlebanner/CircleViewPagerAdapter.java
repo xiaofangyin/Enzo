@@ -19,17 +19,14 @@ import java.util.List;
  */
 public class CircleViewPagerAdapter extends PagerAdapter {
 
-    private final ArrayList<Object> mViewCaches = new ArrayList<>();
+    private ArrayList<Object> mViewCaches;
     private List<String> mData;
     private Context context;
 
-    public CircleViewPagerAdapter(List<String> data, Context context) {
+    CircleViewPagerAdapter(List<String> data, Context context) {
+        this.mViewCaches = new ArrayList<>();
         this.mData = data;
         this.context = context;
-    }
-
-    public void setmData(List<String> data) {
-        this.mData = data;
     }
 
     @Override
