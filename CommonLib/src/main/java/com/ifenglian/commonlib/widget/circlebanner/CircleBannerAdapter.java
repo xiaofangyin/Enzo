@@ -12,18 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: CircleViewPagerAdapter
+ * 文 件 名: CircleBannerAdapter
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/1/13
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class CircleViewPagerAdapter extends PagerAdapter {
+public class CircleBannerAdapter extends PagerAdapter {
 
     private ArrayList<Object> mViewCaches;
     private List<String> mData;
     private Context context;
 
-    CircleViewPagerAdapter(List<String> data, Context context) {
+    CircleBannerAdapter(List<String> data, Context context) {
         this.mViewCaches = new ArrayList<>();
         this.mData = data;
         this.context = context;
@@ -50,7 +50,7 @@ public class CircleViewPagerAdapter extends PagerAdapter {
             if (mViewCaches.isEmpty()) {
                 imageView = new ImageView(context);
                 imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             } else {
                 imageView = (ImageView) mViewCaches.remove(0);
             }

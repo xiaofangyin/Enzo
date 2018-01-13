@@ -59,7 +59,7 @@ public class CircleBanner extends RelativeLayout {
     public void play(List<String> data) {
         this.mData = data;
         mUIHandler = new Handler(Looper.getMainLooper());
-        CircleViewPagerAdapter adapter = new CircleViewPagerAdapter(data, getContext());
+        CircleBannerAdapter adapter = new CircleBannerAdapter(data, getContext());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
 
