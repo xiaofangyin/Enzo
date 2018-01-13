@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: CircleBanner
+ * 文 件 名: CircleViewPager
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/1/13
  * 邮   箱: xiaofy@ifenglian.com
