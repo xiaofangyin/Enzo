@@ -44,7 +44,7 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        speedTestView.updateSpeed(102400);
+        speedTestView.updateSpeed(10240);
 
         List<FLDanMuBean> danMuList = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
