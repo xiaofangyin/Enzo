@@ -22,9 +22,9 @@ import java.util.List;
  */
 public class CircleBanner extends RelativeLayout {
 
-    private int mSelectedIndex = 0;     // 当前下标
+    private int mSelectedIndex = 0;
     private Handler mUIHandler;
-    private List<String> mData = new ArrayList<>();
+    private List<String> mData;
     private ViewPager viewPager;
     private LinearLayout indicatorLayout;
     private ImageView[] indicators;
@@ -43,6 +43,7 @@ public class CircleBanner extends RelativeLayout {
     }
 
     private void init(Context context) {
+        mData = new ArrayList<>();
         viewPager = new ViewPager(context);
         addView(viewPager, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
