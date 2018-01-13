@@ -1,7 +1,7 @@
 package com.ifenglian.module_d.activity;
 
 import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.widget.circlebanner.CircleBanner;
+import com.ifenglian.commonlib.widget.circlebanner.CircleViewPager;
 import com.ifenglian.module_d.R;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MDCircleBannerActivity extends BaseActivity{
 
-    private CircleBanner circleBanner;
+    private CircleViewPager circleBanner;
 
     @Override
     public int getLayoutId() {

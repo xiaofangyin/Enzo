@@ -16,17 +16,17 @@ import java.util.List;
  * 创建日期: 2018/1/13
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class CircleBanner extends ViewPager {
+public class CircleViewPager extends ViewPager {
 
     private int mSelectedIndex = 0;     // 当前下标
     private Handler mUIHandler;
     private List<String> mData = new ArrayList<>();
 
-    public CircleBanner(Context context) {
+    public CircleViewPager(Context context) {
         this(context, null);
     }
 
-    public CircleBanner(Context context, AttributeSet attrs) {
+    public CircleViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -34,7 +34,7 @@ public class CircleBanner extends ViewPager {
         if (data != null && data.size() > 0) {
             this.mData = data;
             mUIHandler = new Handler(Looper.getMainLooper());
-            CircleBannerAdapter adapter = new CircleBannerAdapter(data, getContext());
+            CircleViewPagerAdapter adapter = new CircleViewPagerAdapter(data, getContext());
             setAdapter(adapter);
             addOnPageChangeListener(mOnPageChangeListener);
             setCurrentItem(getInitPosition());

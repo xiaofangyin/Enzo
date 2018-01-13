@@ -12,18 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: CircleBannerAdapter
+ * 文 件 名: CircleViewPagerAdapter
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/1/13
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class CircleBannerAdapter extends PagerAdapter {
+public class CircleViewPagerAdapter extends PagerAdapter {
 
     private final ArrayList<Object> mViewCaches = new ArrayList<>();
     private List<String> mData;
     private Context context;
 
-    public CircleBannerAdapter(List<String> data, Context context) {
+    public CircleViewPagerAdapter(List<String> data, Context context) {
         this.mData = data;
         this.context = context;
     }
