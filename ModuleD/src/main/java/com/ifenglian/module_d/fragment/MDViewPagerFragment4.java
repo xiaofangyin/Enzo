@@ -11,7 +11,6 @@ import com.ifenglian.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBleActivity;
-import com.ifenglian.module_d.activity.MDCircleBannerActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
@@ -34,7 +33,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
-        rootView.findViewById(R.id.btn_circle_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_round_image_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
@@ -59,10 +57,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_circle_banner) {
-            Intent intent = new Intent(getContext(), MDCircleBannerActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_round_image_view) {
+        if (id == R.id.btn_round_image_view) {
             Intent intent = new Intent(getContext(), MDRoundImageViewActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_update_version) {
