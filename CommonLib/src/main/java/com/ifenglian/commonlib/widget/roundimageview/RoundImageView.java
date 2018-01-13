@@ -34,7 +34,6 @@ public class RoundImageView extends AppCompatImageView {
     private Paint mBitmapPaint;
     private int mRadius;
     private Matrix mMatrix;//3x3 矩阵，主要用于缩小放大
-    private BitmapShader mBitmapShader;
     private int mWidth;
     private RectF mRoundRect;
 
@@ -70,9 +69,9 @@ public class RoundImageView extends AppCompatImageView {
         if (drawable == null) {
             return;
         }
-        Bitmap bmp = drawableToBitamp(drawable);
+        Bitmap bmp = drawableToBitmap(drawable);
         // 将bmp作为着色器，就是在指定区域内绘制bmp
-        mBitmapShader = new BitmapShader(bmp, TileMode.CLAMP, TileMode.CLAMP);
+        BitmapShader mBitmapShader = new BitmapShader(bmp, TileMode.CLAMP, TileMode.CLAMP);
         float scale = 1.0f;
         if (type == TYPE_CIRCLE) {
             // 拿到bitmap宽或高的小值
@@ -115,17 +114,15 @@ public class RoundImageView extends AppCompatImageView {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         // 圆角图片的范围
-        if (type == TYPE_ROUND)
+        if (type == TYPE_ROUND) {
             mRoundRect = new RectF(0, 0, w, h);
+        }
     }
 
     /**
      * drawable转bitmap
-     *
-     * @param drawable
-     * @return
      */
-    private Bitmap drawableToBitamp(Drawable drawable) {
+    private Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bd = (BitmapDrawable) drawable;
             return bd.getBitmap();
