@@ -15,7 +15,7 @@ import android.widget.Scroller;
  * <p>获取取到ViewPager 的 mScroller 属性，然后替换成我们自己的Scroller</p>
  */
 public class ViewPagerScroller extends Scroller {
-    private int mDuration = 800;// ViewPager默认的最大Duration 为600,我们默认稍微大一点。值越大越慢。
+    private int mDuration = 1000;// ViewPager默认的最大Duration 为600,我们默认稍微大一点。值越大越慢。
 
     ViewPagerScroller(Context context) {
         super(context);
