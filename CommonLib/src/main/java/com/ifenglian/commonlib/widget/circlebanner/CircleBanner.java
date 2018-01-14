@@ -51,7 +51,7 @@ public class CircleBanner extends RelativeLayout {
         viewPager.setOffscreenPageLimit(4);
         viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
         LayoutParams layoutParams1 = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        layoutParams1.setMargins(dip2px(30), dip2px(30), dip2px(30), dip2px(30));
+        layoutParams1.setMargins(dip2px(50), dip2px(30), dip2px(50), dip2px(30));
         viewPager.setLayoutParams(layoutParams1);
         addView(viewPager);
 
