@@ -10,7 +10,7 @@ import android.widget.Scroller;
  * 创建日期: 2018/1/14
  * 邮   箱: xiaofy@ifenglian.com
  * <p>
- * ＊由于ViewPager 默认的切换速度有点快，因此用一个Scroller 来控制切换的速度
+ * <p>由于ViewPager 默认的切换速度有点快，因此用一个Scroller 来控制切换的速度</p>
  * <p>而实际上ViewPager 切换本来就是用的Scroller来做的，因此我们可以通过反射来</p>
  * <p>获取取到ViewPager 的 mScroller 属性，然后替换成我们自己的Scroller</p>
  */
