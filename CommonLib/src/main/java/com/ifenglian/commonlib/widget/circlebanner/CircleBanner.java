@@ -13,6 +13,7 @@ import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.utils.common.LogUtil;
 import com.ifenglian.commonlib.utils.toast.ToastUtils;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,16 +48,38 @@ public class CircleBanner extends RelativeLayout {
     private void init(Context context) {
         mData = new ArrayList<>();
         viewPager = new ViewPager(context);
-        addView(viewPager, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        viewPager.setOffscreenPageLimit(4);
+        viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
+        LayoutParams layoutParams1 = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        layoutParams1.setMargins(dip2px(30), dip2px(30), dip2px(30), dip2px(30));
+        viewPager.setLayoutParams(layoutParams1);
+        addView(viewPager);
+
+        initViewPagerScroll();
 
         indicatorLayout = new LinearLayout(context);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
-        layoutParams.rightMargin = dip2px(context, 10);
-        layoutParams.bottomMargin = dip2px(context, 10);
+        layoutParams.rightMargin = dip2px(10);
+        layoutParams.bottomMargin = dip2px(10);
         indicatorLayout.setLayoutParams(layoutParams);
         addView(indicatorLayout);
+    }
+
+    /**
+     * 设置ViewPager的滑动速度
+     */
+    private void initViewPagerScroll() {
+        try {
+            Field mScroller = ViewPager.class.getDeclaredField("mScroller");
+            mScroller.setAccessible(true);
+            ViewPagerScroller mViewPagerScroller = new ViewPagerScroller(
+                    viewPager.getContext());
+            mScroller.set(viewPager, mViewPagerScroller);
+        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public void play(List<String> data) {
@@ -82,7 +105,7 @@ public class CircleBanner extends RelativeLayout {
             if (i != 0) {
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
-                layoutParams.leftMargin = dip2px(getContext(), 5);
+                layoutParams.leftMargin = dip2px(5);
                 indicators[i].setLayoutParams(layoutParams);
             }
         }
@@ -170,8 +193,8 @@ public class CircleBanner extends RelativeLayout {
         void onImageClick(String url, int position);
     }
 
-    private int dip2px(Context context, int dip) {
-        float scale = context.getResources().getDisplayMetrics().density;
+    private int dip2px(int dip) {
+        float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (scale * dip + 0.5);
     }
 }
