@@ -16,7 +16,6 @@ import android.widget.Scroller;
  */
 public class ViewPagerScroller extends Scroller {
     private int mDuration = 800;// ViewPager默认的最大Duration 为600,我们默认稍微大一点。值越大越慢。
-    private boolean mIsUseDefaultDuration = false;
 
     ViewPagerScroller(Context context) {
         super(context);
@@ -37,23 +36,11 @@ public class ViewPagerScroller extends Scroller {
 
     @Override
     public void startScroll(int startX, int startY, int dx, int dy, int duration) {
-        super.startScroll(startX, startY, dx, dy, mIsUseDefaultDuration ? duration : mDuration);
-    }
-
-    public void setUseDefaultDuration(boolean useDefaultDuration) {
-        mIsUseDefaultDuration = useDefaultDuration;
-    }
-
-    public boolean isUseDefaultDuration() {
-        return mIsUseDefaultDuration;
+        super.startScroll(startX, startY, dx, dy, mDuration);
     }
 
     public void setDuration(int duration) {
         mDuration = duration;
     }
 
-
-    public int getScrollDuration() {
-        return mDuration;
-    }
 }
