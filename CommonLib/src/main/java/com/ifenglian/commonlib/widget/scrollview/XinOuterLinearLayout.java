@@ -1,10 +1,14 @@
 package com.ifenglian.commonlib.widget.scrollview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -20,6 +24,9 @@ public class XinOuterLinearLayout extends LinearLayout {
     private int downX, downY; // 按下时
     private int currX, currY; // 移动时
     private int moveY; // 从按下到移动的Y距离
+    private View topView;
+    private boolean isShow;
+    private boolean animating;
 
     public XinOuterLinearLayout(Context context) {
         super(context);
@@ -36,6 +43,7 @@ public class XinOuterLinearLayout extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        topView = getChildAt(0);
         listView = (ListView) getChildAt(2);
     }
 
@@ -43,7 +51,6 @@ public class XinOuterLinearLayout extends LinearLayout {
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                getParent().getParent().requestDisallowInterceptTouchEvent(true);
                 downX = (int) ev.getX();
                 downY = (int) ev.getY();
                 break;
@@ -56,7 +63,32 @@ public class XinOuterLinearLayout extends LinearLayout {
                 }
                 // 垂直滑动
                 if (moveY > Math.abs(currX - downX)) {
-                    Log.e("AAA", "********");
+                    Log.e("AAA", "currX - downX: " + (currY - downY));
+                    if (!isShow && !animating && (currY - downY) < 0) {
+                        animating = true;
+                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", 0, -topView.getHeight());
+                        objectAnimator.setDuration(300);
+                        objectAnimator.start();
+                        objectAnimator.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                animating = false;
+                                isShow = !isShow;
+                            }
+                        });
+                    } else if (isShow && !animating && (currY - downY) > 0) {
+                        animating = true;
+                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", -topView.getHeight(), 0);
+                        objectAnimator.setDuration(300);
+                        objectAnimator.start();
+                        objectAnimator.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                animating = false;
+                                isShow = !isShow;
+                            }
+                        });
+                    }
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
@@ -64,13 +96,5 @@ public class XinOuterLinearLayout extends LinearLayout {
                 break;
         }
         return true;
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (listView.getChildCount() > 0) {
-            return listView.getChildAt(0).getTop() == 0;
-        }
-        return super.onInterceptTouchEvent(ev);
     }
 }

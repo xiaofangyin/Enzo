@@ -89,7 +89,7 @@ public class XinInnerListView extends ListView implements AbsListView.OnScrollLi
                 getParent().requestDisallowInterceptTouchEvent(true);
                 break;
         }
-        return true;
+        return super.onTouchEvent(ev);
     }
 
     /**
