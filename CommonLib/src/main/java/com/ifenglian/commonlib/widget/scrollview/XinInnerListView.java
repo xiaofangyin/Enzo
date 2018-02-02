@@ -45,7 +45,7 @@ public class XinInnerListView extends ListView implements AbsListView.OnScrollLi
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                getParent().requestDisallowInterceptTouchEvent(true);
                 downX = (int) ev.getX();
                 downY = (int) ev.getY();
                 break;
@@ -61,7 +61,7 @@ public class XinInnerListView extends ListView implements AbsListView.OnScrollLi
                     if (isFirstItemVisible) { // 当前处于顶部
                         if (currY - downY > 0) {
                             printLog("onTouchEvent ACTION_MOVE 已到顶部 下滑 父处理");
-                            getParent().getParent().requestDisallowInterceptTouchEvent(false);
+                            getParent().requestDisallowInterceptTouchEvent(false);
                         } else {
                             printLog("onTouchEvent ACTION_MOVE 已到顶部 上滑 子处理");
                         }
@@ -69,7 +69,7 @@ public class XinInnerListView extends ListView implements AbsListView.OnScrollLi
                         // 当前处于底部
                         if (currY - downY < 0) {
                             printLog("onTouchEvent ACTION_MOVE 已到底部 上滑 父处理");
-                            getParent().getParent().requestDisallowInterceptTouchEvent(false);
+                            getParent().requestDisallowInterceptTouchEvent(false);
                         } else {
                             printLog("onTouchEvent ACTION_MOVE 已到底部 下滑 子处理");
                         }
@@ -80,16 +80,16 @@ public class XinInnerListView extends ListView implements AbsListView.OnScrollLi
                 } else {
                     // 水平滚动
                     printLog("onTouchEvent ACTION_MOVE 水平滚动 父处理");
-                    getParent().getParent().requestDisallowInterceptTouchEvent(false);
+                    getParent().requestDisallowInterceptTouchEvent(false);
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 printLog("onTouchEvent ACTION_UP ========================");
-                getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                getParent().requestDisallowInterceptTouchEvent(true);
                 break;
         }
-        return super.onTouchEvent(ev);
+        return true;
     }
 
     /**
