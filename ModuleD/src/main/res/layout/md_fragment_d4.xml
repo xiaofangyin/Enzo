@@ -64,4 +64,9 @@
         android:layout_height="wrap_content"
         android:text="中间弹出dialog" />
 
+    <Button
+        android:id="@+id/btn_listview_in_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ListView in ScrollView" />
 </LinearLayout>

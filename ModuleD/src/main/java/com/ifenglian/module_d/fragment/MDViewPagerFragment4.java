@@ -12,6 +12,7 @@ import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
+import com.ifenglian.module_d.activity.MDListViewInScrollViewActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
@@ -47,6 +48,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_jni).setOnClickListener(this);
         rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
         rootView.findViewById(R.id.btn_alert_view).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_listview_in_scrollview).setOnClickListener(this);
     }
 
     @Override
@@ -114,6 +116,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
                 }
             }).show();
+        } else if (id == R.id.btn_listview_in_scrollview) {
+            Intent intent = new Intent(getContext(), MDListViewInScrollViewActivity.class);
+            startActivity(intent);
         }
     }
 }
