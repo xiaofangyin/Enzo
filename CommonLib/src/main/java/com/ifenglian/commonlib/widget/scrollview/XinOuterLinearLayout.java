@@ -22,8 +22,6 @@ public class XinOuterLinearLayout extends LinearLayout {
 
     private ListView listView;
     private int downX, downY; // 按下时
-    private int currX, currY; // 移动时
-    private int moveY; // 从按下到移动的Y距离
     private View topView;
     private boolean isShow;
     private boolean animating;
@@ -49,21 +47,22 @@ public class XinOuterLinearLayout extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        Log.e("AAA", "父类消费事件。。。");
+        Log.e("AAA", "父类消费事件。。");
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 downX = (int) ev.getX();
                 downY = (int) ev.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                currX = (int) ev.getX();
-                currY = (int) ev.getY();
-                moveY = Math.abs(currY - downY);
+
+                int currX = (int) ev.getX();
+                int currY = (int) ev.getY();
+                int moveY = Math.abs(currY - downY);
                 if (currY == downY) {
                     break;
                 }
                 // 垂直滑动
-                if (moveY > Math.abs(currX - downX)) {
+                if (moveY > Math.abs(currX - downX) && moveY > 20) {
                     Log.e("AAA", "currX - downX: " + (currY - downY));
                     if (!isShow && !animating && (currY - downY) < 0) {
                         animating = true;
@@ -91,6 +90,7 @@ public class XinOuterLinearLayout extends LinearLayout {
                         });
                     }
                 }
+                downY = currY;
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
