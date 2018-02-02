@@ -17,6 +17,10 @@ import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
+import com.ifenglian.module_d.utils.decorator.Component;
+import com.ifenglian.module_d.utils.decorator.ConcreteComponent;
+import com.ifenglian.module_d.utils.decorator.ConcreteDecoratorA;
+import com.ifenglian.module_d.utils.decorator.Decorator;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -33,6 +37,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
+        rootView.findViewById(R.id.btn_decorator).setOnClickListener(this);
         rootView.findViewById(R.id.btn_round_image_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
@@ -57,7 +62,11 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_round_image_view) {
+        if (id == R.id.btn_decorator) {
+            Component component = new ConcreteComponent();
+            Decorator decorator = new ConcreteDecoratorA(component);
+            decorator.operation();
+        } else if (id == R.id.btn_round_image_view) {
             Intent intent = new Intent(getContext(), MDRoundImageViewActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_update_version) {
