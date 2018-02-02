@@ -14,7 +14,7 @@ import android.widget.ListView;
  * 提供一个接口OnLastItemVisibleListener，当最后一个item完全显示时，回调onLastItemVisible()，可以去加载更多数据。
  */
 public class XinInnerListView extends ListView implements AbsListView.OnScrollListener {
-    private final String TAG = "XinInnerScrollView";
+    private final String TAG = "AAA";
     private boolean isFirstItemVisible; // 第一个item是否可见
     private boolean isLastItemVisible; // 最后一个item是否可见
     private int downX, downY; // 按下时

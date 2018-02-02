@@ -49,6 +49,7 @@ public class XinOuterLinearLayout extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.e("AAA", "父类消费事件。。。");
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 downX = (int) ev.getX();

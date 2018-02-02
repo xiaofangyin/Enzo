@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -38,16 +36,16 @@ public class MDListViewInScrollViewActivity extends BaseActivity {
         list = getList();
         mAdapter = new MyAdapter(this, list);
         mListView.setAdapter(mAdapter);
-        mListView.setOnLastItemVisibleListener(new XinInnerListView.OnLastItemVisibleListener() {
-            @Override
-            public void onLastItemVisible(AbsListView view, int position, Adapter adapter) {
-                if (list.size() < maxListSize) {
-                    list.addAll(getList());
-                    mAdapter.setData(list);
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+//        mListView.setOnLastItemVisibleListener(new XinInnerListView.OnLastItemVisibleListener() {
+//            @Override
+//            public void onLastItemVisible(AbsListView view, int position, Adapter adapter) {
+//                if (list.size() < maxListSize) {
+//                    list.addAll(getList());
+//                    mAdapter.setData(list);
+//                    mAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        });
     }
 
     @Override
