@@ -17,19 +17,16 @@ import com.ifenglian.commonlib.R;
 
 public class StickyNavLayout extends LinearLayout implements NestedScrollingParent {
 
-    private static final String TAG = "StickyNavLayout";
+    private static final String TAG = "AAA";
     private View mTop;
     private View mNav;
     private ViewPager mViewPager;
     private int mTopViewHeight;
-    private OverScroller mScroller;
     private ValueAnimator mOffsetAnimator;
 
     public StickyNavLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(LinearLayout.VERTICAL);
-
-        mScroller = new OverScroller(context);
     }
 
     @Override
@@ -73,8 +70,9 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
         boolean showTop = dy < 0 && getScrollY() >= 0 && !ViewCompat.canScrollVertically(target, -1);
 
         if (hiddenTop || showTop) {
-            scrollBy(0, dy);
+//            scrollBy(0, dy);
             consumed[1] = dy;
+            animateScroll(-1, false);
         }
     }
 
@@ -92,9 +90,9 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
             consumed = childAdapterPosition > TOP_CHILD_FLING_THRESHOLD;
         }
         if (!consumed) {
-            animateScroll(velocityY, computeDuration(0), consumed);
+            animateScroll(velocityY, consumed);
         } else {
-            animateScroll(velocityY, computeDuration(velocityY), consumed);
+            animateScroll(velocityY, consumed);
         }
         return true;
     }
@@ -139,7 +137,7 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
 
     }
 
-    private void animateScroll(float velocityY, final int duration, boolean consumed) {
+    private void animateScroll(float velocityY, boolean consumed) {
         final int currentOffset = getScrollY();
         final int topHeight = mTop.getHeight();
         if (mOffsetAnimator == null) {
@@ -155,7 +153,7 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
         } else {
             mOffsetAnimator.cancel();
         }
-        mOffsetAnimator.setDuration(Math.min(duration, 600));
+        mOffsetAnimator.setDuration(300);
 
         if (velocityY >= 0) {
             mOffsetAnimator.setIntValues(currentOffset, topHeight);
@@ -187,12 +185,6 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
         mTopViewHeight = mTop.getMeasuredHeight();
     }
 
-
-    public void fling(int velocityY) {
-        mScroller.fling(0, getScrollY(), 0, velocityY, 0, 0, 0, mTopViewHeight);
-        invalidate();
-    }
-
     @Override
     public void scrollTo(int x, int y) {
         if (y < 0) {
@@ -205,14 +197,4 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
             super.scrollTo(x, y);
         }
     }
-
-    @Override
-    public void computeScroll() {
-        if (mScroller.computeScrollOffset()) {
-            scrollTo(0, mScroller.getCurrY());
-            invalidate();
-        }
-    }
-
-
 }
