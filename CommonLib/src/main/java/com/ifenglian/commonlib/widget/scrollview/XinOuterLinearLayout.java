@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 /**
  * 文 件 名: XinOuterLinearLayout
@@ -18,7 +19,7 @@ import android.widget.ListView;
  * 创建日期: 2018/2/2
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class XinOuterLinearLayout extends LinearLayout {
+public class XinOuterLinearLayout extends ScrollView {
 
     private ListView listView;
     private int downX, downY; // 按下时
@@ -41,8 +42,9 @@ public class XinOuterLinearLayout extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        topView = getChildAt(0);
-        listView = (ListView) getChildAt(2);
+        LinearLayout linearLayout = (LinearLayout) getChildAt(0);
+        topView = linearLayout.getChildAt(0);
+        listView = (ListView) linearLayout.getChildAt(2);
     }
 
     @Override
@@ -62,9 +64,9 @@ public class XinOuterLinearLayout extends LinearLayout {
                     break;
                 }
                 // 垂直滑动
-                if (moveY > Math.abs(currX - downX) && moveY > 20) {
+                if (moveY > Math.abs(currX - downX) && moveY > 20 && !animating) {
                     Log.e("AAA", "currX - downX: " + (currY - downY));
-                    if (!isShow && !animating && (currY - downY) < 0) {
+                    if (!isShow && (currY - downY) < 0) {
                         animating = true;
                         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", 0, -topView.getHeight());
                         objectAnimator.setDuration(300);
@@ -76,7 +78,7 @@ public class XinOuterLinearLayout extends LinearLayout {
                                 isShow = !isShow;
                             }
                         });
-                    } else if (isShow && !animating && (currY - downY) > 0) {
+                    } else if (isShow && (currY - downY) > 0) {
                         animating = true;
                         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", -topView.getHeight(), 0);
                         objectAnimator.setDuration(300);
@@ -96,6 +98,6 @@ public class XinOuterLinearLayout extends LinearLayout {
             case MotionEvent.ACTION_UP:
                 break;
         }
-        return true;
+        return super.onTouchEvent(ev);
     }
 }
