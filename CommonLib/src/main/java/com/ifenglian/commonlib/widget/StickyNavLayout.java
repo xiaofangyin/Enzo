@@ -1,4 +1,4 @@
-package com.ifenglian.module_d.activity;
+package com.ifenglian.commonlib.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -8,28 +8,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 
-import com.ifenglian.module_d.R;
-
+import com.ifenglian.commonlib.R;
 
 public class StickyNavLayout extends LinearLayout implements NestedScrollingParent {
 
     private static final String TAG = "StickyNavLayout";
-
-
     private View mTop;
     private View mNav;
     private ViewPager mViewPager;
-
     private int mTopViewHeight;
-
     private OverScroller mScroller;
-    private VelocityTracker mVelocityTracker;
     private ValueAnimator mOffsetAnimator;
 
     public StickyNavLayout(Context context, AttributeSet attrs) {
