@@ -16,23 +16,23 @@ import android.widget.LinearLayout;
  * 创建日期: 2018/2/2
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class XinOuterLinearLayout extends LinearLayout {
+public class SGLOuterLinearLayout extends LinearLayout {
 
     private RecyclerView recyclerView;
     private int downY; // 按下时
     private View topView;
-    private boolean isShow = true;
+    private boolean isTopViewShow = true;
     private boolean animating;
 
-    public XinOuterLinearLayout(Context context) {
+    public SGLOuterLinearLayout(Context context) {
         super(context);
     }
 
-    public XinOuterLinearLayout(Context context, @Nullable AttributeSet attrs) {
+    public SGLOuterLinearLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public XinOuterLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SGLOuterLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -57,18 +57,18 @@ public class XinOuterLinearLayout extends LinearLayout {
                 }
                 // 垂直滑动
                 if (!animating) {
-                    if (isShow && (currY - downY) < 0) {
+                    if (isTopViewShow && (currY - downY) < 0) {
                         animating = true;
                         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", 0, -topView.getHeight());
                         objectAnimator.setDuration(300);
                         objectAnimator.start();
-                        isShow = !isShow;
-                    } else if (!isShow && (currY - downY) > 0) {
+                        isTopViewShow = !isTopViewShow;
+                    } else if (!isTopViewShow && (currY - downY) > 0) {
                         animating = true;
                         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", -topView.getHeight(), 0);
                         objectAnimator.setDuration(300);
                         objectAnimator.start();
-                        isShow = !isShow;
+                        isTopViewShow = !isTopViewShow;
                     }
                 }
                 downY = currY;
@@ -91,15 +91,15 @@ public class XinOuterLinearLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (y - downY > 0) {
-                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && !isShow) {
-                        Log.e("AAA", "y - mLastY > 0 isShow: " + isShow);
+                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && !isTopViewShow) {
+                        Log.e("AAA", "y - mLastY > 0 isTopViewShow: " + isTopViewShow);
                         return true;
                     }
                 }
 
                 if (y - downY < 0) {
-                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && isShow) {
-                        Log.e("AAA", "y - mLastY < 0 isShow: " + isShow);
+                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && isTopViewShow) {
+                        Log.e("AAA", "y - mLastY < 0 isTopViewShow: " + isTopViewShow);
                         return true;
                     }
                 }
