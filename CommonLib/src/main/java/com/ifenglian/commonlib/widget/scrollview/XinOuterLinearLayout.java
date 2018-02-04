@@ -1,7 +1,5 @@
 package com.ifenglian.commonlib.widget.scrollview;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -23,7 +21,7 @@ public class XinOuterLinearLayout extends LinearLayout {
     private RecyclerView recyclerView;
     private int downY; // 按下时
     private View topView;
-    private boolean isShow;
+    private boolean isShow = true;
     private boolean animating;
 
     public XinOuterLinearLayout(Context context) {
@@ -59,18 +57,19 @@ public class XinOuterLinearLayout extends LinearLayout {
                 }
                 // 垂直滑动
                 if (!animating) {
-                    if (!isShow && (currY - downY) < 0) {
+                    if (isShow && (currY - downY) < 0) {
                         animating = true;
                         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", 0, -topView.getHeight());
                         objectAnimator.setDuration(300);
                         objectAnimator.start();
-                    } else if (isShow && (currY - downY) > 0) {
+                        isShow = !isShow;
+                    } else if (!isShow && (currY - downY) > 0) {
                         animating = true;
                         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", -topView.getHeight(), 0);
                         objectAnimator.setDuration(300);
                         objectAnimator.start();
+                        isShow = !isShow;
                     }
-                    isShow = !isShow;
                 }
                 downY = currY;
                 break;
@@ -94,14 +93,14 @@ public class XinOuterLinearLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (y - mLastY > 0) {
-                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && isShow) {
+                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && !isShow) {
                         Log.e("AAA", "y - mLastY > 0 isShow: " + isShow);
                         return true;
                     }
                 }
 
                 if (y - mLastY < 0) {
-                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && !isShow) {
+                    if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && isShow) {
                         Log.e("AAA", "y - mLastY < 0 isShow: " + isShow);
                         return true;
                     }
