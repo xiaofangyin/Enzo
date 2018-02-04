@@ -1,0 +1,98 @@
+package com.ifenglian.commonlib.widget.scrollview;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+
+/**
+ * 文 件 名: XinOuterLinearLayout
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2018/2/2
+ * 邮   箱: xiaofy@ifenglian.com
+ */
+public class XinOuterLinearLayout extends LinearLayout {
+
+    private int downX, downY; // 按下时
+    private View topView;
+    private boolean isShow;
+    private boolean animating;
+
+    public XinOuterLinearLayout(Context context) {
+        super(context);
+    }
+
+    public XinOuterLinearLayout(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public XinOuterLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        topView = getChildAt(0);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        Log.e("AAA", "父类消费事件。。");
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                downX = (int) ev.getX();
+                downY = (int) ev.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+
+                int currX = (int) ev.getX();
+                int currY = (int) ev.getY();
+                int moveY = Math.abs(currY - downY);
+                if (currY == downY) {
+                    break;
+                }
+                // 垂直滑动
+                if (moveY > Math.abs(currX - downX) && moveY > 20 && !animating) {
+                    Log.e("AAA", "currX - downX: " + (currY - downY));
+                    if (!isShow && (currY - downY) < 0) {
+                        animating = true;
+                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", 0, -topView.getHeight());
+                        objectAnimator.setDuration(300);
+                        objectAnimator.start();
+                        objectAnimator.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                animating = false;
+                                isShow = !isShow;
+                            }
+                        });
+                    } else if (isShow && (currY - downY) > 0) {
+                        animating = true;
+                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", -topView.getHeight(), 0);
+                        objectAnimator.setDuration(300);
+                        objectAnimator.start();
+                        objectAnimator.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                animating = false;
+                                isShow = !isShow;
+                            }
+                        });
+                    }
+                }
+                downY = currY;
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return super.onTouchEvent(ev);
+    }
+}

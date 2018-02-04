@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget;
+package com.ifenglian.commonlib.widget.scrollview;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.OverScroller;
 
 import com.ifenglian.commonlib.R;
 
