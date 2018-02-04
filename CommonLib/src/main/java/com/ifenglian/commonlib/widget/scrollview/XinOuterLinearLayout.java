@@ -81,25 +81,23 @@ public class XinOuterLinearLayout extends LinearLayout {
         return true;
     }
 
-    int mLastY;
-
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.e("AAA", "onInterceptTouchEvent...");
         int y = (int) ev.getY();
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mLastY = y;
+                downY = y;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (y - mLastY > 0) {
+                if (y - downY > 0) {
                     if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && !isShow) {
                         Log.e("AAA", "y - mLastY > 0 isShow: " + isShow);
                         return true;
                     }
                 }
 
-                if (y - mLastY < 0) {
+                if (y - downY < 0) {
                     if (SARecyclerUtil.isRecyclerViewToTop(recyclerView) && isShow) {
                         Log.e("AAA", "y - mLastY < 0 isShow: " + isShow);
                         return true;
