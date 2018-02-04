@@ -1,5 +1,6 @@
 package com.ifenglian.commonlib.widget.scrollview;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
@@ -21,6 +23,7 @@ public class SGLOuterLinearLayout extends LinearLayout {
     private RecyclerView recyclerView;
     private int downY; // 按下时
     private View topView;
+    private View secondView;
     private boolean isTopViewShow = true;
     private boolean animating;
 
@@ -37,9 +40,19 @@ public class SGLOuterLinearLayout extends LinearLayout {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+        Log.e("AAA", "layoutParams.height: " + recyclerView.getMeasuredHeight() + "..." + topView.getMeasuredHeight());
+        layoutParams.height = recyclerView.getMeasuredHeight() + topView.getMeasuredHeight();
+        recyclerView.setLayoutParams(layoutParams);
+    }
+
+    @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         topView = getChildAt(0);
+        secondView = getChildAt(1);
         recyclerView = (RecyclerView) getChildAt(2);
     }
 
@@ -59,15 +72,23 @@ public class SGLOuterLinearLayout extends LinearLayout {
                 if (!animating) {
                     if (isTopViewShow && (currY - downY) < 0) {
                         animating = true;
-                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", 0, -topView.getHeight());
-                        objectAnimator.setDuration(300);
-                        objectAnimator.start();
+                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(topView, "translationY", 0, -topView.getHeight());
+                        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(secondView, "translationY", 0, -topView.getHeight());
+                        ObjectAnimator objectAnimator3 = ObjectAnimator.ofFloat(recyclerView, "translationY", 0, -topView.getHeight());
+                        AnimatorSet set = new AnimatorSet();
+                        set.playTogether(objectAnimator, objectAnimator2, objectAnimator3);
+                        set.setDuration(300);
+                        set.start();
                         isTopViewShow = !isTopViewShow;
                     } else if (!isTopViewShow && (currY - downY) > 0) {
                         animating = true;
-                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "translationY", -topView.getHeight(), 0);
-                        objectAnimator.setDuration(300);
-                        objectAnimator.start();
+                        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(topView, "translationY", -topView.getHeight(), 0);
+                        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(secondView, "translationY", -topView.getHeight(), 0);
+                        ObjectAnimator objectAnimator3 = ObjectAnimator.ofFloat(recyclerView, "translationY", -topView.getHeight(), 0);
+                        AnimatorSet set = new AnimatorSet();
+                        set.playTogether(objectAnimator, objectAnimator2, objectAnimator3);
+                        set.setDuration(300);
+                        set.start();
                         isTopViewShow = !isTopViewShow;
                     }
                 }
