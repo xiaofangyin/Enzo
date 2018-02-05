@@ -40,8 +40,5 @@
         <activity
             android:name=".activity.MDUpdateVersionActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MDListViewInScrollViewActivity"
-            android:screenOrientation="portrait" />
     </application>
 </manifest>
