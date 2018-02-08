@@ -28,11 +28,8 @@ public class NestedLayout extends LinearLayout {
     private ListView listView;
     private View topView, secondView;
     private int downY;
+    private int moveDistance;
     private int mHeight;
-    //控制滑动
-    private OverScroller mOverScroller;
-    //速度获取
-    private VelocityTracker mVelocityTracker;
 
     public NestedLayout(Context context) {
         this(context, null);
@@ -44,8 +41,6 @@ public class NestedLayout extends LinearLayout {
 
     public NestedLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mOverScroller = new OverScroller(context);
-        mVelocityTracker = VelocityTracker.obtain();
     }
 
     @Override
@@ -70,16 +65,9 @@ public class NestedLayout extends LinearLayout {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         LogUtil.d("onTouchEvent...");
-        mVelocityTracker.addMovement(ev);
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 downY = (int) ev.getY();
-                getParent().requestDisallowInterceptTouchEvent(true);
-                if (!mOverScroller.isFinished()) {
-                    mOverScroller.abortAnimation();
-                }
-                mVelocityTracker.clear();
-                mVelocityTracker.addMovement(ev);
                 break;
             case MotionEvent.ACTION_MOVE:
                 int currY = (int) ev.getY();
@@ -91,20 +79,8 @@ public class NestedLayout extends LinearLayout {
                 downY = currY;
                 break;
             case MotionEvent.ACTION_UP:
-                //处理松手后的Fling 1000 表示1000毫秒内运动了多少像素
-                mVelocityTracker.computeCurrentVelocity(1000, ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity());
-                int velocityX = (int) mVelocityTracker.getXVelocity();
-                if (Math.abs(velocityX) > ViewConfiguration.get(getContext()).getScaledMinimumFlingVelocity()) {
-                    fling(-velocityX);
-                }
-                mVelocityTracker.clear();
-                getParent().requestDisallowInterceptTouchEvent(false);
                 break;
             case MotionEvent.ACTION_CANCEL:
-                if (!mOverScroller.isFinished()) {
-                    mOverScroller.abortAnimation();
-                }
-                getParent().requestDisallowInterceptTouchEvent(false);
                 break;
         }
         return true;
@@ -137,11 +113,6 @@ public class NestedLayout extends LinearLayout {
         return false;
     }
 
-    private void fling(int vX) {
-        mOverScroller.fling(getScrollX(), 0, vX, 0, 0, getHeight(), 0, 0);
-        invalidate();
-    }
-
     @Override
     public void scrollTo(@Px int x, @Px int y) {
         LogUtil.e("scrollTo y: " + y);
@@ -153,17 +124,6 @@ public class NestedLayout extends LinearLayout {
         }
         if (y != getScrollY()) {
             super.scrollTo(x, y);
-        }
-    }
-
-    @Override
-    public void computeScroll() {
-        if (mOverScroller.computeScrollOffset()) {
-//            scrollTo(mOverScroller.getCurrX(), mOverScroller.getCurrY());
-//            postInvalidate();
-//            if (!mOverScroller.computeScrollOffset() ) {
-//
-//            }
         }
     }
 
