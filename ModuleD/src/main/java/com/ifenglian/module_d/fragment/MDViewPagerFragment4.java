@@ -13,14 +13,11 @@ import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
+import com.ifenglian.module_d.activity.MDNestedActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
-import com.ifenglian.module_d.utils.decorator.Component;
-import com.ifenglian.module_d.utils.decorator.ConcreteComponent;
-import com.ifenglian.module_d.utils.decorator.ConcreteDecoratorA;
-import com.ifenglian.module_d.utils.decorator.Decorator;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -63,9 +60,11 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_decorator) {
-            Component component = new ConcreteComponent();
-            Decorator decorator = new ConcreteDecoratorA(component);
-            decorator.operation();
+//            Component component = new ConcreteComponent();
+//            Decorator decorator = new ConcreteDecoratorA(component);
+//            decorator.operation();
+            Intent intent = new Intent(getContext(), MDNestedActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_round_image_view) {
             Intent intent = new Intent(getContext(), MDRoundImageViewActivity.class);
             startActivity(intent);

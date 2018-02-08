@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ifenglian.commonlib.widget.nestedlayout.NestedLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#00ffff"
+        android:gravity="center"
+        android:text="1"
+        android:textSize="28sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#f0f"
+        android:gravity="center"
+        android:text="2"
+        android:textSize="28sp" />
+
+    <ListView
+        android:id="@+id/md_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</com.ifenglian.commonlib.widget.nestedlayout.NestedLayout>
