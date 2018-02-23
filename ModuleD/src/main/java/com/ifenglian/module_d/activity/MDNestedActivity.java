@@ -1,8 +1,11 @@
 package com.ifenglian.module_d.activity;
 
-import android.widget.ListView;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 
 import com.ifenglian.commonlib.base.BaseActivity;
+import com.ifenglian.commonlib.widget.parallax.ParallaxListView;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDNestedListViewAdapter;
 
@@ -15,9 +18,11 @@ import java.util.List;
  * 创建日期: 2018/2/8
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDNestedActivity extends BaseActivity{
+public class MDNestedActivity extends BaseActivity {
 
-    private ListView listView;
+    private ParallaxListView listView;
+    private View head;
+    private ImageView parallaxImageView;
 
     @Override
     public int getLayoutId() {
@@ -26,7 +31,18 @@ public class MDNestedActivity extends BaseActivity{
 
     @Override
     public void initView() {
-        listView = findViewById(R.id.md_recycler_view);
+        listView = findViewById(R.id.parallaxListView);
+
+        head = View.inflate(MDNestedActivity.this, R.layout.md_layout_head, null);
+        parallaxImageView = head.findViewById(R.id.parallaxImageView);
+        head.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                listView.setParallaxImageView(parallaxImageView);
+                head.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+        listView.addHeaderView(head);
     }
 
     @Override
