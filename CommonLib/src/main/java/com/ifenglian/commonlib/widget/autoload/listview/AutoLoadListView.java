@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.R;
@@ -14,7 +14,7 @@ public class AutoLoadListView extends ListView implements Pullable {
     public static final int INIT = 0;
     public static final int LOADING = 1;
     private OnLoadListener mOnLoadListener;
-    private ImageView mLoadingView;
+    private ProgressBar mLoadingView;
     private TextView mStateTextView;
     private int state = INIT;
 
@@ -35,8 +35,8 @@ public class AutoLoadListView extends ListView implements Pullable {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.lib_layout_refresh_footer, null);
-        mLoadingView = view.findViewById(R.id.loading_icon);
-        mStateTextView = view.findViewById(R.id.loadstate_tv);
+        mLoadingView = view.findViewById(R.id.pb_loading_icon);
+        mStateTextView = view.findViewById(R.id.tv_load_state);
         addFooterView(view, null, false);
     }
 
@@ -61,7 +61,7 @@ public class AutoLoadListView extends ListView implements Pullable {
         this.state = state;
         switch (state) {
             case INIT:
-                mLoadingView.setVisibility(View.INVISIBLE);
+                mLoadingView.setVisibility(View.GONE);
                 mStateTextView.setText(R.string.more);
                 break;
 
