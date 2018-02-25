@@ -10,6 +10,7 @@ import com.ifenglian.commonlib.widget.alertdialog.AlertDialogCallBack;
 import com.ifenglian.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
+import com.ifenglian.module_d.activity.MDAutoLoadListViewActivity;
 import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
@@ -34,6 +35,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
+        rootView.findViewById(R.id.btn_list_view_auto_load).setOnClickListener(this);
         rootView.findViewById(R.id.btn_decorator).setOnClickListener(this);
         rootView.findViewById(R.id.btn_round_image_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
@@ -59,10 +61,10 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_decorator) {
-//            Component component = new ConcreteComponent();
-//            Decorator decorator = new ConcreteDecoratorA(component);
-//            decorator.operation();
+        if (id == R.id.btn_list_view_auto_load) {
+            Intent intent = new Intent(getContext(), MDAutoLoadListViewActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_decorator) {
             Intent intent = new Intent(getContext(), MDNestedActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_round_image_view) {

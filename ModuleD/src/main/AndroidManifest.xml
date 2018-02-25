@@ -43,5 +43,8 @@
         <activity
             android:name=".activity.MDNestedActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDAutoLoadListViewActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

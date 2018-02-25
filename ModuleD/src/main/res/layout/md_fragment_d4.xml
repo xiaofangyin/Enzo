@@ -1,67 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_decorator"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="decorator" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_round_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RoundImageView" />
+        <Button
+            android:id="@+id/btn_list_view_auto_load"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ListViewAutoLoad" />
 
-    <Button
-        android:id="@+id/btn_update_version"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="版本更新" />
+        <Button
+            android:id="@+id/btn_recycler_view_auto_load"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RecyclerViewAutoLoad" />
 
-    <Button
-        android:id="@+id/btn_lottie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="lottie" />
+        <Button
+            android:id="@+id/btn_decorator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="decorator" />
 
-    <Button
-        android:id="@+id/btn_album"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="缩略图" />
+        <Button
+            android:id="@+id/btn_round_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RoundImageView" />
 
-    <Button
-        android:id="@+id/btn_loading_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LoadingLayout" />
+        <Button
+            android:id="@+id/btn_update_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="版本更新" />
 
-    <Button
-        android:id="@+id/btn_ble"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ble" />
+        <Button
+            android:id="@+id/btn_lottie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="lottie" />
 
-    <Button
-        android:id="@+id/btn_jni"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="jni" />
+        <Button
+            android:id="@+id/btn_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="缩略图" />
 
-    <Button
-        android:id="@+id/btn_photo_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="底部弹出dialog" />
+        <Button
+            android:id="@+id/btn_loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LoadingLayout" />
 
-    <Button
-        android:id="@+id/btn_alert_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="中间弹出dialog" />
+        <Button
+            android:id="@+id/btn_ble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ble" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_jni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="jni" />
+
+        <Button
+            android:id="@+id/btn_photo_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="底部弹出dialog" />
+
+        <Button
+            android:id="@+id/btn_alert_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="中间弹出dialog" />
+
+    </LinearLayout>
+</ScrollView>
