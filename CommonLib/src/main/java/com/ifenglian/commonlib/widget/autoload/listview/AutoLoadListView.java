@@ -82,6 +82,7 @@ public class AutoLoadListView extends ListView implements Pullable {
     @Override
     public boolean canPullDown() {
         if (state == LOADING) {
+            // 加载更多的时候不能下拉刷新
             return false;
         } else if (getCount() == 0) {
             // 没有item的时候也可以下拉刷新
