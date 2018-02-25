@@ -105,7 +105,7 @@ public class AutoLoadListView extends ListView implements Pullable {
             // 没有item的时候也可以上拉加载
             return true;
         } else if (getLastVisiblePosition() == (getCount() - 1)) {
-            // 滑到底部了
+            // 滑到底部了   getChildAt(int position)方法的参数position指的是当前可见区域中的ChildView位置
             if (getChildAt(getLastVisiblePosition() - getFirstVisiblePosition()) != null
                     && getChildAt(getLastVisiblePosition() - getFirstVisiblePosition()).getTop() < getMeasuredHeight()) {
                 return true;
