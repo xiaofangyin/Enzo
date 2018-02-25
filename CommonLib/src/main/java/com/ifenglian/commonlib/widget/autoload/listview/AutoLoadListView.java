@@ -34,8 +34,7 @@ public class AutoLoadListView extends ListView implements Pullable {
     }
 
     private void init(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.lib_layout_refresh_footer,
-                null);
+        View view = LayoutInflater.from(context).inflate(R.layout.lib_layout_refresh_footer, null);
         mLoadingView = view.findViewById(R.id.loading_icon);
         mStateTextView = view.findViewById(R.id.loadstate_tv);
         addFooterView(view, null, false);
@@ -82,15 +81,16 @@ public class AutoLoadListView extends ListView implements Pullable {
 
     @Override
     public boolean canPullDown() {
-        if (getCount() == 0) {
+        if (state == LOADING) {
+            return false;
+        } else if (getCount() == 0) {
             // 没有item的时候也可以下拉刷新
             return true;
-        } else if (getFirstVisiblePosition() == 0
-                && getChildAt(0).getTop() >= 0) {
+        } else if (getFirstVisiblePosition() == 0 && getChildAt(0).getTop() >= 0) {
             // 滑到ListView的顶部了
             return true;
-        } else
-            return false;
+        }
+        return false;
     }
 
     public void setOnLoadListener(OnLoadListener listener) {
@@ -98,7 +98,7 @@ public class AutoLoadListView extends ListView implements Pullable {
     }
 
     /**
-     * @return footerview可见时返回true，否则返回false
+     * @return FooterView可见时返回true，否则返回false
      */
     public boolean reachBottom() {
         if (getCount() == 0) {
@@ -107,10 +107,9 @@ public class AutoLoadListView extends ListView implements Pullable {
         } else if (getLastVisiblePosition() == (getCount() - 1)) {
             // 滑到底部了
             if (getChildAt(getLastVisiblePosition() - getFirstVisiblePosition()) != null
-                    && getChildAt(
-                    getLastVisiblePosition()
-                            - getFirstVisiblePosition()).getTop() < getMeasuredHeight())
+                    && getChildAt(getLastVisiblePosition() - getFirstVisiblePosition()).getTop() < getMeasuredHeight()) {
                 return true;
+            }
         }
         return false;
     }
