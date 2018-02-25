@@ -52,7 +52,7 @@ public class MDAutoLoadListViewActivity extends BaseActivity implements AutoLoad
      */
     private void initListView() {
         List<String> items = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 13; i++) {
             items.add("这里是item " + i);
         }
         adapter = new MDAutoLoadListViewAdapter(this, items);
