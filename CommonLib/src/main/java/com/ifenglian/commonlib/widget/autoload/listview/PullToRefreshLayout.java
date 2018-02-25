@@ -100,7 +100,7 @@ public class PullToRefreshLayout extends RelativeLayout {
                 }
 
             }
-            if (pullDownY > 0){
+            if (pullDownY > 0) {
                 pullDownY -= MOVE_SPEED;
             }
             if (pullDownY <= 0) {
@@ -108,7 +108,7 @@ public class PullToRefreshLayout extends RelativeLayout {
                 pullDownY = 0;
                 pullView.clearAnimation();
                 // 隐藏下拉头时有可能还在刷新，只有当前状态不是正在刷新时才改变状态
-                if (state != REFRESHING){
+                if (state != REFRESHING) {
                     changeState(INIT);
                 }
                 timer.cancel();
@@ -243,15 +243,17 @@ public class PullToRefreshLayout extends RelativeLayout {
                         if (pullDownY < 0) {
                             pullDownY = 0;
                         }
-                        if (pullDownY > getMeasuredHeight())
+                        if (pullDownY > getMeasuredHeight()) {
                             pullDownY = getMeasuredHeight();
+                        }
                         if (state == REFRESHING) {
                             // 正在刷新的时候触摸移动
                             isTouch = true;
                         }
                     }
-                } else
+                } else {
                     mEvents = 0;
+                }
                 lastY = ev.getY();
                 // 根据下拉距离改变比例
                 radio = (float) (2 + 2 * Math.tan(Math.PI / 2 / getMeasuredHeight() * (pullDownY)));
@@ -272,13 +274,14 @@ public class PullToRefreshLayout extends RelativeLayout {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if (pullDownY > refreshDist)
+                if (pullDownY > refreshDist) {
                     // 正在刷新时往下拉（正在加载时往上拉），释放后下拉头（上拉头）不隐藏
                     isTouch = false;
+                }
                 if (state == RELEASE_TO_REFRESH) {
                     changeState(REFRESHING);
                     // 刷新操作
-                    if (mListener != null){
+                    if (mListener != null) {
                         mListener.onRefresh(this);
                     }
                 }
