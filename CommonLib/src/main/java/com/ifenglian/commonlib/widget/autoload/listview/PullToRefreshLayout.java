@@ -90,8 +90,7 @@ public class PullToRefreshLayout extends RelativeLayout {
         @Override
         public void handleMessage(Message msg) {
             // 回弹速度随下拉距离moveDeltaY增大而增大
-            MOVE_SPEED = (float) (8 + 5 * Math.tan(Math.PI / 2
-                    / getMeasuredHeight() * (pullDownY)));
+            MOVE_SPEED = (float) (8 + 5 * Math.tan(Math.PI / 2 / getMeasuredHeight() * (pullDownY)));
             if (!isTouch) {
                 // 正在刷新，且没有往上推的话则悬停，显示"正在刷新..."
                 if (state == REFRESHING && pullDownY <= refreshDist) {
