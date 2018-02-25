@@ -43,7 +43,7 @@ public class AutoLoadListView extends ListView implements Pullable {
     }
 
     private void init(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.load_more,
+        View view = LayoutInflater.from(context).inflate(R.layout.lib_layout_refresh_footer,
                 null);
         mLoadingView = view.findViewById(R.id.loading_icon);
 //		mLoadingView.setBackgroundResource(R.anim.loading_anim);

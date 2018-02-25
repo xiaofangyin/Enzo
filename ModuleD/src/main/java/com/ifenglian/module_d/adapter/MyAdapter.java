@@ -43,7 +43,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(context).inflate(R.layout.list_item_layout, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.md_item_list_autoload_layout, null);
         TextView tv = view.findViewById(R.id.tv);
         tv.setText(items.get(position));
         return view;
