@@ -37,7 +37,7 @@ public class AutoLoadListView extends ListView implements Pullable {
         View view = LayoutInflater.from(context).inflate(R.layout.lib_layout_refresh_footer, null);
         mLoadingView = view.findViewById(R.id.pb_loading_icon);
         mStateTextView = view.findViewById(R.id.tv_load_state);
-        addFooterView(view, null, false);
+        addFooterView(view);
     }
 
     @Override
