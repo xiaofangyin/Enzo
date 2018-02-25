@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="#ffffff"
         android:divider="#666666"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+        android:overScrollMode="never" />
 
 </com.ifenglian.commonlib.widget.autoload.listview.PullToRefreshLayout>
