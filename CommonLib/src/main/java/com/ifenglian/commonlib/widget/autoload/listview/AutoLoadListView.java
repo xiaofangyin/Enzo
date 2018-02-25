@@ -3,7 +3,6 @@ package com.ifenglian.commonlib.widget.autoload.listview;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -11,13 +10,6 @@ import android.widget.TextView;
 
 import com.ifenglian.commonlib.R;
 
-/**
- * 如果不需要下拉刷新直接在canPullDown中返回false，这里的自动加载和下拉刷新没有冲突，通过增加在尾部的footerview实现自动加载，
- * 所以在使用中不要再动footerview了
- * 更多详解见博客http://blog.csdn.net/zhongkejingwang/article/details/38963177
- *
- * @author chenjing
- */
 public class AutoLoadListView extends ListView implements Pullable {
     public static final int INIT = 0;
     public static final int LOADING = 1;
@@ -25,7 +17,6 @@ public class AutoLoadListView extends ListView implements Pullable {
     private ImageView mLoadingView;
     private TextView mStateTextView;
     private int state = INIT;
-    private boolean canLoad = true;
 
     public AutoLoadListView(Context context) {
         super(context);
@@ -46,25 +37,8 @@ public class AutoLoadListView extends ListView implements Pullable {
         View view = LayoutInflater.from(context).inflate(R.layout.lib_layout_refresh_footer,
                 null);
         mLoadingView = view.findViewById(R.id.loading_icon);
-//		mLoadingView.setBackgroundResource(R.anim.loading_anim);
         mStateTextView = view.findViewById(R.id.loadstate_tv);
         addFooterView(view, null, false);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        switch (ev.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                // 按下的时候禁止自动加载
-                canLoad = false;
-                break;
-            case MotionEvent.ACTION_UP:
-                // 松开手判断是否自动加载
-                canLoad = true;
-                checkLoad();
-                break;
-        }
-        return super.onTouchEvent(ev);
     }
 
     @Override
@@ -78,8 +52,7 @@ public class AutoLoadListView extends ListView implements Pullable {
      * 判断是否满足自动加载条件
      */
     private void checkLoad() {
-        if (reachBottom() && mOnLoadListener != null && state != LOADING
-                && canLoad) {
+        if (reachBottom() && mOnLoadListener != null && state != LOADING) {
             mOnLoadListener.onLoad(this);
             changeState(LOADING);
         }
@@ -143,6 +116,6 @@ public class AutoLoadListView extends ListView implements Pullable {
     }
 
     public interface OnLoadListener {
-        void onLoad(AutoLoadListView pullableListView);
+        void onLoad(AutoLoadListView listView);
     }
 }

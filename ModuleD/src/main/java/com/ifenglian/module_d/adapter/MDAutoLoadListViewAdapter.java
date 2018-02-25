@@ -11,12 +11,12 @@ import com.ifenglian.module_d.R;
 
 import java.util.List;
 
-public class MyAdapter extends BaseAdapter {
+public class MDAutoLoadListViewAdapter extends BaseAdapter {
 
     List<String> items;
     Context context;
 
-    public MyAdapter(Context context, List<String> items) {
+    public MDAutoLoadListViewAdapter(Context context, List<String> items) {
         this.context = context;
         this.items = items;
     }
