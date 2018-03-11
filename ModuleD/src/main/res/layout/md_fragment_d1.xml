@@ -7,7 +7,7 @@
     <com.ifenglian.commonlib.widget.circlebanner.CircleBanner
         android:id="@+id/md_circle_banner"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         android:clipChildren="false" />
 
     <com.ifenglian.commonlib.widget.snowview.SnowView
