@@ -15,8 +15,8 @@ import com.ifenglian.commonlib.widget.boheruler.Ruler;
 import com.ifenglian.commonlib.widget.boheruler.RulerCallback;
 import com.ifenglian.commonlib.widget.progress.CircularProgressBar;
 import com.ifenglian.commonlib.widget.progress.CircularProgressBarWithRate;
+import com.ifenglian.commonlib.widget.progress.FLCSeekBar;
 import com.ifenglian.commonlib.widget.progress.HorizontalProgressBar;
-import com.ifenglian.commonlib.widget.progress.SGLSeekBar;
 import com.ifenglian.commonlib.widget.progress.SRDiskCapacityProgressBar;
 import com.ifenglian.module_d.R;
 
@@ -29,7 +29,7 @@ import com.ifenglian.module_d.R;
 public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickListener {
 
     private int progress = 0;
-    private SGLSeekBar seekBar;
+    private FLCSeekBar seekBar;
     private HorizontalProgressBar mCustomProgressBar;
     private SRDiskCapacityProgressBar mDiskProgressBar;
     private CircularProgressBar mCircularProgressBar;
@@ -44,7 +44,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
-        seekBar = rootView.findViewById(R.id.seek_bar);
+        seekBar = rootView.findViewById(R.id.seek_bar1);
         mCircularProgressBar = rootView.findViewById(R.id.circular_progress_bar);
         mCircularProgressBar.setMax(100);
 
@@ -66,20 +66,20 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initListener(View rootView) {
-        seekBar.setOnSeekChangedListener(new SGLSeekBar.OnSeekBarChangedListener() {
+        seekBar.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
             @Override
-            public void onProgressChanged(SGLSeekBar seekBar, int percent) {
+            public void onProgressChanged(FLCSeekBar seekBar, int percent) {
                 LogUtil.d("percent: " + percent);
                 ToastUtils.showToast(String.valueOf(percent));
             }
 
             @Override
-            public void onStartTrackingTouch(SGLSeekBar seekBar, int percent) {
+            public void onStartTrackingTouch(FLCSeekBar seekBar, int percent) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(SGLSeekBar seekBar, int percent) {
+            public void onStopTrackingTouch(FLCSeekBar seekBar, int percent) {
 
             }
         });

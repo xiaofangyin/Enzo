@@ -26,12 +26,20 @@
             android:layout_margin="20dp" />
     </LinearLayout>
 
-    <com.ifenglian.commonlib.widget.progress.SGLSeekBar
-        android:id="@+id/seek_bar"
+    <com.ifenglian.commonlib.widget.progress.FLCSeekBar
+        android:id="@+id/seek_bar1"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp" />
+
+    <com.ifenglian.commonlib.widget.progress.FLCSeekBar
+        android:id="@+id/seek_bar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        app:lineHeight="5dp" />
+        app:bitmapThumb="@mipmap/md_icon_thumb"
+        app:lineColorSelected="#30B5FF"
+        app:lineHeight="4dp" />
 
     <com.ifenglian.commonlib.widget.progress.HorizontalProgressBar
         android:id="@+id/web_view_progress_bar"

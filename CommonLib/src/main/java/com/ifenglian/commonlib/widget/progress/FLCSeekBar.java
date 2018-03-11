@@ -2,6 +2,8 @@ package com.ifenglian.commonlib.widget.progress;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,33 +26,35 @@ import com.nineoldandroids.animation.ValueAnimator;
  * 创建日期: 2017/8/17
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class SGLSeekBar extends View {
+public class FLCSeekBar extends View {
 
+    private static final String TAG = "FLCSeekBar";
     private Paint paint;
     private RectF line;
     private Thumb thumb;
 
     private int colorLineSelected, colorLineUnSelected, colorEdge;
     private int lineTop, lineBottom, lineLeft, lineRight;
-    private int lineWidth, lineHeight;
-    private int lineCorners;
-    private int seekBarRadius;
+    private int lineWidth, lineHeight, lineCorners;
     private int cellsCount = 1;
     private float cellsPercent;
+    private Bitmap bitmapThumb;
 
-    public SGLSeekBar(Context context) {
+    public FLCSeekBar(Context context) {
         this(context, null);
     }
 
-    public SGLSeekBar(Context context, AttributeSet attrs) {
+    public FLCSeekBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SGLSeekBar);
+        thumb = new Thumb();
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FLCSeekBar);
         try {
-            colorLineSelected = a.getColor(R.styleable.SGLSeekBar_lineColorSelected, 0xFF97DAFF);
-            colorLineUnSelected = a.getColor(R.styleable.SGLSeekBar_lineColorUnSelected, 0xFFD9D9D9);
-            colorEdge = a.getColor(R.styleable.SGLSeekBar_circleColorEdge, 0xFF30B5FF);
-            lineHeight = (int) a.getDimension(R.styleable.SGLSeekBar_lineHeight, 5);
-            int cells = a.getInt(R.styleable.SGLSeekBar_cells, 1);
+            colorLineSelected = a.getColor(R.styleable.FLCSeekBar_lineColorSelected, 0xFF97DAFF);
+            colorLineUnSelected = a.getColor(R.styleable.FLCSeekBar_lineColorUnSelected, 0xFFD9D9D9);
+            colorEdge = a.getColor(R.styleable.FLCSeekBar_circleColorEdge, 0xFF30B5FF);
+            lineHeight = (int) a.getDimension(R.styleable.FLCSeekBar_lineHeight, dip2px(4));
+            bitmapThumb = BitmapFactory.decodeResource(getResources(), a.getResourceId(R.styleable.FLCSeekBar_bitmapThumb, 0));
+            int cells = a.getInt(R.styleable.FLCSeekBar_cells, 1);
             setRules(cells);
         } finally {
             a.recycle();
@@ -97,26 +101,72 @@ public class SGLSeekBar extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int minimumWidth = getSuggestedMinimumWidth();
+        int minimumHeight = getSuggestedMinimumHeight();
+        int width = measureWidth(minimumWidth, widthMeasureSpec);
+        int height = measureHeight(minimumHeight, heightMeasureSpec);
+        setMeasuredDimension(width, height);
+    }
+
+    private int measureWidth(int defaultWidth, int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                defaultWidth = specSize;
+                break;
+            case MeasureSpec.EXACTLY:
+                defaultWidth = specSize;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                defaultWidth = Math.max(defaultWidth, specSize);
+        }
+        return defaultWidth;
+    }
+
+    private int measureHeight(int defaultHeight, int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                defaultHeight = bitmapThumb == null ? dip2px(25) : bitmapThumb.getHeight();
+                break;
+            case MeasureSpec.EXACTLY:
+                defaultHeight = specSize;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                defaultHeight = Math.max(defaultHeight, specSize);
+                break;
+        }
+        return defaultHeight;
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        seekBarRadius = h / 2;
-
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
 
-        lineLeft = seekBarRadius;
-        lineRight = w - seekBarRadius;
-        lineTop = seekBarRadius - lineHeight / 2;
-        lineBottom = seekBarRadius + lineHeight / 2;
-        lineWidth = lineRight - lineLeft;
+        if (bitmapThumb == null) {
+            lineLeft = h / 2;
+            lineRight = w - h / 2;
+            lineWidth = lineRight - lineLeft;
+            thumb.onSizeChanged(h / 2, h / 2, h, lineWidth);
+        } else {
+            lineLeft = bitmapThumb.getWidth() / 2;
+            lineRight = w - bitmapThumb.getWidth() / 2;
+            lineWidth = lineRight - lineLeft;
+            thumb.onSizeChanged(bitmapThumb.getWidth() / 2, h / 2, h, lineWidth);
+        }
+        lineTop = h / 2 - lineHeight / 2;
+        lineBottom = h / 2 + lineHeight / 2;
 
         line = new RectF();
         line.set(lineLeft, lineTop, lineRight, lineBottom);
         lineCorners = (int) ((lineBottom - lineTop) * 0.5f);
-
-        thumb = new Thumb();
-        thumb.onSizeChanged(seekBarRadius, seekBarRadius, h, lineWidth);
     }
 
     @Override
@@ -128,13 +178,13 @@ public class SGLSeekBar extends View {
         canvas.drawRoundRect(line, lineCorners, lineCorners, paint);
 
         paint.setColor(colorLineSelected);
-        line.set(lineLeft, lineTop, thumb.left + thumb.widthSize / 2 + thumb.lineWidth * thumb.currPercent, lineBottom);
+        line.set(lineLeft, lineTop, thumb.left + thumb.thumbWidth / 2 + thumb.lineWidth * thumb.currPercent, lineBottom);
         canvas.drawRoundRect(line, lineCorners, lineCorners, paint);
 
         if (cellsCount > 1) {
             paint.setColor(colorEdge);
             for (int i = 0; i <= cellsCount; i++) {
-                canvas.drawCircle(lineLeft + i * cellsPercent * lineWidth, seekBarRadius, lineHeight / 2, paint);
+                canvas.drawCircle(lineLeft + i * cellsPercent * lineWidth, getHeight() / 2, lineHeight / 2, paint);
             }
         }
         thumb.draw(canvas);
@@ -151,7 +201,7 @@ public class SGLSeekBar extends View {
                     thumb.material = 1;
                     invalidate();
                     if (callback != null) {
-                        callback.onStartTrackingTouch(SGLSeekBar.this, Math.round(thumb.currPercent * 100));
+                        callback.onStartTrackingTouch(FLCSeekBar.this, Math.round(thumb.currPercent * 100));
                     }
                 }
                 return touchResult;
@@ -174,7 +224,7 @@ public class SGLSeekBar extends View {
                     invalidate();
 
                     if (callback != null) {
-                        callback.onProgressChanged(SGLSeekBar.this, progress);
+                        callback.onProgressChanged(FLCSeekBar.this, progress);
                     }
                 }
                 break;
@@ -183,7 +233,7 @@ public class SGLSeekBar extends View {
                 getParent().requestDisallowInterceptTouchEvent(false);
                 thumb.materialRestore();
                 if (callback != null) {
-                    callback.onStopTrackingTouch(SGLSeekBar.this, Math.round(thumb.currPercent * 100));
+                    callback.onStopTrackingTouch(FLCSeekBar.this, Math.round(thumb.currPercent * 100));
                 }
                 break;
         }
@@ -195,7 +245,8 @@ public class SGLSeekBar extends View {
         RadialGradient shadowGradient;
         ValueAnimator valueAnimator;
         int lineWidth;
-        int widthSize, heightSize;
+        int parentHeight;
+        int thumbWidth, thumbHeight;
         int left, right, top, bottom;
         float currPercent;
         float material;
@@ -211,22 +262,32 @@ public class SGLSeekBar extends View {
             }
         };
 
-        void onSizeChanged(int centerX, int centerY, int hSize, int parentLineWidth) {
-            heightSize = hSize;
-            widthSize = (int) (heightSize * 0.8f);
-            left = centerX - widthSize / 2;
-            right = centerX + widthSize / 2;
-            top = centerY - heightSize / 2;
-            bottom = centerY + heightSize / 2;
-            lineWidth = parentLineWidth;
+        void onSizeChanged(int centerX, int centerY, int hSize, int lineWidth) {
+            this.lineWidth = lineWidth;
+            this.parentHeight = hSize;
+            if (bitmapThumb == null) {
+                thumbWidth = (int) (hSize * 0.8f);
+                thumbHeight = hSize;
+                left = centerX - thumbWidth / 2;
+                right = centerX + thumbWidth / 2;
+
+                int radius = (int) (thumbWidth * 0.5f);
+                int mShadowCenterX = thumbWidth / 2;
+                int mShadowCenterY = thumbHeight / 2;
+                shadowGradient = new RadialGradient(mShadowCenterX, mShadowCenterY, radius, Color.BLACK, Color.TRANSPARENT, Shader.TileMode.CLAMP);
+            } else {
+                thumbWidth = bitmapThumb.getWidth();
+                thumbHeight = bitmapThumb.getHeight();
+                left = centerX - bitmapThumb.getWidth() / 2;
+                right = centerX + bitmapThumb.getWidth() / 2;
+            }
+
+            top = centerY - thumbHeight / 2;
+            bottom = centerY + thumbHeight / 2;
 
             defaultPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             defaultPaint.setAntiAlias(true);
             defaultPaint.setDither(true);
-            int radius = (int) (widthSize * 0.5f);
-            int mShadowCenterX = widthSize / 2;
-            int mShadowCenterY = heightSize / 2;
-            shadowGradient = new RadialGradient(mShadowCenterX, mShadowCenterY, radius, Color.BLACK, Color.TRANSPARENT, Shader.TileMode.CLAMP);
         }
 
         boolean onTouchEvent(MotionEvent event) {
@@ -254,25 +315,30 @@ public class SGLSeekBar extends View {
         }
 
         private void drawThumb(Canvas canvas) {
-            int centerX = widthSize / 2;
-            int centerY = heightSize / 2;
-            int radius = widthSize / 2;
-            // 绘制阴影
-            defaultPaint.setStyle(Paint.Style.FILL);
-            canvas.save();
-            canvas.translate(0, radius * 0.25f);
-            defaultPaint.setShader(shadowGradient);
-            canvas.drawCircle(centerX, centerY, radius, defaultPaint);
-            defaultPaint.setShader(null);
-            canvas.restore();
-            // 绘制实心圆
-            defaultPaint.setStyle(Paint.Style.FILL);
-            defaultPaint.setColor(te.evaluate(material, 0xFFFFFFFF, 0xFFE7E7E7));
-            canvas.drawCircle(centerX, centerY, radius, defaultPaint);
-            // 绘制边框
-            defaultPaint.setStyle(Paint.Style.STROKE);
-            defaultPaint.setColor(0xFFD7D7D7);
-            canvas.drawCircle(centerX, centerY, radius, defaultPaint);
+            if (bitmapThumb == null) {
+                int centerX = thumbWidth / 2;
+                int centerY = thumbHeight / 2;
+                int radius = thumbWidth / 2;
+                // 绘制阴影
+                defaultPaint.setStyle(Paint.Style.FILL);
+                canvas.save();
+                canvas.translate(0, radius * 0.25f);
+                defaultPaint.setShader(shadowGradient);
+                canvas.drawCircle(centerX, centerY, radius, defaultPaint);
+                defaultPaint.setShader(null);
+                canvas.restore();
+                // 绘制实心圆
+                defaultPaint.setStyle(Paint.Style.FILL);
+                defaultPaint.setColor(te.evaluate(material, 0xFFFFFFFF, 0xFFE7E7E7));
+                canvas.drawCircle(centerX, centerY, radius, defaultPaint);
+                // 绘制边框
+                defaultPaint.setStyle(Paint.Style.STROKE);
+                defaultPaint.setColor(0xFFD7D7D7);
+                canvas.drawCircle(centerX, centerY, radius, defaultPaint);
+            } else {
+                int top = parentHeight / 2 - bitmapThumb.getHeight() / 2;
+                canvas.drawBitmap(bitmapThumb, 0, top, defaultPaint);
+            }
         }
 
         private void materialRestore() {
@@ -280,8 +346,8 @@ public class SGLSeekBar extends View {
             valueAnimator = ValueAnimator.ofFloat(material, 0);
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    material = (float) valueAnimator.getAnimatedValue();
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    material = (float) animation.getAnimatedValue();
                     invalidate();
                 }
             });
@@ -303,11 +369,15 @@ public class SGLSeekBar extends View {
     }
 
     public interface OnSeekBarChangedListener {
-        void onProgressChanged(SGLSeekBar seekBar, int percent);
+        void onProgressChanged(FLCSeekBar seekBar, int percent);
 
-        void onStartTrackingTouch(SGLSeekBar seekBar, int percent);
+        void onStartTrackingTouch(FLCSeekBar seekBar, int percent);
 
-        void onStopTrackingTouch(SGLSeekBar seekBar, int percent);
+        void onStopTrackingTouch(FLCSeekBar seekBar, int percent);
+    }
+
+    private int dip2px(float dip) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dip * scale + 0.5f);
     }
 }
-
