@@ -49,10 +49,6 @@ public class CircleBanner extends RelativeLayout {
         mData = new ArrayList<>();
         viewPager = new ViewPager(context);
         viewPager.setOffscreenPageLimit(4);
-//        viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
-//        LayoutParams layoutParams1 = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-//        layoutParams1.setMargins(dip2px(50), dip2px(30), dip2px(50), dip2px(30));
-//        viewPager.setLayoutParams(layoutParams1);
         addView(viewPager);
 
         initViewPagerScroll();
@@ -74,8 +70,7 @@ public class CircleBanner extends RelativeLayout {
         try {
             Field mScroller = ViewPager.class.getDeclaredField("mScroller");
             mScroller.setAccessible(true);
-            ViewPagerScroller mViewPagerScroller = new ViewPagerScroller(
-                    viewPager.getContext());
+            ViewPagerScroller mViewPagerScroller = new ViewPagerScroller(viewPager.getContext());
             mScroller.set(viewPager, mViewPagerScroller);
         } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
             e.printStackTrace();
