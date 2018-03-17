@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="#878787"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -15,6 +16,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="30dp" />
+
+        <com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicator="BallPulse" />
+
+        <com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicator_color="#f0f"
+            app:indicator="BallSpinFadeLoader" />
 
         <com.ifenglian.commonlib.widget.togglebutton.FlToggleButton
             android:layout_width="51dp"
