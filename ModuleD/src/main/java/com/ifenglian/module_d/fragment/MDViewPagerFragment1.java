@@ -38,13 +38,12 @@ public class MDViewPagerFragment1 extends BaseFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         List<String> data = new ArrayList<>();
-        data.add("http://onq81n53u.bkt.clouddn.com/photo1.jpg");
-        data.add("http://onq81n53u.bkt.clouddn.com/photo2.jpg");
-        data.add("http://img.taodiantong.cn/v55183/infoimg/2013-07/130720115322ky.jpg");
-        data.add("http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg");
-        data.add("http://pic18.nipic.com/20111215/577405_080531548148_2.jpg");
-        data.add("http://pic15.nipic.com/20110722/2912365_092519919000_2.jpg");
-        data.add("http://pic.58pic.com/58pic/12/64/27/55U58PICrdX.jpg");
+        data.add("http://file06.16sucai.com/2016/0428/cd094f5623151c096b820400fc71eac3.jpg");
+        data.add("http://file06.16sucai.com/2016/0425/67a5159babcb1df3ecf68197a513af61.jpg");
+        data.add("http://file06.16sucai.com/2016/0425/73e2fc8d7871ae4952ea2789f3f5b24f.jpg");
+        data.add("http://file06.16sucai.com/2016/0425/006fb503a3ec0822c2b1a10405b069a8.jpg");
+        data.add("http://file06.16sucai.com/2016/0425/bbdec65210c15d347dbc17d88c5535be.jpg");
+        data.add("http://file06.16sucai.com/2016/0425/a768086eef8c2abb98eabbcee8ecd578.jpg");
         circleBanner.play(data);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.md_icon_snow);
