@@ -93,8 +93,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     /**
      * 增加头部布局
      * 暂时只能添加一个头布局
-     *
-     * @param view
      */
     public void addHeaderView(View view) {
         if (mHeaderViews == null || headerTypes == null)
@@ -123,8 +121,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 自定义刷新View
-     *
-     * @param refreshView
      */
     public void setRefreshView(BasePullToRefreshView refreshView) {
         this.headerRefreshView = refreshView;
@@ -132,8 +128,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 自定义加载View
-     *
-     * @param loadMoreView
      */
     public void setLoadMoreView(BaseLoadMoreView loadMoreView) {
         this.loadMoreView = loadMoreView;
@@ -186,8 +180,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 是否允许刷新
-     *
-     * @param enabled
      */
     public void setPullRefreshEnabled(boolean enabled) {
         isAllowRefresh = enabled;
@@ -195,8 +187,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 是否允许加载更多
-     *
-     * @param enabled
      */
     public void setLoadMoreEnabled(boolean enabled) {
         isAllowLoadMore = enabled;
@@ -225,8 +215,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 保证GridLayoutManager加载更多和headView占一行
-     *
-     * @param layout
      */
     @Override
     public void setLayoutManager(LayoutManager layout) {
@@ -353,8 +341,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 是否正在loading数据
-     *
-     * @return
      */
     public boolean isLoading() {
         if (loadMoreView.getState() == BaseLoadMoreView.STATE_LOADING) {
@@ -374,10 +360,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     }
 
     /**
-     * ======================================================================================================================================
-     */
-
-    /**
      * 根据header的ViewType判断是哪个header
      */
     private View getHeaderViewByType(int itemType) {
@@ -391,9 +373,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 判断一个type是否为HeaderType
-     *
-     * @param itemViewType
-     * @return
      */
     private boolean isHeaderType(int itemViewType) {
         if (mHeaderViews == null || headerTypes == null)
@@ -403,9 +382,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 判断内部adapter的type是否跟定义的头部和底部itemtype一致
-     *
-     * @param itemViewType
-     * @return
      */
     private boolean isDefinitionWithSame(int itemViewType) {
         if (itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_LOADMORE_FOOTER
@@ -457,8 +433,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 配合BasePullToRefreshAdapter使用，用来获取除去头部View之后对应的item
-     *
-     * @return
      */
     public int getRealItemCount() {
         int itemCount;
@@ -507,11 +481,11 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
         private Adapter adapter;
 
-        public HeaderAndFooterAdapter(Adapter adapter) {
+        HeaderAndFooterAdapter(Adapter adapter) {
             this.adapter = adapter;
         }
 
-        public boolean isHeader(int position) {
+        boolean isHeader(int position) {
             if (mHeaderViews == null)
                 return false;
             if (isAllowRefresh) {
@@ -522,7 +496,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
         }
 
-        public boolean isFooter(int position) {
+        boolean isFooter(int position) {
             if (isAllowLoadMore) {
                 return position == getItemCount() - 1;
             } else {
@@ -530,7 +504,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             }
         }
 
-        public boolean isRefreshHeader(int position) {
+        boolean isRefreshHeader(int position) {
             if (isAllowRefresh) {
                 return position == 0;
             } else {
@@ -752,7 +726,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         private class HeaderAndFooterViewHolder extends ViewHolder {
-            public HeaderAndFooterViewHolder(View itemView) {
+            HeaderAndFooterViewHolder(View itemView) {
                 super(itemView);
             }
         }
@@ -761,8 +735,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 设置加载更多监听
-     *
-     * @param listener
      */
     public void setRefreshAndLoadMoreListener(OnRefreshAndLoadMoreListener listener) {
         mLoadingListener = listener;
