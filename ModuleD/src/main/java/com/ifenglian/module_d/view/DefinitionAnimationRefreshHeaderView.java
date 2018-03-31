@@ -13,13 +13,7 @@ import android.widget.LinearLayout;
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
 import com.ifenglian.module_d.R;
 
-/**
- * 自定义默认动画
- * Created by yangyan on 2018/3/10.
- */
-
 public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener{
-
 
     private ImageView ivPullBgOne,ivPullBgTwo;
     private ImageView ivWheelOne,ivWheelTwo;
@@ -68,6 +62,7 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
 
     @Override
     public void setRefreshTimeVisible(boolean show) {
+
     }
 
     @Override
@@ -118,7 +113,6 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
             wheelAnimation.cancel();
             wheelAnimation=null;
         }
-
     }
 
     @Override

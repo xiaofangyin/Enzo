@@ -11,11 +11,6 @@ import android.widget.TextView;
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreView;
 import com.ifenglian.module_d.R;
 
-/**
- * Created by yangyan
- * on 2018/3/12.
- */
-
 public class DefinitionAnimationLoadMoreView extends BaseLoadMoreView {
 
 	private ImageView loadingIv;

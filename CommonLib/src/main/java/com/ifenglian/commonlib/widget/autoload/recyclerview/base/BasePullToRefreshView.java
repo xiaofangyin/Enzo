@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
- * 下拉刷新基类，如果要自定义加载布局只需要继承该基类，在对应的方法中进行逻辑整理
- * Created by yangyan
- * on 2018/3/9.
+ * 文 件 名: BasePullToRefreshView
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/12/12
+ * 邮   箱: xiaofy@ifenglian.com
  */
-
 public abstract class BasePullToRefreshView extends LinearLayout {
 
     //下拉的状态（还没到下拉到固定的高度时）

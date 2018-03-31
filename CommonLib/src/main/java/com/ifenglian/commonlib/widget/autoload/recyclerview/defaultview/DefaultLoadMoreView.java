@@ -10,10 +10,11 @@ import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreView;
 
 /**
- * Created by yangyan
- * on 2018/3/9.
+ * 文 件 名: DefaultLoadMoreView
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/12/12
+ * 邮   箱: xiaofy@ifenglian.com
  */
-
 public class DefaultLoadMoreView extends BaseLoadMoreView {
 
 	private TextView noDataTv;

@@ -17,12 +17,11 @@ import com.ifenglian.commonlib.widget.autoload.recyclerview.PullToRefreshRecycle
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
 
 /**
- * 默认的刷新头部
- * 刷新用的是AVLoadingIndicatorView动画库
- * Created by yangyan
- * on 2018/3/9.
+ * 文 件 名: DefaultArrowRefreshHeaderView
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/12/12
+ * 邮   箱: xiaofy@ifenglian.com
  */
-
 public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener {
 
     private static final int ROTATE_DURATION = 180;

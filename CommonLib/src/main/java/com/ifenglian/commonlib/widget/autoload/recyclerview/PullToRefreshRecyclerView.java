@@ -21,12 +21,11 @@ import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultL
 import java.util.List;
 
 /**
- * 自定义下拉刷新、加载更多
- * 增加Header
- * Created by yangyan
- * on 2018/3/9.
+ * 文 件 名: PullToRefreshRecyclerView
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/12/12
+ * 邮   箱: xiaofy@ifenglian.com
  */
-
 public class PullToRefreshRecyclerView extends RecyclerView {
 
     //是否允许刷新
