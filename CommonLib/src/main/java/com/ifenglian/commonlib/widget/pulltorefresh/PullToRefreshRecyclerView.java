@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     //是否正在加载数据
     private boolean isLoadingData = false;
     //是否没有更多数据
-    private boolean isNoMoreDate = false;
+    private boolean isNoMoreData = false;
     //是否为空布局
     private boolean isEmptyView = false;
     //设置一个很大的数字
@@ -113,10 +114,10 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     /**
      * 没有更多数据可加载
      */
-    public void setNoMoreDate(boolean noMore) {
+    public void setNoMoreData(boolean noMore) {
         isLoadingData = false;
-        isNoMoreDate = noMore;
-        loadMoreView.setState(isNoMoreDate ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_COMPLETE);
+        isNoMoreData = noMore;
+        loadMoreView.setState(isNoMoreData ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_COMPLETE);
         if (noMore) {
             insideAdapter.notifyDataSetChanged();
         }
@@ -128,6 +129,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void setAutoRefresh() {
         if (isAllowRefresh && mLoadingListener != null) {
             if (!isLoading() && !isRefreshing()) {
+                isLoadingData = true;
                 headerRefreshView.onStateChangeListener.onStateChange(BasePullToRefreshView.STATE_REFRESHING);
                 mLoadingListener.onRecyclerViewRefresh();
                 this.scrollToPosition(0);
@@ -139,17 +141,24 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      * 刷新数据完成
      */
     public void refreshComplete() {
-        if (headerRefreshView != null)
+        Log.e("AAA", "refreshComplete...");
+        isLoadingData = false;
+        if (headerRefreshView != null) {
             headerRefreshView.refreshComplete();
-
+        }
         mDataObserver.onChanged();
-        setNoMoreDate(false);
+        setNoMoreData(false);
+
+        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
+            scrollLoadMore();
+        }
     }
 
     /**
      * 加载数据完成
      */
     public void loadMoreComplete() {
+        Log.e("AAA", "loadMoreComplete...");
         isLoadingData = false;
         loadMoreView.setState(BaseLoadMoreView.STATE_COMPLETE);
         insideAdapter.notifyDataSetChanged();
@@ -215,49 +224,62 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     @Override
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
-        if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreDate) {
-            LayoutManager layoutManager = getLayoutManager();
-            int lastVisibleItemPosition;
-            if (layoutManager instanceof GridLayoutManager) {
-                lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
-            } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-                int[] into = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
-                ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(into);
-                lastVisibleItemPosition = findMax(into);
-            } else {
-                lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+        Log.e("AAA", "onScrollStateChanged state: " + state);
+        if (state == RecyclerView.SCROLL_STATE_IDLE) {
+            if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
+                scrollLoadMore();
             }
+        }
+    }
 
-            int headerAndFooterAdapterItemCount = layoutManager.getItemCount();
-            int status = BasePullToRefreshView.STATE_DONE;
+    @Override
+    public void onScrolled(int dx, int dy) {
+        super.onScrolled(dx, dy);
+        Log.e("AAA", "onScrolled dy: " + dy);
+        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
+            scrollLoadMore();
+        }
+    }
 
-            if (headerRefreshView != null)
-                status = headerRefreshView.getState();
+    private void scrollLoadMore() {
+        LayoutManager layoutManager = getLayoutManager();
 
-            //是否满屏
-            if (PullToRefreshRecyclerViewUtils.isFullPage(this, lastVisibleItemPosition)) {
-                if (layoutManager.getChildCount() > 0 && lastVisibleItemPosition >= headerAndFooterAdapterItemCount - 2
-                        && headerAndFooterAdapterItemCount >= layoutManager.getChildCount()
-                        && status < BasePullToRefreshView.STATE_REFRESHING) {
-                    isLoadingData = true;
-                    loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-                    mLoadingListener.onRecyclerViewLoadMore();
+        int status = BasePullToRefreshView.STATE_DONE;
+
+        if (headerRefreshView != null)
+            status = headerRefreshView.getState();
+
+        Log.e("AAA", "before scrollLoadMore...layoutManager.getChildCount(): " + layoutManager.getChildCount()
+                + "  findLastVisibleItemPosition(layoutManager):  " + findLastVisibleItemPosition(layoutManager)
+                + "  layoutManager.getItemCount() - 2: " + (layoutManager.getItemCount() - 2)
+                + "  layoutManager.getItemCount():  " + layoutManager.getItemCount()
+                + "  layoutManager.getChildCount(): " + layoutManager.getChildCount()
+                + "  status: " + status);
+
+        if (layoutManager.getChildCount() > 0 && findLastVisibleItemPosition(layoutManager) >= layoutManager.getItemCount() - 2
+                && layoutManager.getItemCount() >= layoutManager.getChildCount()) {
+            Log.e("AAA", "start scrollLoadMore...");
+            isLoadingData = true;
+            loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
+            mLoadingListener.onRecyclerViewLoadMore();
+        }
+    }
+
+    private int findLastVisibleItemPosition(RecyclerView.LayoutManager layoutManager) {
+        if (layoutManager instanceof LinearLayoutManager) {
+            return ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(null);
+            int max = lastVisibleItemPositions[0];
+            for (int value : lastVisibleItemPositions) {
+                if (value > max) {
+                    max = value;
                 }
             }
+            return max;
         }
+        return -1;
     }
-
-
-    private int findMax(int[] lastPositions) {
-        int max = lastPositions[0];
-        for (int value : lastPositions) {
-            if (value > max) {
-                max = value;
-            }
-        }
-        return max;
-    }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {

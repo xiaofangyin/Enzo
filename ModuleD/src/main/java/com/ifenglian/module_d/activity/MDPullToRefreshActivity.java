@@ -58,7 +58,7 @@ public class MDPullToRefreshActivity extends BaseActivity implements PullToRefre
             @Override
             public void run() {
                 mData.clear();
-                for (int i = 0; i < 29; i++) {
+                for (int i = 0; i < 13; i++) {
                     mData.add("Item" + (mData.size() + 1));
                 }
                 adapter.setNewData(mData);
@@ -78,7 +78,9 @@ public class MDPullToRefreshActivity extends BaseActivity implements PullToRefre
                     list.add("load more" + i);
                 }
                 adapter.setLoadMoreData(list);
-
+                if (adapter.getItemCount() > 50) {
+                    mRecyclerView.setNoMoreData(true);
+                }
                 refreshUI();
             }
         }, 3000);
