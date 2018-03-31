@@ -35,6 +35,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
+        rootView.findViewById(R.id.btn_pull_to_refresh).setOnClickListener(this);
         rootView.findViewById(R.id.btn_list_view_auto_load).setOnClickListener(this);
         rootView.findViewById(R.id.btn_decorator).setOnClickListener(this);
         rootView.findViewById(R.id.btn_round_image_view).setOnClickListener(this);
@@ -42,7 +43,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
         rootView.findViewById(R.id.btn_album).setOnClickListener(this);
         rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_pull_to_refresh).setOnClickListener(this);
         rootView.findViewById(R.id.btn_jni).setOnClickListener(this);
         rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
         rootView.findViewById(R.id.btn_alert_view).setOnClickListener(this);

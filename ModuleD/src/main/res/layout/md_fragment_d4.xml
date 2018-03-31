@@ -9,6 +9,12 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PullToRefresh" />
+
+        <Button
             android:id="@+id/btn_list_view_auto_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,12 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LoadingLayout" />
-
-        <Button
-            android:id="@+id/btn_pull_to_refresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ble" />
 
         <Button
             android:id="@+id/btn_jni"

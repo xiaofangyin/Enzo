@@ -25,13 +25,16 @@ public class MDPullToRefreshAdapter extends RecyclerView.Adapter {
     }
 
     public void setNewData(List<String> data) {
-        mData = data;
+        mData.clear();
+        mData.addAll(data);
         notifyDataSetChanged();
     }
 
     public void setLoadMoreData(List<String> data) {
+        int size = mData.size();
         mData.addAll(data);
-        notifyDataSetChanged();
+        notifyItemInserted(size);
+        notifyItemRangeChanged(size, mData.size() - size);
     }
 
     @Override
