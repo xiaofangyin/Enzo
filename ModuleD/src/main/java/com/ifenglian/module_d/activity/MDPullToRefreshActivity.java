@@ -58,7 +58,7 @@ public class MDPullToRefreshActivity extends BaseActivity implements PullToRefre
             @Override
             public void run() {
                 mData.clear();
-                for (int i = 0; i < 15; i++) {
+                for (int i = 0; i < 30; i++) {
                     mData.add("Item" + (mData.size() + 1));
                 }
                 adapter.setNewData(mData);

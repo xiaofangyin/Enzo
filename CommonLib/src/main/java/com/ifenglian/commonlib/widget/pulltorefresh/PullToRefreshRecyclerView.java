@@ -298,15 +298,15 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		if (mLastY == -1) {
-			mLastY = ev.getRawY();
+			mLastY = ev.getY();
 		}
 		switch (ev.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				mLastY = ev.getRawY();
+				mLastY = ev.getY();
 				break;
 			case MotionEvent.ACTION_MOVE:
-				final float deltaY = ev.getRawY() - mLastY;
-				mLastY = ev.getRawY();
+				final float deltaY = ev.getY() - mLastY;
+				mLastY = ev.getY();
 				if (isOnTop() && isAllowRefresh) {
 					if (headerRefreshView == null)
 						break;
