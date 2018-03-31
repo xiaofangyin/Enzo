@@ -14,18 +14,15 @@ import android.widget.LinearLayout;
  */
 
 public abstract class BasePullToRefreshView extends LinearLayout {
-    /***
-     * 下拉刷新分为4个状态
-     */
+
     //下拉的状态（还没到下拉到固定的高度时）
-    public static final int STATE_PULL_DOWN = 0;//
+    public static final int STATE_PULL_DOWN = 0;
     //下拉到固定高度提示释放刷新的状态
     public static final int STATE_RELEASE_REFRESH = 1;
     //刷新状态
     public static final int STATE_REFRESHING = 2;
     //刷新完成
     public static final int STATE_DONE = 3;
-
     //初始化状态
     public int mState = STATE_PULL_DOWN;
 

@@ -21,8 +21,7 @@ public abstract class BaseLoadMoreView extends LinearLayout {
     //加载完成
     public final static int STATE_COMPLETE = 1;
     //没有数据
-    public final static int STATE_NODATA = 2;
-
+    public final static int STATE_NO_DATA = 2;
     //初始化状态
     public int mState = STATE_COMPLETE;
 

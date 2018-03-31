@@ -40,9 +40,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     private boolean isEmptyView = false;
     //设置一个很大的数字
     private static final int TYPE_REFRESH_HEADER = 20000;
-    private static final int TYPE_LOADMORE_FOOTER = 20001;
+    private static final int TYPE_LOAD_MORE_FOOTER = 20001;
     private static final int TYPE_EMPTY_VIEW = 20002;
-    private static final int HEADER_INIT_INDEX = 20003;
     //刷新加载更多监听
     private OnRefreshAndLoadMoreListener mLoadingListener;
     //设置头部底部View的适配器
@@ -117,7 +116,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void setNoMoreDate(boolean noMore) {
         isLoadingData = false;
         isNoMoreDate = noMore;
-        loadMoreView.setState(isNoMoreDate ? BaseLoadMoreView.STATE_NODATA : BaseLoadMoreView.STATE_COMPLETE);
+        loadMoreView.setState(isNoMoreDate ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_COMPLETE);
         if (noMore) {
             insideAdapter.notifyDataSetChanged();
         }
@@ -340,7 +339,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      * 判断内部adapter的type是否跟定义的头部和底部itemtype一致
      */
     private boolean isDefinitionWithSame(int itemViewType) {
-        if (itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_LOADMORE_FOOTER
+        if (itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_LOAD_MORE_FOOTER
                 || itemViewType == TYPE_EMPTY_VIEW) {
             return true;
         } else {
@@ -443,7 +442,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
             if (viewType == TYPE_REFRESH_HEADER) {
                 return new HeaderAndFooterViewHolder(headerRefreshView);
-            } else if (viewType == TYPE_LOADMORE_FOOTER) {
+            } else if (viewType == TYPE_LOAD_MORE_FOOTER) {
                 loadMoreView.setVisibility(GONE);
                 return new HeaderAndFooterViewHolder(loadMoreView);
             } else if (viewType == TYPE_EMPTY_VIEW) {
@@ -546,7 +545,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             }
 
             if (isFooter(position)) {
-                return TYPE_LOADMORE_FOOTER;
+                return TYPE_LOAD_MORE_FOOTER;
             }
             int adapterCount;
             if (adapter != null) {

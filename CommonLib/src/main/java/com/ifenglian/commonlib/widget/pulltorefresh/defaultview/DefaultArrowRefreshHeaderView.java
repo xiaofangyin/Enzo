@@ -27,7 +27,7 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
 
 	private static final int ROTATE_DURATION = 180;
 
-	private LinearLayout mRefrehsContainer;//刷新时间布局
+	private LinearLayout mRefreshContainer;//刷新时间布局
 	private ImageView arrowIv;
 	private TextView refreshStateTv;
 	private AVLoadingIndicatorView progressView;
@@ -51,7 +51,7 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
 	public void initView(Context context) {
 		this.context = context;
 		mContainer = LayoutInflater.from(context).inflate(R.layout.layout_default_arrow_refresh, null);
-		mRefrehsContainer = mContainer.findViewById(R.id.refresh_time_container);
+		mRefreshContainer = mContainer.findViewById(R.id.refresh_time_container);
 
 		//把刷新头部的高度初始化为0
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -82,8 +82,8 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
 
 	@Override
 	public void setRefreshTimeVisible(boolean show) {
-		if (mRefrehsContainer != null)
-			mRefrehsContainer.setVisibility(show ? VISIBLE : GONE);
+		if (mRefreshContainer != null)
+			mRefreshContainer.setVisibility(show ? VISIBLE : GONE);
 	}
 
 	@Override

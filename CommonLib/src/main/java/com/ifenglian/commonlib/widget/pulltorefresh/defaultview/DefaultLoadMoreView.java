@@ -43,7 +43,7 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
 			case STATE_COMPLETE:
 				this.setVisibility(GONE);
 				break;
-			case STATE_NODATA:
+			case STATE_NO_DATA:
 				loadMoreLl.setVisibility(GONE);
 				noDataTv.setVisibility(VISIBLE);
 				break;
