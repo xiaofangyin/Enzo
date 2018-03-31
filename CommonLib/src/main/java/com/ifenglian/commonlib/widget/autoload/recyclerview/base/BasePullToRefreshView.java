@@ -92,7 +92,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
             public void run() {
                 reset();
             }
-        }, 200);
+        }, 500);
     }
 
     /**
@@ -120,7 +120,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     public void scrollTo(int height) {
         //动画设置高度
         ValueAnimator animator = ValueAnimator.ofInt(getVisibleHeight(), height);
-        animator.setDuration(300).start();
+        animator.setDuration(250).start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
