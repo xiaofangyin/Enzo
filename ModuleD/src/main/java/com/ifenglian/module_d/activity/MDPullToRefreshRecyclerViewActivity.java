@@ -34,7 +34,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadMoreEnabled(true);
-        mRecyclerView.setRefreshTimeVisible(false);
+        mRecyclerView.setRefreshTimeVisible(true);
         mRecyclerView.setRefreshAndLoadMoreListener(this);
     }
 
