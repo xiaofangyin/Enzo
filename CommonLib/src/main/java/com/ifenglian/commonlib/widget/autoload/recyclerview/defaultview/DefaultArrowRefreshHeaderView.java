@@ -27,14 +27,13 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
     private static final int ROTATE_DURATION = 180;
 
     private LinearLayout mRefreshContainer;//刷新时间布局
-    private ImageView arrowIv;
-    private TextView refreshStateTv;
+    private ImageView ivArrow;
+    private TextView tvRefreshState;
     private AVLoadingIndicatorView progressView;
-    private TextView lastRefreshTimeTv;
+    private TextView tvLastRefreshTime;
     //刷新箭头装换方向动画
     private Animation mRotateUpAnim;
     private Animation mRotateDownAnim;
-
     private Context context;
 
     public DefaultArrowRefreshHeaderView(Context context) {
@@ -60,10 +59,10 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
         addView(mContainer, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
         setGravity(Gravity.BOTTOM);
 
-        arrowIv = mContainer.findViewById(R.id.refresh_arrow);
-        refreshStateTv = mContainer.findViewById(R.id.refresh_status_tv);
+        ivArrow = mContainer.findViewById(R.id.refresh_arrow);
+        tvRefreshState = mContainer.findViewById(R.id.refresh_status_tv);
         progressView = mContainer.findViewById(R.id.av_progressbar);
-        lastRefreshTimeTv = mContainer.findViewById(R.id.last_refresh_time);
+        tvLastRefreshTime = mContainer.findViewById(R.id.last_refresh_time);
 
         mRotateUpAnim = new RotateAnimation(0.0f, -180.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -78,7 +77,7 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
         measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mMeasuredHeight = getMeasuredHeight();
 
-        lastRefreshTimeTv.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
+        tvLastRefreshTime.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
     }
 
     @Override
@@ -90,7 +89,7 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
     @Override
     public void onDown() {
         //时间更新
-        lastRefreshTimeTv.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
+        tvLastRefreshTime.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
     }
 
     @Override
@@ -115,17 +114,17 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
 
         //根据状态处理刷新控件的外显
         if (state == STATE_REFRESHING) {
-            arrowIv.clearAnimation();
-            arrowIv.setVisibility(View.GONE);
+            ivArrow.clearAnimation();
+            ivArrow.setVisibility(View.GONE);
             if (progressView != null)
                 progressView.setVisibility(View.VISIBLE);
             scrollTo(mMeasuredHeight);
         } else if (state == STATE_DONE) {//执行这一步之前会先执行重置刷新布局，因此这里不需要设置布局高度
-            arrowIv.setVisibility(View.GONE);
+            ivArrow.setVisibility(View.GONE);
             if (progressView != null)
                 progressView.setVisibility(View.GONE);
         } else {//正常显示箭头
-            arrowIv.setVisibility(View.VISIBLE);
+            ivArrow.setVisibility(View.VISIBLE);
             if (progressView != null) {
                 progressView.setVisibility(View.GONE);
             }
@@ -134,21 +133,21 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
         //根据状态进行动画显示
         switch (state) {
             case STATE_PULL_DOWN:
-                arrowIv.clearAnimation();
-                arrowIv.startAnimation(mRotateDownAnim);
-                refreshStateTv.setText(R.string.collection_pull_to_refresh);
+                ivArrow.clearAnimation();
+                ivArrow.startAnimation(mRotateDownAnim);
+                tvRefreshState.setText(R.string.collection_pull_to_refresh);
                 break;
             case STATE_RELEASE_REFRESH:
-                arrowIv.clearAnimation();
-                arrowIv.startAnimation(mRotateUpAnim);
-                refreshStateTv.setText(R.string.collection_release_refresh);
+                ivArrow.clearAnimation();
+                ivArrow.startAnimation(mRotateUpAnim);
+                tvRefreshState.setText(R.string.collection_release_refresh);
                 break;
             case STATE_REFRESHING:
-                refreshStateTv.setText(R.string.collection_refreshing);
+                tvRefreshState.setText(R.string.collection_refreshing);
                 break;
             case STATE_DONE:
                 PullToRefreshRecyclerViewUtils.saveLastRefreshTime(context, System.currentTimeMillis());
-                refreshStateTv.setText(R.string.collection_refresh_done);
+                tvRefreshState.setText(R.string.collection_refresh_done);
                 break;
         }
         mState = state;
