@@ -66,7 +66,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
 
                 refreshUI();
             }
-        }, 3000);
+        }, 2000);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
             @Override
             public void run() {
                 List<String> list = new ArrayList<>();
-                for (int i = 0; i < 14; i++) {
+                for (int i = 0; i < 1; i++) {
                     list.add("load more" + i);
                 }
                 adapter.setLoadMoreData(list);
@@ -84,7 +84,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
                 }
                 refreshUI();
             }
-        }, 3000);
+        }, 2000);
     }
 
     public void refreshUI() {

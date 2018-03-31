@@ -149,9 +149,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         mDataObserver.onChanged();
         setNoMoreData(false);
 
-        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
-            scrollLoadMore();
-        }
+        scrollLoadMore();
     }
 
     /**
@@ -162,6 +160,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         isLoadingData = false;
         loadMoreView.setState(BaseLoadMoreView.STATE_COMPLETE);
         insideAdapter.notifyDataSetChanged();
+
+        scrollLoadMore();
     }
 
     /**
@@ -226,9 +226,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         super.onScrollStateChanged(state);
         Log.e("AAA", "onScrollStateChanged state: " + state);
         if (state == RecyclerView.SCROLL_STATE_IDLE) {
-            if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
-                scrollLoadMore();
-            }
+            scrollLoadMore();
         }
     }
 
@@ -236,32 +234,32 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void onScrolled(int dx, int dy) {
         super.onScrolled(dx, dy);
         Log.e("AAA", "onScrolled dy: " + dy);
-        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
-            scrollLoadMore();
-        }
+        scrollLoadMore();
     }
 
     private void scrollLoadMore() {
-        LayoutManager layoutManager = getLayoutManager();
+        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
+            LayoutManager layoutManager = getLayoutManager();
 
-        int status = BasePullToRefreshView.STATE_DONE;
+            int status = BasePullToRefreshView.STATE_DONE;
 
-        if (headerRefreshView != null)
-            status = headerRefreshView.getState();
+            if (headerRefreshView != null)
+                status = headerRefreshView.getState();
 
-        Log.e("AAA", "before scrollLoadMore...layoutManager.getChildCount(): " + layoutManager.getChildCount()
-                + "  findLastVisibleItemPosition(layoutManager):  " + findLastVisibleItemPosition(layoutManager)
-                + "  layoutManager.getItemCount() - 2: " + (layoutManager.getItemCount() - 2)
-                + "  layoutManager.getItemCount():  " + layoutManager.getItemCount()
-                + "  layoutManager.getChildCount(): " + layoutManager.getChildCount()
-                + "  status: " + status);
+            Log.e("AAA", "before scrollLoadMore...layoutManager.getChildCount(): " + layoutManager.getChildCount()
+                    + "  findLastVisibleItemPosition(layoutManager):  " + findLastVisibleItemPosition(layoutManager)
+                    + "  layoutManager.getItemCount() - 2: " + (layoutManager.getItemCount() - 2)
+                    + "  layoutManager.getItemCount():  " + layoutManager.getItemCount()
+                    + "  layoutManager.getChildCount(): " + layoutManager.getChildCount()
+                    + "  status: " + status);
 
-        if (layoutManager.getChildCount() > 0 && findLastVisibleItemPosition(layoutManager) >= layoutManager.getItemCount() - 2
-                && layoutManager.getItemCount() >= layoutManager.getChildCount()) {
-            Log.e("AAA", "start scrollLoadMore...");
-            isLoadingData = true;
-            loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-            mLoadingListener.onRecyclerViewLoadMore();
+            if (layoutManager.getChildCount() > 0 && findLastVisibleItemPosition(layoutManager) >= layoutManager.getItemCount() - 2
+                    && layoutManager.getItemCount() >= layoutManager.getChildCount()) {
+                Log.e("AAA", "start scrollLoadMore...");
+                isLoadingData = true;
+                loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
+                mLoadingListener.onRecyclerViewLoadMore();
+            }
         }
     }
 
