@@ -17,7 +17,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDBleActivity"
+            android:name=".activity.MDPullToRefreshActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDViewPagerIndicatorActivity"

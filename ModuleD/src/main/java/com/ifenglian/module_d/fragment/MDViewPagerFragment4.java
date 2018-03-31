@@ -11,11 +11,11 @@ import com.ifenglian.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDAutoLoadListViewActivity;
-import com.ifenglian.module_d.activity.MDBleActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDNestedActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
+import com.ifenglian.module_d.activity.MDPullToRefreshActivity;
 import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
@@ -42,7 +42,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
         rootView.findViewById(R.id.btn_album).setOnClickListener(this);
         rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_ble).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_pull_to_refresh).setOnClickListener(this);
         rootView.findViewById(R.id.btn_jni).setOnClickListener(this);
         rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
         rootView.findViewById(R.id.btn_alert_view).setOnClickListener(this);
@@ -82,8 +82,8 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         } else if (id == R.id.btn_loading_layout) {
             Intent intent = new Intent(getContext(), MDLoadingLayoutActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_ble) {
-            Intent intent = new Intent(getContext(), MDBleActivity.class);
+        } else if (id == R.id.btn_pull_to_refresh) {
+            Intent intent = new Intent(getContext(), MDPullToRefreshActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_jni) {
             Intent intent = new Intent(getContext(), MDJniActivity.class);

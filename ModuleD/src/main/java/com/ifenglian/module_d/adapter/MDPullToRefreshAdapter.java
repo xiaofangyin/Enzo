@@ -1,0 +1,59 @@
+package com.ifenglian.module_d.adapter;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.ifenglian.module_d.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 文 件 名: MDPullToRefreshAdapter
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2018/3/31
+ * 邮   箱: xiaofy@ifenglian.com
+ */
+public class MDPullToRefreshAdapter extends RecyclerView.Adapter {
+
+    private List<String> mData;
+
+    public MDPullToRefreshAdapter() {
+        mData = new ArrayList<>();
+    }
+
+    public void setNewData(List<String> data) {
+        mData = data;
+        notifyDataSetChanged();
+    }
+
+    public void setLoadMoreData(List<String> data) {
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.md_item_pull_refresh, parent, false);
+        return new NormalViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return mData == null ? 0 : mData.size();
+    }
+
+    private static class NormalViewHolder extends RecyclerView.ViewHolder {
+
+        public NormalViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+}
