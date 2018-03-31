@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView;
 import com.ifenglian.commonlib.widget.pulltorefresh.PullToRefreshRecyclerViewUtils;
-import com.ifenglian.commonlib.widget.pulltorefresh.base.refreshview.BasePullToRefreshView;
+import com.ifenglian.commonlib.widget.pulltorefresh.base.BasePullToRefreshView;
 
 /**
  * 默认的刷新头部

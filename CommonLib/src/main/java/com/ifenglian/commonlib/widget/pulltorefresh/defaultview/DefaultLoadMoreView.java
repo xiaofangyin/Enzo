@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.R;
-import com.ifenglian.commonlib.widget.pulltorefresh.base.refreshview.BaseLoadMoreView;
+import com.ifenglian.commonlib.widget.pulltorefresh.base.BaseLoadMoreView;
 
 /**
  * Created by yangyan
