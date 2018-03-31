@@ -37,6 +37,8 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadMoreEnabled(true);
         mRecyclerView.setRefreshTimeVisible(true);
+        //mRecyclerView.setRefreshView(new DefinitionAnimationRefreshHeaderView(MDPullToRefreshRecyclerViewActivity.this));
+        //mRecyclerView.setLoadMoreView(new DefinitionAnimationLoadMoreView(MDPullToRefreshRecyclerViewActivity.this));
         mRecyclerView.setRefreshAndLoadMoreListener(this);
     }
 
@@ -62,7 +64,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
             @Override
             public void run() {
                 mData.clear();
-                for (int i = 0; i < 13; i++) {
+                for (int i = 0; i < 30; i++) {
                     mData.add("Item" + (mData.size() + 1));
                 }
                 adapter.setNewData(mData);
@@ -78,7 +80,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
             @Override
             public void run() {
                 List<String> list = new ArrayList<>();
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < 10; i++) {
                     list.add("load more" + i);
                 }
                 adapter.setLoadMoreData(list);
