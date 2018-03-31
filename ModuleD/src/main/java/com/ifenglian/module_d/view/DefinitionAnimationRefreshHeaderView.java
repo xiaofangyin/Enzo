@@ -13,29 +13,29 @@ import android.widget.LinearLayout;
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
 import com.ifenglian.module_d.R;
 
-public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener{
+public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener {
 
-    private ImageView ivPullBgOne,ivPullBgTwo;
-    private ImageView ivWheelOne,ivWheelTwo;
+    private ImageView ivPullBgOne, ivPullBgTwo;
+    private ImageView ivWheelOne, ivWheelTwo;
     private ImageView ivSun;
 
-    private Animation wheelAnimation,sunAnimation;  //轮子、太阳动画
-    private Animation backAnimationOne,backAnimationTwo;    //两张背景图动画
+    private Animation wheelAnimation, sunAnimation;  //轮子、太阳动画
+    private Animation backAnimationOne, backAnimationTwo;    //两张背景图动画
 
     public DefinitionAnimationRefreshHeaderView(Context context) {
         super(context);
-        onStateChangeListener=this;
+        onStateChangeListener = this;
     }
-    
+
     @Override
-    public void initView(Context context){
+    public void initView(Context context) {
         mContainer = LayoutInflater.from(context).inflate(R.layout.md_layout_definition_animation_refresh, null);
 
-        ivPullBgOne=mContainer.findViewById(R.id.iv_pull_bg_one);
-        ivPullBgTwo=mContainer.findViewById(R.id.iv_pull_bg_two);
-        ivWheelOne=mContainer.findViewById(R.id.ivWheelOne);
-        ivWheelTwo=mContainer.findViewById(R.id.ivWheelTwo);
-        ivSun=mContainer.findViewById(R.id.ivSun);
+        ivPullBgOne = mContainer.findViewById(R.id.iv_pull_bg_one);
+        ivPullBgTwo = mContainer.findViewById(R.id.iv_pull_bg_two);
+        ivWheelOne = mContainer.findViewById(R.id.ivWheelOne);
+        ivWheelTwo = mContainer.findViewById(R.id.ivWheelTwo);
+        ivSun = mContainer.findViewById(R.id.ivSun);
 
         //获取动画
         wheelAnimation = AnimationUtils.loadAnimation(context, R.anim.wheel_animation);
@@ -55,7 +55,7 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
         setGravity(Gravity.BOTTOM);
 
         //测量高度
-        measure(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mMeasuredHeight = getMeasuredHeight();
 
     }
@@ -73,7 +73,7 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
     /**
      * 开启动画
      */
-    public void startAnim(){
+    public void startAnim() {
         ivPullBgOne.startAnimation(backAnimationOne);
         ivPullBgTwo.startAnimation(backAnimationTwo);
         ivSun.startAnimation(sunAnimation);
@@ -84,7 +84,7 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
     /**
      * 清除动画
      */
-    public void clearAnim(){
+    public void clearAnim() {
         ivPullBgOne.clearAnimation();
         ivPullBgTwo.clearAnimation();
         ivSun.clearAnimation();
@@ -94,33 +94,33 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
 
     @Override
     public void destroy() {
-        if(backAnimationOne!=null){
+        if (backAnimationOne != null) {
             backAnimationOne.cancel();
-            backAnimationOne=null;
+            backAnimationOne = null;
         }
 
-        if(backAnimationTwo!=null){
+        if (backAnimationTwo != null) {
             backAnimationTwo.cancel();
-            backAnimationTwo=null;
+            backAnimationTwo = null;
         }
 
-        if(sunAnimation!=null){
+        if (sunAnimation != null) {
             sunAnimation.cancel();
-            sunAnimation=null;
+            sunAnimation = null;
         }
 
-        if(wheelAnimation!=null){
+        if (wheelAnimation != null) {
             wheelAnimation.cancel();
-            wheelAnimation=null;
+            wheelAnimation = null;
         }
     }
 
     @Override
     public void onStateChange(int state) {
         //下拉时状态相同不做继续保持原有的状态
-        if (state == mState) return ;
+        if (state == mState) return;
         //根据状态进行动画显示
-        switch (state){
+        switch (state) {
             case STATE_PULL_DOWN:
                 clearAnim();
                 startAnim();
