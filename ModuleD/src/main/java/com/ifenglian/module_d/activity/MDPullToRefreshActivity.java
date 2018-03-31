@@ -44,10 +44,7 @@ public class MDPullToRefreshActivity extends BaseActivity implements PullToRefre
         adapter.setNewData(mData);
         mRecyclerView.setAdapter(adapter);
 
-        for (int i = 0; i < 15; i++) {
-            mData.add("Item" + (mData.size() + 1));
-        }
-        adapter.setNewData(mData);
+        mRecyclerView.setAutoRefresh();
     }
 
     @Override
