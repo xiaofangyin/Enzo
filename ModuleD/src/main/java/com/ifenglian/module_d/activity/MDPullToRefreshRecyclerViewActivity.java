@@ -1,6 +1,7 @@
 package com.ifenglian.module_d.activity;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.ifenglian.commonlib.base.BaseActivity;
@@ -22,6 +23,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
     private PullToRefreshRecyclerView mRecyclerView;
     private MDPullToRefreshAdapter adapter;
     private List<String> mData;
+    private Handler mHandler;
 
     @Override
     public int getLayoutId() {
@@ -40,6 +42,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
 
     @Override
     public void initData() {
+        mHandler = new Handler(Looper.myLooper());
         mData = new ArrayList<>();
         adapter = new MDPullToRefreshAdapter();
         adapter.setNewData(mData);
@@ -55,7 +58,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
 
     @Override
     public void onRecyclerViewRefresh() {
-        new Handler().postDelayed(new Runnable() {
+        mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mData.clear();
@@ -71,7 +74,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
 
     @Override
     public void onRecyclerViewLoadMore() {
-        new Handler().postDelayed(new Runnable() {
+        mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 List<String> list = new ArrayList<>();
@@ -100,6 +103,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
         mRecyclerView.destroy();
     }
 }
