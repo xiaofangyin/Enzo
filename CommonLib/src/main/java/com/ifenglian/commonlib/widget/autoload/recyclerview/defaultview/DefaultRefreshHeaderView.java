@@ -119,11 +119,13 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 progressView.setVisibility(View.VISIBLE);
             scrollTo(mMeasuredHeight);
         } else if (state == STATE_DONE) {//执行这一步之前会先执行重置刷新布局，因此这里不需要设置布局高度
-            ivArrow.setVisibility(View.GONE);
+            ivArrow.setVisibility(View.VISIBLE);
+            ivArrow.setImageResource(R.mipmap.refresh_succeed);
             if (progressView != null)
                 progressView.setVisibility(View.GONE);
         } else {//正常显示箭头
             ivArrow.setVisibility(View.VISIBLE);
+            ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
             if (progressView != null) {
                 progressView.setVisibility(View.GONE);
             }
