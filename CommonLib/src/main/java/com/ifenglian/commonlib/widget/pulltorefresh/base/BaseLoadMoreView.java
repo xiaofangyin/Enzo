@@ -13,9 +13,6 @@ import android.widget.LinearLayout;
 
 public abstract class BaseLoadMoreView extends LinearLayout {
 
-    /***
-     * 加载更多分为3个状态
-     */
     //正在加载
     public final static int STATE_LOADING = 0;
     //加载完成
@@ -26,7 +23,6 @@ public abstract class BaseLoadMoreView extends LinearLayout {
     public int mState = STATE_COMPLETE;
 
     public View mContainer;
-
 
     public BaseLoadMoreView(Context context) {
         super(context);
