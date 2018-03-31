@@ -35,13 +35,10 @@
             android:name=".activity.MDLoadingLayoutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDRoundImageViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDUpdateVersionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDNestedActivity"
+            android:name=".activity.MDParallaxListViewActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDPullToRefreshListViewActivity"

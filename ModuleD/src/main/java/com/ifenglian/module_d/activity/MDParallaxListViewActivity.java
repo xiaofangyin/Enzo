@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: MDNestedActivity
+ * 文 件 名: MDParallaxListViewActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/2/8
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDNestedActivity extends BaseActivity {
+public class MDParallaxListViewActivity extends BaseActivity {
 
     private ParallaxListView listView;
     private View head;
@@ -26,14 +26,14 @@ public class MDNestedActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.md_activity_nested;
+        return R.layout.md_activity_parallax_list_view;
     }
 
     @Override
     public void initView() {
         listView = findViewById(R.id.parallaxListView);
 
-        head = View.inflate(MDNestedActivity.this, R.layout.md_layout_head, null);
+        head = View.inflate(MDParallaxListViewActivity.this, R.layout.md_layout_head, null);
         parallaxImageView = head.findViewById(R.id.parallaxImageView);
         head.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

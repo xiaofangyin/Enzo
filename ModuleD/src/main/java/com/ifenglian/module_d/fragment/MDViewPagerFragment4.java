@@ -13,10 +13,9 @@ import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDPullToRefreshListViewActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
-import com.ifenglian.module_d.activity.MDNestedActivity;
+import com.ifenglian.module_d.activity.MDParallaxListViewActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDPullToRefreshRecyclerViewActivity;
-import com.ifenglian.module_d.activity.MDRoundImageViewActivity;
 import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
 
@@ -37,8 +36,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     public void initView(View rootView) {
         rootView.findViewById(R.id.btn_pull_to_refresh).setOnClickListener(this);
         rootView.findViewById(R.id.btn_list_view_auto_load).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_decorator).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_round_image_view).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_parallax_list_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
         rootView.findViewById(R.id.btn_album).setOnClickListener(this);
@@ -64,11 +62,8 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         if (id == R.id.btn_list_view_auto_load) {
             Intent intent = new Intent(getContext(), MDPullToRefreshListViewActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_decorator) {
-            Intent intent = new Intent(getContext(), MDNestedActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_round_image_view) {
-            Intent intent = new Intent(getContext(), MDRoundImageViewActivity.class);
+        } else if (id == R.id.btn_parallax_list_view) {
+            Intent intent = new Intent(getContext(), MDParallaxListViewActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_update_version) {
             Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);

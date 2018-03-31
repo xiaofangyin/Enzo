@@ -58,6 +58,4 @@ public class ParallaxListView extends ListView {
         }
         return super.onTouchEvent(ev);
     }
-
-
 }

@@ -21,22 +21,10 @@
             android:text="ListViewAutoLoad" />
 
         <Button
-            android:id="@+id/btn_recycler_view_auto_load"
+            android:id="@+id/btn_parallax_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RecyclerViewAutoLoad" />
-
-        <Button
-            android:id="@+id/btn_decorator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="decorator" />
-
-        <Button
-            android:id="@+id/btn_round_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="RoundImageView" />
+            android:text="ParallaxListView" />
 
         <Button
             android:id="@+id/btn_update_version"
