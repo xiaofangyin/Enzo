@@ -22,7 +22,7 @@ import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefre
  * 创建日期: 2017/12/12
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener {
+public class DefaultRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener {
 
     private static final int ROTATE_DURATION = 180;
 
@@ -36,7 +36,7 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
     private Animation mRotateDownAnim;
     private Context context;
 
-    public DefaultArrowRefreshHeaderView(Context context) {
+    public DefaultRefreshHeaderView(Context context) {
         super(context);
         onStateChangeListener = this;
     }

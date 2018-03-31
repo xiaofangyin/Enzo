@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreView;
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
-import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultArrowRefreshHeaderView;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultRefreshHeaderView;
 import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultLoadMoreView;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      */
     private void init(Context context) {
         //初始化头部刷新布局
-        headerRefreshView = new DefaultArrowRefreshHeaderView(context);
+        headerRefreshView = new DefaultRefreshHeaderView(context);
         headerRefreshView.setRefreshTimeVisible(true);
         loadMoreView = new DefaultLoadMoreView(context);
     }
