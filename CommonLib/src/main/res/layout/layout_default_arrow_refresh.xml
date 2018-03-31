@@ -16,23 +16,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="10dp">
+            android:layout_margin="10dp">
 
             <ImageView
                 android:id="@+id/refresh_arrow"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_centerVertical="true"
-
+                android:layout_centerInParent="true"
                 android:src="@mipmap/icon_refresh_arrow" />
 
             <com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView
                 android:id="@+id/av_progressbar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
                 android:visibility="invisible"
-                app:indicator="Pacman"
+                app:indicator="BallSpinFadeLoader"
                 app:indicator_color="#ffB5B5B5" />
         </RelativeLayout>
 
