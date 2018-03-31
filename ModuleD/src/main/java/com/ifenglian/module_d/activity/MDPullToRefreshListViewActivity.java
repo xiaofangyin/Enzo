@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: MDAutoLoadListViewActivity
+ * 文 件 名: MDPullToRefreshListViewActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/2/25
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDAutoLoadListViewActivity extends BaseActivity implements AutoLoadListView.OnLoadListener, PullToRefreshLayout.OnRefreshListener {
+public class MDPullToRefreshListViewActivity extends BaseActivity implements AutoLoadListView.OnLoadListener, PullToRefreshLayout.OnRefreshListener {
 
     private AutoLoadListView listView;
     private MDAutoLoadListViewAdapter adapter;

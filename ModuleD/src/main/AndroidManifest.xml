@@ -17,7 +17,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDPullToRefreshActivity"
+            android:name=".activity.MDPullToRefreshRecyclerViewActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDViewPagerIndicatorActivity"
@@ -44,7 +44,7 @@
             android:name=".activity.MDNestedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDAutoLoadListViewActivity"
+            android:name=".activity.MDPullToRefreshListViewActivity"
             android:screenOrientation="portrait" />
     </application>
 </manifest>

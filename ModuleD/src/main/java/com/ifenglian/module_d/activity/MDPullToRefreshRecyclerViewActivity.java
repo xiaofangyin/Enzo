@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: MDPullToRefreshActivity
+ * 文 件 名: MDPullToRefreshRecyclerViewActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/3/31
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDPullToRefreshActivity extends BaseActivity implements PullToRefreshRecyclerView.OnRefreshAndLoadMoreListener {
+public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements PullToRefreshRecyclerView.OnRefreshAndLoadMoreListener {
 
     private PullToRefreshRecyclerView mRecyclerView;
     private MDPullToRefreshAdapter adapter;
@@ -34,6 +34,7 @@ public class MDPullToRefreshActivity extends BaseActivity implements PullToRefre
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadMoreEnabled(true);
+        mRecyclerView.setRefreshTimeVisible(false);
         mRecyclerView.setRefreshAndLoadMoreListener(this);
     }
 
