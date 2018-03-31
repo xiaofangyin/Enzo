@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.pulltorefresh.defaultview;
+package com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.ifenglian.commonlib.R;
 import com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView;
-import com.ifenglian.commonlib.widget.pulltorefresh.PullToRefreshRecyclerViewUtils;
-import com.ifenglian.commonlib.widget.pulltorefresh.base.BasePullToRefreshView;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.PullToRefreshRecyclerViewUtils;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
 
 /**
  * 默认的刷新头部

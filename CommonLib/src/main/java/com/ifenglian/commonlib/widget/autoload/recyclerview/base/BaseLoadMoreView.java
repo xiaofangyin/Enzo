@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.pulltorefresh.base;
+package com.ifenglian.commonlib.widget.autoload.recyclerview.base;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

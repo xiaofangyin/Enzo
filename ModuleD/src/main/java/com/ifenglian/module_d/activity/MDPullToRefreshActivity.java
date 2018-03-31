@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.widget.pulltorefresh.PullToRefreshRecyclerView;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.PullToRefreshRecyclerView;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDPullToRefreshAdapter;
 
@@ -94,5 +94,11 @@ public class MDPullToRefreshActivity extends BaseActivity implements PullToRefre
                 mRecyclerView.refreshComplete();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRecyclerView.destroy();
     }
 }

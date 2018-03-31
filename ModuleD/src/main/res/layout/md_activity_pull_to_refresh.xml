@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ifenglian.commonlib.widget.pulltorefresh.PullToRefreshRecyclerView
+    <com.ifenglian.commonlib.widget.autoload.recyclerview.PullToRefreshRecyclerView
         android:id="@+id/md_pull_to_refresh_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

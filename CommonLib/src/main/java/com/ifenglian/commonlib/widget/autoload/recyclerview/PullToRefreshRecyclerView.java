@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.pulltorefresh;
+package com.ifenglian.commonlib.widget.autoload.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.ifenglian.commonlib.widget.pulltorefresh.base.BaseLoadMoreView;
-import com.ifenglian.commonlib.widget.pulltorefresh.base.BasePullToRefreshView;
-import com.ifenglian.commonlib.widget.pulltorefresh.defaultview.DefaultArrowRefreshHeaderView;
-import com.ifenglian.commonlib.widget.pulltorefresh.defaultview.DefaultLoadMoreView;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreView;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultArrowRefreshHeaderView;
+import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultLoadMoreView;
 
 import java.util.List;
 
@@ -294,8 +294,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
                 final float deltaY = ev.getY() - mLastY;
                 mLastY = ev.getY();
                 if (isOnTop() && isAllowRefresh) {
-                    if (headerRefreshView == null)
-                        break;
                     if (loadMoreView.getState() != BaseLoadMoreView.STATE_LOADING) {
                         headerRefreshView.onMove(deltaY / DRAG_RATE);
                     }
@@ -307,7 +305,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             default:
                 mLastY = -1; // reset
                 if (isOnTop() && isAllowRefresh) {
-                    if (headerRefreshView != null && headerRefreshView.dealReleaseAction()) {
+                    if (headerRefreshView.dealReleaseAction()) {
                         if (mLoadingListener != null) {
                             mLoadingListener.onRecyclerViewRefresh();
                         }
@@ -320,55 +318,35 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         if (headerRefreshView != null)
             status = headerRefreshView.getState();
 
-        if (status == BasePullToRefreshView.STATE_REFRESHING) {
-            return true;
-        } else {
-            return super.onTouchEvent(ev);
-        }
+        return status == BasePullToRefreshView.STATE_REFRESHING || super.onTouchEvent(ev);
     }
 
     private boolean isOnTop() {
-        if (headerRefreshView == null)
-            return false;
-        if (headerRefreshView.getParent() != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return headerRefreshView != null && headerRefreshView.getParent() != null;
     }
 
     /**
      * 是否正在loading数据
      */
     public boolean isLoading() {
-        if (loadMoreView.getState() == BaseLoadMoreView.STATE_LOADING) {
-            return true;
-        }
-        return false;
+        return loadMoreView.getState() == BaseLoadMoreView.STATE_LOADING;
     }
 
     /**
      * 正在refreshing数据
      */
     public boolean isRefreshing() {
-        if (headerRefreshView.getState() == BasePullToRefreshView.STATE_REFRESHING) {
-            return true;
-        }
-        return false;
+        return headerRefreshView.getState() == BasePullToRefreshView.STATE_REFRESHING;
     }
 
     /**
      * 判断内部adapter的type是否跟定义的头部和底部itemtype一致
      */
     private boolean isDefinitionWithSame(int itemViewType) {
-        if (itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_LOAD_MORE_FOOTER
-                || itemViewType == TYPE_EMPTY_VIEW) {
-            return true;
-        } else {
-            return false;
-        }
+        return itemViewType == TYPE_REFRESH_HEADER ||
+                itemViewType == TYPE_LOAD_MORE_FOOTER ||
+                itemViewType == TYPE_EMPTY_VIEW;
     }
-
 
     /***
      * 包装头部和底部的数据通知
@@ -443,25 +421,15 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         boolean isFooter(int position) {
-            if (isAllowLoadMore) {
-                return position == getItemCount() - 1;
-            } else {
-                return false;
-            }
+            return isAllowLoadMore && position == getItemCount() - 1;
         }
 
         boolean isRefreshHeader(int position) {
-            if (isAllowRefresh) {
-                return position == 0;
-            } else {
-                return false;
-            }
-
+            return isAllowRefresh && position == 0;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
             if (viewType == TYPE_REFRESH_HEADER) {
                 return new HeaderAndFooterViewHolder(headerRefreshView);
             } else if (viewType == TYPE_LOAD_MORE_FOOTER) {
@@ -667,7 +635,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             }
         }
     }
-
 
     /**
      * 设置加载更多监听
