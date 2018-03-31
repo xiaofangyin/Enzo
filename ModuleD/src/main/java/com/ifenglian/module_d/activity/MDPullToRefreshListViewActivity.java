@@ -5,8 +5,8 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.widget.autoload.listview.AutoLoadListView;
-import com.ifenglian.commonlib.widget.autoload.listview.PullToRefreshLayout;
+import com.ifenglian.commonlib.widget.pulltorefresh.listview.AutoLoadListView;
+import com.ifenglian.commonlib.widget.pulltorefresh.listview.PullToRefreshLayout;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDAutoLoadListViewAdapter;
 

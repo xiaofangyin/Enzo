@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.autoload.recyclerview;
+package com.ifenglian.commonlib.widget.pulltorefresh.recyclerview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview;
+package com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.R;
-import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BaseLoadMoreView;
 
 /**
  * 文 件 名: DefaultLoadMoreView

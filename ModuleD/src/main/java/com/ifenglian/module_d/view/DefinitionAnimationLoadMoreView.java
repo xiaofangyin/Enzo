@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BaseLoadMoreView;
 import com.ifenglian.module_d.R;
 
 public class DefinitionAnimationLoadMoreView extends BaseLoadMoreView {

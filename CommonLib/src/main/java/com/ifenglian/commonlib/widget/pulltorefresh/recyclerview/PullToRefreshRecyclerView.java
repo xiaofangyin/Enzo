@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.autoload.recyclerview;
+package com.ifenglian.commonlib.widget.pulltorefresh.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreView;
-import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
-import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultRefreshHeaderView;
-import com.ifenglian.commonlib.widget.autoload.recyclerview.defaultview.DefaultLoadMoreView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BaseLoadMoreView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultRefreshHeaderView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultLoadMoreView;
 
 import java.util.List;
 

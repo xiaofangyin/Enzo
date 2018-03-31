@@ -10,7 +10,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
 import com.ifenglian.module_d.R;
 
 public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener {

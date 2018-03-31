@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.autoload.recyclerview.base;
+package com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
