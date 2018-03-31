@@ -85,8 +85,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * 设置自定义的加载布局和空布局
-     *
-     * @param emptyView
      */
     public void setEmptyView(View emptyView) {
         this.emptyView = emptyView;
