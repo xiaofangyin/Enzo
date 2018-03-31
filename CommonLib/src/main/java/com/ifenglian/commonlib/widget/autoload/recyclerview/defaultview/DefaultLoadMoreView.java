@@ -17,44 +17,44 @@ import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BaseLoadMoreVie
  */
 public class DefaultLoadMoreView extends BaseLoadMoreView {
 
-	private TextView tvNoData;
-	private LinearLayout llLoadMore;
+    private TextView tvNoData;
+    private LinearLayout llLoadMore;
 
-	public DefaultLoadMoreView(Context context) {
-		super(context);
-	}
+    public DefaultLoadMoreView(Context context) {
+        super(context);
+    }
 
-	@Override
-	public void initView(Context context){
-		mContainer =LayoutInflater.from(context).inflate(R.layout.layout_default_loading_more, null);
-		addView(mContainer);
-		setGravity(Gravity.CENTER);
-		tvNoData =mContainer.findViewById(R.id.no_data);
-		llLoadMore =mContainer.findViewById(R.id.loadMore_Ll);
-	}
+    @Override
+    public void initView(Context context) {
+        mContainer = LayoutInflater.from(context).inflate(R.layout.layout_default_loading_more, null);
+        addView(mContainer);
+        setGravity(Gravity.CENTER);
+        tvNoData = mContainer.findViewById(R.id.no_data);
+        llLoadMore = mContainer.findViewById(R.id.loadMore_Ll);
+    }
 
-	@Override
-	public void setState(int state) {
-		this.setVisibility(VISIBLE);
-		switch (state){
-			case STATE_LOADING:
-				llLoadMore.setVisibility(VISIBLE);
-				tvNoData.setVisibility(INVISIBLE);
-				break;
-			case STATE_COMPLETE:
-				this.setVisibility(GONE);
-				break;
-			case STATE_NO_DATA:
-				llLoadMore.setVisibility(GONE);
-				tvNoData.setVisibility(VISIBLE);
-				break;
-		}
-		mState = state;
+    @Override
+    public void setState(int state) {
+        this.setVisibility(VISIBLE);
+        switch (state) {
+            case STATE_LOADING:
+                llLoadMore.setVisibility(VISIBLE);
+                tvNoData.setVisibility(INVISIBLE);
+                break;
+            case STATE_COMPLETE:
+                this.setVisibility(GONE);
+                break;
+            case STATE_NO_DATA:
+                llLoadMore.setVisibility(GONE);
+                tvNoData.setVisibility(VISIBLE);
+                break;
+        }
+        mState = state;
 
-	}
+    }
 
-	@Override
-	public void destroy() {
-	}
+    @Override
+    public void destroy() {
+    }
 
 }

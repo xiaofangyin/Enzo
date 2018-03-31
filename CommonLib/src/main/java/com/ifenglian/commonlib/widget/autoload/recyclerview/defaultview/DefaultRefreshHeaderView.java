@@ -17,7 +17,7 @@ import com.ifenglian.commonlib.widget.autoload.recyclerview.PullToRefreshRecycle
 import com.ifenglian.commonlib.widget.autoload.recyclerview.base.BasePullToRefreshView;
 
 /**
- * 文 件 名: DefaultArrowRefreshHeaderView
+ * 文 件 名: DefaultRefreshHeaderView
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/12
  * 邮   箱: xiaofy@ifenglian.com
