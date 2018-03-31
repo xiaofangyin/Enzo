@@ -287,6 +287,9 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastY = ev.getY();
+                if (loadMoreView.getState() != BaseLoadMoreView.STATE_LOADING) {
+                    headerRefreshView.onDown();
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = ev.getY() - mLastY;

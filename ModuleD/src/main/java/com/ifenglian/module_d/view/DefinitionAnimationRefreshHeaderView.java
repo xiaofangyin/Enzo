@@ -70,6 +70,11 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
     public void setRefreshTimeVisible(boolean show) {
     }
 
+    @Override
+    public void onDown() {
+
+    }
+
     /**
      * 开启动画
      */

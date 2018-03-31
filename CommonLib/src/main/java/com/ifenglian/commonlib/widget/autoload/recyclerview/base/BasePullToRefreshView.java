@@ -56,7 +56,6 @@ public abstract class BasePullToRefreshView extends LinearLayout {
 
     }
 
-
     /**
      * 处理下拉刷新释放后的动作
      */
@@ -158,6 +157,11 @@ public abstract class BasePullToRefreshView extends LinearLayout {
      * 显示加载更新时间
      */
     public abstract void setRefreshTimeVisible(boolean show);
+
+    /**
+     * 手指按下回调
+     */
+    public abstract void onDown();
 
     /**
      * 销毁页面对象和动画，防止内存泄漏

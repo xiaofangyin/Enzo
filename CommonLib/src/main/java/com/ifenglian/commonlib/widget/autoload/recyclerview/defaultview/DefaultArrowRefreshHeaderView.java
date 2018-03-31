@@ -78,12 +78,20 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
         //测量高度
         measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mMeasuredHeight = getMeasuredHeight();
+
+        lastRefreshTimeTv.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
     }
 
     @Override
     public void setRefreshTimeVisible(boolean show) {
         if (mRefreshContainer != null)
             mRefreshContainer.setVisibility(show ? VISIBLE : GONE);
+    }
+
+    @Override
+    public void onDown() {
+        //时间更新
+        lastRefreshTimeTv.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
     }
 
     @Override
@@ -132,14 +140,11 @@ public class DefaultArrowRefreshHeaderView extends BasePullToRefreshView impleme
                 refreshStateTv.setText(R.string.collection_pull_to_refresh);
                 break;
             case STATE_RELEASE_REFRESH:
-                //时间更新
-                lastRefreshTimeTv.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
                 arrowIv.clearAnimation();
                 arrowIv.startAnimation(mRotateUpAnim);
                 refreshStateTv.setText(R.string.collection_release_refresh);
                 break;
             case STATE_REFRESHING:
-                lastRefreshTimeTv.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(PullToRefreshRecyclerViewUtils.getLastRefreshTime(context)));
                 refreshStateTv.setText(R.string.collection_refreshing);
                 break;
             case STATE_DONE:
