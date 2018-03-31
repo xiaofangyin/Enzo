@@ -41,7 +41,6 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
         onStateChangeListener = this;
     }
 
-
     /**
      * 初始化HearView
      */
