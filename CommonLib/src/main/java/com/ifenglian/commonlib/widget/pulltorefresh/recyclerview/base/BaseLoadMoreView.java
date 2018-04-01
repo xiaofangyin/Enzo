@@ -16,11 +16,13 @@ public abstract class BaseLoadMoreView extends LinearLayout {
     //正在加载
     public final static int STATE_LOADING = 0;
     //加载完成
-    public final static int STATE_COMPLETE = 1;
+    public final static int STATE_SUCCESS = 1;
+    //加载失败
+    public final static int STATE_FAILED = 2;
     //没有数据
-    public final static int STATE_NO_DATA = 2;
+    public final static int STATE_NO_DATA = 3;
     //初始化状态
-    public int mState = STATE_COMPLETE;
+    public int mState = STATE_SUCCESS;
 
     public View mContainer;
 

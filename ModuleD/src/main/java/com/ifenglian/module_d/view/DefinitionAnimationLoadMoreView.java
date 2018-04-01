@@ -44,7 +44,7 @@ public class DefinitionAnimationLoadMoreView extends BaseLoadMoreView {
                 animationDrawable.start();
                 this.setVisibility(VISIBLE);
                 break;
-            case STATE_COMPLETE:
+            case STATE_SUCCESS:
                 if (animationDrawable != null) {
                     animationDrawable.stop();
                 }

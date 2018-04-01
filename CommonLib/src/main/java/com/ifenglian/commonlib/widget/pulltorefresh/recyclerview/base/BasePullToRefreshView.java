@@ -22,7 +22,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     //刷新状态
     public static final int STATE_REFRESHING = 2;
     //刷新完成
-    public static final int STATE_DONE = 3;
+    public static final int STATE_SUCCESS = 3;
     //刷新失败
     public static final int STATE_FAILED = 4;
     //初始化状态
@@ -87,8 +87,8 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     /**
      * 刷新完成
      */
-    public void refreshComplete() {
-        onStateChangeListener.onStateChange(STATE_DONE);
+    public void refreshSuccess() {
+        onStateChangeListener.onStateChange(STATE_SUCCESS);
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 reset();

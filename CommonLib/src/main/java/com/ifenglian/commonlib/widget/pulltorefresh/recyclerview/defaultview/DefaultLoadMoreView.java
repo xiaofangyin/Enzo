@@ -41,8 +41,7 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
                 llLoadMore.setVisibility(VISIBLE);
                 tvNoData.setVisibility(INVISIBLE);
                 break;
-            case STATE_COMPLETE:
-                this.setVisibility(GONE);
+            case STATE_SUCCESS:
                 break;
             case STATE_NO_DATA:
                 llLoadMore.setVisibility(GONE);
@@ -50,7 +49,6 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
                 break;
         }
         mState = state;
-
     }
 
     @Override

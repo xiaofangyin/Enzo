@@ -132,7 +132,7 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
                 startAnim();
                 scrollTo(mMeasuredHeight);
                 break;
-            case STATE_DONE:
+            case STATE_SUCCESS:
                 break;
         }
         mState = state;

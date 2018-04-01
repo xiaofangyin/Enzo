@@ -145,7 +145,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 scrollTo(mMeasuredHeight);
                 break;
-            case STATE_DONE:
+            case STATE_SUCCESS:
                 PullToRefreshRecyclerViewUtils.saveLastRefreshTime(context, System.currentTimeMillis());
                 ivArrow.clearAnimation();
                 ivArrow.setVisibility(View.VISIBLE);

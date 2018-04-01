@@ -114,7 +114,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void setNoMoreData(boolean noMore) {
         isLoadingData = false;
         isNoMoreData = noMore;
-        loadMoreView.setState(isNoMoreData ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_COMPLETE);
+        loadMoreView.setState(isNoMoreData ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_SUCCESS);
         if (noMore) {
             insideAdapter.notifyDataSetChanged();
         }
@@ -137,11 +137,11 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     /**
      * 刷新数据完成
      */
-    public void refreshComplete() {
-        Log.e("AAA", "refreshComplete...");
+    public void refreshSuccess() {
+        Log.e("AAA", "refreshSuccess...");
         isLoadingData = false;
         if (headerRefreshView != null) {
-            headerRefreshView.refreshComplete();
+            headerRefreshView.refreshSuccess();
         }
         mDataObserver.onChanged();
         setNoMoreData(false);
@@ -168,7 +168,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void loadMoreComplete() {
         Log.e("AAA", "loadMoreComplete...");
         isLoadingData = false;
-        loadMoreView.setState(BaseLoadMoreView.STATE_COMPLETE);
+        loadMoreView.setState(BaseLoadMoreView.STATE_SUCCESS);
         insideAdapter.notifyDataSetChanged();
 
         scrollLoadMore();
@@ -187,7 +187,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void setLoadMoreEnabled(boolean enabled) {
         isAllowLoadMore = enabled;
         if (!enabled) {
-            loadMoreView.setState(BaseLoadMoreView.STATE_COMPLETE);
+            loadMoreView.setState(BaseLoadMoreView.STATE_SUCCESS);
         }
     }
 
@@ -251,7 +251,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
             LayoutManager layoutManager = getLayoutManager();
 
-            int status = BasePullToRefreshView.STATE_DONE;
+            int status = BasePullToRefreshView.STATE_SUCCESS;
 
             if (headerRefreshView != null)
                 status = headerRefreshView.getState();
@@ -325,7 +325,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
                 break;
         }
 
-        int status = BasePullToRefreshView.STATE_DONE;
+        int status = BasePullToRefreshView.STATE_SUCCESS;
         if (headerRefreshView != null)
             status = headerRefreshView.getState();
 

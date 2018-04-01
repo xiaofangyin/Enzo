@@ -97,7 +97,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
             if (mRecyclerView.isLoading()) {
                 mRecyclerView.loadMoreComplete();
             } else if (mRecyclerView.isRefreshing()) {
-                mRecyclerView.refreshComplete();
+                mRecyclerView.refreshSuccess();
             }
         }
     }
