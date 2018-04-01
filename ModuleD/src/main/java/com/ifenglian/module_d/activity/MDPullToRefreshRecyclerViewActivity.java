@@ -93,7 +93,6 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
                     list.add("load more" + i);
                 }
                 adapter.setLoadMoreData(list);
-
                 refreshUI();
             }
         }, 2000);

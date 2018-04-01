@@ -54,7 +54,7 @@ public class MDPullToRefreshAdapter extends RecyclerView.Adapter<MDPullToRefresh
         return mData == null ? 0 : mData.size();
     }
 
-    public static class NormalViewHolder extends RecyclerView.ViewHolder {
+    static class NormalViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
 
