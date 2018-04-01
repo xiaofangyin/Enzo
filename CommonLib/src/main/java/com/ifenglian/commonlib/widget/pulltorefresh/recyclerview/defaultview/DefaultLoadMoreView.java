@@ -1,6 +1,7 @@
 package com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -35,11 +36,12 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
 
     @Override
     public void setState(int state) {
+        Log.e("AAA", "DefaultLoadMoreView setState: " + state);
         this.setVisibility(VISIBLE);
         switch (state) {
             case STATE_LOADING:
                 llLoadMore.setVisibility(VISIBLE);
-                tvNoData.setVisibility(INVISIBLE);
+                tvNoData.setVisibility(GONE);
                 break;
             case STATE_SUCCESS:
                 break;
