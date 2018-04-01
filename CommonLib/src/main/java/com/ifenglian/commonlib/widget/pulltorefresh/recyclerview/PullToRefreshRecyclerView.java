@@ -36,8 +36,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     private boolean isAllowLoadMore = false;
     //是否正在加载数据
     private boolean isLoadingData = false;
-    //是否没有更多数据
-    private boolean isNoMoreData = false;
     //是否为空布局
     private boolean isEmptyView = false;
     //设置一个很大的数字
@@ -117,8 +115,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      */
     public void setNoMoreData(boolean noMore) {
         isLoadingData = false;
-        isNoMoreData = noMore;
-        loadMoreView.setState(isNoMoreData ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_SUCCESS);
+        loadMoreView.setState(noMore ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_SUCCESS);
         if (noMore) {
             insideAdapter.notifyDataSetChanged();
         }
@@ -268,23 +265,12 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     private void scrollLoadMore() {
         int loadStatus = loadMoreView.getState();
-        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
+        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
             LayoutManager layoutManager = getLayoutManager();
 
-            int status = BasePullToRefreshView.STATE_SUCCESS;
-
-            if (headerRefreshView != null)
-                status = headerRefreshView.getState();
-
-            Log.e("AAA", "before scrollLoadMore...layoutManager.getChildCount(): " + layoutManager.getChildCount()
-                    + "  findLastVisibleItemPosition(layoutManager):  " + findLastVisibleItemPosition(layoutManager)
-                    + "  layoutManager.getItemCount() - 2: " + (layoutManager.getItemCount() - 2)
-                    + "  layoutManager.getItemCount():  " + layoutManager.getItemCount()
-                    + "  layoutManager.getChildCount(): " + layoutManager.getChildCount()
-                    + "  status: " + status);
-
-            if (layoutManager.getChildCount() > 0 && findLastVisibleItemPosition(layoutManager) >= layoutManager.getItemCount() - 2
-                    && layoutManager.getItemCount() >= layoutManager.getChildCount()) {
+            if (layoutManager.getChildCount() > 0 &&
+                    findLastVisibleItemPosition(layoutManager) >= layoutManager.getItemCount() - 2 &&
+                    layoutManager.getItemCount() >= layoutManager.getChildCount()) {
                 Log.e("AAA", "start scrollLoadMore...");
                 isLoadingData = true;
                 loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
