@@ -150,6 +150,19 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     }
 
     /**
+     * 刷新数据失败
+     */
+    public void refreshFailed() {
+        Log.e("AAA", "refreshFailed...");
+        isLoadingData = false;
+        if (headerRefreshView != null) {
+            headerRefreshView.refreshFailed();
+        }
+        mDataObserver.onChanged();
+        setNoMoreData(false);
+    }
+
+    /**
      * 加载数据完成
      */
     public void loadMoreComplete() {

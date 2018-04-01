@@ -111,44 +111,60 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
         //下拉时状态相同不做继续保持原有的状态
         if (state == mState) return;
 
-        //根据状态处理刷新控件的外显
-        if (state == STATE_REFRESHING) {
-            ivArrow.clearAnimation();
-            ivArrow.setVisibility(View.GONE);
-            if (progressView != null)
-                progressView.setVisibility(View.VISIBLE);
-            scrollTo(mMeasuredHeight);
-        } else if (state == STATE_DONE) {//执行这一步之前会先执行重置刷新布局，因此这里不需要设置布局高度
-            ivArrow.setVisibility(View.VISIBLE);
-            ivArrow.setImageResource(R.mipmap.refresh_succeed);
-            if (progressView != null)
-                progressView.setVisibility(View.GONE);
-        } else {//正常显示箭头
-            ivArrow.setVisibility(View.VISIBLE);
-            ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
-            if (progressView != null) {
-                progressView.setVisibility(View.GONE);
-            }
-        }
-
         //根据状态进行动画显示
         switch (state) {
             case STATE_PULL_DOWN:
+                ivArrow.setVisibility(View.VISIBLE);
+                ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
                 ivArrow.clearAnimation();
                 ivArrow.startAnimation(mRotateDownAnim);
+
                 tvRefreshState.setText(R.string.collection_pull_to_refresh);
+                if (progressView != null) {
+                    progressView.setVisibility(View.GONE);
+                }
                 break;
             case STATE_RELEASE_REFRESH:
+                ivArrow.setVisibility(View.VISIBLE);
+                ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
                 ivArrow.clearAnimation();
                 ivArrow.startAnimation(mRotateUpAnim);
+
                 tvRefreshState.setText(R.string.collection_release_refresh);
+                if (progressView != null) {
+                    progressView.setVisibility(View.GONE);
+                }
                 break;
             case STATE_REFRESHING:
+                ivArrow.clearAnimation();
+                ivArrow.setVisibility(View.GONE);
+
                 tvRefreshState.setText(R.string.collection_refreshing);
+                if (progressView != null) {
+                    progressView.setVisibility(View.VISIBLE);
+                }
+                scrollTo(mMeasuredHeight);
                 break;
             case STATE_DONE:
                 PullToRefreshRecyclerViewUtils.saveLastRefreshTime(context, System.currentTimeMillis());
+                ivArrow.clearAnimation();
+                ivArrow.setVisibility(View.VISIBLE);
+                ivArrow.setImageResource(R.mipmap.refresh_succeed);
+
+                if (progressView != null) {
+                    progressView.setVisibility(View.GONE);
+                }
                 tvRefreshState.setText(R.string.collection_refresh_done);
+                break;
+            case STATE_FAILED:
+                ivArrow.clearAnimation();
+                ivArrow.setVisibility(View.VISIBLE);
+                ivArrow.setImageResource(R.mipmap.refresh_failed);
+
+                if (progressView != null) {
+                    progressView.setVisibility(View.GONE);
+                }
+                tvRefreshState.setText(R.string.collection_refresh_failed);
                 break;
         }
         mState = state;
