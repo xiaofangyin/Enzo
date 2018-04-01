@@ -5,27 +5,24 @@ import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
 /**
- * 文 件 名: ViewPagerScroller
+ * 文 件 名: UGCViewPagerScroller
  * 创 建 人: xiaofangyin
- * 创建日期: 2018/1/14
+ * 创建日期: 2018/3/16
  * 邮   箱: xiaofy@ifenglian.com
- * <p>
- * <p>由于ViewPager 默认的切换速度有点快，因此用一个Scroller 来控制切换的速度</p>
- * <p>而实际上ViewPager 切换本来就是用的Scroller来做的，因此我们可以通过反射来</p>
- * <p>获取取到ViewPager 的 mScroller 属性，然后替换成我们自己的Scroller</p>
  */
-public class ViewPagerScroller extends Scroller {
-    private int mDuration = 1000;// ViewPager默认的最大Duration 为600,我们默认稍微大一点。值越大越慢。
+public class UGCViewPagerScroller extends Scroller {
 
-    ViewPagerScroller(Context context) {
+    private int mDuration = 1000;// ViewPager默认的最大Duration 为600。
+
+    UGCViewPagerScroller(Context context) {
         super(context);
     }
 
-    public ViewPagerScroller(Context context, Interpolator interpolator) {
+    public UGCViewPagerScroller(Context context, Interpolator interpolator) {
         super(context, interpolator);
     }
 
-    public ViewPagerScroller(Context context, Interpolator interpolator, boolean flywheel) {
+    public UGCViewPagerScroller(Context context, Interpolator interpolator, boolean flywheel) {
         super(context, interpolator, flywheel);
     }
 
@@ -42,5 +39,4 @@ public class ViewPagerScroller extends Scroller {
     public void setDuration(int duration) {
         mDuration = duration;
     }
-
 }
