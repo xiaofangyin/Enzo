@@ -92,10 +92,8 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
                 for (int i = 0; i < 10; i++) {
                     list.add("load more" + i);
                 }
-//                adapter.setLoadMoreData(list);
-                if (adapter.getItemCount() > 50) {
-                    mRecyclerView.setNoMoreData(true);
-                }
+                adapter.setLoadMoreData(list);
+
                 refreshUI();
             }
         }, 2000);
@@ -104,7 +102,11 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
     public void refreshUI() {
         if (mRecyclerView != null) {
             if (mRecyclerView.isLoading()) {
-                mRecyclerView.loadFailed();
+                if (adapter.getItemCount() > 50) {
+                    mRecyclerView.loadMoreFailed();
+                } else {
+                    mRecyclerView.loadMoreSuccess();
+                }
             } else if (mRecyclerView.isRefreshing()) {
                 mRecyclerView.refreshSuccess();
             }

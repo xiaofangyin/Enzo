@@ -169,8 +169,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     /**
      * 加载数据完成
      */
-    public void loadMoreComplete() {
-        Log.e("AAA", "loadMoreComplete...");
+    public void loadMoreSuccess() {
+        Log.e("AAA", "loadMoreSuccess...");
         isLoadingData = false;
         loadMoreView.setState(BaseLoadMoreView.STATE_SUCCESS);
         insideAdapter.notifyDataSetChanged();
@@ -181,7 +181,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     /**
      * 加载数据失败
      */
-    public void loadFailed() {
+    public void loadMoreFailed() {
         isLoadingData = false;
         loadMoreView.setState(BaseLoadMoreView.STATE_FAILED);
         loadMoreView.setOnRetryListener(new OnRetryListener() {

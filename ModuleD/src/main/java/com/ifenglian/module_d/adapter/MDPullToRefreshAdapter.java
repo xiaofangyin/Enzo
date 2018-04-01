@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ifenglian.module_d.R;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * 创建日期: 2018/3/31
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDPullToRefreshAdapter extends RecyclerView.Adapter {
+public class MDPullToRefreshAdapter extends RecyclerView.Adapter<MDPullToRefreshAdapter.NormalViewHolder> {
 
     private List<String> mData;
 
@@ -38,14 +39,14 @@ public class MDPullToRefreshAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NormalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.md_item_pull_refresh, parent, false);
         return new NormalViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(NormalViewHolder holder, int position) {
+        holder.tvTitle.setText(mData.get(position));
     }
 
     @Override
@@ -53,10 +54,13 @@ public class MDPullToRefreshAdapter extends RecyclerView.Adapter {
         return mData == null ? 0 : mData.size();
     }
 
-    private static class NormalViewHolder extends RecyclerView.ViewHolder {
+    public static class NormalViewHolder extends RecyclerView.ViewHolder {
 
-        public NormalViewHolder(View itemView) {
+        TextView tvTitle;
+
+        NormalViewHolder(View itemView) {
             super(itemView);
+            tvTitle = itemView.findViewById(R.id.title);
         }
     }
 }
