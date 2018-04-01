@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.circlebanner;
+package com.ifenglian.commonlib.widget.banner;
 
 import android.content.Context;
 import android.os.Handler;
@@ -20,9 +20,8 @@ import java.util.List;
  * 创建日期: 2018/3/16
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class UGCircleBanner extends RelativeLayout {
+public class UGCBanner extends RelativeLayout {
 
-    private int MAX_VALUE;
     private int mSelectedIndex = 0;
     private Handler mUIHandler;
     private List<String> mData;
@@ -30,17 +29,17 @@ public class UGCircleBanner extends RelativeLayout {
     private LinearLayout indicatorLayout;
     private ImageView[] indicators;
     private OnBannerClickListener mClickListener;
-    private UGCircleBannerAdapter adapter;
+    private UGCBannerAdapter adapter;
 
-    public UGCircleBanner(Context context) {
+    public UGCBanner(Context context) {
         this(context, null);
     }
 
-    public UGCircleBanner(Context context, AttributeSet attrs) {
+    public UGCBanner(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public UGCircleBanner(Context context, AttributeSet attrs, int defStyleAttr) {
+    public UGCBanner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -60,18 +59,17 @@ public class UGCircleBanner extends RelativeLayout {
         indicatorLayout.setLayoutParams(layoutParams);
         addView(indicatorLayout);
 
-        adapter = new UGCircleBannerAdapter(getContext());
+        adapter = new UGCBannerAdapter(getContext());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
     }
 
     public void play(List<String> data) {
         if (data != null && data.size() > 0) {
-            MAX_VALUE = data.size() * 400;
             if (mData.size() != data.size()) {
                 stopAdvertPlay();
                 mData = data;
-                adapter = new UGCircleBannerAdapter(getContext());
+                adapter = new UGCBannerAdapter(getContext());
                 adapter.setNewData(mData);
                 viewPager.setAdapter(adapter);
                 adapter.setOnBannerClickListener(new OnBannerClickListener() {
@@ -148,7 +146,7 @@ public class UGCircleBanner extends RelativeLayout {
     private Runnable timerTask = new Runnable() {
         @Override
         public void run() {
-            if (mSelectedIndex == MAX_VALUE || mSelectedIndex == 0) {
+            if (mSelectedIndex == Short.MAX_VALUE || mSelectedIndex == 0) {
                 viewPager.setCurrentItem(getInitPosition(), false);
             } else {
                 // 常规执行这里
@@ -198,7 +196,7 @@ public class UGCircleBanner extends RelativeLayout {
         if (mData.isEmpty()) {
             return 0;
         }
-        int halfValue = MAX_VALUE / 2;
+        int halfValue = Short.MAX_VALUE / 2;
         int position = halfValue % mData.size();
         return halfValue - position;
     }

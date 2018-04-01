@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.circlebanner;
+package com.ifenglian.commonlib.widget.banner;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: UGCircleBannerAdapter
+ * 文 件 名: UGCBannerAdapter
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/3/16
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class UGCircleBannerAdapter extends PagerAdapter {
+public class UGCBannerAdapter extends PagerAdapter {
 
     private ArrayList<ImageView> mViewCaches;
     private List<String> mData;
     private Context context;
-    private UGCircleBanner.OnBannerClickListener mClickListener;
+    private UGCBanner.OnBannerClickListener mClickListener;
 
-    UGCircleBannerAdapter(Context context) {
+    UGCBannerAdapter(Context context) {
         mData = new ArrayList<>();
         this.mViewCaches = new ArrayList<>();
         this.context = context;
@@ -38,14 +38,14 @@ public class UGCircleBannerAdapter extends PagerAdapter {
         }
     }
 
-    void setOnBannerClickListener(UGCircleBanner.OnBannerClickListener clickListener) {
+    void setOnBannerClickListener(UGCBanner.OnBannerClickListener clickListener) {
         mClickListener = clickListener;
     }
 
     @Override
     public int getCount() {
         if (mData != null && mData.size() > 0) {
-            return mData.size() == 1 ? 1 : mData.size() * 400;
+            return mData.size() == 1 ? 1 : Short.MAX_VALUE;
         } else {
             return 0;
         }

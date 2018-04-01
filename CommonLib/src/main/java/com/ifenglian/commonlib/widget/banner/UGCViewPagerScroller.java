@@ -1,4 +1,4 @@
-package com.ifenglian.commonlib.widget.circlebanner;
+package com.ifenglian.commonlib.widget.banner;
 
 import android.content.Context;
 import android.view.animation.Interpolator;

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.circlebanner.UGCircleBanner;
+import com.ifenglian.commonlib.widget.banner.UGCBanner;
 import com.ifenglian.commonlib.widget.snowview.SnowView;
 import com.ifenglian.module_d.R;
 
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class MDViewPagerFragment1 extends BaseFragment {
 
-    private UGCircleBanner circleBanner;
+    private UGCBanner circleBanner;
     private SnowView fallingView;
 
     @Override
