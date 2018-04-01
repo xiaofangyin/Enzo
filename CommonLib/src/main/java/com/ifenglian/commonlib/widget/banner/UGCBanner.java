@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -124,6 +125,7 @@ public class UGCBanner extends RelativeLayout {
 
         @Override
         public void onPageSelected(int position) {
+            Log.e("AAA", "onPageSelected: " + position);
             mSelectedIndex = position;
             setIndicator(position % mData.size());
         }
