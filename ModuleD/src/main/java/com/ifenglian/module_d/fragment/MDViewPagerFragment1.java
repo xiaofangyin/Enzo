@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseFragment;
+import com.ifenglian.commonlib.utils.toast.ToastUtils;
 import com.ifenglian.commonlib.widget.banner.UGCBanner;
 import com.ifenglian.commonlib.widget.snowview.SnowView;
 import com.ifenglian.module_d.R;
@@ -21,8 +22,9 @@ import java.util.List;
  */
 public class MDViewPagerFragment1 extends BaseFragment {
 
-    private UGCBanner circleBanner;
+    private UGCBanner banner;
     private SnowView fallingView;
+    private List<String> mData;
 
     @Override
     public int getLayoutId() {
@@ -31,20 +33,20 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        circleBanner = rootView.findViewById(R.id.md_circle_banner);
+        banner = rootView.findViewById(R.id.md_circle_banner);
         fallingView = rootView.findViewById(R.id.fall_view);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        List<String> data = new ArrayList<>();
-        data.add("http://file06.16sucai.com/2016/0428/cd094f5623151c096b820400fc71eac3.jpg");
-        data.add("http://file06.16sucai.com/2016/0425/67a5159babcb1df3ecf68197a513af61.jpg");
-        data.add("http://file06.16sucai.com/2016/0425/73e2fc8d7871ae4952ea2789f3f5b24f.jpg");
-        data.add("http://file06.16sucai.com/2016/0425/006fb503a3ec0822c2b1a10405b069a8.jpg");
-        data.add("http://file06.16sucai.com/2016/0425/bbdec65210c15d347dbc17d88c5535be.jpg");
-        data.add("http://file06.16sucai.com/2016/0425/a768086eef8c2abb98eabbcee8ecd578.jpg");
-        circleBanner.play(data);
+        mData = new ArrayList<>();
+        mData.add("http://file06.16sucai.com/2016/0428/cd094f5623151c096b820400fc71eac3.jpg");
+        mData.add("http://file06.16sucai.com/2016/0425/67a5159babcb1df3ecf68197a513af61.jpg");
+        mData.add("http://file06.16sucai.com/2016/0425/73e2fc8d7871ae4952ea2789f3f5b24f.jpg");
+        mData.add("http://file06.16sucai.com/2016/0425/006fb503a3ec0822c2b1a10405b069a8.jpg");
+        mData.add("http://file06.16sucai.com/2016/0425/bbdec65210c15d347dbc17d88c5535be.jpg");
+        mData.add("http://file06.16sucai.com/2016/0425/a768086eef8c2abb98eabbcee8ecd578.jpg");
+        banner.play(mData);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.md_icon_snow);
         fallingView.initSnow(bitmap, 60);
@@ -52,6 +54,11 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-
+        banner.setOnBannerClickListener(new UGCBanner.OnBannerClickListener() {
+            @Override
+            public void onBannerClick(int position) {
+                ToastUtils.showToast(mData.get(position));
+            }
+        });
     }
 }
