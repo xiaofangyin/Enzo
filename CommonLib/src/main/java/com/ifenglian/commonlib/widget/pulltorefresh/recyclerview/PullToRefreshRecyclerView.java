@@ -15,8 +15,10 @@ import android.widget.LinearLayout;
 
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BaseLoadMoreView;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
-import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultRefreshHeaderView;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultLoadMoreView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultRefreshHeaderView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRefreshAndLoadMoreListener;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRetryListener;
 
 import java.util.List;
 
@@ -44,6 +46,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     private static final int TYPE_EMPTY_VIEW = 20002;
     //刷新加载更多监听
     private OnRefreshAndLoadMoreListener mLoadingListener;
+    //加载失败，点击重试
+    private OnRetryListener mRetryListener;
     //设置头部底部View的适配器
     public HeaderAndFooterAdapter mHeaderAndFooterAdapter;
     private Adapter insideAdapter;
@@ -175,6 +179,21 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     }
 
     /**
+     * 加载数据失败
+     */
+    public void loadFailed() {
+        isLoadingData = false;
+        loadMoreView.setState(BaseLoadMoreView.STATE_FAILED);
+        loadMoreView.setOnRetryListener(new OnRetryListener() {
+            @Override
+            public void onRetry(View view) {
+                loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
+                mRetryListener.onRetry(view);
+            }
+        });
+    }
+
+    /**
      * 是否允许刷新
      */
     public void setPullRefreshEnabled(boolean enabled) {
@@ -248,7 +267,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     }
 
     private void scrollLoadMore() {
-        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData) {
+        int loadStatus = loadMoreView.getState();
+        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && !isNoMoreData && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
             LayoutManager layoutManager = getLayoutManager();
 
             int status = BasePullToRefreshView.STATE_SUCCESS;
@@ -647,18 +667,15 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
     }
 
+    public void setOnRetryListener(OnRetryListener listener) {
+        mRetryListener = listener;
+    }
+
     /**
      * 设置加载更多监听
      */
     public void setRefreshAndLoadMoreListener(OnRefreshAndLoadMoreListener listener) {
         mLoadingListener = listener;
-    }
-
-    public interface OnRefreshAndLoadMoreListener {
-
-        void onRecyclerViewRefresh();
-
-        void onRecyclerViewLoadMore();
     }
 
     /**

@@ -66,7 +66,7 @@
             android:background="@drawable/lib_alert_dialog_selector_button_left"
             android:gravity="center"
             android:text="取消"
-            android:textColor="@drawable/lib_selector_text_color_alert_dialog_cancel"
+            android:textColor="@drawable/lib_selector_text_color_999"
             android:textSize="18sp" />
 
         <View
@@ -83,7 +83,7 @@
             android:background="@drawable/lib_alert_dialog_selector_button_right"
             android:gravity="center"
             android:text="确定"
-            android:textColor="@drawable/lib_selector_text_color_alert_dialog_confirm"
+            android:textColor="@drawable/lib_selector_text_color_blue"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

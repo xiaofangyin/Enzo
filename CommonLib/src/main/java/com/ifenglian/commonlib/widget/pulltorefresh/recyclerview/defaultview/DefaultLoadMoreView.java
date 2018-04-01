@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,8 +19,8 @@ import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BaseLoadMo
  */
 public class DefaultLoadMoreView extends BaseLoadMoreView {
 
-    private TextView tvNoData;
-    private LinearLayout llLoadMore;
+    private LinearLayout llLoadingLayout;
+    private TextView tvNoData, tvLoadFailed;
 
     public DefaultLoadMoreView(Context context) {
         super(context);
@@ -30,24 +31,40 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
         mContainer = LayoutInflater.from(context).inflate(R.layout.layout_default_loading_more, null);
         addView(mContainer);
         setGravity(Gravity.CENTER);
-        tvNoData = mContainer.findViewById(R.id.no_data);
-        llLoadMore = mContainer.findViewById(R.id.loadMore_Ll);
+        llLoadingLayout = mContainer.findViewById(R.id.ll_loading_layout);
+        tvNoData = mContainer.findViewById(R.id.tv_load_no_data);
+        tvLoadFailed = mContainer.findViewById(R.id.tv_load_failed);
     }
 
     @Override
     public void setState(int state) {
         Log.e("AAA", "DefaultLoadMoreView setState: " + state);
-        this.setVisibility(VISIBLE);
+        this.setVisibility(View.VISIBLE);
         switch (state) {
             case STATE_LOADING:
-                llLoadMore.setVisibility(VISIBLE);
-                tvNoData.setVisibility(GONE);
+                llLoadingLayout.setVisibility(View.VISIBLE);
+                tvNoData.setVisibility(View.GONE);
+                tvLoadFailed.setVisibility(View.GONE);
                 break;
             case STATE_SUCCESS:
                 break;
+            case STATE_FAILED:
+                llLoadingLayout.setVisibility(View.GONE);
+                tvNoData.setVisibility(View.GONE);
+                tvLoadFailed.setVisibility(View.VISIBLE);
+                tvLoadFailed.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mRetryListener != null) {
+                            mRetryListener.onRetry(v);
+                        }
+                    }
+                });
+                break;
             case STATE_NO_DATA:
-                llLoadMore.setVisibility(GONE);
-                tvNoData.setVisibility(VISIBLE);
+                llLoadingLayout.setVisibility(View.GONE);
+                tvNoData.setVisibility(View.VISIBLE);
+                tvLoadFailed.setVisibility(View.GONE);
                 break;
         }
         mState = state;
@@ -55,6 +72,6 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
 
     @Override
     public void destroy() {
-    }
 
+    }
 }

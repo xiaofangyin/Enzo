@@ -3,9 +3,12 @@ package com.ifenglian.module_d.activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRefreshAndLoadMoreListener;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRetryListener;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDPullToRefreshAdapter;
 
@@ -18,7 +21,7 @@ import java.util.List;
  * 创建日期: 2018/3/31
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements PullToRefreshRecyclerView.OnRefreshAndLoadMoreListener {
+public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements OnRefreshAndLoadMoreListener {
 
     private PullToRefreshRecyclerView mRecyclerView;
     private MDPullToRefreshAdapter adapter;
@@ -51,6 +54,12 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
         mRecyclerView.setAdapter(adapter);
 
         mRecyclerView.setAutoRefresh();
+        mRecyclerView.setOnRetryListener(new OnRetryListener() {
+            @Override
+            public void onRetry(View view) {
+                onRecyclerViewLoadMore();
+            }
+        });
     }
 
     @Override
@@ -83,7 +92,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
                 for (int i = 0; i < 10; i++) {
                     list.add("load more" + i);
                 }
-                adapter.setLoadMoreData(list);
+//                adapter.setLoadMoreData(list);
                 if (adapter.getItemCount() > 50) {
                     mRecyclerView.setNoMoreData(true);
                 }
@@ -95,7 +104,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
     public void refreshUI() {
         if (mRecyclerView != null) {
             if (mRecyclerView.isLoading()) {
-                mRecyclerView.loadMoreComplete();
+                mRecyclerView.loadFailed();
             } else if (mRecyclerView.isRefreshing()) {
                 mRecyclerView.refreshSuccess();
             }

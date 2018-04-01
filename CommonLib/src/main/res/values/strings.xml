@@ -18,4 +18,5 @@
     <string name="collection_last_refresh_time">上次更新时间：</string>
     <string name="collection_loading_more">正在加载...</string>
     <string name="collection_no_more_data">没有更多数据</string>
+    <string name="collection_load_failed">加载失败，点我再试试...</string>
 </resources>
