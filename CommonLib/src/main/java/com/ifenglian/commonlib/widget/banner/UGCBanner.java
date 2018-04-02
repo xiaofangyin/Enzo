@@ -148,8 +148,10 @@ public class UGCBanner extends RelativeLayout {
     private Runnable timerTask = new Runnable() {
         @Override
         public void run() {
-            if (mSelectedIndex == Short.MAX_VALUE || mSelectedIndex == 0) {
+            if (mSelectedIndex == Short.MAX_VALUE - 1 || mSelectedIndex == 0) {
                 viewPager.setCurrentItem(getInitPosition(), false);
+                setIndicator(0);
+                startAdvertPlay();
             } else {
                 // 常规执行这里
                 viewPager.setCurrentItem(mSelectedIndex + 1, true);
