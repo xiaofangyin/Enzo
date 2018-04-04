@@ -75,8 +75,9 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
 
     @Override
     public void setRefreshTimeVisible(boolean show) {
-        if (mRefreshContainer != null)
+        if (mRefreshContainer != null) {
             mRefreshContainer.setVisibility(show ? VISIBLE : GONE);
+        }
     }
 
     @Override
@@ -104,6 +105,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
                 rotateAnimator.reverse();
+
                 tvRefreshState.setText(R.string.collection_pull_to_refresh);
                 if (progressView != null) {
                     progressView.setVisibility(View.GONE);
