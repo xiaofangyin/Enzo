@@ -15,7 +15,6 @@ import com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerViewUtils;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
 import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.view.ViewHelper;
 
 /**
  * 文 件 名: DefaultRefreshHeaderView
@@ -122,7 +121,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 break;
             case STATE_REFRESHING:
-                ViewHelper.setRotation(ivArrow, 0);
+                rotateAnimator.reverse();//恢复0度
                 ivArrow.setVisibility(View.GONE);
 
                 tvRefreshState.setText(R.string.collection_refreshing);

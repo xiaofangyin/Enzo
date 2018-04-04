@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/tv_load_failed"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:gravity="center"

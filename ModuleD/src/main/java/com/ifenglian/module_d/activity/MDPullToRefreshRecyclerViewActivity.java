@@ -2,7 +2,7 @@ package com.ifenglian.module_d.activity;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
@@ -36,7 +36,8 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
     @Override
     public void initView() {
         mRecyclerView = findViewById(R.id.md_pull_to_refresh_recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        //mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadMoreEnabled(true);
         mRecyclerView.setRefreshTimeVisible(true);
@@ -73,7 +74,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
             @Override
             public void run() {
                 mData.clear();
-                for (int i = 0; i < 30; i++) {
+                for (int i = 0; i < 10; i++) {
                     mData.add("Item" + (mData.size() + 1));
                 }
                 adapter.setNewData(mData);
@@ -88,12 +89,16 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                List<String> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add("load more" + i);
+                if (adapter.getItemCount() > 20) {
+                    mRecyclerView.loadMoreFailed();
+                } else {
+                    List<String> list = new ArrayList<>();
+                    for (int i = 0; i < 10; i++) {
+                        list.add("load more" + (adapter.getItemCount() + i));
+                    }
+                    adapter.setLoadMoreData(list);
+                    refreshUI();
                 }
-                adapter.setLoadMoreData(list);
-                refreshUI();
             }
         }, 2000);
     }
@@ -101,11 +106,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
     public void refreshUI() {
         if (mRecyclerView != null) {
             if (mRecyclerView.isLoading()) {
-                if (adapter.getItemCount() > 50) {
-                    mRecyclerView.loadMoreFailed();
-                } else {
-                    mRecyclerView.loadMoreSuccess();
-                }
+                mRecyclerView.loadMoreSuccess();
             } else if (mRecyclerView.isRefreshing()) {
                 mRecyclerView.refreshSuccess();
             }
