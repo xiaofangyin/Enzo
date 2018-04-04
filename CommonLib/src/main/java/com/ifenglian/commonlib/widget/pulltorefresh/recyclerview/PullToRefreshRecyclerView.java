@@ -18,7 +18,6 @@ import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BasePullTo
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultLoadMoreView;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultRefreshHeaderView;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRefreshAndLoadMoreListener;
-import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRetryListener;
 
 import java.util.List;
 
@@ -44,8 +43,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     private static final int TYPE_EMPTY_VIEW = 20002;
     //刷新加载更多监听
     private OnRefreshAndLoadMoreListener mLoadingListener;
-    //加载失败，点击重试
-    private OnRetryListener mRetryListener;
     //设置头部底部View的适配器
     public HeaderAndFooterAdapter mHeaderAndFooterAdapter;
     private Adapter insideAdapter;
@@ -181,11 +178,23 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void loadMoreFailed() {
         isLoadingData = false;
         loadMoreView.setState(BaseLoadMoreView.STATE_FAILED);
-        loadMoreView.setOnRetryListener(new OnRetryListener() {
+        loadMoreView.setOnRetryListener(new OnRefreshAndLoadMoreListener() {
             @Override
-            public void onRetry(View view) {
+            public void onRecyclerViewRefresh() {
+
+            }
+
+            @Override
+            public void onRecyclerViewLoadMore() {
+
+            }
+
+            @Override
+            public void onRetry() {
                 loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-                mRetryListener.onRetry(view);
+                if (mLoadingListener != null) {
+                    mLoadingListener.onRetry();
+                }
             }
         });
     }
@@ -651,10 +660,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
                 super(itemView);
             }
         }
-    }
-
-    public void setOnRetryListener(OnRetryListener listener) {
-        mRetryListener = listener;
     }
 
     /**

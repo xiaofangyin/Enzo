@@ -3,12 +3,10 @@ package com.ifenglian.module_d.activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRefreshAndLoadMoreListener;
-import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRetryListener;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDPullToRefreshAdapter;
 
@@ -53,14 +51,7 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
         adapter = new MDPullToRefreshAdapter();
         adapter.setNewData(mData);
         mRecyclerView.setAdapter(adapter);
-
         mRecyclerView.setAutoRefresh();
-        mRecyclerView.setOnRetryListener(new OnRetryListener() {
-            @Override
-            public void onRetry(View view) {
-                onRecyclerViewLoadMore();
-            }
-        });
     }
 
     @Override
@@ -101,6 +92,11 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
                 }
             }
         }, 2000);
+    }
+
+    @Override
+    public void onRetry() {
+        onRecyclerViewLoadMore();
     }
 
     public void refreshUI() {

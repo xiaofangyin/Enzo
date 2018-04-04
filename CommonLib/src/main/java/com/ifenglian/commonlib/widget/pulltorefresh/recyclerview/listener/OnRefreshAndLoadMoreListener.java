@@ -12,4 +12,5 @@ public interface OnRefreshAndLoadMoreListener {
 
     void onRecyclerViewLoadMore();
 
+    void onRetry();
 }

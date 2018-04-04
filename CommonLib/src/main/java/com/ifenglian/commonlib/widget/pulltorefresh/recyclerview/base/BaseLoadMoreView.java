@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRetryListener;
+import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.listener.OnRefreshAndLoadMoreListener;
 
 /**
  * 文 件 名: BaseLoadMoreView 加载更多基类，如果要自定义加载布局只需要继承该基类，在对应的方法中进行逻辑整理
@@ -27,7 +27,7 @@ public abstract class BaseLoadMoreView extends LinearLayout {
     public int mState = STATE_SUCCESS;
 
     public View mContainer;
-    public OnRetryListener mRetryListener;
+    public OnRefreshAndLoadMoreListener mRetryListener;
 
     public BaseLoadMoreView(Context context) {
         super(context);
@@ -59,7 +59,7 @@ public abstract class BaseLoadMoreView extends LinearLayout {
         return mState;
     }
 
-    public void setOnRetryListener(OnRetryListener listener){
+    public void setOnRetryListener(OnRefreshAndLoadMoreListener listener){
         mRetryListener = listener;
     }
 }

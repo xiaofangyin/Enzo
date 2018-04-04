@@ -56,7 +56,7 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
                     @Override
                     public void onClick(View v) {
                         if (mRetryListener != null) {
-                            mRetryListener.onRetry(v);
+                            mRetryListener.onRetry();
                         }
                     }
                 });
