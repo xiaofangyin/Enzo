@@ -132,7 +132,11 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 scrollTo(mMeasuredHeight);
                 break;
             case STATE_SUCCESS:
-                PullToRefreshRecyclerViewUtils.saveLastRefreshTime(context, System.currentTimeMillis());
+                //时间更新
+                long currentTime = System.currentTimeMillis();
+                tvLastRefreshTime.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(currentTime));
+                PullToRefreshRecyclerViewUtils.saveLastRefreshTime(context, currentTime);
+
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.refresh_succeed);
 
