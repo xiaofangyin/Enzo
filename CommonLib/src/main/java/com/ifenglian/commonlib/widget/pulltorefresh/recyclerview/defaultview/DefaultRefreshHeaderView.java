@@ -120,8 +120,8 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 break;
             case STATE_REFRESHING:
-                ivArrow.setVisibility(View.GONE);
                 ViewHelper.setRotation(ivArrow, 0);
+                ivArrow.setVisibility(View.GONE);
 
                 tvRefreshState.setText(R.string.collection_refreshing);
                 if (progressView != null) {
