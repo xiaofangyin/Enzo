@@ -5,16 +5,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ifenglian.commonlib.R;
+import com.ifenglian.commonlib.utils.common.LogUtil;
 import com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerViewUtils;
 import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * 文 件 名: DefaultRefreshHeaderView
@@ -31,10 +32,9 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
     private TextView tvRefreshState;
     private AVLoadingIndicatorView progressView;
     private TextView tvLastRefreshTime;
-    //刷新箭头装换方向动画
-    private Animation mRotateUpAnim;
-    private Animation mRotateDownAnim;
+
     private Context context;
+    private ObjectAnimator rotateAnimator;
 
     public DefaultRefreshHeaderView(Context context) {
         super(context);
@@ -63,14 +63,8 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
         progressView = mContainer.findViewById(R.id.av_progressbar);
         tvLastRefreshTime = mContainer.findViewById(R.id.last_refresh_time);
 
-        mRotateUpAnim = new RotateAnimation(0.0f, -180.0f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        mRotateUpAnim.setDuration(ROTATE_DURATION);
-        mRotateUpAnim.setFillAfter(true);
-        mRotateDownAnim = new RotateAnimation(-180.0f, 0.0f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        mRotateDownAnim.setDuration(ROTATE_DURATION);
-        mRotateDownAnim.setFillAfter(true);
+        rotateAnimator = ObjectAnimator.ofFloat(ivArrow, "rotation", 0, -180);
+        rotateAnimator.setDuration(ROTATE_DURATION);
 
         //测量高度
         measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -96,14 +90,6 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
         if (progressView != null) {
             progressView = null;
         }
-        if (mRotateUpAnim != null) {
-            mRotateUpAnim.cancel();
-            mRotateUpAnim = null;
-        }
-        if (mRotateDownAnim != null) {
-            mRotateDownAnim.cancel();
-            mRotateDownAnim = null;
-        }
     }
 
     @Override
@@ -111,14 +97,13 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
         //下拉时状态相同不做继续保持原有的状态
         if (state == mState) return;
 
+        LogUtil.e("onStateChange state: " + state);
         //根据状态进行动画显示
         switch (state) {
             case STATE_PULL_DOWN:
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
-                ivArrow.clearAnimation();
-                ivArrow.startAnimation(mRotateDownAnim);
-
+                rotateAnimator.reverse();
                 tvRefreshState.setText(R.string.collection_pull_to_refresh);
                 if (progressView != null) {
                     progressView.setVisibility(View.GONE);
@@ -127,8 +112,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
             case STATE_RELEASE_REFRESH:
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
-                ivArrow.clearAnimation();
-                ivArrow.startAnimation(mRotateUpAnim);
+                rotateAnimator.start();
 
                 tvRefreshState.setText(R.string.collection_release_refresh);
                 if (progressView != null) {
@@ -136,8 +120,8 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 break;
             case STATE_REFRESHING:
-                ivArrow.clearAnimation();
                 ivArrow.setVisibility(View.GONE);
+                ViewHelper.setRotation(ivArrow, 0);
 
                 tvRefreshState.setText(R.string.collection_refreshing);
                 if (progressView != null) {
@@ -147,7 +131,6 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 break;
             case STATE_SUCCESS:
                 PullToRefreshRecyclerViewUtils.saveLastRefreshTime(context, System.currentTimeMillis());
-                ivArrow.clearAnimation();
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.refresh_succeed);
 
@@ -157,7 +140,6 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 tvRefreshState.setText(R.string.collection_refresh_done);
                 break;
             case STATE_FAILED:
-                ivArrow.clearAnimation();
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.refresh_failed);
 
