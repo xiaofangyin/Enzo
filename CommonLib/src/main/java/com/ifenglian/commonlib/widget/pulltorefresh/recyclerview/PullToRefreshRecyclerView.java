@@ -275,17 +275,19 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     }
 
     private void scrollLoadMore() {
-        int loadStatus = loadMoreView.getState();
-        if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
-            LayoutManager layoutManager = getLayoutManager();
+        if (loadMoreView != null) {
+            int loadStatus = loadMoreView.getState();
+            if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
+                LayoutManager layoutManager = getLayoutManager();
 
-            if (layoutManager.getChildCount() > 0 &&
-                    findLastVisibleItemPosition(layoutManager) >= layoutManager.getItemCount() - 2 &&
-                    layoutManager.getItemCount() >= layoutManager.getChildCount()) {
-                Log.e("AAA", "start scrollLoadMore...");
-                isLoadingData = true;
-                loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-                mLoadingListener.onRecyclerViewLoadMore();
+                if (layoutManager.getChildCount() > 0 &&
+                        findLastVisibleItemPosition(layoutManager) >= layoutManager.getItemCount() - 2 &&
+                        layoutManager.getItemCount() >= layoutManager.getChildCount()) {
+                    Log.e("AAA", "start scrollLoadMore...");
+                    isLoadingData = true;
+                    loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
+                    mLoadingListener.onRecyclerViewLoadMore();
+                }
             }
         }
     }
