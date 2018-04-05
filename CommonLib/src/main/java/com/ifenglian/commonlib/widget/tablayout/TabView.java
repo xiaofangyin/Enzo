@@ -1,20 +1,20 @@
 package com.ifenglian.commonlib.widget.tablayout;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Looper;
 import android.util.AttributeSet;
-import android.view.View;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ifenglian.commonlib.utils.common.DensityUtil;
-import com.nineoldandroids.animation.ValueAnimator;
 
 /**
  * 文 件 名: TabButton
@@ -22,22 +22,21 @@ import com.nineoldandroids.animation.ValueAnimator;
  * 创建日期: 2017/4/1
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class TabView extends View {
+public class TabView extends LinearLayout {
 
-    private Bitmap mDrawBitmap;
-    private Bitmap mNormalBitmap;
-    private Bitmap mSelectedBitmap;
+    private TextView textView;
+    private ImageView imageView;
+    private int mNormalBitmap;
+    private int mSelectedBitmap;
+
     private int mTextColorNormal;
     private int mTextColorSelected;
-    private String mText = "";
-    private Rect mTextRect;
-    private Paint mTextPaint;
-    private Paint mBitmapPaint;
 
     private int mMessageNumber;
     private Paint mMessagePaint;
     private Rect mMessageRect;
     private RectF mMessageRectF;
+
     private Paint mRedPointPaint;
     private RectF mRedPointRectF;
     private boolean mShowRedPoint;
@@ -52,9 +51,8 @@ public class TabView extends View {
 
     public TabView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mTextRect = new Rect();
-        mTextPaint = new Paint();
-        mBitmapPaint = new Paint();
+        setGravity(Gravity.CENTER_VERTICAL);
+        setOrientation(LinearLayout.VERTICAL);
 
         //数字画笔内容大小等创建
         mMessagePaint = new Paint();
@@ -68,49 +66,33 @@ public class TabView extends View {
     public void initTab(String text, int[] textColors, int[] iconRes) {
         mTextColorNormal = textColors[0];
         mTextColorSelected = textColors[1];
-        mNormalBitmap = BitmapFactory.decodeResource(getResources(), iconRes[0]);
-        mSelectedBitmap = BitmapFactory.decodeResource(getResources(), iconRes[1]);
-        mDrawBitmap = mNormalBitmap;
+        mNormalBitmap = iconRes[0];
+        mSelectedBitmap = iconRes[1];
 
-        mText = text;
-        mTextPaint.setTextSize(DensityUtil.sp2px(getContext(), 12));
-        mTextPaint.setColor(mTextColorNormal);
-        mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
-        mTextPaint.setAntiAlias(true);//抗锯齿
+        LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+
+        imageView = new ImageView(getContext());
+        imageView.setImageResource(mNormalBitmap);
+        imageView.setLayoutParams(layoutParams);
+
+        textView = new TextView(getContext());
+        textView.setText(text);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        textView.setTextColor(mTextColorNormal);
+        textView.setLayoutParams(layoutParams);
+        addView(imageView);
+        addView(textView);
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        drawText(canvas);//绘制原文本
-        drawBitmap(canvas);
-
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
         if (mMessageNumber > 0) {
             drawMessages(canvas);
         } else if (mShowRedPoint) {
             drawRedPoint(canvas);
         }
-    }
-
-    /**
-     * 绘制文本
-     */
-    private void drawText(Canvas canvas) {
-        int marginTop = getHeight() / 2 - (mTextRect.height() + mDrawBitmap.getHeight()) / 2;
-        int x = getMeasuredWidth() / 2 - mTextRect.width() / 2;
-        int y = marginTop + mDrawBitmap.getHeight() + mTextRect.height();
-        canvas.drawText(mText, x, y, mTextPaint);
-    }
-
-    /**
-     * 画图标
-     */
-    private void drawBitmap(Canvas canvas) {
-        int marginLeft = getWidth() / 2 - mDrawBitmap.getWidth() / 2;
-        int marginTop = getHeight() / 2 - (mTextRect.height() + mDrawBitmap.getHeight()) / 2;
-        mBitmapPaint.setAntiAlias(true);
-        mBitmapPaint.setDither(true);
-        canvas.drawBitmap(mDrawBitmap, marginLeft, marginTop, mBitmapPaint);
     }
 
     /**
@@ -123,10 +105,10 @@ public class TabView extends View {
         mRedPointPaint.setDither(true);
 
         int radius = DensityUtil.dip2px(getContext(), 3);
-        mRedPointRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - radius;
-        mRedPointRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
-        mRedPointRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + radius;
-        mRedPointRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + radius * 2;
+        mRedPointRectF.left = getWidth() / 2 + imageView.getWidth() / 2 - radius;
+        mRedPointRectF.top = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2;
+        mRedPointRectF.right = getWidth() / 2 + imageView.getWidth() / 2 + radius;
+        mRedPointRectF.bottom = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2 + radius * 2;
         canvas.drawOval(mRedPointRectF, mRedPointPaint);
     }
 
@@ -155,10 +137,10 @@ public class TabView extends View {
 
         //画圆
         int radius = DensityUtil.dip2px(getContext(), 8);
-        mMessageRectF.left = getWidth() / 2 + mDrawBitmap.getWidth() / 2 - radius;
-        mMessageRectF.top = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2;
-        mMessageRectF.right = getWidth() / 2 + mDrawBitmap.getWidth() / 2 + radius;
-        mMessageRectF.bottom = getHeight() / 2 - (mDrawBitmap.getHeight() + mTextRect.height()) / 2 + radius * 2;
+        mMessageRectF.left = getWidth() / 2 + imageView.getWidth() / 2 - radius;
+        mMessageRectF.top = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2;
+        mMessageRectF.right = getWidth() / 2 + imageView.getWidth() / 2 + radius;
+        mMessageRectF.bottom = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2 + radius * 2;
 
         mRedPointPaint.setStyle(Paint.Style.FILL);
         mRedPointPaint.setColor(0xFFFF0000);
@@ -209,51 +191,9 @@ public class TabView extends View {
      * 没有放大
      */
     public void setSelected(boolean selected) {
-        mTextPaint.setColor(selected ? mTextColorSelected : mTextColorNormal);
-        mDrawBitmap = selected ? mSelectedBitmap : mNormalBitmap;
+        textView.setTextColor(selected ? mTextColorSelected : mTextColorNormal);
+        imageView.setImageResource(selected ? mSelectedBitmap : mNormalBitmap);
         invalidateView();
-    }
-
-    /**
-     * 放大
-     */
-    public void setSelected(boolean selected, boolean animate) {
-        mTextPaint.setColor(selected ? mTextColorSelected : mTextColorNormal);
-        if (animate) {
-            if (selected) {
-                startScaleAnim(1.0f, 1.15f, mSelectedBitmap);
-            } else {
-                startScaleAnim(1.15f, 1f, mNormalBitmap);
-            }
-        } else {
-            if (selected) {
-                Matrix matrix = new Matrix();
-                matrix.postScale(1.15f, 1.15f);
-                mDrawBitmap = Bitmap.createBitmap(mSelectedBitmap, 0, 0, mSelectedBitmap.getWidth(), mSelectedBitmap.getHeight(),
-                        matrix, true);
-            } else {
-                mDrawBitmap = mNormalBitmap;
-            }
-        }
-        invalidateView();
-    }
-
-    private void startScaleAnim(float startValue, float endValue, final Bitmap bitmap) {
-        if (getWidth() > 0) {
-            ValueAnimator valueAnimator = ValueAnimator.ofFloat(startValue, endValue);
-            valueAnimator.setDuration(200);
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float value = (float) valueAnimator.getAnimatedValue();
-                    Matrix matrix = new Matrix();
-                    matrix.postScale(value, value);
-                    mDrawBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                    invalidateView();
-                }
-            });
-            valueAnimator.start();
-        }
     }
 
     /**
