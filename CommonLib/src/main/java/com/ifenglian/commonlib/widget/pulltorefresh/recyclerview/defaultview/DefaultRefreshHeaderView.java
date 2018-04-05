@@ -124,7 +124,9 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 break;
             case STATE_REFRESHING:
-                ViewHelper.setRotation(ivArrow, 0);
+                if(ViewHelper.getRotation(ivArrow) != 0){
+                    rotateAnimator.reverse();
+                }
                 ivArrow.setVisibility(View.GONE);
 
                 tvRefreshState.setText(R.string.collection_refreshing);
