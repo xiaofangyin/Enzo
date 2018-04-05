@@ -31,7 +31,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     public View mContainer;
     public int mMeasuredHeight;
 
-    public OnStateChangeListener onStateChangeListener;
+    private OnStateChangeListener onStateChangeListener;
 
     public BasePullToRefreshView(Context context) {
         super(context);
@@ -49,13 +49,16 @@ public abstract class BasePullToRefreshView extends LinearLayout {
             setVisibleHeight((int) distance + getVisibleHeight());
             if (mState <= STATE_RELEASE_REFRESH) { // 未处于刷新状态，更新箭头
                 if (getVisibleHeight() > mMeasuredHeight) {
-                    onStateChangeListener.onStateChange(STATE_RELEASE_REFRESH);
+                    if (onStateChangeListener != null) {
+                        onStateChangeListener.onStateChange(STATE_RELEASE_REFRESH);
+                    }
                 } else {
-                    onStateChangeListener.onStateChange(STATE_PULL_DOWN);
+                    if (onStateChangeListener != null) {
+                        onStateChangeListener.onStateChange(STATE_PULL_DOWN);
+                    }
                 }
             }
         }
-
     }
 
     /**
@@ -70,7 +73,9 @@ public abstract class BasePullToRefreshView extends LinearLayout {
 
         //下拉和释放两种状态之后就进入正在刷新状态
         if (getVisibleHeight() > mMeasuredHeight && mState < STATE_REFRESHING) {
-            onStateChangeListener.onStateChange(STATE_REFRESHING);
+            if (onStateChangeListener != null) {
+                onStateChangeListener.onStateChange(STATE_REFRESHING);
+            }
             isRefreshing = true;
         }
 
@@ -88,7 +93,9 @@ public abstract class BasePullToRefreshView extends LinearLayout {
      * 刷新完成
      */
     public void refreshSuccess() {
-        onStateChangeListener.onStateChange(STATE_SUCCESS);
+        if (onStateChangeListener != null) {
+            onStateChangeListener.onStateChange(STATE_SUCCESS);
+        }
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 reset();
@@ -100,7 +107,9 @@ public abstract class BasePullToRefreshView extends LinearLayout {
      * 刷新失败
      */
     public void refreshFailed() {
-        onStateChangeListener.onStateChange(STATE_FAILED);
+        if (onStateChangeListener != null) {
+            onStateChangeListener.onStateChange(STATE_FAILED);
+        }
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 reset();
@@ -115,7 +124,9 @@ public abstract class BasePullToRefreshView extends LinearLayout {
         scrollTo(0);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                onStateChangeListener.onStateChange(STATE_PULL_DOWN);
+                if (onStateChangeListener != null) {
+                    onStateChangeListener.onStateChange(STATE_PULL_DOWN);
+                }
             }
         }, 500);
     }
@@ -181,9 +192,18 @@ public abstract class BasePullToRefreshView extends LinearLayout {
      */
     public abstract void destroy();
 
+
     /**
      * 状态变化通知
      */
+    public void setOnStateChangeListener(OnStateChangeListener listener) {
+        onStateChangeListener = listener;
+    }
+
+    public OnStateChangeListener getOnStateChangeListener() {
+        return onStateChangeListener;
+    }
+
     public interface OnStateChangeListener {
         void onStateChange(int state);
     }

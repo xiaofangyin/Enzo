@@ -37,7 +37,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
 
     public DefaultRefreshHeaderView(Context context) {
         super(context);
-        onStateChangeListener = this;
+        setOnStateChangeListener(this);
     }
 
     /**

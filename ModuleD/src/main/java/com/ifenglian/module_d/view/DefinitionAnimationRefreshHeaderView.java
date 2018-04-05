@@ -24,7 +24,7 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
 
     public DefinitionAnimationRefreshHeaderView(Context context) {
         super(context);
-        onStateChangeListener = this;
+        setOnStateChangeListener(this);
     }
 
     @Override

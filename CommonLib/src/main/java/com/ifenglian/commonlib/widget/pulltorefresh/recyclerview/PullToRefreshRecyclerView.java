@@ -125,7 +125,9 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         if (isAllowRefresh && mLoadingListener != null) {
             if (!isLoading() && !isRefreshing()) {
                 isLoadingData = true;
-                headerRefreshView.onStateChangeListener.onStateChange(BasePullToRefreshView.STATE_REFRESHING);
+                if (headerRefreshView.getOnStateChangeListener() != null) {
+                    headerRefreshView.getOnStateChangeListener().onStateChange(BasePullToRefreshView.STATE_REFRESHING);
+                }
                 mLoadingListener.onRecyclerViewRefresh();
                 this.scrollToPosition(0);
             }
