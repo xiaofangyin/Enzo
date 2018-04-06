@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -43,7 +44,6 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
         super(context, attrs);
         mContext = context;
         init();
-
     }
 
     private void init() {
@@ -116,11 +116,23 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
         this.mListener = listener;
     }
 
-    //这里返回的TextView，就是我们看到的View,可以设置自己想要的效果
+    //定义动作，向上滚动翻页
+    public void next() {
+        //显示动画
+        if (getInAnimation() != mInUp) {
+            setInAnimation(mInUp);
+        }
+        //隐藏动画
+        if (getOutAnimation() != mOutUp) {
+            setOutAnimation(mOutUp);
+        }
+    }
+
+    @Override
     public View makeView() {
         TextView textView = new TextView(mContext);
         textView.setGravity(Gravity.LEFT);
-        textView.setTextSize(20);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textView.setSingleLine(true);
         textView.setGravity(Gravity.CENTER_VERTICAL);
         textView.setEllipsize(TextUtils.TruncateAt.END);
@@ -136,18 +148,6 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
         return textView;
     }
 
-    //定义动作，向上滚动翻页
-    public void next() {
-        //显示动画
-        if (getInAnimation() != mInUp) {
-            setInAnimation(mInUp);
-        }
-        //隐藏动画
-        if (getOutAnimation() != mOutUp) {
-            setOutAnimation(mOutUp);
-        }
-    }
-
     class Rotate3dAnimation extends Animation {
         private float mCenterX;
         private float mCenterY;
@@ -155,7 +155,7 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
         private final boolean mTurnUp;
         private Camera mCamera;
 
-        public Rotate3dAnimation(boolean turnIn, boolean turnUp) {
+        Rotate3dAnimation(boolean turnIn, boolean turnUp) {
             mTurnIn = turnIn;
             mTurnUp = turnUp;
         }
@@ -170,19 +170,18 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
 
         @Override
         protected void applyTransformation(float interpolatedTime, Transformation t) {
-
             final float centerX = mCenterX;
             final float centerY = mCenterY;
             final Camera camera = mCamera;
-            final int derection = mTurnUp ? 1 : -1;
+            final int direction = mTurnUp ? 1 : -1;
 
             final Matrix matrix = t.getMatrix();
 
             camera.save();
             if (mTurnIn) {
-                camera.translate(0.0f, derection * mCenterY * (interpolatedTime - 1.0f), 0.0f);
+                camera.translate(0.0f, direction * mCenterY * (interpolatedTime - 1.0f), 0.0f);
             } else {
-                camera.translate(0.0f, derection * mCenterY * (interpolatedTime), 0.0f);
+                camera.translate(0.0f, direction * mCenterY * (interpolatedTime), 0.0f);
             }
             camera.getMatrix(matrix);
             camera.restore();
