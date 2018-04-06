@@ -17,13 +17,13 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDPullToRefreshRecyclerViewActivity"
+            android:name=".activity.MDPullToRefreshRvActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDViewPagerIndicatorActivity"
+            android:name=".activity.MDPullToRefreshLvActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDJniActivity"
+            android:name=".activity.MDUpdateVersionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDPhotosActivity"
@@ -32,10 +32,10 @@
             android:name=".activity.MDLoadingLayoutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDUpdateVersionActivity"
+            android:name=".activity.MDJniActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDPullToRefreshListViewActivity"
+            android:name=".activity.MDTouchEventActivity"
             android:screenOrientation="portrait" />
     </application>
 </manifest>

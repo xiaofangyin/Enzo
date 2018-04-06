@@ -10,11 +10,12 @@ import com.ifenglian.commonlib.widget.alertdialog.AlertDialogCallBack;
 import com.ifenglian.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.activity.MDPullToRefreshListViewActivity;
+import com.ifenglian.module_d.activity.MDPullToRefreshLvActivity;
 import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
-import com.ifenglian.module_d.activity.MDPullToRefreshRecyclerViewActivity;
+import com.ifenglian.module_d.activity.MDPullToRefreshRvActivity;
+import com.ifenglian.module_d.activity.MDTouchEventActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
 
 /**
@@ -32,12 +33,13 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
-        rootView.findViewById(R.id.btn_pull_to_refresh).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_list_view_auto_load).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_pull_to_refresh_rv).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_pull_to_refresh_lv).setOnClickListener(this);
         rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
         rootView.findViewById(R.id.btn_album).setOnClickListener(this);
         rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
         rootView.findViewById(R.id.btn_jni).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
         rootView.findViewById(R.id.btn_alert_view).setOnClickListener(this);
     }
@@ -55,8 +57,8 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_list_view_auto_load) {
-            Intent intent = new Intent(getContext(), MDPullToRefreshListViewActivity.class);
+        if (id == R.id.btn_pull_to_refresh_lv) {
+            Intent intent = new Intent(getContext(), MDPullToRefreshLvActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_update_version) {
             Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);
@@ -67,11 +69,14 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         } else if (id == R.id.btn_loading_layout) {
             Intent intent = new Intent(getContext(), MDLoadingLayoutActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_pull_to_refresh) {
-            Intent intent = new Intent(getContext(), MDPullToRefreshRecyclerViewActivity.class);
+        } else if (id == R.id.btn_pull_to_refresh_rv) {
+            Intent intent = new Intent(getContext(), MDPullToRefreshRvActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_jni) {
             Intent intent = new Intent(getContext(), MDJniActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_touch_event) {
+            Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_photo_select) {
             BottomAlertDialog.Builder builder = new BottomAlertDialog.Builder(getActivity());

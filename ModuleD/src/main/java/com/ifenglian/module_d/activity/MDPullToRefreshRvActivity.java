@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: MDPullToRefreshRecyclerViewActivity
+ * 文 件 名: MDPullToRefreshRvActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/3/31
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements OnRefreshAndLoadMoreListener {
+public class MDPullToRefreshRvActivity extends BaseActivity implements OnRefreshAndLoadMoreListener {
 
     private PullToRefreshRecyclerView mRecyclerView;
     private MDPullToRefreshAdapter adapter;
@@ -39,8 +39,8 @@ public class MDPullToRefreshRecyclerViewActivity extends BaseActivity implements
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadMoreEnabled(true);
         mRecyclerView.setRefreshTimeVisible(true);
-        //mRecyclerView.setRefreshView(new DefinitionAnimationRefreshHeaderView(MDPullToRefreshRecyclerViewActivity.this));
-        //mRecyclerView.setLoadMoreView(new DefinitionAnimationLoadMoreView(MDPullToRefreshRecyclerViewActivity.this));
+        //mRecyclerView.setRefreshView(new DefinitionAnimationRefreshHeaderView(MDPullToRefreshRvActivity.this));
+        //mRecyclerView.setLoadMoreView(new DefinitionAnimationLoadMoreView(MDPullToRefreshRvActivity.this));
         mRecyclerView.setRefreshAndLoadMoreListener(this);
     }
 
