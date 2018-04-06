@@ -35,7 +35,17 @@ public class MDTouchEventView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.e("AAA", "MDTouchEventView onTouchEvent..." + event.getAction());
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.e("AAA", "MDTouchEventView onTouchEvent down 000");
+                return true;
+            case MotionEvent.ACTION_MOVE:
+                Log.e("AAA", "MDTouchEventView onTouchEvent move 222");
+                return true;
+            case MotionEvent.ACTION_UP:
+                Log.e("AAA", "MDTouchEventView onTouchEvent up 111");
+                break;
+        }
         return super.onTouchEvent(event);
     }
 }
