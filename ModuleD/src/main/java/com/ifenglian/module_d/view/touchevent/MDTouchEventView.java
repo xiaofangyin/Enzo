@@ -8,34 +8,34 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * 文 件 名: MDViewB
+ * 文 件 名: MDTouchEventView
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/4/6
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDViewB extends View{
+public class MDTouchEventView extends View {
 
-    public MDViewB(Context context) {
+    public MDTouchEventView(Context context) {
         super(context);
     }
 
-    public MDViewB(Context context, @Nullable AttributeSet attrs) {
+    public MDTouchEventView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MDViewB(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MDTouchEventView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @Override
-    protected boolean dispatchHoverEvent(MotionEvent event) {
-        Log.e("AAA","MDViewB dispatchHoverEvent...");
-        return super.dispatchHoverEvent(event);
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.e("AAA", "MDTouchEventView dispatchTouchEvent..." + ev.getAction());
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.e("AAA","MDViewB onTouchEvent...");
+        Log.e("AAA", "MDTouchEventView onTouchEvent..." + event.getAction());
         return super.onTouchEvent(event);
     }
 }

@@ -7,40 +7,40 @@ import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
 /**
- * 文 件 名: MDViewGroup1
+ * 文 件 名: MDTouchEventViewGroup
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/4/6
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDViewGroupA extends RelativeLayout{
+public class MDTouchEventViewGroup extends RelativeLayout{
 
-    public MDViewGroupA(Context context) {
+    public MDTouchEventViewGroup(Context context) {
         super(context);
     }
 
-    public MDViewGroupA(Context context, AttributeSet attrs) {
+    public MDTouchEventViewGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MDViewGroupA(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MDTouchEventViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @Override
-    protected boolean dispatchHoverEvent(MotionEvent event) {
-        Log.e("AAA","MDViewGroupA dispatchHoverEvent...");
-        return super.dispatchHoverEvent(event);
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.e("AAA","MDTouchEventViewGroup dispatchTouchEvent..." + ev.getAction());
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.e("AAA","MDViewGroupA onInterceptTouchEvent...");
+        Log.e("AAA","MDTouchEventViewGroup onInterceptTouchEvent..." + ev.getAction());
         return super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.e("AAA","MDViewGroupA onTouchEvent...");
+        Log.e("AAA","MDTouchEventViewGroup onTouchEvent..." + event.getAction());
         return super.onTouchEvent(event);
     }
 }

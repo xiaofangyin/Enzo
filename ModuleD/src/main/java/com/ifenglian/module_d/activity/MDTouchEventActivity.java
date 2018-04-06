@@ -1,5 +1,8 @@
 package com.ifenglian.module_d.activity;
 
+import android.util.Log;
+import android.view.MotionEvent;
+
 import com.ifenglian.commonlib.base.BaseActivity;
 import com.ifenglian.module_d.R;
 
@@ -9,7 +12,7 @@ import com.ifenglian.module_d.R;
  * 创建日期: 2018/4/6
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDTouchEventActivity extends BaseActivity{
+public class MDTouchEventActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
@@ -29,5 +32,17 @@ public class MDTouchEventActivity extends BaseActivity{
     @Override
     public void initListener() {
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.e("AAA", "MDTouchEventActivity dispatchTouchEvent..." + ev.getAction());
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.e("AAA", "MDTouchEventActivity onTouchEvent..." + event.getAction());
+        return super.onTouchEvent(event);
     }
 }
