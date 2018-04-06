@@ -33,7 +33,7 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
     private List<String> list;
     private int position = 0;
     private int delayedTime = 3000;//滚动间隔
-    private ItemClickListener lisener;
+    private ItemClickListener mListener;
 
     public AutoScrollTextView(Context context) {
         this(context, null);
@@ -62,8 +62,6 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
                 position++;
                 if (position == list.size())
                     position = 0;
-
-                if (list == null) return;
                 //设置显示数据并滚动
                 next();
                 setText(list.get(position));
@@ -115,7 +113,7 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
      * 设置监听
      */
     public void setClickListener(ItemClickListener listener) {
-        this.lisener = listener;
+        this.mListener = listener;
     }
 
     //这里返回的TextView，就是我们看到的View,可以设置自己想要的效果
@@ -130,8 +128,8 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
         textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (lisener != null) {
-                    lisener.onClick(position);
+                if (mListener != null) {
+                    mListener.onClick(position);
                 }
             }
         });
