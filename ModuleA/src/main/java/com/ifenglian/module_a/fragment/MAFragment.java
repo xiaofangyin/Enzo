@@ -49,7 +49,7 @@ public class MAFragment extends BaseFragment {
         verticalScrollTV.setText(list.get(0));
         verticalScrollTV.setList(list);
         verticalScrollTV.startScroll();
-        verticalScrollTV.setClickLisener(new AutoScrollTextView.ItemClickLisener() {
+        verticalScrollTV.setClickListener(new AutoScrollTextView.ItemClickListener() {
             @Override
             public void onClick(int position) {
                 Toast.makeText(getContext(), list.get(position), Toast.LENGTH_SHORT).show();

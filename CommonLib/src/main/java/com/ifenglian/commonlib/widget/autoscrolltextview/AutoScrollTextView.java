@@ -33,7 +33,7 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
     private List<String> list;
     private int position = 0;
     private int delayedTime = 3000;//滚动间隔
-    private ItemClickLisener lisener;
+    private ItemClickListener lisener;
 
     public AutoScrollTextView(Context context) {
         this(context, null);
@@ -47,7 +47,6 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
     }
 
     private void init() {
-
         setFactory(this);
 
         mInUp = createAnim(true, true);
@@ -74,19 +73,15 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
     }
 
     private Rotate3dAnimation createAnim(boolean turnIn, boolean turnUp) {
-
         Rotate3dAnimation rotation = new Rotate3dAnimation(turnIn, turnUp);
         rotation.setDuration(1200);//执行动画的时间
         rotation.setFillAfter(false);//是否保持动画完毕之后的状态
         rotation.setInterpolator(new AccelerateInterpolator());//设置加速模式
-
         return rotation;
     }
 
     /**
      * 设置滚动数据集合
-     *
-     * @param list
      */
     public void setList(List<String> list) {
         this.list = list;
@@ -118,11 +113,9 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
 
     /**
      * 设置监听
-     *
-     * @return
      */
-    public void setClickLisener(ItemClickLisener lisener) {
-        this.lisener = lisener;
+    public void setClickListener(ItemClickListener listener) {
+        this.lisener = listener;
     }
 
     //这里返回的TextView，就是我们看到的View,可以设置自己想要的效果
@@ -143,7 +136,6 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
             }
         });
         return textView;
-
     }
 
     //定义动作，向上滚动翻页
@@ -202,8 +194,7 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
         }
     }
 
-    public interface ItemClickLisener {
+    public interface ItemClickListener {
         void onClick(int position);
     }
-
 }
