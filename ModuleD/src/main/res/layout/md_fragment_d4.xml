@@ -21,12 +21,6 @@
             android:text="ListViewAutoLoad" />
 
         <Button
-            android:id="@+id/btn_parallax_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ParallaxListView" />
-
-        <Button
             android:id="@+id/btn_update_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

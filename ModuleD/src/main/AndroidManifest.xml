@@ -38,9 +38,6 @@
             android:name=".activity.MDUpdateVersionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDParallaxListViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDPullToRefreshListViewActivity"
             android:screenOrientation="portrait" />
     </application>
