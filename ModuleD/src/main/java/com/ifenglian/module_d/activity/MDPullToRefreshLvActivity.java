@@ -26,7 +26,7 @@ public class MDPullToRefreshLvActivity extends BaseActivity implements AutoLoadL
 
     @Override
     public int getLayoutId() {
-        return R.layout.md_activity_autoload_listview;
+        return R.layout.md_activity_pull_to_refresh_lv;
     }
 
     @Override

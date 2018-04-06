@@ -28,7 +28,7 @@ public class MDPullToRefreshRvActivity extends BaseActivity implements OnRefresh
 
     @Override
     public int getLayoutId() {
-        return R.layout.md_activity_pull_to_refresh;
+        return R.layout.md_activity_pull_to_refresh_rv;
     }
 
     @Override
