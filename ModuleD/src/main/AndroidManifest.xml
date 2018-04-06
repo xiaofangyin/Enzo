@@ -26,9 +26,6 @@
             android:name=".activity.MDJniActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDSimpleActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDPhotosActivity"
             android:screenOrientation="portrait" />
         <activity

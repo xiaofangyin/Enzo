@@ -27,12 +27,6 @@
             android:text="版本更新" />
 
         <Button
-            android:id="@+id/btn_lottie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lottie" />
-
-        <Button
             android:id="@+id/btn_album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

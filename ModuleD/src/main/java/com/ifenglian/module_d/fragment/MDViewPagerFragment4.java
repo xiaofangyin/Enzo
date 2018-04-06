@@ -15,7 +15,6 @@ import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDPhotosActivity;
 import com.ifenglian.module_d.activity.MDPullToRefreshRecyclerViewActivity;
-import com.ifenglian.module_d.activity.MDSimpleActivity;
 import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
 
 /**
@@ -36,7 +35,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_pull_to_refresh).setOnClickListener(this);
         rootView.findViewById(R.id.btn_list_view_auto_load).setOnClickListener(this);
         rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_lottie).setOnClickListener(this);
         rootView.findViewById(R.id.btn_album).setOnClickListener(this);
         rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
         rootView.findViewById(R.id.btn_jni).setOnClickListener(this);
@@ -62,9 +60,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_update_version) {
             Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_lottie) {
-            Intent intent = new Intent(getContext(), MDSimpleActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_album) {
             Intent intent = new Intent(getContext(), MDPhotosActivity.class);
