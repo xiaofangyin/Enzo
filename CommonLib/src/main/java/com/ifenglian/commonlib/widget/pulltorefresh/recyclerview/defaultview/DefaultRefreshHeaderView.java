@@ -98,13 +98,14 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
         //下拉时状态相同不做继续保持原有的状态
         if (state == mState) return;
 
-        LogUtil.e("onStateChange state: " + state);
         //根据状态进行动画显示
         switch (state) {
             case STATE_PULL_DOWN:
+                LogUtil.e("onStateChange state STATE_PULL_DOWN");
+
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
-                if(ViewHelper.getRotation(ivArrow) != 0){
+                if (ViewHelper.getRotation(ivArrow) != 0) {
                     rotateAnimator.reverse();
                 }
 
@@ -114,6 +115,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 break;
             case STATE_RELEASE_REFRESH:
+                LogUtil.e("onStateChange state STATE_RELEASE_REFRESH");
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
                 rotateAnimator.start();
@@ -124,7 +126,8 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 break;
             case STATE_REFRESHING:
-                if(ViewHelper.getRotation(ivArrow) != 0){
+                LogUtil.e("onStateChange state STATE_REFRESHING");
+                if (ViewHelper.getRotation(ivArrow) != 0) {
                     rotateAnimator.reverse();
                 }
                 ivArrow.setVisibility(View.GONE);
@@ -136,6 +139,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 scrollTo(mMeasuredHeight);
                 break;
             case STATE_SUCCESS:
+                LogUtil.e("onStateChange state STATE_SUCCESS");
                 //时间更新
                 long currentTime = System.currentTimeMillis();
                 tvLastRefreshTime.setText(PullToRefreshRecyclerViewUtils.getTimeConvert(currentTime));
@@ -143,6 +147,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
 
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.refresh_succeed);
+                ViewHelper.setRotation(ivArrow, 0);
 
                 if (progressView != null) {
                     progressView.setVisibility(View.GONE);
@@ -150,8 +155,10 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 tvRefreshState.setText(R.string.collection_refresh_done);
                 break;
             case STATE_FAILED:
+                LogUtil.e("onStateChange state STATE_FAILED");
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.refresh_failed);
+                ViewHelper.setRotation(ivArrow, 0);
 
                 if (progressView != null) {
                     progressView.setVisibility(View.GONE);
