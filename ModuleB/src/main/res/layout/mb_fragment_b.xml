@@ -16,20 +16,9 @@
             android:layout_height="match_parent"
             android:layout_margin="30dp" />
 
-        <com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:indicator="BallPulse" />
-
-        <com.ifenglian.commonlib.widget.avi.AVLoadingIndicatorView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:indicator="BallSpinFadeLoader"
-            app:indicator_color="#999999" />
-
         <com.ifenglian.commonlib.widget.togglebutton.FlToggleButton
-            android:layout_width="51dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp" />
 
         <LinearLayout

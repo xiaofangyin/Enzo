@@ -62,12 +62,55 @@ public class FlToggleButton extends View implements OnClickListener {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int minimumWidth = getSuggestedMinimumWidth();
+        int minimumHeight = getSuggestedMinimumHeight();
+        int width = measureWidth(minimumWidth, widthMeasureSpec);
+        int height = measureHeight(minimumHeight, heightMeasureSpec);
+        setMeasuredDimension(width, height);
+    }
+
+    private int measureWidth(int defaultWidth, int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                defaultWidth = (int) dip2px(51);
+                break;
+            case MeasureSpec.EXACTLY:
+                defaultWidth = specSize;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                defaultWidth = Math.max(defaultWidth, specSize);
+        }
+        return defaultWidth;
+    }
+
+    private int measureHeight(int defaultHeight, int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                defaultHeight = (int) dip2px(30);
+                break;
+            case MeasureSpec.EXACTLY:
+                defaultHeight = specSize;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                defaultHeight = Math.max(defaultHeight, specSize);
+                break;
+        }
+        return defaultHeight;
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         width = getWidth();
         height = getHeight();
         centerY = height / 2;
-        margin = dip2px(getContext(), 1.5f);
+        margin = dip2px(1.5f);
         radius = height / 2 - margin;
         minLeft = radius + margin;
         maxLeft = width - radius - margin;
@@ -251,8 +294,8 @@ public class FlToggleButton extends View implements OnClickListener {
         void onToggle(boolean on);
     }
 
-    private float dip2px(Context context, float dip) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+    private float dip2px(float dip) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
         return dip * scale;
     }
 }
