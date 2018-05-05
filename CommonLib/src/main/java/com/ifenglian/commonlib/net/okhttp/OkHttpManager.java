@@ -46,13 +46,14 @@ public class OkHttpManager {
 
     private OkHttpManager() {
         mOkHttpClient = new OkHttpClient();
-        mOkHttpClient.newBuilder().connectTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS);
+        mOkHttpClient.newBuilder().
+                connectTimeout(10, TimeUnit.SECONDS).
+                readTimeout(10, TimeUnit.SECONDS).
+                writeTimeout(10, TimeUnit.SECONDS);
         gson = new Gson();
         handler = new Handler(Looper.getMainLooper());
     }
 
-    //创建 单例模式（OkHttp官方建议如此操作）
     public static OkHttpManager getInstance() {
         if (mOkHttpManager == null) {
             mOkHttpManager = new OkHttpManager();
@@ -82,7 +83,6 @@ public class OkHttpManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void postUploadMoreImages(String url, final BaseCallBack callback, File[] files, String[] fileKeys, Map<String, String> params) {
@@ -93,7 +93,6 @@ public class OkHttpManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /***********************
@@ -168,8 +167,6 @@ public class OkHttpManager {
                 }
             }
         });
-
-
     }
 
     //构造上传图片 Request
@@ -257,12 +254,10 @@ public class OkHttpManager {
                 if (response.isSuccessful()) {
 
                     if (callBack.mType == String.class) {
-//                        callBack.onSuccess(call, response, result);
                         callBackSuccess(callBack, call, response, result);
                     } else {
                         try {
                             Object object = gson.fromJson(result, callBack.mType);//自动转化为 泛型对象
-//                            callBack.onSuccess(call, response, object);
                             callBackSuccess(callBack, call, response, object);
                         } catch (JsonParseException e) {
                             //json解析错误时调用
@@ -273,17 +268,12 @@ public class OkHttpManager {
                 } else {
                     callBack.onError(call, response.code(), null);
                 }
-
             }
-
         });
-
-
     }
 
     //创建 Request对象
     private Request buildRequest(String url, Map<String, String> params, HttpMethodType methodType) {
-
         Request.Builder builder = new Request.Builder();
         builder.url(url);
         if (methodType == HttpMethodType.GET) {
@@ -316,7 +306,6 @@ public class OkHttpManager {
                 callBack.onSuccess(call, response, object);
             }
         });
-
     }
 
     private void callBackError(final BaseCallBack callBack, final Call call, final int code) {
@@ -326,7 +315,6 @@ public class OkHttpManager {
                 callBack.onError(call, code, null);
             }
         });
-
     }
 
     private Param[] validateParam(Param[] params) {
