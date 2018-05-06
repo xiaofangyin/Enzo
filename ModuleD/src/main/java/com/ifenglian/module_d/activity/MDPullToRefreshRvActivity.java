@@ -34,13 +34,10 @@ public class MDPullToRefreshRvActivity extends BaseActivity implements OnRefresh
     @Override
     public void initView() {
         mRecyclerView = findViewById(R.id.md_pull_to_refresh_recycler_view);
-        //mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadMoreEnabled(true);
         mRecyclerView.setRefreshTimeVisible(true);
-        //mRecyclerView.setRefreshView(new DefinitionAnimationRefreshHeaderView(MDPullToRefreshRvActivity.this));
-        //mRecyclerView.setLoadMoreView(new DefinitionAnimationLoadMoreView(MDPullToRefreshRvActivity.this));
         mRecyclerView.setRefreshAndLoadMoreListener(this);
     }
 
@@ -49,6 +46,9 @@ public class MDPullToRefreshRvActivity extends BaseActivity implements OnRefresh
         mHandler = new Handler(Looper.myLooper());
         mData = new ArrayList<>();
         adapter = new MDPullToRefreshAdapter();
+        for (int i = 0; i < 10; i++) {
+            mData.add("Item" + (mData.size() + 1));
+        }
         adapter.setNewData(mData);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setAutoRefresh();
