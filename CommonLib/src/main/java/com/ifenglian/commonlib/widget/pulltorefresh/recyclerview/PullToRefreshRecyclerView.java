@@ -192,10 +192,10 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             }
 
             @Override
-            public void onRetry() {
+            public void onLoadMoreRetry() {
                 loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
                 if (mLoadingListener != null) {
-                    mLoadingListener.onRetry();
+                    mLoadingListener.onLoadMoreRetry();
                 }
             }
         });

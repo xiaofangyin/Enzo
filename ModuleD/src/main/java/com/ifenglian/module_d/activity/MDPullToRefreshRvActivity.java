@@ -95,7 +95,7 @@ public class MDPullToRefreshRvActivity extends BaseActivity implements OnRefresh
     }
 
     @Override
-    public void onRetry() {
+    public void onLoadMoreRetry() {
         onRecyclerViewLoadMore();
     }
 
