@@ -14,7 +14,7 @@ android {
         ndk {
             moduleName "hello"
             ldLibs "log", "z", "m"
-            abiFilters "armeabi-v7a", "x86", "armeabi"
+            abiFilters "armeabi-v7a", "x86"
         }
         sourceSets.main {
             jni.srcDirs = []
