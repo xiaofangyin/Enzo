@@ -11,7 +11,7 @@ import android.view.KeyEvent;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.commonlib.widget.nopreloadviewpager.NoScrollViewPager;
+import com.enzo.commonlib.widget.noscrollviewpager.NoScrollViewPager;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
@@ -78,14 +78,6 @@ public class SAMainActivity extends BaseActivity {
                 LogUtil.e("onTabReClick: " + position);
             }
         });
-    }
-
-    public void showTabLayout(boolean show) {
-        if (show) {
-            mTabLayout.showTabLayout();
-        } else {
-            mTabLayout.hideTabLayout();
-        }
     }
 
     private List<Fragment> getFragments() {

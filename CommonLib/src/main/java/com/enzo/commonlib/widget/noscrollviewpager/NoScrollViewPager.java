@@ -1,6 +1,7 @@
-package com.enzo.commonlib.widget.nopreloadviewpager;
+package com.enzo.commonlib.widget.noscrollviewpager;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -10,7 +11,7 @@ import android.view.MotionEvent;
  * 创建日期: 2017/12/23
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class NoScrollViewPager extends NoPreloadViewPager {
+public class NoScrollViewPager extends ViewPager {
 
     public NoScrollViewPager(Context context) {
         super(context);
