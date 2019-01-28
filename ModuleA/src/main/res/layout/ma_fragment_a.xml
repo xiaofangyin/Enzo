@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#08143b">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -90,49 +91,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <com.ifenglian.commonlib.widget.timeclock.SHTimePicker
+                <com.ifenglian.commonlib.widget.timeclock.TimePicker
                     android:id="@+id/picker"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="240dp"
+                    android:layout_height="240dp"
                     android:layout_centerInParent="true"
                     android:layout_margin="30dp" />
             </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_fun1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="功能1" />
-
-                <Button
-                    android:id="@+id/btn_fun2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="功能2" />
-
-                <Button
-                    android:id="@+id/btn_fun3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="功能3" />
-
-                <Button
-                    android:id="@+id/btn_fun4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="功能4" />
-            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

@@ -7,8 +7,7 @@ import android.widget.Toast;
 
 import com.ifenglian.commonlib.base.BaseFragment;
 import com.ifenglian.commonlib.widget.autoscrolltextview.AutoScrollTextView;
-import com.ifenglian.commonlib.widget.timeclock.SHScheduleBean;
-import com.ifenglian.commonlib.widget.timeclock.SHTimePicker;
+import com.ifenglian.commonlib.widget.timeclock.TimePicker;
 import com.ifenglian.module_a.R;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.List;
 public class MAFragment extends BaseFragment {
 
     private AutoScrollTextView verticalScrollTV;
-    private SHTimePicker picker;
+    private TimePicker picker;
     private TextView tvStartTime;
     private TextView tvEndTime;
 
@@ -56,7 +55,7 @@ public class MAFragment extends BaseFragment {
             }
         });
 
-        picker.setOnTimeChangeListener(new SHTimePicker.OnTimeChangeListener() {
+        picker.setOnTimeChangeListener(new TimePicker.OnTimeChangeListener() {
             @Override
             public void onStartTimeChange(String startTime) {
                 tvStartTime.setText(startTime);
@@ -72,29 +71,6 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-        rootView.findViewById(R.id.btn_fun1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                picker.setModeType(SHScheduleBean.SCHEDULE_HOME_MODE);
-            }
-        });
-        rootView.findViewById(R.id.btn_fun2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                picker.setModeType(SHScheduleBean.SCHEDULE_INFRARED_NIGHTLIGHT);
-            }
-        });
-        rootView.findViewById(R.id.btn_fun3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                picker.setModeType(SHScheduleBean.SCHEDULE_LIGHT_SENSOR_NIGHTLIGHT);
-            }
-        });
-        rootView.findViewById(R.id.btn_fun4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                picker.setModeType(SHScheduleBean.SCHEDULE_OUTSIDE_MODE);
-            }
-        });
+
     }
 }

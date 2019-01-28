@@ -10,23 +10,6 @@ android {
         versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        ndk {
-            moduleName "hello"
-            ldLibs "log", "z", "m"
-            abiFilters "armeabi-v7a", "x86"
-        }
-        sourceSets.main {
-            jni.srcDirs = []
-            jniLibs.srcDir "src/main/libs"
-        }
-    }
-
-    externalNativeBuild {
-        ndkBuild {
-            // Android.mk 的相对路径
-            path "src/main/jni/Android.mk"
-        }
     }
 
     buildTypes {

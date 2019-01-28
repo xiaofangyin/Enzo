@@ -2,6 +2,7 @@ package com.ifenglian.commonlib.widget.timeclock;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,26 +13,30 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.ifenglian.commonlib.R;
+import com.nineoldandroids.animation.TypeEvaluator;
+
 /**
  * 文 件 名: TimePicker
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/17
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class SHTimePicker extends View {
+public class TimePicker extends View {
 
     private static final int AN_HOUR_AS_MINUTES = 60;
     private static final int HALF_DAY_AS_HOURS = 12;
-    private int dialColor = Color.parseColor("#00c37b");
-    private int bgColor1 = Color.parseColor("#2F2F2F");
-    private int bgColor2 = Color.parseColor("#404040");
+    private int bgColor1 = Color.parseColor("#081542");
+    private int bgColor2 = Color.parseColor("#050f30");
+    private int bgColor3 = Color.parseColor("#101e52");
+    private int startColor = Color.parseColor("#4888ef");
+    private int endColor = Color.parseColor("#4e50d4");
     private Paint paintText;
     private Paint paintLine;
     private Paint paintCircle;
     private Paint paintArc;
     private RectF rectF;
     private Path path;
-    private String mCurrentType = "";
 
     private boolean startAm, endAm;
     private int preHour1, preHour2;
@@ -44,16 +49,18 @@ public class SHTimePicker extends View {
     private float rectWidth;
     private String time;
     private Bitmap cacheBitmap;
+    private Bitmap bitmapStart;
+    private Bitmap bitmapEnd;
 
-    public SHTimePicker(Context context) {
+    public TimePicker(Context context) {
         this(context, null);
     }
 
-    public SHTimePicker(Context context, AttributeSet attrs) {
+    public TimePicker(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SHTimePicker(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TimePicker(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
@@ -78,6 +85,9 @@ public class SHTimePicker extends View {
 
         path = new Path();
         rectF = new RectF();
+
+        bitmapStart = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_time_picker_start);
+        bitmapEnd = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_time_picker_end);
     }
 
     @Override
@@ -90,9 +100,8 @@ public class SHTimePicker extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         float min = Math.min(w, h);
         offset = min / 2;
-        dialRadius = dip2px(10);
-        float radius = min / 2 - dip2px(25);
-        rectWidth = radius - dialRadius;
+        dialRadius = dip2px(15);
+        rectWidth = min / 2 - dip2px(34);
 
         int triangleWidth = dip2px(8);
         double triangleHeight = triangleWidth * Math.sin(Math.PI / 180 * 60);
@@ -140,12 +149,28 @@ public class SHTimePicker extends View {
         //绘制环形
         drawArc(canvas);
 
-        //绘制内圆 俩个小圆
+        //绘制俩个小圆
         drawCircles(canvas);
     }
 
+    TypeEvaluator<Integer> te = new TypeEvaluator<Integer>() {
+        @Override
+        public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+            int alpha = (int) (Color.alpha(startValue) + fraction * (Color.alpha(endValue) - Color.alpha(startValue)));
+            int red = (int) (Color.red(startValue) + fraction * (Color.red(endValue) - Color.red(startValue)));
+            int green = (int) (Color.green(startValue) + fraction * (Color.green(endValue) - Color.green(startValue)));
+            int blue = (int) (Color.blue(startValue) + fraction * (Color.blue(endValue) - Color.blue(startValue)));
+            return Color.argb(alpha, red, green, blue);
+        }
+    };
+
     private void drawBg(Canvas canvas) {
         rectF.set(-offset, offset, offset, -offset);
+        paintCircle.setColor(bgColor3);
+        canvas.drawOval(rectF, paintCircle);
+
+        float radius2 = offset - dip2px(30);
+        rectF.set(-radius2, radius2, radius2, -radius2);
         paintCircle.setColor(bgColor2);
         canvas.drawOval(rectF, paintCircle);
 
@@ -203,13 +228,13 @@ public class SHTimePicker extends View {
     }
 
     private void calculatePointerPosition1(double angle) {
-        dialX1 = (float) ((rectWidth - dialRadius) * Math.cos(angle));
-        dialY1 = (float) ((rectWidth - dialRadius) * Math.sin(angle));
+        dialX1 = (float) ((offset - dialRadius) * Math.cos(angle));
+        dialY1 = (float) ((offset - dialRadius) * Math.sin(angle));
     }
 
     private void calculatePointerPosition2(double angle) {
-        dialX2 = (float) ((rectWidth - dialRadius) * Math.cos(angle));
-        dialY2 = (float) ((rectWidth - dialRadius) * Math.sin(angle));
+        dialX2 = (float) ((offset - dialRadius) * Math.cos(angle));
+        dialY2 = (float) ((offset - dialRadius) * Math.sin(angle));
     }
 
     /**
@@ -222,12 +247,14 @@ public class SHTimePicker extends View {
         for (int i = 0; i < 60; i++) {
             if (i % 5 == 0) {
                 //绘制整点刻度
+                paintLine.setColor(Color.parseColor("#ff485894"));
                 paintLine.setStrokeWidth(dip2px(2));
-                canvas.drawLine(0, -offset + dip2px(1), 0, -offset + dip2px(13), paintLine);
+                canvas.drawLine(0, -rectWidth + dip2px(2), 0, -rectWidth + dip2px(11), paintLine);
             } else {
                 //绘制分钟刻度
+                paintLine.setColor(Color.parseColor("#ff283867"));
                 paintLine.setStrokeWidth(dip2px(1));
-                canvas.drawLine(0, -offset + dip2px(1), 0, -offset + dip2px(10), paintLine);
+                canvas.drawLine(0, -rectWidth + dip2px(2), 0, -rectWidth + dip2px(8), paintLine);
             }
             //绕着(centerX,centerY)旋转6°
             canvas.rotate(6f, 0, 0);
@@ -241,11 +268,12 @@ public class SHTimePicker extends View {
      * @param canvas 画布
      */
     private void drawText(Canvas canvas) {
+        paintText.setColor(Color.parseColor("#ff4f619e"));
         paintText.setTextSize(sp2px(12));
         // 获取文字高度用于设置文本垂直居中
         float textSize = (paintText.getFontMetrics().bottom - paintText.getFontMetrics().top);
         // 数字离圆心的距离,16dp为刻度的长度,20文字大小
-        int distance = (int) (offset - dip2px(16) - 20);
+        int distance = (int) (rectWidth - dip2px(16) - 20);
         // 数字的坐标(a,b)
         float a, b;
         // 每30°写一个数字
@@ -268,13 +296,13 @@ public class SHTimePicker extends View {
      */
     private void drawArc(Canvas canvas) {
         paintArc.setStrokeWidth(dialRadius * 2);
-        rectF.set(-rectWidth + dialRadius, -rectWidth + dialRadius, rectWidth - dialRadius, rectWidth - dialRadius);
+        rectF.set(-offset + dialRadius, -offset + dialRadius, offset - dialRadius, offset - dialRadius);
         if (time.equals("24小时") || time.equals("12小时")) {
             float sweepDegrees = 360f;
             int total = 50;//圆弧平均分总数
             float degrees = sweepDegrees / total;
             for (int i = 0; i < total; i++) {
-                paintArc.setColor(SHTimePickerUtils.getPickerColor(i, total, true, mCurrentType));
+                paintArc.setColor(te.evaluate(i * 1f / total, startColor, endColor));
                 if (i > 10 && i < total - 10) {
                     canvas.drawArc(rectF, (float) degrees1 - 90 + degrees * i + 1, degrees, false, paintArc);
                 } else {
@@ -286,7 +314,7 @@ public class SHTimePicker extends View {
             int total = 50;//圆弧平均分总数
             float degrees = sweepDegrees / total;
             for (int i = 0; i < total; i++) {
-                paintArc.setColor(SHTimePickerUtils.getPickerColor(i, total, true, mCurrentType));
+                paintArc.setColor(te.evaluate(i * 1f / total, startColor, endColor));
                 if (i > 10 && i < total - 10 && sweepDegrees > 30) {
                     canvas.drawArc(rectF, (float) degrees1 - 90 + degrees * i + 1, degrees, false, paintArc);
                 } else {
@@ -297,29 +325,13 @@ public class SHTimePicker extends View {
     }
 
     private void drawCircles(Canvas canvas) {
-        //结束时间拖拽圆
-        paintCircle.setColor(dialColor);
-        canvas.drawCircle(dialX2, dialY2, dialRadius, paintCircle);
-
-        //结束时间拖拽小白圆
-        paintCircle.setColor(Color.WHITE);
-        canvas.drawCircle(dialX2, dialY2, dip2px(5), paintCircle);
-
-        //开始时间拖拽圆
-        paintCircle.setColor(dialColor);
-        canvas.drawCircle(dialX1, dialY1, dialRadius, paintCircle);
-
-        //开始时间三角形
-        canvas.save();
-        paintCircle.setColor(Color.WHITE);
-        canvas.translate(dialX1, dialY1);
-        canvas.rotate((float) (degrees1 - 180));
-        canvas.drawPath(path, paintCircle);
-        canvas.restore();
+        canvas.drawBitmap(bitmapStart, dialX1 - bitmapStart.getWidth() / 2, dialY1 - bitmapStart.getHeight() / 2, paintCircle);
+        canvas.drawBitmap(bitmapEnd, dialX2 - bitmapEnd.getWidth() / 2, dialY2 - bitmapEnd.getHeight() / 2, paintCircle);
     }
 
     private void drawTime(Canvas canvas) {
-        paintText.setTextSize(sp2px(24));
+        paintText.setColor(Color.parseColor("#ffffffff"));
+        paintText.setTextSize(sp2px(20));
         String strHour;
         String strMinute;
         int minutes1 = ((int) (degrees1 * 2)) % AN_HOUR_AS_MINUTES;
@@ -441,16 +453,6 @@ public class SHTimePicker extends View {
         endMinutes = endMinutes - endMinutes % 5;
         degrees2 = ((endHour % HALF_DAY_AS_HOURS) * 30) + ((endMinutes % AN_HOUR_AS_MINUTES) / 2);
         angle2 = Math.toRadians(degrees2) - (Math.PI / 2);
-    }
-
-    /**
-     * 设置绘制弧形画笔颜色
-     *
-     * @param type 具体模式类型
-     */
-    public void setModeType(String type) {
-        mCurrentType = type;
-        invalidate();
     }
 
     private int dip2px(float dipValue) {
