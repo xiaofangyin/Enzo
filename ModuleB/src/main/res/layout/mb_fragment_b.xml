@@ -14,16 +14,30 @@
         <com.ifenglian.commonlib.widget.timeclock.SHTimeClock
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="30dp" />
-
-        <com.ifenglian.commonlib.widget.togglebutton.FlToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp" />
+            android:layout_marginTop="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.ifenglian.commonlib.widget.togglebutton.FlToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.ifenglian.commonlib.widget.togglebutton.FLSwitchButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="horizontal">
 
