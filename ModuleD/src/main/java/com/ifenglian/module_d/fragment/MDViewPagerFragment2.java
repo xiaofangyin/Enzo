@@ -5,19 +5,16 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.View;
-import android.widget.TextView;
 
-import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.utils.common.DensityUtil;
-import com.ifenglian.commonlib.utils.common.LogUtil;
-import com.ifenglian.commonlib.utils.toast.ToastUtils;
-import com.ifenglian.commonlib.widget.boheruler.Ruler;
-import com.ifenglian.commonlib.widget.boheruler.RulerCallback;
-import com.ifenglian.commonlib.widget.progress.CircularProgressBar;
-import com.ifenglian.commonlib.widget.progress.CircularProgressBarWithRate;
-import com.ifenglian.commonlib.widget.progress.FLCSeekBar;
-import com.ifenglian.commonlib.widget.progress.HorizontalProgressBar;
-import com.ifenglian.commonlib.widget.progress.SRDiskCapacityProgressBar;
+import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.widget.progress.CircularProgressBar;
+import com.enzo.commonlib.widget.progress.CircularProgressBarWithRate;
+import com.enzo.commonlib.widget.progress.FLCSeekBar;
+import com.enzo.commonlib.widget.progress.HorizontalProgressBar;
+import com.enzo.commonlib.widget.progress.SRDiskCapacityProgressBar;
 import com.ifenglian.module_d.R;
 
 /**
@@ -34,8 +31,6 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
     private SRDiskCapacityProgressBar mDiskProgressBar;
     private CircularProgressBar mCircularProgressBar;
     private CircularProgressBarWithRate mRateTextCircularProgressBar;
-    private Ruler ruler;
-    private TextView tvValue;
 
     @Override
     public int getLayoutId() {
@@ -50,12 +45,10 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
         mRateTextCircularProgressBar = rootView.findViewById(R.id.rate_progress_bar);
         mRateTextCircularProgressBar.setMax(100);
-        mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(getActivity(), 10));
+        mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(10));
 
         mCustomProgressBar = rootView.findViewById(R.id.web_view_progress_bar);
         mDiskProgressBar = rootView.findViewById(R.id.disk_capacity_progress);
-        ruler = rootView.findViewById(R.id.ruler2);
-        tvValue = rootView.findViewById(R.id.tv_value);
     }
 
     @Override
@@ -81,18 +74,6 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
             @Override
             public void onStopTrackingTouch(FLCSeekBar seekBar, int percent) {
 
-            }
-        });
-
-        ruler.setRulerCallback(new RulerCallback() {
-            @Override
-            public void onScaleChanging(float scale) {
-                tvValue.setText(String.valueOf(scale));
-            }
-
-            @Override
-            public void afterScaleChanged(float scale) {
-                ToastUtils.showToast(String.valueOf(scale));
             }
         });
     }

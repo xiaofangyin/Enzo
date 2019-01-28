@@ -1,12 +1,13 @@
 package com.ifenglian.main.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
-import com.ifenglian.commonlib.base.BaseActivity;
+import com.enzo.commonlib.base.BaseActivity;
 
 /**
  * 文 件 名: SASplashActivity
@@ -28,7 +29,7 @@ public class SASplashActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {

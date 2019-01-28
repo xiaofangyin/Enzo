@@ -1,6 +1,6 @@
 package com.ifenglian.module_d.utils.decorator;
 
-import com.ifenglian.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 
 /**
  * 文 件 名: ConcreteDecoratorA

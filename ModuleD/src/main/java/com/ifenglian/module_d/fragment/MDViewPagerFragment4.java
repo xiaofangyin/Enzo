@@ -4,19 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.utils.toast.ToastUtils;
-import com.ifenglian.commonlib.widget.alertdialog.AlertDialogCallBack;
-import com.ifenglian.commonlib.widget.alertdialog.BottomAlertDialog;
-import com.ifenglian.commonlib.widget.alertdialog.CenterAlertDialog;
+import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.activity.MDPullToRefreshLvActivity;
-import com.ifenglian.module_d.activity.MDJniActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
-import com.ifenglian.module_d.activity.MDPhotosActivity;
-import com.ifenglian.module_d.activity.MDPullToRefreshRvActivity;
-import com.ifenglian.module_d.activity.MDTouchEventActivity;
-import com.ifenglian.module_d.activity.MDUpdateVersionActivity;
+import com.ifenglian.module_d.activity.MDPullToRefreshLvActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -61,23 +54,18 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             Intent intent = new Intent(getContext(), MDPullToRefreshLvActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_update_version) {
-            Intent intent = new Intent(getContext(), MDUpdateVersionActivity.class);
-            startActivity(intent);
+
         } else if (id == R.id.btn_album) {
-            Intent intent = new Intent(getContext(), MDPhotosActivity.class);
-            startActivity(intent);
+
         } else if (id == R.id.btn_loading_layout) {
             Intent intent = new Intent(getContext(), MDLoadingLayoutActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_pull_to_refresh_rv) {
-            Intent intent = new Intent(getContext(), MDPullToRefreshRvActivity.class);
-            startActivity(intent);
+
         } else if (id == R.id.btn_jni) {
-            Intent intent = new Intent(getContext(), MDJniActivity.class);
-            startActivity(intent);
+
         } else if (id == R.id.btn_touch_event) {
-            Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
-            startActivity(intent);
+
         } else if (id == R.id.btn_photo_select) {
             BottomAlertDialog.Builder builder = new BottomAlertDialog.Builder(getActivity());
             BottomAlertDialog dialog = builder.
@@ -85,7 +73,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
                     add("略略略").
                     add("嘿嘿嘿").
                     cancel("取消").
-                    setOnItemClickListener(new BottomAlertDialog.OnItemClickListener() {
+                    listener(new BottomAlertDialog.OnItemClickListener() {
                         @Override
                         public void onItemClick(int i, String data) {
                             ToastUtils.showToast(data);
@@ -94,17 +82,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
                     build();
             dialog.show();
         } else if (id == R.id.btn_alert_view) {
-            new CenterAlertDialog(getActivity(), "确认", "确定退出吗？", "取消", "确定", new AlertDialogCallBack() {
-                @Override
-                public void onNegClick() {
 
-                }
-
-                @Override
-                public void onPosClick() {
-
-                }
-            }).show();
         }
     }
 }

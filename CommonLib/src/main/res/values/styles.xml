@@ -1,41 +1,52 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowEnableSplitTouch">false</item><!--禁止多点触控-->
+        <item name="android:splitMotionEvents">false</item><!--禁止多点触控-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+        <!-- 部分手机部分界面，headview下面有阴影，假设这个去掉阴影 -->
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="photo_choose_dialog_anim_style">
+    <!-- animation 样式 -->
+    <style name="ActivityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/lib_slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/lib_slide_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/lib_slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/lib_slide_right_out</item>
+    </style>
+
+    <style name="BottomDialogStyle">
         <item name="android:windowEnterAnimation">@anim/lib_anim_photo_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/lib_anim_photo_dialog_out</item>
     </style>
 
     <!-- 对话框风格 -->
     <style name="BaseDialogTheme" parent="@android:style/Theme.Dialog">
-        <!-- 窗口边框 -->
-        <item name="android:windowFrame">@null</item>
-        <!-- 窗口是否浮动在Activity上 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 半透明 -->
-        <item name="android:windowIsTranslucent">false</item>
-        <!-- 没有标题栏 -->
+        <item name="android:windowBackground">@color/color_transparent</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
-        <!-- 背景 -->
-        <item name="android:background">@null</item>
-        <!-- 背景模糊 -->
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="FL_SEND_DAN_MU" parent="@style/AppTheme">
+    <style name="CommentDialogStyle" parent="@style/AppTheme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowSoftInputMode">stateAlwaysVisible</item><!--显示软件盘-->
         <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="LoadingDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 </resources>

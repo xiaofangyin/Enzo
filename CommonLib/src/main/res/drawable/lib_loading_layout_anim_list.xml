@@ -3,55 +3,55 @@
     android:oneshot="false">
 
     <item
-        android:drawable="@drawable/loading_layout_view_1"
+        android:drawable="@mipmap/loading_layout_view_1"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_layout_view_2"
+        android:drawable="@mipmap/loading_layout_view_2"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_layout_view_3"
+        android:drawable="@mipmap/loading_layout_view_3"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_layout_view_4"
+        android:drawable="@mipmap/loading_layout_view_4"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_layout_view_5"
+        android:drawable="@mipmap/loading_layout_view_5"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_layout_view_6"
+        android:drawable="@mipmap/loading_layout_view_6"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_layout_view_7"
+        android:drawable="@mipmap/loading_layout_view_7"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_8"
+        android:drawable="@mipmap/loading_layout_view_8"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_9"
+        android:drawable="@mipmap/loading_layout_view_9"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_10"
+        android:drawable="@mipmap/loading_layout_view_10"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_11"
+        android:drawable="@mipmap/loading_layout_view_11"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_12"
+        android:drawable="@mipmap/loading_layout_view_12"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_13"
+        android:drawable="@mipmap/loading_layout_view_13"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_14"
+        android:drawable="@mipmap/loading_layout_view_14"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_15"
+        android:drawable="@mipmap/loading_layout_view_15"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_16"
+        android:drawable="@mipmap/loading_layout_view_16"
         android:duration="30" />
     <item
-        android:drawable="@drawable/loading_layout_view_17"
+        android:drawable="@mipmap/loading_layout_view_17"
         android:duration="30" />
 
 </animation-list>

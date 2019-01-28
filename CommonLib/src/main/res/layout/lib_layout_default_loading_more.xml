@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/ll_loading_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="4dp"
+            app:indicator="Pacman"
+            app:indicator_color="#ffB5B5B5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/collection_loading_more"
+            android:textColor="#999999"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_load_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/collection_no_more_data"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_load_failed"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/collection_load_failed"
+        android:textColor="@drawable/lib_selector_text_color_999"
+        android:textSize="14sp"
+        android:visibility="gone" />
+</RelativeLayout>

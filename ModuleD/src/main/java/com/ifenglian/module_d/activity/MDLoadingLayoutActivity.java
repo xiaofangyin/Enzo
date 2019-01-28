@@ -1,11 +1,12 @@
 package com.ifenglian.module_d.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
-import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.widget.loadinglayout.LoadingLayout;
+import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 import com.ifenglian.module_d.R;
 
 /**
@@ -26,11 +27,10 @@ public class MDLoadingLayoutActivity extends BaseActivity {
     @Override
     public void initView() {
         loadingLayout = findViewById(R.id.loading_layout);
-        loadingLayout.showLoading();
     }
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {

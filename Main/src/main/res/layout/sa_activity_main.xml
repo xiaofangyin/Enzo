@@ -3,14 +3,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ifenglian.commonlib.widget.nopreloadviewpager.NoScrollViewPager
+    <com.enzo.commonlib.widget.nopreloadviewpager.NoScrollViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#4a4a4a" />
 
-    <com.ifenglian.commonlib.widget.tablayout.TabLayout
+    <com.enzo.commonlib.widget.tablayout.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"

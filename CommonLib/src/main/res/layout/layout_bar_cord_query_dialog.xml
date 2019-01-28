@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_green"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edt_query_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_round_white_corners_4"
+            android:hint=""
+            android:inputType="phone"
+            android:padding="10dp"
+            android:textColor="@color/color_333"
+            android:textColorHint="@color/color_999"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_query"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="查找"
+            android:textColor="@drawable/lib_selector_text_color_white"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>

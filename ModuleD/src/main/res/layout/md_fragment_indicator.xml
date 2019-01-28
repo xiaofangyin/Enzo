@@ -4,7 +4,7 @@
     android:background="@drawable/lib_gradient_color_list"
     android:orientation="vertical">
 
-    <com.ifenglian.commonlib.widget.viewpagerindicator.ViewPagerIndicator
+    <com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="45dp"

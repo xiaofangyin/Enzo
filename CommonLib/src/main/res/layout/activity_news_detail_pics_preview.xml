@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_black">
+
+    <com.enzo.commonlib.widget.photoview.viewpager.MTouchViewPager
+        android:id="@+id/pic_preview_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+
+    <TextView
+        android:id="@+id/pic_preview_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/shape_round_black_50"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:textColor="@color/color_white"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:id="@+id/ugc_photo_browser_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_round_black_50"
+        android:paddingBottom="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="6dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/icon_pic_download" />
+    </RelativeLayout>
+</RelativeLayout>

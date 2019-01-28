@@ -23,6 +23,6 @@
         <attr name="centerColor" format="color" />
         <attr name="endColor" format="color" />
         <attr name="max" format="float" />
-        <attr name="progress" format="float" />
+        <attr name="mProgress" format="float" />
     </declare-styleable>
 </resources>

@@ -2,17 +2,57 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#04d1aa</color>
 
-    <color name="colorGray">#e2e5e2</color>
-    <color name="colorDirtyWithe">#f6f9f6</color>
-    <color name="colorForgiven">#4bbb74</color>
-    <color name="colorLightBlack">#2B2E2B</color>
+    <color name="color_main_blue">#34c0be</color>
 
-    <color name="color999">#999999</color>
-    <color name="color999_80">#cc999999</color>
-    <color name="colorBlue">#59a7ff</color>
-    <color name="colorBlue_80">#cc59a7ff</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_common_bg">#f8f8f8</color>
+    <color name="color_status_bar">#b5b5b5</color>
+    <color name="color_aa">#aaaaaa</color>
+    <color name="color_c9">#c9c9c9</color>
+    <color name="color_d8">#d8d8d8</color>
+    <color name="color_d9">#d9d9d9</color>
+    <color name="color_df">#dfdfdf</color>
+    <color name="color_gray">#e2e5e2</color>
+    <color name="color_line">#d8d8d8</color>
+    <color name="color_ef">#efefef</color>
+    <color name="color_f2">#f2f2f2</color>
+    <color name="color_f5">#f5f5f5</color>
+    <color name="color_light_black">#2b2e2b</color>
+    <color name="color_black">#000000</color>
+    <color name="color_black_80">#80000000</color>
 
-    <color name="transparent">#00000000</color>
+    <color name="color_blue">#34c0be</color>
+    <color name="color_blue_80">#7F34c0be</color>
+
+    <color name="color_red">#ED5565</color>
+    <color name="color_red_55">#8cED5565</color>
+
+    <color name="color_white">#ffffff</color>
+    <color name="color_white_70">#b3ffffff</color>
+
+    <color name="color_333">#333333</color>
+    <color name="color_333_55">#8c333333</color>
+
+    <color name="color_666">#666666</color>
+    <color name="color_666_55">#8c666666</color>
+
+    <color name="color_999">#999999</color>
+    <color name="color_999_55">#8c999999</color>
+
+    <color name="color_green_light">#81E8D4</color>
+    <color name="color_green">#04d1aa</color>
+    <color name="color_green_55">#8c04d1aa</color>
+    <color name="color_green_80">#cc04d1aa</color>
+
+    <color name="color_yellow">#F8AC59</color>
+    <color name="color_yellow_55">#8cF8AC59</color>
+    <color name="color_yellow_80">#ccF8AC59</color>
+
+    <!-- pdf -->
+    <color name="pdfViewPager_background_color">@android:color/white</color>
+    <color name="pdfViewPager_ab_color">#990000</color>
+    <color name="pdfViewPager_ab_color_lighter">#CC0000</color>
+    <color name="pdfViewPager_ab_color_darker">#660000</color>
 </resources>

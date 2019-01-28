@@ -17,16 +17,10 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDPullToRefreshRvActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDPullToRefreshLvActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDUpdateVersionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MDPhotosActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MDLoadingLayoutActivity"

@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:background="@mipmap/md_snow_bg">
 
-    <com.ifenglian.commonlib.widget.banner.UGCBanner
+    <com.enzo.commonlib.widget.banner.UGCBanner
         android:id="@+id/md_circle_banner"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
-    <com.ifenglian.commonlib.widget.snowview.SnowView
+    <com.enzo.commonlib.widget.snowview.SnowView
         android:id="@+id/fall_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

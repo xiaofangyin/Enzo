@@ -3,7 +3,7 @@ package com.ifenglian.module_b.fragment;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ifenglian.commonlib.base.BaseFragment;
+import com.enzo.commonlib.base.BaseFragment;
 import com.ifenglian.module_b.R;
 
 /**

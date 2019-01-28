@@ -13,26 +13,26 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.ifenglian.commonlib.widget.progress.CircularProgressBar
+        <com.enzo.commonlib.widget.progress.CircularProgressBar
             android:id="@+id/circular_progress_bar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="20dp" />
 
-        <com.ifenglian.commonlib.widget.progress.CircularProgressBarWithRate
+        <com.enzo.commonlib.widget.progress.CircularProgressBarWithRate
             android:id="@+id/rate_progress_bar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="20dp" />
     </LinearLayout>
 
-    <com.ifenglian.commonlib.widget.progress.FLCSeekBar
+    <com.enzo.commonlib.widget.progress.FLCSeekBar
         android:id="@+id/seek_bar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp" />
 
-    <com.ifenglian.commonlib.widget.progress.FLCSeekBar
+    <com.enzo.commonlib.widget.progress.FLCSeekBar
         android:id="@+id/seek_bar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,42 +41,16 @@
         app:lineColorSelected="#30B5FF"
         app:lineHeight="4dp" />
 
-    <com.ifenglian.commonlib.widget.progress.HorizontalProgressBar
+    <com.enzo.commonlib.widget.progress.HorizontalProgressBar
         android:id="@+id/web_view_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:layout_margin="20dp" />
 
-    <com.ifenglian.commonlib.widget.progress.SRDiskCapacityProgressBar
+    <com.enzo.commonlib.widget.progress.SRDiskCapacityProgressBar
         android:id="@+id/disk_capacity_progress"
         android:layout_width="120dp"
         android:layout_height="12dp"
         android:layout_margin="20dp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.ifenglian.commonlib.widget.boheruler.Ruler
-            android:id="@+id/ruler2"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/colorDirtyWithe" />
-
-        <ImageView
-            android:layout_width="4dp"
-            android:layout_height="46dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/lib_cursor_shape" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tv_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorForgiven"
-        android:textSize="28sp" />
 
 </LinearLayout>

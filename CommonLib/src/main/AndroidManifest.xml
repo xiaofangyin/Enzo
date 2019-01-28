@@ -1,23 +1,55 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ifenglian.commonlib">
+    package="com.enzo.commonlib">
 
+    <!-- 需要运行时注册的权限 -->
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于提高GPS定位速度 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <!-- 获取CUID，用于鉴权，请求签名等 -->
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
         android:supportsRtl="true">
 
-        <service android:name=".utils.updateversion.UpdateVersionService"
-            android:exported="false"
-            android:label="@string/app_name"
-            android:process=":update"/>
+        <activity
+            android:name=".utils.album.activity.SingleSelectorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.album.activity.FoldersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.album.activity.ImagesSelectorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.album.activity.PreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.preview.PicPreviewActivity"
+            android:screenOrientation="portrait" />
     </application>
-
 </manifest>

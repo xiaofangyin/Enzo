@@ -27,7 +27,7 @@
                     android:paddingRight="10dp"
                     android:src="@mipmap/notice" />
 
-                <com.ifenglian.commonlib.widget.autoscrolltextview.AutoScrollTextView
+                <com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView
                     android:id="@+id/auto_scroll_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <com.ifenglian.commonlib.widget.timeclock.TimePicker
+                <com.enzo.commonlib.widget.timeclock.TimePicker
                     android:id="@+id/picker"
                     android:layout_width="240dp"
                     android:layout_height="240dp"

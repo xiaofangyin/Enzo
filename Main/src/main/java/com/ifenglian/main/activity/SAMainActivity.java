@@ -1,5 +1,6 @@
 package com.ifenglian.main.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -7,12 +8,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
 
-import com.ifenglian.commonlib.base.BaseActivity;
-import com.ifenglian.commonlib.utils.common.LogUtil;
-import com.ifenglian.commonlib.utils.toast.ToastUtils;
-import com.ifenglian.commonlib.widget.nopreloadviewpager.NoScrollViewPager;
-import com.ifenglian.commonlib.widget.tablayout.TabLayout;
-import com.ifenglian.commonlib.widget.tablayout.TabView;
+import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.widget.nopreloadviewpager.NoScrollViewPager;
+import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
+import com.enzo.commonlib.widget.tablayout.TabLayout;
+import com.enzo.commonlib.widget.tablayout.TabView;
 import com.ifenglian.main.R;
 import com.ifenglian.main.adapter.SAHomeFragmentAdapter;
 import com.ifenglian.main.plugin.SAFactoryManager;
@@ -27,15 +29,6 @@ import java.util.List;
  * 邮   箱: xiaofy@ifenglian.com
  */
 public class SAMainActivity extends BaseActivity {
-
-    private String mTitles[] = {"家庭", "安全", "发现", "我"};
-    private int mTextColors[] = {0xFFAAAAAA, 0xFF30B5FF};
-    private int mIconRes[][] = {
-            {com.ifenglian.commonlib.R.mipmap.sa_tab_home_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_home_select},
-            {com.ifenglian.commonlib.R.mipmap.sa_tab_security_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_security_select},
-            {com.ifenglian.commonlib.R.mipmap.sa_tab_find_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_find_select},
-            {com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_normal, com.ifenglian.commonlib.R.mipmap.sa_tab_personalcenter_select}
-    };
 
     private TabLayout mTabLayout;
     private NoScrollViewPager viewPager;
@@ -54,12 +47,10 @@ public class SAMainActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
         SAHomeFragmentAdapter adapter = new SAHomeFragmentAdapter(mFragmentManager, getFragments());
         viewPager.setAdapter(adapter);
-
-        mTabLayout.initData(mTitles, mTextColors, mIconRes);
-        mTabLayout.setCurrentItem(0, false);
+        mTabLayout.initData(TabEntityConfig.getEntities());
         mTabLayout.showRedPoint(2);
         mHandler.sendEmptyMessage(0);
     }

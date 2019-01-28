@@ -10,7 +10,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.ifenglian.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
+import com.enzo.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
 import com.ifenglian.module_d.R;
 
 public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener {
@@ -61,12 +61,12 @@ public class DefinitionAnimationRefreshHeaderView extends BasePullToRefreshView 
     }
 
     @Override
-    public void setRefreshTimeVisible(boolean show) {
+    public void setRefreshTimeVisible(String tag) {
 
     }
 
     @Override
-    public void onDown() {
+    public void onRefreshTime() {
 
     }
 

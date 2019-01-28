@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.viewpagerindicator.ViewPagerIndicator;
+import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.MDViewPagerIndicatorAdapter;
 
@@ -55,22 +55,17 @@ public class MDFragment extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-        mIndicator.setOnPageChangeListener(new ViewPagerIndicator.PageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+       mIndicator.setOnTabClickListener(new ViewPagerIndicator.OnTabClickListener() {
+           @Override
+           public void onClick(int position) {
+               mViewPager.setCurrentItem(position);
+           }
 
-            }
+           @Override
+           public void onReClick(int position) {
 
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+           }
+       });
     }
 
     @Override

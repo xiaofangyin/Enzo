@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.ifenglian.commonlib.base.BaseFragment;
-import com.ifenglian.commonlib.widget.waveview.WaveView;
+import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.widget.waveview.WaveView;
 import com.ifenglian.module_d.R;
 
 /**

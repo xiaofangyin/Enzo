@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 整体透明画布 -->
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <com.enzo.commonlib.widget.headerview.HeadWidget
+            android:id="@+id/capture_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- 扫描取景框 -->
+        <cn.bingoogolapple.qrcode.zbar.ZBarView
+            android:id="@+id/z_bar_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:qrcv_animTime="1000"
+            app:qrcv_barCodeTipText="将条码放入框内，即可自动扫描"
+            app:qrcv_barcodeRectHeight="120dp"
+            app:qrcv_borderColor="@android:color/white"
+            app:qrcv_borderSize="1dp"
+            app:qrcv_cornerColor="@color/color_green"
+            app:qrcv_cornerLength="20dp"
+            app:qrcv_cornerSize="3dp"
+            app:qrcv_customGridScanLineDrawable="@mipmap/icon_bar_code_scan_line"
+            app:qrcv_isAutoZoom="true"
+            app:qrcv_isBarcode="false"
+            app:qrcv_isOnlyDecodeScanBoxArea="false"
+            app:qrcv_isShowDefaultGridScanLineDrawable="true"
+            app:qrcv_isShowDefaultScanLineDrawable="true"
+            app:qrcv_isShowLocationPoint="false"
+            app:qrcv_isShowTipBackground="false"
+            app:qrcv_isShowTipTextAsSingleLine="true"
+            app:qrcv_isTipTextBelowRect="false"
+            app:qrcv_maskColor="#33FFFFFF"
+            app:qrcv_qrCodeTipText="将二维码/条码放入框内，即可自动扫描"
+            app:qrcv_rectWidth="200dp"
+            app:qrcv_scanLineColor="@color/color_green"
+            app:qrcv_toolbarHeight="56dp"
+            app:qrcv_topOffset="60dp"
+            app:qrcv_verticalBias="-1" />
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/color_333"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/bar_cord_light_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/flashLightIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/icon_bar_code_light_close" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="手电筒"
+                    android:textColor="@drawable/lib_selector_text_color_white" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/bar_cord_input_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/albumIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/icon_bar_code_input" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="手动输入"
+                    android:textColor="@drawable/lib_selector_text_color_white" />
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v7.widget.LinearLayoutCompat>
+</RelativeLayout>
