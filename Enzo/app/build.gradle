@@ -35,7 +35,7 @@ android {
             zipAlignEnabled true // 是否zip对齐
             shrinkResources true // 是否删除无用资源（前提：minifyEnabled为true）
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            //signingConfig signingConfigs.release  //调用 keystore 的规则
+            signingConfig signingConfigs.release  //调用 keystore 的规则
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
                     outputFileName = "enzo_${defaultConfig.versionName}_${buildTime()}_${variant.productFlavors[0].name}.apk"
