@@ -33,15 +33,15 @@ public class TabEntityConfig {
         entity3.setTitle("食品安全");
         entity3.setNormalColor(0xFFAAAAAA);
         entity3.setSelectedColor(0xFF04d1aa);
-        entity3.setNormalImage(R.mipmap.icon_home_tab_2_normal);
-        entity3.setSelectedImage(R.mipmap.icon_home_tab_2_selected);
+        entity3.setNormalImage(R.mipmap.icon_home_tab_4_normal);
+        entity3.setSelectedImage(R.mipmap.icon_home_tab_4_selected);
 
         TabEntity entity4 = new TabEntity();
         entity4.setTitle("问答广场");
         entity4.setNormalColor(0xFFAAAAAA);
         entity4.setSelectedColor(0xFF04d1aa);
-        entity4.setNormalImage(R.mipmap.icon_home_tab_4_normal);
-        entity4.setSelectedImage(R.mipmap.icon_home_tab_4_selected);
+        entity4.setNormalImage(R.mipmap.icon_home_tab_5_normal);
+        entity4.setSelectedImage(R.mipmap.icon_home_tab_5_selected);
 
         list.add(entity1);
         list.add(entity2);
