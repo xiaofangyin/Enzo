@@ -6,17 +6,16 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.commonlib.widget.noscrollviewpager.NoScrollViewPager;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
 import com.ifenglian.main.R;
-import com.ifenglian.main.adapter.SAHomeFragmentAdapter;
 import com.ifenglian.main.plugin.SAFactoryManager;
 
 import java.util.ArrayList;
@@ -31,8 +30,7 @@ import java.util.List;
 public class SAMainActivity extends BaseActivity {
 
     private TabLayout mTabLayout;
-    private NoScrollViewPager viewPager;
-    private FragmentManager mFragmentManager;
+    private List<Fragment> mFragments;
 
     @Override
     public int getLayoutId() {
@@ -41,15 +39,14 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mFragmentManager = getSupportFragmentManager();
         mTabLayout = findViewById(R.id.tab_layout);
-        viewPager = findViewById(R.id.view_pager);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        SAHomeFragmentAdapter adapter = new SAHomeFragmentAdapter(mFragmentManager, getFragments());
-        viewPager.setAdapter(adapter);
+        mFragments = getFragments();
+        switchFragment(0);
+
         mTabLayout.initData(TabEntityConfig.getEntities());
         mTabLayout.setCurrentItem(0);
         mTabLayout.showRedPoint(2);
@@ -71,7 +68,7 @@ public class SAMainActivity extends BaseActivity {
             @Override
             public void onTabClick(TabView view, int position) {
                 LogUtil.e("onTabClick: " + position);
-                viewPager.setCurrentItem(position, false);
+                switchFragment(position);
             }
 
             @Override
@@ -87,6 +84,31 @@ public class SAMainActivity extends BaseActivity {
             fragments.add(SAFactoryManager.getInstance().getFactoryList().get(i).getFragment());
         }
         return fragments;
+    }
+
+    private void switchFragment(int index) {
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        hideFragment(transaction);
+        showFragment(transaction, mFragments.get(index));
+        transaction.commitAllowingStateLoss();
+        fragmentManager.executePendingTransactions();
+    }
+
+    private void showFragment(FragmentTransaction transaction, Fragment fragment) {
+        if (fragment.isAdded()) {
+            transaction.show(fragment);
+        } else {
+            transaction.add(R.id.main_content, fragment, fragment.getClass().getSimpleName());
+        }
+    }
+
+    private void hideFragment(FragmentTransaction transaction) {
+        for (int i = 0; i < mFragments.size(); i++) {
+            if (mFragments.get(i).isAdded()) {
+                transaction.hide(mFragments.get(i));
+            }
+        }
     }
 
     private long firstTime = 0; //点击两次退出应用计时
