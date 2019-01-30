@@ -9,58 +9,28 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_pull_to_refresh_rv"
+            android:id="@+id/btn_img_single_choose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pull_To_Refresh_RV" />
+            android:text="选择照片(单选)" />
+
+        <Button
+            android:id="@+id/btn_img_multiple_choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择照片(多选)" />
 
         <Button
             android:id="@+id/btn_pull_to_refresh_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pull_To_Refresh_LV" />
+            android:text="ListView下拉刷新" />
 
         <Button
-            android:id="@+id/btn_update_version"
+            android:id="@+id/btn_bar_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update_Version" />
-
-        <Button
-            android:id="@+id/btn_album"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Album_Thumbnail" />
-
-        <Button
-            android:id="@+id/btn_loading_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Loading_Layout" />
-
-        <Button
-            android:id="@+id/btn_jni"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="jni" />
-
-        <Button
-            android:id="@+id/btn_touch_event"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Touch_Event" />
-
-        <Button
-            android:id="@+id/btn_photo_select"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="底部弹出dialog" />
-
-        <Button
-            android:id="@+id/btn_alert_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="中间弹出dialog" />
+            android:text="二维码扫描" />
 
     </LinearLayout>
 </ScrollView>

@@ -13,13 +13,10 @@ import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigat
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * 使得MagicIndicator在FragmentContainer中使用
  * Created by hackware on 2016/9/4.
  */
-
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class FragmentContainerHelper {
     private List<MagicIndicator> mMagicIndicators = new ArrayList<MagicIndicator>();
     private ValueAnimator mScrollAnimator;

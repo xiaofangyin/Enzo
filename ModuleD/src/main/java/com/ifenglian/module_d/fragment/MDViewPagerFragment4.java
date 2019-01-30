@@ -8,6 +8,9 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.ifenglian.module_d.R;
+import com.ifenglian.module_d.activity.MDBarCodeActivity;
+import com.ifenglian.module_d.activity.MDImgMultipleSelectActivity;
+import com.ifenglian.module_d.activity.MDImgSingleSelectActivity;
 import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
 import com.ifenglian.module_d.activity.MDPullToRefreshLvActivity;
 
@@ -26,15 +29,10 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
-        rootView.findViewById(R.id.btn_pull_to_refresh_rv).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_pull_to_refresh_lv).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_update_version).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_album).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_loading_layout).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_jni).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_photo_select).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_alert_view).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
     }
 
     @Override
@@ -50,39 +48,18 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_pull_to_refresh_lv) {
+        if (id == R.id.btn_img_single_choose) {
+            Intent intent = new Intent(getContext(), MDImgSingleSelectActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_img_multiple_choose) {
+            Intent intent = new Intent(getContext(), MDImgMultipleSelectActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_pull_to_refresh_lv) {
             Intent intent = new Intent(getContext(), MDPullToRefreshLvActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_update_version) {
-
-        } else if (id == R.id.btn_album) {
-
-        } else if (id == R.id.btn_loading_layout) {
-            Intent intent = new Intent(getContext(), MDLoadingLayoutActivity.class);
+        } else if (id == R.id.btn_bar_code) {
+            Intent intent = new Intent(getContext(), MDBarCodeActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_pull_to_refresh_rv) {
-
-        } else if (id == R.id.btn_jni) {
-
-        } else if (id == R.id.btn_touch_event) {
-
-        } else if (id == R.id.btn_photo_select) {
-            BottomAlertDialog.Builder builder = new BottomAlertDialog.Builder(getActivity());
-            BottomAlertDialog dialog = builder.
-                    add("啦啦啦").
-                    add("略略略").
-                    add("嘿嘿嘿").
-                    cancel("取消").
-                    listener(new BottomAlertDialog.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int i, String data) {
-                            ToastUtils.showToast(data);
-                        }
-                    }).
-                    build();
-            dialog.show();
-        } else if (id == R.id.btn_alert_view) {
-
         }
     }
 }

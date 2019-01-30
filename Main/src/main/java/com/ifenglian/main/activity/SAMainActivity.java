@@ -51,6 +51,7 @@ public class SAMainActivity extends BaseActivity {
         SAHomeFragmentAdapter adapter = new SAHomeFragmentAdapter(mFragmentManager, getFragments());
         viewPager.setAdapter(adapter);
         mTabLayout.initData(TabEntityConfig.getEntities());
+        mTabLayout.setCurrentItem(0);
         mTabLayout.showRedPoint(2);
         mHandler.sendEmptyMessage(0);
     }

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#04d1aa</color>
 
-    <color name="color_main_blue">#34c0be</color>
+    <color name="color_main_blue">#04d1aa</color>
 
     <color name="color_transparent">#00000000</color>
     <color name="color_common_bg">#f8f8f8</color>
@@ -23,7 +23,7 @@
     <color name="color_black">#000000</color>
     <color name="color_black_80">#80000000</color>
 
-    <color name="color_blue">#34c0be</color>
+    <color name="color_blue">#04d1aa</color>
     <color name="color_blue_80">#7F34c0be</color>
 
     <color name="color_red">#ED5565</color>

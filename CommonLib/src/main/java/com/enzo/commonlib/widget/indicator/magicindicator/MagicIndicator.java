@@ -1,6 +1,7 @@
 package com.enzo.commonlib.widget.indicator.magicindicator;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -45,7 +46,7 @@ public class MagicIndicator extends FrameLayout {
         return mNavigator;
     }
 
-    public void setNavigator(IPagerNavigator navigator) {
+    public void setNavigator(IPagerNavigator navigator, ViewPager viewPager) {
         if (mNavigator == navigator) {
             return;
         }
@@ -58,6 +59,24 @@ public class MagicIndicator extends FrameLayout {
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             addView((View) mNavigator, lp);
             mNavigator.onAttachToMagicIndicator();
+
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    mNavigator.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    mNavigator.onPageSelected(position);
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                    mNavigator.onPageScrollStateChanged(state);
+                }
+            });
         }
     }
 }

@@ -7,8 +7,8 @@ import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.commonlib.widget.banner.BannerBean;
-import com.enzo.commonlib.widget.banner.UGCBanner;
+import com.enzo.commonlib.widget.banner.normal.BannerBean;
+import com.enzo.commonlib.widget.banner.normal.UGCBanner;
 import com.enzo.commonlib.widget.snowview.SnowView;
 import com.ifenglian.module_d.R;
 

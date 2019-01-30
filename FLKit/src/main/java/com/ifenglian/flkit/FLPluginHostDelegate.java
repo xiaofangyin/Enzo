@@ -4,9 +4,6 @@ import android.content.Context;
 
 import java.util.List;
 
-/**
- * Created by clg on 2016/6/16.
- */
 public interface FLPluginHostDelegate {
 
     Context getKeyWindow();

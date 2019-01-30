@@ -1,4 +1,4 @@
-package com.enzo.commonlib.widget.banner;
+package com.enzo.commonlib.widget.banner.normal;
 
 import android.content.Context;
 import android.os.Handler;
