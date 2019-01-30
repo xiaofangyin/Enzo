@@ -17,9 +17,9 @@ android {
 
         manifestPlaceholders.put("AMAP_KAY_VALUE",'76102ad5248952675e465b405894263f')
         //网络环境是否为正式环境
-        buildConfigField("Boolean", "PROD_ENV", 'true')
+        buildConfigField("Boolean", "PROD_ENV", 'false')
         //是否开启log
-        buildConfigField("Boolean", "LOG_OPEN", 'false')
+        buildConfigField("Boolean", "LOG_OPEN", 'true')
     }
     signingConfigs { //gradle assembleRelease
         release {
