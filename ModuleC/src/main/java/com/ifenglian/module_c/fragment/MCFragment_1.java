@@ -27,23 +27,19 @@ import java.util.List;
 public class MCFragment_1 extends BaseFragment {
 
     public static final String TAG = "MZModeBannerFragment";
-    public static final int[] RES = new int[]{R.mipmap.image5, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image6, R.mipmap.image7, R.mipmap.image8};
     public static final int[] BANNER = new int[]{R.mipmap.banner1, R.mipmap.banner2, R.mipmap.banner3, R.mipmap.banner4, R.mipmap.banner5};
     private MZBannerView mMZBanner;
-    private MZBannerView mNormalBanner;
 
     @Override
     public void onPause() {
         super.onPause();
         mMZBanner.pause();
-        mNormalBanner.pause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mMZBanner.start();
-        mNormalBanner.start();
     }
 
     @Override
@@ -76,28 +72,16 @@ public class MCFragment_1 extends BaseFragment {
 
             }
         });
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < RES.length; i++) {
-            list.add(RES[i]);
-        }
 
         List<Integer> bannerList = new ArrayList<>();
-        for (int i = 0; i < BANNER.length; i++) {
-            bannerList.add(BANNER[i]);
+        for (int aBANNER : BANNER) {
+            bannerList.add(aBANNER);
         }
         mMZBanner.setIndicatorVisible(true);
         // 代码中更改indicator 的位置
         //mMZBanner.setIndicatorAlign(MZBannerView.IndicatorAlign.LEFT);
         //mMZBanner.setIndicatorPadding(10,0,0,150);
         mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
-            @Override
-            public BannerViewHolder createViewHolder() {
-                return new BannerViewHolder();
-            }
-        });
-
-        mNormalBanner = rootView.findViewById(R.id.banner_normal);
-        mNormalBanner.setPages(list, new MZHolderCreator<BannerViewHolder>() {
             @Override
             public BannerViewHolder createViewHolder() {
                 return new BannerViewHolder();
@@ -122,7 +106,7 @@ public class MCFragment_1 extends BaseFragment {
         public View createView(Context context) {
             // 返回页面布局文件
             View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
-            mImageView = (ImageView) view.findViewById(R.id.banner_image);
+            mImageView = view.findViewById(R.id.banner_image);
             return view;
         }
 
