@@ -81,8 +81,8 @@ public class MDViewPagerFragment1 extends BaseFragment {
     public void initListener(View rootView) {
         banner.setOnBannerClickListener(new UGCBanner.OnBannerClickListener() {
             @Override
-            public void onBannerClick(int position) {
-                ToastUtils.showToast(mData.get(position).getPic());
+            public void onBannerClick(BannerBean bean) {
+                ToastUtils.showToast(bean.getPic());
             }
         });
     }

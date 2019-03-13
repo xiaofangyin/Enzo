@@ -74,9 +74,9 @@ public class UGCBanner extends RelativeLayout {
                 viewPager.setAdapter(adapter);
                 adapter.setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
-                    public void onBannerClick(int position) {
+                    public void onBannerClick(BannerBean bean) {
                         if (mClickListener != null) {
-                            mClickListener.onBannerClick(position);
+                            mClickListener.onBannerClick(bean);
                         }
                     }
                 });
@@ -107,9 +107,9 @@ public class UGCBanner extends RelativeLayout {
 
                 adapter.setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
-                    public void onBannerClick(int position) {
+                    public void onBannerClick(BannerBean bean) {
                         if (mClickListener != null) {
-                            mClickListener.onBannerClick(position);
+                            mClickListener.onBannerClick(bean);
                         }
                     }
                 });
@@ -204,7 +204,7 @@ public class UGCBanner extends RelativeLayout {
     }
 
     public interface OnBannerClickListener {
-        void onBannerClick(int position);
+        void onBannerClick(BannerBean bean);
     }
 
     public void setOnBannerClickListener(OnBannerClickListener clickListener) {

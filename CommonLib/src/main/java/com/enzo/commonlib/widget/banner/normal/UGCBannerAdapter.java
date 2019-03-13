@@ -75,7 +75,7 @@ public class UGCBannerAdapter extends PagerAdapter {
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mClickListener.onBannerClick(position % mData.size());
+                        mClickListener.onBannerClick(mData.get(position % mData.size()));
                     }
                 });
             }
