@@ -1,10 +1,10 @@
 package com.enzo.commonlib.utils.album.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -19,14 +19,15 @@ import com.enzo.commonlib.utils.album.constant.SelectImageConstants;
 import com.enzo.commonlib.utils.album.utils.PhotoCropConfig;
 import com.enzo.commonlib.utils.album.utils.SelectImageModel;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.permission.PermissionsConfig;
-import com.enzo.commonlib.utils.permission.PermissionsManager;
-import com.enzo.commonlib.utils.permission.PermissionsResultAction;
+import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.List;
+
+import rx.functions.Action1;
 
 /**
  * 文 件 名: SingleSelectorActivity
@@ -72,20 +73,26 @@ public class SingleSelectorActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         initImageList();
-        PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(SingleSelectorActivity.this,
-                PermissionsConfig.PERMISSIONS_STORAGE,
-                new PermissionsResultAction() {
-                    @Override
-                    public void onGranted() {
-                        //有权限，加载图片。
-                        loadImageForSDCard();
-                    }
-
-                    @Override
-                    public void onDenied(String permission) {
-
-                    }
-                });
+        if (RxPermissions.getInstance(SingleSelectorActivity.this).
+                isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            //有权限，加载图片。
+            loadImageForSDCard();
+        } else {
+            RxPermissions.getInstance(SingleSelectorActivity.this).request(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean aBoolean) {
+                            if (aBoolean) {
+                                //有权限，加载图片。
+                                loadImageForSDCard();
+                            } else {
+                                ToastUtils.showToast("该应用缺少读取sd卡权限");
+                            }
+                        }
+                    });
+        }
     }
 
     @Override
@@ -167,12 +174,6 @@ public class SingleSelectorActivity extends BaseActivity {
                 }
             });
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.enzo.commonlib.utils.zbar;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,18 +15,17 @@ import com.enzo.commonlib.utils.album.utils.SelectImagesUtils;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.commonlib.utils.permission.PermissionsConfig;
-import com.enzo.commonlib.utils.permission.PermissionsManager;
-import com.enzo.commonlib.utils.permission.PermissionsResultAction;
 import com.enzo.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
+import rx.functions.Action1;
 
 public abstract class CaptureActivity extends BaseActivity {
 
-    private ZBarView mZBarView;
+    protected ZBarView mZBarView;
     private AppCompatImageView flashLightIv;
     private BarCordQueryDialog dialog;
 
@@ -120,20 +119,24 @@ public abstract class CaptureActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         mZBarView.getScanBoxView().setTipText(getStatusText());
 
-        PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(
-                CaptureActivity.this,
-                PermissionsConfig.PERMISSIONS_CAMERA, new PermissionsResultAction() {
-                    @Override
-                    public void onGranted() {
-                        mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
-                        mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
-                    }
-
-                    @Override
-                    public void onDenied(String permission) {
-                        showTip();
-                    }
-                });
+        if (RxPermissions.getInstance(CaptureActivity.this).isGranted(Manifest.permission.CAMERA)) {
+            LogUtil.d("have camera permission");
+            mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
+            mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
+        } else {
+            RxPermissions.getInstance(CaptureActivity.this).request(Manifest.permission.CAMERA)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean aBoolean) {
+                            if (aBoolean) {
+                                mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
+                                mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
+                            } else {
+                                showTip();
+                            }
+                        }
+                    });
+        }
     }
 
     @Override
@@ -177,7 +180,9 @@ public abstract class CaptureActivity extends BaseActivity {
 
                     }
                 });
-                dialog.show(getSupportFragmentManager(), "dialog");
+                if (!dialog.isAdded() && !dialog.isVisible() && !dialog.isRemoving()) {
+                    dialog.show(getSupportFragmentManager(), "dialog");
+                }
             }
         });
     }
@@ -225,41 +230,41 @@ public abstract class CaptureActivity extends BaseActivity {
     }
 
     private void chooseFromGallery() {
-        PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(
-                CaptureActivity.this,
-                PermissionsConfig.PERMISSIONS_STORAGE,
-                new PermissionsResultAction() {
-
-                    @Override
-                    public void onGranted() {
-                        LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-                        if (SDCardUtils.isAvailable()) {
-                            SelectImagesUtils.single(CaptureActivity.this,
-                                    SelectImageConstants.PICK_IMAGE_REQUEST_CODE, false);
-                        } else {
-                            ToastUtils.showToast("设备没有SD卡！");
+        if (RxPermissions.getInstance(CaptureActivity.this).isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
+            if (SDCardUtils.isAvailable()) {
+                SelectImagesUtils.single(CaptureActivity.this,
+                        SelectImageConstants.PICK_IMAGE_REQUEST_CODE, false);
+            } else {
+                ToastUtils.showToast("设备没有SD卡！");
+            }
+        } else {
+            RxPermissions.getInstance(CaptureActivity.this).request(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean aBoolean) {
+                            if (aBoolean) {
+                                LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
+                                if (SDCardUtils.isAvailable()) {
+                                    SelectImagesUtils.single(CaptureActivity.this,
+                                            SelectImageConstants.PICK_IMAGE_REQUEST_CODE, false);
+                                } else {
+                                    ToastUtils.showToast("设备没有SD卡！");
+                                }
+                            } else {
+                                LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied...");
+                                CenterAlertDialog.Builder builder = new CenterAlertDialog.Builder(CaptureActivity.this);
+                                builder.title("打开相册异常")
+                                        .content("请检查应用是否具有读取sd卡权限")
+                                        .confirm("确定")
+                                        .build()
+                                        .show();
+                            }
                         }
-                    }
-
-                    @Override
-                    public void onDenied(String permission) {
-                        LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied..." + permission);
-                        showTip("打开相册异常", "请检查应用是否具有读取sd卡权限");
-                    }
-                }
-        );
-    }
-
-    /**
-     * 提示没有权限
-     */
-    public void showTip(String title, String message) {
-        CenterAlertDialog.Builder builder = new CenterAlertDialog.Builder(CaptureActivity.this);
-        builder.title(title)
-                .content(message)
-                .confirm("确定")
-                .build()
-                .show();
+                    });
+        }
     }
 
     @Override
@@ -271,12 +276,6 @@ public abstract class CaptureActivity extends BaseActivity {
             mZBarView.stopCamera();
             mZBarView.decodeQRCode(path);
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        LogUtil.d("onRequestPermissionsResult");
-        PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
     }
 
 //    public void onClick(View v) {

@@ -1,10 +1,10 @@
 package com.ifenglian.module_d.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.GridView;
 
@@ -17,16 +17,16 @@ import com.enzo.commonlib.utils.common.FileProvider7;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.commonlib.utils.permission.PermissionsConfig;
-import com.enzo.commonlib.utils.permission.PermissionsManager;
-import com.enzo.commonlib.utils.permission.PermissionsResultAction;
 import com.enzo.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.TakePicturesVerifyAdapter;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 import java.util.List;
+
+import rx.functions.Action1;
 
 /**
  * 文 件 名: MDImgMultipleSelectActivity
@@ -119,76 +119,81 @@ public class MDImgMultipleSelectActivity extends BaseActivity {
     }
 
     private void chooseFromGallery() {
-        PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(
-                MDImgMultipleSelectActivity.this,
-                PermissionsConfig.PERMISSIONS_STORAGE,
-                new PermissionsResultAction() {
-
-                    @Override
-                    public void onGranted() {
-                        LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-                        if (SDCardUtils.isAvailable()) {
-                            SelectImagesUtils.images(MDImgMultipleSelectActivity.this, GALLERY_REQUEST_CODE,
-                                    MAX_PICTURE - adapter.getData().size());
-                        } else {
-                            ToastUtils.showToast("设备没有SD卡！");
+        if (RxPermissions.getInstance(MDImgMultipleSelectActivity.this).
+                isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
+            if (SDCardUtils.isAvailable()) {
+                SelectImagesUtils.images(MDImgMultipleSelectActivity.this, GALLERY_REQUEST_CODE,
+                        MAX_PICTURE - adapter.getData().size());
+            } else {
+                ToastUtils.showToast("设备没有SD卡！");
+            }
+        } else {
+            RxPermissions.getInstance(MDImgMultipleSelectActivity.this).request(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean aBoolean) {
+                            if (aBoolean) {
+                                LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
+                                if (SDCardUtils.isAvailable()) {
+                                    SelectImagesUtils.images(MDImgMultipleSelectActivity.this, GALLERY_REQUEST_CODE,
+                                            MAX_PICTURE - adapter.getData().size());
+                                } else {
+                                    ToastUtils.showToast("设备没有SD卡！");
+                                }
+                            } else {
+                                ToastUtils.showToast("该应用缺少读取sd卡权限");
+                            }
                         }
-                    }
-
-                    @Override
-                    public void onDenied(String permission) {
-                        LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied..." + permission);
-                        ToastUtils.showToast("打开相册异常");
-                    }
-                }
-        );
+                    });
+        }
     }
 
     private void takePicture() {
-        PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(
-                MDImgMultipleSelectActivity.this,
-                PermissionsConfig.PERMISSIONS_TAKE_PHOTO,
-                new PermissionsResultAction() {
-
-                    @Override
-                    public void onGranted() {
-                        LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-                        if (SDCardUtils.isAvailable()) {
-                            //如果没有(shianxia)目录 创建一个
-                            File parent = new File(SDCardUtils.getShiAnXiaPath());
-                            if (!parent.exists()) {
-                                parent.mkdirs();
+        if (RxPermissions.getInstance(MDImgMultipleSelectActivity.this).isGranted(Manifest.permission.CAMERA)) {
+            startTakePhoto();
+        } else {
+            RxPermissions.getInstance(MDImgMultipleSelectActivity.this).request(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean aBoolean) {
+                            if (aBoolean) {
+                                startTakePhoto();
+                            } else {
+                                ToastUtils.showToast("打开相机异常");
                             }
-                            //通过FileProvider创建一个content类型的Uri
-                            File imageFile = new File(SDCardUtils.getShiAnXiaPath(), "verify_" + System.currentTimeMillis() + ".jpg");
-                            image = new AlbumImage();
-                            image.setImagePath(imageFile.getAbsolutePath());
-                            image.setSelected(true);
-                            Uri imageUri = FileProvider7.getUriForFile(MDImgMultipleSelectActivity.this,
-                                    EnvConstants.FILE_AUTHORITY, imageFile);
-                            //调用系统相机
-                            Intent intentCamera = new Intent();
-                            intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                            //将拍照结果保存至photo_file的Uri中，不保留在相册中
-                            intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                            startActivityForResult(intentCamera, CAMERA_REQUEST_CODE);
-                        } else {
-                            ToastUtils.showToast("设备没有SD卡！");
                         }
-                    }
-
-                    @Override
-                    public void onDenied(String permission) {
-                        LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied..." + permission);
-                        ToastUtils.showToast("打开相机异常");
-                    }
-                }
-        );
+                    });
+        }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+    private void startTakePhoto() {
+        if (SDCardUtils.isAvailable()) {
+            //如果没有(shianxia)目录 创建一个
+            File parent = new File(SDCardUtils.getShiAnXiaPath());
+            if (!parent.exists()) {
+                parent.mkdirs();
+            }
+            //通过FileProvider创建一个content类型的Uri
+            File imageFile = new File(SDCardUtils.getShiAnXiaPath(), "verify_" + System.currentTimeMillis() + ".jpg");
+            image = new AlbumImage();
+            image.setImagePath(imageFile.getAbsolutePath());
+            image.setSelected(true);
+            Uri imageUri = FileProvider7.getUriForFile(MDImgMultipleSelectActivity.this,
+                    EnvConstants.FILE_AUTHORITY, imageFile);
+            //调用系统相机
+            Intent intentCamera = new Intent();
+            intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+            //将拍照结果保存至photo_file的Uri中，不保留在相册中
+            intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            startActivityForResult(intentCamera, CAMERA_REQUEST_CODE);
+        } else {
+            ToastUtils.showToast("设备没有SD卡！");
+        }
     }
 
     @Override
