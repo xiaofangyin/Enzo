@@ -2,6 +2,7 @@ package com.ifenglian.enzo;
 
 import com.enzo.commonlib.base.BaseApplication;
 import com.enzo.commonlib.env.EnvConstants;
+import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.main.plugin.SAFactoryManager;
 import com.ifenglian.module_a.plugin.MAFactoryManager;
@@ -52,6 +53,8 @@ public class App extends BaseApplication {
 
     private void initEnv() {
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
+
+        CrashManager.getInstance().init(this, BuildConfig.DEBUG);
     }
 
     private void initFactory() {
