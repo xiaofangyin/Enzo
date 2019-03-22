@@ -61,5 +61,11 @@
         <activity
             android:name=".utils.preview.PicPreviewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.crashlib.ui.ShowExceptionActivity"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:process=":exception"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
