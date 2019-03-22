@@ -33,7 +33,7 @@ public class ShowExceptionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.crash_lib_activity_show_exception);
+        setContentView(R.layout.activity_crash_show_exception);
         setListener();
         int exceptionId = getResources().getIdentifier("crash_lib_activity_show_exception_view", "id", getPackageName());
         exceptionView = findViewById(exceptionId);
