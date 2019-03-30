@@ -78,26 +78,20 @@ public class ImagesSelectorActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         initImageList();
-        if (RxPermissions.getInstance(ImagesSelectorActivity.this).
-                isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            //有权限，加载图片。
-            loadImageForSDCard();
-        } else {
-            RxPermissions.getInstance(ImagesSelectorActivity.this).request(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                //有权限，加载图片。
-                                loadImageForSDCard();
-                            } else {
-                                ToastUtils.showToast("该应用缺少读取sd卡权限");
-                            }
+        rxPermissions.request(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            //有权限，加载图片。
+                            loadImageForSDCard();
+                        } else {
+                            ToastUtils.showToast("该应用缺少读取sd卡权限");
                         }
-                    });
-        }
+                    }
+                });
     }
 
     @Override

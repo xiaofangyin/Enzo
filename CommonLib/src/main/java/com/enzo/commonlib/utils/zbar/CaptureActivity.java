@@ -17,7 +17,6 @@ import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
@@ -119,24 +118,21 @@ public abstract class CaptureActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         mZBarView.getScanBoxView().setTipText(getStatusText());
 
-        if (RxPermissions.getInstance(CaptureActivity.this).isGranted(Manifest.permission.CAMERA)) {
-            LogUtil.d("have camera permission");
-            mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
-            mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
-        } else {
-            RxPermissions.getInstance(CaptureActivity.this).request(Manifest.permission.CAMERA)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
-                                mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
-                            } else {
-                                showTip();
-                            }
+        rxPermissions.request(
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
+                            mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
+                        } else {
+                            showTip();
                         }
-                    });
-        }
+                    }
+                });
     }
 
     @Override
@@ -230,41 +226,31 @@ public abstract class CaptureActivity extends BaseActivity {
     }
 
     private void chooseFromGallery() {
-        if (RxPermissions.getInstance(CaptureActivity.this).isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-            if (SDCardUtils.isAvailable()) {
-                SelectImagesUtils.single(CaptureActivity.this,
-                        SelectImageConstants.PICK_IMAGE_REQUEST_CODE, false);
-            } else {
-                ToastUtils.showToast("设备没有SD卡！");
-            }
-        } else {
-            RxPermissions.getInstance(CaptureActivity.this).request(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-                                if (SDCardUtils.isAvailable()) {
-                                    SelectImagesUtils.single(CaptureActivity.this,
-                                            SelectImageConstants.PICK_IMAGE_REQUEST_CODE, false);
-                                } else {
-                                    ToastUtils.showToast("设备没有SD卡！");
-                                }
+        rxPermissions.request(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
+                            if (SDCardUtils.isAvailable()) {
+                                SelectImagesUtils.single(CaptureActivity.this,
+                                        SelectImageConstants.PICK_IMAGE_REQUEST_CODE, false);
                             } else {
-                                LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied...");
-                                CenterAlertDialog.Builder builder = new CenterAlertDialog.Builder(CaptureActivity.this);
-                                builder.title("打开相册异常")
-                                        .content("请检查应用是否具有读取sd卡权限")
-                                        .confirm("确定")
-                                        .build()
-                                        .show();
+                                ToastUtils.showToast("设备没有SD卡！");
                             }
+                        } else {
+                            LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied...");
+                            CenterAlertDialog.Builder builder = new CenterAlertDialog.Builder(CaptureActivity.this);
+                            builder.title("打开相册异常")
+                                    .content("请检查应用是否具有读取sd卡权限")
+                                    .confirm("确定")
+                                    .build()
+                                    .show();
                         }
-                    });
-        }
+                    }
+                });
     }
 
     @Override
