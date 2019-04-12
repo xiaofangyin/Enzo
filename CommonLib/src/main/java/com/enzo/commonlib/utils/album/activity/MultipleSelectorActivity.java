@@ -31,12 +31,12 @@ import java.util.List;
 import rx.functions.Action1;
 
 /**
- * 文 件 名: ImagesSelectorActivity
+ * 文 件 名: MultipleSelectorActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/6/3
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class ImagesSelectorActivity extends BaseActivity {
+public class MultipleSelectorActivity extends BaseActivity {
 
     private HeadWidget headWidget;
     private RecyclerView recyclerView;
@@ -78,12 +78,12 @@ public class ImagesSelectorActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         initImageList();
-        if (RxPermissions.getInstance(ImagesSelectorActivity.this).
+        if (RxPermissions.getInstance(MultipleSelectorActivity.this).
                 isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             //有权限，加载图片。
             loadImageForSDCard();
         } else {
-            RxPermissions.getInstance(ImagesSelectorActivity.this).request(
+            RxPermissions.getInstance(MultipleSelectorActivity.this).request(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     .subscribe(new Action1<Boolean>() {
@@ -114,7 +114,7 @@ public class ImagesSelectorActivity extends BaseActivity {
         headWidget.setRightTextClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ImagesSelectorActivity.this, FoldersActivity.class);
+                Intent intent = new Intent(MultipleSelectorActivity.this, FoldersActivity.class);
                 intent.putExtra(SelectImageConstants.MAX_SELECT_COUNT, mMaxCount);
                 intent.putExtra(SelectImageConstants.IS_SINGLE, false);
                 startActivityForResult(intent, SelectImageConstants.IMAGES_SELECT_REQUEST_CODE);
@@ -238,7 +238,7 @@ public class ImagesSelectorActivity extends BaseActivity {
 
     private void toPreviewActivity(List<AlbumImage> images, int position, boolean canSelect) {
         if (images != null && !images.isEmpty()) {
-            SelectImagesUtils.toPreview(ImagesSelectorActivity.this, images, position, mMaxCount, canSelect);
+            SelectImagesUtils.toPreview(MultipleSelectorActivity.this, images, position, mMaxCount, canSelect);
         }
     }
 

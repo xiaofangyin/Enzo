@@ -81,7 +81,7 @@ public class FoldersActivity extends BaseActivity {
                                 intent.putExtra(SelectImageConstants.NEED_CROP, needCrop);
                                 startActivityForResult(intent, SelectImageConstants.AVATAR_CROP_REQUEST_CODE);
                             } else {
-                                Intent intent = new Intent(FoldersActivity.this, ImagesSelectorActivity.class);
+                                Intent intent = new Intent(FoldersActivity.this, MultipleSelectorActivity.class);
                                 intent.putExtra(SelectImageConstants.BUCKET, folder.getName());
                                 intent.putExtra(SelectImageConstants.MAX_SELECT_COUNT, mMaxCount);
                                 startActivityForResult(intent, SelectImageConstants.IMAGES_SELECT_REQUEST_CODE);

@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
 
+import com.enzo.commonlib.utils.album.activity.MultipleSelectorActivity;
 import com.enzo.commonlib.utils.album.activity.SingleSelectorActivity;
-import com.enzo.commonlib.utils.album.activity.ImagesSelectorActivity;
 import com.enzo.commonlib.utils.album.activity.PreviewActivity;
 import com.enzo.commonlib.utils.album.constant.SelectImageConstants;
 import com.enzo.commonlib.utils.album.bean.AlbumImage;
@@ -19,7 +19,7 @@ import java.util.List;
 public class SelectImagesUtils {
 
     public static void images(Activity activity, int requestCode, int maxSelectCount) {
-        Intent intent = new Intent(activity, ImagesSelectorActivity.class);
+        Intent intent = new Intent(activity, MultipleSelectorActivity.class);
         intent.putExtra(SelectImageConstants.MAX_SELECT_COUNT, maxSelectCount);
         intent.putExtra(SelectImageConstants.IS_SINGLE, false);
         activity.startActivityForResult(intent, requestCode);
