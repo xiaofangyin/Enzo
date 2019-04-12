@@ -21,7 +21,6 @@ import com.enzo.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.adapter.TakePicturesVerifyAdapter;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 import java.util.List;
@@ -119,56 +118,41 @@ public class MDImgMultipleSelectActivity extends BaseActivity {
     }
 
     private void chooseFromGallery() {
-        if (RxPermissions.getInstance(MDImgMultipleSelectActivity.this).
-                isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-            if (SDCardUtils.isAvailable()) {
-                SelectImagesUtils.images(MDImgMultipleSelectActivity.this, GALLERY_REQUEST_CODE,
-                        MAX_PICTURE - adapter.getData().size());
-            } else {
-                ToastUtils.showToast("设备没有SD卡！");
-            }
-        } else {
-            RxPermissions.getInstance(MDImgMultipleSelectActivity.this).request(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-                                if (SDCardUtils.isAvailable()) {
-                                    SelectImagesUtils.images(MDImgMultipleSelectActivity.this, GALLERY_REQUEST_CODE,
-                                            MAX_PICTURE - adapter.getData().size());
-                                } else {
-                                    ToastUtils.showToast("设备没有SD卡！");
-                                }
+        rxPermissions.request(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
+                            if (SDCardUtils.isAvailable()) {
+                                SelectImagesUtils.images(MDImgMultipleSelectActivity.this, GALLERY_REQUEST_CODE,
+                                        MAX_PICTURE - adapter.getData().size());
                             } else {
-                                ToastUtils.showToast("该应用缺少读取sd卡权限");
+                                ToastUtils.showToast("设备没有SD卡！");
                             }
+                        } else {
+                            ToastUtils.showToast("该应用缺少读取sd卡权限");
                         }
-                    });
-        }
+                    }
+                });
     }
 
     private void takePicture() {
-        if (RxPermissions.getInstance(MDImgMultipleSelectActivity.this).isGranted(Manifest.permission.CAMERA)) {
-            startTakePhoto();
-        } else {
-            RxPermissions.getInstance(MDImgMultipleSelectActivity.this).request(
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                startTakePhoto();
-                            } else {
-                                ToastUtils.showToast("打开相机异常");
-                            }
+        rxPermissions.request(
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            startTakePhoto();
+                        } else {
+                            ToastUtils.showToast("打开相机异常");
                         }
-                    });
-        }
+                    }
+                });
     }
 
     private void startTakePhoto() {

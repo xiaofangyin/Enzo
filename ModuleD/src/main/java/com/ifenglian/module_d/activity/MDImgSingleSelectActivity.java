@@ -20,9 +20,7 @@ import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.widget.alertdialog.BottomAlertDialog;
-import com.enzo.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.ifenglian.module_d.R;
-import com.tbruyelle.rxpermissions.RxPermissions;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -89,56 +87,41 @@ public class MDImgSingleSelectActivity extends BaseActivity {
     }
 
     private void chooseFromGallery() {
-        if (RxPermissions.getInstance(MDImgSingleSelectActivity.this).
-                isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-            if (SDCardUtils.isAvailable()) {
-                SelectImagesUtils.single(MDImgSingleSelectActivity.this,
-                        SelectImageConstants.AVATAR_CROP_REQUEST_CODE, true);
-            } else {
-                ToastUtils.showToast("设备没有SD卡！");
-            }
-        } else {
-            RxPermissions.getInstance(MDImgSingleSelectActivity.this).request(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
-                                if (SDCardUtils.isAvailable()) {
-                                    SelectImagesUtils.single(MDImgSingleSelectActivity.this,
-                                            SelectImageConstants.AVATAR_CROP_REQUEST_CODE, true);
-                                } else {
-                                    ToastUtils.showToast("设备没有SD卡！");
-                                }
+        rxPermissions.request(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
+                            if (SDCardUtils.isAvailable()) {
+                                SelectImagesUtils.single(MDImgSingleSelectActivity.this,
+                                        SelectImageConstants.AVATAR_CROP_REQUEST_CODE, true);
                             } else {
-                                ToastUtils.showToast("该应用缺少读取sd卡权限");
+                                ToastUtils.showToast("设备没有SD卡！");
                             }
+                        } else {
+                            ToastUtils.showToast("该应用缺少读取sd卡权限");
                         }
-                    });
-        }
+                    }
+                });
     }
 
     private void takePicture() {
-        if (RxPermissions.getInstance(MDImgSingleSelectActivity.this).isGranted(Manifest.permission.CAMERA)) {
-            startTakePhoto();
-        } else {
-            RxPermissions.getInstance(MDImgSingleSelectActivity.this).request(
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean) {
-                                startTakePhoto();
-                            } else {
-                                ToastUtils.showToast("打开相机异常");
-                            }
+        rxPermissions.request(
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            startTakePhoto();
+                        } else {
+                            ToastUtils.showToast("打开相机异常");
                         }
-                    });
-        }
+                    }
+                });
     }
 
     private void startTakePhoto() {
