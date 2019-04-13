@@ -23,7 +23,6 @@ import com.enzo.commonlib.utils.album.utils.SelectImagesUtils;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
