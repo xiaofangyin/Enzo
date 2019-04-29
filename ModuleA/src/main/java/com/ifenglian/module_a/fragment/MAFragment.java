@@ -45,7 +45,7 @@ public class MAFragment extends BaseFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         mSpiderWebView.setPointNum(80);//小点数量
-        mSpiderWebView.setPointAcceleration(10);//加速度
+        mSpiderWebView.setPointAcceleration(6);//加速度
 
 
         final List<String> list = new ArrayList<>();
