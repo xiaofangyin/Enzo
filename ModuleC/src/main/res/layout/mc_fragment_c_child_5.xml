@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.enzo.commonlib.widget.horizontal.HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_blue"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:tag="viewpager_dispatch">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never" />
+
+    <com.enzo.commonlib.widget.horizontal.VerticalTextView
+        android:id="@+id/tv_more"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignTop="@+id/recycler"
+        android:layout_alignBottom="@+id/recycler"
+        android:layout_marginRight="-65dp"
+        android:layout_toRightOf="@+id/recycler"
+        android:drawableLeft="@mipmap/mei_left_arrow"
         android:gravity="center"
-        android:text="5" />
-</LinearLayout>
+        android:paddingLeft="15dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/color_333"
+        android:textSize="13sp" />
+
+</com.enzo.commonlib.widget.horizontal.HorizontalScrollView>
