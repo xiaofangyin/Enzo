@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.KeyEvent;
-import android.view.WindowManager;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 
 /**
  * 文 件 名: SASplashActivity
@@ -25,7 +25,7 @@ public class SASplashActivity extends BaseActivity {
     @Override
     public void initView() {
         //隐藏信号栏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        StateAppBar.translucentStatusBar(this, true);
     }
 
     @Override

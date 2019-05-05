@@ -12,7 +12,7 @@
     </item>
 
     <item
-        android:bottom="40dp"
+        android:bottom="80dp"
         android:gravity="center_horizontal|bottom">
         <bitmap
             android:antialias="true"
