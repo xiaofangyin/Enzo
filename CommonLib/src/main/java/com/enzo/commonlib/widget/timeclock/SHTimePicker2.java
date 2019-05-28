@@ -108,8 +108,8 @@ public class SHTimePicker2 extends View {
         int triangleWidth = dip2px(8);
         double triangleHeight = triangleWidth * Math.sin(Math.PI / 180 * 60);
         path.moveTo(-(float) (triangleHeight / 3 * 2), 0);
-        path.lineTo((float) (triangleHeight / 3), -triangleWidth / 2);
-        path.lineTo((float) (triangleHeight / 3), triangleWidth / 2);
+        path.lineTo((float) (triangleHeight / 3), -triangleWidth / 2f);
+        path.lineTo((float) (triangleHeight / 3), triangleWidth / 2f);
         path.close();
     }
 
@@ -440,7 +440,7 @@ public class SHTimePicker2 extends View {
         if (startMinutes < 0 || startMinutes > 59)
             startMinutes = 0;
         startMinutes = startMinutes - startMinutes % 5;
-        degrees1 = ((startHour % HALF_DAY_AS_HOURS) * 30) + ((startMinutes % AN_HOUR_AS_MINUTES) / 2);
+        degrees1 = ((startHour % HALF_DAY_AS_HOURS) * 30) + ((startMinutes % AN_HOUR_AS_MINUTES) / 2f);
         angle1 = Math.toRadians(degrees1) - (Math.PI / 2);
 
         if (endHour < 0 || endHour > 23)
@@ -450,7 +450,7 @@ public class SHTimePicker2 extends View {
         if (endMinutes < 0 || endMinutes > 59)
             endMinutes = 0;
         endMinutes = endMinutes - endMinutes % 5;
-        degrees2 = ((endHour % HALF_DAY_AS_HOURS) * 30) + ((endMinutes % AN_HOUR_AS_MINUTES) / 2);
+        degrees2 = ((endHour % HALF_DAY_AS_HOURS) * 30) + ((endMinutes % AN_HOUR_AS_MINUTES) / 2f);
         angle2 = Math.toRadians(degrees2) - (Math.PI / 2);
     }
 

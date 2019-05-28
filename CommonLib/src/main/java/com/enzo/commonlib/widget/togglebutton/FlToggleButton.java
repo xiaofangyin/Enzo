@@ -111,7 +111,7 @@ public class FlToggleButton extends View implements OnClickListener {
         height = getHeight();
         centerY = height / 2;
         margin = dip2px(1.5f);
-        radius = height / 2 - margin;
+        radius = height / 2f - margin;
         minLeft = radius + margin;
         maxLeft = width - radius - margin;
         slideBtn_left = isOpen ? maxLeft : minLeft;
@@ -126,13 +126,19 @@ public class FlToggleButton extends View implements OnClickListener {
             paint.setAntiAlias(true);
             paint.setDither(true);
             paint.setColor(onColor);
-            rectF.set(0, 0, width, height);
+            if (isOpen) {
+                rectF.set(0, 0, width, height);
+            } else {
+                float offset = dip2px(0.4f);
+                rectF.set(offset, offset, width - offset, height - offset);
+            }
             //第一个参数：RectF对象，第二个参数：x方向上的圆角半径，第三个参数：y方向上的圆角半径
-            canvas.drawRoundRect(rectF, height / 2, height / 2, paint);
+            canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
             paint.setColor(offColor);
-            rectF.set(width / 2 * percent, height / 2 * percent, width - width / 2 * percent, height - height / 2 * percent);
-            canvas.drawRoundRect(rectF, height / 2 * (1 - percent), height / 2 * (1 - percent), paint);
+            rectF.set(width / 2f * percent, height / 2f * percent,
+                    width - width / 2f * percent, height - height / 2f * percent);
+            canvas.drawRoundRect(rectF, height / 2f * (1 - percent), height / 2f * (1 - percent), paint);
 
             paint.setColor(Color.WHITE);
             //第一个参数：圆心X轴坐标，第二个参数：圆心Y轴坐标，第三个参数：半径值
@@ -144,7 +150,7 @@ public class FlToggleButton extends View implements OnClickListener {
             paint.setColor(offColor);
             paint.setAlpha(127);//半透明
             rectF.set(0, 0, width, height);
-            canvas.drawRoundRect(rectF, height / 2, height / 2, paint);
+            canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
             paint.setColor(Color.WHITE);
             paint.setAlpha(127);//半透明
