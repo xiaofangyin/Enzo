@@ -13,6 +13,8 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.banner.mzbanner.MZBannerView;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZHolderCreator;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZViewHolder;
+import com.enzo.commonlib.widget.progress.FLCSeekBar;
+import com.enzo.commonlib.widget.progress.WaterWaveView;
 import com.ifenglian.module_c.R;
 
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ import java.util.List;
 public class MCFragment_1 extends BaseFragment {
 
     public static final String TAG = "MZModeBannerFragment";
-    public static final int[] BANNER = new int[]{R.mipmap.banner1, R.mipmap.banner2, R.mipmap.banner3, R.mipmap.banner4, R.mipmap.banner5};
     private MZBannerView mMZBanner;
+    private WaterWaveView waterWaveView;
+    private FLCSeekBar seekBar;
 
     @Override
     public void onPause() {
@@ -50,12 +53,41 @@ public class MCFragment_1 extends BaseFragment {
     @Override
     public void initView(View rootView) {
         mMZBanner = rootView.findViewById(R.id.banner);
+        waterWaveView = rootView.findViewById(R.id.water_wave_view);
+        seekBar = rootView.findViewById(R.id.seek_bar);
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
         mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
             @Override
             public void onPageClick(View view, int position) {
                 Toast.makeText(getContext(), "click page:" + position, Toast.LENGTH_LONG).show();
             }
         });
+        List<Integer> bannerList = new ArrayList<>();
+        bannerList.add(R.mipmap.banner1);
+        bannerList.add(R.mipmap.banner2);
+        bannerList.add(R.mipmap.banner3);
+        bannerList.add(R.mipmap.banner4);
+        bannerList.add(R.mipmap.banner5);
+        mMZBanner.setIndicatorVisible(true);
+        // 代码中更改indicator 的位置
+        //mMZBanner.setIndicatorAlign(MZBannerView.IndicatorAlign.LEFT);
+        //mMZBanner.setIndicatorPadding(10,0,0,150);
+        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
+            @Override
+            public BannerViewHolder createViewHolder() {
+                return new BannerViewHolder();
+            }
+        });
+
+        waterWaveView.setProgress(50);
+        seekBar.setProgress(50);
+    }
+
+    @Override
+    public void initListener(View rootView) {
         mMZBanner.addPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -72,31 +104,22 @@ public class MCFragment_1 extends BaseFragment {
 
             }
         });
-
-        List<Integer> bannerList = new ArrayList<>();
-        for (int aBANNER : BANNER) {
-            bannerList.add(aBANNER);
-        }
-        mMZBanner.setIndicatorVisible(true);
-        // 代码中更改indicator 的位置
-        //mMZBanner.setIndicatorAlign(MZBannerView.IndicatorAlign.LEFT);
-        //mMZBanner.setIndicatorPadding(10,0,0,150);
-        mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
+        seekBar.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
             @Override
-            public BannerViewHolder createViewHolder() {
-                return new BannerViewHolder();
+            public void onProgressChanged(FLCSeekBar seekBar, int percent) {
+                waterWaveView.setProgress(percent);
+            }
+
+            @Override
+            public void onStartTrackingTouch(FLCSeekBar seekBar, int percent) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(FLCSeekBar seekBar, int percent) {
+
             }
         });
-    }
-
-    @Override
-    public void initData(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public void initListener(View rootView) {
-
     }
 
     public static class BannerViewHolder implements MZViewHolder<Integer> {

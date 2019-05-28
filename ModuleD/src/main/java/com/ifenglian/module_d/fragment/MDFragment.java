@@ -1,6 +1,5 @@
 package com.ifenglian.module_d.fragment;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -24,7 +23,6 @@ import java.util.List;
  */
 public class MDFragment extends BaseFragment {
 
-    private AnimationDrawable anim;
     private List<String> itemTitles = Arrays.asList("短信", "收藏", "推荐", "发现");
     private ViewPager mViewPager;
     private ViewPagerIndicator mIndicator;
@@ -36,9 +34,6 @@ public class MDFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        anim = (AnimationDrawable) rootView.getBackground();
-        anim.setEnterFadeDuration(2000);
-        anim.setExitFadeDuration(1000);
         mViewPager = rootView.findViewById(R.id.view_pager);
         mIndicator = rootView.findViewById(R.id.indicator);
     }
@@ -55,33 +50,27 @@ public class MDFragment extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-       mIndicator.setOnTabClickListener(new ViewPagerIndicator.OnTabClickListener() {
-           @Override
-           public void onClick(int position) {
-               mViewPager.setCurrentItem(position);
-           }
+        mIndicator.setOnTabClickListener(new ViewPagerIndicator.OnTabClickListener() {
+            @Override
+            public void onClick(int position) {
+                mViewPager.setCurrentItem(position);
+            }
 
-           @Override
-           public void onReClick(int position) {
+            @Override
+            public void onReClick(int position) {
 
-           }
-       });
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (anim != null && !anim.isRunning()) {
-            anim.start();
-        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (anim != null && anim.isRunning()) {
-            anim.stop();
-        }
     }
 
     private List<Fragment> getFragments() {

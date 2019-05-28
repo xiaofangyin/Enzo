@@ -4,10 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#04d1aa</color>
 
-    <color name="color_main_blue">#04d1aa</color>
+    <color name="color_main_black">#161922</color>
 
     <color name="color_transparent">#00000000</color>
-    <color name="color_common_bg">#f8f8f8</color>
+    <color name="color_common_bg">#161922</color>
     <color name="color_status_bar">#b5b5b5</color>
     <color name="color_aa">#aaaaaa</color>
     <color name="color_c9">#c9c9c9</color>

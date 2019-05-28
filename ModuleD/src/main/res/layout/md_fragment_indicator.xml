@@ -1,14 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/lib_gradient_color_list"
+    android:background="@color/color_common_bg"
     android:orientation="vertical">
 
     <com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/color_blue"
         android:orientation="horizontal" />
 
     <android.support.v4.view.ViewPager

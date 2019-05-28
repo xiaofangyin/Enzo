@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     @Override
     public int getStatusBarColor() {
-        return getResources().getColor(R.color.color_main_blue);
+        return getResources().getColor(R.color.color_main_black);
     }
 
     @Override

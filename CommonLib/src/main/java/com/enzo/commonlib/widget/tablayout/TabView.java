@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.DensityUtil;
 
 /**
@@ -54,7 +53,7 @@ public class TabView extends LinearLayout {
         super(context, attrs, defStyleAttr);
         setGravity(Gravity.CENTER_VERTICAL);
         setOrientation(LinearLayout.VERTICAL);
-        setBackground(getResources().getDrawable(R.drawable.lib_selector_tabview_bg));
+//        setBackground(getResources().getDrawable(R.drawable.lib_selector_tabview_bg));
 
         //数字画笔内容大小等创建
         mMessagePaint = new Paint();

@@ -25,7 +25,6 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
     private UGCBanner banner;
     private SnowView fallingView;
-    private List<BannerBean> mData;
 
     @Override
     public int getLayoutId() {
@@ -40,7 +39,7 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mData = new ArrayList<>();
+        List<BannerBean> mData = new ArrayList<>();
         BannerBean bannerBean1 = new BannerBean();
         bannerBean1.setId("1");
         bannerBean1.setPic("http://file06.16sucai.com/2016/0428/cd094f5623151c096b820400fc71eac3.jpg");
