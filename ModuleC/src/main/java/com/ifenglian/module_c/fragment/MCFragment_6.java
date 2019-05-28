@@ -7,7 +7,7 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.ifenglian.module_c.R;
 
 /**
- * 文 件 名: MCFragment_1
+ * 文 件 名: MCFragment_6
  * 创 建 人: xiaofangyin
  * 创建日期: 2019/1/29
  * 邮   箱: xiaofangyin@360.cn

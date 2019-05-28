@@ -14,7 +14,7 @@ import com.ifenglian.module_c.R;
 import com.ifenglian.module_c.model.BarrageData;
 
 /**
- * 文 件 名: MCFragment_1
+ * 文 件 名: MCFragment_4
  * 创 建 人: xiaofangyin
  * 创建日期: 2019/1/29
  * 邮   箱: xiaofangyin@360.cn

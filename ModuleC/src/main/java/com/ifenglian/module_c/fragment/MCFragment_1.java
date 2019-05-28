@@ -82,7 +82,7 @@ public class MCFragment_1 extends BaseFragment {
             }
         });
 
-        waterWaveView.setProgress(50);
+        waterWaveView.setProgress(50, 1000);
         seekBar.setProgress(50);
     }
 

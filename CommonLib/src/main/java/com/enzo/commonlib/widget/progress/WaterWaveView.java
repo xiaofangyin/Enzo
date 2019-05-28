@@ -311,7 +311,8 @@ public class WaterWaveView extends AppCompatImageView {
     }
 
     public void setProgress(int progress) {
-        setProgress(progress, 1000);
+        waterLevelRatio = progress / 100f;
+        invalidate();
     }
 
     public void setProgress(int progress, int milliseconds) {
