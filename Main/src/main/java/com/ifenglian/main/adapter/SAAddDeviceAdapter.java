@@ -9,10 +9,14 @@ import android.widget.FrameLayout;
 
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.ifenglian.flkit.FLPluginBaseCell;
 import com.ifenglian.flkit.FLPluginBaseObject;
 import com.ifenglian.flkit.FLPluginCellStyle;
 import com.ifenglian.main.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 文 件 名: SAAddDeviceAdapter
@@ -21,6 +25,12 @@ import com.ifenglian.main.R;
  * 邮   箱: xiaofangyinwork@163.com
  */
 public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObject> {
+
+    private Map<Integer, FLPluginBaseCell> mBaseCellCache;
+
+    public SAAddDeviceAdapter() {
+        mBaseCellCache = new HashMap<>();
+    }
 
     @NonNull
     @Override
@@ -34,7 +44,7 @@ public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObje
         baseViewHolder.setUpView(mData.get(i), i, this);
     }
 
-    private static class AddDeviceHolder extends BaseViewHolder<FLPluginBaseObject> {
+    private class AddDeviceHolder extends BaseViewHolder<FLPluginBaseObject> {
 
         private FrameLayout flContainer;
 
@@ -48,17 +58,27 @@ public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObje
             if (flContainer.getChildCount() != 0) {
                 View view = flContainer.getChildAt(0);
                 ((ViewGroup) view.getParent()).removeAllViews();
+                mBaseCellCache.put(model.type, (FLPluginBaseCell) view);
             }
-            final FLPluginBaseCell baseCell = model.buildCellWithStyle(FLPluginCellStyle.FLPluginCellStyleNormal);
-            baseCell.layoutWithModel(model);
-            flContainer.addView(baseCell);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    baseCell.cellPressed();
-                }
-            });
+            final FLPluginBaseCell baseCell;
+            if (mBaseCellCache.get(model.type) != null) {
+                LogUtil.d("1 get base cell from cache...");
+                baseCell = mBaseCellCache.remove(model.type);
+            } else {
+                LogUtil.d("2 get base cell from model build...");
+                baseCell = model.buildCellWithStyle(FLPluginCellStyle.FLPluginCellStyleNormal);
+            }
+            if (baseCell != null) {
+                baseCell.layoutWithModel(model);
+                flContainer.addView(baseCell);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        baseCell.cellPressed();
+                    }
+                });
+            }
         }
     }
 }

@@ -97,37 +97,33 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     private List<JSONObject> buildData() {
         List<JSONObject> list = new ArrayList<>();
         try {
-
-            JSONObject object1 = new JSONObject();
-            object1.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);
-            object1.put("alias", "路由器 p1");
-            object1.put("rid", "1000000001");
-
-            JSONObject object2 = new JSONObject();
-            object2.put("type", FLPluginTypeList.FL_DEVICE_TYPE_B);
-            object2.put("alias", "智能夜灯");
-            object2.put("rid", "2000000001");
-
-            JSONObject object3 = new JSONObject();
-            object3.put("type", FLPluginTypeList.FL_DEVICE_TYPE_C);
-            object3.put("alias", "空气盒子");
-            object3.put("rid", "3000000001");
-
-            JSONObject object4 = new JSONObject();
-            object4.put("type", FLPluginTypeList.FL_DEVICE_TYPE_D);
-            object4.put("alias", "扩展器 R1");
-            object4.put("rid", "4000000001");
-
-            JSONObject object5 = new JSONObject();
-            object5.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);
-            object5.put("alias", "路由器 p3");
-            object5.put("rid", "1000000002");
-
-            list.add(object1);
-            list.add(object2);
-            list.add(object3);
-            list.add(object4);
-            list.add(object5);
+            for (int i = 0; i < 100; i++) {
+                if (i % 4 == 0) {
+                    JSONObject object1 = new JSONObject();
+                    object1.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);
+                    object1.put("alias", "路由器 " + i);
+                    object1.put("rid", "100000000" + i);
+                    list.add(object1);
+                } else if (i % 4 == 1) {
+                    JSONObject object2 = new JSONObject();
+                    object2.put("type", FLPluginTypeList.FL_DEVICE_TYPE_B);
+                    object2.put("alias", "智能夜灯 " + i);
+                    object2.put("rid", "200000000" + i);
+                    list.add(object2);
+                } else if (i % 4 == 2) {
+                    JSONObject object3 = new JSONObject();
+                    object3.put("type", FLPluginTypeList.FL_DEVICE_TYPE_C);
+                    object3.put("alias", "空气盒子 " + i);
+                    object3.put("rid", "300000000" + i);
+                    list.add(object3);
+                } else if (i % 4 == 3) {
+                    JSONObject object4 = new JSONObject();
+                    object4.put("type", FLPluginTypeList.FL_DEVICE_TYPE_D);
+                    object4.put("alias", "扩展器 " + i);
+                    object4.put("rid", "400000000" + i);
+                    list.add(object4);
+                }
+            }
             return list;
         } catch (JSONException e) {
             e.printStackTrace();
