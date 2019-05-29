@@ -99,27 +99,27 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
         try {
 
             JSONObject object1 = new JSONObject();
-            object1.put("type", FLPluginTypeList.FL_DEVICE_TYPE_360_SAFE_ROUTER);
+            object1.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);
             object1.put("alias", "路由器 p1");
             object1.put("rid", "1000000001");
 
             JSONObject object2 = new JSONObject();
-            object2.put("type", FLPluginTypeList.FL_DEVICE_TYPE_360_SMART_HOME);
+            object2.put("type", FLPluginTypeList.FL_DEVICE_TYPE_B);
             object2.put("alias", "智能夜灯");
             object2.put("rid", "2000000001");
 
             JSONObject object3 = new JSONObject();
-            object3.put("type", FLPluginTypeList.FL_DEVICE_TYPE_360_AIR_BOX);
+            object3.put("type", FLPluginTypeList.FL_DEVICE_TYPE_C);
             object3.put("alias", "空气盒子");
             object3.put("rid", "3000000001");
 
             JSONObject object4 = new JSONObject();
-            object4.put("type", FLPluginTypeList.FL_DEVICE_TYPE_360_REPEATER);
+            object4.put("type", FLPluginTypeList.FL_DEVICE_TYPE_D);
             object4.put("alias", "扩展器 R1");
             object4.put("rid", "4000000001");
 
             JSONObject object5 = new JSONObject();
-            object5.put("type", FLPluginTypeList.FL_DEVICE_TYPE_360_SAFE_ROUTER);
+            object5.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);
             object5.put("alias", "路由器 p3");
             object5.put("rid", "1000000002");
 

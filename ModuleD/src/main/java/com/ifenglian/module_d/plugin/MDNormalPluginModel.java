@@ -17,7 +17,7 @@ public class MDNormalPluginModel extends FLPluginBaseObject {
 
     @Override
     public FLPluginBaseObject build(JSONObject data) {
-        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_360_REPEATER) {
+        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_D) {
             this.rid = data.optString("rid");
             this.alias = data.optString("alias");
             return this;

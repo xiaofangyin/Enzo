@@ -17,7 +17,7 @@ public class MBNormalPluginModel extends FLPluginBaseObject {
 
     @Override
     public FLPluginBaseObject build(JSONObject data) {
-        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_360_SMART_HOME) {
+        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_B) {
             this.rid = data.optString("rid");
             this.alias = data.optString("alias");
             return this;

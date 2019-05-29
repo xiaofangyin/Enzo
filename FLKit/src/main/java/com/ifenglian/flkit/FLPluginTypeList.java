@@ -8,8 +8,8 @@ package com.ifenglian.flkit;
  */
 public class FLPluginTypeList {
 
-    public static final int FL_DEVICE_TYPE_360_SAFE_ROUTER = 1001;  //306路由器
-    public static final int FL_DEVICE_TYPE_360_SMART_HOME = 1002;  //360安全夜灯
-    public static final int FL_DEVICE_TYPE_360_AIR_BOX = 1003;  //360空气盒子
-    public static final int FL_DEVICE_TYPE_360_REPEATER = 1004; //360 repeater
+    public static final int FL_DEVICE_TYPE_A = 100001;  //设备a
+    public static final int FL_DEVICE_TYPE_B = 100002;  //设备b
+    public static final int FL_DEVICE_TYPE_C = 100003;  //设备c
+    public static final int FL_DEVICE_TYPE_D = 100004;  //设备d
 }
