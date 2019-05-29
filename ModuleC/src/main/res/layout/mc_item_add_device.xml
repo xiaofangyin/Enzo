@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:layout_marginTop="10dp"
-    android:background="@color/color_blue_80"
+    android:background="@color/color_yellow_80"
     android:gravity="center">
 
     <TextView
-        android:id="@+id/ma_device_name"
+        android:id="@+id/mc_device_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

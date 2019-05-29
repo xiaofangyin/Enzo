@@ -23,7 +23,7 @@ public class MBNormalPluginItem extends FLPluginBaseCell {
     public MBNormalPluginItem(Context context) {
         super(context);
         View view = LayoutInflater.from(context).inflate(R.layout.mb_item_add_device, this, true);
-        tvName = view.findViewById(R.id.ma_device_name);
+        tvName = view.findViewById(R.id.mb_device_name);
     }
 
     @Override
