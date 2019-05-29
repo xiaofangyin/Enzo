@@ -3,20 +3,18 @@
     <!-- 背景颜色 -->
     <item android:drawable="@drawable/sa_welcome_background" />
 
-    <item
-        android:gravity="center_horizontal|top"
-        android:top="140dp">
+    <item android:gravity="center">
         <bitmap
             android:gravity="center"
             android:src="@mipmap/sa_skull_4" />
     </item>
 
-    <item
-        android:bottom="80dp"
-        android:gravity="center_horizontal|bottom">
-        <bitmap
-            android:antialias="true"
-            android:gravity="center"
-            android:src="@mipmap/sa_welcome_icon_2" />
-    </item>
+    <!--<item-->
+    <!--android:bottom="80dp"-->
+    <!--android:gravity="center_horizontal|bottom">-->
+    <!--<bitmap-->
+    <!--android:antialias="true"-->
+    <!--android:gravity="center"-->
+    <!--android:src="@mipmap/sa_welcome_icon_2" />-->
+    <!--</item>-->
 </layer-list>

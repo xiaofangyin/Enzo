@@ -108,7 +108,7 @@ public class TakePicturesVerifyAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
         if (view == null) {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_take_picture_verify, viewGroup, false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.md_item_take_picture_verify, viewGroup, false);
             viewHolder = new ViewHolder(view);
             view.setTag(viewHolder);
         } else {

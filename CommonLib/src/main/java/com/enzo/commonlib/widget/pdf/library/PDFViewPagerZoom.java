@@ -43,7 +43,7 @@ public class PDFViewPagerZoom extends PDFViewPager {
 
     protected void init(AttributeSet attrs) {
         if (isInEditMode()) {
-            setBackgroundResource(R.mipmap.pdf_flaticon_dummy);
+            setBackgroundResource(R.mipmap.icon_pdf_flaticon_dummy);
             return;
         }
 

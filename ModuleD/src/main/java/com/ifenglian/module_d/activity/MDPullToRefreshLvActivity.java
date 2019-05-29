@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.View;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.pulltorefresh.listview.AutoLoadListView;
 import com.enzo.commonlib.widget.pulltorefresh.listview.PullToRefreshLayout;
 import com.ifenglian.module_d.R;
@@ -36,6 +38,18 @@ public class MDPullToRefreshLvActivity extends BaseActivity implements AutoLoadL
         listView = findViewById(R.id.content_view);
         initListView();
         listView.setOnLoadListener(this);
+    }
+
+    @Override
+    public void initHeader() {
+        HeadWidget headWidget = findViewById(R.id.pull_refresh_header);
+        headWidget.setTitle("下拉刷新");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

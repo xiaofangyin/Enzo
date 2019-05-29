@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/image1" />
+            android:src="@mipmap/mc_meinv" />
 
         <TextView
             android:id="@+id/tv_title"

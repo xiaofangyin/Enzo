@@ -13,10 +13,27 @@
         android:src="@mipmap/ic_launcher_round" />
 
     <com.enzo.commonlib.widget.progress.FLCSeekBar
-        android:id="@+id/seek_bar"
+        android:id="@+id/seek_bar_progress"
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp" />
+
+    <com.enzo.commonlib.widget.progress.FLCSeekBar
+        android:id="@+id/seek_bar_size"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp" />
+
+    <com.enzo.commonlib.widget.progress.FLCSeekBar
+        android:id="@+id/seek_bar_amplitude"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp" />
+
 </LinearLayout>

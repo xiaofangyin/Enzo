@@ -1,18 +1,29 @@
-<com.enzo.commonlib.widget.pulltorefresh.listview.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refresh_view"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/lib_layout_refresh_head" />
-    <!-- 支持所有实现Pullable接口的View -->
-
-    <com.enzo.commonlib.widget.pulltorefresh.listview.AutoLoadListView
-        android:id="@+id/content_view"
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/pull_refresh_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:divider="#666666"
-        android:dividerHeight="1dp"
-        android:overScrollMode="never" />
+        android:layout_height="wrap_content" />
 
-</com.enzo.commonlib.widget.pulltorefresh.listview.PullToRefreshLayout>
+    <com.enzo.commonlib.widget.pulltorefresh.listview.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/lib_layout_refresh_head" />
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.enzo.commonlib.widget.pulltorefresh.listview.AutoLoadListView
+            android:id="@+id/content_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:divider="#666666"
+            android:dividerHeight="1dp"
+            android:overScrollMode="never" />
+
+    </com.enzo.commonlib.widget.pulltorefresh.listview.PullToRefreshLayout>
+</LinearLayout>

@@ -1,8 +1,8 @@
 package com.ifenglian.main.plugin;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.enzo.commonlib.base.BaseApplication;
 import com.ifenglian.flkit.FLPluginFactory;
 
 import java.util.List;
@@ -15,9 +15,7 @@ import java.util.List;
  */
 public class SAFactoryManager {
 
-    @SuppressLint("StaticFieldLeak")
     private static SAFactoryManager mInstance;
-    private Context mContext;
     private List<FLPluginFactory> mFactoryList;
 
     private SAFactoryManager() {
@@ -36,11 +34,10 @@ public class SAFactoryManager {
     }
 
     public Context getContext() {
-        return mContext;
+        return BaseApplication.getInstance();
     }
 
-    public void init(Context context, List<FLPluginFactory> factoryList) {
-        this.mContext = context;
+    public void init(List<FLPluginFactory> factoryList) {
         this.mFactoryList = factoryList;
         SAHostDelegateManager.getInstance().initFactories(factoryList);
     }

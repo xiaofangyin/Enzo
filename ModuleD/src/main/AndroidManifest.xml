@@ -31,5 +31,17 @@
         <activity
             android:name=".activity.MDBarCodeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDPickerViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDCalendarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDMeiZuBannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MDNotificationActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

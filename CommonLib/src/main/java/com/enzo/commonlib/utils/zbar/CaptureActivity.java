@@ -40,7 +40,7 @@ public abstract class CaptureActivity extends BaseActivity {
 
     @Override
     public int getStatusBarColor() {
-        return getResources().getColor(R.color.color_green);
+        return getResources().getColor(R.color.color_common_bg);
     }
 
     @Override

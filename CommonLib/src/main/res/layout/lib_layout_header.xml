@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ugc_title_content"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+    android:background="@color/color_common_bg">
 
     <RelativeLayout
         android:id="@+id/ugc_header_left_layout"
@@ -15,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/lib_selector_back_black"
+            android:background="@drawable/lib_selector_back_white"
             android:scaleType="center"
             android:visibility="visible" />
 
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@drawable/lib_selector_text_color_333"
+            android:textColor="@drawable/lib_selector_text_color_white"
             android:textSize="16sp"
             android:visibility="gone" />
     </RelativeLayout>
@@ -59,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@drawable/lib_selector_text_color_333"
+            android:textColor="@drawable/lib_selector_text_color_white"
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -75,7 +76,7 @@
         android:gravity="center"
         android:maxLength="20"
         android:singleLine="true"
-        android:textColor="@color/color_333"
+        android:textColor="@color/color_white"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -95,7 +96,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="middle"
             android:singleLine="true"
-            android:textColor="@color/color_333"
+            android:textColor="@color/color_white"
             android:textSize="12sp" />
 
         <TextView
@@ -104,7 +105,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="middle"
             android:singleLine="true"
-            android:textColor="@color/color_333"
+            android:textColor="@color/color_white"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -113,6 +114,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/color_df" />
+        android:background="@color/color_light_black" />
 
 </RelativeLayout>

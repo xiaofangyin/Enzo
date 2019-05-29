@@ -32,5 +32,28 @@
             android:layout_height="wrap_content"
             android:text="二维码扫描" />
 
+        <Button
+            android:id="@+id/btn_picker_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="日期选择" />
+
+        <Button
+            android:id="@+id/btn_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="日历" />
+
+        <Button
+            android:id="@+id/btn_meizu_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="魅族轮播图" />
+
+        <Button
+            android:id="@+id/btn_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="消息通知" />
     </LinearLayout>
 </ScrollView>

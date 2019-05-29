@@ -3,7 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="@color/color_common_bg"
     android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/img_picker_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/md_img_single"

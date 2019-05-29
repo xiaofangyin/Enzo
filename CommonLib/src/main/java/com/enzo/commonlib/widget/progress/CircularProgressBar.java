@@ -8,6 +8,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.enzo.commonlib.R;
+
 /**
  * 文 件 名: CircularProgressBar
  * 创 建 人: xiaofangyin
@@ -39,7 +41,7 @@ public class CircularProgressBar extends View {
         mMaxProgress = 100;
         mProgress = 0;
         mBackgroundColor = Color.LTGRAY;
-        mPrimaryColor = Color.parseColor("#6DCAEC");
+        mPrimaryColor = getResources().getColor(R.color.color_green);
         mStrokeWidth = dip2px(getContext(), 5);
     }
 

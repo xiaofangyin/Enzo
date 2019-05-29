@@ -5,10 +5,10 @@ import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.main.plugin.SAFactoryManager;
-import com.ifenglian.module_a.plugin.MAFactoryManager;
-import com.ifenglian.module_b.plugin.MBFactoryManager;
-import com.ifenglian.module_c.plugin.MCFactoryManager;
-import com.ifenglian.module_d.plugin.MDFactoryManager;
+import com.ifenglian.module_a.plugin.MAPluginFactory;
+import com.ifenglian.module_b.plugin.MBPluginFactory;
+import com.ifenglian.module_c.plugin.MCPluginFactory;
+import com.ifenglian.module_d.plugin.MDPluginFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +59,10 @@ public class App extends BaseApplication {
 
     private void initFactory() {
         List<FLPluginFactory> factoryList = new ArrayList<>();
-        factoryList.add(MAFactoryManager.getInstance());
-        factoryList.add(MBFactoryManager.getInstance());
-        factoryList.add(MCFactoryManager.getInstance());
-        factoryList.add(MDFactoryManager.getInstance());
-        SAFactoryManager.getInstance().init(App.this, factoryList);
+        factoryList.add(MAPluginFactory.getInstance());
+        factoryList.add(MBPluginFactory.getInstance());
+        factoryList.add(MCPluginFactory.getInstance());
+        factoryList.add(MDPluginFactory.getInstance());
+        SAFactoryManager.getInstance().init(factoryList);
     }
 }

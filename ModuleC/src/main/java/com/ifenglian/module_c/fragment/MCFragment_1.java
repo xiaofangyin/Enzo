@@ -17,7 +17,9 @@ import com.ifenglian.module_c.R;
 public class MCFragment_1 extends BaseFragment {
 
     private WaterWaveView waterWaveView;
-    private FLCSeekBar seekBar;
+    private FLCSeekBar seekBarProgress;
+    private FLCSeekBar seekBarSize;
+    private FLCSeekBar seekBarAmplitude;
 
     @Override
     public int getLayoutId() {
@@ -27,30 +29,64 @@ public class MCFragment_1 extends BaseFragment {
     @Override
     public void initView(View rootView) {
         waterWaveView = rootView.findViewById(R.id.water_wave_view);
-        seekBar = rootView.findViewById(R.id.seek_bar);
+        seekBarProgress = rootView.findViewById(R.id.seek_bar_progress);
+        seekBarSize = rootView.findViewById(R.id.seek_bar_size);
+        seekBarAmplitude = rootView.findViewById(R.id.seek_bar_amplitude);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         waterWaveView.setProgress(50, 1000);
-        seekBar.setProgress(50);
+        seekBarProgress.setProgress(50);
     }
 
     @Override
     public void initListener(View rootView) {
-        seekBar.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
+        seekBarProgress.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
             @Override
-            public void onProgressChanged(FLCSeekBar seekBar, int percent) {
-                waterWaveView.setProgress(percent);
+            public void onProgressChanged(FLCSeekBar seekBar, int progress) {
+                waterWaveView.setProgress(progress);
             }
 
             @Override
-            public void onStartTrackingTouch(FLCSeekBar seekBar, int percent) {
+            public void onStartTrackingTouch(FLCSeekBar seekBar, int progress) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(FLCSeekBar seekBar, int percent) {
+            public void onStopTrackingTouch(FLCSeekBar seekBar, int progress) {
+
+            }
+        });
+        seekBarSize.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
+            @Override
+            public void onProgressChanged(FLCSeekBar seekBar, int progress) {
+                waterWaveView.setBorderWidth(progress / 100f * waterWaveView.getWidth() / 2);
+            }
+
+            @Override
+            public void onStartTrackingTouch(FLCSeekBar seekBar, int progress) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(FLCSeekBar seekBar, int progress) {
+
+            }
+        });
+        seekBarAmplitude.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
+            @Override
+            public void onProgressChanged(FLCSeekBar seekBar, int progress) {
+                waterWaveView.setAmplitudeRatio((float) progress / 1000);
+            }
+
+            @Override
+            public void onStartTrackingTouch(FLCSeekBar seekBar, int progress) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(FLCSeekBar seekBar, int progress) {
 
             }
         });

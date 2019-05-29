@@ -20,6 +20,7 @@ import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.widget.alertdialog.BottomAlertDialog;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.ifenglian.module_d.R;
 import com.yalantis.ucrop.UCrop;
 
@@ -36,10 +37,7 @@ import rx.functions.Action1;
 public class MDImgSingleSelectActivity extends BaseActivity {
 
     private static final int CAMERA_REQUEST_CODE = 999;
-    private static final int RENAME_REQUEST_CODE = 1;
-    private static final int SIGNATURE_REQUEST_CODE = 2;
     private File imageFile;
-    private Uri imageUri;
     private ImageView imageView;
 
     @Override
@@ -50,6 +48,18 @@ public class MDImgSingleSelectActivity extends BaseActivity {
     @Override
     public void initView() {
         imageView = findViewById(R.id.md_img_single);
+    }
+
+    @Override
+    public void initHeader() {
+        HeadWidget headWidget = findViewById(R.id.img_picker_header);
+        headWidget.setTitle("图片选择");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -132,7 +142,7 @@ public class MDImgSingleSelectActivity extends BaseActivity {
                 parent.mkdirs();
             }
             //通过FileProvider创建一个content类型的Uri
-            imageUri = FileProvider7.getUriForFile(MDImgSingleSelectActivity.this,
+            Uri imageUri = FileProvider7.getUriForFile(MDImgSingleSelectActivity.this,
                     EnvConstants.FILE_AUTHORITY, imageFile);
             //调用系统相机
             Intent intentCamera = new Intent();

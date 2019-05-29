@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.commonlib.widget.alertdialog.BottomAlertDialog;
 import com.ifenglian.module_d.R;
 import com.ifenglian.module_d.activity.MDBarCodeActivity;
+import com.ifenglian.module_d.activity.MDCalendarActivity;
 import com.ifenglian.module_d.activity.MDImgMultipleSelectActivity;
 import com.ifenglian.module_d.activity.MDImgSingleSelectActivity;
-import com.ifenglian.module_d.activity.MDLoadingLayoutActivity;
+import com.ifenglian.module_d.activity.MDMeiZuBannerActivity;
+import com.ifenglian.module_d.activity.MDNotificationActivity;
+import com.ifenglian.module_d.activity.MDPickerViewActivity;
 import com.ifenglian.module_d.activity.MDPullToRefreshLvActivity;
 
 /**
@@ -33,6 +34,10 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_pull_to_refresh_lv).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_picker_view).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +64,18 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_bar_code) {
             Intent intent = new Intent(getContext(), MDBarCodeActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_picker_view) {
+            Intent intent = new Intent(getContext(), MDPickerViewActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_calendar) {
+            Intent intent = new Intent(getContext(), MDCalendarActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_meizu_banner) {
+            Intent intent = new Intent(getContext(), MDMeiZuBannerActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_notification) {
+            Intent intent = new Intent(getContext(), MDNotificationActivity.class);
             startActivity(intent);
         }
     }

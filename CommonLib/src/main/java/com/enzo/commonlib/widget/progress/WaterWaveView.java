@@ -310,6 +310,25 @@ public class WaterWaveView extends AppCompatImageView {
         }
     }
 
+    //region Set Attr Method
+    public void setColor(int color) {
+        waveColor = color;
+        updateWaveShader();
+        invalidate();
+    }
+
+    public void setBorderWidth(float width) {
+        borderPaint.setStrokeWidth(width);
+        invalidate();
+    }
+
+    public void setAmplitudeRatio(float amplitudeRatio) {
+        if (this.amplitudeRatio != amplitudeRatio) {
+            this.amplitudeRatio = amplitudeRatio;
+            invalidate();
+        }
+    }
+
     public void setProgress(int progress) {
         waterLevelRatio = progress / 100f;
         invalidate();

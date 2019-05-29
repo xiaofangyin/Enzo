@@ -247,6 +247,7 @@ public class RulerView extends View {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
+                getParent().requestDisallowInterceptTouchEvent(true);
                 mScroller.forceFinished(true);
                 mLastX = xPosition;
                 mMove = 0;
@@ -257,6 +258,7 @@ public class RulerView extends View {
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
+                getParent().requestDisallowInterceptTouchEvent(false);
                 countMoveEnd();
                 countVelocityTracker();
                 return false;

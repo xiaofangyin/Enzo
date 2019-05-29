@@ -1,11 +1,13 @@
 package com.enzo.commonlib.widget.progress;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.enzo.commonlib.R;
 
 /**
  * 文 件 名: CircularProgressBarWithRate
@@ -39,8 +41,8 @@ public class CircularProgressBarWithRate extends FrameLayout implements Circular
         this.addView(mRateText);
         mRateText.setLayoutParams(lp);
         mRateText.setGravity(Gravity.CENTER);
-        mRateText.setTextColor(Color.YELLOW);
-        mRateText.setTextSize(20);
+        mRateText.setTextColor(getResources().getColor(R.color.color_white));
+        mRateText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
         mCircularProgressBar.setOnProgressChangeListener(this);
     }
@@ -54,8 +56,6 @@ public class CircularProgressBarWithRate extends FrameLayout implements Circular
 
     /**
      * 设置进度
-     *
-     * @param progress
      */
     public void setProgress(int progress) {
         mCircularProgressBar.setProgress(progress);
@@ -63,8 +63,6 @@ public class CircularProgressBarWithRate extends FrameLayout implements Circular
 
     /**
      * 设置环形的宽度
-     *
-     * @param circleWidth
      */
     public void setCircleWidth(float circleWidth) {
         mCircularProgressBar.setCircleWidth(circleWidth);
@@ -72,8 +70,6 @@ public class CircularProgressBarWithRate extends FrameLayout implements Circular
 
     /**
      * 得到 CircularProgressBar 对象，用来设置其他的一些属性
-     *
-     * @return
      */
     public CircularProgressBar getCircularProgressBar() {
         return mCircularProgressBar;
@@ -81,8 +77,6 @@ public class CircularProgressBarWithRate extends FrameLayout implements Circular
 
     /**
      * 设置中间进度百分比文字的尺寸
-     *
-     * @param size
      */
     public void setTextSize(float size) {
         mRateText.setTextSize(size);
@@ -90,8 +84,6 @@ public class CircularProgressBarWithRate extends FrameLayout implements Circular
 
     /**
      * 设置中间进度百分比文字的颜色
-     *
-     * @param color
      */
     public void setTextColor(int color) {
         mRateText.setTextColor(color);

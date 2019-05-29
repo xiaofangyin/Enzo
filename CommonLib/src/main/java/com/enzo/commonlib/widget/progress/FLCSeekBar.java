@@ -49,8 +49,8 @@ public class FLCSeekBar extends View {
         thumb = new Thumb();
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FLCSeekBar);
         try {
-            colorLineSelected = a.getColor(R.styleable.FLCSeekBar_lineColorSelected, 0xFF97DAFF);
-            colorLineUnSelected = a.getColor(R.styleable.FLCSeekBar_lineColorUnSelected, 0xFFD9D9D9);
+            colorLineSelected = a.getColor(R.styleable.FLCSeekBar_lineColorSelected, getResources().getColor(R.color.color_green));
+            colorLineUnSelected = a.getColor(R.styleable.FLCSeekBar_lineColorUnSelected, getResources().getColor(R.color.color_d9));
             colorEdge = a.getColor(R.styleable.FLCSeekBar_circleColorEdge, 0xFF30B5FF);
             lineHeight = (int) a.getDimension(R.styleable.FLCSeekBar_lineHeight, dip2px(4));
             bitmapThumb = BitmapFactory.decodeResource(getResources(), a.getResourceId(R.styleable.FLCSeekBar_bitmapThumb, 0));
@@ -369,11 +369,11 @@ public class FLCSeekBar extends View {
     }
 
     public interface OnSeekBarChangedListener {
-        void onProgressChanged(FLCSeekBar seekBar, int percent);
+        void onProgressChanged(FLCSeekBar seekBar, int progress);
 
-        void onStartTrackingTouch(FLCSeekBar seekBar, int percent);
+        void onStartTrackingTouch(FLCSeekBar seekBar, int progress);
 
-        void onStopTrackingTouch(FLCSeekBar seekBar, int percent);
+        void onStopTrackingTouch(FLCSeekBar seekBar, int progress);
     }
 
     private int dip2px(float dip) {

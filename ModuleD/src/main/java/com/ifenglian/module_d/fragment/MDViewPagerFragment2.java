@@ -61,18 +61,18 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
     public void initListener(View rootView) {
         seekBar.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
             @Override
-            public void onProgressChanged(FLCSeekBar seekBar, int percent) {
-                LogUtil.d("percent: " + percent);
-                ToastUtils.showToast(String.valueOf(percent));
+            public void onProgressChanged(FLCSeekBar seekBar, int progress) {
+                LogUtil.d("percent: " + progress);
+                ToastUtils.showToast(String.valueOf(progress));
             }
 
             @Override
-            public void onStartTrackingTouch(FLCSeekBar seekBar, int percent) {
+            public void onStartTrackingTouch(FLCSeekBar seekBar, int progress) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(FLCSeekBar seekBar, int percent) {
+            public void onStopTrackingTouch(FLCSeekBar seekBar, int progress) {
 
             }
         });
