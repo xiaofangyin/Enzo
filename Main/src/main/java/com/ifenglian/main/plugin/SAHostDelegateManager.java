@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginHostDelegate;
+import com.ifenglian.main.activity.SAAddDeviceActivity;
 import com.ifenglian.main.activity.SAMainActivity;
 
 import java.util.List;
@@ -51,6 +52,14 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
         Intent intent = new Intent();
         intent.setClass(context, SAMainActivity.class);
         context.startActivity(intent);
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean popToAddDevicesControllerWithAnimated(Context context, boolean animated) {
+        Intent intent = new Intent();
+        intent.setClass(context, SAAddDeviceActivity.class);
+        context.startActivity(intent);
+        return true;
     }
 }

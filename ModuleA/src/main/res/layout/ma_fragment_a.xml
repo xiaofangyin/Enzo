@@ -23,21 +23,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="10dp"
                     android:src="@mipmap/notice" />
 
                 <com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView
                     android:id="@+id/auto_scroll_text_view"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
                     android:padding="5dp" />
+
+                <ImageView
+                    android:id="@+id/ma_add_device_icon"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:background="@mipmap/ma_add_icon" />
             </LinearLayout>
 
             <LinearLayout

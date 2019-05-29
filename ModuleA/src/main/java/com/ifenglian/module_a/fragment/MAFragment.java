@@ -10,6 +10,7 @@ import com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.timeclock.TimePicker;
 import com.ifenglian.module_a.R;
+import com.ifenglian.module_a.plugin.MAPluginFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,11 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-
+        rootView.findViewById(R.id.ma_add_device_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MAPluginFactory.getInstance().hostDelegate.popToAddDevicesControllerWithAnimated(getActivity(), true);
+            }
+        });
     }
 }

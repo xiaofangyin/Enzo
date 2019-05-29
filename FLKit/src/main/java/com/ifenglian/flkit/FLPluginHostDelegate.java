@@ -12,4 +12,7 @@ public interface FLPluginHostDelegate {
 
     //插件调用会跳转到宿主的家庭页
     boolean popToHomeControllerWithAnimated(Context context, boolean animated);
+
+    //插件调用会跳转到宿主的添加设备页
+    boolean popToAddDevicesControllerWithAnimated(Context context, boolean animated);
 }
