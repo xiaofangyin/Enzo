@@ -3,23 +3,22 @@ package com.ifenglian.flkit;
 import android.content.Context;
 import android.widget.FrameLayout;
 
-public class FLPluginBaseCell extends FrameLayout {
-
-    //插件的上下文
-    public FLPluginCellDelegate cellDelegate;
+/**
+ * 文 件 名: FLPluginBaseCell
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/11/18
+ * 邮   箱: xiaofy@ifenglian.com
+ */
+public abstract class FLPluginBaseCell extends FrameLayout {
 
     public FLPluginBaseCell(Context context) {
         super(context);
     }
 
     //根据model生成对应的view
-    public void layoutWithModel(FLPluginBaseObject model) {
-
-    }
+    public abstract void layoutWithModel(FLPluginBaseObject model);
 
     //cell的点击事件
-    public void cellPressed() {
-
-    }
+    public abstract void cellPressed();
 
 }

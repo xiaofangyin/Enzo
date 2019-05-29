@@ -1,7 +1,8 @@
 package com.ifenglian.flkit;
 
-
 import android.support.v4.app.Fragment;
+
+import org.json.JSONObject;
 
 /**
  * 文 件 名: FLPluginFactory
@@ -15,6 +16,8 @@ public abstract class FLPluginFactory {
 
     //给插件的factory传上下文
     public abstract void setHostDelegate(FLPluginHostDelegate delegate);
+
+    public abstract FLPluginBaseObject buildNormalPluginCellModel(JSONObject data);
 
     public abstract Fragment getFragment();
 }

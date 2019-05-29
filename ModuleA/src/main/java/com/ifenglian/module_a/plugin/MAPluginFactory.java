@@ -2,9 +2,12 @@ package com.ifenglian.module_a.plugin;
 
 import android.support.v4.app.Fragment;
 
+import com.ifenglian.flkit.FLPluginBaseObject;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginHostDelegate;
 import com.ifenglian.module_a.fragment.MAFragment;
+
+import org.json.JSONObject;
 
 /**
  * 文 件 名: MAPluginFactory
@@ -34,6 +37,11 @@ public class MAPluginFactory extends FLPluginFactory {
     @Override
     public void setHostDelegate(FLPluginHostDelegate delegate) {
         hostDelegate = delegate;
+    }
+
+    @Override
+    public FLPluginBaseObject buildNormalPluginCellModel(JSONObject data) {
+        return new MANormalPluginModel().build(data);
     }
 
     @Override

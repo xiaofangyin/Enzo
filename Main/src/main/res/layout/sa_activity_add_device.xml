@@ -9,4 +9,16 @@
         android:id="@+id/add_device_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <com.enzo.commonlib.widget.loadinglayout.LoadingLayout
+        android:id="@+id/add_device_loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/add_device_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </com.enzo.commonlib.widget.loadinglayout.LoadingLayout>
 </LinearLayout>
