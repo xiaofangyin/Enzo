@@ -17,9 +17,6 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDPullToRefreshLvActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MDLoadingLayoutActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -13,7 +13,6 @@ import com.ifenglian.module_d.activity.MDImgSingleSelectActivity;
 import com.ifenglian.module_d.activity.MDMeiZuBannerActivity;
 import com.ifenglian.module_d.activity.MDNotificationActivity;
 import com.ifenglian.module_d.activity.MDPickerViewActivity;
-import com.ifenglian.module_d.activity.MDPullToRefreshLvActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -32,7 +31,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     public void initView(View rootView) {
         rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_pull_to_refresh_lv).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_picker_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
@@ -58,9 +56,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_img_multiple_choose) {
             Intent intent = new Intent(getContext(), MDImgMultipleSelectActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_pull_to_refresh_lv) {
-            Intent intent = new Intent(getContext(), MDPullToRefreshLvActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_bar_code) {
             Intent intent = new Intent(getContext(), MDBarCodeActivity.class);

@@ -21,12 +21,6 @@
             android:text="选择照片(多选)" />
 
         <Button
-            android:id="@+id/btn_pull_to_refresh_lv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ListView下拉刷新" />
-
-        <Button
             android:id="@+id/btn_bar_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
