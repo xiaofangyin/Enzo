@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.enzo.commonlib.utils.common.ToastUtils;
 import com.ifenglian.flkit.FLPluginBaseCell;
 import com.ifenglian.flkit.FLPluginBaseObject;
 import com.ifenglian.module_d.R;
@@ -32,6 +33,6 @@ public class MDNormalPluginItem extends FLPluginBaseCell {
 
     @Override
     public void cellPressed() {
-
+        ToastUtils.showToast(tvName.getText().toString());
     }
 }
