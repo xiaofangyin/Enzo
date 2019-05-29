@@ -45,9 +45,20 @@ public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObje
 
         @Override
         public void setUpView(FLPluginBaseObject model, int position, RecyclerView.Adapter adapter) {
-            FLPluginBaseCell baseCell = model.buildCellWithStyle(FLPluginCellStyle.FLPluginCellStyleNormal);
+            if (flContainer.getChildCount() != 0) {
+                View view = flContainer.getChildAt(0);
+                ((ViewGroup) view.getParent()).removeAllViews();
+            }
+            final FLPluginBaseCell baseCell = model.buildCellWithStyle(FLPluginCellStyle.FLPluginCellStyleNormal);
             baseCell.layoutWithModel(model);
             flContainer.addView(baseCell);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    baseCell.cellPressed();
+                }
+            });
         }
     }
 }
