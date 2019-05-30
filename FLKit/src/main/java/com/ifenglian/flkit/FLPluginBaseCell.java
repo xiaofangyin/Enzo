@@ -15,10 +15,10 @@ public abstract class FLPluginBaseCell extends FrameLayout {
         super(context);
     }
 
+    //返回设备类型
+    public abstract int getType();
+
     //根据model生成对应的view
     public abstract void layoutWithModel(FLPluginBaseObject model);
-
-    //cell的点击事件
-    public abstract void cellPressed();
 
 }

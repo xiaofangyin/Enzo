@@ -18,6 +18,7 @@ public class MCNormalPluginModel extends FLPluginBaseObject {
     @Override
     public FLPluginBaseObject build(JSONObject data) {
         if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_C) {
+            this.type = data.optInt("type");
             this.rid = data.optString("rid");
             this.alias = data.optString("alias");
             return this;

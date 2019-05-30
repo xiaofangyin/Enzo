@@ -1,8 +1,5 @@
 package com.ifenglian.main.plugin;
 
-import android.content.Context;
-
-import com.enzo.commonlib.base.BaseApplication;
 import com.ifenglian.flkit.FLPluginFactory;
 
 import java.util.List;
@@ -31,10 +28,6 @@ public class SAFactoryManager {
             }
         }
         return mInstance;
-    }
-
-    public Context getContext() {
-        return BaseApplication.getInstance();
     }
 
     public void init(List<FLPluginFactory> factoryList) {

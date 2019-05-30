@@ -1,81 +1,46 @@
 package com.enzo.commonlib.utils.common;
 
-import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 
+import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseApplication;
+import com.enzo.commonlib.utils.dtoast.DToast;
 
 /**
- * 文 件 名: ToastUtils
- * 创 建 人: xiaofangyin
- * 创建日期: 2017/11/18
- * 邮   箱: xiaofy@ifenglian.com
+ * https://github.com/Dovar66/DToast
  */
 public class ToastUtils {
 
-    private static Toast toast;
-
-    private static View view;
-
-    private ToastUtils() {
+    /**
+     * 使用默认布局
+     */
+    public static void showToast(int msg) {
+        showToast(BaseApplication.getInstance().getString(msg));
     }
 
-    private static void getToast(Context context) {
-        if (toast == null) {
-            toast = new Toast(context);
-        }
-        if (view == null) {
-            view = Toast.makeText(context, "", Toast.LENGTH_SHORT).getView();
-        }
-        toast.setView(view);
+    public static void showToast(String msg) {
+        if (msg == null) return;
+        DToast.make(BaseApplication.getInstance())
+                .setText(R.id.tv_content_default, msg)
+                .setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, DensityUtil.dip2px(50))
+                .show();
     }
 
-    public static void showToast(CharSequence msg) {
-        showToast(BaseApplication.getInstance(), msg, Toast.LENGTH_SHORT);
+    /**
+     * 通过setView()设置自定义的Toast布局
+     */
+    public static void showAtCenter(String msg) {
+        if (msg == null) return;
+        DToast.make(BaseApplication.getInstance())
+                .setView(View.inflate(BaseApplication.getInstance(), R.layout.lib_layout_toast_center, null))
+                .setText(R.id.tv_content_custom, msg)
+                .setGravity(Gravity.CENTER, 0, 0)
+                .showLong();
     }
 
-    public static void showToast(int resId) {
-        showToast(BaseApplication.getInstance(), resId, Toast.LENGTH_SHORT);
+    //退出APP时调用
+    public static void cancelAll() {
+        DToast.cancel();
     }
-
-    public static void showLongToast(CharSequence msg) {
-        showToast(BaseApplication.getInstance(), msg, Toast.LENGTH_LONG);
-    }
-
-    public static void showLongToast(int resId) {
-        showToast(BaseApplication.getInstance(), resId, Toast.LENGTH_LONG);
-    }
-
-    private static void showToast(Context context, CharSequence msg, int duration) {
-        try {
-            getToast(context);
-            toast.setText(msg);
-            toast.setDuration(duration);
-            toast.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void showToast(Context context, int resId, int duration) {
-        try {
-            if (resId == 0) {
-                return;
-            }
-            getToast(context);
-            toast.setText(resId);
-            toast.setDuration(duration);
-            toast.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void cancelToast() {
-        if (toast != null) {
-            toast.cancel();
-        }
-    }
-
 }

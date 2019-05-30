@@ -3,10 +3,11 @@ package com.ifenglian.main.plugin;
 import android.content.Context;
 import android.content.Intent;
 
+import com.enzo.commonlib.base.BaseApplication;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginHostDelegate;
-import com.ifenglian.main.activity.SAAddDeviceActivity;
-import com.ifenglian.main.activity.SAMainActivity;
+import com.ifenglian.main.ui.activity.SAAddDeviceActivity;
+import com.ifenglian.main.ui.activity.SAMainActivity;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
 
     }
 
-    public static SAHostDelegateManager getInstance() {
+    static SAHostDelegateManager getInstance() {
         if (mInstance == null) {
             synchronized (SAHostDelegateManager.class) {
                 if (mInstance == null) {
@@ -36,8 +37,8 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
     }
 
     @Override
-    public Context getKeyWindow() {
-        return SAFactoryManager.getInstance().getContext();
+    public Context getApplicationContext() {
+        return BaseApplication.getInstance();
     }
 
     @Override

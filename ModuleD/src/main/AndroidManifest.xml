@@ -17,28 +17,28 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.MDLoadingLayoutActivity"
+            android:name=".ui.activity.MDLoadingLayoutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDImgSingleSelectActivity"
+            android:name=".ui.activity.MDImgSingleSelectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDImgMultipleSelectActivity"
+            android:name=".ui.activity.MDImgMultipleSelectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDBarCodeActivity"
+            android:name=".ui.activity.MDBarCodeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDPickerViewActivity"
+            android:name=".ui.activity.MDPickerViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDCalendarActivity"
+            android:name=".ui.activity.MDCalendarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDMeiZuBannerActivity"
+            android:name=".ui.activity.MDMeiZuBannerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MDNotificationActivity"
+            android:name=".ui.activity.MDNotificationActivity"
             android:screenOrientation="portrait" />
     </application>
 </manifest>

@@ -3,12 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/mc_yasuo" />
-
-    <com.enzo.commonlib.widget.barragephoto.ui.BarrageView
+    <com.enzo.commonlib.widget.barrage.ui.BarrageView
         android:id="@+id/barrage"
         android:layout_width="match_parent"
         android:layout_height="200dp" />

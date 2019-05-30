@@ -7,7 +7,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".activity.SASplashActivity"
+            android:name=".ui.activity.SASplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WelLauncher">
             <intent-filter>
@@ -18,11 +18,11 @@
         </activity>
 
         <activity
-            android:name=".activity.SAMainActivity"
+            android:name=".ui.activity.SAMainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.SAAddDeviceActivity"
+            android:name=".ui.activity.SAAddDeviceActivity"
             android:screenOrientation="portrait" />
     </application>
 

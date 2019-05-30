@@ -14,7 +14,7 @@ public interface FLPluginHostDelegate {
 
     void initFactories(List<FLPluginFactory> factoryList);
 
-    Context getKeyWindow();
+    Context getApplicationContext();
 
     //插件调用会跳转到宿主的家庭页
     boolean popToHomeControllerWithAnimated(Context context, boolean animated);

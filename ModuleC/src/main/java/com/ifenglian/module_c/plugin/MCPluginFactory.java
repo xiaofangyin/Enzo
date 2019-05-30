@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import com.ifenglian.flkit.FLPluginBaseObject;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginHostDelegate;
-import com.ifenglian.module_c.fragment.MCFragment;
+import com.ifenglian.module_c.ui.fragment.MCFragment;
 
 import org.json.JSONObject;
 
