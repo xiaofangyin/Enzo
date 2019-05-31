@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import com.ifenglian.flkit.FLPluginBaseObject;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginHostDelegate;
+import com.ifenglian.flkit.FLPluginTypeList;
 import com.ifenglian.module_d.ui.fragment.MDFragment;
 
 import org.json.JSONObject;
@@ -41,7 +42,14 @@ public class MDPluginFactory extends FLPluginFactory {
 
     @Override
     public FLPluginBaseObject buildNormalPluginCellModel(JSONObject data) {
-        return new MDNormalPluginModel().build(data);
+        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_D) {
+            MDNormalPluginModel normalPluginModel = new MDNormalPluginModel();
+            normalPluginModel.type = data.optInt("type");
+            normalPluginModel.rid = data.optString("rid");
+            normalPluginModel.alias = data.optString("alias");
+            return normalPluginModel;
+        }
+        return null;
     }
 
     @Override

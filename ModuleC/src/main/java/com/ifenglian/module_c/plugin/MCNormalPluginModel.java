@@ -1,11 +1,9 @@
 package com.ifenglian.module_c.plugin;
 
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.ifenglian.flkit.FLPluginBaseCell;
 import com.ifenglian.flkit.FLPluginBaseObject;
 import com.ifenglian.flkit.FLPluginCellStyle;
-import com.ifenglian.flkit.FLPluginTypeList;
-
-import org.json.JSONObject;
 
 /**
  * 文 件 名: MCNormalPluginModel
@@ -16,21 +14,15 @@ import org.json.JSONObject;
 public class MCNormalPluginModel extends FLPluginBaseObject {
 
     @Override
-    public FLPluginBaseObject build(JSONObject data) {
-        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_C) {
-            this.type = data.optInt("type");
-            this.rid = data.optString("rid");
-            this.alias = data.optString("alias");
-            return this;
-        }
-        return null;
-    }
-
-    @Override
     public FLPluginBaseCell buildCellWithStyle(FLPluginCellStyle pluginStyle) {
         if (pluginStyle == FLPluginCellStyle.FLPluginCellStyleNormal) {
             return new MCNormalPluginItem(delegate.getContext());
         }
         return null;
+    }
+
+    @Override
+    public void release() {
+        LogUtil.d("MCNormalPluginModel release...");
     }
 }

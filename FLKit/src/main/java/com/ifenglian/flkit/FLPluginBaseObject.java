@@ -1,7 +1,5 @@
 package com.ifenglian.flkit;
 
-import org.json.JSONObject;
-
 /**
  * 文 件 名: FLPluginBaseObject
  * 创 建 人: xiaofangyin
@@ -15,14 +13,9 @@ public abstract class FLPluginBaseObject {
     public String alias = "";     //设备名称
     public FLPluginBaseObjectDelegate delegate;
 
-    //将服务器返回的json数据转换成对应的model
-    public abstract FLPluginBaseObject build(JSONObject data);
-
     //生成相应的item
     public abstract FLPluginBaseCell buildCellWithStyle(FLPluginCellStyle pluginStyle);
 
     //释放插件
-    public void remove() {
-
-    }
+    public abstract void release();
 }

@@ -16,8 +16,8 @@ import com.ifenglian.flkit.FLPluginBaseObjectDelegate;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginTypeList;
 import com.ifenglian.main.R;
-import com.ifenglian.main.ui.adapter.SAAddDeviceAdapter;
 import com.ifenglian.main.plugin.SAFactoryManager;
+import com.ifenglian.main.ui.adapter.SAAddDeviceAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +35,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     private LoadingLayout loadingLayout;
     private RecyclerView recyclerView;
+    private SAAddDeviceAdapter adapter;
 
     @Override
     public int getLayoutId() {
@@ -63,10 +64,11 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     @Override
     public void initData(Bundle savedInstanceState) {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
             @Override
             public void run() {
                 loadingLayout.showContent();
-                SAAddDeviceAdapter adapter = new SAAddDeviceAdapter();
+                adapter = new SAAddDeviceAdapter();
                 recyclerView.setAdapter(adapter);
                 adapter.setNewData(getObjectList(buildData()));
             }
@@ -134,5 +136,14 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     @Override
     public Context getContext() {
         return SAAddDeviceActivity.this;
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            adapter.getData().get(i).release();
+        }
+        adapter.release();
     }
 }
