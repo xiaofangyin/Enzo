@@ -20,4 +20,7 @@ public abstract class FLPluginFactory {
     public abstract FLPluginBaseObject buildNormalPluginCellModel(JSONObject data);
 
     public abstract Fragment getFragment();
+
+    //释放资源
+    public abstract void releaseResources();
 }

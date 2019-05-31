@@ -56,4 +56,9 @@ public class MCPluginFactory extends FLPluginFactory {
     public Fragment getFragment() {
         return new MCFragment();
     }
+
+    @Override
+    public void releaseResources() {
+
+    }
 }

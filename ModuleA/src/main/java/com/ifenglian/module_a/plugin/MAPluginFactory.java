@@ -56,4 +56,9 @@ public class MAPluginFactory extends FLPluginFactory {
     public Fragment getFragment() {
         return new MAFragment();
     }
+
+    @Override
+    public void releaseResources() {
+
+    }
 }
