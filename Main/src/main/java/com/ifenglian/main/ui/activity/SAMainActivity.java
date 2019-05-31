@@ -81,7 +81,7 @@ public class SAMainActivity extends BaseActivity {
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < SAFactoryManager.getInstance().getFactoryList().size(); i++) {
-            fragments.add(SAFactoryManager.getInstance().getFactoryList().get(i).getFragment());
+            fragments.add(SAFactoryManager.getInstance().getFactoryList().get(i).buildHomeTabFragment());
         }
         return fragments;
     }

@@ -53,7 +53,7 @@ public class MDPluginFactory extends FLPluginFactory {
     }
 
     @Override
-    public Fragment getFragment() {
+    public Fragment buildHomeTabFragment() {
         return new MDFragment();
     }
 
