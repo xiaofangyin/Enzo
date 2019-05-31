@@ -144,6 +144,5 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
         for (int i = 0; i < adapter.getItemCount(); i++) {
             adapter.getData().get(i).release();
         }
-        adapter.release();
     }
 }

@@ -1,5 +1,6 @@
 package com.ifenglian.main.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
@@ -75,6 +77,12 @@ public class SAMainActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        LogUtil.d("on new intent...");
     }
 
     private List<Fragment> getFragments() {

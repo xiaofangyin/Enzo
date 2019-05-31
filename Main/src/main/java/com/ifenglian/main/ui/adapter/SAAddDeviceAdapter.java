@@ -88,9 +88,4 @@ public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObje
             }
         }
     }
-
-    public void release() {
-        getData().clear();
-        mViewCache.clear();
-    }
 }

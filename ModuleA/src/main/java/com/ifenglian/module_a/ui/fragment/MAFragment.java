@@ -82,7 +82,7 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_add_device_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MAPluginFactory.getInstance().hostDelegate.popToAddDevicesControllerWithAnimated(getActivity(), true);
+                MAPluginFactory.getInstance().hostDelegate.popToAddDevicesController(getActivity());
             }
         });
     }
