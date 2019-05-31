@@ -16,6 +16,7 @@ import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
 import com.ifenglian.main.R;
 import com.ifenglian.main.plugin.SAFactoryManager;
+import com.ifenglian.main.plugin.SAHostDelegateManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,5 +125,11 @@ public class SAMainActivity extends BaseActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SAHostDelegateManager.getInstance().releaseResources();
     }
 }

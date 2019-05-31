@@ -25,7 +25,7 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
 
     }
 
-    static SAHostDelegateManager getInstance() {
+    public static SAHostDelegateManager getInstance() {
         if (mInstance == null) {
             synchronized (SAHostDelegateManager.class) {
                 if (mInstance == null) {
@@ -62,5 +62,13 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
         intent.setClass(context, SAAddDeviceActivity.class);
         context.startActivity(intent);
         return true;
+    }
+
+    @Override
+    public void releaseResources() {
+        List<FLPluginFactory> factoryList = SAFactoryManager.getInstance().getFactoryList();
+        for (int i = 0; i < factoryList.size(); i++) {
+            factoryList.get(i).releaseResources();
+        }
     }
 }
