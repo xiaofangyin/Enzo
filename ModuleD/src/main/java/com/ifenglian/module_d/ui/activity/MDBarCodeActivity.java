@@ -4,9 +4,7 @@ import android.os.Bundle;
 
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.commonlib.utils.zbar.CaptureActivity;
-
-import cn.bingoogolapple.qrcode.core.BarcodeType;
+import com.enzo.commonlib.utils.zxing.activity.CaptureActivity;
 
 /**
  * 文 件 名: CheckReportActivity
@@ -19,20 +17,16 @@ public class MDBarCodeActivity extends CaptureActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        mZBarView.getScanBoxView().setRectWidth(DensityUtil.dip2px(240));
-//        mZBarView.changeToScanBarcodeStyle(); // 切换成扫描条码样式
-//        mZBarView.setType(BarcodeType.ONE_DIMENSION, null); // 只识别一维条码
-//        mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
-
-        mZBarView.changeToScanQRCodeStyle(); // 切换成扫描二维码样式
-        mZBarView.setType(BarcodeType.ALL, null); // 识别所有类型的码
-        mZBarView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.1秒后开始识别
     }
 
     @Override
     public String getTitleText() {
         return "扫码查食品";
+    }
+
+    @Override
+    public boolean isBarCode() {
+        return false;
     }
 
     @Override
