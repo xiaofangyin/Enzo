@@ -6,13 +6,14 @@ import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
 import com.ifenglian.module_d.R;
-import com.ifenglian.module_d.ui.activity.MDBarCodeActivity;
 import com.ifenglian.module_d.ui.activity.MDCalendarActivity;
 import com.ifenglian.module_d.ui.activity.MDImgMultipleSelectActivity;
 import com.ifenglian.module_d.ui.activity.MDImgSingleSelectActivity;
 import com.ifenglian.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.ifenglian.module_d.ui.activity.MDNotificationActivity;
 import com.ifenglian.module_d.ui.activity.MDPickerViewActivity;
+import com.ifenglian.module_d.ui.activity.MDScanBarCodeActivity;
+import com.ifenglian.module_d.ui.activity.MDScanQrCodeActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -29,13 +30,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View rootView) {
-        rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_picker_view).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
+
     }
 
     @Override
@@ -45,7 +40,14 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initListener(View rootView) {
-
+        rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_picker_view).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
     }
 
     @Override
@@ -58,7 +60,10 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             Intent intent = new Intent(getContext(), MDImgMultipleSelectActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_bar_code) {
-            Intent intent = new Intent(getContext(), MDBarCodeActivity.class);
+            Intent intent = new Intent(getContext(), MDScanBarCodeActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_qr_code) {
+            Intent intent = new Intent(getContext(), MDScanQrCodeActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_picker_view) {
             Intent intent = new Intent(getContext(), MDPickerViewActivity.class);

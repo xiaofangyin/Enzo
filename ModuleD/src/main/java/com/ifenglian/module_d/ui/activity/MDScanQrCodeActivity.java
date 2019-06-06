@@ -7,12 +7,12 @@ import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.zxing.activity.CaptureActivity;
 
 /**
- * 文 件 名: CheckReportActivity
+ * 文 件 名: MDScanQrCodeActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/6/30
  * 邮   箱: xiaofy@ifenglian.com
  */
-public class MDBarCodeActivity extends CaptureActivity {
+public class MDScanQrCodeActivity extends CaptureActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class MDBarCodeActivity extends CaptureActivity {
 
     @Override
     public String getTitleText() {
-        return "扫码查食品";
+        return "二维码扫描";
     }
 
     @Override
