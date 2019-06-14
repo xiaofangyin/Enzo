@@ -1,4 +1,4 @@
-package com.enzo.commonlib.utils.zbar;
+package com.enzo.commonlib.utils.zxing.view;
 
 import android.app.Dialog;
 import android.content.DialogInterface;

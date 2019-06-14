@@ -26,9 +26,6 @@
             android:name=".ui.activity.MDImgMultipleSelectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDBarCodeActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDPickerViewActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -39,6 +36,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDNotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDScanBarCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDScanQrCodeActivity"
             android:screenOrientation="portrait" />
     </application>
 </manifest>

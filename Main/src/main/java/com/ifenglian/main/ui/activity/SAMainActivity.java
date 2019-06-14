@@ -1,5 +1,6 @@
 package com.ifenglian.main.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,6 +18,7 @@ import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
 import com.ifenglian.main.R;
 import com.ifenglian.main.plugin.SAFactoryManager;
+import com.ifenglian.main.plugin.SAHostDelegateManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,21 +69,26 @@ public class SAMainActivity extends BaseActivity {
         mTabLayout.setOnTabClickListener(new TabLayout.OnTabClickListener() {
             @Override
             public void onTabClick(TabView view, int position) {
-                LogUtil.e("onTabClick: " + position);
                 switchFragment(position);
             }
 
             @Override
             public void onTabReClick(TabView view, int position) {
-                LogUtil.e("onTabReClick: " + position);
+
             }
         });
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        LogUtil.d("on new intent...");
     }
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < SAFactoryManager.getInstance().getFactoryList().size(); i++) {
-            fragments.add(SAFactoryManager.getInstance().getFactoryList().get(i).getFragment());
+            fragments.add(SAFactoryManager.getInstance().getFactoryList().get(i).buildHomeTabFragment());
         }
         return fragments;
     }
@@ -126,5 +133,11 @@ public class SAMainActivity extends BaseActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SAHostDelegateManager.getInstance().releaseResources();
     }
 }

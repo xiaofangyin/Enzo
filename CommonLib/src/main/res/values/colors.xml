@@ -55,4 +55,13 @@
     <color name="pdfViewPager_ab_color">#990000</color>
     <color name="pdfViewPager_ab_color_lighter">#CC0000</color>
     <color name="pdfViewPager_ab_color_darker">#660000</color>
+
+    <!-- QRCode scanner color begin -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#B0000000</color>
+    <color name="viewfinder_frame">#90FFFFFF</color>
+    <color name="result_point_color">#C0FFFF00</color>
+    <color name="laser_color">#04d1aa</color>
+    <color name="corner_color">#04d1aa</color>
+    <!-- QRCode scanner color end -->
 </resources>

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import com.ifenglian.flkit.FLPluginBaseObject;
 import com.ifenglian.flkit.FLPluginFactory;
 import com.ifenglian.flkit.FLPluginHostDelegate;
+import com.ifenglian.flkit.FLPluginTypeList;
 import com.ifenglian.module_a.ui.fragment.MAFragment;
 
 import org.json.JSONObject;
@@ -41,11 +42,23 @@ public class MAPluginFactory extends FLPluginFactory {
 
     @Override
     public FLPluginBaseObject buildNormalPluginCellModel(JSONObject data) {
-        return new MANormalPluginModel().build(data);
+        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_A) {
+            MANormalPluginModel normalPluginModel = new MANormalPluginModel();
+            normalPluginModel.type = data.optInt("type");
+            normalPluginModel.rid = data.optString("rid");
+            normalPluginModel.alias = data.optString("alias");
+            return normalPluginModel;
+        }
+        return null;
     }
 
     @Override
-    public Fragment getFragment() {
+    public Fragment buildHomeTabFragment() {
         return new MAFragment();
+    }
+
+    @Override
+    public void releaseResources() {
+
     }
 }

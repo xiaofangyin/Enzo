@@ -1,5 +1,6 @@
 package com.ifenglian.flkit;
 
+import android.app.Activity;
 import android.content.Context;
 
 import java.util.List;
@@ -14,11 +15,18 @@ public interface FLPluginHostDelegate {
 
     void initFactories(List<FLPluginFactory> factoryList);
 
+    //获取Application Context
     Context getApplicationContext();
 
-    //插件调用会跳转到宿主的家庭页
-    boolean popToHomeControllerWithAnimated(Context context, boolean animated);
+    //返回当前显示的activity
+    Activity getCurrentController();
 
-    //插件调用会跳转到宿主的添加设备页
-    boolean popToAddDevicesControllerWithAnimated(Context context, boolean animated);
+    //跳转到宿主的家庭页
+    boolean popToHomeController(Context context);
+
+    //跳转到宿主的添加设备页
+    boolean popToAddDevicesController(Context context);
+
+    //释放资源
+    void releaseResources();
 }
