@@ -23,7 +23,7 @@ import com.nineoldandroids.animation.TypeEvaluator;
  * 文 件 名: SmoothCheckBox
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/27
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class SmoothCheckBox extends View implements Checkable, View.OnClickListener {
     private static final String KEY_INSTANCE_STATE = "InstanceState";

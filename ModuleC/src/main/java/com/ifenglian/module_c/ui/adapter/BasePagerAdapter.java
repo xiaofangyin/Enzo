@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * 文 件 名: BasePagerAdapter
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/6/10
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public abstract class BasePagerAdapter extends PagerAdapter {
 

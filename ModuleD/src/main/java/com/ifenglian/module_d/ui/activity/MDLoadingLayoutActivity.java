@@ -13,7 +13,7 @@ import com.ifenglian.module_d.R;
  * 文 件 名: MDLoadingLayoutActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/2
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class MDLoadingLayoutActivity extends BaseActivity {
 

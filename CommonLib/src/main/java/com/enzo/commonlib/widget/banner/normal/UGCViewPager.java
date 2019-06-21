@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  * 文 件 名: UGCViewPager
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/3/16
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  * <p>
  * 在RecyclerView中使用ViewPager时，会出现两个诡异的bug：
  * 1.RecyclerView滚动上去，直至ViewPager看不见，再滚动下来，ViewPager下一次切换没有动画

@@ -16,7 +16,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
  * 文 件 名: LoadingLayout
  * 创 建 人: xiaofangyin
  * 创建日期: 2016/6/6
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class LoadingLayout extends FrameLayout {
 

@@ -8,7 +8,7 @@ import android.view.View;
  * 文 件 名: BaseViewHolder
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/5/26
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 

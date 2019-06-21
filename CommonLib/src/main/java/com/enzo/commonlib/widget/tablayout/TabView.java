@@ -20,7 +20,7 @@ import com.enzo.commonlib.utils.common.DensityUtil;
  * 文 件 名: TabButton
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/1
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class TabView extends LinearLayout {
 

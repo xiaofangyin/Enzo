@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
  * 文 件 名: FLPluginBaseCell
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/11/18
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public abstract class FLPluginBaseCell extends FrameLayout {
 

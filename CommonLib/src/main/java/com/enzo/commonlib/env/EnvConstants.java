@@ -4,7 +4,7 @@ package com.enzo.commonlib.env;
  * 文 件 名: EnvConstants
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/31
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class EnvConstants {
 

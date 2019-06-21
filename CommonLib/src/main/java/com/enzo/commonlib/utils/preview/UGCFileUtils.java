@@ -28,7 +28,7 @@ import okhttp3.Response;
  * 文 件 名: UGCFileUtils
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/5/24
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class UGCFileUtils {
 

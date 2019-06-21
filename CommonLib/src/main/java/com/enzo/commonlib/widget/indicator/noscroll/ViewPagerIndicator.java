@@ -21,7 +21,7 @@ import java.util.List;
  * 文 件 名: ViewPagerIndicator
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/11
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class ViewPagerIndicator extends LinearLayout {
 

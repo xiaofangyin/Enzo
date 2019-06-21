@@ -24,7 +24,7 @@ import com.nineoldandroids.animation.ValueAnimator;
  * 文 件 名: SGLSeekBar
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/8/17
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class FLCSeekBar extends View {
 

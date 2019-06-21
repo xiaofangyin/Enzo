@@ -34,7 +34,7 @@ import okhttp3.Response;
  * 文 件 名: OkHttpManager
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/9
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class OkHttpManager {
 

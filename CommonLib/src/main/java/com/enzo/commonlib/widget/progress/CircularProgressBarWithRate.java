@@ -13,7 +13,7 @@ import com.enzo.commonlib.R;
  * 文 件 名: CircularProgressBarWithRate
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/26
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class CircularProgressBarWithRate extends FrameLayout implements CircularProgressBar.OnProgressChangeListener {
 

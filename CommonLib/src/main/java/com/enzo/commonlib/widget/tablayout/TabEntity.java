@@ -4,7 +4,7 @@ package com.enzo.commonlib.widget.tablayout;
  * 文 件 名: TabEntity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/5/25
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class TabEntity {
 

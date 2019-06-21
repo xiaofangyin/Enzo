@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * 文 件 名: BaseFragment
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/9/26
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
 

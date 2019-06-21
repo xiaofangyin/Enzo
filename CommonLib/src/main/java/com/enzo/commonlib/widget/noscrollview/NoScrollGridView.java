@@ -8,7 +8,7 @@ import android.widget.GridView;
  * 文 件 名: CommNoScrollGridView
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/3/6
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class NoScrollGridView extends GridView {
 

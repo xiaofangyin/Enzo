@@ -18,7 +18,7 @@ import com.nineoldandroids.animation.TypeEvaluator;
  * 文 件 名: TimePicker
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/17
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class SHTimePicker2 extends View {
 

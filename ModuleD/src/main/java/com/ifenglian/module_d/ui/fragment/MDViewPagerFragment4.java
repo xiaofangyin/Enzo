@@ -19,7 +19,7 @@ import com.ifenglian.module_d.ui.activity.MDScanQrCodeActivity;
  * 文 件 名: MDViewPagerFragment4
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/1
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickListener {
 

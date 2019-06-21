@@ -13,7 +13,7 @@ import com.enzo.commonlib.R;
  * 文 件 名: PercentLayout
  * 创 建 人: xiaofangyin
  * 创建日期: 2016/8/3
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class PercentLayout extends RelativeLayout {
 

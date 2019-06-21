@@ -23,7 +23,7 @@ import com.enzo.commonlib.utils.common.KeyboardUtils;
  * 文 件 名: BarCordQueryDialog
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/5/13
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class BarCordQueryDialog extends DialogFragment {
 

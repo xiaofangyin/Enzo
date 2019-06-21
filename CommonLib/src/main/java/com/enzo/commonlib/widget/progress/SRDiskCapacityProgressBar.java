@@ -18,7 +18,7 @@ import java.text.DecimalFormat;
  * 文 件 名: SRDiskCapacitySeekBar
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/1/5
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class SRDiskCapacityProgressBar extends View {
 

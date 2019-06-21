@@ -11,7 +11,7 @@ import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecycle
  * 文 件 名: BaseLoadMoreView 加载更多基类，如果要自定义加载布局只需要继承该基类，在对应的方法中进行逻辑整理
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/12
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public abstract class BaseLoadMoreView extends LinearLayout {
 

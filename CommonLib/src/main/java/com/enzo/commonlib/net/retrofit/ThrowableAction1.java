@@ -10,7 +10,7 @@ import rx.functions.Action1;
  * 文 件 名: ThrowableAction1
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/7/13
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class ThrowableAction1 implements Action1<Throwable> {
 

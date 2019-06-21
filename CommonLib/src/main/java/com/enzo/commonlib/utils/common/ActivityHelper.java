@@ -8,7 +8,7 @@ import java.util.Stack;
  * 文 件 名: ActivityHelper
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/6/11
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class ActivityHelper {
 

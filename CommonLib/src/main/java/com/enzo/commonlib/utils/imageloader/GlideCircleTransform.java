@@ -16,7 +16,7 @@ import java.security.MessageDigest;
  * 文 件 名: GlideCircleTransform
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/2/26
- * 邮   箱: xiaofy@ifenglian.com
+ * 邮   箱: xiaofangyinwork@163.com
  */
 public class GlideCircleTransform extends BitmapTransformation {
 
