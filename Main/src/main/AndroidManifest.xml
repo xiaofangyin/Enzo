@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ifenglian.main">
+    package="com.enzo.main">
 
     <application
         android:allowBackup="true"
@@ -7,7 +7,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".ui.activity.SASplashActivity"
+            android:name="com.enzo.main.ui.activity.SASplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WelLauncher">
             <intent-filter>
@@ -18,11 +18,11 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.SAMainActivity"
+            android:name="com.enzo.main.ui.activity.SAMainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.SAAddDeviceActivity"
+            android:name="com.enzo.main.ui.activity.SAAddDeviceActivity"
             android:screenOrientation="portrait" />
     </application>
 

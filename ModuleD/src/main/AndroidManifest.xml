@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ifenglian.module_d">
+    package="com.enzo.module_d">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -17,31 +17,31 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".ui.activity.MDLoadingLayoutActivity"
+            android:name="com.enzo.module_d.ui.activity.MDLoadingLayoutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDImgSingleSelectActivity"
+            android:name="com.enzo.module_d.ui.activity.MDImgSingleSelectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDImgMultipleSelectActivity"
+            android:name="com.enzo.module_d.ui.activity.MDImgMultipleSelectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDPickerViewActivity"
+            android:name="com.enzo.module_d.ui.activity.MDPickerViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDCalendarActivity"
+            android:name="com.enzo.module_d.ui.activity.MDCalendarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDMeiZuBannerActivity"
+            android:name="com.enzo.module_d.ui.activity.MDMeiZuBannerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDNotificationActivity"
+            android:name="com.enzo.module_d.ui.activity.MDNotificationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDScanBarCodeActivity"
+            android:name="com.enzo.module_d.ui.activity.MDScanBarCodeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDScanQrCodeActivity"
+            android:name="com.enzo.module_d.ui.activity.MDScanQrCodeActivity"
             android:screenOrientation="portrait" />
     </application>
 </manifest>

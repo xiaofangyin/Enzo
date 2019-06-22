@@ -1,0 +1,64 @@
+package com.enzo.module_c.plugin;
+
+import android.support.v4.app.Fragment;
+
+import com.enzo.flkit.FLPluginBaseObject;
+import com.enzo.flkit.FLPluginFactory;
+import com.enzo.flkit.FLPluginHostDelegate;
+import com.enzo.flkit.FLPluginTypeList;
+import com.enzo.module_c.ui.fragment.MCFragment;
+
+import org.json.JSONObject;
+
+/**
+ * 文 件 名: MCPluginFactory
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/11/18
+ * 邮   箱: xiaofangyinwork@163.com
+ */
+public class MCPluginFactory extends FLPluginFactory {
+
+    private static MCPluginFactory mInstance;
+
+    private MCPluginFactory() {
+
+    }
+
+    public static MCPluginFactory getInstance() {
+        if (mInstance == null) {
+            synchronized (MCPluginFactory.class) {
+                if (mInstance == null) {
+                    mInstance = new MCPluginFactory();
+                }
+            }
+        }
+        return mInstance;
+    }
+
+    @Override
+    public void setHostDelegate(FLPluginHostDelegate delegate) {
+        hostDelegate = delegate;
+    }
+
+    @Override
+    public FLPluginBaseObject buildNormalPluginCellModel(JSONObject data) {
+        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_C) {
+            MCNormalPluginModel normalPluginModel = new MCNormalPluginModel();
+            normalPluginModel.type = data.optInt("type");
+            normalPluginModel.rid = data.optString("rid");
+            normalPluginModel.alias = data.optString("alias");
+            return normalPluginModel;
+        }
+        return null;
+    }
+
+    @Override
+    public Fragment buildHomeTabFragment() {
+        return new MCFragment();
+    }
+
+    @Override
+    public void releaseResources() {
+
+    }
+}

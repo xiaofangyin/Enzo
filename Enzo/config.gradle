@@ -1,6 +1,6 @@
 ext {
     android = [
-            applicationId    : "com.ifenglian.enzo",
+            applicationId    : "com.enzo.xiaofy",
             compileSdkVersion: 28,
             minSdkVersion    : 19,
             targetSdkVersion : 28,
