@@ -9,8 +9,6 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
-        flavorDimensions "1"
 
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -49,6 +47,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "normal"
+
     productFlavors {
         beta {//用于公司内日常发包测试
             applicationId "com.ifenglian.enzotest"
@@ -62,28 +63,7 @@ android {
             buildConfigField("Boolean", "LOG_OPEN", 'true')
         }
         qihoo_360 {
-        }
-        ali {
-        }
-        huawei {
-        }
-        meizu {
-        }
-        oppo {
-        }
-        vivo {
-        }
-        samsung {
-        }
-        mu {
-        }
-        sogo {
-        }
-        tencent {
-        }
-        xiaomi {
-        }
-        baidu {
+
         }
 
         productFlavors.all {
