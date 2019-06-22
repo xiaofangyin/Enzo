@@ -59,6 +59,9 @@ public class SAMainActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if (mTabLayout.getMessageNum(3) >= 99) {
+                mTabLayout.resetMessageNum(3);
+            }
             mTabLayout.addMessageNum(3, 1);
             mHandler.sendEmptyMessageDelayed(0, 2000);
         }

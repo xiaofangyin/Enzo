@@ -109,10 +109,10 @@ public class TabView extends LinearLayout {
         mRedPointPaint.setDither(true);
 
         int radius = DensityUtil.dip2px(3);
-        mRedPointRectF.left = getWidth() / 2 + imageView.getWidth() / 2 - radius;
-        mRedPointRectF.top = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2;
+        mRedPointRectF.left = getWidth() / 2f + imageView.getWidth() / 2f - radius;
+        mRedPointRectF.top = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f;
         mRedPointRectF.right = getWidth() / 2 + imageView.getWidth() / 2 + radius;
-        mRedPointRectF.bottom = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2 + radius * 2;
+        mRedPointRectF.bottom = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f + radius * 2;
         canvas.drawOval(mRedPointRectF, mRedPointPaint);
     }
 
@@ -141,10 +141,10 @@ public class TabView extends LinearLayout {
 
         //画圆
         int radius = DensityUtil.dip2px(8);
-        mMessageRectF.left = getWidth() / 2 + imageView.getWidth() / 2 - radius;
-        mMessageRectF.top = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2;
+        mMessageRectF.left = getWidth() / 2f + imageView.getWidth() / 2f - radius;
+        mMessageRectF.top = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f;
         mMessageRectF.right = getWidth() / 2 + imageView.getWidth() / 2 + radius;
-        mMessageRectF.bottom = getHeight() / 2 - (imageView.getHeight() + textView.getHeight()) / 2 + radius * 2;
+        mMessageRectF.bottom = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f + radius * 2;
 
         mRedPointPaint.setStyle(Paint.Style.FILL);
         mRedPointPaint.setColor(0xFFFF0000);
@@ -180,6 +180,11 @@ public class TabView extends LinearLayout {
         mMessageNumber = 0;
         invalidateView();
     }
+
+    public int getMessageNumber() {
+        return mMessageNumber;
+    }
+
 
     /**
      * 小红点

@@ -22,6 +22,8 @@ public interface ITabLayout {
 
     void resetMessageNum(int position);
 
+    int getMessageNum(int position);
+
     void showRedPoint(int position);
 
     void hideRedPoint(int position);

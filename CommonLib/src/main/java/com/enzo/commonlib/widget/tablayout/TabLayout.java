@@ -107,6 +107,14 @@ public class TabLayout extends LinearLayout implements ITabLayout, View.OnClickL
     }
 
     @Override
+    public int getMessageNum(int position) {
+        if (position >= 0 && position < mTabList.size()) {
+            return mTabList.get(position).getMessageNumber();
+        }
+        return 0;
+    }
+
+    @Override
     public void showRedPoint(int position) {
         if (position >= 0 && position < mTabList.size()) {
             mTabList.get(position).showRedPoint(true);
