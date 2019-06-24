@@ -20,6 +20,9 @@
             android:name=".ui.activity.MDLoadingLayoutActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.MDStructureActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.MDImgSingleSelectActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -43,5 +46,6 @@
         <activity
             android:name=".ui.activity.MDScanQrCodeActivity"
             android:screenOrientation="portrait" />
+
     </application>
 </manifest>

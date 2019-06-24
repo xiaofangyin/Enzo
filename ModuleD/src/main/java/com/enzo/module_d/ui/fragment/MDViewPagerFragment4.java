@@ -14,6 +14,7 @@ import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDPickerViewActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
+import com.enzo.module_d.ui.activity.MDStructureActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -40,6 +41,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initListener(View rootView) {
+        rootView.findViewById(R.id.btn_structure).setOnClickListener(this);
         rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
@@ -53,7 +55,10 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_img_single_choose) {
+        if (id == R.id.btn_structure) {
+            Intent intent = new Intent(getContext(), MDStructureActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_img_single_choose) {
             Intent intent = new Intent(getContext(), MDImgSingleSelectActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_img_multiple_choose) {
