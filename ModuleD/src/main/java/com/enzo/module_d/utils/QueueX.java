@@ -12,52 +12,35 @@ package com.enzo.module_d.utils;
 public class QueueX {
 
     private int maxSize;
-    private Long[] queueArray;
     private int front;
     private int rear;
-    private int nItems;
+    private Object[] queueArray;
 
     public QueueX(int n) {
         this.maxSize = n;
-        this.queueArray = new Long[maxSize];
-        this.front = 0;
+        this.front = -1;
         this.rear = -1;
-        this.nItems = 0;
+        this.queueArray = new Object[maxSize];
     }
 
     public void insert(long j) {
-        if (!isFull()) {
-            if (rear == maxSize - 1)
-                rear = -1;
+        if (rear < maxSize - 1) {
             queueArray[++rear] = j;
-            nItems++;
         } else {
             System.out.println("队列已满.....");
         }
     }
 
-    public Long remove() {
-        if (!isEmpty()) {
-            Long temp = queueArray[front++];
-            if (front == maxSize)
-                front = 0;
-            nItems--;
-            return temp;
+    public Object remove() {
+        if (front != rear) {
+            return queueArray[++front];
         } else {
             System.out.println("队列为空不能删除。。。。");
         }
         return null;
     }
 
-    public Long peekFornt() {
+    public Object peekFornt() {
         return queueArray[front];
-    }
-
-    public boolean isEmpty() {
-        return (nItems == 0);
-    }
-
-    public boolean isFull() {
-        return (nItems == maxSize);
     }
 }
