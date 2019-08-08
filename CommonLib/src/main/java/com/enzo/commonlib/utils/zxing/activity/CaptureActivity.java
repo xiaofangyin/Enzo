@@ -43,6 +43,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
+
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -84,7 +85,6 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     public abstract void onSearchInput(String inputText);
 
     public abstract void onHandleDecode(String result);
-
 
 
     @Override
@@ -171,6 +171,20 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     @Override
     public void initData(Bundle savedInstanceState) {
         viewfinderView.setLabelText(getStatusText());
+
+        rxPermissions.request(
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (!aBoolean) {
+                            finish();
+                            ToastUtils.showToast("打开相机异常");
+                        }
+                    }
+                });
     }
 
     @Override
