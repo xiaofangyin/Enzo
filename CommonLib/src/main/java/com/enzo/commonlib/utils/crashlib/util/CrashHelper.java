@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
+import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 
@@ -115,7 +116,8 @@ public final class CrashHelper {
      * @return dir
      */
     private static String getDefaultCrashDir() {
-        return SDCardUtils.getShiAnXiaPath() + File.separator + "crash" + File.separator;
+        return ExternalCacheUtil.getCrashDir(CrashManager.getInstance().getApplication())
+                + File.separator + "crash" + File.separator;
     }
 
     private static void input2File(final String input, final String filePath) {
