@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.GridView;
 
 import com.enzo.commonlib.base.BaseActivity;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.album.bean.AlbumImage;
 import com.enzo.commonlib.utils.album.constant.SelectImageConstants;
 import com.enzo.commonlib.utils.album.utils.SelectImagesUtils;

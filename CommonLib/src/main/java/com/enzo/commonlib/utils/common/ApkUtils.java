@@ -10,10 +10,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
 
-import androidx.core.content.FileProvider;
-
-import com.enzo.commonlib.env.EnvConstants;
-
 import java.io.File;
 import java.util.List;
 

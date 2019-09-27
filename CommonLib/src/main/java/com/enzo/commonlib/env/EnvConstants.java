@@ -45,7 +45,7 @@ public class EnvConstants {
         return PROD_ENV;
     }
 
-    public String getWX_APP_ID(){
+    public String getWX_APP_ID() {
         return WX_APP_ID;
     }
 }
