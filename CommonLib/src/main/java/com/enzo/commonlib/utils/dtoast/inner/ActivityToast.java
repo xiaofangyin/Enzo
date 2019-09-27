@@ -3,7 +3,7 @@ package com.enzo.commonlib.utils.dtoast.inner;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.WindowManager;
 
 /**

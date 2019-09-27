@@ -3,7 +3,7 @@ package com.enzo.commonlib.widget.banner.normal;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

@@ -3,7 +3,7 @@ package com.enzo.commonlib.utils.dtoast.inner;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.view.ViewManager;
 import android.view.ViewParent;

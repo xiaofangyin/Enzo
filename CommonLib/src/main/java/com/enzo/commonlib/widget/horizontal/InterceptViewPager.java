@@ -2,8 +2,8 @@ package com.enzo.commonlib.widget.horizontal;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ViewPager;
+import androidx.core.view.MotionEventCompat;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;

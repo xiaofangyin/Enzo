@@ -6,7 +6,7 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 

@@ -1,6 +1,6 @@
 package com.enzo.commonlib.utils.dtoast.inner;
 
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import android.view.View;
 
 import com.enzo.commonlib.utils.dtoast.DToast;

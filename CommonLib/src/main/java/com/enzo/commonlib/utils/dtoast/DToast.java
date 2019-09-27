@@ -2,8 +2,8 @@ package com.enzo.commonlib.utils.dtoast;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.IntDef;
-import android.support.v4.app.NotificationManagerCompat;
+import androidx.annotation.IntDef;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.enzo.commonlib.utils.dtoast.inner.ActivityToast;
 import com.enzo.commonlib.utils.dtoast.inner.DovaToast;
