@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.core.content.FileProvider;
 
 import com.enzo.commonlib.env.EnvConstants;
@@ -77,7 +78,7 @@ public class ApkUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= 24) {
             LogUtil.d("getInstallIntent FileProvider.getUriForFile...");
-            intent.setDataAndType(FileProvider.getUriForFile(context, EnvConstants.FILE_AUTHORITY, apkFile),
+            intent.setDataAndType(FileProvider7.getUriForFile(context, apkFile),
                     "application/vnd.android.package-archive");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);

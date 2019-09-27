@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -13,10 +14,10 @@ import java.util.List;
 
 public class FileProvider7 {
 
-    public static Uri getUriForFile(Context context, String authority, File file) {
+    public static Uri getUriForFile(Context context, File file) {
         Uri fileUri;
         if (Build.VERSION.SDK_INT >= 24) {
-            fileUri = getUriForFile24(context, authority, file);
+            fileUri = getUriForFile24(context, file);
             context.grantUriPermission(ApkUtils.getAppName(context), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
         } else {
             fileUri = Uri.fromFile(file);
@@ -24,18 +25,21 @@ public class FileProvider7 {
         return fileUri;
     }
 
-    private static Uri getUriForFile24(Context context, String authority, File file) {
-        return FileProvider.getUriForFile(context, authority, file);
+    private static Uri getUriForFile24(Context context, File file) {
+        return FileProvider.getUriForFile(context, getFileProviderName(context), file);
+    }
+
+    private static String getFileProviderName(Context context) {
+        return context.getPackageName() + ".fileprovider";
     }
 
     public static void setIntentDataAndType(Context context,
                                             Intent intent,
                                             String type,
                                             File file,
-                                            String authority,
                                             boolean writeAble) {
         if (Build.VERSION.SDK_INT >= 24) {
-            intent.setDataAndType(getUriForFile(context, authority, file), type);
+            intent.setDataAndType(getUriForFile(context, file), type);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             if (writeAble) {
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -48,10 +52,9 @@ public class FileProvider7 {
     public static void setIntentData(Context context,
                                      Intent intent,
                                      File file,
-                                     String authority,
                                      boolean writeAble) {
         if (Build.VERSION.SDK_INT >= 24) {
-            intent.setData(getUriForFile(context, authority, file));
+            intent.setData(getUriForFile(context, file));
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             if (writeAble) {
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
