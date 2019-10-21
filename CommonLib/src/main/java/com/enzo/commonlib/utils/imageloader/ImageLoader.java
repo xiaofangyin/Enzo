@@ -5,9 +5,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
@@ -87,9 +88,9 @@ public class ImageLoader {
                     glideRequest.apply(RequestOptions.signatureOf(new ObjectKey(builder.signature)));
                 }
                 if (builder.isCircle) {
-                    glideRequest.apply(RequestOptions.bitmapTransform(new GlideCircleTransform(builder.context)));
+                    glideRequest.apply(RequestOptions.bitmapTransform(new GlideCircleTransform()));
                 } else if (builder.radius != 0) {
-                    glideRequest.apply(RequestOptions.bitmapTransform(new GlideRoundTransform(builder.context, builder.radius)));
+                    glideRequest.apply(RequestOptions.bitmapTransform(new GlideRoundTransform(builder.radius)));
                 }
                 if (builder.listener != null) {
                     glideRequest.listener(new RequestListener<Drawable>() {

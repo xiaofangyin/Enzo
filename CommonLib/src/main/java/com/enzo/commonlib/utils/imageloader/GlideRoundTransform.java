@@ -1,12 +1,12 @@
 package com.enzo.commonlib.utils.imageloader;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -24,8 +24,7 @@ public class GlideRoundTransform extends BitmapTransformation {
 
     private float radius = 0f;
 
-    GlideRoundTransform(Context context, int dp) {
-        super(context);
+    GlideRoundTransform(int dp) {
         this.radius = Resources.getSystem().getDisplayMetrics().density * dp;
     }
 
