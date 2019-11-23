@@ -1,6 +1,6 @@
 package com.enzo.module_c.plugin;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.FLPluginBaseObject;
 import com.enzo.flkit.FLPluginFactory;

@@ -1,11 +1,11 @@
 package com.enzo.commonlib.utils.imageloader;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
@@ -19,10 +19,6 @@ import java.security.MessageDigest;
  * 邮   箱: xiaofangyinwork@163.com
  */
 public class GlideCircleTransform extends BitmapTransformation {
-
-    GlideCircleTransform(Context context) {
-        super(context);
-    }
 
     @Override
     protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {

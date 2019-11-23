@@ -11,7 +11,7 @@ android {
         versionName rootProject.ext.android.versionName
 
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders.put("AMAP_KAY_VALUE",'76102ad5248952675e465b405894263f')
         //网络环境是否为正式环境

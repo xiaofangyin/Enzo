@@ -35,7 +35,7 @@
 
     </FrameLayout>
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
 
-        <android.support.v7.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/bar_cord_light_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -52,7 +52,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/flashLightIv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,9 +66,9 @@
                 android:text="手电筒"
                 android:textColor="@drawable/lib_selector_text_color_white" />
 
-        </android.support.v7.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <android.support.v7.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/bar_cord_input_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -76,7 +76,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/albumIv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,6 +89,6 @@
                 android:gravity="center"
                 android:text="手动输入"
                 android:textColor="@drawable/lib_selector_text_color_white" />
-        </android.support.v7.widget.LinearLayoutCompat>
-    </android.support.v7.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </LinearLayout>

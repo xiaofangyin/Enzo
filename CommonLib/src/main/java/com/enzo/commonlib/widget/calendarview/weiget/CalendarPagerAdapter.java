@@ -1,6 +1,6 @@
 package com.enzo.commonlib.widget.calendarview.weiget;
 
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;

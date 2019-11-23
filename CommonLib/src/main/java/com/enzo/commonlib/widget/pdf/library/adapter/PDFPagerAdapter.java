@@ -19,7 +19,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.graphics.pdf.PdfRenderer;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;

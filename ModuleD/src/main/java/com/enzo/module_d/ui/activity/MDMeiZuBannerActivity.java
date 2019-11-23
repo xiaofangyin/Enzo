@@ -2,7 +2,7 @@ package com.enzo.module_d.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

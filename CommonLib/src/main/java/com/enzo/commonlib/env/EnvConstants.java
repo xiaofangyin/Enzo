@@ -8,7 +8,6 @@ package com.enzo.commonlib.env;
  */
 public class EnvConstants {
 
-    public static final String FILE_AUTHORITY = "com.enzo.commonlib.fileprovider";
     private static EnvConstants mInstance;
     //网络环境是否为正式环境
     private boolean PROD_ENV;
@@ -46,7 +45,7 @@ public class EnvConstants {
         return PROD_ENV;
     }
 
-    public String getWX_APP_ID(){
+    public String getWX_APP_ID() {
         return WX_APP_ID;
     }
 }

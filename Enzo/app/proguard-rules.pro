@@ -34,6 +34,15 @@
 -keep public class * extends android.support.v7.**
 -keep interface android.support.v7.app.** { *; }
 
+# AndroidX 防止混淆
+-keep class com.google.android.material.** {*;}
+-keep class androidx.** {*;}
+-keep public class * extends androidx.**
+-keep interface androidx.** {*;}
+-keepclassmembers class * {
+    @androidx.annotation.Keep *;
+}
+
 -keepclasseswithmembernames class * {
     native <methods>;
 }

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.enzo.commonlib.base.BaseActivity;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.album.constant.SelectImageConstants;
 import com.enzo.commonlib.utils.album.utils.PhotoCropConfig;
 import com.enzo.commonlib.utils.album.utils.SelectImagesUtils;
@@ -142,8 +141,7 @@ public class MDImgSingleSelectActivity extends BaseActivity {
                 parent.mkdirs();
             }
             //通过FileProvider创建一个content类型的Uri
-            Uri imageUri = FileProvider7.getUriForFile(MDImgSingleSelectActivity.this,
-                    EnvConstants.FILE_AUTHORITY, imageFile);
+            Uri imageUri = FileProvider7.getUriForFile(MDImgSingleSelectActivity.this, imageFile);
             //调用系统相机
             Intent intentCamera = new Intent();
             intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);

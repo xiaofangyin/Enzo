@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.GridView;
 
 import com.enzo.commonlib.base.BaseActivity;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.album.bean.AlbumImage;
 import com.enzo.commonlib.utils.album.constant.SelectImageConstants;
 import com.enzo.commonlib.utils.album.utils.SelectImagesUtils;
@@ -167,8 +166,7 @@ public class MDImgMultipleSelectActivity extends BaseActivity {
             image = new AlbumImage();
             image.setImagePath(imageFile.getAbsolutePath());
             image.setSelected(true);
-            Uri imageUri = FileProvider7.getUriForFile(MDImgMultipleSelectActivity.this,
-                    EnvConstants.FILE_AUTHORITY, imageFile);
+            Uri imageUri = FileProvider7.getUriForFile(MDImgMultipleSelectActivity.this, imageFile);
             //调用系统相机
             Intent intentCamera = new Intent();
             intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);

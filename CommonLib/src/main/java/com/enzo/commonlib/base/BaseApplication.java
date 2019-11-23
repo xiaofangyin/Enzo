@@ -2,7 +2,7 @@ package com.enzo.commonlib.base;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 /**
  * 文 件 名: BaseApplication
