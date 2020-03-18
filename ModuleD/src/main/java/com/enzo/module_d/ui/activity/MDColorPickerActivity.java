@@ -19,7 +19,8 @@ public class MDColorPickerActivity extends BaseActivity {
     private static final int INITIAL_COLOR = 0xFFFF8000;
 
     private ColorPickerView colorPickerView;
-    private TextView tvValue;
+    private TextView tvHexValue;
+    private TextView tvRgbValue;
 
     @Override
     public int getLayoutId() {
@@ -42,7 +43,8 @@ public class MDColorPickerActivity extends BaseActivity {
     @Override
     public void initView() {
         colorPickerView = findViewById(R.id.colorPicker);
-        tvValue = findViewById(R.id.color_picker_value);
+        tvHexValue = findViewById(R.id.color_picker_hex_value);
+        tvRgbValue = findViewById(R.id.color_picker_rgb_value);
     }
 
     @Override
@@ -50,8 +52,8 @@ public class MDColorPickerActivity extends BaseActivity {
         colorPickerView.subscribe(new ColorObserver() {
             @Override
             public void onColor(int color, boolean fromUser, boolean shouldPropagate) {
-//                pickedColor.setBackgroundColor(color);
-                tvValue.setText(colorHex(color));
+                tvHexValue.setText(colorHex(color));
+                tvRgbValue.setText(colorRGB(color));
             }
         });
 
@@ -73,5 +75,12 @@ public class MDColorPickerActivity extends BaseActivity {
         int g = Color.green(color);
         int b = Color.blue(color);
         return String.format(Locale.getDefault(), "0x%02X%02X%02X%02X", a, r, g, b);
+    }
+
+    private String colorRGB(int color) {
+        int red = (color & 0xff0000) >> 16;
+        int green = (color & 0x00ff00) >> 8;
+        int blue = (color & 0x0000ff);
+        return "RGB（" + red + "," + green + "," + blue + "）";
     }
 }
