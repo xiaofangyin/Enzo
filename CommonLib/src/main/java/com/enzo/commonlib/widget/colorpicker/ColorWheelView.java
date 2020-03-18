@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
 
+import com.enzo.commonlib.utils.common.DensityUtil;
+
 import static com.enzo.commonlib.widget.colorpicker.Constants.SELECTOR_RADIUS_DP;
 
 /**
@@ -22,7 +24,7 @@ public class ColorWheelView extends FrameLayout implements ColorObservable, Upda
     private float centerX;
     private float centerY;
 
-    private float selectorRadiusPx = SELECTOR_RADIUS_DP * 3;
+    private float selectorRadiusPx;
 
     private PointF currentPoint = new PointF();
     private int currentColor = Color.MAGENTA;
@@ -43,7 +45,7 @@ public class ColorWheelView extends FrameLayout implements ColorObservable, Upda
 
     public ColorWheelView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        selectorRadiusPx = SELECTOR_RADIUS_DP * getResources().getDisplayMetrics().density;
+        selectorRadiusPx = DensityUtil.dip2px(SELECTOR_RADIUS_DP);
 
         {
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -146,7 +148,7 @@ public class ColorWheelView extends FrameLayout implements ColorObservable, Upda
         }
         currentPoint.x = x + centerX;
         currentPoint.y = y + centerY;
-        selector.setCurrentPoint(currentPoint);
+        selector.setCurrentPoint(currentPoint, getColor());
     }
 
     @Override

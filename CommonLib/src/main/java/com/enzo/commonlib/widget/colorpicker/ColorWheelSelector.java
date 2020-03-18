@@ -10,13 +10,15 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import static com.enzo.commonlib.widget.colorpicker.Constants.SELECTOR_RADIUS_DP;
+import com.enzo.commonlib.utils.common.DensityUtil;
 
 public class ColorWheelSelector extends View {
 
+    private int currentColor;
     private Paint selectorPaint;
-    private float selectorRadiusPx = SELECTOR_RADIUS_DP * 3;
+    private float selectorRadiusPx;
     private PointF currentPoint = new PointF();
+    private float strokeWidth;
 
     public ColorWheelSelector(Context context) {
         this(context, null);
@@ -28,28 +30,29 @@ public class ColorWheelSelector extends View {
 
     public ColorWheelSelector(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         selectorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        selectorPaint.setColor(Color.BLACK);
-        selectorPaint.setStyle(Paint.Style.STROKE);
-        selectorPaint.setStrokeWidth(2);
+        selectorPaint.setColor(Color.TRANSPARENT);
+        selectorPaint.setStyle(Paint.Style.FILL);
+        setSelectorRadiusPx(DensityUtil.dip2px(10));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawLine(currentPoint.x - selectorRadiusPx, currentPoint.y,
-                currentPoint.x + selectorRadiusPx, currentPoint.y, selectorPaint);
-        canvas.drawLine(currentPoint.x, currentPoint.y - selectorRadiusPx,
-                currentPoint.x, currentPoint.y + selectorRadiusPx, selectorPaint);
-        canvas.drawCircle(currentPoint.x, currentPoint.y, selectorRadiusPx * 0.66f, selectorPaint);
+        selectorPaint.setColor(Color.WHITE);
+        canvas.drawCircle(currentPoint.x, currentPoint.y, selectorRadiusPx, selectorPaint);
+
+        selectorPaint.setColor(currentColor);
+        canvas.drawCircle(currentPoint.x, currentPoint.y, strokeWidth, selectorPaint);
     }
 
     public void setSelectorRadiusPx(float selectorRadiusPx) {
         this.selectorRadiusPx = selectorRadiusPx;
+        strokeWidth = selectorRadiusPx - DensityUtil.dip2px(2);
     }
 
-    public void setCurrentPoint(PointF currentPoint) {
+    public void setCurrentPoint(PointF currentPoint, int color) {
         this.currentPoint = currentPoint;
+        this.currentColor = color;
         invalidate();
     }
 }
