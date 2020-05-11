@@ -18,7 +18,7 @@ public class StackX {
     }
 
     public void push(long j) {
-        if (isFull()) {
+        if (!isFull()) {
             stackArray[++top] = j;
         } else {
             System.out.println("数组已经满了。。。");
@@ -26,7 +26,7 @@ public class StackX {
     }
 
     public long pop() {
-        if (isEmpty()) {
+        if (!isEmpty()) {
             return stackArray[top--];
         } else {
             return -1;
