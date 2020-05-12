@@ -24,10 +24,9 @@ public class BinarySearch {
     }
 
     private static int binarySearch(int[] a, int beg, int end, int item) {
-        int mid;
         if (end >= beg) {
-            mid = (beg + end) / 2;
-            System.out.println("mid: " + mid);
+            int mid = (beg + end) / 2;
+            System.out.println("position: " + mid + "...value: " + a[mid]);
             if (a[mid] == item) {
                 return mid;
             } else if (a[mid] < item) {
