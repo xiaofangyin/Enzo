@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.module_d.utils.MyHashMap;
-import com.enzo.module_d.utils.QueueX;
+import com.enzo.module_d.structure.MyHashMap;
+import com.enzo.module_d.structure.QueueX;
 
 /**
  * 文 件 名: MDStructureActivity

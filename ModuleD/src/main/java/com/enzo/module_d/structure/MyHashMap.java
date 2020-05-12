@@ -1,4 +1,4 @@
-package com.enzo.module_d.utils;
+package com.enzo.module_d.structure;
 
 
 /**
