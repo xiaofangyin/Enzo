@@ -1,4 +1,4 @@
-package com.enzo.module_d.structure;
+package com.enzo.module_d.structure.algorithm;
 
 import java.util.Scanner;
 

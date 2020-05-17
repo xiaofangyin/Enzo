@@ -1,4 +1,4 @@
-package com.enzo.module_d.structure.bitree;
+package com.enzo.module_d.structure.datastructure.bitree;
 
 /**
  * 文 件 名: BinaryTree
