@@ -58,6 +58,8 @@ dependencies {
     api 'com.google.zxing:core:3.3.0'
     //RxPermissions获取运行时权限
     api 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+    //littie
+    api 'com.airbnb.android:lottie:3.4.1'
 
     api files('libs/nineoldandroids-2.4.0.jar')
     api project(':FLKit')
