@@ -1,6 +1,8 @@
 package com.enzo.commonlib.utils.crashlib.util;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -36,20 +38,13 @@ public final class CrashHelper {
     @SuppressLint("SimpleDateFormat")
     private static final Format FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 
-    public static void init() {
-        defaultDir = getDefaultCrashDir();
-    }
+    public static void init(Context context) {
+        defaultDir = getDefaultCrashDir(context);
 
-    private CrashHelper() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
-    }
-
-
-    static {
         try {
-            PackageInfo pi = CrashManager.getInstance().getApplication()
+            PackageInfo pi = context
                     .getPackageManager()
-                    .getPackageInfo(CrashManager.getInstance().getApplication().getPackageName(), 0);
+                    .getPackageInfo(context.getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -57,6 +52,10 @@ public final class CrashHelper {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private CrashHelper() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
 
@@ -99,12 +98,12 @@ public final class CrashHelper {
     /**
      * 将奔溃信息存储到本地
      */
-    public static void saveCrashLogToLocal(String crashInfo) {
+    public static void saveCrashLogToLocal(Application application, String crashInfo) {
         final String time = FORMAT.format(new Date(System.currentTimeMillis()));
         String fileName = "crash-" + time + ".txt";
         final String fullPath = defaultDir + fileName;
         if (createOrExistsFile(fullPath)) {
-            input2File(crashInfo, fullPath);
+            input2File(application, crashInfo, fullPath);
         } else {
             Log.e("CrashHelper", "create " + fullPath + " failed!");
         }
@@ -115,12 +114,12 @@ public final class CrashHelper {
      *
      * @return dir
      */
-    private static String getDefaultCrashDir() {
-        return ExternalCacheUtil.getCrashDir(CrashManager.getInstance().getApplication())
+    private static String getDefaultCrashDir(Context context) {
+        return ExternalCacheUtil.getCrashDir(context)
                 + File.separator + "crash" + File.separator;
     }
 
-    private static void input2File(final String input, final String filePath) {
+    private static void input2File(final Application application, final String input, final String filePath) {
         Future<Boolean> submit =
                 Executors.newSingleThreadExecutor().submit(new Callable<Boolean>() {
                     @Override
@@ -129,7 +128,7 @@ public final class CrashHelper {
                         try {
                             bw = new BufferedWriter(new FileWriter(filePath, true));
                             bw.write(input);
-                            onClearFile();
+                            onClearFile(application);
                             return true;
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -174,9 +173,9 @@ public final class CrashHelper {
     /**
      * 删除超过3天的文件，防止过多
      */
-    private static void onClearFile() {
+    private static void onClearFile(Application application) {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            File file = new File(getDefaultCrashDir());
+            File file = new File(getDefaultCrashDir(application));
             if (file.exists()) {
                 if (file.listFiles().length > 3) {
                     int index = 0;

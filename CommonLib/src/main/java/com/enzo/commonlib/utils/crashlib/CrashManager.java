@@ -13,16 +13,12 @@ import com.enzo.commonlib.utils.crashlib.util.CrashHelper;
 
 public class CrashManager {
     private static final CrashManager gInstance = new CrashManager();
-    private Application application;
     private boolean isDebug = true;//是否是debug模式
 
     public static CrashManager getInstance() {
         return gInstance;
     }
 
-    public Application getApplication() {
-        return application;
-    }
 
     public boolean isDebug() {
         return isDebug;
@@ -32,11 +28,10 @@ public class CrashManager {
     }
 
     public void init(Application application, boolean isDebug) {
-        this.application = application;
         this.isDebug = isDebug;
-        CrashHelper.init();
+        CrashHelper.init(application);
         Thread.UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
-        ExceptionCaughtAdapter exceptionCaughtAdapter = new ExceptionCaughtAdapter(handler);
+        ExceptionCaughtAdapter exceptionCaughtAdapter = new ExceptionCaughtAdapter(application, handler);
         Thread.setDefaultUncaughtExceptionHandler(exceptionCaughtAdapter);
     }
 }

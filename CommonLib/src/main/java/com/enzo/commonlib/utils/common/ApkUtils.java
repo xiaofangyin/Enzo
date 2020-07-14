@@ -34,7 +34,6 @@ public class ApkUtils {
     /**
      * 获取应用程序版本名称信息
      *
-     * @param context
      * @return 当前应用的版本名称
      */
     public static String getVersionName(Context context) {
@@ -44,7 +43,7 @@ public class ApkUtils {
             return packageInfo.versionName;
 
         } catch (NameNotFoundException e) {
-
+            e.printStackTrace();
         }
         return null;
     }

@@ -19,16 +19,14 @@ public class ShowExceptionActivity extends Activity {
     private static final String KEY_CRASH_INFO = "key_crash_info";
     private TextView exceptionView;
 
-    public static void showException(String crashInfo) {
-        Application applicationContext = CrashManager.getInstance().getApplication();
-        if (applicationContext != null) {
-            Intent intent = new Intent(applicationContext, ShowExceptionActivity.class);
+    public static void showException(Application application, String crashInfo) {
+        if (application != null) {
+            Intent intent = new Intent(application, ShowExceptionActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(KEY_CRASH_INFO, crashInfo);
-            applicationContext.startActivity(intent);
+            application.startActivity(intent);
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

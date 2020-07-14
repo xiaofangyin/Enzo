@@ -26,7 +26,11 @@ public class ExternalCacheUtil {
     public static String getNetLogCachePath(Context context) {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
-            return context.getExternalCacheDir().getPath() + "/log";
+            if (context.getExternalCacheDir() != null) {
+                return context.getExternalCacheDir().getPath() + "/log";
+            } else {
+                return context.getCacheDir().getPath() + "/log";
+            }
         } else {
             return context.getCacheDir().getPath() + "/log";
         }
@@ -45,7 +49,11 @@ public class ExternalCacheUtil {
     private static String getExternalCacheDir(Context context) {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
-            return context.getExternalCacheDir().getPath();
+            if (context.getExternalCacheDir() != null) {
+                return context.getExternalCacheDir().getPath();
+            } else {
+                return context.getCacheDir().getPath();
+            }
         } else {
             return context.getCacheDir().getPath();
         }
