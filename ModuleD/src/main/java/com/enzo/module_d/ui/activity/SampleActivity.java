@@ -94,19 +94,17 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .choose(MimeType.ofImage(), false)
                     .countable(true)
                     .capture(true)
-                    .captureStrategy(
-                            new CaptureStrategy(true, "com.zhihu.matisse.sample.fileprovider", "test"))
+                    .captureStrategy(new CaptureStrategy(true, "test"))
                     .maxSelectable(9)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                    .gridExpectedSize(
-                            getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                    .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                     .thumbnailScale(0.85f)
                     .imageEngine(new GlideEngine())
                     .setOnSelectedListener(new OnSelectedListener() {
                         @Override
                         public void onSelected(@NonNull List<Uri> uriList, @NonNull List<String> pathList) {
-                            Log.e("onSelected", "onSelected: pathList=" + pathList);
+                            Log.e("xfy", "onSelected: pathList=" + pathList);
                         }
                     })
                     .showSingleMediaType(true)
@@ -116,7 +114,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .setOnCheckedListener(new OnCheckedListener() {
                         @Override
                         public void onCheck(boolean isChecked) {
-                            Log.e("isChecked", "onCheck: isChecked=" + isChecked);
+                            Log.e("xfy", "onCheck: isChecked=" + isChecked);
                         }
                     })
                     .forResult(REQUEST_CODE_CHOOSE);
