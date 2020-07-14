@@ -16,6 +16,7 @@ import com.enzo.module_d.ui.activity.MDPickerViewActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
 import com.enzo.module_d.ui.activity.MDStructureActivity;
+import com.enzo.module_d.ui.activity.SampleActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -52,6 +53,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
         rootView.findViewById(R.id.btn_color_picker).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_zhifu).setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +88,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_color_picker) {
             Intent intent = new Intent(getContext(), MDColorPickerActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_zhifu) {
+            Intent intent = new Intent(getContext(), SampleActivity.class);
             startActivity(intent);
         }
     }

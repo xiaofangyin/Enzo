@@ -97,7 +97,4 @@
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
 
 #picasso
--dontwarn okhttp3.**
--keep class okhttp3.** { *; }
--dontwarn com.squareup.picasso**
--keep class com.squareup.picasso.**{*;}
+-dontwarn com.squareup.okhttp.**

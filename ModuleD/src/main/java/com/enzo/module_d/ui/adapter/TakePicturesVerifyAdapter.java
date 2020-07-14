@@ -8,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.enzo.commonlib.utils.album.bean.AlbumImage;
+import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.module_d.R;
 
 import java.io.File;
@@ -137,8 +134,9 @@ public class TakePicturesVerifyAdapter extends BaseAdapter {
                 break;
             case TYPE_SELECTED_IMAGE:
                 Log.d("AAA", "TYPE_SELECTED_IMAGE i: " + i);
-                Glide.with(context).load(new File(mData.get(i).getImagePath()))
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+                new ImageLoader.Builder(context)
+                        .load(new File(mData.get(i).getImagePath()))
+                        .build()
                         .into(viewHolder.imageView);
                 final int j = i;
                 viewHolder.ivClose.setVisibility(View.VISIBLE);

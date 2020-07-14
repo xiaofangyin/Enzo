@@ -64,4 +64,7 @@
     <color name="laser_color">#04d1aa</color>
     <color name="corner_color">#04d1aa</color>
     <!-- QRCode scanner color end -->
+
+    <color name="matisse_preview_bottom_toolbar_bg">#CC000000</color>
+    <color name="matisse_preview_bottom_size">#61FFFFFF</color>
 </resources>

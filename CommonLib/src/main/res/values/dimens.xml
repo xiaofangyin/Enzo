@@ -4,4 +4,8 @@
     <dimen name="fab_size_mini">40dp</dimen>
     <dimen name="fab_shadow_size">12dp</dimen>
 
+
+    <dimen name="matisse_media_grid_size">48dp</dimen>
+    <dimen name="matisse_media_grid_spacing">4dp</dimen>
+    <dimen name="matisse_album_item_height">72dp</dimen>
 </resources>

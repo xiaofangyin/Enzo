@@ -48,8 +48,7 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.1.0'
     api 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    //glide
-    api 'com.github.bumptech.glide:glide:4.11.0'
+
     //picker
     api 'com.contrarywind:Android-PickerView:3.2.6'
     //ucrop
@@ -60,6 +59,10 @@ dependencies {
     api 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
     //littie
     api 'com.airbnb.android:lottie:3.4.1'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    //imagezoom
+    implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
 
     api files('libs/nineoldandroids-2.4.0.jar')
     api project(':FLKit')
