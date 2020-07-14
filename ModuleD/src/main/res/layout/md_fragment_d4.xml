@@ -15,18 +15,6 @@
             android:text="数据结构" />
 
         <Button
-            android:id="@+id/btn_img_single_choose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="选择照片(单选)" />
-
-        <Button
-            android:id="@+id/btn_img_multiple_choose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="选择照片(多选)" />
-
-        <Button
             android:id="@+id/btn_bar_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,9 +57,21 @@
             android:text="调色板" />
 
         <Button
+            android:id="@+id/btn_img_single_choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择照片(单选)" />
+
+        <Button
+            android:id="@+id/btn_img_multiple_choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择照片(多选)" />
+
+        <Button
             android:id="@+id/btn_zhifu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="调色板" />
+            android:text="选择图片" />
     </LinearLayout>
 </ScrollView>

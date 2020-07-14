@@ -44,8 +44,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void initListener(View rootView) {
         rootView.findViewById(R.id.btn_structure).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_picker_view).setOnClickListener(this);
@@ -53,6 +51,8 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
         rootView.findViewById(R.id.btn_color_picker).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_zhifu).setOnClickListener(this);
     }
 
@@ -61,12 +61,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         int id = v.getId();
         if (id == R.id.btn_structure) {
             Intent intent = new Intent(getContext(), MDStructureActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_img_single_choose) {
-            Intent intent = new Intent(getContext(), MDImgSingleSelectActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_img_multiple_choose) {
-            Intent intent = new Intent(getContext(), MDImgMultipleSelectActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_bar_code) {
             Intent intent = new Intent(getContext(), MDScanBarCodeActivity.class);
@@ -88,6 +82,12 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_color_picker) {
             Intent intent = new Intent(getContext(), MDColorPickerActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_img_single_choose) {
+            Intent intent = new Intent(getContext(), MDImgSingleSelectActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_img_multiple_choose) {
+            Intent intent = new Intent(getContext(), MDImgMultipleSelectActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_zhifu) {
             Intent intent = new Intent(getContext(), SampleActivity.class);
