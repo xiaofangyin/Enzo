@@ -4,12 +4,6 @@ import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 
-/**
- * @author 工藤
- * @email gougou@16fan.com
- * create at 2018年10月23日12:17:59
- * description:媒体扫描
- */
 public class SingleMediaScanner implements MediaScannerConnection.MediaScannerConnectionClient {
 
     private MediaScannerConnection mMsc;
