@@ -21,7 +21,9 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+
 import androidx.appcompat.widget.AppCompatImageView;
+
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 
@@ -54,6 +56,10 @@ public class PhotoView extends AppCompatImageView implements IPhotoView {
             setScaleType(mPendingScaleType);
             mPendingScaleType = null;
         }
+    }
+
+    public void resetMatrix() {
+        mAttacher.resetMatrix();
     }
 
     /**

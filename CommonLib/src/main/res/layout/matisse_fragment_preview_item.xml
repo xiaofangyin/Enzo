@@ -18,11 +18,11 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <it.sephiroth.android.library.imagezoom.ImageViewTouch
-        android:id="@+id/image_view"
+    <com.enzo.commonlib.widget.photoview.PhotoView
+        android:id="@+id/photo_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter" />
     <ImageView
         android:id="@+id/video_play_button"
         android:layout_width="wrap_content"

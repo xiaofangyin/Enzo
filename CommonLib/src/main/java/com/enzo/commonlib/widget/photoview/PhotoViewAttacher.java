@@ -834,7 +834,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
     /**
      * Resets the Matrix back to FIT_CENTER, and then displays it.s
      */
-    private void resetMatrix() {
+    public void resetMatrix() {
         mSuppMatrix.reset();
         setImageViewMatrix(getDrawMatrix());
         checkMatrixBounds();

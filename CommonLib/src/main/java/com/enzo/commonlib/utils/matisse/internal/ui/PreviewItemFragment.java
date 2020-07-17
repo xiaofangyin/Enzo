@@ -33,9 +33,8 @@ import com.enzo.commonlib.utils.matisse.internal.entity.Item;
 import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;
 import com.enzo.commonlib.utils.matisse.internal.utils.PhotoMetadataUtils;
 import com.enzo.commonlib.utils.matisse.listener.OnFragmentInteractionListener;
-
-import it.sephiroth.android.library.imagezoom.ImageViewTouch;
-import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
+import com.enzo.commonlib.widget.photoview.PhotoView;
+import com.enzo.commonlib.widget.photoview.PhotoViewAttacher;
 
 public class PreviewItemFragment extends Fragment {
 
@@ -82,12 +81,10 @@ public class PreviewItemFragment extends Fragment {
             videoPlayButton.setVisibility(View.GONE);
         }
 
-        ImageViewTouch image = (ImageViewTouch) view.findViewById(R.id.image_view);
-        image.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
-
-        image.setSingleTapListener(new ImageViewTouch.OnImageViewTouchSingleTapListener() {
+        PhotoView image = view.findViewById(R.id.photo_view);
+        image.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
             @Override
-            public void onSingleTapConfirmed() {
+            public void onPhotoTap(View view, float x, float y) {
                 if (mListener != null) {
                     mListener.onClick();
                 }
@@ -106,7 +103,7 @@ public class PreviewItemFragment extends Fragment {
 
     public void resetView() {
         if (getView() != null) {
-            ((ImageViewTouch) getView().findViewById(R.id.image_view)).resetMatrix();
+            ((PhotoView) getView().findViewById(R.id.photo_view)).resetMatrix();
         }
     }
 
