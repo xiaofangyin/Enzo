@@ -38,9 +38,9 @@ import com.enzo.commonlib.R;
 public class CheckView extends View {
 
     public static final int UNCHECKED = Integer.MIN_VALUE;
-    private static final float STROKE_WIDTH = 3.0f; // dp
+    private static final float STROKE_WIDTH = 2.0f; // dp
     private static final float SHADOW_WIDTH = 6.0f; // dp
-    private static final int SIZE = 48; // dp
+    private static final int SIZE = 40; // dp
     private static final float STROKE_RADIUS = 11.5f; // dp
     private static final float BG_RADIUS = 11.0f; // dp
     private static final int CONTENT_SIZE = 16; // dp
