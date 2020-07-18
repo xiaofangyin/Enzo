@@ -124,7 +124,6 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
                         }
                     })
                     .showSingleMediaType(true)
-                    .originalEnable(true)
                     .maxOriginalSize(10)
                     .autoHideToolbarOnSingleTap(true)
                     .setOnCheckedListener(new OnCheckedListener() {
@@ -142,7 +141,6 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
                     .showPreview(false)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                     .maxSelectable(9)
-                    .originalEnable(true)
                     .maxOriginalSize(10)
                     .imageEngine(new GlideEngine())
                     .forResult(REQUEST_CODE_CHOOSE);
@@ -156,7 +154,6 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
                     .thumbnailScale(0.85f)
                     .imageEngine(new GlideEngine())
                     .showSingleMediaType(true)
-                    .originalEnable(true)
                     .maxOriginalSize(10)
                     .autoHideToolbarOnSingleTap(true)
                     .forResult(REQUEST_CODE_CHOOSE);
@@ -174,7 +171,6 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
                     .thumbnailScale(0.85f)
                     .imageEngine(new GlideEngine())
                     .showSingleMediaType(true)
-                    .originalEnable(true)
                     .maxOriginalSize(10)
                     .autoHideToolbarOnSingleTap(true)
                     .forResult(REQUEST_CODE_CHOOSE_SINGLE);

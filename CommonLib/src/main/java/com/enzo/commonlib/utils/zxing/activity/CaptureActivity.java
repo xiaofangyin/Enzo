@@ -281,7 +281,6 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                                         .thumbnailScale(0.85f)
                                         .imageEngine(new GlideEngine())
                                         .showSingleMediaType(true)
-                                        .originalEnable(true)
                                         .maxOriginalSize(10)
                                         .autoHideToolbarOnSingleTap(true)
                                         .forResult(PICK_IMAGE_REQUEST_CODE);

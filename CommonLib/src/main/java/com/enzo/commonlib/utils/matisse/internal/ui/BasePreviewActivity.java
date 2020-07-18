@@ -17,12 +17,10 @@ package com.enzo.commonlib.utils.matisse.internal.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -36,9 +34,7 @@ import com.enzo.commonlib.utils.matisse.internal.entity.Item;
 import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;
 import com.enzo.commonlib.utils.matisse.internal.model.SelectedItemCollection;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.PreviewPagerAdapter;
-import com.enzo.commonlib.utils.matisse.internal.ui.widget.CheckRadioView;
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.CheckView;
-import com.enzo.commonlib.utils.matisse.internal.ui.widget.IncapableDialog;
 import com.enzo.commonlib.utils.matisse.internal.utils.PhotoMetadataUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.Platform;
 import com.enzo.commonlib.utils.matisse.listener.OnFragmentInteractionListener;
@@ -49,7 +45,6 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
     public static final String EXTRA_DEFAULT_BUNDLE = "extra_default_bundle";
     public static final String EXTRA_RESULT_BUNDLE = "extra_result_bundle";
     public static final String EXTRA_RESULT_APPLY = "extra_result_apply";
-    public static final String EXTRA_RESULT_ORIGINAL_ENABLE = "extra_result_original_enable";
     public static final String CHECK_STATE = "checkState";
 
     protected final SelectedItemCollection mSelectedCollection = new SelectedItemCollection(this);
@@ -64,10 +59,6 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
     protected TextView mSize;
 
     protected int mPreviousPos = -1;
-
-    private LinearLayout mOriginalLayout;
-    private CheckRadioView mOriginal;
-    protected boolean mOriginalEnable;
 
     private FrameLayout mBottomToolbar;
     private FrameLayout mTopToolbar;
@@ -94,10 +85,8 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
 
         if (savedInstanceState == null) {
             mSelectedCollection.onCreate(getIntent().getBundleExtra(EXTRA_DEFAULT_BUNDLE));
-            mOriginalEnable = getIntent().getBooleanExtra(EXTRA_RESULT_ORIGINAL_ENABLE, false);
         } else {
             mSelectedCollection.onCreate(savedInstanceState);
-            mOriginalEnable = savedInstanceState.getBoolean(CHECK_STATE);
         }
         mButtonBack = (TextView) findViewById(R.id.button_back);
         mButtonApply = (TextView) findViewById(R.id.button_apply);
@@ -145,42 +134,12 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             }
         });
 
-
-        mOriginalLayout = findViewById(R.id.originalLayout);
-        mOriginal = findViewById(R.id.original);
-        mOriginalLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                int count = countOverMaxSize();
-                if (count > 0) {
-                    IncapableDialog incapableDialog = IncapableDialog.newInstance("",
-                            getString(R.string.error_over_original_count, count, mSpec.originalMaxSize));
-                    incapableDialog.show(getSupportFragmentManager(),
-                            IncapableDialog.class.getName());
-                    return;
-                }
-
-                mOriginalEnable = !mOriginalEnable;
-                mOriginal.setChecked(mOriginalEnable);
-                if (!mOriginalEnable) {
-                    mOriginal.setColor(Color.WHITE);
-                }
-
-
-                if (mSpec.onCheckedListener != null) {
-                    mSpec.onCheckedListener.onCheck(mOriginalEnable);
-                }
-            }
-        });
-
         updateApplyButton();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         mSelectedCollection.onSaveInstanceState(outState);
-        outState.putBoolean("checkState", mOriginalEnable);
         super.onSaveInstanceState(outState);
     }
 
@@ -281,37 +240,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             mButtonApply.setEnabled(true);
             mButtonApply.setText(getString(R.string.button_apply, selectedCount));
         }
-
-        if (mSpec.originalable) {
-            mOriginalLayout.setVisibility(View.VISIBLE);
-            updateOriginalState();
-        } else {
-            mOriginalLayout.setVisibility(View.GONE);
-        }
     }
-
-
-    private void updateOriginalState() {
-        mOriginal.setChecked(mOriginalEnable);
-        if (!mOriginalEnable) {
-            mOriginal.setColor(Color.WHITE);
-        }
-
-        if (countOverMaxSize() > 0) {
-
-            if (mOriginalEnable) {
-                IncapableDialog incapableDialog = IncapableDialog.newInstance("",
-                        getString(R.string.error_over_original_size, mSpec.originalMaxSize));
-                incapableDialog.show(getSupportFragmentManager(),
-                        IncapableDialog.class.getName());
-
-                mOriginal.setChecked(false);
-                mOriginal.setColor(Color.WHITE);
-                mOriginalEnable = false;
-            }
-        }
-    }
-
 
     private int countOverMaxSize() {
         int count = 0;
@@ -335,19 +264,12 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
         } else {
             mSize.setVisibility(View.GONE);
         }
-
-        if (item.isVideo()) {
-            mOriginalLayout.setVisibility(View.GONE);
-        } else if (mSpec.originalable) {
-            mOriginalLayout.setVisibility(View.VISIBLE);
-        }
     }
 
     protected void sendBackResult(boolean apply) {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_RESULT_BUNDLE, mSelectedCollection.getDataWithBundle());
         intent.putExtra(EXTRA_RESULT_APPLY, apply);
-        intent.putExtra(EXTRA_RESULT_ORIGINAL_ENABLE, mOriginalEnable);
         setResult(Activity.RESULT_OK, intent);
     }
 

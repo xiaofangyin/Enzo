@@ -152,11 +152,6 @@ public final class SelectionCreator {
         return this;
     }
 
-    public SelectionCreator originalEnable(boolean enable) {
-        mSelectionSpec.originalable = enable;
-        return this;
-    }
-
     public SelectionCreator autoHideToolbarOnSingleTap(boolean enable) {
         mSelectionSpec.autoHideToobar = enable;
         return this;
