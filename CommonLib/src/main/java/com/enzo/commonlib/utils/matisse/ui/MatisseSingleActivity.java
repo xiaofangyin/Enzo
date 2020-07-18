@@ -46,7 +46,6 @@ import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;
 import com.enzo.commonlib.utils.matisse.internal.model.AlbumCollection;
 import com.enzo.commonlib.utils.matisse.internal.model.SelectedItemCollection;
 import com.enzo.commonlib.utils.matisse.internal.ui.MediaSingleSelectionFragment;
-import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaSingleAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumsAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.AlbumsSpinner;

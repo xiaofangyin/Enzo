@@ -154,7 +154,6 @@ public enum MimeType {
         }
         String type = map.getExtensionFromMimeType(resolver.getType(uri));
         String path = null;
-        // lazy load the path and prevent resolve for multiple times
         boolean pathParsed = false;
         for (String extension : mExtensions) {
             if (extension.equals(type)) {

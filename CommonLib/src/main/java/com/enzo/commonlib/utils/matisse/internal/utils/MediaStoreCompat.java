@@ -63,12 +63,6 @@ public class MediaStoreCompat {
         mFragment = new WeakReference<>(fragment);
     }
 
-    /**
-     * Checks whether the device has a camera feature or not.
-     *
-     * @param context a context to check for camera feature.
-     * @return true if the device has a camera feature. false otherwise.
-     */
     public static boolean hasCameraFeature(Context context) {
         PackageManager pm = context.getApplicationContext().getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);

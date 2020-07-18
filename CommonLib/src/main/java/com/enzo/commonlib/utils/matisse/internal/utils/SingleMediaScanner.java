@@ -12,9 +12,6 @@ public class SingleMediaScanner implements MediaScannerConnection.MediaScannerCo
 
     public interface ScanListener {
 
-        /**
-         * scan finish
-         */
         void onScanFinish();
     }
 

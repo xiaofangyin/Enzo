@@ -138,7 +138,7 @@ public final class SelectionCreator {
         return this;
     }
 
-    public SelectionCreator addFilter(@NonNull Filter filter) {
+    public SelectionCreator addFilter(Filter filter) {
         if (mSelectionSpec.filters == null) {
             mSelectionSpec.filters = new ArrayList<>();
         }
@@ -156,7 +156,6 @@ public final class SelectionCreator {
         mSelectionSpec.originalable = enable;
         return this;
     }
-
 
     public SelectionCreator autoHideToolbarOnSingleTap(boolean enable) {
         mSelectionSpec.autoHideToobar = enable;
