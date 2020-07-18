@@ -61,7 +61,7 @@ import java.util.Objects;
 
 public class MatisseSingleActivity extends AppCompatActivity implements
         AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
-        MediaSingleSelectionFragment.SelectionProvider, AlbumMediaAdapter.CheckStateListener,
+        MediaSingleSelectionFragment.SelectionProvider,
         AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.OnPhotoCapture {
 
     public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
@@ -187,7 +187,14 @@ public class MatisseSingleActivity extends AppCompatActivity implements
             });
             finish();
         } else if (requestCode == UCrop.REQUEST_CROP) {
-            setResult(RESULT_OK, data);
+            Intent result = new Intent();
+            ArrayList<Uri> selectedUris = new ArrayList<>();
+            ArrayList<String> selectedPaths = new ArrayList<>();
+            selectedUris.add(UCrop.getOutput(data));
+            selectedPaths.add(PathUtils.getPath(this, UCrop.getOutput(data)));
+            result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+            result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+            setResult(RESULT_OK, result);
             finish();
         }
     }
@@ -249,20 +256,24 @@ public class MatisseSingleActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onUpdate() {
-        if (mSpec.onSelectedListener != null) {
-            mSpec.onSelectedListener.onSelected(
-                    mSelectedCollection.asListOfUri(), mSelectedCollection.asListOfString());
-        }
-    }
-
-    @Override
     public void onMediaClick(Album album, Item item, int adapterPosition) {
-        Uri sourceUri = Uri.fromFile(new File(Objects.requireNonNull(PathUtils.getPath(this, item.uri))));
-        Uri uri = Uri.fromFile(PhotoCropConfig.getAvatarCroppedFile(this));
-        UCrop.of(sourceUri, uri)
-                .withOptions(PhotoCropConfig.getOptions())
-                .start(this);
+        if (mSpec.crop) {
+            Uri sourceUri = Uri.fromFile(new File(Objects.requireNonNull(PathUtils.getPath(this, item.uri))));
+            Uri uri = Uri.fromFile(PhotoCropConfig.getAvatarCroppedFile(this));
+            UCrop.of(sourceUri, uri)
+                    .withOptions(PhotoCropConfig.getOptions())
+                    .start(this);
+        } else {
+            Intent result = new Intent();
+            ArrayList<Uri> selectedUris = new ArrayList<>();
+            ArrayList<String> selectedPaths = new ArrayList<>();
+            selectedUris.add(item.getContentUri());
+            selectedPaths.add(PathUtils.getPath(this, item.getContentUri()));
+            result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+            result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+            setResult(RESULT_OK, result);
+            finish();
+        }
     }
 
     @Override

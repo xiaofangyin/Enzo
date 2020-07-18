@@ -44,11 +44,8 @@ import com.enzo.commonlib.utils.matisse.listener.OnSelectedListener;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.filter.GifSizeFilter;
 import com.tbruyelle.rxpermissions.RxPermissions;
-import com.yalantis.ucrop.UCrop;
 
-import java.io.File;
 import java.util.List;
-import java.util.Objects;
 
 import rx.functions.Action1;
 
@@ -92,12 +89,15 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             mAdapter.setData(Matisse.obtainResult(data), Matisse.obtainPathResult(data));
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
-        }else if(requestCode == REQUEST_CODE_CHOOSE_SINGLE && resultCode == RESULT_OK){
-            ImageLoader.Builder builder = new ImageLoader.Builder(this);
-            builder.load(UCrop.getOutput(data))
-                    .signature(String.valueOf(System.currentTimeMillis()))
-                    .build()
-                    .into(imageView);
+        } else if (requestCode == REQUEST_CODE_CHOOSE_SINGLE && resultCode == RESULT_OK) {
+            List<Uri> list = Matisse.obtainResult(data);
+            if (list != null && !list.isEmpty()) {
+                ImageLoader.Builder builder = new ImageLoader.Builder(this);
+                builder.load(list.get(0))
+                        .signature(String.valueOf(System.currentTimeMillis()))
+                        .build()
+                        .into(imageView);
+            }
         }
     }
 
@@ -164,6 +164,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .choose(MimeType.ofImage(), false)
                     .countable(true)
                     .singleChoose(true)
+                    .crop(true)
                     .capture(true)
                     .captureStrategy(new CaptureStrategy(true, "test"))
                     .maxSelectable(9)
