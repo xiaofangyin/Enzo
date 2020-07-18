@@ -23,12 +23,6 @@
             android:name=".ui.activity.MDStructureActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDImgSingleSelectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.MDImgMultipleSelectActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDPickerViewActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -50,7 +44,7 @@
             android:name=".ui.activity.MDColorPickerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.SampleActivity"
+            android:name=".ui.activity.MDMatisseActivity"
             android:screenOrientation="portrait" />
 
     </application>

@@ -2,6 +2,7 @@ package com.enzo.commonlib.utils.zxing.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,7 +12,6 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import androidx.appcompat.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -19,13 +19,17 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseActivity;
-import com.enzo.commonlib.utils.album.constant.SelectImageConstants;
-import com.enzo.commonlib.utils.album.utils.SelectImagesUtils;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.matisse.Matisse;
+import com.enzo.commonlib.utils.matisse.MimeType;
+import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
+import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.zxing.camera.CameraManager;
 import com.enzo.commonlib.utils.zxing.decoding.CaptureActivityHandler;
 import com.enzo.commonlib.utils.zxing.decoding.InactivityTimer;
@@ -46,6 +50,7 @@ import com.google.zxing.qrcode.QRCodeReader;
 
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Vector;
 
 import rx.functions.Action1;
@@ -56,6 +61,8 @@ import rx.functions.Action1;
  * @author Ryan.Tang
  */
 public abstract class CaptureActivity extends BaseActivity implements Callback {
+
+    private int PICK_IMAGE_REQUEST_CODE = 1003;
 
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
@@ -245,7 +252,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     @Override
     protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            if (requestCode == SelectImageConstants.PICK_IMAGE_REQUEST_CODE) {
+            if (requestCode == PICK_IMAGE_REQUEST_CODE) {
                 handleAlbumPic(data);
             }
         }
@@ -260,10 +267,24 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                     @Override
                     public void call(Boolean aBoolean) {
                         if (aBoolean) {
-                            LogUtil.d("PERMISSIONS_TAKE_PHOTO onGranted...");
                             if (SDCardUtils.isAvailable()) {
-                                SelectImagesUtils.single(CaptureActivity.this,
-                                        SelectImageConstants.PICK_IMAGE_REQUEST_CODE, false);
+                                Matisse.from(CaptureActivity.this)
+                                        .choose(MimeType.ofImage(), false)
+                                        .countable(true)
+                                        .singleChoose(true)
+                                        .crop(false)
+                                        .capture(false)
+                                        .captureStrategy(new CaptureStrategy(true, "enzo"))
+                                        .maxSelectable(9)
+                                        .spanCount(4)
+                                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                                        .thumbnailScale(0.85f)
+                                        .imageEngine(new GlideEngine())
+                                        .showSingleMediaType(true)
+                                        .originalEnable(true)
+                                        .maxOriginalSize(10)
+                                        .autoHideToolbarOnSingleTap(true)
+                                        .forResult(PICK_IMAGE_REQUEST_CODE);
                             } else {
                                 ToastUtils.showToast("设备没有SD卡！");
                             }
@@ -285,23 +306,24 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
      */
     private void handleAlbumPic(Intent data) {
         //获取选中图片的路径
-        if (data.getData() == null) {
-            ToastUtils.showToast("抱歉，解析失败,换个图片试试.");
-        } else {
-            photo_path = data.getData().getPath();
-
+        List<String> list = Matisse.obtainPathResult(data);
+        if (list != null && !list.isEmpty()) {
+            photo_path = list.get(0);
+            LogUtil.d("handleAlbumPic path: " + photo_path);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     Result result = scanningImage(photo_path);
                     if (result != null) {
-
                         onHandleDecode(result.getText());
                     } else {
                         ToastUtils.showToast("抱歉，解析失败,换个图片试试.");
                     }
                 }
             });
+        } else {
+            ToastUtils.showToast("抱歉，解析失败,换个图片试试.");
+
         }
     }
 

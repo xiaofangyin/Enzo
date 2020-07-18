@@ -49,7 +49,7 @@ import java.util.List;
 
 import rx.functions.Action1;
 
-public class SampleActivity extends AppCompatActivity implements View.OnClickListener {
+public class MDMatisseActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_CHOOSE = 23;
     private static final int REQUEST_CODE_CHOOSE_SINGLE = 24;
@@ -105,7 +105,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.zhihu) {
-            Matisse.from(SampleActivity.this)
+            Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.ofImage(), false)
                     .countable(true)
                     .capture(true)
@@ -134,7 +134,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     })
                     .forResult(REQUEST_CODE_CHOOSE);
         } else if (id == R.id.dracula) {
-            Matisse.from(SampleActivity.this)
+            Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.ofImage())
                     .theme(R.style.Matisse_Dracula)
                     .countable(false)
@@ -146,7 +146,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .imageEngine(new GlideEngine())
                     .forResult(REQUEST_CODE_CHOOSE);
         } else if (id == R.id.only_gif) {
-            Matisse.from(SampleActivity.this)
+            Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.of(MimeType.GIF), false)
                     .countable(true)
                     .maxSelectable(9)
@@ -160,15 +160,14 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .autoHideToolbarOnSingleTap(true)
                     .forResult(REQUEST_CODE_CHOOSE);
         } else if (id == R.id.single) {
-            Matisse.from(SampleActivity.this)
+            Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.ofImage(), false)
                     .countable(true)
                     .singleChoose(true)
                     .crop(true)
                     .capture(true)
-                    .captureStrategy(new CaptureStrategy(true, "test"))
+                    .captureStrategy(new CaptureStrategy(true, "enzo"))
                     .maxSelectable(9)
-                    .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                     .spanCount(4)
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                     .thumbnailScale(0.85f)
@@ -177,12 +176,6 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .originalEnable(true)
                     .maxOriginalSize(10)
                     .autoHideToolbarOnSingleTap(true)
-                    .setOnCheckedListener(new OnCheckedListener() {
-                        @Override
-                        public void onCheck(boolean isChecked) {
-                            Log.e("xfy", "onCheck: isChecked=" + isChecked);
-                        }
-                    })
                     .forResult(REQUEST_CODE_CHOOSE_SINGLE);
         }
         mAdapter.setData(null, null);

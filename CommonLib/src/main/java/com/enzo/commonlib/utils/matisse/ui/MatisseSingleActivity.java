@@ -39,7 +39,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.enzo.commonlib.R;
-import com.enzo.commonlib.utils.album.utils.PhotoCropConfig;
+import com.enzo.commonlib.utils.matisse.PhotoCropConfig;
 import com.enzo.commonlib.utils.matisse.internal.entity.Album;
 import com.enzo.commonlib.utils.matisse.internal.entity.Item;
 import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;

@@ -8,15 +8,13 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDColorPickerActivity;
-import com.enzo.module_d.ui.activity.MDImgMultipleSelectActivity;
-import com.enzo.module_d.ui.activity.MDImgSingleSelectActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDPickerViewActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
 import com.enzo.module_d.ui.activity.MDStructureActivity;
-import com.enzo.module_d.ui.activity.SampleActivity;
+import com.enzo.module_d.ui.activity.MDMatisseActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -83,14 +81,8 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         } else if (id == R.id.btn_color_picker) {
             Intent intent = new Intent(getContext(), MDColorPickerActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_img_single_choose) {
-            Intent intent = new Intent(getContext(), MDImgSingleSelectActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_img_multiple_choose) {
-            Intent intent = new Intent(getContext(), MDImgMultipleSelectActivity.class);
-            startActivity(intent);
         } else if (id == R.id.btn_zhifu) {
-            Intent intent = new Intent(getContext(), SampleActivity.class);
+            Intent intent = new Intent(getContext(), MDMatisseActivity.class);
             startActivity(intent);
         }
     }

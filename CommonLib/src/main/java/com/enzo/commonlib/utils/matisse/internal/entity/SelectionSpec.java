@@ -77,7 +77,7 @@ public final class SelectionSpec {
         mimeTypeSet = null;
         mediaTypeExclusive = true;
         showSingleMediaType = false;
-        themeId = R.style.Matisse_Zhihu;
+        themeId = R.style.Matisse_Dracula;
         singleChoose = false;
         crop = true;
         orientation = 0;
