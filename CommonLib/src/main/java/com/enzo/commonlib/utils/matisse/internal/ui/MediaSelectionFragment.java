@@ -100,11 +100,7 @@ public class MediaSelectionFragment extends Fragment implements
 
         int spanCount;
         SelectionSpec selectionSpec = SelectionSpec.getInstance();
-        if (selectionSpec.gridExpectedSize > 0) {
-            spanCount = UIUtils.spanCount(getContext(), selectionSpec.gridExpectedSize);
-        } else {
-            spanCount = selectionSpec.spanCount;
-        }
+        spanCount = selectionSpec.spanCount;
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), spanCount));
 
         int spacing = getResources().getDimensionPixelSize(R.dimen.matisse_media_grid_spacing);

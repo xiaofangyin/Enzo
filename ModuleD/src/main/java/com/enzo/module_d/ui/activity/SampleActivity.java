@@ -97,7 +97,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .captureStrategy(new CaptureStrategy(true, "test"))
                     .maxSelectable(9)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                    .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                    .spanCount(4)
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                     .thumbnailScale(0.85f)
                     .imageEngine(new GlideEngine())
@@ -135,8 +135,6 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .countable(true)
                     .maxSelectable(9)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                    .gridExpectedSize(
-                            getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                     .thumbnailScale(0.85f)
                     .imageEngine(new GlideEngine())

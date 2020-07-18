@@ -279,19 +279,6 @@ public final class SelectionCreator {
     }
 
     /**
-     * Set expected size for media grid to adapt to different screen sizes. This won't necessarily
-     * be applied cause the media grid should fill the view container. The measured media grid's
-     * size will be as close to this value as possible.
-     *
-     * @param size Expected media grid size in pixel.
-     * @return {@link SelectionCreator} for fluent API.
-     */
-    public SelectionCreator gridExpectedSize(int size) {
-        mSelectionSpec.gridExpectedSize = size;
-        return this;
-    }
-
-    /**
      * Photo thumbnail's scale compared to the View's size. It should be a float value in (0.0,
      * 1.0].
      *
@@ -309,8 +296,6 @@ public final class SelectionCreator {
      * Provide an image engine.
      * <p>
      * There are two built-in image engines:
-     * 1. {@link com.zhihu.matisse.engine.impl.GlideEngine}
-     * 2. {@link com.zhihu.matisse.engine.impl.PicassoEngine}
      * And you can implement your own image engine.
      *
      * @param imageEngine {@link ImageEngine}
