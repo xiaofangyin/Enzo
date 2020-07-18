@@ -110,7 +110,7 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
                     .theme(R.style.Matisse_Zhihu)
                     .countable(true)
                     .capture(true)
-                    .captureStrategy(new CaptureStrategy(true, "test"))
+                    .captureStrategy(new CaptureStrategy(true, "enzo"))
                     .maxSelectable(9)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                     .spanCount(4)
