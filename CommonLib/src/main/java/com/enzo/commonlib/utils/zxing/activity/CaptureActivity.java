@@ -145,7 +145,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
         headWidget.setBackgroundColor(getResources().getColor(com.enzo.commonlib.R.color.color_green));
         headWidget.setLeftImage(com.enzo.commonlib.R.mipmap.flc_icon_back_default);
         headWidget.setTitle(getTitleText());
-        headWidget.setRightText("相册中选取");
+        headWidget.setRightText("相册");
         headWidget.setTitleColor(getResources().getColor(com.enzo.commonlib.R.color.color_white));
         headWidget.setRightTextColor(getResources().getColor(com.enzo.commonlib.R.color.color_white));
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {

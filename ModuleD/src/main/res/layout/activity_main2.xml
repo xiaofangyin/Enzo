@@ -83,17 +83,9 @@
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/item_margin_horizontal"
-            android:text="@string/app_name"
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
-
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ugc_default_photo" />
 
     </LinearLayout>
 
@@ -105,8 +97,6 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:paddingBottom="16dp" />
 
 </LinearLayout>
