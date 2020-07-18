@@ -49,8 +49,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
         rootView.findViewById(R.id.btn_color_picker).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_img_single_choose).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_img_multiple_choose).setOnClickListener(this);
         rootView.findViewById(R.id.btn_zhifu).setOnClickListener(this);
     }
 
