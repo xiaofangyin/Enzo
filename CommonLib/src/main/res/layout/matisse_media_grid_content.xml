@@ -33,7 +33,7 @@
         android:layout_gravity="right|bottom"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/matisse_ic_gif"
+        android:src="@mipmap/matisse_ic_gif"
         android:visibility="gone" />
 
     <TextView

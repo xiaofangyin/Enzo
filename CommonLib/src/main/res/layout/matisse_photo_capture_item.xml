@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:drawablePadding="8dp"
-        android:drawableTop="@drawable/matisse_ic_photo_camera_white_24dp"
+        android:drawableTop="@mipmap/matisse_ic_photo_camera_white_24dp"
         android:gravity="center"
         android:text="@string/photo_grid_capture"
         android:textColor="?capture.textColor"

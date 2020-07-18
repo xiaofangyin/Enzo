@@ -62,7 +62,7 @@
         <item name="album.element.color">@android:color/white</item>
         <item name="album.thumbnail.placeholder">@color/zhihu_album_dropdown_thumbnail_placeholder
         </item>
-        <item name="album.emptyView">@drawable/matisse_ic_empty_zhihu</item>
+        <item name="album.emptyView">@mipmap/matisse_ic_empty_zhihu</item>
         <item name="album.emptyView.textColor">@color/zhihu_album_empty_view</item>
         <item name="item.placeholder">@color/zhihu_item_placeholder</item>
         <item name="item.checkCircle.backgroundColor">
@@ -106,7 +106,7 @@
         <item name="album.thumbnail.placeholder">
             @color/dracula_album_dropdown_thumbnail_placeholder
         </item>
-        <item name="album.emptyView">@drawable/matisse_ic_empty_dracula</item>
+        <item name="album.emptyView">@mipmap/matisse_ic_empty_dracula</item>
         <item name="album.emptyView.textColor">@color/dracula_album_empty_view</item>
         <item name="item.placeholder">@color/dracula_item_placeholder</item>
         <item name="item.checkCircle.backgroundColor">

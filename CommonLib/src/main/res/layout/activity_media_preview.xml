@@ -70,7 +70,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/matisse_ic_preview_radio_off"
+                    android:src="@mipmap/matisse_ic_preview_radio_off"
                     android:tint="#ffffff" />
 
                 <TextView

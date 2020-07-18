@@ -107,6 +107,7 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
         if (id == R.id.zhihu) {
             Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.ofImage(), false)
+                    .theme(R.style.Matisse_Zhihu)
                     .countable(true)
                     .capture(true)
                     .captureStrategy(new CaptureStrategy(true, "test"))
