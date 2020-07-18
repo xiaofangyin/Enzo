@@ -111,7 +111,6 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
         void capture();
     }
 
-
     public interface OnMediaClickListener {
         void onMediaClick(Album album, Item item, int adapterPosition);
     }
