@@ -188,7 +188,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                     public void call(Boolean aBoolean) {
                         if (!aBoolean) {
                             finish();
-                            ToastUtils.showToast("打开相机异常");
+                            ToastUtils.showToast(getApplicationContext(), "打开相机异常");
                         }
                     }
                 });
@@ -286,7 +286,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                                         .autoHideToolbarOnSingleTap(true)
                                         .forResult(PICK_IMAGE_REQUEST_CODE);
                             } else {
-                                ToastUtils.showToast("设备没有SD卡！");
+                                ToastUtils.showToast(getApplicationContext(), "设备没有SD卡！");
                             }
                         } else {
                             LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied...");
@@ -317,12 +317,12 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                     if (result != null) {
                         onHandleDecode(result.getText());
                     } else {
-                        ToastUtils.showToast("抱歉，解析失败,换个图片试试.");
+                        ToastUtils.showToast(getApplicationContext(), "抱歉，解析失败,换个图片试试.");
                     }
                 }
             });
         } else {
-            ToastUtils.showToast("抱歉，解析失败,换个图片试试.");
+            ToastUtils.showToast(getApplicationContext(), "抱歉，解析失败,换个图片试试.");
 
         }
     }

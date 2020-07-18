@@ -45,7 +45,7 @@ public class ColorWheelView extends FrameLayout implements ColorObservable, Upda
 
     public ColorWheelView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        selectorRadiusPx = DensityUtil.dip2px(SELECTOR_RADIUS_DP);
+        selectorRadiusPx = DensityUtil.dip2px(getContext(), SELECTOR_RADIUS_DP);
 
         {
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

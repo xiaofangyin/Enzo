@@ -80,7 +80,7 @@ public class MDCalendarActivity extends BaseActivity implements View.OnClickList
             public void onSingleChoose(View view, DateBean date) {
                 LogUtil.d(date.getSolar()[0] + "年" + date.getSolar()[1] + "月" + date.getSolar()[2] + "日");
                 calendarTitle.setText(date.getSolar()[0] + "年" + date.getSolar()[1] + "月");
-                ToastUtils.showToast(date.getSolar()[1] + "月" + date.getSolar()[2] + "日");
+                ToastUtils.showToast(getApplication(), date.getSolar()[1] + "月" + date.getSolar()[2] + "日");
             }
         });
     }

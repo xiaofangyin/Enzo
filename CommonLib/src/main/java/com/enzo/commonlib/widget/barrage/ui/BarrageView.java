@@ -200,7 +200,7 @@ public class BarrageView extends ViewGroup implements IBarrageView {
      * 初始化一个空的弹幕列表和速度列表
      */
     private void initBarrageListAndSpeedArray() {
-        barrageDistance = DensityUtil.dip2px(12);
+        barrageDistance = DensityUtil.dip2px(getContext(), 12);
         barrageLines = height / (singleLineHeight + barrageDistance);
         for (int i = 0; i < barrageLines; i++) {
             barrageList.add(i, null);

@@ -6,11 +6,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.enzo.commonlib.utils.common.DensityUtil;
 
@@ -49,8 +50,8 @@ public class VerticalTextView extends AppCompatTextView {
         mPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setAntiAlias(true);
         //　默认为4dp
-        mCharSpacing = DensityUtil.dip2px(4);
-        mErrorDistance = DensityUtil.dip2px(8);
+        mCharSpacing = DensityUtil.dip2px(getContext(), 4);
+        mErrorDistance = DensityUtil.dip2px(getContext(), 8);
 
         mShadowPaint = new Paint();
         mShadowPaint.setColor(Color.parseColor("#4F000000"));

@@ -76,7 +76,7 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void call(Boolean aBoolean) {
                         if (!aBoolean) {
-                            ToastUtils.showToast("当前应用缺少读取sd卡权限");
+                            ToastUtils.showToast(getApplicationContext(), "当前应用缺少读取sd卡权限");
                             finish();
                         }
                     }

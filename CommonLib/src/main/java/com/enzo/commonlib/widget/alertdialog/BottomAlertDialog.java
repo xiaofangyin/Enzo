@@ -44,9 +44,9 @@ public class BottomAlertDialog extends Dialog {
             TextView textView = new TextView(getContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    DensityUtil.dip2px(45));
+                    DensityUtil.dip2px(getContext(), 45));
             layoutParams.setMargins(0, 0,
-                    0, DensityUtil.dip2px(0.5f));
+                    0, DensityUtil.dip2px(getContext(), 0.5f));
             textView.setLayoutParams(layoutParams);
             textView.setBackground(getContext().getResources().getDrawable(R.drawable.lib_selector_white_bg));
             textView.setTextSize(16);

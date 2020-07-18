@@ -66,11 +66,11 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.SmoothCheckBox);
         int tickColor = ta.getColor(R.styleable.SmoothCheckBox_color_tick, COLOR_TICK);
-        int tickWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_tick_width, DensityUtil.dip2px(1.2f));
+        int tickWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_tick_width, DensityUtil.dip2px(getContext(), 1.2f));
         mFloorColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked_stroke, COLOR_FLOOR_UNCHECKED);
         mCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_checked, COLOR_CHECKED);
         mUnCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked, COLOR_UNCHECKED);
-        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, DensityUtil.dip2px(1));
+        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, DensityUtil.dip2px(getContext(), 1));
         ta.recycle();
 
         mFloorUnCheckedColor = mFloorColor;
@@ -143,13 +143,13 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
 
     private void drawFloor(Canvas canvas) {
         mFloorPaint.setColor(mFloorColor);
-        int radius = mCenterPoint.x - DensityUtil.dip2px(5);
+        int radius = mCenterPoint.x - DensityUtil.dip2px(getContext(), 5);
         canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, radius * mFloorScale, mFloorPaint);
     }
 
     private void drawCenter(Canvas canvas) {
         mPaint.setColor(mUnCheckedColor);
-        float radius = (mCenterPoint.x - mStrokeWidth) * mScaleVal - DensityUtil.dip2px(5);
+        float radius = (mCenterPoint.x - mStrokeWidth) * mScaleVal - DensityUtil.dip2px(getContext(), 5);
         canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, radius, mPaint);
     }
 
@@ -333,7 +333,7 @@ public class SmoothCheckBox extends View implements Checkable, View.OnClickListe
     }
 
     private int measureSize(int measureSpec) {
-        int defSize = DensityUtil.dip2px(DEF_DRAW_SIZE);
+        int defSize = DensityUtil.dip2px(getContext(),DEF_DRAW_SIZE);
         int specSize = MeasureSpec.getSize(measureSpec);
         int specMode = MeasureSpec.getMode(measureSpec);
 

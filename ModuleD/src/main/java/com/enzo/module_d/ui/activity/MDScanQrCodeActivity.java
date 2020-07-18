@@ -51,6 +51,6 @@ public class MDScanQrCodeActivity extends CaptureActivity {
 
     private void reportFetch(String code) {
         LogUtil.d("reportFetch code: " + code);
-        ToastUtils.showToast(String.valueOf(code));
+        ToastUtils.showToast(getApplicationContext(), String.valueOf(code));
     }
 }

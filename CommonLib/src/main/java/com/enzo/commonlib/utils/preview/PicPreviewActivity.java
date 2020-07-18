@@ -2,8 +2,6 @@ package com.enzo.commonlib.utils.preview;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseActivity;
@@ -55,7 +56,7 @@ public class PicPreviewActivity extends BaseActivity {
         imageList = (ArrayList<PicsBean>) getIntent().getSerializableExtra("pic_list");
         curPosition = getIntent().getIntExtra("position", 0);
 
-        viewPager.setPageMargin(DensityUtil.dip2px(15));
+        viewPager.setPageMargin(DensityUtil.dip2px(getApplicationContext(), 15));
         viewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
@@ -133,7 +134,7 @@ public class PicPreviewActivity extends BaseActivity {
 
     private void downLoadImage(String url) {
         LoadingDialog.show(PicPreviewActivity.this);
-        ToastUtils.showToast("开始下载...");
+        ToastUtils.showToast(getApplicationContext(), "开始下载...");
         UGCFileUtils.downLoadImageAndSave(getApplicationContext(),
                 url,
                 UGCFileUtils.UGC_FILE_PARENT,
@@ -145,7 +146,7 @@ public class PicPreviewActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 LoadingDialog.dismiss();
-                                ToastUtils.showToast("下载成功");
+                                ToastUtils.showToast(getApplicationContext(), "下载成功");
                             }
                         });
                     }
@@ -156,7 +157,7 @@ public class PicPreviewActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 LoadingDialog.dismiss();
-                                ToastUtils.showToast("下载失败，请重试");
+                                ToastUtils.showToast(getApplicationContext(), "下载失败，请重试");
                             }
                         });
                     }

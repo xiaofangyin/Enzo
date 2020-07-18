@@ -33,7 +33,7 @@ public class ColorWheelSelector extends View {
         selectorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         selectorPaint.setColor(Color.TRANSPARENT);
         selectorPaint.setStyle(Paint.Style.FILL);
-        setSelectorRadiusPx(DensityUtil.dip2px(10));
+        setSelectorRadiusPx(DensityUtil.dip2px(getContext(), 10));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ColorWheelSelector extends View {
 
     public void setSelectorRadiusPx(float selectorRadiusPx) {
         this.selectorRadiusPx = selectorRadiusPx;
-        strokeWidth = selectorRadiusPx - DensityUtil.dip2px(2);
+        strokeWidth = selectorRadiusPx - DensityUtil.dip2px(getContext(), 2);
     }
 
     public void setCurrentPoint(PointF currentPoint, int color) {

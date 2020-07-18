@@ -1,6 +1,9 @@
 package com.enzo.xiaofy;
 
-import com.enzo.commonlib.base.BaseApplication;
+import android.app.Application;
+
+import androidx.multidex.MultiDex;
+
 import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.flkit.FLPluginFactory;
@@ -42,7 +45,7 @@ import java.util.List;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class App extends BaseApplication {
+public class App extends Application {
 
     @Override
     public void onCreate() {
@@ -52,6 +55,8 @@ public class App extends BaseApplication {
     }
 
     private void initEnv() {
+        MultiDex.install(this);
+
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
 
         CrashManager.getInstance().init(this, BuildConfig.DEBUG);
@@ -63,6 +68,6 @@ public class App extends BaseApplication {
         factoryList.add(MBPluginFactory.getInstance());
         factoryList.add(MCPluginFactory.getInstance());
         factoryList.add(MDPluginFactory.getInstance());
-        SAFactoryManager.getInstance().init(factoryList);
+        SAFactoryManager.getInstance().init(this, factoryList);
     }
 }

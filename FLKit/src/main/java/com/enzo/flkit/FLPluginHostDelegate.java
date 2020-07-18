@@ -1,6 +1,7 @@
 package com.enzo.flkit;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface FLPluginHostDelegate {
 
-    void initFactories(List<FLPluginFactory> factoryList);
+    void initFactories(Application application, List<FLPluginFactory> factoryList);
 
     //获取Application Context
     Context getApplicationContext();

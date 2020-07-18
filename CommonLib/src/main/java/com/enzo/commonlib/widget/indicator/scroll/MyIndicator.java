@@ -3,7 +3,6 @@ package com.enzo.commonlib.widget.indicator.scroll;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -12,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.nineoldandroids.view.ViewHelper;
@@ -112,8 +113,8 @@ public class MyIndicator extends HorizontalScrollView {
         ViewHelper.setScaleX(tabView, isSelected ? 1.1f : 1f);
         ViewHelper.setScaleY(tabView, isSelected ? 1.1f : 1f);
 
-        int paddingLeft = DensityUtil.dip2px(index == 0 ? 16 : 10);
-        int paddingRight = DensityUtil.dip2px(lastItem ? 60 : 10);
+        int paddingLeft = DensityUtil.dip2px(getContext(), index == 0 ? 16 : 10);
+        int paddingRight = DensityUtil.dip2px(getContext(), lastItem ? 60 : 10);
         tabView.setPadding(paddingLeft, 0, paddingRight, 0);
         ViewGroup.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         tabView.setLayoutParams(layoutParams);

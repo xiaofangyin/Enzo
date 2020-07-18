@@ -45,7 +45,7 @@ public class MCNormalPluginItem extends FLPluginBaseCell implements View.OnClick
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.mc_device_name) {
-            ToastUtils.showToast(baseObject.alias);
+            ToastUtils.showToast(v.getContext(), baseObject.alias);
         }
     }
 }

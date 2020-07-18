@@ -1,10 +1,10 @@
 package com.enzo.main.plugin;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
-import com.enzo.commonlib.base.BaseApplication;
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.flkit.FLPluginFactory;
 import com.enzo.flkit.FLPluginHostDelegate;
@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class SAHostDelegateManager implements FLPluginHostDelegate {
 
+    private Application application;
     private static SAHostDelegateManager mInstance;
 
     private SAHostDelegateManager() {
@@ -40,7 +41,7 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
 
     @Override
     public Context getApplicationContext() {
-        return BaseApplication.getInstance();
+        return application;
     }
 
     @Override
@@ -49,7 +50,8 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
     }
 
     @Override
-    public void initFactories(List<FLPluginFactory> factoryList) {
+    public void initFactories(Application application, List<FLPluginFactory> factoryList) {
+        this.application = application;
         for (int i = 0; i < factoryList.size(); i++) {
             factoryList.get(i).setHostDelegate(this);
         }

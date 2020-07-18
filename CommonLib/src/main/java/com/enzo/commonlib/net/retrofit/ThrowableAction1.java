@@ -18,10 +18,10 @@ public class ThrowableAction1 implements Action1<Throwable> {
     public void call(Throwable throwable) {
         LogUtil.e("throwable: " + throwable.getMessage());
         if (!(throwable instanceof Fault)) {
-            ToastUtils.showToast(R.string.net_error);
+//            ToastUtils.showToast(R.string.net_error);
         } else {
             Fault fault = (Fault) throwable;
-            ToastUtils.showToast(fault.getMessage());
+//            ToastUtils.showToast(fault.getMessage());
         }
     }
 }

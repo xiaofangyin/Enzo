@@ -128,7 +128,7 @@ public class SAMainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {
-                ToastUtils.showToast("再按一次退出程序");
+                ToastUtils.showToast(getApplicationContext(),"再按一次退出程序");
                 firstTime = System.currentTimeMillis();
                 return true;
             } else {

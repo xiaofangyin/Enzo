@@ -2,7 +2,9 @@ package com.enzo.commonlib.widget.horizontal;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,7 +50,7 @@ public class HorizontalScrollView extends RelativeLayout {
 
     public HorizontalScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mOffsetWidth = -DensityUtil.dip2px(65);
+        mOffsetWidth = -DensityUtil.dip2px(getContext(), 65);
     }
 
     @Override
@@ -61,7 +63,7 @@ public class HorizontalScrollView extends RelativeLayout {
         super.onSizeChanged(w, h, oldw, oldh);
         if (mMoreTextView != null) {
             mOffsetWidth = -mMoreTextView.getWidth();
-            mOffsetWidth = mOffsetWidth == 0 ? -DensityUtil.dip2px(65) : mOffsetWidth;
+            mOffsetWidth = mOffsetWidth == 0 ? -DensityUtil.dip2px(getContext(), 65) : mOffsetWidth;
         }
     }
 

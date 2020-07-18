@@ -45,7 +45,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
         mRateTextCircularProgressBar = rootView.findViewById(R.id.rate_progress_bar);
         mRateTextCircularProgressBar.setMax(100);
-        mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(10));
+        mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(getContext(), 10));
 
         mCustomProgressBar = rootView.findViewById(R.id.web_view_progress_bar);
         mDiskProgressBar = rootView.findViewById(R.id.disk_capacity_progress);
@@ -63,7 +63,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
             @Override
             public void onProgressChanged(FLCSeekBar seekBar, int progress) {
                 LogUtil.d("percent: " + progress);
-                ToastUtils.showToast(String.valueOf(progress));
+                ToastUtils.showToast(getContext(), String.valueOf(progress));
             }
 
             @Override
