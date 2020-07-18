@@ -30,7 +30,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.R;
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.matisse.internal.entity.Album;
 import com.enzo.commonlib.utils.matisse.internal.entity.IncapableCause;
 import com.enzo.commonlib.utils.matisse.internal.entity.Item;
@@ -39,7 +38,7 @@ import com.enzo.commonlib.utils.matisse.internal.model.SelectedItemCollection;
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.CheckView;
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.MediaGrid;
 
-public class AlbumMediaAdapter extends
+public class AlbumMediaSingleAdapter extends
         RecyclerViewCursorAdapter<RecyclerView.ViewHolder> implements
         MediaGrid.OnMediaGridClickListener {
 
@@ -48,12 +47,11 @@ public class AlbumMediaAdapter extends
     private final SelectedItemCollection mSelectedCollection;
     private final Drawable mPlaceholder;
     private SelectionSpec mSelectionSpec;
-    private CheckStateListener mCheckStateListener;
     private OnMediaClickListener mOnMediaClickListener;
     private RecyclerView mRecyclerView;
     private int mImageResize;
 
-    public AlbumMediaAdapter(Context context, SelectedItemCollection selectedCollection, RecyclerView recyclerView) {
+    public AlbumMediaSingleAdapter(Context context, SelectedItemCollection selectedCollection, RecyclerView recyclerView) {
         super(null);
         mSelectionSpec = SelectionSpec.getInstance();
         mSelectedCollection = selectedCollection;
@@ -201,11 +199,7 @@ public class AlbumMediaAdapter extends
     }
 
     private void notifyCheckStateChanged() {
-        LogUtil.d("AlbumMediaAdapter notifyCheckStateChanged...");
         notifyDataSetChanged();
-        if (mCheckStateListener != null) {
-            mCheckStateListener.onUpdate();
-        }
     }
 
     @Override
@@ -217,15 +211,6 @@ public class AlbumMediaAdapter extends
         IncapableCause cause = mSelectedCollection.isAcceptable(item);
         IncapableCause.handleCause(context, cause);
         return cause == null;
-    }
-
-
-    public void registerCheckStateListener(CheckStateListener listener) {
-        mCheckStateListener = listener;
-    }
-
-    public void unregisterCheckStateListener() {
-        mCheckStateListener = null;
     }
 
     public void registerOnMediaClickListener(OnMediaClickListener listener) {
@@ -286,6 +271,7 @@ public class AlbumMediaAdapter extends
         MediaViewHolder(View itemView) {
             super(itemView);
             mMediaGrid = itemView.findViewById(R.id.media_grid);
+            mMediaGrid.setCheckViewVisibility(false);
         }
     }
 

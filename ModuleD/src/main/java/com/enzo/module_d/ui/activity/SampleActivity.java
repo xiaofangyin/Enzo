@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
 import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
@@ -42,15 +44,20 @@ import com.enzo.commonlib.utils.matisse.listener.OnSelectedListener;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.filter.GifSizeFilter;
 import com.tbruyelle.rxpermissions.RxPermissions;
+import com.yalantis.ucrop.UCrop;
 
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import rx.functions.Action1;
 
 public class SampleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_CHOOSE = 23;
+    private static final int REQUEST_CODE_CHOOSE_SINGLE = 24;
 
+    private ImageView imageView;
     private UriAdapter mAdapter;
 
     @Override
@@ -60,7 +67,9 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.zhihu).setOnClickListener(this);
         findViewById(R.id.dracula).setOnClickListener(this);
         findViewById(R.id.only_gif).setOnClickListener(this);
+        findViewById(R.id.single).setOnClickListener(this);
 
+        imageView = findViewById(R.id.single_choose_result);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter = new UriAdapter());
@@ -83,6 +92,12 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             mAdapter.setData(Matisse.obtainResult(data), Matisse.obtainPathResult(data));
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
+        }else if(requestCode == REQUEST_CODE_CHOOSE_SINGLE && resultCode == RESULT_OK){
+            ImageLoader.Builder builder = new ImageLoader.Builder(this);
+            builder.load(UCrop.getOutput(data))
+                    .signature(String.valueOf(System.currentTimeMillis()))
+                    .build()
+                    .into(imageView);
         }
     }
 
@@ -123,6 +138,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .choose(MimeType.ofImage())
                     .theme(R.style.Matisse_Dracula)
                     .countable(false)
+                    .showPreview(false)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                     .maxSelectable(9)
                     .originalEnable(true)
@@ -143,6 +159,30 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     .maxOriginalSize(10)
                     .autoHideToolbarOnSingleTap(true)
                     .forResult(REQUEST_CODE_CHOOSE);
+        } else if (id == R.id.single) {
+            Matisse.from(SampleActivity.this)
+                    .choose(MimeType.ofImage(), false)
+                    .countable(true)
+                    .singleChoose(true)
+                    .capture(true)
+                    .captureStrategy(new CaptureStrategy(true, "test"))
+                    .maxSelectable(9)
+                    .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+                    .spanCount(4)
+                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                    .thumbnailScale(0.85f)
+                    .imageEngine(new GlideEngine())
+                    .showSingleMediaType(true)
+                    .originalEnable(true)
+                    .maxOriginalSize(10)
+                    .autoHideToolbarOnSingleTap(true)
+                    .setOnCheckedListener(new OnCheckedListener() {
+                        @Override
+                        public void onCheck(boolean isChecked) {
+                            Log.e("xfy", "onCheck: isChecked=" + isChecked);
+                        }
+                    })
+                    .forResult(REQUEST_CODE_CHOOSE_SINGLE);
         }
         mAdapter.setData(null, null);
     }

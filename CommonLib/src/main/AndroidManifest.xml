@@ -76,5 +76,8 @@
         <activity
             android:name=".utils.matisse.internal.ui.SelectedPreviewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.matisse.ui.MatisseSingleActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

@@ -34,23 +34,25 @@ import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;
 import com.enzo.commonlib.utils.matisse.internal.model.AlbumMediaCollection;
 import com.enzo.commonlib.utils.matisse.internal.model.SelectedItemCollection;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaAdapter;
+import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaSingleAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.MediaGridInset;
 
-public class MediaSelectionFragment extends Fragment implements
-        AlbumMediaCollection.AlbumMediaCallbacks, AlbumMediaAdapter.CheckStateListener,
-        AlbumMediaAdapter.OnMediaClickListener {
+public class MediaSingleSelectionFragment extends Fragment implements
+        AlbumMediaCollection.AlbumMediaCallbacks,
+        AlbumMediaSingleAdapter.CheckStateListener,
+        AlbumMediaSingleAdapter.OnMediaClickListener {
 
     public static final String EXTRA_ALBUM = "extra_album";
 
     private final AlbumMediaCollection mAlbumMediaCollection = new AlbumMediaCollection();
     private RecyclerView mRecyclerView;
-    private AlbumMediaAdapter mAdapter;
+    private AlbumMediaSingleAdapter mAdapter;
     private SelectionProvider mSelectionProvider;
     private AlbumMediaAdapter.CheckStateListener mCheckStateListener;
     private AlbumMediaAdapter.OnMediaClickListener mOnMediaClickListener;
 
-    public static MediaSelectionFragment newInstance(Album album) {
-        MediaSelectionFragment fragment = new MediaSelectionFragment();
+    public static MediaSingleSelectionFragment newInstance(Album album) {
+        MediaSingleSelectionFragment fragment = new MediaSingleSelectionFragment();
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_ALBUM, album);
         fragment.setArguments(args);
@@ -91,9 +93,8 @@ public class MediaSelectionFragment extends Fragment implements
         super.onActivityCreated(savedInstanceState);
         Album album = getArguments().getParcelable(EXTRA_ALBUM);
 
-        mAdapter = new AlbumMediaAdapter(getActivity(),
+        mAdapter = new AlbumMediaSingleAdapter(getActivity(),
                 mSelectionProvider.provideSelectedItemCollection(), mRecyclerView);
-        mAdapter.registerCheckStateListener(this);
         mAdapter.registerOnMediaClickListener(this);
         mRecyclerView.setHasFixedSize(true);
 
@@ -135,7 +136,6 @@ public class MediaSelectionFragment extends Fragment implements
 
     @Override
     public void onUpdate() {
-        // notify outer Activity that check state changed
         if (mCheckStateListener != null) {
             mCheckStateListener.onUpdate();
         }
