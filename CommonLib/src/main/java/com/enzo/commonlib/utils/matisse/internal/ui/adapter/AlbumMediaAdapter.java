@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.matisse.internal.entity.Album;
 import com.enzo.commonlib.utils.matisse.internal.entity.IncapableCause;
 import com.enzo.commonlib.utils.matisse.internal.entity.Item;
 import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;
@@ -265,18 +264,6 @@ public class AlbumMediaAdapter extends
             mImageResize = (int) (mImageResize * mSelectionSpec.thumbnailScale);
         }
         return mImageResize;
-    }
-
-    public interface CheckStateListener {
-        void onUpdate();
-    }
-
-    public interface OnMediaClickListener {
-        void onMediaClick(Album album, Item item, int adapterPosition);
-    }
-
-    public interface OnPhotoCapture {
-        void capture();
     }
 
     private static class MediaViewHolder extends RecyclerView.ViewHolder {

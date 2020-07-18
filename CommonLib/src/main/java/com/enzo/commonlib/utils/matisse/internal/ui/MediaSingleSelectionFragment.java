@@ -32,14 +32,12 @@ import com.enzo.commonlib.utils.matisse.internal.entity.Album;
 import com.enzo.commonlib.utils.matisse.internal.entity.Item;
 import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;
 import com.enzo.commonlib.utils.matisse.internal.model.AlbumMediaCollection;
-import com.enzo.commonlib.utils.matisse.internal.model.SelectedItemCollection;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaSingleAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.MediaGridInset;
 
 public class MediaSingleSelectionFragment extends Fragment implements
         AlbumMediaCollection.AlbumMediaCallbacks,
-        AlbumMediaSingleAdapter.CheckStateListener,
         AlbumMediaSingleAdapter.OnMediaClickListener {
 
     public static final String EXTRA_ALBUM = "extra_album";
@@ -47,8 +45,6 @@ public class MediaSingleSelectionFragment extends Fragment implements
     private final AlbumMediaCollection mAlbumMediaCollection = new AlbumMediaCollection();
     private RecyclerView mRecyclerView;
     private AlbumMediaSingleAdapter mAdapter;
-    private SelectionProvider mSelectionProvider;
-    private AlbumMediaAdapter.CheckStateListener mCheckStateListener;
     private AlbumMediaAdapter.OnMediaClickListener mOnMediaClickListener;
 
     public static MediaSingleSelectionFragment newInstance(Album album) {
@@ -62,14 +58,6 @@ public class MediaSingleSelectionFragment extends Fragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof SelectionProvider) {
-            mSelectionProvider = (SelectionProvider) context;
-        } else {
-            throw new IllegalStateException("Context must implement SelectionProvider.");
-        }
-        if (context instanceof AlbumMediaAdapter.CheckStateListener) {
-            mCheckStateListener = (AlbumMediaAdapter.CheckStateListener) context;
-        }
         if (context instanceof AlbumMediaAdapter.OnMediaClickListener) {
             mOnMediaClickListener = (AlbumMediaAdapter.OnMediaClickListener) context;
         }
@@ -83,7 +71,7 @@ public class MediaSingleSelectionFragment extends Fragment implements
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
     }
@@ -93,8 +81,7 @@ public class MediaSingleSelectionFragment extends Fragment implements
         super.onActivityCreated(savedInstanceState);
         Album album = getArguments().getParcelable(EXTRA_ALBUM);
 
-        mAdapter = new AlbumMediaSingleAdapter(getActivity(),
-                mSelectionProvider.provideSelectedItemCollection(), mRecyclerView);
+        mAdapter = new AlbumMediaSingleAdapter(getActivity(), mRecyclerView);
         mAdapter.registerOnMediaClickListener(this);
         mRecyclerView.setHasFixedSize(true);
 
@@ -114,15 +101,9 @@ public class MediaSingleSelectionFragment extends Fragment implements
     public void onDestroyView() {
         super.onDestroyView();
         mAlbumMediaCollection.onDestroy();
+        mAdapter.unregisterOnMediaClickListener();
     }
 
-    public void refreshMediaGrid() {
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void refreshSelection() {
-        mAdapter.refreshSelection();
-    }
 
     @Override
     public void onAlbumMediaLoad(Cursor cursor) {
@@ -134,12 +115,6 @@ public class MediaSingleSelectionFragment extends Fragment implements
         mAdapter.swapCursor(null);
     }
 
-    @Override
-    public void onUpdate() {
-        if (mCheckStateListener != null) {
-            mCheckStateListener.onUpdate();
-        }
-    }
 
     @Override
     public void onMediaClick(Album album, Item item, int adapterPosition) {
@@ -147,9 +122,5 @@ public class MediaSingleSelectionFragment extends Fragment implements
             mOnMediaClickListener.onMediaClick((Album) getArguments().getParcelable(EXTRA_ALBUM),
                     item, adapterPosition);
         }
-    }
-
-    public interface SelectionProvider {
-        SelectedItemCollection provideSelectedItemCollection();
     }
 }

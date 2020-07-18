@@ -47,6 +47,7 @@ import com.enzo.commonlib.utils.matisse.internal.model.AlbumCollection;
 import com.enzo.commonlib.utils.matisse.internal.model.SelectedItemCollection;
 import com.enzo.commonlib.utils.matisse.internal.ui.MediaSingleSelectionFragment;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaAdapter;
+import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumMediaSingleAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.adapter.AlbumsAdapter;
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.AlbumsSpinner;
 import com.enzo.commonlib.utils.matisse.internal.utils.MediaStoreCompat;
@@ -61,8 +62,7 @@ import java.util.Objects;
 
 public class MatisseSingleActivity extends AppCompatActivity implements
         AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
-        MediaSingleSelectionFragment.SelectionProvider,
-        AlbumMediaAdapter.OnMediaClickListener, AlbumMediaAdapter.OnPhotoCapture {
+        AlbumMediaSingleAdapter.OnMediaClickListener, AlbumMediaSingleAdapter.OnPhotoCapture {
 
     public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
     public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
@@ -164,28 +164,34 @@ public class MatisseSingleActivity extends AppCompatActivity implements
             return;
 
         if (requestCode == REQUEST_CODE_CAPTURE) {
-            // Just pass the data back to previous calling Activity.
-            Uri contentUri = mMediaStoreCompat.getCurrentPhotoUri();
-            String path = mMediaStoreCompat.getCurrentPhotoPath();
-            ArrayList<Uri> selected = new ArrayList<>();
-            selected.add(contentUri);
-            ArrayList<String> selectedPath = new ArrayList<>();
-            selectedPath.add(path);
-            Intent result = new Intent();
-            result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selected);
-            result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPath);
-            setResult(RESULT_OK, result);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-                MatisseSingleActivity.this.revokeUriPermission(contentUri,
-                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            if (mSpec.crop) {
+                Uri uri = Uri.fromFile(PhotoCropConfig.getAvatarCroppedFile(this));
+                UCrop.of(mMediaStoreCompat.getCurrentPhotoUri(), uri)
+                        .withOptions(PhotoCropConfig.getOptions())
+                        .start(this);
+            } else {
+                Uri contentUri = mMediaStoreCompat.getCurrentPhotoUri();
+                String path = mMediaStoreCompat.getCurrentPhotoPath();
+                ArrayList<Uri> selected = new ArrayList<>();
+                selected.add(contentUri);
+                ArrayList<String> selectedPath = new ArrayList<>();
+                selectedPath.add(path);
+                Intent result = new Intent();
+                result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selected);
+                result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPath);
+                setResult(RESULT_OK, result);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+                    MatisseSingleActivity.this.revokeUriPermission(contentUri,
+                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-            new SingleMediaScanner(this.getApplicationContext(), path, new SingleMediaScanner.ScanListener() {
-                @Override
-                public void onScanFinish() {
-                    Log.i("SingleMediaScanner", "scan finish!");
-                }
-            });
-            finish();
+                new SingleMediaScanner(this.getApplicationContext(), path, new SingleMediaScanner.ScanListener() {
+                    @Override
+                    public void onScanFinish() {
+                        Log.i("SingleMediaScanner", "scan finish!");
+                    }
+                });
+                finish();
+            }
         } else if (requestCode == UCrop.REQUEST_CROP) {
             Intent result = new Intent();
             ArrayList<Uri> selectedUris = new ArrayList<>();
@@ -274,11 +280,6 @@ public class MatisseSingleActivity extends AppCompatActivity implements
             setResult(RESULT_OK, result);
             finish();
         }
-    }
-
-    @Override
-    public SelectedItemCollection provideSelectedItemCollection() {
-        return mSelectedCollection;
     }
 
     @Override

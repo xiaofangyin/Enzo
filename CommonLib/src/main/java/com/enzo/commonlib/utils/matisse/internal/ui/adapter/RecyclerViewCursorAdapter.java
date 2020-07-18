@@ -20,6 +20,9 @@ import android.provider.MediaStore;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.enzo.commonlib.utils.matisse.internal.entity.Album;
+import com.enzo.commonlib.utils.matisse.internal.entity.Item;
+
 public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHolder> extends
         RecyclerView.Adapter<VH> {
 
@@ -103,4 +106,18 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
     private boolean isDataValid(Cursor cursor) {
         return cursor != null && !cursor.isClosed();
     }
+
+    public interface OnPhotoCapture {
+        void capture();
+    }
+
+
+    public interface OnMediaClickListener {
+        void onMediaClick(Album album, Item item, int adapterPosition);
+    }
+
+    public interface CheckStateListener {
+        void onUpdate();
+    }
+
 }
