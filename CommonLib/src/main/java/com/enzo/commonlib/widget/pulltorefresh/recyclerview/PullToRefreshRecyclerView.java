@@ -3,11 +3,13 @@ package com.enzo.commonlib.widget.pulltorefresh.recyclerview;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -129,6 +131,10 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      * 刷新数据完成
      */
     public void refreshSuccess() {
+        //因为刷新完后recycler的mScrollState还是SCROLL_STATE_DRAGGING,在onInterceptTouchEvent方法中
+        //return true,导致子view的点击事件被拦截，所以此处将mScrollState手动置成SCROLL_STATE_IDLE
+        stopScroll();
+
         isLoadingData = false;
         if (headerRefreshView != null) {
             headerRefreshView.refreshSuccess();
@@ -331,8 +337,9 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         int status = BasePullToRefreshView.STATE_SUCCESS;
-        if (headerRefreshView != null)
+        if (headerRefreshView != null) {
             status = headerRefreshView.getState();
+        }
 
         return status == BasePullToRefreshView.STATE_REFRESHING || super.onTouchEvent(ev);
     }

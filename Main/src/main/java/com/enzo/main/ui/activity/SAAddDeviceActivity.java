@@ -88,11 +88,10 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+                        adapter.setNewData(getObjectList(buildData()));
+                        recyclerView.refreshSuccess();
                     }
-                }, 2500);
-                adapter.setNewData(getObjectList(buildData()));
-                recyclerView.refreshSuccess();
+                }, 3000);
             }
 
             @Override
