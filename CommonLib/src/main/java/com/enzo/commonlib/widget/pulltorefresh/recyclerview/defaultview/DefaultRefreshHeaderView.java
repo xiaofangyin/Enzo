@@ -15,7 +15,6 @@ import com.enzo.commonlib.R;
 import com.enzo.commonlib.widget.avi.AVLoadingIndicatorView;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerViewUtils;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
-import com.nineoldandroids.view.ViewHelper;
 
 /**
  * 文 件 名: DefaultRefreshHeaderView
@@ -101,7 +100,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
             case STATE_PULL_DOWN:
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.icon_refresh_arrow);
-                if (ViewHelper.getRotation(ivArrow) != 0) {
+                if (ivArrow.getRotation() != 0) {
                     rotateAnimator.reverse();
                 }
 
@@ -121,7 +120,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 }
                 break;
             case STATE_REFRESHING:
-                if (ViewHelper.getRotation(ivArrow) != 0) {
+                if (ivArrow.getRotation() != 0) {
                     rotateAnimator.reverse();
                 }
                 ivArrow.setVisibility(View.GONE);
@@ -140,7 +139,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
 
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.refresh_succeed);
-                ViewHelper.setRotation(ivArrow, 0);
+                ivArrow.setRotation(0);
 
                 if (progressView != null) {
                     progressView.setVisibility(View.GONE);
@@ -150,7 +149,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
             case STATE_FAILED:
                 ivArrow.setVisibility(View.VISIBLE);
                 ivArrow.setImageResource(R.mipmap.refresh_failed);
-                ViewHelper.setRotation(ivArrow, 0);
+                ivArrow.setRotation(0);
 
                 if (progressView != null) {
                     progressView.setVisibility(View.GONE);

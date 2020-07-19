@@ -15,7 +15,6 @@ import android.widget.TextView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.utils.common.DensityUtil;
-import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,9 +109,8 @@ public class MyIndicator extends HorizontalScrollView {
         tabView.setText(bean.getTitle());
         tabView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         tabView.setTextColor(getContext().getResources().getColor(isSelected ? com.enzo.commonlib.R.color.color_green : com.enzo.commonlib.R.color.color_333));
-        ViewHelper.setScaleX(tabView, isSelected ? 1.1f : 1f);
-        ViewHelper.setScaleY(tabView, isSelected ? 1.1f : 1f);
-
+        tabView.setScaleX(isSelected ? 1.1f : 1f);
+        tabView.setScaleY(isSelected ? 1.1f : 1f);
         int paddingLeft = DensityUtil.dip2px(getContext(), index == 0 ? 16 : 10);
         int paddingRight = DensityUtil.dip2px(getContext(), lastItem ? 60 : 10);
         tabView.setPadding(paddingLeft, 0, paddingRight, 0);

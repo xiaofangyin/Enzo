@@ -1,5 +1,6 @@
 package com.enzo.commonlib.widget.loadinglayout;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
@@ -10,7 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.enzo.commonlib.R;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 /**
  * 文 件 名: LoadingLayout

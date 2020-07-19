@@ -1,13 +1,11 @@
 package com.enzo.commonlib.widget.tablayout;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
-
-import com.nineoldandroids.animation.ObjectAnimator;
-
 import java.util.ArrayList;
 import java.util.List;
 

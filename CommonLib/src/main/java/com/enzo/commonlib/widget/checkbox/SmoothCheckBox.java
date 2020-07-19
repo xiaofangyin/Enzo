@@ -1,5 +1,6 @@
 package com.enzo.commonlib.widget.checkbox;
 
+import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,7 +18,6 @@ import android.widget.Checkable;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.DensityUtil;
-import com.nineoldandroids.animation.TypeEvaluator;
 
 /**
  * 文 件 名: SmoothCheckBox

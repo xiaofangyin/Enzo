@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.enzo.commonlib.R;
-import com.nineoldandroids.view.ViewHelper;
 
 
 /**
@@ -158,7 +157,7 @@ public class HeadWidget extends FrameLayout {
     public void setRightTextEnable(boolean enable) {
         if (mRightTextLayout != null && mRightText != null) {
             mRightTextLayout.setEnabled(enable);
-            ViewHelper.setAlpha(mRightTextLayout, enable ? 1.0f : 0.5f);
+            mRightTextLayout.setAlpha(enable ? 1.0f : 0.5f);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.enzo.commonlib.widget.timeclock;
 
+import android.animation.TypeEvaluator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,7 +13,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.nineoldandroids.animation.TypeEvaluator;
 
 /**
  * 文 件 名: TimePicker

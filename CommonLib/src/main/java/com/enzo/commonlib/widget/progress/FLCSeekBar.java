@@ -1,5 +1,9 @@
 package com.enzo.commonlib.widget.progress;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -15,10 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.enzo.commonlib.R;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.TypeEvaluator;
-import com.nineoldandroids.animation.ValueAnimator;
 
 /**
  * 文 件 名: SGLSeekBar
