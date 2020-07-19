@@ -4,13 +4,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
+import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.flkit.FLPluginBaseObject;
 import com.enzo.flkit.FLPluginBaseObjectDelegate;
 import com.enzo.flkit.FLPluginFactory;
@@ -34,7 +37,7 @@ import java.util.List;
 public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObjectDelegate {
 
     private LoadingLayout loadingLayout;
-    private RecyclerView recyclerView;
+    private PullToRefreshRecyclerView recyclerView;
     private SAAddDeviceAdapter adapter;
 
     @Override
@@ -59,6 +62,8 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
         loadingLayout = findViewById(R.id.add_device_loading_layout);
         recyclerView = findViewById(R.id.add_device_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(SAAddDeviceActivity.this));
+        recyclerView.setPullRefreshEnabled(true);
+        recyclerView.setLoadMoreEnabled(true);
     }
 
     @Override
@@ -77,7 +82,41 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     @Override
     public void initListener() {
+        recyclerView.setOnLoadListener(new PullToRefreshRecyclerView.OnLoadListener() {
+            @Override
+            public void onRecyclerViewRefresh() {
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
+                    }
+                }, 2500);
+                adapter.setNewData(getObjectList(buildData()));
+                recyclerView.refreshSuccess();
+            }
+
+            @Override
+            public void onRecyclerViewLoadMore() {
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.setLoadMoreData(getObjectList(buildData()));
+                        recyclerView.loadMoreSuccess();
+                    }
+                }, 2500);
+            }
+
+            @Override
+            public void onLoadMoreRetry() {
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.setLoadMoreData(getObjectList(buildData()));
+                        recyclerView.loadMoreSuccess();
+                    }
+                }, 2500);
+            }
+        });
     }
 
     private List<FLPluginBaseObject> getObjectList(List<JSONObject> dataList) {
@@ -99,7 +138,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     private List<JSONObject> buildData() {
         List<JSONObject> list = new ArrayList<>();
         try {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 20; i++) {
                 if (i % 4 == 0) {
                     JSONObject object1 = new JSONObject();
                     object1.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);
