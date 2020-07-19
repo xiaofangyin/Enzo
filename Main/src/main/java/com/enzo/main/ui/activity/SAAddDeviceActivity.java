@@ -137,7 +137,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     private List<JSONObject> buildData() {
         List<JSONObject> list = new ArrayList<>();
         try {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 4; i++) {
                 if (i % 4 == 0) {
                     JSONObject object1 = new JSONObject();
                     object1.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);
