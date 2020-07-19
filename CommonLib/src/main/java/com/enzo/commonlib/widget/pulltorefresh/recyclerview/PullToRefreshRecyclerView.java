@@ -106,11 +106,11 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     /**
      * 自动加载
      */
-    public void setAutoRefresh() {
+    public void autoRefresh() {
         if (isAllowRefresh && mLoadingListener != null) {
             if (!isLoading() && !isRefreshing()) {
                 isLoadingData = true;
-                headerRefreshView.onRefreshTime();
+                headerRefreshView.onPullDown();
                 if (headerRefreshView.getOnStateChangeListener() != null) {
                     headerRefreshView.getOnStateChangeListener().onStateChange(BasePullToRefreshView.STATE_REFRESHING);
                 }
@@ -206,14 +206,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
     }
 
-    /**
-     * 显示加载更新时间
-     */
-    public void setRefreshTimeVisible(String tag) {
-        if (headerRefreshView != null)
-            headerRefreshView.setRefreshTimeVisible(tag);
-    }
-
     @Override
     public void setAdapter(Adapter adapter) {
         this.insideAdapter = adapter;
@@ -294,7 +286,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             if (headerRefreshView.getState() != BasePullToRefreshView.STATE_REFRESHING) {
-                headerRefreshView.onRefreshTime();
+                headerRefreshView.onPullDown();
             }
         }
         return super.dispatchTouchEvent(ev);

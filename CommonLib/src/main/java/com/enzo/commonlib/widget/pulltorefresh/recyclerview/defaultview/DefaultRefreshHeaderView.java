@@ -74,15 +74,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
     }
 
     @Override
-    public void setRefreshTimeVisible(String tag) {
-        if (mRefreshContainer != null) {
-            this.tag = tag;
-            mRefreshContainer.setVisibility(VISIBLE);
-        }
-    }
-
-    @Override
-    public void onRefreshTime() {
+    public void onPullDown() {
         if (mState == STATE_PULL_DOWN) {
             //时间更新
             if (!TextUtils.isEmpty(tag)) {
