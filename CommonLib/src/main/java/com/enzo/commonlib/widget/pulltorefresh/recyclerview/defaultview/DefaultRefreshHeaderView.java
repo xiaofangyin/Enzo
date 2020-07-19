@@ -127,7 +127,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 break;
             case STATE_SUCCESS:
                 ivArrow.setVisibility(View.VISIBLE);
-                ivArrow.setImageResource(R.mipmap.refresh_succeed);
+                ivArrow.setImageResource(R.mipmap.icon_refresh_succeed);
                 ivArrow.setRotation(0);
 
                 if (progressView != null) {
@@ -137,7 +137,7 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 break;
             case STATE_FAILED:
                 ivArrow.setVisibility(View.VISIBLE);
-                ivArrow.setImageResource(R.mipmap.refresh_failed);
+                ivArrow.setImageResource(R.mipmap.icon_refresh_failed);
                 ivArrow.setRotation(0);
 
                 if (progressView != null) {

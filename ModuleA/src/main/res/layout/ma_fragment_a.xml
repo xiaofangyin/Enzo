@@ -29,8 +29,8 @@
                 android:paddingEnd="16dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/notice" />
 
