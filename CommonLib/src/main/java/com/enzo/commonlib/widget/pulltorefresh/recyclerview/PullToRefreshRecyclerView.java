@@ -22,12 +22,6 @@ import com.enzo.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultR
 
 import java.util.List;
 
-/**
- * 文 件 名: PullToRefreshRecyclerView
- * 创 建 人: xiaofangyin
- * 创建日期: 2017/12/12
- * 邮   箱: xiaofangyinwork@163.com
- */
 public class PullToRefreshRecyclerView extends RecyclerView {
 
     private Handler handler;
@@ -387,27 +381,37 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
-            mHeaderAndFooterAdapter.notifyItemRangeInserted(0, itemCount);
+            if (mHeaderAndFooterAdapter != null) {
+                mHeaderAndFooterAdapter.notifyItemRangeInserted(0, itemCount);
+            }
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount) {
-            mHeaderAndFooterAdapter.notifyItemRangeChanged(0, itemCount);
+            if (mHeaderAndFooterAdapter != null) {
+                mHeaderAndFooterAdapter.notifyItemRangeChanged(0, itemCount);
+            }
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
-            mHeaderAndFooterAdapter.notifyItemRangeChanged(0, itemCount, payload);
+            if (mHeaderAndFooterAdapter != null) {
+                mHeaderAndFooterAdapter.notifyItemRangeChanged(0, itemCount, payload);
+            }
         }
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
-            mHeaderAndFooterAdapter.notifyItemRangeRemoved(0, itemCount);
+            if (mHeaderAndFooterAdapter != null) {
+                mHeaderAndFooterAdapter.notifyItemRangeRemoved(0, itemCount);
+            }
         }
 
         @Override
         public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-            mHeaderAndFooterAdapter.notifyItemMoved(0, toPosition);
+            if (mHeaderAndFooterAdapter != null) {
+                mHeaderAndFooterAdapter.notifyItemMoved(0, toPosition);
+            }
         }
     }
 

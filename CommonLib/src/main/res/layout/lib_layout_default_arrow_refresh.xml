@@ -11,52 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
-        <LinearLayout
-            android:id="@+id/refresh_tip_ll"
+        <TextView
+            android:id="@+id/refresh_status_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/refresh_status_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/collection_pull_to_refresh"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:id="@+id/refresh_time_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/collection_last_refresh_time"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/last_refresh_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
+            android:gravity="center"
+            android:text="@string/collection_pull_to_refresh"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
 
         <RelativeLayout
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
-            android:layout_toLeftOf="@id/refresh_tip_ll">
+            android:layout_toStartOf="@id/refresh_status_tv">
 
             <ImageView
                 android:id="@+id/refresh_arrow"
