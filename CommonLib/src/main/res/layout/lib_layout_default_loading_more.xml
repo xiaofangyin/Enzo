@@ -14,10 +14,10 @@
         android:orientation="horizontal">
 
         <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="4dp"
-            app:indicator="Pacman"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="10dp"
+            app:indicator="BallSpinFadeLoader"
             app:indicator_color="#ffB5B5B5" />
 
         <TextView
