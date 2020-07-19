@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * https://github.com/AndroidKun/PullToRefreshRecyclerView
  */
-public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDataObserver {
+public class PullToRefreshRecyclerView extends RecyclerView {
 
     private Handler handler;
     //是否允许刷新
@@ -40,7 +40,8 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
     private OnLoadListener mLoadingListener;
     //设置头部底部View的适配器
     public HeaderAndFooterAdapter mHeaderAndFooterAdapter;
-    private RecyclerView.Adapter insideAdapter;
+    private Adapter insideAdapter;
+    private AdapterDataObserver mDataObserver = new HeaderAndFooterAdapterDataObserver();
 
     //默认下拉刷新头布局、空布局
     private BasePullToRefreshView headerRefreshView;
@@ -133,6 +134,7 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
         if (headerRefreshView != null) {
             headerRefreshView.refreshSuccess();
         }
+        mDataObserver.onChanged();
         setNoMoreData(false);
 
         scrollLoadMore();
@@ -150,6 +152,7 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
         if (headerRefreshView != null) {
             headerRefreshView.refreshFailed();
         }
+        mDataObserver.onChanged();
         setNoMoreData(false);
     }
 
@@ -209,10 +212,12 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
     }
 
     @Override
-    public void setAdapter(RecyclerView.Adapter adapter) {
+    public void setAdapter(Adapter adapter) {
         this.insideAdapter = adapter;
         mHeaderAndFooterAdapter = new HeaderAndFooterAdapter(adapter);
         super.setAdapter(mHeaderAndFooterAdapter);
+        adapter.registerAdapterDataObserver(mDataObserver);
+        mDataObserver.onChanged();
     }
 
     /**
@@ -363,6 +368,73 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
     private boolean isDefinitionWithSame(int itemViewType) {
         return itemViewType == TYPE_REFRESH_HEADER ||
                 itemViewType == TYPE_LOAD_MORE_FOOTER;
+    }
+
+    /***
+     * 包装头部和底部的数据通知
+     */
+    private class HeaderAndFooterAdapterDataObserver extends AdapterDataObserver {
+        @Override
+        public void onChanged() {
+            if (mHeaderAndFooterAdapter != null) {
+                mHeaderAndFooterAdapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            if (mHeaderAndFooterAdapter != null) {
+                if (isAllowRefresh) {
+                    mHeaderAndFooterAdapter.notifyItemRangeInserted(positionStart + 1, itemCount);
+                } else {
+                    mHeaderAndFooterAdapter.notifyItemRangeInserted(positionStart, itemCount);
+                }
+            }
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            if (mHeaderAndFooterAdapter != null) {
+                if (isAllowRefresh) {
+                    mHeaderAndFooterAdapter.notifyItemRangeChanged(positionStart + 1, itemCount);
+                } else {
+                    mHeaderAndFooterAdapter.notifyItemRangeChanged(positionStart, itemCount);
+                }
+            }
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+            if (mHeaderAndFooterAdapter != null) {
+                if (isAllowRefresh) {
+                    mHeaderAndFooterAdapter.notifyItemRangeChanged(positionStart + 1, itemCount, payload);
+                } else {
+                    mHeaderAndFooterAdapter.notifyItemRangeChanged(positionStart, itemCount, payload);
+                }
+            }
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            if (mHeaderAndFooterAdapter != null) {
+                if (isAllowRefresh) {
+                    mHeaderAndFooterAdapter.notifyItemRangeRemoved(positionStart + 1, itemCount);
+                } else {
+                    mHeaderAndFooterAdapter.notifyItemRangeRemoved(positionStart, itemCount);
+                }
+            }
+        }
+
+        @Override
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+            if (mHeaderAndFooterAdapter != null) {
+                if (isAllowRefresh) {
+                    mHeaderAndFooterAdapter.notifyItemMoved(fromPosition, toPosition);
+                } else {
+                    mHeaderAndFooterAdapter.notifyItemMoved(fromPosition, toPosition);
+                }
+            }
+        }
     }
 
     /***
@@ -553,16 +625,6 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
             return adapter.onFailedToRecycleView(holder);
         }
 
-        @Override
-        public void unregisterAdapterDataObserver(AdapterDataObserver observer) {
-            adapter.unregisterAdapterDataObserver(observer);
-        }
-
-        @Override
-        public void registerAdapterDataObserver(AdapterDataObserver observer) {
-            adapter.registerAdapterDataObserver(observer);
-        }
-
         private class HeaderAndFooterViewHolder extends ViewHolder {
             HeaderAndFooterViewHolder(View itemView) {
                 super(itemView);
@@ -572,6 +634,7 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
 
     /**
      * ======================================================= 加载数据 =======================================================
+     * 设置加载更多监听
      */
     public void setOnLoadListener(OnLoadListener listener) {
         mLoadingListener = listener;
@@ -586,83 +649,10 @@ public class PullToRefreshRecyclerView extends RecyclerView implements AdapterDa
         void onLoadMoreRetry();
     }
 
-    /*
+    /**
      * ======================================================= 加载数据 =======================================================
      */
 
-
-    /**
-     * ======================================================= 更新数据 =======================================================
-     */
-    @Override
-    public void notifyItemChanged(int position) {
-        if (insideAdapter != null) {
-            if (isAllowRefresh) {
-                insideAdapter.notifyItemChanged(position + 1);
-            } else {
-                insideAdapter.notifyItemChanged(position);
-            }
-        }
-    }
-
-    @Override
-    public void notifyItemRangeChanged(int positionStart, int itemCount) {
-        if (insideAdapter != null) {
-            if (isAllowRefresh) {
-                insideAdapter.notifyItemRangeChanged(positionStart + 1, itemCount);
-            } else {
-                insideAdapter.notifyItemRangeChanged(positionStart, itemCount);
-            }
-        }
-    }
-
-    @Override
-    public void notifyItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
-        if (insideAdapter != null) {
-            if (isAllowRefresh) {
-                insideAdapter.notifyItemRangeChanged(positionStart + 1, itemCount, payload);
-            } else {
-                insideAdapter.notifyItemRangeChanged(positionStart, itemCount, payload);
-            }
-        }
-    }
-
-    @Override
-    public void notifyItemRangeInserted(int positionStart, int itemCount) {
-        if (insideAdapter != null) {
-            if (isAllowRefresh) {
-                insideAdapter.notifyItemRangeInserted(positionStart + 1, itemCount);
-            } else {
-                insideAdapter.notifyItemRangeInserted(positionStart, itemCount);
-            }
-        }
-    }
-
-    @Override
-    public void notifyItemRangeRemoved(int positionStart, int itemCount) {
-        if (insideAdapter != null) {
-            if (isAllowRefresh) {
-                insideAdapter.notifyItemRangeRemoved(positionStart + 1, itemCount);
-            } else {
-                insideAdapter.notifyItemRangeRemoved(positionStart, itemCount);
-            }
-        }
-    }
-
-    @Override
-    public void notifyItemRangeRemoved(int fromPosition, int toPosition, int itemCount) {
-        if (insideAdapter != null) {
-            if (isAllowRefresh) {
-                insideAdapter.notifyItemRangeRemoved(fromPosition + 1, itemCount);
-            } else {
-                insideAdapter.notifyItemRangeRemoved(fromPosition, itemCount);
-            }
-        }
-    }
-
-    /*
-     * ======================================================= 更新数据 =======================================================
-     */
 
     /**
      * 防止内存泄漏

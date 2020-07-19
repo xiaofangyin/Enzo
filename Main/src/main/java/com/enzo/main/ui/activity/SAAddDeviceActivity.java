@@ -70,7 +70,9 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                     }
                 }
                 adapter.getData().addAll(1, getObjectList(list));
-                recyclerView.notifyItemRangeInserted(1, list.size());
+                adapter.notifyItemRangeInserted(1, list.size());
+//                adapter.getData().get(3).alias = "123456";
+//                adapter.notifyItemChanged(3);
             }
         });
     }
