@@ -149,6 +149,10 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      * 刷新数据失败
      */
     public void refreshFailed() {
+        //因为刷新完后recycler的mScrollState还是SCROLL_STATE_DRAGGING,在onInterceptTouchEvent方法中
+        //return true,导致子view的点击事件被拦截，所以此处将mScrollState手动置成SCROLL_STATE_IDLE
+        stopScroll();
+
         isLoadingData = false;
         if (headerRefreshView != null) {
             headerRefreshView.refreshFailed();
