@@ -181,7 +181,12 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     /**
      * 手指按下回调
      */
-    public abstract void onPullDown();
+    public abstract void onActionDown();
+
+    /**
+     * 手指抬起回调
+     */
+    public abstract void onActionUp();
 
     /**
      * 销毁页面对象和动画，防止内存泄漏

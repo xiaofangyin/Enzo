@@ -24,12 +24,9 @@ import com.enzo.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefre
 public class DefaultRefreshHeaderView extends BasePullToRefreshView implements BasePullToRefreshView.OnStateChangeListener {
 
     private static final int ROTATE_DURATION = 180;
-    private String tag = "";
     private ImageView ivArrow;
     private TextView tvRefreshState;
     private AVLoadingIndicatorView progressView;
-
-    private Context context;
     private ObjectAnimator rotateAnimator;
 
     public DefaultRefreshHeaderView(Context context) {
@@ -42,7 +39,6 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
      */
     @Override
     public void initView(Context context) {
-        this.context = context;
         mContainer = LayoutInflater.from(context).inflate(R.layout.lib_layout_default_arrow_refresh, null);
 
         //把刷新头部的高度初始化为0
@@ -66,10 +62,13 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
     }
 
     @Override
-    public void onPullDown() {
-        if (mState == STATE_PULL_DOWN) {
-            LogUtil.d("header view pull down...");
-        }
+    public void onActionDown() {
+        LogUtil.d("header view action down...");
+    }
+
+    @Override
+    public void onActionUp() {
+        LogUtil.d("header view action up...");
     }
 
     @Override

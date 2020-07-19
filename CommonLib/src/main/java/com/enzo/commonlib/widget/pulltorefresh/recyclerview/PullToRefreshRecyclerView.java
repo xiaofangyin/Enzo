@@ -107,7 +107,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         if (isAllowRefresh && mLoadingListener != null) {
             if (!isLoading() && !isRefreshing()) {
                 isLoadingData = true;
-                headerRefreshView.onPullDown();
+                headerRefreshView.onActionDown();
                 if (headerRefreshView.getOnStateChangeListener() != null) {
                     headerRefreshView.getOnStateChangeListener().onStateChange(BasePullToRefreshView.STATE_REFRESHING);
                 }
@@ -291,8 +291,12 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (headerRefreshView.getState() != BasePullToRefreshView.STATE_REFRESHING) {
-                headerRefreshView.onPullDown();
+            if (headerRefreshView.getState() == BasePullToRefreshView.STATE_PULL_DOWN) {
+                headerRefreshView.onActionDown();
+            }
+        } else if (ev.getAction() == MotionEvent.ACTION_UP) {
+            if (headerRefreshView.getState() == BasePullToRefreshView.STATE_RELEASE_REFRESH) {
+                headerRefreshView.onActionUp();
             }
         }
         return super.dispatchTouchEvent(ev);
