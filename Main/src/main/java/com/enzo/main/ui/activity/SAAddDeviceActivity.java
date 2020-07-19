@@ -4,11 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
@@ -49,10 +47,30 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     public void initHeader() {
         HeadWidget headWidget = findViewById(R.id.add_device_header);
         headWidget.setTitle("添加设备");
+        headWidget.setRightImage(R.mipmap.main_add_icon);
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        headWidget.setRightImageClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<JSONObject> list = new ArrayList<>();
+                for (int i = 0; i < 4; i++) {
+                    JSONObject object4 = new JSONObject();
+                    try {
+                        object4.put("type", FLPluginTypeList.FL_DEVICE_TYPE_D);
+                        object4.put("alias", "扩展器 " + i);
+                        object4.put("rid", "400000000" + i);
+                        list.add(object4);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                adapter.getData().addAll(1, getObjectList(list));
+                recyclerView.notifyItemRangeInserted(1, list.size());
             }
         });
     }
