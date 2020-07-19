@@ -3,17 +3,16 @@ package com.enzo.commonlib.widget.pulltorefresh.recyclerview;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.base.BaseLoadMoreView;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
@@ -22,6 +21,9 @@ import com.enzo.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultR
 
 import java.util.List;
 
+/**
+ * https://github.com/AndroidKun/PullToRefreshRecyclerView
+ */
 public class PullToRefreshRecyclerView extends RecyclerView {
 
     private Handler handler;
@@ -69,7 +71,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      */
     private void init(Context context) {
         handler = new Handler(Looper.getMainLooper());
-        //初始化头部刷新布局
         headerRefreshView = new DefaultRefreshHeaderView(context);
         loadMoreView = new DefaultLoadMoreView(context);
     }
@@ -260,11 +261,12 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             int loadStatus = loadMoreView.getState();
             if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
                 LayoutManager layoutManager = getLayoutManager();
-
-                if (layoutManager.getChildCount() > 0 && (findLastVisibleItemPosition(layoutManager) + 1 == layoutManager.getItemCount())) {
-                    isLoadingData = true;
-                    loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-                    mLoadingListener.onRecyclerViewLoadMore();
+                if (layoutManager != null) {
+                    if (layoutManager.getChildCount() > 0 && (findLastVisibleItemPosition(layoutManager) + 1 == layoutManager.getItemCount())) {
+                        isLoadingData = true;
+                        loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
+                        mLoadingListener.onRecyclerViewLoadMore();
+                    }
                 }
             }
         }
@@ -382,35 +384,35 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             if (mHeaderAndFooterAdapter != null) {
-                mHeaderAndFooterAdapter.notifyItemRangeInserted(0, itemCount);
+                mHeaderAndFooterAdapter.notifyItemRangeInserted(positionStart, itemCount);
             }
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount) {
             if (mHeaderAndFooterAdapter != null) {
-                mHeaderAndFooterAdapter.notifyItemRangeChanged(0, itemCount);
+                mHeaderAndFooterAdapter.notifyItemRangeChanged(positionStart, itemCount);
             }
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
             if (mHeaderAndFooterAdapter != null) {
-                mHeaderAndFooterAdapter.notifyItemRangeChanged(0, itemCount, payload);
+                mHeaderAndFooterAdapter.notifyItemRangeChanged(positionStart, itemCount, payload);
             }
         }
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
             if (mHeaderAndFooterAdapter != null) {
-                mHeaderAndFooterAdapter.notifyItemRangeRemoved(0, itemCount);
+                mHeaderAndFooterAdapter.notifyItemRangeRemoved(positionStart, itemCount);
             }
         }
 
         @Override
         public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
             if (mHeaderAndFooterAdapter != null) {
-                mHeaderAndFooterAdapter.notifyItemMoved(0, toPosition);
+                mHeaderAndFooterAdapter.notifyItemMoved(fromPosition, toPosition);
             }
         }
     }
