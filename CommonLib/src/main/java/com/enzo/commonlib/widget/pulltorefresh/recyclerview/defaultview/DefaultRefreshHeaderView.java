@@ -76,6 +76,12 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
         if (progressView != null) {
             progressView = null;
         }
+        if (rotateAnimator != null) {
+            rotateAnimator.cancel();
+            rotateAnimator.removeAllUpdateListeners();
+            rotateAnimator.removeAllListeners();
+            rotateAnimator = null;
+        }
     }
 
     @Override
