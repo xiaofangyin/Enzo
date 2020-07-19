@@ -634,7 +634,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
 
     /**
      * ======================================================= 加载数据 =======================================================
-     * 设置加载更多监听
      */
     public void setOnLoadListener(OnLoadListener listener) {
         mLoadingListener = listener;
@@ -649,7 +648,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         void onLoadMoreRetry();
     }
 
-    /**
+    /*
      * ======================================================= 加载数据 =======================================================
      */
 

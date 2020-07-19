@@ -197,8 +197,9 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     }
 
     @Override
-    public void finish() {
-        super.finish();
+    protected void onDestroy() {
+        super.onDestroy();
+        recyclerView.destroy();
         for (int i = 0; i < adapter.getItemCount(); i++) {
             adapter.getData().get(i).release();
         }
