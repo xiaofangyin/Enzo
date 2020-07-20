@@ -433,7 +433,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
             if (mHeaderAndFooterAdapter != null) {
                 if (isAllowRefresh) {
-                    mHeaderAndFooterAdapter.notifyItemMoved(fromPosition, toPosition);
+                    mHeaderAndFooterAdapter.notifyItemMoved(fromPosition + 1, toPosition + 1);
                 } else {
                     mHeaderAndFooterAdapter.notifyItemMoved(fromPosition, toPosition);
                 }
