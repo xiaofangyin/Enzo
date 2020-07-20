@@ -1,8 +1,10 @@
 package com.enzo.commonlib.base;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.ActivityHelper;
@@ -40,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     @Override
     public int getStatusBarColor() {
-        return getResources().getColor(R.color.color_main_black);
+        return ContextCompat.getColor(this, R.color.color_main_black);
     }
 
     @Override

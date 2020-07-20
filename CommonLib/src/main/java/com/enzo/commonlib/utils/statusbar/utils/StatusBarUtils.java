@@ -1,4 +1,5 @@
-package com.enzo.commonlib.utils.statusbar;
+package com.enzo.commonlib.utils.statusbar.utils;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,6 +32,7 @@ public class StatusBarUtils {
      * @return              状态栏高度
      */
     public static int getStatusBarHeight(Context context) {
+        checkNull(context);
         int statusBarHeight = 0;
         Resources res = context.getResources();
         int resourceId = res.getIdentifier("status_bar_height",
@@ -58,6 +60,18 @@ public class StatusBarUtils {
     }
 
     /**
+     * 设置状态栏字体图标颜色
+     *
+     * @param activity 当前activity
+     * @param dark     是否深色 true为深色 false 为白色
+     */
+    public static void setMeiZu(Activity activity , boolean dark){
+        if (RomUtils.isFlyme()){
+            StatusBarColorUtils.setStatusBarDarkIcon(activity , dark);
+        }
+    }
+
+    /**
      * 状态栏亮色模式，设置状态栏黑色文字、图标，
      * 适配4.4以上版本MIUIV、Flyme和6.0以上版本其他Android
      * @param activity      activity
@@ -67,12 +81,15 @@ public class StatusBarUtils {
         int result=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if(StateAppBar.setStatusBarLightMode(activity, true)){
+                //是否是MIUI
                 result=1;
             }else if(StateAppBar.FlymeSetStatusBarLightMode(activity, true)){
+                //是否是Flyme
                 result=2;
             }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //其他
                 activity.getWindow().getDecorView().
-                        setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|
+                        setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|
                                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 result=3;
             }
@@ -96,7 +113,7 @@ public class StatusBarUtils {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     activity.getWindow().getDecorView().setSystemUiVisibility(
                             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                    |View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
             }
         }
@@ -117,5 +134,10 @@ public class StatusBarUtils {
         }
     }
 
+    public static void checkNull(Object object){
+        if (object == null){
+            throw new NullPointerException("object is not null");
+        }
+    }
 
 }

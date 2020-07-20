@@ -1,14 +1,26 @@
+/*
+Copyright 2017 yangchong211（github.com/yangchong211）
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package com.enzo.commonlib.utils.statusbar.bar;
+
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.appcompat.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -16,18 +28,46 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.Toolbar;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.enzo.commonlib.R;
-import com.enzo.commonlib.utils.statusbar.StatusBarUtils;
+import com.enzo.commonlib.utils.statusbar.view.StatusBarView;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.lang.reflect.Field;
 
+import static com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils.getStatusBarHeight;
+
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211/YCStatusBar
+ *     time  : 2018/06/4
+ *     desc  : 状态栏工具类
+ *     revise: 使用方法请看GitHub说明文档
+ * </pre>
+ */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 final class BarStatusKitKat {
 
+    /**
+     * 添加一个状态栏高度的自定义view
+     */
     private static final String TAG_FAKE_STATUS_BAR_VIEW = "statusBarView";
+    /**
+     * 添加margin
+     */
     private static final String TAG_MARGIN_ADDED = "marginAdded";
 
+    /**
+     * 设置状态栏的颜色，4.4以上，5.0以下，可以直接通过添加状态view来修改颜色
+     *
+     * @param activity                          activity
+     * @param statusColor                       颜色
+     */
     static void setStatusBarColor(Activity activity, int statusColor) {
         Window window = activity.getWindow();
         //设置Window为全透明
@@ -36,7 +76,7 @@ final class BarStatusKitKat {
         //获取父布局
         View mContentChild = mContentView.getChildAt(0);
         //获取状态栏高度
-        int statusBarHeight = StatusBarUtils.getStatusBarHeight(activity);
+        int statusBarHeight = getStatusBarHeight(activity);
         //如果已经存在假状态栏则移除，防止重复添加
         removeFakeStatusBarViewIfExist(activity);
         //添加一个View来作为状态栏的填充
@@ -54,23 +94,30 @@ final class BarStatusKitKat {
         if (view != null) {
             TypedValue typedValue = new TypedValue();
             if (activity.getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true)) {
-                int actionBarHeight = TypedValue.complexToDimensionPixelSize(typedValue.data, activity.getResources().getDisplayMetrics());
+                int actionBarHeight = TypedValue.complexToDimensionPixelSize(
+                        typedValue.data, activity.getResources().getDisplayMetrics());
                 StateAppBar.setContentTopPadding(activity, actionBarHeight);
             }
         }
     }
 
+
+    /**
+     * 设置状态栏透明效果
+     * @param activity                          activity
+     */
     static void translucentStatusBar(Activity activity) {
         Window window = activity.getWindow();
         //设置Window为透明
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
+        //获取content布局
         ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
         View mContentChild = mContentView.getChildAt(0);
-
         //移除已经存在假状态栏则,并且取消它的Margin间距
         removeFakeStatusBarViewIfExist(activity);
-        removeMarginTopOfContentChild(mContentChild, StatusBarUtils.getStatusBarHeight(activity));
+        //获取状态栏的高度
+        int statusBarHeight = getStatusBarHeight(activity);
+        removeMarginTopOfContentChild(mContentChild, statusBarHeight);
         if (mContentChild != null) {
             //fitsSystemWindow 为 false, 不预留系统栏位置.
             mContentChild.setFitsSystemWindows(false);
@@ -96,14 +143,14 @@ final class BarStatusKitKat {
         //为Toolbar添加一个状态栏的高度, 同时为Toolbar添加paddingTop,使Toolbar覆盖状态栏，ToolBar的title可以正常显示.
         if (toolbar.getTag() == null) {
             CollapsingToolbarLayout.LayoutParams lp = (CollapsingToolbarLayout.LayoutParams) toolbar.getLayoutParams();
-            int statusBarHeight = StatusBarUtils.getStatusBarHeight(activity);
+            int statusBarHeight = getStatusBarHeight(activity);
             lp.height += statusBarHeight;
             toolbar.setLayoutParams(lp);
             toolbar.setPadding(toolbar.getPaddingLeft(), toolbar.getPaddingTop() + statusBarHeight, toolbar.getPaddingRight(), toolbar.getPaddingBottom());
             toolbar.setTag(true);
         }
         //移除已经存在假状态栏则,并且取消它的Margin间距
-        int statusBarHeight = StatusBarUtils.getStatusBarHeight(activity);
+        int statusBarHeight = getStatusBarHeight(activity);
         removeFakeStatusBarViewIfExist(activity);
         removeMarginTopOfContentChild(mContentChild, statusBarHeight);
         //添加一个View来作为状态栏的填充
@@ -155,14 +202,14 @@ final class BarStatusKitKat {
 
         if (toolbar.getTag() == null) {
             CollapsingToolbarLayout.LayoutParams lp = (CollapsingToolbarLayout.LayoutParams) toolbar.getLayoutParams();
-            int statusBarHeight = StatusBarUtils.getStatusBarHeight(activity);
+            int statusBarHeight = getStatusBarHeight(activity);
             lp.height += statusBarHeight;
             toolbar.setLayoutParams(lp);
             toolbar.setPadding(toolbar.getPaddingLeft(), toolbar.getPaddingTop() + statusBarHeight, toolbar.getPaddingRight(), toolbar.getPaddingBottom());
             toolbar.setTag(true);
         }
 
-        int statusBarHeight = StatusBarUtils.getStatusBarHeight(activity);
+        int statusBarHeight = getStatusBarHeight(activity);
         int color = Color.BLACK;
         try {
             @SuppressLint("PrivateApi")
@@ -228,50 +275,76 @@ final class BarStatusKitKat {
         });
     }
 
+    /**
+     * 如果已经存在假状态栏则移除，假状态栏是指StatusBarView，添加之前可以先移除操作，避免重复添加
+     * TAG_FAKE_STATUS_BAR_VIEW    给假的状态栏StatusBarView打的tag标签
+     * @param activity                      activity
+     */
     private static void removeFakeStatusBarViewIfExist(Activity activity) {
         Window window = activity.getWindow();
         ViewGroup mDecorView = (ViewGroup) window.getDecorView();
-
         View fakeView = mDecorView.findViewWithTag(TAG_FAKE_STATUS_BAR_VIEW);
         if (fakeView != null) {
             mDecorView.removeView(fakeView);
         }
     }
 
+    /**
+     * 添加一个假的状态栏
+     * 4.4以上，5.0以下
+     * 原理：只要在根布局去设置一个与状态栏等高的View，设置背景色为我们期望的颜色就可以
+     * @param activity                      activity
+     * @param statusBarColor                状态栏颜色
+     * @param statusBarHeight               状态栏高度，这个高度可以获取
+     * @return
+     */
     private static View addFakeStatusBarView(Activity activity, int statusBarColor, int statusBarHeight) {
         Window window = activity.getWindow();
         ViewGroup mDecorView = (ViewGroup) window.getDecorView();
 
-        View mStatusBarView = new View(activity);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
+        //创建一个假的状态栏，添加到DecorView上
+        StatusBarView mStatusBarView = new StatusBarView(activity);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
         layoutParams.gravity = Gravity.TOP;
         mStatusBarView.setLayoutParams(layoutParams);
         mStatusBarView.setBackgroundColor(statusBarColor);
         mStatusBarView.setTag(TAG_FAKE_STATUS_BAR_VIEW);
-
+        //添加view
         mDecorView.addView(mStatusBarView);
         return mStatusBarView;
     }
 
+    /**
+     * 添加到顶部margin间距
+     * @param mContentChild                 子child
+     * @param statusBarHeight               状态栏高度
+     */
     private static void addMarginTopToContentChild(View mContentChild, int statusBarHeight) {
         if (mContentChild == null) {
             return;
         }
         if (!TAG_MARGIN_ADDED.equals(mContentChild.getTag())) {
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mContentChild.getLayoutParams();
+            //设置到顶部的间距
             lp.topMargin += statusBarHeight;
             mContentChild.setLayoutParams(lp);
             mContentChild.setTag(TAG_MARGIN_ADDED);
         }
     }
 
-
+    /**
+     * 移除到顶部margin间距
+     * @param mContentChild                 子child
+     * @param statusBarHeight               状态栏高度
+     */
     private static void removeMarginTopOfContentChild(View mContentChild, int statusBarHeight) {
         if (mContentChild == null) {
             return;
         }
         if (TAG_MARGIN_ADDED.equals(mContentChild.getTag())) {
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mContentChild.getLayoutParams();
+            //移除到顶部的间距
             lp.topMargin -= statusBarHeight;
             mContentChild.setLayoutParams(lp);
             mContentChild.setTag(null);
