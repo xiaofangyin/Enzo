@@ -285,32 +285,35 @@ public class BarrageView extends ViewGroup implements IBarrageView {
         if (model == MODEL_RANDOM) {
             return speed - speedWaveValue + random.nextInt(2 * speedWaveValue);
         } else {
-            int lastSpeed = speedArray[line];
-            View view = barrageList.get(line);
-            int curSpeed;
-            if (view == null) {
-                curSpeed = speed - speedWaveValue + random.nextInt(2 * speedWaveValue);
-                Log.e(TAG, "View:null" + ",line:" + line + ",speed:" + curSpeed);
-                // 如果当前为空 随机生成一个滑动时间
+            if (speedArray != null && speedArray.length > line) {
+                int lastSpeed = speedArray[line];
+                View view = barrageList.get(line);
+                int curSpeed;
+                if (view == null) {
+                    curSpeed = speed - speedWaveValue + random.nextInt(2 * speedWaveValue);
+                    Log.e(TAG, "View:null" + ",line:" + line + ",speed:" + curSpeed);
+                    // 如果当前为空 随机生成一个滑动时间
+                    return curSpeed;
+                }
+                int slideLength = (int) (width - view.getX());
+                if (view.getWidth() > slideLength) {
+                    // 数据密集的时候跟上面的时间间隔相同
+                    Log.e(TAG, "View:------" + ",line:" + line + ",speed:" + lastSpeed);
+                    return lastSpeed;
+                }
+                // 得到上个View剩下的滑动时间
+                int lastLeavedSlidingTime = (int) ((view.getX() + view.getWidth()) / (float) lastSpeed) + 1;
+                //Log.e(TAG,"lastLeavedSlidingTime:"+lastLeavedSlidingTime+",lastLeavedSlidingTime:"+);
+                int fastestSpeed = (width) / lastLeavedSlidingTime;
+                fastestSpeed = Math.min(fastestSpeed, speed + speedWaveValue);
+                if (fastestSpeed <= speed - speedWaveValue) {
+                    curSpeed = speed - speedWaveValue;
+                } else
+                    curSpeed = speed - speedWaveValue + random.nextInt(fastestSpeed - (speed - speedWaveValue));
+                Log.e(TAG, "view:" + view.getX() + ",lastLeavedSlidingTime:" + lastLeavedSlidingTime + ",line:" + line + ",speed:" + curSpeed);
                 return curSpeed;
             }
-            int slideLength = (int) (width - view.getX());
-            if (view.getWidth() > slideLength) {
-                // 数据密集的时候跟上面的时间间隔相同
-                Log.e(TAG, "View:------" + ",line:" + line + ",speed:" + lastSpeed);
-                return lastSpeed;
-            }
-            // 得到上个View剩下的滑动时间
-            int lastLeavedSlidingTime = (int) ((view.getX() + view.getWidth()) / (float) lastSpeed) + 1;
-            //Log.e(TAG,"lastLeavedSlidingTime:"+lastLeavedSlidingTime+",lastLeavedSlidingTime:"+);
-            int fastestSpeed = (width) / lastLeavedSlidingTime;
-            fastestSpeed = Math.min(fastestSpeed, speed + speedWaveValue);
-            if (fastestSpeed <= speed - speedWaveValue) {
-                curSpeed = speed - speedWaveValue;
-            } else
-                curSpeed = speed - speedWaveValue + random.nextInt(fastestSpeed - (speed - speedWaveValue));
-            Log.e(TAG, "view:" + view.getX() + ",lastLeavedSlidingTime:" + lastLeavedSlidingTime + ",line:" + line + ",speed:" + curSpeed);
-            return curSpeed;
+            return 0;
         }
     }
 
