@@ -12,6 +12,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.utils.common.DensityUtil;
@@ -108,7 +109,8 @@ public class MyIndicator extends HorizontalScrollView {
         tabView.setOnClickListener(mTabClickListener);
         tabView.setText(bean.getTitle());
         tabView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        tabView.setTextColor(getContext().getResources().getColor(isSelected ? com.enzo.commonlib.R.color.color_green : com.enzo.commonlib.R.color.color_333));
+        tabView.setTextColor(ContextCompat.getColor(getContext(),
+                isSelected ? com.enzo.commonlib.R.color.color_green : com.enzo.commonlib.R.color.color_333));
         tabView.setScaleX(isSelected ? 1.1f : 1f);
         tabView.setScaleY(isSelected ? 1.1f : 1f);
         int paddingLeft = DensityUtil.dip2px(getContext(), index == 0 ? 16 : 10);
@@ -152,11 +154,11 @@ public class MyIndicator extends HorizontalScrollView {
             TextView child = (TextView) myLinearLayout.getChildAt(i);
             boolean isSelected = (i == item);
             if (isSelected) {
-                child.setTextColor(getContext().getResources().getColor(com.enzo.commonlib.R.color.color_green));
+                child.setTextColor(ContextCompat.getColor(getContext(), com.enzo.commonlib.R.color.color_green));
                 animation(child);
                 animateToTab(item, animate);
             } else {
-                child.setTextColor(getContext().getResources().getColor(com.enzo.commonlib.R.color.color_333));
+                child.setTextColor(ContextCompat.getColor(getContext(), com.enzo.commonlib.R.color.color_333));
                 animation2(child);
             }
         }

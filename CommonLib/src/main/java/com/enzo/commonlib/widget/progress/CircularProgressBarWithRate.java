@@ -7,6 +7,8 @@ import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.enzo.commonlib.R;
 
 /**
@@ -41,7 +43,7 @@ public class CircularProgressBarWithRate extends FrameLayout implements Circular
         this.addView(mRateText);
         mRateText.setLayoutParams(lp);
         mRateText.setGravity(Gravity.CENTER);
-        mRateText.setTextColor(getResources().getColor(R.color.color_white));
+        mRateText.setTextColor(ContextCompat.getColor(getContext(), R.color.color_white));
         mRateText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
         mCircularProgressBar.setOnProgressChangeListener(this);

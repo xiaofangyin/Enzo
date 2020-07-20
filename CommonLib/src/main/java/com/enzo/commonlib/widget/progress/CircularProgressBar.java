@@ -8,6 +8,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.core.content.ContextCompat;
+
 import com.enzo.commonlib.R;
 
 /**
@@ -41,7 +43,7 @@ public class CircularProgressBar extends View {
         mMaxProgress = 100;
         mProgress = 0;
         mBackgroundColor = Color.LTGRAY;
-        mPrimaryColor = getResources().getColor(R.color.color_green);
+        mPrimaryColor = ContextCompat.getColor(getContext(), R.color.color_green);
         mStrokeWidth = dip2px(getContext(), 5);
     }
 

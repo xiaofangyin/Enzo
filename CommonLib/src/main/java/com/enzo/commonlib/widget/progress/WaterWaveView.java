@@ -22,6 +22,7 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Keep;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.DensityUtil;
@@ -96,9 +97,9 @@ public class WaterWaveView extends AppCompatImageView {
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.WaterWaveView, defStyleAttr, 0);
 
         // Init Wave
-        waveColor = attributes.getColor(R.styleable.WaterWaveView_cfl_wave_color, getResources().getColor(R.color.color_green));
+        waveColor = attributes.getColor(R.styleable.WaterWaveView_cfl_wave_color, ContextCompat.getColor(getContext(), R.color.color_green));
         float amplitudeRatioAttr = attributes.getFloat(R.styleable.WaterWaveView_cfl_wave_amplitude, DEFAULT_AMPLITUDE_RATIO);
-        amplitudeRatio = (amplitudeRatioAttr > DEFAULT_AMPLITUDE_RATIO) ? DEFAULT_AMPLITUDE_RATIO : amplitudeRatioAttr;
+        amplitudeRatio = Math.min(amplitudeRatioAttr, DEFAULT_AMPLITUDE_RATIO);
         setProgress(attributes.getInteger(R.styleable.WaterWaveView_cfl_progress, 0));
 
         if (attributes.getBoolean(R.styleable.WaterWaveView_cfl_border, true)) {
@@ -125,7 +126,7 @@ public class WaterWaveView extends AppCompatImageView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = measureWidth(widthMeasureSpec);
         int height = measureHeight(heightMeasureSpec);
-        int imageSize = (width < height) ? width : height;
+        int imageSize = Math.min(width, height);
         setMeasuredDimension(imageSize, imageSize);
     }
 

@@ -3,8 +3,6 @@ package com.enzo.commonlib.widget.commentdialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import com.enzo.commonlib.R;
 
@@ -97,11 +99,11 @@ public class CommentDialog extends DialogFragment {
                 if (TextUtils.isEmpty(s.toString())) {
                     llSendLayout.setEnabled(false);
                     ivSendIcon.setImageResource(R.mipmap.icon_comment_disable);
-                    tvSendText.setTextColor(getResources().getColor(R.color.color_d9));
+                    tvSendText.setTextColor(ContextCompat.getColor(getContext(), R.color.color_d9));
                 } else {
                     llSendLayout.setEnabled(true);
                     ivSendIcon.setImageResource(R.mipmap.icon_comment_enable);
-                    tvSendText.setTextColor(getResources().getColor(R.color.color_green));
+                    tvSendText.setTextColor(ContextCompat.getColor(getContext(), R.color.color_green));
                 }
 
             }

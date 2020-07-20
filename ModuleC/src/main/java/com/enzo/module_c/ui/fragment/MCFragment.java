@@ -2,9 +2,11 @@ package com.enzo.module_c.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.viewpager.widget.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
+
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
@@ -16,8 +18,8 @@ import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigat
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.ScaleTransitionPagerTitleView;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.enzo.module_c.R;
-import com.enzo.module_c.ui.adapter.MCViewPagerAdapter;
 import com.enzo.module_c.model.ColumnBean;
+import com.enzo.module_c.ui.adapter.MCViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +89,8 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
-                simplePagerTitleView.setNormalColor(getResources().getColor(R.color.color_666));
-                simplePagerTitleView.setSelectedColor(getResources().getColor(R.color.color_blue));
+                simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, R.color.color_666));
+                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.color_blue));
                 simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
                 simplePagerTitleView.setText(columnList.get(index).getColumn_name());
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +106,7 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
                 linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                linePagerIndicator.setColors(getResources().getColor(R.color.color_blue));
+                linePagerIndicator.setColors(ContextCompat.getColor(context, R.color.color_blue));
                 return linePagerIndicator;
             }
         });

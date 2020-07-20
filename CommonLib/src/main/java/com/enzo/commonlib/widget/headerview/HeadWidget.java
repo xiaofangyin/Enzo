@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.enzo.commonlib.R;
 
 
@@ -53,7 +55,7 @@ public class HeadWidget extends FrameLayout {
         mRightImageLayout = rootView.findViewById(R.id.ugc_header_right_image_layout);
         mRightImage = rootView.findViewById(R.id.ugc_header_right_image);
         bottomLine = rootView.findViewById(R.id.ugc_header_bottom_line);
-        setBackgroundColor(getResources().getColor(R.color.color_white));
+        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_white));
     }
 
     public void setBackButtonVisible(int visible) {

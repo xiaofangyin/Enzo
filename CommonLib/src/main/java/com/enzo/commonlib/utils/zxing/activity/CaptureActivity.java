@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseActivity;
@@ -142,12 +143,12 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     @Override
     public void initHeader() {
         HeadWidget headWidget = findViewById(R.id.scanner_header);
-        headWidget.setBackgroundColor(getResources().getColor(com.enzo.commonlib.R.color.color_green));
+        headWidget.setBackgroundColor(ContextCompat.getColor(this, com.enzo.commonlib.R.color.color_green));
         headWidget.setLeftImage(com.enzo.commonlib.R.mipmap.flc_icon_back_default);
         headWidget.setTitle(getTitleText());
         headWidget.setRightText("相册");
-        headWidget.setTitleColor(getResources().getColor(com.enzo.commonlib.R.color.color_white));
-        headWidget.setRightTextColor(getResources().getColor(com.enzo.commonlib.R.color.color_white));
+        headWidget.setTitleColor(ContextCompat.getColor(this, com.enzo.commonlib.R.color.color_white));
+        headWidget.setRightTextColor(ContextCompat.getColor(this, com.enzo.commonlib.R.color.color_white));
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
