@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
@@ -81,8 +81,8 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     public void initView() {
         loadingLayout = findViewById(R.id.add_device_loading_layout);
         recyclerView = findViewById(R.id.add_device_recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(SAAddDeviceActivity.this));
-        recyclerView.setLayoutManager(new GridLayoutManager(SAAddDeviceActivity.this, 3));
+        recyclerView.setLayoutManager(new LinearLayoutManager(SAAddDeviceActivity.this));
+//        recyclerView.setLayoutManager(new GridLayoutManager(SAAddDeviceActivity.this, 3));
         recyclerView.setPullRefreshEnabled(true);
         recyclerView.setLoadMoreEnabled(true);
     }
