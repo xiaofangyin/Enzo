@@ -221,25 +221,6 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     }
 
     /**
-     * 保证GridLayoutManager加载更多和headView占一行
-     */
-    @Override
-    public void setLayoutManager(LayoutManager layout) {
-        super.setLayoutManager(layout);
-        if (mHeaderAndFooterAdapter != null) {
-            if (layout instanceof GridLayoutManager) {
-                final GridLayoutManager gridManager = ((GridLayoutManager) layout);
-                gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                    @Override
-                    public int getSpanSize(int position) {
-                        return (mHeaderAndFooterAdapter.isFooter(position) || mHeaderAndFooterAdapter.isRefreshHeader(position)) ? gridManager.getSpanCount() : 1;
-                    }
-                });
-            }
-        }
-    }
-
-    /**
      * ======================================================= 滚动监听 =======================================================
      */
     @Override
