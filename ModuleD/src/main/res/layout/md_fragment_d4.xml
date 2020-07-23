@@ -15,10 +15,10 @@
             android:text="数据结构" />
 
         <Button
-            android:id="@+id/btn_picker_view"
+            android:id="@+id/btn_lighter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="日期选择" />
+            android:text="引导" />
 
         <Button
             android:id="@+id/btn_calendar"

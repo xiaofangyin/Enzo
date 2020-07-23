@@ -23,9 +23,6 @@
             android:name=".ui.activity.MDStructureActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDPickerViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDCalendarActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -45,6 +42,33 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDMatisseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDLighterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDDialogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDFragmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDGridViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDListViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDRecyclerViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDRelativeLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDScrollViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDViewPagerActivity"
             android:screenOrientation="portrait" />
 
     </application>

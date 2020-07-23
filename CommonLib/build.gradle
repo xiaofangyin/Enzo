@@ -50,8 +50,6 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
-    //picker
-    api 'com.contrarywind:Android-PickerView:3.2.6'
     //ucrop
     api 'com.github.yalantis:ucrop:2.2.2'
     //zxing

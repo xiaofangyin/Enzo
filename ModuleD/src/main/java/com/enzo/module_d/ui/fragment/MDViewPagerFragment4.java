@@ -10,11 +10,11 @@ import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDColorPickerActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
-import com.enzo.module_d.ui.activity.MDPickerViewActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
 import com.enzo.module_d.ui.activity.MDStructureActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
+import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 
 /**
  * 文 件 名: MDViewPagerFragment4
@@ -42,7 +42,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void initListener(View rootView) {
         rootView.findViewById(R.id.btn_structure).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_picker_view).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
@@ -58,8 +58,8 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         if (id == R.id.btn_structure) {
             Intent intent = new Intent(getContext(), MDStructureActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_picker_view) {
-            Intent intent = new Intent(getContext(), MDPickerViewActivity.class);
+        } else if (id == R.id.btn_lighter) {
+            Intent intent = new Intent(getContext(), MDLighterActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_calendar) {
             Intent intent = new Intent(getContext(), MDCalendarActivity.class);
