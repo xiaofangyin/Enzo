@@ -88,7 +88,7 @@ public class FLSwitchButton extends View implements Checkable, View.OnClickListe
 
         uncheckColor = 0XffDDDDDD;
 
-        checkedColor = 0Xff34c0be;
+        checkedColor = 0Xff41DDB5;
 
         borderWidth = dp2pxInt(1f);
 
