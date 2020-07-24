@@ -31,11 +31,6 @@ public class LighterParameter {
         this.highlightedViewId = highlightedViewId;
     }
 
-    /**
-     * Set the view that will be highlighted.
-     *
-     * @param highlightedView The highlighted view.
-     */
     public void setHighlightedView(View highlightedView) {
         this.highlightedView = highlightedView;
     }

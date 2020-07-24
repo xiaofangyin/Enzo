@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 
 public abstract class LighterShape {
+
     protected RectF highlightedViewRect;
     protected Path path;
     protected Paint paint;
@@ -25,9 +26,6 @@ public abstract class LighterShape {
         }
     }
 
-    /**
-     * Draw the highlighted view.
-     */
     public void onDraw(Canvas canvas) {
         if (path != null
                 && paint != null) {
@@ -35,38 +33,23 @@ public abstract class LighterShape {
         }
     }
 
-    /**
-     * Set {@link RectF} the highlighted view.
-     */
     public void setViewRect(RectF rect) {
         highlightedViewRect = rect;
     }
 
-    /**
-     * Get {@link RectF} the highlighted view.
-     */
     public RectF getViewRect() {
         return highlightedViewRect;
     }
 
-    /**
-     * Returns true if the view rect is empty (left >= right or top >= bottom)
-     */
     public boolean isViewRectEmpty() {
         return highlightedViewRect == null
                 || highlightedViewRect.isEmpty();
     }
 
-    /**
-     * Set a custom paint when draw this shape.
-     */
     public void setPaint(Paint paint) {
         this.paint = paint;
     }
 
-    /**
-     * Get shape path.
-     */
     public Path getShapePath() {
         return path;
     }

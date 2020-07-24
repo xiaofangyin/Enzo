@@ -45,9 +45,6 @@ public class ViewUtils {
         return result;
     }
 
-    /**
-     * Calculate the rect of the highlighted view
-     */
     public static void calculateHighlightedViewRect(LighterView lighterView, LighterParameter lighterParameter) {
         if (lighterView == null
                 || lighterParameter == null
@@ -57,8 +54,7 @@ public class ViewUtils {
 
         RectF highlightedViewRect = ViewUtils.getRectOnScreen(lighterParameter.getHighlightedView());
 
-        if (highlightedViewRect == null
-                || highlightedViewRect.isEmpty()) {
+        if (highlightedViewRect.isEmpty()) {
             return;
         }
 
