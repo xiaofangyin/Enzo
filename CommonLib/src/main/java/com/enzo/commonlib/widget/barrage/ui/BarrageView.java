@@ -241,6 +241,9 @@ public class BarrageView extends ViewGroup implements IBarrageView {
         int curSpeed = getSpeed(line, itemWidth);
         long duration = (int) ((float) (width + itemWidth) / (float) curSpeed + 1) * 1000;
         Log.i(TAG, "duration:" + duration);
+        if (duration < 0) {
+            duration = 2000;
+        }
         valueAnimator.setDuration(duration);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
