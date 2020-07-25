@@ -38,9 +38,6 @@
             android:name=".ui.activity.MDScanQrCodeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDColorPickerActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDMatisseActivity"
             android:screenOrientation="portrait" />
         <activity

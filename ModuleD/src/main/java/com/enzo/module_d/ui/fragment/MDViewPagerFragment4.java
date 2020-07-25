@@ -7,7 +7,6 @@ import android.view.View;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
-import com.enzo.module_d.ui.activity.MDColorPickerActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
@@ -46,7 +45,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_color_picker).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
@@ -70,10 +68,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         } else if (id == R.id.btn_notification) {
             Intent intent = new Intent(getContext(), MDNotificationActivity.class);
             startActivity(intent);
-        } else if (id == R.id.btn_color_picker) {
-            Intent intent = new Intent(getContext(), MDColorPickerActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_bar_code) {
+        }else if (id == R.id.btn_bar_code) {
             Intent intent = new Intent(getContext(), MDScanBarCodeActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_qr_code) {

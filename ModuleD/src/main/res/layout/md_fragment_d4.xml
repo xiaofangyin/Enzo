@@ -39,12 +39,6 @@
             android:text="消息通知" />
 
         <Button
-            android:id="@+id/btn_color_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="调色板" />
-
-        <Button
             android:id="@+id/btn_bar_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
