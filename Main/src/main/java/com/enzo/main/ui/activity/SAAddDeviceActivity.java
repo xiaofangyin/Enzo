@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
@@ -83,10 +85,22 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     public void initView() {
         loadingLayout = findViewById(R.id.add_device_loading_layout);
         recyclerView = findViewById(R.id.add_device_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(SAAddDeviceActivity.this));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(SAAddDeviceActivity.this));
 //        recyclerView.setLayoutManager(new GridLayoutManager(SAAddDeviceActivity.this, 3));
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration mDivider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(mDivider);
         recyclerView.setPullRefreshEnabled(true);
         recyclerView.setLoadMoreEnabled(true);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                layoutManager.invalidateSpanAssignments(); //防止第一行到顶部有空白区域
+            }
+        });
     }
 
     @Override
@@ -96,7 +110,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
             @Override
             public void run() {
                 loadingLayout.showContent();
-                adapter = new SAAddDeviceAdapter();
+                adapter = new SAAddDeviceAdapter(SAAddDeviceActivity.this);
                 recyclerView.setAdapter(adapter);
                 adapter.setNewData(getObjectList(buildData()));
             }
