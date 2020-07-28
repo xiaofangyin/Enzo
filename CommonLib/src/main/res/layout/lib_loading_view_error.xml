@@ -3,6 +3,7 @@
     android:id="@+id/loading_error_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f3f3f3"
     android:gravity="center">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:scaleType="centerInside"
-        android:src="@mipmap/loading_layout_wrong" />
+        android:src="@mipmap/icon_loading_01" />
 
     <TextView
         android:id="@+id/ab_tv_error"
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ab_page_iv"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="6dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="加载出错"
