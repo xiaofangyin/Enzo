@@ -84,7 +84,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:background=""
             android:scaleType="centerCrop"
             android:src="@mipmap/icon_default_photo" />
 
