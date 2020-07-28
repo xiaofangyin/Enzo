@@ -86,7 +86,7 @@
             android:layout_marginBottom="16dp"
             android:background=""
             android:scaleType="centerCrop"
-            android:src="@mipmap/ugc_default_photo" />
+            android:src="@mipmap/icon_default_photo" />
 
     </LinearLayout>
 
