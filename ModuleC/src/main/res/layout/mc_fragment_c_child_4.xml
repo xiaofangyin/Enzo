@@ -3,9 +3,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.enzo.commonlib.widget.barrage.ui.BarrageView
-        android:id="@+id/barrage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-
 </RelativeLayout>
