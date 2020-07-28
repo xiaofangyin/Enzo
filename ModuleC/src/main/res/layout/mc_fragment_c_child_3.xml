@@ -5,11 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.enzo.commonlib.widget.flowlayout.FlowLayout
+    <!--    <com.enzo.commonlib.widget.flowlayout.FlowLayout-->
+    <!--        android:id="@+id/mc_flow_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="16dp"-->
+    <!--        app:height_space="10dp"-->
+    <!--        app:width_space="10dp" />-->
+    <com.enzo.commonlib.widget.flowlayout.FlowLayoutScrollView
         android:id="@+id/mc_flow_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:overScrollMode="never"
         app:height_space="10dp"
         app:width_space="10dp" />
 </LinearLayout>

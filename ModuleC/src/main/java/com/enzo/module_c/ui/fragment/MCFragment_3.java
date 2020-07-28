@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.widget.flowlayout.FlowLayout;
 import com.enzo.commonlib.widget.flowlayout.FlowLayoutAdapter;
+import com.enzo.commonlib.widget.flowlayout.FlowLayoutScrollView;
 import com.enzo.module_c.R;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MCFragment_3 extends BaseFragment {
 
-    private FlowLayout flowLayout;
+    private FlowLayoutScrollView flowLayout;
 
     @Override
     public int getLayoutId() {
@@ -33,8 +33,80 @@ public class MCFragment_3 extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        List<String> flowList = buildData();
+        FlowLayoutAdapter flowLayoutAdapter = new FlowLayoutAdapter<String>(flowList) {
+            @Override
+            public void bindDataToView(ViewHolder holder, int position, String bean) {
+                holder.setText(R.id.tv, bean);
+            }
+
+            @Override
+            public void onItemClick(int position, String bean) {
+                if (position == 0) {
+                    remove(position);
+                }
+            }
+
+            @Override
+            public int getItemLayoutID(int position, String bean) {
+                if (position == 0) {
+                    return R.layout.mc_item_flow_layout2;
+                }
+                return R.layout.mc_item_flow_layout;
+            }
+        };
+        flowLayout.setAdapter(flowLayoutAdapter);
+    }
+
+    private List<String> buildData() {
         List<String> flowList = new ArrayList();
         flowList.add("11111");
+        flowList.add("22222222");
+        flowList.add("333333");
+        flowList.add("444444444444444");
+        flowList.add("5555555555");
+        flowList.add("66666");
+        flowList.add("7777777777777");
+        flowList.add("88888888888888");
+        flowList.add("9999999999999999");
+        flowList.add("66666");
+        flowList.add("33333333");
+        flowList.add("11111");
+        flowList.add("22222222");
+        flowList.add("333333");
+        flowList.add("444444444444444");
+        flowList.add("55555555555555");
+        flowList.add("66666666666");
+        flowList.add("77777777");
+        flowList.add("88888888888");
+        flowList.add("9999999999999");
+        flowList.add("6666666");
+        flowList.add("33333333");
+        flowList.add("11111");
+        flowList.add("22222222");
+        flowList.add("333333");
+        flowList.add("4444444444444444");
+        flowList.add("5555555");
+        flowList.add("66666");
+        flowList.add("77777777");
+        flowList.add("8888888888888888");
+        flowList.add("9999999999999");
+        flowList.add("66666");
+        flowList.add("33333333");
+        flowList.add("6666666");
+        flowList.add("33333333");
+        flowList.add("11111");
+        flowList.add("22222222");
+        flowList.add("333333");
+        flowList.add("4444444444444444");
+        flowList.add("5555555");
+        flowList.add("66666");
+        flowList.add("77777777");
+        flowList.add("8888888888888888");
+        flowList.add("9999999999999");
+        flowList.add("66666");
+        flowList.add("33333333");
+        flowList.add("1111111111111111");
         flowList.add("22222222");
         flowList.add("333333");
         flowList.add("444444444444444");
@@ -44,24 +116,8 @@ public class MCFragment_3 extends BaseFragment {
         flowList.add("88888888888");
         flowList.add("9999999999999");
         flowList.add("66666");
-        flowList.add("33333333");
-        FlowLayoutAdapter flowLayoutAdapter = new FlowLayoutAdapter<String>(flowList) {
-            @Override
-            public void bindDataToView(ViewHolder holder, int position, String bean) {
-                holder.setText(R.id.tv, bean);
-            }
-
-            @Override
-            public void onItemClick(int position, String bean) {
-
-            }
-
-            @Override
-            public int getItemLayoutID(int position, String bean) {
-                return R.layout.mc_item_flow_layout;
-            }
-        };
-        flowLayout.setAdapter(flowLayoutAdapter);
+        flowList.add("3333333333333333333");
+        return flowList;
     }
 
     @Override
