@@ -44,18 +44,6 @@
         </provider>
 
         <activity
-            android:name=".utils.album.activity.SingleSelectorActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".utils.album.activity.FoldersActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".utils.album.activity.MultipleSelectorActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".utils.album.activity.PreviewActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />
         <activity
