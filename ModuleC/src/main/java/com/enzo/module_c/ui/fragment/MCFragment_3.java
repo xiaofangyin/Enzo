@@ -35,7 +35,7 @@ public class MCFragment_3 extends BaseFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         List<String> flowList = buildData();
-        FlowLayoutAdapter flowLayoutAdapter = new FlowLayoutAdapter<String>(flowList) {
+        flowLayout.setAdapter(new FlowLayoutAdapter<String>(flowList) {
             @Override
             public void bindDataToView(ViewHolder holder, int position, String bean) {
                 holder.setText(R.id.tv, bean);
@@ -51,13 +51,12 @@ public class MCFragment_3 extends BaseFragment {
 
             @Override
             public int getItemLayoutID(int position, String bean) {
-                if (position == 0) {
+                if (position % 2 == 0) {
                     return R.layout.mc_item_flow_layout2;
                 }
                 return R.layout.mc_item_flow_layout;
             }
-        };
-        flowLayout.setAdapter(flowLayoutAdapter);
+        });
     }
 
     private List<String> buildData() {
