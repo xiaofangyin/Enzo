@@ -11,7 +11,6 @@ import com.enzo.commonlib.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 public class FlowLayout extends ViewGroup {
 
@@ -40,19 +39,11 @@ public class FlowLayout extends ViewGroup {
     }
 
     public void setAdapter(final FlowLayoutAdapter flowLayoutAdapter) {
+        if (this.flowLayoutAdapter != null) {
+            this.flowLayoutAdapter.unregisterObserver(observer);
+        }
         this.flowLayoutAdapter = flowLayoutAdapter;
-        this.flowLayoutAdapter.registerAdapterDataObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-                setAdapter(FlowLayout.this.flowLayoutAdapter);
-            }
-
-            @Override
-            public void onInvalidated() {
-                super.onInvalidated();
-            }
-        });
+        this.flowLayoutAdapter.registerAdapterDataObserver(observer);
         removeAllViews();
 
         // 循环添加TextView到容器
@@ -61,6 +52,19 @@ public class FlowLayout extends ViewGroup {
             addView(flowLayoutAdapter.getView(this, i));
         }
     }
+
+    private DataSetObserver observer = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            setAdapter(FlowLayout.this.flowLayoutAdapter);
+        }
+
+        @Override
+        public void onInvalidated() {
+            super.onInvalidated();
+        }
+    };
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
