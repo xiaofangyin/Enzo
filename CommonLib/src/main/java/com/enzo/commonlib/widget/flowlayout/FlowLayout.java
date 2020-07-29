@@ -2,6 +2,7 @@ package com.enzo.commonlib.widget.flowlayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +41,16 @@ public class FlowLayout extends ViewGroup {
 
     public void setAdapter(final FlowLayoutAdapter flowLayoutAdapter) {
         this.flowLayoutAdapter = flowLayoutAdapter;
-        this.flowLayoutAdapter.registerAdapterDataObserver(new FlowLayoutAdapter.AdapterDataObserver() {
+        this.flowLayoutAdapter.registerAdapterDataObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
+                super.onChanged();
                 setAdapter(FlowLayout.this.flowLayoutAdapter);
+            }
+
+            @Override
+            public void onInvalidated() {
+                super.onInvalidated();
             }
         });
         removeAllViews();

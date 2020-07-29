@@ -1,5 +1,6 @@
 package com.enzo.commonlib.widget.flowlayout;
 
+import android.database.DataSetObserver;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,7 @@ public interface BaseFlowAdapter<T> {
 
     void notifyDataSetChanged();
 
-    void registerAdapterDataObserver(@NonNull FlowLayoutAdapter.AdapterDataObserver observer);
+    void registerAdapterDataObserver(@NonNull DataSetObserver observer);
 
-    void unregisterObserver(@NonNull FlowLayoutAdapter.AdapterDataObserver observer);
+    void unregisterObserver(@NonNull DataSetObserver observer);
 }

@@ -1,6 +1,7 @@
 package com.enzo.commonlib.widget.flowlayout;
 
-import android.database.Observable;
+import android.database.DataSetObservable;
+import android.database.DataSetObserver;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public abstract class FlowLayoutAdapter<T> implements BaseFlowAdapter<T> {
 
-    private final AdapterDataObservable mObservable = new AdapterDataObservable();
+    private final DataSetObservable mDataSetObservable = new DataSetObservable();
     private final List<T> list_bean = new ArrayList<>();
 
     public FlowLayoutAdapter(List<T> list_bean) {
@@ -24,18 +25,18 @@ public abstract class FlowLayoutAdapter<T> implements BaseFlowAdapter<T> {
     }
 
     @Override
-    public void registerAdapterDataObserver(@NonNull AdapterDataObserver observer) {
-        mObservable.registerObserver(observer);
+    public void registerAdapterDataObserver(@NonNull DataSetObserver observer) {
+        mDataSetObservable.registerObserver(observer);
     }
 
     @Override
-    public void unregisterObserver(@NonNull AdapterDataObserver observer) {
-        mObservable.unregisterObserver(observer);
+    public void unregisterObserver(@NonNull DataSetObserver observer) {
+        mDataSetObservable.unregisterObserver(observer);
     }
 
     @Override
     public void notifyDataSetChanged() {
-        mObservable.notifyChanged();
+        mDataSetObservable.notifyChanged();
     }
 
     @Override
@@ -127,21 +128,6 @@ public abstract class FlowLayoutAdapter<T> implements BaseFlowAdapter<T> {
 
         public String nullToString(Object object) {
             return object == null ? "" : object.toString();
-        }
-    }
-
-    static class AdapterDataObservable extends Observable<AdapterDataObserver> {
-
-        public void notifyChanged() {
-            for (int i = mObservers.size() - 1; i >= 0; i--) {
-                mObservers.get(i).onChanged();
-            }
-        }
-    }
-
-    public abstract static class AdapterDataObserver {
-        public void onChanged() {
-
         }
     }
 }
