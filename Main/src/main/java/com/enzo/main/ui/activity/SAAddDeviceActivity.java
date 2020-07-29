@@ -115,7 +115,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                 recyclerView.setAdapter(adapter);
                 adapter.setNewData(getObjectList(buildData()));
             }
-        }, 4000);
+        }, 10000);
     }
 
     @Override

@@ -3,12 +3,12 @@ package com.enzo.commonlib.widget.loadinglayout;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+
+import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
 
@@ -21,7 +21,6 @@ import com.enzo.commonlib.R;
 public class LoadingLayout extends FrameLayout {
 
     private OnClickListener onRetryClickListener;
-    private AnimationDrawable loadingAnimationDrawable;
 
     public LoadingLayout(Context context) {
         this(context, null);
@@ -47,6 +46,7 @@ public class LoadingLayout extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_main_black));
         for (int i = 0; i < getChildCount() - 1; i++) {
             getChildAt(i).setVisibility(GONE);
             //设置失败页面重新加载回调
@@ -62,8 +62,6 @@ public class LoadingLayout extends FrameLayout {
                 });
             }
         }
-        ImageView imageLoading = findViewById(R.id.ab_iv_loading);
-        loadingAnimationDrawable = (AnimationDrawable) imageLoading.getBackground();
         showLoading();
     }
 
@@ -119,8 +117,9 @@ public class LoadingLayout extends FrameLayout {
      * 开启动画
      */
     private void startLoadingAnim() {
-        if (loadingAnimationDrawable != null && !loadingAnimationDrawable.isRunning()) {
-            loadingAnimationDrawable.start();
+        LoadingView imageLoading = findViewById(R.id.ab_iv_loading);
+        if (imageLoading != null) {
+            imageLoading.start();
         }
     }
 
@@ -128,8 +127,9 @@ public class LoadingLayout extends FrameLayout {
      * 结束动画
      */
     private void stopLoadingAnim() {
-        if (loadingAnimationDrawable != null && loadingAnimationDrawable.isRunning()) {
-            loadingAnimationDrawable.stop();
+        LoadingView imageLoading = findViewById(R.id.ab_iv_loading);
+        if (imageLoading != null) {
+            imageLoading.stop();
         }
     }
 
