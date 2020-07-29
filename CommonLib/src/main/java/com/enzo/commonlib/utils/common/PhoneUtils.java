@@ -1,8 +1,10 @@
 package com.enzo.commonlib.utils.common;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import java.util.HashMap;
@@ -15,6 +17,7 @@ public class PhoneUtils {
 
     private static PhoneUtils instance;
 
+    private String combinedID;
     private String versionname;
     private String versioncode;
     private String ostype;
@@ -47,6 +50,7 @@ public class PhoneUtils {
         this.screenwidth = getSystemWidth(context);
         this.screenheight = getSystemHeight(context);
         this.density = getSystemDensityDPI(context);
+        this.combinedID = getUniqueId(context);
     }
 
     public Map<String, String> getDefaultParams() {
@@ -74,6 +78,9 @@ public class PhoneUtils {
         }
         if (!params.containsKey("density")) {
             params.put("density", "" + density);
+        }
+        if (!params.containsKey("deviceid")) {
+            params.put("deviceid", "" + combinedID);
         }
         return params;
     }
@@ -122,13 +129,50 @@ public class PhoneUtils {
      * @param context application的context
      */
     public String getUniqueId(Context context) {
-        String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        String id = androidID + Build.SERIAL;
-        try {
-            return SecurityUtil.getMD5(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return id;
+        if (TextUtils.isEmpty(combinedID)) {
+            String combinedDeviceId = getPseudoUId() + getAndroidId(context);
+            byte[] idMd5 = SecurityUtil.MD5(combinedDeviceId.getBytes());
+            StringBuilder ID = new StringBuilder();
+            if (idMd5 != null) {
+                for (byte anIdMd5 : idMd5) {
+                    int b = (0xFF & anIdMd5);
+                    if (b <= 0xF) {
+                        ID.append("0");
+                    }
+                    ID.append(Integer.toHexString(b));
+                }
+            }
+            LogUtil.d("PhoneUtils id: " + ID);
+            combinedID = ID.toString();
         }
+        return combinedID;
+    }
+
+    private static String getPseudoUId() {
+        String pseudoUId = "42" + Build.BOARD.length() % 10 +
+                Build.BRAND.length() % 10 +
+                Build.CPU_ABI.length() % 10 +
+                Build.DEVICE.length() % 10 +
+                Build.DISPLAY.length() % 10 +
+                Build.HOST.length() % 10 +
+                Build.ID.length() % 10 +
+                Build.MANUFACTURER.length() % 10 +
+                Build.MODEL.length() % 10 +
+                Build.PRODUCT.length() % 10 +
+                Build.TAGS.length() % 10 +
+                Build.TYPE.length() % 10 +
+                Build.USER.length() % 10; //13 digits
+        LogUtil.d("PhoneUtils getPseudoUId: " + pseudoUId);
+        return pseudoUId;
+    }
+
+    @SuppressLint("HardwareIds")
+    private static String getAndroidId(Context context) {
+        String androidId = "";
+        if (context != null) {
+            androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+        LogUtil.d("PhoneUtils getAndroidId: " + androidId);
+        return androidId;
     }
 }

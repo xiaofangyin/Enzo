@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.multidex.MultiDex;
 
 import com.enzo.commonlib.env.EnvConstants;
+import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.flkit.FLPluginFactory;
 import com.enzo.main.plugin.SAFactoryManager;
@@ -55,6 +56,8 @@ public class App extends Application {
     }
 
     private void initEnv() {
+        PhoneUtils.getInstance().initParam(this);
+
         MultiDex.install(this);
 
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
