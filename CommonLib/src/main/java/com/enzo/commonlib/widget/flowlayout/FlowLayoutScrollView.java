@@ -7,10 +7,6 @@ import android.widget.ScrollView;
 
 import com.enzo.commonlib.R;
 
-/**
- * Created by cy on 2018/4/14.
- */
-
 public class FlowLayoutScrollView extends ScrollView {
 
     private FlowLayout flowLayout;
@@ -24,7 +20,6 @@ public class FlowLayoutScrollView extends ScrollView {
         setOverScrollMode(OVER_SCROLL_NEVER);
         setScrollBarStyle(SCROLLBARS_OUTSIDE_OVERLAY);
 
-        // 获取自定义属性
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.FlowLayout);
         float horizontal_space = array.getDimension(R.styleable.FlowLayout_width_space, 0);
         float vertical_space = array.getDimension(R.styleable.FlowLayout_height_space, 0);

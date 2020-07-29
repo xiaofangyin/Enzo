@@ -12,9 +12,6 @@ import android.widget.TextView;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by cy on 2018/2/8.
- */
 public abstract class FlowLayoutAdapter<T> {
 
     private OnDataSetChangedListener onDataSetChangedListener;
@@ -29,7 +26,6 @@ public abstract class FlowLayoutAdapter<T> {
     }
 
     public View getView(FlowLayout parent, final int position) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(getItemLayoutID(position, list_bean.get(position)), parent, false);
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -49,14 +45,7 @@ public abstract class FlowLayoutAdapter<T> {
         return view;
     }
 
-
-    //填充数据
     public abstract void bindDataToView(ViewHolder holder, int position, T bean);
-     /*
-      ItemView的单击事件
-
-      @param position
-     */
 
     public abstract void onItemClick(int position, T bean);
 
