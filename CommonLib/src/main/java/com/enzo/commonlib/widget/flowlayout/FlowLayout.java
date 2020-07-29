@@ -10,6 +10,7 @@ import com.enzo.commonlib.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 public class FlowLayout extends ViewGroup {
 
@@ -39,10 +40,9 @@ public class FlowLayout extends ViewGroup {
 
     public void setAdapter(final FlowLayoutAdapter flowLayoutAdapter) {
         this.flowLayoutAdapter = flowLayoutAdapter;
-
-        this.flowLayoutAdapter.setOnDataSetChangedListener(new FlowLayoutAdapter.OnDataSetChangedListener() {
+        this.flowLayoutAdapter.registerAdapterDataObserver(new FlowLayoutAdapter.AdapterDataObserver() {
             @Override
-            public void onDataSetChanged() {
+            public void onChanged() {
                 setAdapter(FlowLayout.this.flowLayoutAdapter);
             }
         });

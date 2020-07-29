@@ -50,6 +50,11 @@ public class MCFragment_3 extends BaseFragment {
             }
 
             @Override
+            public void onItemLongClick(int position, String bean) {
+
+            }
+
+            @Override
             public int getItemLayoutID(int position, String bean) {
                 if (position % 2 == 0) {
                     return R.layout.mc_item_flow_layout2;
