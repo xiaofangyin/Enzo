@@ -24,5 +24,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':BaseLib:CommonLib')
+    api project(':BaseLib:CommonLib')
+    api project(':BaseLib:FLKit')
 }
