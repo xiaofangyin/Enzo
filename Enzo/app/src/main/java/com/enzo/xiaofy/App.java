@@ -56,7 +56,7 @@ public class App extends Application {
     }
 
     private void initEnv() {
-        PhoneUtils.getInstance().initParam(this);
+        PhoneUtils.getInstance().init(this);
 
         MultiDex.install(this);
 

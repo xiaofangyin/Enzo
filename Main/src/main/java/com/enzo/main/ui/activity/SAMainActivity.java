@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
@@ -53,6 +54,8 @@ public class SAMainActivity extends BaseActivity {
         mTabLayout.setCurrentItem(0);
         mTabLayout.showRedPoint(2);
         mHandler.sendEmptyMessage(0);
+
+        LogUtil.d(PhoneUtils.getInstance().getUniqueId(this));
     }
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) {

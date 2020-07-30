@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 用于获取手机信息
@@ -41,7 +42,7 @@ public class PhoneUtils {
         return instance;
     }
 
-    public void initParam(Context context) {
+    public void init(Context context) {
         this.ostype = "Android";
         this.versionname = ApkUtils.getVersionName(context);
         this.versioncode = String.valueOf(ApkUtils.getVersionCode(context));
@@ -129,29 +130,29 @@ public class PhoneUtils {
      * @param context application的context
      */
     public String getUniqueId(Context context) {
-        if (TextUtils.isEmpty(combinedID)) {
-            String combinedDeviceId = getPseudoUId() + getAndroidId(context);
-            byte[] idMd5 = SecurityUtil.MD5(combinedDeviceId.getBytes());
-            StringBuilder ID = new StringBuilder();
-            if (idMd5 != null) {
-                for (byte anIdMd5 : idMd5) {
-                    int b = (0xFF & anIdMd5);
-                    if (b <= 0xF) {
-                        ID.append("0");
-                    }
-                    ID.append(Integer.toHexString(b));
+        String combinedDeviceId = getUUID() + getAndroidId(context);
+        byte[] idMd5 = SecurityUtil.MD5(combinedDeviceId.getBytes());
+        StringBuilder ID = new StringBuilder();
+        if (idMd5 != null) {
+            for (byte anIdMd5 : idMd5) {
+                int b = (0xFF & anIdMd5);
+                if (b <= 0xF) {
+                    ID.append("0");
                 }
+                ID.append(Integer.toHexString(b));
             }
-            LogUtil.d("PhoneUtils id: " + ID);
-            combinedID = ID.toString();
         }
+        combinedID = ID.toString();
+        LogUtil.d("PhoneUtils getUniqueId: " + combinedID);
         return combinedID;
     }
 
-    private static String getPseudoUId() {
-        String pseudoUId = "42" + Build.BOARD.length() % 10 +
+    @SuppressLint("HardwareIds")
+    private static String getUUID() {
+        String serial;
+        String m_szDevIDShort = "42" +
+                Build.BOARD.length() % 10 +
                 Build.BRAND.length() % 10 +
-                Build.CPU_ABI.length() % 10 +
                 Build.DEVICE.length() % 10 +
                 Build.DISPLAY.length() % 10 +
                 Build.HOST.length() % 10 +
@@ -161,9 +162,26 @@ public class PhoneUtils {
                 Build.PRODUCT.length() % 10 +
                 Build.TAGS.length() % 10 +
                 Build.TYPE.length() % 10 +
-                Build.USER.length() % 10; //13 digits
-        LogUtil.d("PhoneUtils getPseudoUId: " + pseudoUId);
-        return pseudoUId;
+                Build.USER.length() % 10; //13 位
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                serial = android.os.Build.getSerial();
+            } else {
+                serial = Build.SERIAL;
+            }
+            //API>=9 使用serial号
+            String uuid = new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
+            LogUtil.d("1 PhoneUtils getUUID: " + uuid);
+            return uuid;
+        } catch (Exception exception) {
+            //serial需要一个初始化
+            exception.printStackTrace();
+            serial = "serial"; // 随便一个初始化
+        }
+        //使用硬件信息拼凑出来的15位号码
+        String uuid = new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
+        LogUtil.d("2 PhoneUtils getUUID: " + uuid);
+        return uuid;
     }
 
     @SuppressLint("HardwareIds")

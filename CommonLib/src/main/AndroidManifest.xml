@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.enzo.commonlib">
 
     <!-- 需要运行时注册的权限 -->
@@ -8,7 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 用于提高GPS定位速度 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <!-- 获取CUID，用于鉴权，请求签名等 -->
     <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
