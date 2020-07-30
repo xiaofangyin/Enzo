@@ -63,5 +63,5 @@ dependencies {
     api 'com.airbnb.android:lottie:3.4.1'
 
     //flkit
-    api project(':FLKit')
+    api project(':BaseLib:FLKit')
 }
