@@ -46,12 +46,12 @@ public class PhoneUtils {
         this.ostype = "Android";
         this.versionname = ApkUtils.getVersionName(context);
         this.versioncode = String.valueOf(ApkUtils.getVersionCode(context));
-        this.osversion = getCurrentSystemVersion();
-        this.phonetype = getCurrentPhoneType();
-        this.screenwidth = getSystemWidth(context);
-        this.screenheight = getSystemHeight(context);
-        this.density = getSystemDensityDPI(context);
-        this.combinedID = getUniqueId(context);
+        this.osversion = android.os.Build.VERSION.SDK_INT;//获得当前系统版本号
+        this.phonetype = android.os.Build.MODEL;//获得当前手机型号
+        this.screenwidth = context.getResources().getDisplayMetrics().widthPixels;//获得当前屏幕的X宽度
+        this.screenheight = context.getResources().getDisplayMetrics().heightPixels;//获得当前屏幕的Y高度
+        this.density = context.getResources().getDisplayMetrics().densityDpi;//获得当前屏幕的密度
+        this.combinedID = getUniqueId(context);//计算出一个唯一识别ID
     }
 
     public Map<String, String> getDefaultParams() {
@@ -84,44 +84,6 @@ public class PhoneUtils {
             params.put("deviceid", "" + combinedID);
         }
         return params;
-    }
-
-    /**
-     * 获得当前系统版本号
-     */
-    private int getCurrentSystemVersion() {
-        return android.os.Build.VERSION.SDK_INT;
-    }
-
-    /**
-     * 获得当前屏幕的密度
-     */
-    private int getSystemDensityDPI(Context context) {
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        return dm.densityDpi;
-    }
-
-    /**
-     * 获得当前屏幕的X宽度
-     */
-    private int getSystemWidth(Context context) {
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        return dm.widthPixels;
-    }
-
-    /**
-     * 获得当前屏幕的Y高度
-     */
-    private int getSystemHeight(Context context) {
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        return dm.heightPixels;
-    }
-
-    /**
-     * 获得当前手机型号
-     */
-    private String getCurrentPhoneType() {
-        return android.os.Build.MODEL;
     }
 
     /**
