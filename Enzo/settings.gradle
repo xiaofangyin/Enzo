@@ -1,8 +1,9 @@
-include ':app', ':Main', ':ModuleA', ':ModuleB', ':ModuleC', ':ModuleD', ':FLKit', ':CommonLib'
+include ':app', ':Main', ':ModuleA', ':ModuleB', ':ModuleC', ':ModuleD', ':FLKit', ':BaseLib:CommonLib', ':BaseLib:ucrop'
 project(':Main').projectDir = new File('../Main')
 project(':ModuleA').projectDir = new File('../ModuleA')
 project(':ModuleB').projectDir = new File('../ModuleB')
 project(':ModuleC').projectDir = new File('../ModuleC')
 project(':ModuleD').projectDir = new File('../ModuleD')
 project(':FLKit').projectDir = new File('../FLKit')
-project(':CommonLib').projectDir = new File('../CommonLib')
+project(':BaseLib:CommonLib').projectDir = new File('../BaseLib/CommonLib')
+project(':BaseLib:ucrop').projectDir = new File('../BaseLib/ucrop')
