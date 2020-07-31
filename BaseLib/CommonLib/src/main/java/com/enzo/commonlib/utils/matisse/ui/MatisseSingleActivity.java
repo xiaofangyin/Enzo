@@ -54,9 +54,7 @@ import com.enzo.commonlib.utils.matisse.internal.utils.PathUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.SingleMediaScanner;
 import com.yalantis.ucrop.UCrop;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class MatisseSingleActivity extends AppCompatActivity implements
@@ -263,9 +261,8 @@ public class MatisseSingleActivity extends AppCompatActivity implements
     @Override
     public void onMediaClick(Album album, Item item, int adapterPosition) {
         if (mSpec.crop) {
-            Uri sourceUri = Uri.fromFile(new File(Objects.requireNonNull(PathUtils.getPath(this, item.uri))));
             Uri uri = Uri.fromFile(PhotoCropConfig.getAvatarCroppedFile(this));
-            UCrop.of(sourceUri, uri)
+            UCrop.of(item.uri, uri)
                     .withOptions(PhotoCropConfig.getOptions())
                     .start(this);
         } else {
