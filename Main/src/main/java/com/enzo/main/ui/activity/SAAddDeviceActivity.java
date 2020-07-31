@@ -38,6 +38,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     private LoadingLayout loadingLayout;
     private PullToRefreshRecyclerView recyclerView;
     private SAAddDeviceAdapter adapter;
+    private HeadWidget headWidget;
 
     @Override
     public int getLayoutId() {
@@ -46,7 +47,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     @Override
     public void initHeader() {
-        HeadWidget headWidget = findViewById(R.id.add_device_header);
+        headWidget = findViewById(R.id.add_device_header);
         headWidget.setTitle("添加设备");
         headWidget.setRightImage(R.mipmap.main_add_icon);
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
@@ -55,6 +56,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                 finish();
             }
         });
+        headWidget.setRightImageVisible(false);
         headWidget.setRightImageClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,13 +108,15 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        adapter = new SAAddDeviceAdapter(SAAddDeviceActivity.this);
+        recyclerView.setAdapter(adapter);
+
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
 
             @Override
             public void run() {
+                headWidget.setRightImageVisible(true);
                 loadingLayout.showContent();
-                adapter = new SAAddDeviceAdapter(SAAddDeviceActivity.this);
-                recyclerView.setAdapter(adapter);
                 adapter.setNewData(getObjectList(buildData()));
             }
         }, 10000);
@@ -217,9 +221,13 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        recyclerView.destroy();
-        for (int i = 0; i < adapter.getItemCount(); i++) {
-            adapter.getData().get(i).release();
+        if (recyclerView != null) {
+            recyclerView.destroy();
+        }
+        if (adapter != null) {
+            for (int i = 0; i < adapter.getItemCount(); i++) {
+                adapter.getData().get(i).release();
+            }
         }
     }
 }
