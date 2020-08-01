@@ -41,8 +41,10 @@ public class PhotoCropConfig {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
             if (context.getExternalCacheDir() != null) {
+                // /storage/emulated/0/Android/data/com.ifenglian.enzotest/cache
                 cachePath = context.getExternalCacheDir().getPath();
             } else {
+                // /data/user/0/com.ifenglian.enzotest/cache
                 cachePath = context.getCacheDir().getPath();
             }
         } else {
