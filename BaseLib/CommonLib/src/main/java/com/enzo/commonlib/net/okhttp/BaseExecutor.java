@@ -1,5 +1,7 @@
 package com.enzo.commonlib.net.okhttp;
 
+import com.enzo.commonlib.utils.common.PhoneUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +40,7 @@ public abstract class BaseExecutor<T> {
     public abstract void execute();
 
     protected void post(final OkHttpCallBack<T> callback) {
+        mParams.putAll(PhoneUtils.getInstance().getDefaultParams());
         OkHttpManager.getInstance().postRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack<T>() {
             @Override
             public void onSuccess(Call call, Response response, T o) {
@@ -56,6 +59,7 @@ public abstract class BaseExecutor<T> {
     }
 
     protected void get(final OkHttpCallBack<T> callback) {
+        mParams.putAll(PhoneUtils.getInstance().getDefaultParams());
         OkHttpManager.getInstance().getRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack<T>() {
             @Override
             public void onSuccess(Call call, Response response, T o) {

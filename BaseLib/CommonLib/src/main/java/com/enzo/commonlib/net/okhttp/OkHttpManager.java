@@ -6,7 +6,6 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.FileNameMap;
 import java.net.URLConnection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -314,11 +312,6 @@ public class OkHttpManager {
     //构建请求所需的参数表单
     private RequestBody buildFormData(Map<String, String> params) {
         FormBody.Builder builder = new FormBody.Builder();
-        if (PhoneUtils.getInstance().getDefaultParams() != null) {
-            for (Map.Entry<String, String> entry : PhoneUtils.getInstance().getDefaultParams().entrySet()) {
-                builder.add(entry.getKey(), entry.getValue());
-            }
-        }
         if (params != null) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 builder.add(entry.getKey(), entry.getValue());
@@ -371,13 +364,8 @@ public class OkHttpManager {
      * get请求后边拼接参数
      */
     private String attachHttpGetParams(String url, Map<String, String> params) {
-        if (params == null) {
-            params = new HashMap<>();
-        }
-        params.putAll(PhoneUtils.getInstance().getDefaultParams());
-
         StringBuilder stringBuffer = new StringBuilder();
-        if (!params.isEmpty()) {
+        if (params != null && !params.isEmpty()) {
             Iterator<String> keys = params.keySet().iterator();
             Iterator<String> values = params.values().iterator();
             stringBuffer.append("?");
