@@ -3,13 +3,17 @@ package com.enzo.module_d.ui.activity;
 import android.os.Bundle;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.net.okhttp.OkHttpCallBack;
 import com.enzo.commonlib.net.okhttp.OkHttpManager;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.module_d.model.GetSubjectExecutor;
+import com.enzo.module_d.model.bean.SubjectBean;
 import com.enzo.module_d.practice.datastructure.MyHashMap;
 import com.enzo.module_d.practice.datastructure.QueueX;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -64,21 +68,32 @@ public class MDStructureActivity extends BaseActivity {
 //            LogUtil.d("data: " + data);
 //        }
 
-        String url = BASE_URL + "subject/" + MOVIE_ID;
-        Map<String, String> map1 = new HashMap<>();
-        map1.put("apikey", API_KEY);
-        OkHttpManager.getInstance().postRequest(url, map1, new OkHttpCallBack<String>() {
+//        String url = BASE_URL + "subject/" + MOVIE_ID;
+//        Map<String, String> map1 = new HashMap<>();
+//        map1.put("apikey", API_KEY);
+//        OkHttpManager.getInstance().postRequest(url, map1, new OkHttpCallBack<String>() {
+//            @Override
+//            public void onSuccess(Call call, Response response, String o) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, Exception e) {
+//
+//            }
+//        });
+
+        new GetSubjectExecutor().callback(new BaseExecutor.JsonCallback<LinkedHashMap<String, String>>() {
             @Override
-            public void onSuccess(Call call, Response response, String o) {
+            public void onSuccess(LinkedHashMap<String, String> subjectBean) {
 
             }
 
             @Override
-            public void onFailure(Call call, Exception e) {
+            public void onFailed(Exception e) {
 
             }
-        });
-
+        }).executor();
     }
 
     @Override
