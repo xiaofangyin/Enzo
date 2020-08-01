@@ -258,11 +258,11 @@ public class OkHttpManager {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(final Call call, final IOException e) {
-                LogUtil.d("url: " + request.url().toString());
-                if (params != null) {
-                    LogUtil.d("params: " + getParamsString(params));
+                String result = "";
+                if (e != null) {
+                    result = e.getMessage();
                 }
-                LogUtil.d("error: " + e.getMessage());
+                logResult(request, params, result, -1);
                 callBackFailure(call, e, callBack);
             }
 
@@ -270,12 +270,9 @@ public class OkHttpManager {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 callBack.onResponse(response);
                 String result = response.body().string();
+                int code = response.code();
                 if (response.isSuccessful()) {
-                    LogUtil.d("url: " + request.url().toString());
-                    if (params != null) {
-                        LogUtil.d("params: " + getParamsString(params));
-                    }
-                    LogUtil.d("response: " + result);
+                    logResult(request, params, result, code);
                     if (callBack.mType == String.class) {
                         callBackSuccess(callBack, call, response, result);
                     } else {
@@ -288,12 +285,7 @@ public class OkHttpManager {
                         }
                     }
                 } else {
-                    LogUtil.d("url: " + request.url().toString());
-                    if (params != null) {
-                        LogUtil.d("params: " + getParamsString(params));
-                    }
-                    LogUtil.d("error code: " + response.code());
-                    LogUtil.d("message: " + result);
+                    logResult(request, params, result, code);
                     Exception errorException = new HttpErrorException(response.code(), result);
                     callBackFailure(call, errorException, callBack);
                 }
@@ -418,5 +410,15 @@ public class OkHttpManager {
             return stringBuilder.toString();
         }
         return "";
+    }
+
+    private void logResult(Request request, Map<String, String> params, String result, int code) {
+        LogUtil.d("method: " + request.method());
+        LogUtil.d("code: " + code);
+        LogUtil.d("url: " + request.url().toString());
+        if (params != null) {
+            LogUtil.d("params: " + getParamsString(params));
+        }
+        LogUtil.d("response: " + result);
     }
 }

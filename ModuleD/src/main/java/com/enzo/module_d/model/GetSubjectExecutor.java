@@ -33,7 +33,7 @@ public class GetSubjectExecutor extends BaseExecutor<LinkedTreeMap<String, Strin
 
     @Override
     public void execute() {
-        post(new OkHttpCallBack<LinkedTreeMap<String, String>>() {
+        get(new OkHttpCallBack<LinkedTreeMap<String, String>>() {
             @Override
             public void onSuccess(Call call, Response response, LinkedTreeMap<String, String> o) {
                 if (jsonCallback != null) {
