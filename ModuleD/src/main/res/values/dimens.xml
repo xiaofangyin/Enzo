@@ -15,6 +15,6 @@
   limitations under the License.
   -->
 <resources>
-    <dimen name="item_margin_horizontal">24dp</dimen>
-    <dimen name="item_margin_vertical">8dp</dimen>
+    <dimen name="md_item_margin_horizontal">24dp</dimen>
+    <dimen name="md_item_margin_vertical">8dp</dimen>
 </resources>
