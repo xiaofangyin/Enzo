@@ -1,28 +1,10 @@
 package com.enzo.xiaofy;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.multidex.MultiDex;
-
-import com.enzo.commonlib.env.EnvConstants;
-import com.enzo.commonlib.utils.common.ActivityHelper;
-import com.enzo.commonlib.utils.common.PhoneUtils;
-import com.enzo.commonlib.utils.crashlib.CrashManager;
-import com.enzo.flkit.FLPluginFactory;
-import com.enzo.main.plugin.SAFactoryManager;
-import com.enzo.module_a.plugin.MAPluginFactory;
-import com.enzo.module_b.plugin.MBPluginFactory;
-import com.enzo.module_c.plugin.MCPluginFactory;
-import com.enzo.module_d.plugin.MDPluginFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ***********************************************
@@ -45,13 +27,8 @@ import java.util.List;
  * **====='-.____'.___ \_____/___.-'____.-'=====**
  * **                  '=---='                  **
  * ***********************************************
- * **              佛祖保佑  镇类之宝            **
+ * **             佛祖保佑  镇类之宝              **
  * ***********************************************
- * <p>
- * 文 件 名: App
- * 创 建 人: xiaofangyin
- * 创建日期: 2017/11/18
- * 邮   箱: xiaofangyinwork@163.com
  */
 public class App extends Application {
 
