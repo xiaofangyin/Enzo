@@ -25,7 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityHelper.getManager().addActivity(this);
         rxPermissions = new RxPermissions(BaseActivity.this);
 
         if (getStatusBarColor() != 0) {
@@ -48,11 +47,5 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     public void initHeader() {
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityHelper.getManager().finishActivity(this);
     }
 }

@@ -1,10 +1,17 @@
 package com.enzo.xiaofy;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.multidex.MultiDex;
 
 import com.enzo.commonlib.env.EnvConstants;
+import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.flkit.FLPluginFactory;
@@ -49,28 +56,20 @@ import java.util.List;
 public class App extends Application {
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        AppController.attachBaseContext(this);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
-        initEnv();
-        initFactory();
+        AppController.onCreate(this);
     }
 
-    private void initEnv() {
-        PhoneUtils.getInstance().init(this);
-
-        MultiDex.install(this);
-
-        EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
-
-        CrashManager.getInstance().init(this, BuildConfig.DEBUG);
-    }
-
-    private void initFactory() {
-        List<FLPluginFactory> factoryList = new ArrayList<>();
-        factoryList.add(MAPluginFactory.getInstance());
-        factoryList.add(MBPluginFactory.getInstance());
-        factoryList.add(MCPluginFactory.getInstance());
-        factoryList.add(MDPluginFactory.getInstance());
-        SAFactoryManager.getInstance().init(this, factoryList);
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        AppController.onConfigurationChanged(this,newConfig);
     }
 }
