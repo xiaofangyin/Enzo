@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.FileNameMap;
 import java.net.URLConnection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -61,8 +62,12 @@ public class OkHttpManager {
      ************************/
 
     public void getRequest(String url, Map<String, String> params, final BaseCallBack callBack) {
+        getRequest(url, params, null, callBack);
+    }
+
+    public void getRequest(String url, Map<String, String> params, Map<String, String> headers, final BaseCallBack callBack) {
         String urlWithParam = attachHttpGetParams(url, params);
-        Request request = buildRequest(urlWithParam, null, HttpMethodType.GET);
+        Request request = buildRequest(urlWithParam, null, headers, HttpMethodType.GET);
         doRequest(request, params, callBack);
     }
 
@@ -128,7 +133,7 @@ public class OkHttpManager {
 
     //异步下载文件
     public void asynDownloadFile(final String url, final String destFileDir, final String fileName, final BaseCallBack callBack) {
-        final Request request = buildRequest(url, null, HttpMethodType.GET);
+        final Request request = buildRequest(url, null, null, HttpMethodType.GET);
         callBack.onRequestBefore(request);  //提示加载框
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -250,9 +255,6 @@ public class OkHttpManager {
     //去进行网络 异步 请求
     private void doRequest(final Request request, final Map<String, String> params, final BaseCallBack callBack) {
         callBack.onRequestBefore(request);
-        //添加公共参数
-        params.putAll(PhoneUtils.getInstance().getDefaultParams());
-
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(final Call call, final IOException e) {
@@ -300,10 +302,6 @@ public class OkHttpManager {
     }
 
     //创建 Request对象
-    private Request buildRequest(String url, Map<String, String> params, HttpMethodType methodType) {
-        return buildRequest(url, params, null, methodType);
-    }
-
     private Request buildRequest(String url, Map<String, String> params, Map<String, String> headers, HttpMethodType methodType) {
         Request.Builder builder = new Request.Builder();
         builder.url(url);
@@ -381,15 +379,20 @@ public class OkHttpManager {
      * get请求后边拼接参数
      */
     private String attachHttpGetParams(String url, Map<String, String> params) {
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        params.putAll(PhoneUtils.getInstance().getDefaultParams());
+
         StringBuilder stringBuffer = new StringBuilder();
-        if (params != null && !params.isEmpty()) {
+        if (!params.isEmpty()) {
             Iterator<String> keys = params.keySet().iterator();
             Iterator<String> values = params.values().iterator();
             stringBuffer.append("?");
 
             for (int i = 0; i < params.size(); i++) {
                 String value = values.next();
-                stringBuffer.append(keys.next() + "=" + value);
+                stringBuffer.append(keys.next()).append("=").append(value);
                 if (i != params.size() - 1) {
                     stringBuffer.append("&");
                 }

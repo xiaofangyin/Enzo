@@ -55,6 +55,24 @@ public abstract class BaseExecutor<T> {
         });
     }
 
+    protected void get(final OkHttpCallBack<T> callback) {
+        OkHttpManager.getInstance().getRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack<T>() {
+            @Override
+            public void onSuccess(Call call, Response response, T o) {
+                if (callback != null) {
+                    callback.onSuccess(call, response, o);
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Exception e) {
+                if (callback != null) {
+                    callback.onFailure(call, e);
+                }
+            }
+        });
+    }
+
     public interface JsonCallback<T> {
 
         void onSuccess(T t);
