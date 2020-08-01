@@ -3,6 +3,8 @@ package com.enzo.commonlib.net.okhttp;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.NonNull;
+
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.google.gson.Gson;
@@ -256,7 +258,7 @@ public class OkHttpManager {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 callBack.onResponse(response);
                 String result = response.body().string();
                 if (response.isSuccessful()) {
@@ -277,7 +279,14 @@ public class OkHttpManager {
                         }
                     }
                 } else {
-                    callBackFailure(call, null, callBack);
+                    LogUtil.d("url: " + request.url().toString());
+                    if (params != null) {
+                        LogUtil.d("params: " + getParamsString(params));
+                    }
+                    LogUtil.d("error code: " + response.code());
+                    LogUtil.d("message: " + result);
+                    Exception errorException = new HttpErrorException(response.code(), result);
+                    callBackFailure(call, errorException, callBack);
                 }
             }
         });
