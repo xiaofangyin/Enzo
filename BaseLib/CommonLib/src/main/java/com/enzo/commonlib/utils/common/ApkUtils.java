@@ -65,21 +65,28 @@ public class ApkUtils {
     }
 
     /**
+     * 安装apk
+     */
+    public static void installApk(Context context, File file) {
+        //自动安装新版本
+        Intent installIntent = getInstallIntent(context, file);
+        context.startActivity(installIntent);
+    }
+
+    /**
      * 得到安装的intent
      */
-    public static Intent getInstallIntent(Context context, File apkFile) {
+    private static Intent getInstallIntent(Context context, File apkFile) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= 24) {
-            LogUtil.d("getInstallIntent FileProvider.getUriForFile...");
             intent.setDataAndType(FileProvider7.getUriForFile(context, apkFile),
                     "application/vnd.android.package-archive");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         } else {
-            LogUtil.d("getInstallIntent Uri.fromFile...");
-            intent.setDataAndType(Uri.fromFile(new File(apkFile.getAbsolutePath())),
+            intent.setDataAndType(Uri.fromFile(apkFile),
                     "application/vnd.android.package-archive");
         }
         return intent;
@@ -115,7 +122,6 @@ public class ApkUtils {
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
             if (applicationInfo != null) {
-                LogUtil.d(applicationInfo.uid);
                 return applicationInfo.uid;
             }
         } catch (Exception e) {
