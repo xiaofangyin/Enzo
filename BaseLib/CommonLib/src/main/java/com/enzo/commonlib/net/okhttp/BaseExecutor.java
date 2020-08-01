@@ -22,20 +22,20 @@ public abstract class BaseExecutor<T> {
     }
 
     public BaseExecutor<T> params(Map<String, String> params) {
-        if(params != null && !params.isEmpty()){
+        if (params != null && !params.isEmpty()) {
             mParams.putAll(params);
         }
         return this;
     }
 
     public BaseExecutor<T> headers(Map<String, String> headers) {
-        if(headers != null && !headers.isEmpty()){
+        if (headers != null && !headers.isEmpty()) {
             mHeaders.putAll(headers);
         }
         return this;
     }
 
-    public abstract void executor();
+    public abstract void execute();
 
     protected void post(final OkHttpCallBack<T> callback) {
         OkHttpManager.getInstance().postRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack<T>() {

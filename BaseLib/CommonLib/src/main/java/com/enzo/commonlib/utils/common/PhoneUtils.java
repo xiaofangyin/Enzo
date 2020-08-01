@@ -43,7 +43,7 @@ public class PhoneUtils {
     }
 
     public void init(Context context) {
-        this.ostype = "Android";
+        this.ostype = "android";
         this.versionname = ApkUtils.getVersionName(context);
         this.versioncode = String.valueOf(ApkUtils.getVersionCode(context));
         this.osversion = android.os.Build.VERSION.SDK_INT;//获得当前系统版本号

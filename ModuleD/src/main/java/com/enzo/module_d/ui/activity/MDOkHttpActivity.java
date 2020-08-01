@@ -70,7 +70,7 @@ public class MDOkHttpActivity extends BaseActivity {
                             public void onFailed(Exception e) {
 
                             }
-                        }).executor();
+                        }).execute();
             }
         });
     }

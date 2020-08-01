@@ -250,6 +250,9 @@ public class OkHttpManager {
     //去进行网络 异步 请求
     private void doRequest(final Request request, final Map<String, String> params, final BaseCallBack callBack) {
         callBack.onRequestBefore(request);
+        //添加公共参数
+        params.putAll(PhoneUtils.getInstance().getDefaultParams());
+
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(final Call call, final IOException e) {
