@@ -104,7 +104,7 @@ public class ImageLoader {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) {
                             LogUtil.d("glide load failed...");
-                            builder.listener.onFailed();
+                            builder.listener.onFailed(e);
                             return false;
                         }
                     });
@@ -239,6 +239,6 @@ public class ImageLoader {
 
         void onSuccess();
 
-        void onFailed();
+        void onFailed(GlideException e);
     }
 }
