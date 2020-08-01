@@ -7,12 +7,13 @@ import android.view.View;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
+import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
+import com.enzo.module_d.ui.activity.MDOkHttpActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
 import com.enzo.module_d.ui.activity.MDStructureActivity;
-import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 
 /**
@@ -48,6 +49,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_okhttp).setOnClickListener(this);
     }
 
     @Override
@@ -68,7 +70,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         } else if (id == R.id.btn_notification) {
             Intent intent = new Intent(getContext(), MDNotificationActivity.class);
             startActivity(intent);
-        }else if (id == R.id.btn_bar_code) {
+        } else if (id == R.id.btn_bar_code) {
             Intent intent = new Intent(getContext(), MDScanBarCodeActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_qr_code) {
@@ -76,6 +78,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_matisse) {
             Intent intent = new Intent(getContext(), MDMatisseActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_okhttp) {
+            Intent intent = new Intent(getContext(), MDOkHttpActivity.class);
             startActivity(intent);
         }
     }

@@ -2,7 +2,7 @@ package com.enzo.module_d.model;
 
 import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.net.okhttp.OkHttpCallBack;
-import com.enzo.module_d.model.bean.SubjectBean;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.LinkedHashMap;
 
@@ -15,7 +15,7 @@ import okhttp3.Response;
  * 创建日期: 2020/8/1
  * 邮   箱: xiaofywork@163.com
  */
-public class GetSubjectExecutor extends BaseExecutor<LinkedHashMap> {
+public class GetSubjectExecutor extends BaseExecutor<LinkedTreeMap<String, String>> {
 
     public static final String BASE_URL = "http://api.douban.com/v2/movie/";
     // 豆瓣电影申请的开发者 API KEY（暂时不对个人开发者开放）
@@ -23,7 +23,7 @@ public class GetSubjectExecutor extends BaseExecutor<LinkedHashMap> {
     // 电影 ID （例：移动迷宫3：死亡解药）
     public static final String MOVIE_ID = "26004132";
 
-    public GetSubjectExecutor(){
+    public GetSubjectExecutor() {
         params.put("apikey", API_KEY);
     }
 
@@ -39,15 +39,19 @@ public class GetSubjectExecutor extends BaseExecutor<LinkedHashMap> {
 
     @Override
     public void executor() {
-        post(new OkHttpCallBack<LinkedHashMap>() {
+        post(new OkHttpCallBack<LinkedTreeMap<String, String>>() {
             @Override
-            public void onSuccess(Call call, Response response, LinkedHashMap o) {
-                jsonCallback.onSuccess(o);
+            public void onSuccess(Call call, Response response, LinkedTreeMap<String, String> o) {
+                if (jsonCallback != null) {
+                    jsonCallback.onSuccess(o);
+                }
             }
 
             @Override
             public void onFailure(Call call, Exception e) {
-                jsonCallback.onFailed(e);
+                if (jsonCallback != null) {
+                    jsonCallback.onFailed(e);
+                }
             }
         });
     }

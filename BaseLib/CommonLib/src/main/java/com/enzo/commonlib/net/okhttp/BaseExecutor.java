@@ -27,14 +27,14 @@ public abstract class BaseExecutor<T> {
             @Override
             public void onSuccess(Call call, Response response, T o) {
                 if (jsonCallback != null) {
-                    jsonCallback.onSuccess(o);
+                    callback.onSuccess(call, response, o);
                 }
             }
 
             @Override
             public void onFailure(Call call, Exception e) {
                 if (jsonCallback != null) {
-                    jsonCallback.onFailed(e);
+                    callback.onFailure(call, e);
                 }
             }
         });

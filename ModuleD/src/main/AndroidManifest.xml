@@ -67,6 +67,9 @@
         <activity
             android:name=".ui.activity.lighter.MDViewPagerActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDOkHttpActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
