@@ -14,6 +14,7 @@ import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
@@ -32,6 +33,7 @@ import java.util.List;
  */
 public class SAMainActivity extends BaseActivity {
 
+    private SpiderWebView mSpiderWebView;
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
 
@@ -42,11 +44,15 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        mSpiderWebView = findViewById(R.id.spider_web_view);
         mTabLayout = findViewById(R.id.tab_layout);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mSpiderWebView.setPointNum(80);//小点数量
+        mSpiderWebView.setPointAcceleration(6);//加速度
+
         mFragments = getFragments();
         switchFragment(0);
 

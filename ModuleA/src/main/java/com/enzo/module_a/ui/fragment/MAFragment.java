@@ -23,7 +23,6 @@ import java.util.List;
  */
 public class MAFragment extends BaseFragment {
 
-    private SpiderWebView mSpiderWebView;
     private AutoScrollTextView verticalScrollTV;
     private TimePicker picker;
     private TextView tvStartTime;
@@ -36,7 +35,6 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        mSpiderWebView = rootView.findViewById(R.id.spider_web_view);
         verticalScrollTV = rootView.findViewById(R.id.auto_scroll_text_view);
         picker = rootView.findViewById(R.id.picker);
         tvStartTime = rootView.findViewById(R.id.tv_start_time);
@@ -45,10 +43,6 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mSpiderWebView.setPointNum(80);//小点数量
-        mSpiderWebView.setPointAcceleration(6);//加速度
-
-
         final List<String> list = new ArrayList<>();
         list.add("王者风范");
         list.add("狭路相逢勇者胜");
