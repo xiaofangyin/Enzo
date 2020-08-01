@@ -67,7 +67,11 @@ public class OkHttpManager {
     }
 
     public void postRequest(String url, Map<String, String> params, final BaseCallBack callBack) {
-        Request request = buildRequest(url, params, HttpMethodType.POST);
+        postRequest(url, params, null, callBack);
+    }
+
+    public void postRequest(String url, Map<String, String> params, Map<String, String> headers, final BaseCallBack callBack) {
+        Request request = buildRequest(url, params, headers, HttpMethodType.POST);
         doRequest(request, params, callBack);
     }
 
@@ -294,6 +298,10 @@ public class OkHttpManager {
 
     //创建 Request对象
     private Request buildRequest(String url, Map<String, String> params, HttpMethodType methodType) {
+        return buildRequest(url, params, null, methodType);
+    }
+
+    private Request buildRequest(String url, Map<String, String> params, Map<String, String> headers, HttpMethodType methodType) {
         Request.Builder builder = new Request.Builder();
         builder.url(url);
         if (methodType == HttpMethodType.GET) {
@@ -301,6 +309,11 @@ public class OkHttpManager {
         } else if (methodType == HttpMethodType.POST) {
             RequestBody requestBody = buildFormData(params);
             builder.post(requestBody);
+        }
+        if (headers != null && !headers.isEmpty()) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                builder.addHeader(entry.getKey(), entry.getValue());
+            }
         }
         return builder.build();
     }

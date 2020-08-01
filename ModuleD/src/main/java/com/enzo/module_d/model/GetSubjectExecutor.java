@@ -4,8 +4,6 @@ import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.net.okhttp.OkHttpCallBack;
 import com.google.gson.internal.LinkedTreeMap;
 
-import java.util.LinkedHashMap;
-
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -22,10 +20,6 @@ public class GetSubjectExecutor extends BaseExecutor<LinkedTreeMap<String, Strin
     public static final String API_KEY = "0b2bdeda43b5688921839c8ecb20399b";
     // 电影 ID （例：移动迷宫3：死亡解药）
     public static final String MOVIE_ID = "26004132";
-
-    public GetSubjectExecutor() {
-        params.put("apikey", API_KEY);
-    }
 
     @Override
     protected String getHost() {

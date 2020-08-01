@@ -9,31 +9,46 @@ import okhttp3.Response;
 public abstract class BaseExecutor<T> {
 
     protected JsonCallback jsonCallback;
-    protected Map<String, String> params = new HashMap<>();
+    protected Map<String, String> mParams = new HashMap<>();
+    protected Map<String, String> mHeaders = new HashMap<>();
 
     protected abstract String getHost();
 
     protected abstract String getVirtual();
 
-    public BaseExecutor callback(JsonCallback<T> jsonCallback) {
+    public BaseExecutor<T> callback(JsonCallback<T> jsonCallback) {
         this.jsonCallback = jsonCallback;
+        return this;
+    }
+
+    public BaseExecutor<T> params(Map<String, String> params) {
+        if(params != null && !params.isEmpty()){
+            mParams.putAll(params);
+        }
+        return this;
+    }
+
+    public BaseExecutor<T> headers(Map<String, String> headers) {
+        if(headers != null && !headers.isEmpty()){
+            mHeaders.putAll(headers);
+        }
         return this;
     }
 
     public abstract void executor();
 
     protected void post(final OkHttpCallBack<T> callback) {
-        OkHttpManager.getInstance().postRequest(getHost().concat(getVirtual()), params, new OkHttpCallBack<T>() {
+        OkHttpManager.getInstance().postRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack<T>() {
             @Override
             public void onSuccess(Call call, Response response, T o) {
-                if (jsonCallback != null) {
+                if (callback != null) {
                     callback.onSuccess(call, response, o);
                 }
             }
 
             @Override
             public void onFailure(Call call, Exception e) {
-                if (jsonCallback != null) {
+                if (callback != null) {
                     callback.onFailure(call, e);
                 }
             }
