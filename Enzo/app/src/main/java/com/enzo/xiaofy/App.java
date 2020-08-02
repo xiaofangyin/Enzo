@@ -47,6 +47,6 @@ public class App extends Application {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        AppController.onConfigurationChanged(this,newConfig);
+        AppController.onConfigurationChanged(this, newConfig);
     }
 }
