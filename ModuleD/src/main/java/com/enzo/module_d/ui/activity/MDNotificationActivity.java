@@ -29,7 +29,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initHeader() {
-        HeadWidget headWidget = findViewById(R.id.notification_header);
+        HeadWidget headWidget = findViewById(R.id.heander_view);
         headWidget.setTitle("消息通知");
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override

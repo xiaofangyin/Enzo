@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_common_bg"
     android:orientation="vertical">
 
     <com.enzo.commonlib.widget.headerview.HeadWidget
@@ -10,15 +9,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.enzo.commonlib.widget.loadinglayout.LoadingLayout
-        android:id="@+id/add_device_loading_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-        <com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView
-            android:id="@+id/add_device_recycler_view"
+        <com.enzo.module_d.ui.view.MyViewGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never" />
-    </com.enzo.commonlib.widget.loadinglayout.LoadingLayout>
+            android:background="@color/color_yellow">
+
+            <com.enzo.module_d.ui.view.MyView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:background="@color/color_red" />
+
+        </com.enzo.module_d.ui.view.MyViewGroup>
+
+    </RelativeLayout>
 </LinearLayout>

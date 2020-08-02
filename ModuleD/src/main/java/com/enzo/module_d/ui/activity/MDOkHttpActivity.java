@@ -26,7 +26,7 @@ public class MDOkHttpActivity extends BaseActivity {
     @Override
     public void initHeader() {
         super.initHeader();
-        HeadWidget headWidget = findViewById(R.id.notification_header);
+        HeadWidget headWidget = findViewById(R.id.heander_view);
         headWidget.setTitle("网络");
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override

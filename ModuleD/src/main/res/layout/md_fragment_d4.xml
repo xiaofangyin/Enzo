@@ -9,12 +9,6 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_structure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="数据结构" />
-
-        <Button
             android:id="@+id/btn_lighter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,5 +55,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="网络" />
+
+        <Button
+            android:id="@+id/btn_touch_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="事件分发" />
     </LinearLayout>
 </ScrollView>

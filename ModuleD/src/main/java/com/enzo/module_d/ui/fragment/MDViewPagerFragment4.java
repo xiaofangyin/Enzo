@@ -13,7 +13,7 @@ import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDOkHttpActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
-import com.enzo.module_d.ui.activity.MDStructureActivity;
+import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 
 /**
@@ -41,7 +41,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initListener(View rootView) {
-        rootView.findViewById(R.id.btn_structure).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
@@ -50,15 +49,13 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
         rootView.findViewById(R.id.btn_okhttp).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_structure) {
-            Intent intent = new Intent(getContext(), MDStructureActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_lighter) {
+        if (id == R.id.btn_lighter) {
             Intent intent = new Intent(getContext(), MDLighterActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_calendar) {
@@ -81,6 +78,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_okhttp) {
             Intent intent = new Intent(getContext(), MDOkHttpActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_touch_event) {
+            Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
             startActivity(intent);
         }
     }

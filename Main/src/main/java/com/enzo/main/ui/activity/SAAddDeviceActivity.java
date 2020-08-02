@@ -47,7 +47,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     @Override
     public void initHeader() {
-        headWidget = findViewById(R.id.add_device_header);
+        headWidget = findViewById(R.id.header_view);
         headWidget.setTitle("添加设备");
         headWidget.setRightImage(R.mipmap.main_add_icon);
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
