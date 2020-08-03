@@ -9,21 +9,29 @@ import com.enzo.commonlib.utils.common.LogUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.FileNameMap;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
 import okhttp3.FormBody;
 import okhttp3.Headers;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -33,6 +41,7 @@ import okhttp3.Response;
 
 public class OkHttpManager {
 
+    private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
     private static OkHttpManager mOkHttpManager;
     private OkHttpClient mOkHttpClient;
     private Gson gson;
@@ -43,7 +52,21 @@ public class OkHttpManager {
         mOkHttpClient.newBuilder().
                 connectTimeout(10, TimeUnit.SECONDS).
                 readTimeout(10, TimeUnit.SECONDS).
-                writeTimeout(10, TimeUnit.SECONDS);
+                writeTimeout(10, TimeUnit.SECONDS).
+                cookieJar(new CookieJar() {
+                    @Override
+                    public void saveFromResponse(@NotNull HttpUrl httpUrl, @NotNull List<Cookie> list) {
+                        cookieStore.put(httpUrl.host(), list);
+                    }
+
+                    @NotNull
+                    @Override
+                    public List<Cookie> loadForRequest(@NotNull HttpUrl httpUrl) {
+                        List<Cookie> cookies = cookieStore.get(httpUrl.host());
+                        return cookies != null ? cookies : new ArrayList<Cookie>();
+
+                    }
+                });
         gson = new Gson();
         handler = new Handler(Looper.getMainLooper());
     }
