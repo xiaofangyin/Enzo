@@ -73,7 +73,11 @@ public class OkHttpManager {
 
     public static OkHttpManager getInstance() {
         if (mOkHttpManager == null) {
-            mOkHttpManager = new OkHttpManager();
+            synchronized (OkHttpManager.class) {
+                if (mOkHttpManager == null) {
+                    mOkHttpManager = new OkHttpManager();
+                }
+            }
         }
         return mOkHttpManager;
     }
