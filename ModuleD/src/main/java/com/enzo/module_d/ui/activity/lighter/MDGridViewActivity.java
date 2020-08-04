@@ -44,7 +44,6 @@ public class MDGridViewActivity extends BaseActivity {
     @Override
     public void initView() {
         MDLighterHelper.setupToolBarBackAction(this, (Toolbar) findViewById(R.id.toolbar));
-
         initGridView();
     }
 

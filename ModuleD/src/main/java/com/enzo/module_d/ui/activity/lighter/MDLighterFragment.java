@@ -23,20 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MDLighterFragment extends Fragment {
-    private Lighter mLighter;
-    private Button mButton1;
-    private Button mButton2;
-    private Button mButton3;
-    private Button mButton4;
-    private Button mButton5;
 
+    private Lighter mLighter;
     private List<View> mTipViewList = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.md_layout_lighter_viewpager_1, container, false);
-        return view;
+        return inflater.inflate(R.layout.md_layout_lighter_viewpager_1, container, false);
     }
 
     @Override
@@ -49,11 +43,11 @@ public class MDLighterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mButton1 = view.findViewById(R.id.vp_btn_1);
-        mButton2 = view.findViewById(R.id.vp_btn_2);
-        mButton3 = view.findViewById(R.id.vp_btn_3);
-        mButton4 = view.findViewById(R.id.vp_btn_4);
-        mButton5 = view.findViewById(R.id.vp_btn_5);
+        Button mButton1 = view.findViewById(R.id.vp_btn_1);
+        Button mButton2 = view.findViewById(R.id.vp_btn_2);
+        Button mButton3 = view.findViewById(R.id.vp_btn_3);
+        Button mButton4 = view.findViewById(R.id.vp_btn_4);
+        Button mButton5 = view.findViewById(R.id.vp_btn_5);
 
         mButton1.setOnClickListener(mClickListener);
         mButton2.setOnClickListener(mClickListener);

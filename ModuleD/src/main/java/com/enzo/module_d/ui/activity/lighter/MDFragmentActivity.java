@@ -32,7 +32,6 @@ public class MDFragmentActivity extends BaseActivity {
     @Override
     public void initView() {
         MDLighterHelper.setupToolBarBackAction(this, (Toolbar) findViewById(R.id.toolbar));
-
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_content, new MDLighterFragment())
                 .commit();

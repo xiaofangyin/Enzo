@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MDLighterHelper {
+
     public final static int[] PICTURES = new int[]{
             R.mipmap.lighter_pic_1,
             R.mipmap.lighter_pic_2,

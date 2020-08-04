@@ -9,6 +9,13 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_add_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="添加设备页面" />
+
+        <Button
             android:id="@+id/btn_lighter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

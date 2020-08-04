@@ -33,7 +33,6 @@ public class MDDialogActivity extends BaseActivity {
     @Override
     public void initView() {
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-
         MDLighterHelper.setupToolBarBackAction(this, (Toolbar) findViewById(R.id.toolbar));
     }
 
