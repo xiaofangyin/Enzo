@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.matisse.Matisse;
@@ -41,6 +42,7 @@ import com.enzo.commonlib.utils.matisse.filter.Filter;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.matisse.listener.OnCheckedListener;
 import com.enzo.commonlib.utils.matisse.listener.OnSelectedListener;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.filter.GifSizeFilter;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -49,7 +51,7 @@ import java.util.List;
 
 import rx.functions.Action1;
 
-public class MDMatisseActivity extends AppCompatActivity implements View.OnClickListener {
+public class MDMatisseActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_CHOOSE = 23;
     private static final int REQUEST_CODE_CHOOSE_SINGLE = 24;
@@ -58,19 +60,33 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
     private UriAdapter mAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.md_activity_matisse_main);
-        findViewById(R.id.zhihu).setOnClickListener(this);
-        findViewById(R.id.dracula).setOnClickListener(this);
-        findViewById(R.id.only_gif).setOnClickListener(this);
-        findViewById(R.id.single).setOnClickListener(this);
+    public int getLayoutId() {
+        return R.layout.md_activity_matisse_main;
+    }
 
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_widget);
+        headWidget.setTitle("Matisse");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void initView() {
         imageView = findViewById(R.id.single_choose_result);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter = new UriAdapter());
+    }
 
+    @Override
+    public void initData(Bundle savedInstanceState) {
         new RxPermissions(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(new Action1<Boolean>() {
                     @Override
@@ -81,6 +97,14 @@ public class MDMatisseActivity extends AppCompatActivity implements View.OnClick
                         }
                     }
                 });
+    }
+
+    @Override
+    public void initListener() {
+        findViewById(R.id.zhihu).setOnClickListener(this);
+        findViewById(R.id.dracula).setOnClickListener(this);
+        findViewById(R.id.only_gif).setOnClickListener(this);
+        findViewById(R.id.single).setOnClickListener(this);
     }
 
     @Override
