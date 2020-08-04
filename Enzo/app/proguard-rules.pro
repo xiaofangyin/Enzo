@@ -21,24 +21,14 @@
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
--keep public class com.android.vending.licensing.ILicensingService
--keep public class * extends android.support.v7.**
--keep public class * extends android.support.v4.**
--keep public class * extends android.support.multidex.**
--keep public class * extends android.support.annotation.**
--keep class android.support.** { *; }
--keep class android.support.v4.** { *; }
--keep public class * extends android.support.v4.**
--keep interface android.support.v4.app.** { *; }
--keep class android.support.v7.** { *; }
--keep public class * extends android.support.v7.**
--keep interface android.support.v7.app.** { *; }
-
-# AndroidX 防止混淆
 -keep class com.google.android.material.** {*;}
 -keep class androidx.** {*;}
 -keep public class * extends androidx.**
 -keep interface androidx.** {*;}
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-dontwarn androidx.**
+
 -keepclassmembers class * {
     @androidx.annotation.Keep *;
 }
@@ -95,6 +85,33 @@
 -dontwarn okio.**
 -dontwarn javax.annotation.Nullable
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
+-dontwarn javax.annotation.**
+-dontwarn javax.inject.**
 
-#picasso
--dontwarn com.squareup.okhttp.**
+# glide混淆
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+-dontwarn me.iwf.photopicker.adapter.**
+
+#ucrop
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }
+
+# OkHttp3
+-dontwarn okhttp3.logging.**
+-keep class okhttp3.internal.**{*;}
+-dontwarn okio.**
+
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+
+# Gson
+-keep class com.google.gson.stream.** { *; }
+-keepattributes EnclosingMethod

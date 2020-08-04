@@ -40,8 +40,6 @@ dependencies {
 
     //zxing
     implementation 'com.google.zxing:core:3.3.3'
-    //glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
     //gson
     implementation 'com.google.code.gson:gson:2.8.5'
 
@@ -58,7 +56,8 @@ dependencies {
     api 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
     //littie
     api 'com.airbnb.android:lottie:3.4.1'
-
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
     //ucrop
     //api 'com.github.yalantis:ucrop:2.2.2'
     implementation project(':BaseLib:ucrop')
