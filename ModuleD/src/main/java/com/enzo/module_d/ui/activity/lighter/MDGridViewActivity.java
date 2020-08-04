@@ -1,6 +1,5 @@
 package com.enzo.module_d.ui.activity.lighter;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.lighter.Lighter;
 import com.enzo.commonlib.widget.lighter.parameter.Direction;
 import com.enzo.commonlib.widget.lighter.parameter.LighterParameter;
@@ -21,32 +21,51 @@ import com.enzo.commonlib.widget.lighter.parameter.MarginOffset;
 import com.enzo.commonlib.widget.lighter.shape.RectShape;
 import com.enzo.module_d.R;
 
-public class MDGridViewActivity extends AppCompatActivity {
-    private GridView mGridView;
+public class MDGridViewActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutId() {
+        return R.layout.md_activity_lighter_gridview;
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-        }
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_widget);
+        headWidget.setTitle("引导");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
-        setContentView(R.layout.activity_lighter_gridview);
+    @Override
+    public void initView() {
         MDLighterHelper.setupToolBarBackAction(this, (Toolbar) findViewById(R.id.toolbar));
 
         initGridView();
     }
 
     @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-
         Toast.makeText(this, "Click to show highlight(点击显示高亮)~", Toast.LENGTH_LONG).show();
     }
 
-    private void initGridView(){
-        mGridView = findViewById(R.id.gridview);
+    private void initGridView() {
+        GridView mGridView = findViewById(R.id.gridview);
         mGridView.setNumColumns(3);
         mGridView.setAdapter(new Adapter());
         mGridView.setVerticalSpacing(10);
@@ -60,8 +79,8 @@ public class MDGridViewActivity extends AppCompatActivity {
         });
     }
 
-    private void showGuide(View highlightedView){
-        if (highlightedView == null){
+    private void showGuide(View highlightedView) {
+        if (highlightedView == null) {
             return;
         }
 
@@ -71,7 +90,7 @@ public class MDGridViewActivity extends AppCompatActivity {
         Lighter.with(this)
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedView(highlightedView)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_6)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_6)
                         .setTipViewRelativeDirection(Direction.TOP)
                         .setLighterShape(rectShape)
                         .setShapeXOffset(10)
@@ -80,7 +99,6 @@ public class MDGridViewActivity extends AppCompatActivity {
                         .build())
                 .show();
     }
-
 
     private class Adapter extends BaseAdapter {
 
@@ -101,22 +119,22 @@ public class MDGridViewActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-           ViewHolder viewHolder;
+            ViewHolder viewHolder;
 
-            if (convertView == null){
-                convertView = getLayoutInflater().inflate(R.layout.layout_lighter_item_list, parent, false);
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.md_layout_lighter_item_list, parent, false);
                 viewHolder = new ViewHolder();
                 viewHolder.imageView = convertView.findViewById(R.id.iv_image);
                 convertView.setTag(viewHolder);
             }
 
-            viewHolder = (ViewHolder)convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.imageView.setImageResource(MDLighterHelper.sPictureList.get(position));
             return convertView;
         }
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         ImageView imageView;
     }
 }

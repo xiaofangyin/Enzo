@@ -34,7 +34,7 @@ public class MDCalendarActivity extends BaseActivity implements View.OnClickList
     @Override
     public void initHeader() {
         super.initHeader();
-        HeadWidget headWidget = findViewById(R.id.calendar_header);
+        HeadWidget headWidget = findViewById(R.id.header_widget);
         headWidget.setTitle("日历");
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override

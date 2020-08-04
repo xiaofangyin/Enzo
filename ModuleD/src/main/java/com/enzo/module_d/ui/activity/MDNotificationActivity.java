@@ -174,7 +174,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
     }
 
     private RemoteViews getRemoteViews() {
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_mobile_play);
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.md_notification_mobile_play);
         // 设置 点击通知栏的上一首按钮时要执行的意图
         remoteViews.setOnClickPendingIntent(R.id.btn_pre, getActivityPendingIntent(11));
         // 设置 点击通知栏的下一首按钮时要执行的意图

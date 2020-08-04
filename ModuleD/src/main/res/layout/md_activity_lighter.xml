@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startNormalLayout"
+                android:text="RelativeLayout" />
+
+            <Button
+                android:id="@+id/btn_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startRecyclerView"
+                android:text="RecyclerView" />
+
+            <Button
+                android:id="@+id/btn_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startListView"
+                android:text="ListView" />
+
+
+            <Button
+                android:id="@+id/btn_grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startGridView"
+                android:text="GridView" />
+
+            <Button
+                android:id="@+id/btn_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startScrollView"
+                android:text="ScrollView" />
+
+            <Button
+                android:id="@+id/btn_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startViewPager"
+                android:text="ViewPager" />
+
+            <Button
+                android:id="@+id/btn_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startDialog"
+                android:text="Dialog" />
+
+            <Button
+                android:id="@+id/btn_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startFragment"
+                android:text="Fragment" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

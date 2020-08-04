@@ -1,14 +1,15 @@
 package com.enzo.module_d.ui.activity.lighter;
 
-import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.lighter.Lighter;
 import com.enzo.commonlib.widget.lighter.interfaces.OnLighterListener;
 import com.enzo.commonlib.widget.lighter.parameter.Direction;
@@ -19,20 +20,42 @@ import com.enzo.commonlib.widget.lighter.shape.OvalShape;
 import com.enzo.commonlib.widget.lighter.shape.RectShape;
 import com.enzo.module_d.R;
 
-public class MDRelativeLayoutActivity extends AppCompatActivity {
+public class MDRelativeLayoutActivity extends BaseActivity {
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lighter_normal_layout);
+    public int getLayoutId() {
+        return R.layout.md_activity_lighter_normal_layout;
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-        }
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_widget);
+        headWidget.setTitle("引导");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
+    @Override
+    public void initView() {
         showGuide();
     }
 
-    private void showGuide(){
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    private void showGuide() {
         TranslateAnimation translateAnimation = new TranslateAnimation(-500, 0, 0, 0);
         translateAnimation.setDuration(500);
         translateAnimation.setInterpolator(new BounceInterpolator());
@@ -49,7 +72,7 @@ public class MDRelativeLayoutActivity extends AppCompatActivity {
                 .setOnLighterListener(new OnLighterListener() {
                     @Override
                     public void onShow(int index) {
-                        Toast.makeText(getApplicationContext(), "正在显示第" + (index+1) + "高亮", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "正在显示第" + (index + 1) + "高亮", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -59,7 +82,7 @@ public class MDRelativeLayoutActivity extends AppCompatActivity {
                 })
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedViewId(R.id.iv_head_photo)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_1)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_1)
                         .setLighterShape(circleShape)
                         .setTipViewRelativeDirection(Direction.RIGHT)
                         .setTipViewDisplayAnimation(MDLighterHelper.getScaleAnimation())
@@ -67,7 +90,7 @@ public class MDRelativeLayoutActivity extends AppCompatActivity {
                         .build())
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedViewId(R.id.layout_balance)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_2)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_2)
                         .setLighterShape(rectShape)
                         .setTipViewRelativeDirection(Direction.TOP)
                         .setShapeXOffset(10)
@@ -85,7 +108,7 @@ public class MDRelativeLayoutActivity extends AppCompatActivity {
                         .build())
                 .addHighlight(new LighterParameter.Builder()
                                 .setHighlightedViewId(R.id.btn_highlight1)
-                                .setTipLayoutId(R.layout.layout_lighter_tip_3)
+                                .setTipLayoutId(R.layout.md_layout_lighter_tip_3)
                                 .setLighterShape(new RectShape(0, 0, 25))
                                 .setTipViewRelativeDirection(Direction.TOP)
                                 .setTipViewDisplayAnimation(MDLighterHelper.getScaleAnimation())
@@ -94,7 +117,7 @@ public class MDRelativeLayoutActivity extends AppCompatActivity {
 
                         new LighterParameter.Builder()
                                 .setHighlightedViewId(R.id.btn_highlight3)
-                                .setTipLayoutId(R.layout.layout_lighter_tip_1)
+                                .setTipLayoutId(R.layout.md_layout_lighter_tip_1)
                                 .setLighterShape(new OvalShape())
                                 .setTipViewRelativeDirection(Direction.BOTTOM)
                                 .setTipViewDisplayAnimation(MDLighterHelper.getScaleAnimation())

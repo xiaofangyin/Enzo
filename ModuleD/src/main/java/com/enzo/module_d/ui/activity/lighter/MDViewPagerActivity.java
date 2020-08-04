@@ -1,16 +1,15 @@
 package com.enzo.module_d.ui.activity.lighter;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.lighter.Lighter;
 import com.enzo.commonlib.widget.lighter.parameter.Direction;
 import com.enzo.commonlib.widget.lighter.parameter.LighterParameter;
@@ -22,7 +21,8 @@ import com.enzo.module_d.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MDViewPagerActivity extends AppCompatActivity {
+public class MDViewPagerActivity extends BaseActivity {
+
     private ViewPager mViewPager;
     private List<View> mViewList = new ArrayList<>();
 
@@ -30,17 +30,37 @@ public class MDViewPagerActivity extends AppCompatActivity {
     private Lighter mLighter2;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutId() {
+        return R.layout.md_activity_lighter_viewpager;
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-        }
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_widget);
+        headWidget.setTitle("引导");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
-        setContentView(R.layout.activity_lighter_viewpager);
+    @Override
+    public void initView() {
         MDLighterHelper.setupToolBarBackAction(this, (Toolbar) findViewById(R.id.toolbar));
-
         initViewPager();
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initListener() {
+
     }
 
     @Override
@@ -50,11 +70,11 @@ public class MDViewPagerActivity extends AppCompatActivity {
         mViewPager.removeOnPageChangeListener(mPageChangeListener);
     }
 
-    private void initViewPager(){
+    private void initViewPager() {
         mViewPager = findViewById(R.id.viewpager);
 
-        View view1 = getLayoutInflater().inflate(R.layout.layout_lighter_viewpager_1, null);
-        View view2 = getLayoutInflater().inflate(R.layout.layout_lighter_viewpager_2, null);
+        View view1 = getLayoutInflater().inflate(R.layout.md_layout_lighter_viewpager_1, null);
+        View view2 = getLayoutInflater().inflate(R.layout.md_layout_lighter_viewpager_2, null);
 
         mViewList.add(view1);
         mViewList.add(view2);
@@ -65,14 +85,14 @@ public class MDViewPagerActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(mPageChangeListener);
     }
 
-    private void showPage1Guide(){
-        if (mLighter1 != null && mLighter1.isShowing()){
+    private void showPage1Guide() {
+        if (mLighter1 != null && mLighter1.isShowing()) {
             return;
         }
         mLighter1 = Lighter.with((ViewGroup) mViewList.get(0))
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedViewId(R.id.vp_btn_1)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_1)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_1)
                         .setLighterShape(new OvalShape())
                         .setTipViewDisplayAnimation(MDLighterHelper.getScaleAnimation())
                         .setTipViewRelativeDirection(Direction.RIGHT)
@@ -80,7 +100,7 @@ public class MDViewPagerActivity extends AppCompatActivity {
                         .build())
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedViewId(R.id.vp_btn_2)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_7)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_7)
                         .setLighterShape(new OvalShape())
                         .setTipViewRelativeDirection(Direction.LEFT)
                         .setTipViewDisplayAnimation(MDLighterHelper.getScaleAnimation())
@@ -88,7 +108,7 @@ public class MDViewPagerActivity extends AppCompatActivity {
                         .build())
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedViewId(R.id.vp_btn_3)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_2)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_2)
                         .setLighterShape(new OvalShape())
                         .setTipViewRelativeDirection(Direction.TOP)
                         .setTipViewDisplayAnimation(MDLighterHelper.getScaleAnimation())
@@ -96,7 +116,7 @@ public class MDViewPagerActivity extends AppCompatActivity {
                         .build())
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedViewId(R.id.vp_btn_4)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_3)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_3)
                         .setLighterShape(new OvalShape())
                         .setTipViewRelativeDirection(Direction.TOP)
                         .setTipViewRelativeOffset(new MarginOffset(80, 0, 0, 20))
@@ -104,7 +124,7 @@ public class MDViewPagerActivity extends AppCompatActivity {
                         .build())
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedViewId(R.id.vp_btn_5)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_4)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_4)
                         .setLighterShape(new OvalShape())
                         .setTipViewRelativeDirection(Direction.TOP)
                         .setTipViewRelativeOffset(new MarginOffset(0, 100, 0, 20))
@@ -113,8 +133,8 @@ public class MDViewPagerActivity extends AppCompatActivity {
         mLighter1.show();
     }
 
-    private void showPage2Guide(){
-        if (mLighter2 != null && mLighter2.isShowing()){
+    private void showPage2Guide() {
+        if (mLighter2 != null && mLighter2.isShowing()) {
             return;
         }
 
@@ -122,16 +142,16 @@ public class MDViewPagerActivity extends AppCompatActivity {
                 .addHighlight(
                         //Show three at a time
                         new LighterParameter.Builder()
-                            .setHighlightedViewId(R.id.vp_btn_1)
-                            .setTipLayoutId(R.layout.layout_lighter_tip_1)
-                            .setLighterShape(new RectShape())
-                            .setTipViewRelativeDirection(Direction.BOTTOM)
-                            .setTipViewRelativeOffset(new MarginOffset(200, 0, 30, 0))
-                            .build(),
+                                .setHighlightedViewId(R.id.vp_btn_1)
+                                .setTipLayoutId(R.layout.md_layout_lighter_tip_1)
+                                .setLighterShape(new RectShape())
+                                .setTipViewRelativeDirection(Direction.BOTTOM)
+                                .setTipViewRelativeOffset(new MarginOffset(200, 0, 30, 0))
+                                .build(),
 
                         new LighterParameter.Builder()
                                 .setHighlightedViewId(R.id.vp_btn_2)
-                                .setTipLayoutId(R.layout.layout_lighter_tip_2)
+                                .setTipLayoutId(R.layout.md_layout_lighter_tip_2)
                                 .setLighterShape(new RectShape())
                                 .setTipViewRelativeDirection(Direction.TOP)
                                 .setTipViewRelativeOffset(new MarginOffset(-400, 0, 0, 30))
@@ -139,7 +159,7 @@ public class MDViewPagerActivity extends AppCompatActivity {
 
                         new LighterParameter.Builder()
                                 .setHighlightedViewId(R.id.vp_btn_3)
-                                .setTipLayoutId(R.layout.layout_lighter_tip_3)
+                                .setTipLayoutId(R.layout.md_layout_lighter_tip_3)
                                 .setLighterShape(new RectShape())
                                 .setTipViewRelativeDirection(Direction.TOP)
                                 .setTipViewRelativeOffset(new MarginOffset(100, 0, 0, 30))
@@ -149,19 +169,22 @@ public class MDViewPagerActivity extends AppCompatActivity {
 
     private ViewPager.OnPageChangeListener mPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
-        public void onPageScrolled(int i, float v, int i1) { }
+        public void onPageScrolled(int i, float v, int i1) {
+        }
 
         @Override
         public void onPageSelected(int i) {
-            if (i == 0){
+            if (i == 0) {
                 showPage1Guide();
-            }else{
+            } else {
                 showPage2Guide();
             }
         }
 
         @Override
-        public void onPageScrollStateChanged(int i) { }
+        public void onPageScrollStateChanged(int i) {
+
+        }
     };
 
     public class Adapter extends PagerAdapter {
@@ -172,14 +195,14 @@ public class MDViewPagerActivity extends AppCompatActivity {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view==object;
+            return view == object;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = mViewList.get(position);
             container.addView(view);
-            return  view;
+            return view;
         }
 
         @Override

@@ -21,12 +21,6 @@ import com.enzo.module_d.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author SamLeung
- * @e-mail samlssplus@gmail.com
- * @github https://github.com/samlss
- * @description The lighter helper.
- */
 public class MDLighterHelper {
     public final static int[] PICTURES = new int[]{
             R.mipmap.lighter_pic_1,
@@ -68,7 +62,7 @@ public class MDLighterHelper {
     }
 
     public static View createCommonTipView(Activity activity, int drawableId, String string){
-        View view = activity.getLayoutInflater().inflate(R.layout.layout_lighter_tip_common, null);
+        View view = activity.getLayoutInflater().inflate(R.layout.md_layout_lighter_tip_common, null);
         ImageView imageView = view.findViewById(R.id.iv_image);
         imageView.setImageResource(drawableId);
         TextView textView = view.findViewById(R.id.tv_text);

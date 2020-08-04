@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <com.enzo.commonlib.widget.headerview.HeadWidget
-        android:id="@+id/calendar_header"
+        android:id="@+id/header_widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

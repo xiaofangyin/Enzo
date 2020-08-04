@@ -30,7 +30,7 @@ public class MDCustomDialog extends AlertDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mView = getLayoutInflater().inflate(R.layout.layout_lighter_dialog, null);
+        mView = getLayoutInflater().inflate(R.layout.md_layout_lighter_dialog, null);
         setContentView(mView);
     }
 
@@ -55,7 +55,7 @@ public class MDCustomDialog extends AlertDialog {
                         //Show two at a time
                         new LighterParameter.Builder()
                                 .setHighlightedViewId(R.id.vp_btn_1)
-                                .setTipLayoutId(R.layout.layout_lighter_tip_1)
+                                .setTipLayoutId(R.layout.md_layout_lighter_tip_1)
                                 .setLighterShape(new RectShape(5, 5, 30))
                                 .setTipViewRelativeDirection(Direction.BOTTOM)
                                 .setTipViewRelativeOffset(new MarginOffset(150, 0, 30, 0))
@@ -63,7 +63,7 @@ public class MDCustomDialog extends AlertDialog {
 
                         new LighterParameter.Builder()
                                 .setHighlightedViewId(R.id.vp_btn_2)
-                                .setTipLayoutId(R.layout.layout_lighter_tip_2)
+                                .setTipLayoutId(R.layout.md_layout_lighter_tip_2)
                                 .setLighterShape(new RectShape(5, 5, 30))
                                 .setTipViewRelativeDirection(Direction.TOP)
                                 .setTipViewRelativeOffset(new MarginOffset(-400, 0, 0, 30))

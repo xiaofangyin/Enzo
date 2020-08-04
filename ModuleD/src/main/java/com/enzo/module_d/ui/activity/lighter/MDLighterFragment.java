@@ -35,7 +35,7 @@ public class MDLighterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_lighter_viewpager_1, container, false);
+        View view = inflater.inflate(R.layout.md_layout_lighter_viewpager_1, container, false);
         return view;
     }
 
@@ -61,11 +61,11 @@ public class MDLighterFragment extends Fragment {
         mButton4.setOnClickListener(mClickListener);
         mButton5.setOnClickListener(mClickListener);
 
-        View tipView1 = getLayoutInflater().inflate(R.layout.layout_lighter_tip_1, null);
-        View tipView2 = getLayoutInflater().inflate(R.layout.layout_lighter_tip_7, null);
-        View tipView3 = getLayoutInflater().inflate(R.layout.layout_lighter_tip_2, null);
-        View tipView4 = getLayoutInflater().inflate(R.layout.layout_lighter_tip_3, null);
-        View tipView5 = getLayoutInflater().inflate(R.layout.layout_lighter_tip_4, null);
+        View tipView1 = getLayoutInflater().inflate(R.layout.md_layout_lighter_tip_1, null);
+        View tipView2 = getLayoutInflater().inflate(R.layout.md_layout_lighter_tip_7, null);
+        View tipView3 = getLayoutInflater().inflate(R.layout.md_layout_lighter_tip_2, null);
+        View tipView4 = getLayoutInflater().inflate(R.layout.md_layout_lighter_tip_3, null);
+        View tipView5 = getLayoutInflater().inflate(R.layout.md_layout_lighter_tip_4, null);
 
         tipView1.setOnClickListener(new View.OnClickListener() {
             @Override

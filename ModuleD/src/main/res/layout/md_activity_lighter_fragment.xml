@@ -6,23 +6,15 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_widget"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:contentInsetStart="0dp"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:title="Fragment"
-        app:titleTextColor="@android:color/white">
-
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="wrap_content" />
 
     <FrameLayout
         android:id="@+id/fragment_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"></FrameLayout>
+        android:layout_below="@+id/header_widget"/>
 
 </RelativeLayout>

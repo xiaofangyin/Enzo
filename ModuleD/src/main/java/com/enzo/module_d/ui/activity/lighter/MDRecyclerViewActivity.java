@@ -1,6 +1,5 @@
 package com.enzo.module_d.ui.activity.lighter;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,39 +9,61 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.lighter.Lighter;
 import com.enzo.commonlib.widget.lighter.parameter.Direction;
 import com.enzo.commonlib.widget.lighter.parameter.LighterParameter;
 import com.enzo.module_d.R;
 
-public class MDRecyclerViewActivity extends AppCompatActivity {
-    private RecyclerView mRecyclerView;
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-        }
+public class MDRecyclerViewActivity extends BaseActivity {
 
-        setContentView(R.layout.activity_lighter_recyclerview);
+    @Override
+    public int getLayoutId() {
+        return R.layout.md_activity_lighter_recyclerview;
+    }
+
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_widget);
+        headWidget.setTitle("引导");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void initView() {
         MDLighterHelper.setupToolBarBackAction(this, (Toolbar) findViewById(R.id.toolbar));
         initListView();
     }
 
     @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-
         Toast.makeText(this, "Click to show highlight(点击显示高亮)~", Toast.LENGTH_LONG).show();
     }
 
-    private void initListView(){
-        mRecyclerView = findViewById(R.id.recyclerview);
+    private void initListView() {
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerview);
         Adapter adapter = new Adapter();
         adapter.setItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -54,26 +75,27 @@ public class MDRecyclerViewActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 
-    private void showGuide(View highlightedView){
-        if (highlightedView == null){
+    private void showGuide(View highlightedView) {
+        if (highlightedView == null) {
             return;
         }
 
         Lighter.with((ViewGroup) findViewById(R.id.root))
                 .addHighlight(new LighterParameter.Builder()
                         .setHighlightedView(highlightedView)
-                        .setTipLayoutId(R.layout.layout_lighter_tip_5)
+                        .setTipLayoutId(R.layout.md_layout_lighter_tip_5)
                         .setTipViewRelativeDirection(Direction.TOP)
                         .build())
                 .show();
     }
 
-    private class Adapter extends RecyclerView.Adapter<ViewHolder>{
+    private class Adapter extends RecyclerView.Adapter<ViewHolder> {
         private AdapterView.OnItemClickListener itemClickListener;
+
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = getLayoutInflater().inflate(R.layout.layout_lighter_item_list, viewGroup, false);
+            View view = getLayoutInflater().inflate(R.layout.md_layout_lighter_item_list, viewGroup, false);
             return new ViewHolder(view);
         }
 
@@ -83,7 +105,7 @@ public class MDRecyclerViewActivity extends AppCompatActivity {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (itemClickListener != null){
+                    if (itemClickListener != null) {
                         itemClickListener.onItemClick(null, v, i, v.getId());
                     }
                 }
@@ -100,8 +122,9 @@ public class MDRecyclerViewActivity extends AppCompatActivity {
         }
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder{
+    private class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.iv_image);
