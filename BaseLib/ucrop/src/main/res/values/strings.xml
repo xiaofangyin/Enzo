@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="ucrop_label_original">Original</string>
     <string name="ucrop_label_edit_photo">Edit Photo</string>
