@@ -46,7 +46,7 @@ public class AppController {
 
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
 
-        CrashManager.getInstance().init(application, BuildConfig.DEBUG);
+        CrashManager.getInstance().init(application);
 
         application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
     }

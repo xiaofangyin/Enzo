@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.KeyEvent;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import android.view.KeyEvent;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
@@ -137,7 +138,7 @@ public class SAMainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {
-                ToastUtils.showToast(getApplicationContext(),"再按一次退出程序");
+                ToastUtils.showToast(getApplicationContext(), "再按一次退出程序");
                 firstTime = System.currentTimeMillis();
                 return true;
             } else {

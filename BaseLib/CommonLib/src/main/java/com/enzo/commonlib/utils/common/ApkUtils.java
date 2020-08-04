@@ -9,6 +9,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
+
+import com.google.zxing.common.StringUtils;
 
 import java.io.File;
 import java.util.List;
@@ -121,12 +124,25 @@ public class ApkUtils {
     public static int getPackageUid(Context context, String packageName) {
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
-            if (applicationInfo != null) {
-                return applicationInfo.uid;
-            }
+            return applicationInfo.uid;
         } catch (Exception e) {
             return -1;
         }
-        return -1;
+    }
+
+    /**
+     * 判断App是否是Debug版本
+     *
+     * @return {@code true}: 是<br>{@code false}: 否
+     */
+    public static boolean isAppDebug(Context context) {
+        try {
+            PackageManager pm = context.getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(context.getPackageName(), 0);
+            return (ai.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 }
