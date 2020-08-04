@@ -41,9 +41,9 @@ android {
             }
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             zipAlignEnabled true
-            shrinkResources false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release  //调用 keystore 的规则
         }
@@ -55,7 +55,7 @@ android {
         beta {//用于公司内日常发包测试
             applicationId "com.ifenglian.enzotest"
             versionCode 1
-            versionName "1.0.0.1"
+            versionName "1.0.0"
 
             manifestPlaceholders.put("AMAP_KAY_VALUE",'5d093b10b2f886a36d3018d0b6cdf358')
             //网络环境是否为正式环境
