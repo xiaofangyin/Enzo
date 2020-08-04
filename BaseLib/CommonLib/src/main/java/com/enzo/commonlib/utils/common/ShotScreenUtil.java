@@ -89,7 +89,7 @@ public class ShotScreenUtil {
     }
 
     /**
-     * 获得屏幕高度
+     * 获得屏幕宽度
      */
     public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -99,35 +99,23 @@ public class ShotScreenUtil {
     }
 
     /**
-     * get the height of screen *
+     * 获得屏幕高度
      */
-    public static int getScreenH(Context ctx) {
-        int h = 0;
-        if (Build.VERSION.SDK_INT > 13) {
-            Point p = new Point();
-            ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(p);
-            h = p.y;
-        } else {
-            h = ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay()
-                    .getHeight();
-        }
-        return h;
+    public static int getScreenHeight(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
     }
 
     /**
-     * get the width of screen **
+     * 获得屏幕密度
      */
-    public static int getScreenW(Context ctx) {
-        int w = 0;
-        if (Build.VERSION.SDK_INT > 13) {
-            Point p = new Point();
-            ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(p);
-            w = p.x;
-        } else {
-            w = ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay()
-                    .getWidth();
-        }
-        return w;
+    public static int getScreenDensity(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.densityDpi;
     }
 
     /**
