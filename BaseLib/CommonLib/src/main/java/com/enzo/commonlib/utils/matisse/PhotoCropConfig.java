@@ -18,12 +18,12 @@ public class PhotoCropConfig {
 
     public static UCrop.Options getOptions() {
         UCrop.Options options = new UCrop.Options();
-        options.withAspectRatio(1, 1);
+        //options.withAspectRatio(1, 1);
         options.setToolbarTitle("裁剪");//设置标题栏文字
         options.setCropGridStrokeWidth(2);//设置裁剪网格线的宽度(我这网格设置不显示，所以没效果)
         options.setCropFrameStrokeWidth(2);//设置裁剪框的宽度
         //options.setMaxScaleMultiplier(3);//设置最大缩放比例
-        options.setHideBottomControls(true);//隐藏下边控制栏
+        options.setHideBottomControls(false);//隐藏下边控制栏
         options.setShowCropGrid(true);  //设置是否显示裁剪网格
         options.setShowCropFrame(true); //设置是否显示裁剪边框
         options.setToolbarWidgetColor(Color.parseColor("#ffffff"));//标题字的颜色以及按钮颜色
