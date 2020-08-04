@@ -1,3 +1,5 @@
+#noinspection ShrinkerUnresolvedReference #去除红色警告
+
 -optimizationpasses 5#指定代码的压缩级别
 -dontusemixedcaseclassnames#包明不混合大小写
 -dontskipnonpubliclibraryclasses#不去忽略非公共的库类
