@@ -1,4 +1,5 @@
-#noinspection ShrinkerUnresolvedReference #去除红色警告
+#去除红色警告
+#noinspection ShrinkerUnresolvedReference
 
 -optimizationpasses 5#指定代码的压缩级别
 -dontusemixedcaseclassnames#包明不混合大小写
