@@ -16,5 +16,64 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.MDLoadingLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDStructureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDCalendarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDMeiZuBannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDNotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDScanBarCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDScanQrCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDMatisseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDLighterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDDialogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDFragmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDGridViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDListViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDRecyclerViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDRelativeLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDScrollViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDOkHttpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDTouchEventActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 </manifest>
