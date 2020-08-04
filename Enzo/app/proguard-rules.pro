@@ -24,6 +24,20 @@
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
+-keep public class com.android.vending.licensing.ILicensingService
+-keep public class * extends android.support.v7.**
+-keep public class * extends android.support.v4.**
+-keep public class * extends android.support.multidex.**
+-keep public class * extends android.support.annotation.**
+-keep class android.support.** { *; }
+-keep class android.support.v4.** { *; }
+-keep public class * extends android.support.v4.**
+-keep interface android.support.v4.app.** { *; }
+-keep class android.support.v7.** { *; }
+-keep public class * extends android.support.v7.**
+-keep interface android.support.v7.app.** { *; }
+
+#androidx
 -keep class com.google.android.material.** {*;}
 -keep class androidx.** {*;}
 -keep public class * extends androidx.**
@@ -31,7 +45,6 @@
 -dontwarn com.google.android.material.**
 -dontnote com.google.android.material.**
 -dontwarn androidx.**
-
 -keepclassmembers class * {
     @androidx.annotation.Keep *;
 }
