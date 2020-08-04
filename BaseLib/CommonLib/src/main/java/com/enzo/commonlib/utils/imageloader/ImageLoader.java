@@ -123,6 +123,9 @@ public class ImageLoader {
                 glideRequest.into(imageView);
             } catch (Exception e) {
                 LogUtil.e("glide load error: " + e.getMessage());
+                if (mBuilder != null && mBuilder.listener != null) {
+                    mBuilder.listener.onFailed(e);
+                }
             }
         }
     }
@@ -239,6 +242,6 @@ public class ImageLoader {
 
         void onSuccess();
 
-        void onFailed(GlideException e);
+        void onFailed(Exception e);
     }
 }
