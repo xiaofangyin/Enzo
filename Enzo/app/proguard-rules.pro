@@ -7,10 +7,10 @@
 -dontnote
 -dontshrink#不压缩输入的类文件
 #-verbose#混淆时是否记录日志#
--dump class_files.txt#列出apk包内所有class的内部结构
--printseeds seeds.txt#列出未混淆的类和成员
--printusage unused.txt#列出从apk中删除的代码
--printmapping mapping.txt#列出混淆前后的映射
+#-dump class_files.txt#列出apk包内所有class的内部结构
+#-printseeds seeds.txt#列出未混淆的类和成员
+#-printusage unused.txt#列出从apk中删除的代码
+#-printmapping mapping.txt#列出混淆前后的映射
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*#混淆时所采用的算法
 
 #公共
