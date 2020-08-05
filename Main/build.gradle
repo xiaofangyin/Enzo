@@ -30,6 +30,6 @@ dependencies {
     api project(':BaseLib:CommonLib')
     api project(':BaseLib:FLKit')
 
-    api 'com.alibaba:arouter-api:1.4.0'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
+    api rootProject.ext.dependencies.arouter
+    annotationProcessor rootProject.ext.dependencies.arouter_annotation
 }
