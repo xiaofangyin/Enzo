@@ -15,18 +15,30 @@ import androidx.annotation.NonNull;
  */
 public class ViewUtils {
 
-    public static
-    @NonNull
-    Activity getActivity(View view) {
+    public static Activity getActivity(@NonNull View view) {
         Context context = view.getContext();
-
         while (context instanceof ContextWrapper) {
             if (context instanceof Activity) {
                 return (Activity) context;
             }
             context = ((ContextWrapper) context).getBaseContext();
         }
-
         throw new IllegalStateException("View " + view + " is not attached to an Activity");
+    }
+
+    /**
+     * 获取view的宽高
+     */
+    public static int[] getViewWidthAndHeight(View contentView) {
+        int[] result = new int[2];
+        if (contentView.getMeasuredHeight() == 0 || contentView.getMeasuredWidth() == 0) {
+            contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+            // 计算contentView的高宽
+            int windowHeight = contentView.getMeasuredHeight();
+            int windowWidth = contentView.getMeasuredWidth();
+            result[0] = windowWidth;
+            result[1] = windowHeight;
+        }
+        return result;
     }
 }

@@ -24,16 +24,7 @@ public class ExternalCacheUtil {
      * 网络请求日志缓存目录
      */
     public static String getNetLogCachePath(Context context) {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable()) {
-            if (context.getExternalCacheDir() != null) {
-                return context.getExternalCacheDir().getPath() + "/log";
-            } else {
-                return context.getCacheDir().getPath() + "/log";
-            }
-        } else {
-            return context.getCacheDir().getPath() + "/log";
-        }
+        return getExternalCacheDir(context) + "/log/";
     }
 
     /**

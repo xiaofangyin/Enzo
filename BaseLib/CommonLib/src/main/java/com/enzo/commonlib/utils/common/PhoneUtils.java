@@ -46,9 +46,9 @@ public class PhoneUtils {
         this.versioncode = String.valueOf(ApkUtils.getVersionCode(context));
         this.osversion = android.os.Build.VERSION.SDK_INT;//获得当前系统版本号
         this.phonetype = android.os.Build.MODEL;//获得当前手机型号
-        this.screenwidth = ShotScreenUtil.getScreenWidth(context);//获得当前屏幕的X宽度
-        this.screenheight = ShotScreenUtil.getScreenHeight(context);//获得当前屏幕的Y高度
-        this.density = ShotScreenUtil.getScreenDensity(context);//获得当前屏幕的密度
+        this.screenwidth = DensityUtil.getScreenWidth(context);//获得当前屏幕的X宽度
+        this.screenheight = DensityUtil.getScreenHeight(context);//获得当前屏幕的Y高度
+        this.density = DensityUtil.getScreenDensity(context);//获得当前屏幕的密度
         this.combinedID = getUniqueId(context);//计算出一个唯一识别ID
     }
 
