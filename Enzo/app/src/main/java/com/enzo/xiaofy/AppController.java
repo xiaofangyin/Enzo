@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.multidex.MultiDex;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.common.ActivityHelper;
+import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
-import com.enzo.flkit.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.module_a.plugin.MAPluginFactory;
 import com.enzo.module_b.plugin.MBPluginFactory;
@@ -40,14 +42,21 @@ public class AppController {
     }
 
     private static void initEnv(Application application) {
+        //ARouter
+        if (ApkUtils.isAppDebug(application)) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(application);
+        //初始化手机参数
         PhoneUtils.getInstance().init(application);
-
+        //MultiDex
         MultiDex.install(application);
-
+        //初始化配置参数
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
-
+        //初始化崩溃捕获
         CrashManager.getInstance().init(application);
-
+        //收集Activity任务栈
         application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
     }
 
@@ -59,7 +68,6 @@ public class AppController {
         factoryList.add(MDPluginFactory.getInstance());
         SAFactoryManager.getInstance().init(application, factoryList);
     }
-
 
     private static class ActivityCallbacks implements Application.ActivityLifecycleCallbacks {
 

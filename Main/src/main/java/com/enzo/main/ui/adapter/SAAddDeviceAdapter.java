@@ -3,9 +3,7 @@ package com.enzo.main.ui.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +13,9 @@ import android.widget.FrameLayout;
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
 import com.enzo.commonlib.utils.common.DensityUtil;
-import com.enzo.commonlib.utils.common.MathUtils;
-import com.enzo.flkit.FLPluginBaseCell;
-import com.enzo.flkit.FLPluginBaseObject;
-import com.enzo.flkit.FLPluginCellStyle;
+import com.enzo.flkit.plugin.FLPluginBaseCell;
+import com.enzo.flkit.plugin.FLPluginBaseObject;
+import com.enzo.flkit.plugin.FLPluginCellStyle;
 import com.enzo.main.R;
 
 import java.util.ArrayList;

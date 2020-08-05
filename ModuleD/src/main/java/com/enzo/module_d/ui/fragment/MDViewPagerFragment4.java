@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.flkit.router.ARouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.plugin.MDPluginFactory;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
@@ -60,7 +62,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_add_device) {
-            MDPluginFactory.getInstance().hostDelegate.popToAddDevicesController(getActivity());
+            ARouter.getInstance().build(ARouterPath.MAIN_ADD_DEVICE).navigation();
         } else if (id == R.id.btn_av_loading) {
             Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);
             startActivity(intent);

@@ -2,10 +2,10 @@ package com.enzo.module_b.plugin;
 
 import androidx.fragment.app.Fragment;
 
-import com.enzo.flkit.FLPluginBaseObject;
-import com.enzo.flkit.FLPluginFactory;
-import com.enzo.flkit.FLPluginHostDelegate;
-import com.enzo.flkit.FLPluginTypeList;
+import com.enzo.flkit.plugin.FLPluginBaseObject;
+import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginHostDelegate;
+import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.module_b.ui.fragment.MBFragment;
 
 import org.json.JSONObject;

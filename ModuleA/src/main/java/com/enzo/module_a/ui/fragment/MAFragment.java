@@ -5,12 +5,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView;
-import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.timeclock.TimePicker;
+import com.enzo.flkit.router.ARouterPath;
 import com.enzo.module_a.R;
-import com.enzo.module_a.plugin.MAPluginFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +76,7 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_add_device_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MAPluginFactory.getInstance().hostDelegate.popToAddDevicesController(getActivity());
+                ARouter.getInstance().build(ARouterPath.MAIN_ADD_DEVICE).navigation();
             }
         });
     }

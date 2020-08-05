@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.enzo.commonlib.utils.common.ActivityHelper;
-import com.enzo.flkit.FLPluginFactory;
-import com.enzo.flkit.FLPluginHostDelegate;
+import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.main.ui.activity.SAAddDeviceActivity;
 import com.enzo.main.ui.activity.SAMainActivity;
 
@@ -61,14 +61,6 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
     public boolean popToHomeController(Context context) {
         Intent intent = new Intent();
         intent.setClass(context, SAMainActivity.class);
-        context.startActivity(intent);
-        return true;
-    }
-
-    @Override
-    public boolean popToAddDevicesController(Context context) {
-        Intent intent = new Intent();
-        intent.setClass(context, SAAddDeviceActivity.class);
         context.startActivity(intent);
         return true;
     }

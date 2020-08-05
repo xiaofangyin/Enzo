@@ -9,14 +9,16 @@ import android.view.View;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
-import com.enzo.flkit.FLPluginBaseObject;
-import com.enzo.flkit.FLPluginBaseObjectDelegate;
-import com.enzo.flkit.FLPluginFactory;
-import com.enzo.flkit.FLPluginTypeList;
+import com.enzo.flkit.plugin.FLPluginBaseObject;
+import com.enzo.flkit.plugin.FLPluginBaseObjectDelegate;
+import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginTypeList;
+import com.enzo.flkit.router.ARouterPath;
 import com.enzo.main.R;
 import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.main.ui.adapter.SAAddDeviceAdapter;
@@ -33,6 +35,7 @@ import java.util.List;
  * 创建日期: 2019-05-29
  * 邮   箱: xiaofangyinwork@163.com
  */
+@Route(path = ARouterPath.MAIN_ADD_DEVICE)
 public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObjectDelegate {
 
     private LoadingLayout loadingLayout;

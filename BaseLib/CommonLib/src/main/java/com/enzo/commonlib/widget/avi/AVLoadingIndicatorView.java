@@ -42,6 +42,9 @@ import com.enzo.commonlib.widget.avi.indicator.SemiCircleSpinIndicator;
 import com.enzo.commonlib.widget.avi.indicator.SquareSpinIndicator;
 import com.enzo.commonlib.widget.avi.indicator.TriangleSkewSpinIndicator;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Created by Jack on 2015/10/15
  *
@@ -108,7 +111,6 @@ public class AVLoadingIndicatorView extends View{
     public static final int BallGridBeat=26;
     public static final int SemiCircleSpin=27;
 
-
     @IntDef(flag = true,
             value = {
                     BallPulse,
@@ -140,6 +142,7 @@ public class AVLoadingIndicatorView extends View{
                     BallGridBeat,
                     SemiCircleSpin
             })
+    @Retention(RetentionPolicy.SOURCE)
     public @interface Indicator{}
 
     //Sizes (with defaults in DP)

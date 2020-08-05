@@ -1,4 +1,4 @@
-package com.enzo.flkit;
+package com.enzo.flkit.plugin;
 
 import android.app.Activity;
 import android.app.Application;
@@ -24,9 +24,6 @@ public interface FLPluginHostDelegate {
 
     //跳转到宿主的家庭页
     boolean popToHomeController(Context context);
-
-    //跳转到宿主的添加设备页
-    boolean popToAddDevicesController(Context context);
 
     //释放资源
     void releaseResources();

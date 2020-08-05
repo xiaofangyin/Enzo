@@ -13,7 +13,11 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -44,4 +48,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':BaseLib:CommonLib')
     implementation project(':BaseLib:FLKit')
+
+    api 'com.alibaba:arouter-api:1.4.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
 }

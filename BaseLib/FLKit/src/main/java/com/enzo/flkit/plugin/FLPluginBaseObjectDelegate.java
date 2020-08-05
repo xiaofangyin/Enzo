@@ -1,4 +1,4 @@
-package com.enzo.flkit;
+package com.enzo.flkit.plugin;
 
 import android.content.Context;
 

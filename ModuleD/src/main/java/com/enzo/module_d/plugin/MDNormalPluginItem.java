@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.enzo.commonlib.utils.common.ToastUtils;
-import com.enzo.flkit.FLPluginBaseCell;
-import com.enzo.flkit.FLPluginBaseObject;
+import com.enzo.flkit.plugin.FLPluginBaseCell;
+import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.module_d.R;
 
 /**

@@ -2,7 +2,7 @@ package com.enzo.main.plugin;
 
 import android.app.Application;
 
-import com.enzo.flkit.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginFactory;
 
 import java.util.List;
 
