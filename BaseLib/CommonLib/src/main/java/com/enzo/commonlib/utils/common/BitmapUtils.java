@@ -1,5 +1,6 @@
 package com.enzo.commonlib.utils.common;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -79,8 +80,8 @@ public class BitmapUtils {
     /**
      * 保存图片
      */
-    public static void saveBitmap(String name, Bitmap bitmap, OnSaveBitmapListener listener) {
-        File _file = new File(SDCardUtils.getShiAnXiaPath(), name);
+    public static void saveBitmap(Context context, String name, Bitmap bitmap, OnSaveBitmapListener listener) {
+        File _file = new File(ExternalCacheUtil.getImageCachePath(context), name);
         if (_file.exists()) {
             _file.delete();
         }

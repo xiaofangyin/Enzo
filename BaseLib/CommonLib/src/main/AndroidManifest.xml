@@ -49,6 +49,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!--升级-->
+        <service
+            android:name=".utils.appupgrade.UpgradeVersionService"
+            android:exported="false"
+            android:process=":update" />
+
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />

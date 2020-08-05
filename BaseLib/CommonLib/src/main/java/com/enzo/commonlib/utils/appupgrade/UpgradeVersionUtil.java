@@ -1,0 +1,118 @@
+package com.enzo.commonlib.utils.appupgrade;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
+
+import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
+import com.enzo.commonlib.utils.common.ExternalCacheUtil;
+import com.enzo.commonlib.utils.common.ToastUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class UpgradeVersionUtil {
+
+    //下载apk名称
+    static String DOWN_LOAD_APP_NAME = "my_test.apk";
+    private static String url = "https://89e03ca66219bbe3cf0d65cd0d800c50.dd.cdntips.com/imtt.dd.qq.com/16891/apk/86E914A33DAF7E2B88725E486E907288.apk?mkey=5e8b026fb79c5ff3&f=1026&fsname=com.estrongs.android.pop_4.2.2.3_10063.apk&csr=1bbd&cip=183.156.121.6&proto=https";
+
+    public interface UpdateListener {
+        void onNewVersion(AndroidBean versionInfo);
+
+        void onNewest();
+
+        void onFailed(Exception e);
+    }
+
+    public static void checkVersion(final Context context, final UpdateListener updateListener) {
+        int status = 1;
+        AndroidBean versionInfo = new AndroidBean();
+        versionInfo.setIntro("安卓简介安卓简介安卓简介安卓简介安卓简介安卓简介");
+        versionInfo.setUpdate("2");
+        versionInfo.setUpgrade_url(url);
+        versionInfo.setVersion("5.2.0");
+        if (status == 1) {
+            updateListener.onNewVersion(versionInfo);
+        } else if (status == 2) {
+            updateListener.onNewest();
+        } else {
+            updateListener.onFailed(null);
+        }
+    }
+
+    /**
+     * 弹出新版本提示
+     *
+     * @param context     上下文
+     * @param versionInfo 更新内容
+     */
+    public static void showDialog(final Context context, final AndroidBean versionInfo) {
+        String intro = versionInfo.getIntro();
+        while (intro.contains("\\n")) {
+            intro = intro.replace("\\n", "\n");
+        }
+        final AppUpgradeAlertDialog upgradeAlertDialog = new AppUpgradeAlertDialog(context, "版本更新",
+                intro, versionInfo.getUpdate().equals("1") ? "" : "取消", "确定");
+        upgradeAlertDialog.setOnAlertDialogListener(new AppUpgradeAlertDialog.AlertDialogListener() {
+            @Override
+            public void onNegClick() {
+                upgradeAlertDialog.dismiss();
+            }
+
+            @Override
+            public void onPosClick() {
+                if (!isServiceRunning(context, UpgradeVersionService.class.getName())) {
+                    //新版本已经下载
+                    ToastUtils.showToast(context, "开始下载新版本...");
+                    File file = new File(ExternalCacheUtil.getApkDownloadPath(context), DOWN_LOAD_APP_NAME);
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    //没有下载，则开启服务下载新版本
+                    Intent intent = new Intent(context, UpgradeVersionService.class);
+                    intent.putExtra("downloadUrl", versionInfo.getUpgrade_url());
+                    context.startService(intent);
+                } else {
+                    ToastUtils.showToast(context, "正在下载...");
+                }
+
+                if (!versionInfo.getUpdate().equals("1")) {
+                    upgradeAlertDialog.dismiss();
+                }
+            }
+        });
+        upgradeAlertDialog.show();
+    }
+
+    /**
+     * 收起通知栏
+     */
+    static void collapseStatusBar(Context context) {
+        try {
+            Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+            context.sendBroadcast(it);
+        } catch (Exception localException) {
+            localException.printStackTrace();
+        }
+    }
+
+    /**
+     * 判断服务是否开启
+     */
+    private static boolean isServiceRunning(Context context, String ServiceName) {
+        if (("").equals(ServiceName) || ServiceName == null)
+            return false;
+        ActivityManager myManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>) myManager
+                .getRunningServices(30);
+        for (int i = 0; i < runningService.size(); i++) {
+            if (runningService.get(i).service.getClassName().equals(ServiceName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+}

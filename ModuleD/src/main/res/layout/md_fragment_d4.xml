@@ -9,10 +9,16 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_add_device"
+            android:id="@+id/btn_app_upgrade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="版本检测" />
+
+        <Button
+            android:id="@+id/btn_add_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="添加设备页面" />
 
         <Button

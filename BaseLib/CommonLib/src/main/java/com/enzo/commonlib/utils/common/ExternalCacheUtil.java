@@ -21,6 +21,20 @@ public class ExternalCacheUtil {
      */
 
     /**
+     * apk下载目录
+     */
+    public static String getApkDownloadPath(Context context) {
+        return getExternalCacheDir(context) + "/apk/";
+    }
+
+    /**
+     * 网络请求日志缓存目录
+     */
+    public static String getImageCachePath(Context context) {
+        return getExternalCacheDir(context) + "/image/";
+    }
+
+    /**
      * 网络请求日志缓存目录
      */
     public static String getNetLogCachePath(Context context) {

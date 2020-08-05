@@ -10,8 +10,6 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
-import com.enzo.commonlib.utils.common.SDCardUtils;
-import com.enzo.commonlib.utils.crashlib.CrashManager;
 
 import java.io.BufferedWriter;
 import java.io.File;

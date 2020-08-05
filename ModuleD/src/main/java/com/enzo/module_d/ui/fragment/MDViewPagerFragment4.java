@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.appupgrade.UpgradeVersionUtil;
+import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
 import com.enzo.flkit.router.ARouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.plugin.MDPluginFactory;
@@ -45,6 +47,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initListener(View rootView) {
+        rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_add_device).setOnClickListener(this);
         rootView.findViewById(R.id.btn_av_loading).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
@@ -61,7 +64,24 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_add_device) {
+        if (id == R.id.btn_app_upgrade) {
+            UpgradeVersionUtil.checkVersion(getContext(), new UpgradeVersionUtil.UpdateListener() {
+                @Override
+                public void onNewVersion(AndroidBean versionInfo) {
+                    UpgradeVersionUtil.showDialog(getContext(), versionInfo);
+                }
+
+                @Override
+                public void onNewest() {
+
+                }
+
+                @Override
+                public void onFailed(Exception e) {
+
+                }
+            });
+        } else if (id == R.id.btn_add_device) {
             ARouter.getInstance().build(ARouterPath.MAIN_ADD_DEVICE).navigation();
         } else if (id == R.id.btn_av_loading) {
             Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);

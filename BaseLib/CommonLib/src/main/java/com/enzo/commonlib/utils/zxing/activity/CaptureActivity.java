@@ -25,7 +25,6 @@ import androidx.core.content.ContextCompat;
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.SDCardUtils;
 import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
@@ -268,26 +267,22 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                     @Override
                     public void call(Boolean aBoolean) {
                         if (aBoolean) {
-                            if (SDCardUtils.isAvailable()) {
-                                Matisse.from(CaptureActivity.this)
-                                        .choose(MimeType.ofImage(), false)
-                                        .countable(true)
-                                        .singleChoose(true)
-                                        .crop(false)
-                                        .capture(false)
-                                        .captureStrategy(new CaptureStrategy(true, "enzo"))
-                                        .maxSelectable(9)
-                                        .spanCount(4)
-                                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                                        .thumbnailScale(0.85f)
-                                        .imageEngine(new GlideEngine())
-                                        .showSingleMediaType(true)
-                                        .maxOriginalSize(10)
-                                        .autoHideToolbarOnSingleTap(true)
-                                        .forResult(PICK_IMAGE_REQUEST_CODE);
-                            } else {
-                                ToastUtils.showToast(getApplicationContext(), "设备没有SD卡！");
-                            }
+                            Matisse.from(CaptureActivity.this)
+                                    .choose(MimeType.ofImage(), false)
+                                    .countable(true)
+                                    .singleChoose(true)
+                                    .crop(false)
+                                    .capture(false)
+                                    .captureStrategy(new CaptureStrategy(true, "enzo"))
+                                    .maxSelectable(9)
+                                    .spanCount(4)
+                                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                                    .thumbnailScale(0.85f)
+                                    .imageEngine(new GlideEngine())
+                                    .showSingleMediaType(true)
+                                    .maxOriginalSize(10)
+                                    .autoHideToolbarOnSingleTap(true)
+                                    .forResult(PICK_IMAGE_REQUEST_CODE);
                         } else {
                             LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied...");
                             CenterAlertDialog.Builder builder = new CenterAlertDialog.Builder(CaptureActivity.this);
