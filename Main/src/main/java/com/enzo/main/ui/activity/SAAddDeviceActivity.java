@@ -78,8 +78,6 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                 if (adapter != null) {
                     adapter.getData().addAll(1, getObjectList(list));
                     adapter.notifyItemRangeInserted(1, list.size());
-//                adapter.getData().get(3).alias = "123456";
-//                adapter.notifyItemChanged(3);
                 }
             }
         });
@@ -136,7 +134,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                         adapter.setNewData(getObjectList(buildData()));
                         recyclerView.refreshSuccess();
                     }
-                }, 3000);
+                }, 4000);
             }
 
             @Override
@@ -147,7 +145,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                         adapter.setLoadMoreData(getObjectList(buildData()));
                         recyclerView.loadMoreSuccess();
                     }
-                }, 2500);
+                }, 4000);
             }
 
             @Override
@@ -158,7 +156,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                         adapter.setLoadMoreData(getObjectList(buildData()));
                         recyclerView.loadMoreSuccess();
                     }
-                }, 2500);
+                }, 4000);
             }
         });
     }
@@ -182,7 +180,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     private List<JSONObject> buildData() {
         List<JSONObject> list = new ArrayList<>();
         try {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 12; i++) {
                 if (i % 4 == 0) {
                     JSONObject object1 = new JSONObject();
                     object1.put("type", FLPluginTypeList.FL_DEVICE_TYPE_A);

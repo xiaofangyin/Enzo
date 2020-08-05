@@ -308,6 +308,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
                 mLastY = -1; // reset
                 if (isOnTop() && isAllowRefresh) {
                     if (headerRefreshView.dealReleaseAction()) {
+                        //将mScrollState手动置成SCROLL_STATE_IDLE
+                        stopScroll();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
