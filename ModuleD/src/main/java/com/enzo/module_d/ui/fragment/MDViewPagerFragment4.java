@@ -7,6 +7,7 @@ import android.view.View;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.module_d.R;
 import com.enzo.module_d.plugin.MDPluginFactory;
+import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
@@ -43,6 +44,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     @Override
     public void initListener(View rootView) {
         rootView.findViewById(R.id.btn_add_device).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_av_loading).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
@@ -59,6 +61,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         int id = v.getId();
         if (id == R.id.btn_add_device) {
             MDPluginFactory.getInstance().hostDelegate.popToAddDevicesController(getActivity());
+        } else if (id == R.id.btn_av_loading) {
+            Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_lighter) {
             Intent intent = new Intent(getContext(), MDLighterActivity.class);
             startActivity(intent);

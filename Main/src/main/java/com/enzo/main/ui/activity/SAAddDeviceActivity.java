@@ -119,7 +119,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                 loadingLayout.showContent();
                 adapter.setNewData(getObjectList(buildData()));
             }
-        }, 10000);
+        }, 4000);
     }
 
     @Override
