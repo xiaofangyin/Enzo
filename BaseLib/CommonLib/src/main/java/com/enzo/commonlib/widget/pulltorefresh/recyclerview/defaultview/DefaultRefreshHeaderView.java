@@ -55,10 +55,6 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
 
         rotateAnimator = ObjectAnimator.ofFloat(ivArrow, "rotation", 0, -180);
         rotateAnimator.setDuration(ROTATE_DURATION);
-
-        //测量高度
-        measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        mMeasuredHeight = getMeasuredHeight();
     }
 
     @Override

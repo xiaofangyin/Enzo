@@ -4,11 +4,11 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
-import android.widget.LinearLayout;
 
 /**
  * 文 件 名: BasePullToRefreshView
@@ -31,9 +31,9 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     //初始化状态
     public int mState = STATE_PULL_DOWN;
 
+    protected int mMeasuredHeight;
     private Handler handler;
     public View mContainer;
-    public int mMeasuredHeight;
 
     private OnStateChangeListener onStateChangeListener;
 
@@ -43,7 +43,12 @@ public abstract class BasePullToRefreshView extends LinearLayout {
         LayoutParams lp = new LayoutParams(
                 RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
         this.setLayoutParams(lp);
+
         initView(context);
+
+        //测量高度
+        measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mMeasuredHeight = getMeasuredHeight();
     }
 
     /**
