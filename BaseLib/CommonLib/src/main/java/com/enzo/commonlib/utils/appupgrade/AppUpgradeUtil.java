@@ -16,7 +16,7 @@ public class AppUpgradeUtil {
 
     //下载apk名称
     static String DOWN_LOAD_APP_NAME = "my_test.apk";
-    private static String url = "https://89e03ca66219bbe3cf0d65cd0d800c50.dd.cdntips.com/imtt.dd.qq.com/16891/apk/86E914A33DAF7E2B88725E486E907288.apk?mkey=5e8b026fb79c5ff3&f=1026&fsname=com.estrongs.android.pop_4.2.2.3_10063.apk&csr=1bbd&cip=183.156.121.6&proto=https";
+    private static final String url = "https://89e03ca66219bbe3cf0d65cd0d800c50.dd.cdntips.com/imtt.dd.qq.com/16891/apk/86E914A33DAF7E2B88725E486E907288.apk?mkey=5e8b026fb79c5ff3&f=1026&fsname=com.estrongs.android.pop_4.2.2.3_10063.apk&csr=1bbd&cip=183.156.121.6&proto=https";
 
     public interface UpdateListener {
         void onNewVersion(AndroidBean versionInfo);
@@ -30,9 +30,9 @@ public class AppUpgradeUtil {
         int status = 1;
         AndroidBean versionInfo = new AndroidBean();
         versionInfo.setIntro("安卓简介安卓简介安卓简介安卓简介安卓简介安卓简介");
-        versionInfo.setUpdate("2");
+        versionInfo.setUpdate("0");
         versionInfo.setUpgrade_url(url);
-        versionInfo.setVersion("5.2.0");
+        versionInfo.setVersion("5.3.0");
         if (status == 1) {
             updateListener.onNewVersion(versionInfo);
         } else if (status == 2) {
@@ -105,10 +105,9 @@ public class AppUpgradeUtil {
         if (TextUtils.isEmpty(serviceName)) {
             return false;
         }
-        ActivityManager myManager = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>) myManager
-                .getRunningServices(30);
+        ActivityManager myManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        ArrayList<ActivityManager.RunningServiceInfo> runningService =
+                (ArrayList<ActivityManager.RunningServiceInfo>) myManager.getRunningServices(30);
         for (int i = 0; i < runningService.size(); i++) {
             if (runningService.get(i).service.getClassName().equals(serviceName)) {
                 return true;
