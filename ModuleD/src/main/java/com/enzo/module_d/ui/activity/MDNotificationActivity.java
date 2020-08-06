@@ -125,9 +125,10 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
 
         // 定义Notification的各种属性
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
-                .setContentIntent(resultPendingIntent)
-                .sendNotificationCompat(2, "这个是标题2", "这个是内容2", R.mipmap.sa_skull_2);
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options.setContentIntent(resultPendingIntent);
+        notificationUtils.setOptions(options);
+        notificationUtils.sendNotification(2, "这个是标题2", "这个是内容2", R.mipmap.sa_skull_2);
     }
 
     /**
@@ -144,7 +145,8 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
         //发送pendingIntent
 
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options
                 //让通知左右滑的时候是否可以取消通知
                 .setOngoing(true)
                 //设置内容点击处理intent
@@ -158,19 +160,23 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 //设置优先级
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 //自定义震动效果
-                .setVibrate(vibrate)
-                //必须设置的属性，发送通知
-                .sendNotification(3, "这个是标题3", "这个是内容3", R.mipmap.sa_skull_2);
+                .setVibrate(vibrate);
+
+        notificationUtils.setOptions(options);
+        //必须设置的属性，发送通知
+        notificationUtils.sendNotification(3, "这个是标题3", "这个是内容3", R.mipmap.sa_skull_2);
     }
 
     /**
      * 5.在Activity中发送自定义布局通知
      */
     private void sendNotification4() {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils.setContent(getRemoteViews());
-        Notification notification = notificationUtils.getNotification("这个是标题4", "这个是内容4", R.mipmap.ic_launcher);
-        notificationUtils.getManager().notify(4, notification);
+//        NotificationUtils notificationUtils = new NotificationUtils(this);
+//        NotificationUtils.Options options = new NotificationUtils.Options();
+//        options.setContent(getRemoteViews());
+//        notificationUtils.setOptions(options);
+//        Notification notification = notificationUtils.getNotification("这个是标题4", "这个是内容4", R.mipmap.ic_launcher);
+//        notificationUtils.getManager().notify(4, notification);
     }
 
     private RemoteViews getRemoteViews() {
@@ -216,7 +222,8 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      */
     private void sendNotification9() {
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options
                 //让通知左右滑的时候是否可以取消通知
                 .setOngoing(true)
                 //设置状态栏的标题
@@ -228,9 +235,10 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 //设置优先级
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 //自定义震动效果
-                .setFlags(Notification.FLAG_NO_CLEAR)
-                //必须设置的属性，发送通知
-                .sendNotification(9, "有新消息呢9", "这个是标题9", R.mipmap.sa_skull_2);
+                .setFlags(Notification.FLAG_NO_CLEAR);
+        notificationUtils.setOptions(options);
+        //必须设置的属性，发送通知
+        notificationUtils.sendNotification(9, "有新消息呢9", "这个是标题9", R.mipmap.sa_skull_2);
     }
 
     /**
@@ -250,7 +258,8 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
         //flags 可以通过 |= 运算叠加效果
 
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options
                 //让通知左右滑的时候是否可以取消通知
                 .setOngoing(true)
                 .setContentIntent(resultPendingIntent)
@@ -264,9 +273,10 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 //设置优先级
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 //自定义震动效果
-                .setFlags(Notification.FLAG_AUTO_CANCEL)
-                //必须设置的属性，发送通知
-                .sendNotification(10, "有新消息呢10", "这个是标题10", R.mipmap.sa_skull_2);
+                .setFlags(Notification.FLAG_AUTO_CANCEL);
+        notificationUtils.setOptions(options);
+        //必须设置的属性，发送通知
+        notificationUtils.sendNotification(10, "有新消息呢10", "这个是标题10", R.mipmap.sa_skull_2);
     }
 
     /**
@@ -274,14 +284,16 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      */
     private void sendNotification11() {
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options
                 .setOngoing(false)
                 .setTicker("来通知消息啦")
                 .setContent(getRemoteViews())
                 //.setSound(Uri.parse("android.resource://com.yc.cn.ycnotification/" + R.raw.hah))
                 .setSound(Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, "2"))
-                .setPriority(Notification.PRIORITY_DEFAULT)
-                .sendNotification(11, "我是伴有铃声效果的通知11", "美妙么?安静听~11", R.mipmap.sa_skull_2);
+                .setPriority(Notification.PRIORITY_DEFAULT);
+        notificationUtils.setOptions(options);
+        notificationUtils.sendNotification(11, "我是伴有铃声效果的通知11", "美妙么?安静听~11", R.mipmap.sa_skull_2);
     }
 
     /**
@@ -308,10 +320,12 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
 //        mNotificationManager.notify(12, builder.build());
 
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options
                 .setPriority(Notification.PRIORITY_DEFAULT)
-                .setVibrate(vibrate)
-                .sendNotification(12, "我是伴有震动效果的通知", "颤抖吧,逗比哈哈哈哈哈~", R.mipmap.sa_skull_1);
+                .setVibrate(vibrate);
+        notificationUtils.setOptions(options);
+        notificationUtils.sendNotification(12, "我是伴有震动效果的通知", "颤抖吧,逗比哈哈哈哈哈~", R.mipmap.sa_skull_1);
 
     }
 
@@ -320,10 +334,12 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      */
     private void sendNotification13() {
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options
                 .setDefaults(Notification.DEFAULT_ALL)
-                .setFlags(Notification.FLAG_ONLY_ALERT_ONCE)
-                .sendNotification(13, "仔细看,我就执行一遍", "好了,已经一遍了~", R.mipmap.sa_skull_2);
+                .setFlags(Notification.FLAG_ONLY_ALERT_ONCE);
+        notificationUtils.setOptions(options);
+        notificationUtils.sendNotification(13, "仔细看,我就执行一遍", "好了,已经一遍了~", R.mipmap.sa_skull_2);
 
     }
 
@@ -332,10 +348,12 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      */
     private void sendNotification14() {
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        options
                 .setDefaults(Notification.DEFAULT_ALL)
-                .setFlags(Notification.FLAG_ONLY_ALERT_ONCE)
-                .sendNotification(14, "显示进度条14", "显示进度条内容，自定定义", R.mipmap.sa_skull_3);
+                .setFlags(Notification.FLAG_ONLY_ALERT_ONCE);
+        notificationUtils.setOptions(options);
+        notificationUtils.sendNotification(14, "显示进度条14", "显示进度条内容，自定定义", R.mipmap.sa_skull_3);
     }
 
     /**

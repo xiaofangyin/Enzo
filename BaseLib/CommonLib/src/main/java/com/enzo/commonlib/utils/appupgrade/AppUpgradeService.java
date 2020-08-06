@@ -42,7 +42,8 @@ public class AppUpgradeService extends Service {
 
     private void sendNotification(String content, int progress) {
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        notificationUtils.setOptions(options
                 //让通知左右滑的时候是否可以取消通知
                 .setOngoing(true)
                 //设置状态栏的标题
@@ -50,9 +51,9 @@ public class AppUpgradeService extends Service {
                 //设置优先级
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 //设置进度
-                .setProgress(progress)
-                //必须设置的属性，发送通知
-                .sendNotification(NOTIFY_ID, "正在下载：" + getResources().getString(R.string.app_name), content, R.mipmap.sa_skull_2);
+                .setProgress(progress));
+        //必须设置的属性，发送通知
+        notificationUtils.sendNotification(NOTIFY_ID, "正在下载：" + getResources().getString(R.string.app_name), content, R.mipmap.sa_skull_2);
     }
 
     public void downLoadFile(String url) {
