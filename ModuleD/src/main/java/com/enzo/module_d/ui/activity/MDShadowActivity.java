@@ -40,7 +40,7 @@ public class MDShadowActivity extends BaseActivity {
     public void initHeader() {
         super.initHeader();
         HeadWidget headWidget = findViewById(R.id.header_view);
-        headWidget.setTitle("事件分发");
+        headWidget.setTitle("阴影");
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
