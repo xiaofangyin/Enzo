@@ -6,6 +6,18 @@ import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
 
+import com.enzo.commonlib.base.BaseApplication;
+import com.enzo.commonlib.env.EnvConstants;
+import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.main.plugin.SAFactoryManager;
+import com.enzo.module_a.plugin.MAPluginFactory;
+import com.enzo.module_b.plugin.MBPluginFactory;
+import com.enzo.module_c.plugin.MCPluginFactory;
+import com.enzo.module_d.plugin.MDPluginFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ***********************************************
  * **                  _oo0oo_                  **
@@ -30,23 +42,36 @@ import androidx.annotation.NonNull;
  * **             佛祖保佑  镇类之宝              **
  * ***********************************************
  */
-public class App extends Application {
+public class App extends BaseApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        AppController.attachBaseContext(this);
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        AppController.onCreate(this);
+        initEnv();
+        initFactory(this);
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        AppController.onConfigurationChanged(this, newConfig);
+    }
+
+    private  void initEnv() {
+        //初始化配置参数
+        EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
+    }
+
+    private  void initFactory(Application application) {
+        List<FLPluginFactory> factoryList = new ArrayList<>();
+        factoryList.add(MAPluginFactory.getInstance());
+        factoryList.add(MBPluginFactory.getInstance());
+        factoryList.add(MCPluginFactory.getInstance());
+        factoryList.add(MDPluginFactory.getInstance());
+        SAFactoryManager.getInstance().init(application, factoryList);
     }
 }

@@ -48,7 +48,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':BaseLib:CommonLib')
     implementation project(':BaseLib:FLKit')
-
+    //arouter
     api rootProject.ext.dependencies.arouter
     annotationProcessor rootProject.ext.dependencies.arouter_annotation
 }

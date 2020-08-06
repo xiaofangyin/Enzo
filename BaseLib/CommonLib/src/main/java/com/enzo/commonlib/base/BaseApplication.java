@@ -1,43 +1,32 @@
-package com.enzo.xiaofy;
+package com.enzo.commonlib.base;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
-import com.enzo.flkit.plugin.FLPluginFactory;
-import com.enzo.main.plugin.SAFactoryManager;
-import com.enzo.module_a.plugin.MAPluginFactory;
-import com.enzo.module_b.plugin.MBPluginFactory;
-import com.enzo.module_c.plugin.MCPluginFactory;
-import com.enzo.module_d.plugin.MDPluginFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+public class BaseApplication extends Application {
 
-
-public class AppController {
-
-    public static void attachBaseContext(Application application) {
-
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        login();
+        initEnv(this);
     }
 
-    public static void onCreate(Application application) {
-        initEnv(application);
-        initFactory(application);
-    }
-
-    public static void onConfigurationChanged(Application application, Configuration newConfig) {
+    /**
+     * 在这里模拟登陆，然后拿到sessionId或者Token
+     * 这样就能够在组件请求接口了
+     */
+    private void login() {
 
     }
 
@@ -50,26 +39,13 @@ public class AppController {
         ARouter.init(application);
         //初始化手机参数
         PhoneUtils.getInstance().init(application);
-        //MultiDex
-        MultiDex.install(application);
-        //初始化配置参数
-        EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
         //初始化崩溃捕获
         CrashManager.getInstance().init(application);
         //收集Activity任务栈
         application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
     }
 
-    private static void initFactory(Application application) {
-        List<FLPluginFactory> factoryList = new ArrayList<>();
-        factoryList.add(MAPluginFactory.getInstance());
-        factoryList.add(MBPluginFactory.getInstance());
-        factoryList.add(MCPluginFactory.getInstance());
-        factoryList.add(MDPluginFactory.getInstance());
-        SAFactoryManager.getInstance().init(application, factoryList);
-    }
-
-    private static class ActivityCallbacks implements Application.ActivityLifecycleCallbacks {
+    private static class ActivityCallbacks implements ActivityLifecycleCallbacks {
 
         @Override
         public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
