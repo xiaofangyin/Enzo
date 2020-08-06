@@ -24,6 +24,8 @@ public class AppUpgradeService extends Service {
 
     //通知id
     private static final int NOTIFY_ID = 633980;
+    private static final String CHANNEL_ID = "Upgrade_Id";
+    private static final String CHANNEL_NAME = "Upgrade_Name";
     //下载进度
     private int mCurrentProgress;
 
@@ -94,12 +96,12 @@ public class AppUpgradeService extends Service {
      * 发送通知
      */
     private void sendNotification(String content, int progress) {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         //让通知左右滑的时候是否可以取消通知
         options.setOngoing(true)
                 //设置优先级
-                .setPriority(Notification.PRIORITY_DEFAULT)
+                .setPriority(Notification.PRIORITY_HIGH)
                 //设置进度
                 .setProgress(progress);
         //设置状态栏的标题
@@ -119,7 +121,7 @@ public class AppUpgradeService extends Service {
     public void onDestroy() {
         //下载完成时，清楚该通知，自动安装
         mCurrentProgress = 0;
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         notificationUtils.cancelNotify(NOTIFY_ID);
         super.onDestroy();
     }

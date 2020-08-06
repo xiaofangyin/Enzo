@@ -1,6 +1,5 @@
 package com.enzo.commonlib.utils.notification;
 
-
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -11,32 +10,28 @@ import android.content.ContextWrapper;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import static androidx.core.app.NotificationCompat.PRIORITY_DEFAULT;
 import static androidx.core.app.NotificationCompat.VISIBILITY_SECRET;
 
 /**
- * <pre>
- *     @author yangchong
- *     blog  : https://www.jianshu.com/p/514eb6193a06
- *     time  : 2018/2/10
- *     desc  : 通知栏工具类
- *     revise:
- * </pre>
+ * blog  : https://www.jianshu.com/p/514eb6193a06
  */
 public class NotificationUtils extends ContextWrapper {
 
-    public static final String CHANNEL_ID = "default";
-    private static final String CHANNEL_NAME = "Default_Channel";
+    private String CHANNEL_ID = "";
+    private String CHANNEL_NAME = "";
     private NotificationManager mManager;
     private Options options;
 
-    public NotificationUtils(Context base) {
+    public NotificationUtils(Context base, String channel_id, String channel_name) {
         super(base);
+        this.CHANNEL_ID = channel_id;
+        this.CHANNEL_NAME = channel_name;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
             createNotificationChannel();
@@ -50,8 +45,7 @@ public class NotificationUtils extends ContextWrapper {
         //第三个参数：设置通知重要性级别
         //注意：该级别必须要在 NotificationChannel 的构造函数中指定，总共要五个级别；
         //范围是从 NotificationManager.IMPORTANCE_NONE(0) ~ NotificationManager.IMPORTANCE_HIGH(4)
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
         channel.canBypassDnd();//是否绕过请勿打扰模式
         channel.enableLights(true);//闪光灯
         channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
@@ -71,7 +65,7 @@ public class NotificationUtils extends ContextWrapper {
      *
      * @return NotificationManager对象
      */
-    public NotificationManager getManager() {
+    private NotificationManager getManager() {
         if (mManager == null) {
             mManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         }
@@ -100,12 +94,7 @@ public class NotificationUtils extends ContextWrapper {
     }
 
     /**
-     * 建议使用这个发送通知
      * 调用该方法可以发送通知
-     *
-     * @param notifyId notifyId
-     * @param title    title
-     * @param content  content
      */
     public void sendNotification(int notifyId, String title, String content, int icon) {
         Notification notification;
@@ -130,73 +119,18 @@ public class NotificationUtils extends ContextWrapper {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private Notification.Builder getChannelNotification(String title, String content, int icon) {
-        Notification.Builder builder = new Notification.Builder(getApplicationContext(), CHANNEL_ID);
-        Notification.Builder notificationBuilder = builder
-                //设置标题
-                .setContentTitle(title)
-                //消息内容
+        Notification.Builder notification = new Notification.Builder(getApplicationContext(), CHANNEL_ID);
+        notification.setContentTitle(title)
                 .setContentText(content)
-                //设置通知的图标
                 .setSmallIcon(icon)
                 .setAutoCancel(true);
         if (options != null) {
             //让通知左右滑的时候是否可以取消通知
-            builder.setOngoing(options.ongoing);
-            //设置优先级
-            builder.setPriority(options.priority);
-            //是否提示一次.true - 如果Notification已经存在状态栏即使在调用notify函数也不会更新
-            builder.setOnlyAlertOnce(options.onlyAlertOnce);
-            if (options.progress > 0 && options.progress <= 100) {
-                //一种是有进度刻度的（false）,一种是循环流动的（true）
-                //设置为false，表示刻度，设置为true，表示流动
-                builder.setProgress(100, options.progress, false);
-            } else {
-                //0,0,false,可以将进度条隐藏
-                builder.setProgress(0, 0, false);
-            }
-            if (options.remoteViews != null) {
-                //设置自定义view通知栏
-                notificationBuilder.setContent(options.remoteViews);
-            }
-            if (options.intent != null) {
-                notificationBuilder.setContentIntent(options.intent);
-            }
-            if (options.ticker != null && options.ticker.length() > 0) {
-                //设置状态栏的标题
-                notificationBuilder.setTicker(options.ticker);
-            }
-            if (options.when != 0) {
-                //设置通知时间，默认为系统发出通知的时间，通常不用设置
-                notificationBuilder.setWhen(options.when);
-            }
-            if (options.sound != null) {
-                //设置sound
-                notificationBuilder.setSound(options.sound);
-            }
-            if (options.defaults != 0) {
-                //设置默认的提示音
-                notificationBuilder.setDefaults(options.defaults);
-            }
-            if (options.pattern != null) {
-                //自定义震动效果
-                notificationBuilder.setVibrate(options.pattern);
-            }
-        }
-        return notificationBuilder;
-    }
-
-    private NotificationCompat.Builder getNotificationCompat(String title, String content, int icon) {
-        //注意用下面这个方法，在8.0以上无法出现通知栏。8.0之前是正常的。这里需要增强判断逻辑
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext());
-        notification.setPriority(PRIORITY_DEFAULT)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setSmallIcon(icon)
-                .setAutoCancel(true);
-        if (options != null) {
-            notification.setPriority(options.priority);
-            notification.setOnlyAlertOnce(options.onlyAlertOnce);
             notification.setOngoing(options.ongoing);
+            //设置优先级
+            notification.setPriority(options.priority);
+            //是否提示一次.true - 如果Notification已经存在状态栏即使在调用notify函数也不会更新
+            notification.setOnlyAlertOnce(options.onlyAlertOnce);
             if (options.progress > 0 && options.progress <= 100) {
                 //一种是有进度刻度的（false）,一种是循环流动的（true）
                 //设置为false，表示刻度，设置为true，表示流动
@@ -206,27 +140,87 @@ public class NotificationUtils extends ContextWrapper {
                 notification.setProgress(0, 0, false);
             }
             if (options.remoteViews != null) {
+                //设置自定义view通知栏
                 notification.setContent(options.remoteViews);
             }
             if (options.intent != null) {
                 notification.setContentIntent(options.intent);
             }
-            if (options.ticker != null && options.ticker.length() > 0) {
+            if (!TextUtils.isEmpty(options.ticker)) {
+                //设置状态栏的标题
                 notification.setTicker(options.ticker);
             }
             if (options.when != 0) {
+                //设置通知时间，默认为系统发出通知的时间，通常不用设置
                 notification.setWhen(options.when);
             }
             if (options.sound != null) {
+                //设置sound
                 notification.setSound(options.sound);
             }
             if (options.defaults != 0) {
+                //设置默认的提示音
                 notification.setDefaults(options.defaults);
+            }
+            if (options.pattern != null) {
+                //自定义震动效果
+                notification.setVibrate(options.pattern);
             }
         }
         return notification;
     }
 
+    private NotificationCompat.Builder getNotificationCompat(String title, String content, int icon) {
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+        notification.setContentTitle(title)
+                .setContentText(content)
+                .setSmallIcon(icon)
+                .setAutoCancel(true);
+        if (options != null) {
+            //让通知左右滑的时候是否可以取消通知
+            notification.setOngoing(options.ongoing);
+            //设置优先级
+            notification.setPriority(options.priority);
+            //是否提示一次.true - 如果Notification已经存在状态栏即使在调用notify函数也不会更新
+            notification.setOnlyAlertOnce(options.onlyAlertOnce);
+            if (options.progress > 0 && options.progress <= 100) {
+                //一种是有进度刻度的（false）,一种是循环流动的（true）
+                //设置为false，表示刻度，设置为true，表示流动
+                notification.setProgress(100, options.progress, false);
+            } else {
+                //0,0,false,可以将进度条隐藏
+                notification.setProgress(0, 0, false);
+            }
+            if (options.remoteViews != null) {
+                //设置自定义view通知栏
+                notification.setContent(options.remoteViews);
+            }
+            if (options.intent != null) {
+                notification.setContentIntent(options.intent);
+            }
+            if (!TextUtils.isEmpty(options.ticker)) {
+                //设置状态栏的标题
+                notification.setTicker(options.ticker);
+            }
+            if (options.when != 0) {
+                //设置通知时间，默认为系统发出通知的时间，通常不用设置
+                notification.setWhen(options.when);
+            }
+            if (options.sound != null) {
+                //设置sound
+                notification.setSound(options.sound);
+            }
+            if (options.defaults != 0) {
+                //设置默认的提示音
+                notification.setDefaults(options.defaults);
+            }
+            if (options.pattern != null) {
+                //自定义震动效果
+                notification.setVibrate(options.pattern);
+            }
+        }
+        return notification;
+    }
 
     public static class Options {
 

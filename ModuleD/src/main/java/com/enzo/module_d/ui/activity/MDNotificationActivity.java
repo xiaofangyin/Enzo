@@ -22,6 +22,9 @@ import com.enzo.module_d.R;
  */
 public class MDNotificationActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final String CHANNEL_ID = "test_id";
+    private static final String CHANNEL_NAME = "test_name";
+
     @Override
     public int getLayoutId() {
         return R.layout.md_activity_notification;
@@ -99,7 +102,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      * 清除所有的notification通知
      */
     private void cancelAllNotification() {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         notificationUtils.clearNotification();
     }
 
@@ -108,7 +111,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      */
     private void sendNotification1() {
         //这三个属性是必须要的，否则异常
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         notificationUtils.sendNotification(1, "这个是标题", "这个是内容", R.mipmap.ic_launcher);
     }
 
@@ -124,7 +127,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 2, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // 定义Notification的各种属性
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options.setContentIntent(resultPendingIntent);
         notificationUtils.setOptions(options);
@@ -144,7 +147,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 3, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         //发送pendingIntent
 
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options
                 //让通知左右滑的时候是否可以取消通知
@@ -211,7 +214,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
     private void sendNotification8() {
         for (int a = 0; a < 3; a++) {
             //这三个属性是必须要的，否则异常
-            NotificationUtils notificationUtils = new NotificationUtils(this);
+            NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
             notificationUtils.sendNotification(8, "这个是标题8", "这个是内容8", R.mipmap.icon_skull_2);
 
         }
@@ -221,7 +224,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      * 9.在Activity中发通知，设置通知不能被状态栏的清除按钮给清除掉,也不能被手动清除,但能通过 cancel() 方法清除
      */
     private void sendNotification9() {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options
                 //让通知左右滑的时候是否可以取消通知
@@ -257,7 +260,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
         //FLAG_NO_CLEAR 表示该通知不能被状态栏的清除按钮给清除掉,也不能被手动清除,但能通过 cancel() 方法清除
         //flags 可以通过 |= 运算叠加效果
 
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options
                 //让通知左右滑的时候是否可以取消通知
@@ -283,7 +286,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      * 11.设置铃声效果
      */
     private void sendNotification11() {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options
                 .setOngoing(false)
@@ -319,7 +322,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
 //        //mManager.notify(3,notify);
 //        mNotificationManager.notify(12, builder.build());
 
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options
                 .setPriority(Notification.PRIORITY_DEFAULT)
@@ -333,7 +336,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      * 13.通知只执行一次,与默认的效果一样
      */
     private void sendNotification13() {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options
                 .setDefaults(Notification.DEFAULT_ALL)
@@ -347,7 +350,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      * 14.带有进度条的通知栏
      */
     private void sendNotification14() {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         NotificationUtils.Options options = new NotificationUtils.Options();
         options
                 .setDefaults(Notification.DEFAULT_ALL)
@@ -360,7 +363,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      * 15.Android 8.0 适配问题
      */
     private void sendNotification15() {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils notificationUtils = new NotificationUtils(this, CHANNEL_ID, CHANNEL_NAME);
         notificationUtils.sendNotification(15, "新消息来了", "周末到了，不用上班了", R.mipmap.icon_skull_4);
     }
 }
