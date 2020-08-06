@@ -41,15 +41,6 @@ public class ToastUtil {
         }
     };
 
-    private static Runnable r = new Runnable() {
-        public void run() {
-            if (null != sToast) {
-                sToast.cancel();
-                sToast = null;
-            }
-        }
-    };
-
     public static void show(final String msg) {
         showToast(msg, Toast.LENGTH_SHORT);
     }
@@ -71,13 +62,19 @@ public class ToastUtil {
     }
 
     private static void showToast(String text, int length) {
-        sHandler.removeCallbacks(r);
+        sHandler.removeCallbacks(runnable);
         final ToastInfo info = new ToastInfo();
         info.text = text;
         info.length = length;
         sHandler.obtainMessage(MSG_POST_CHAR_SEQUENCE, info).sendToTarget();
-        sHandler.postDelayed(r, 5000);
+        sHandler.postDelayed(runnable, 5000);
     }
+
+    private static Runnable runnable = new Runnable() {
+        public void run() {
+            cancelToast();
+        }
+    };
 
     public static void cancelToast() {
         if (null != sToast) {
