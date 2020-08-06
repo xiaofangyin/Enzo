@@ -1,6 +1,8 @@
 package com.enzo.commonlib.net.retrofit;
 
+import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 import rx.functions.Action1;
 
@@ -16,10 +18,10 @@ public class ThrowableAction1 implements Action1<Throwable> {
     public void call(Throwable throwable) {
         LogUtil.e("throwable: " + throwable.getMessage());
         if (!(throwable instanceof Fault)) {
-//            ToastUtils.showToast(R.string.net_error);
+            ToastUtil.show(R.string.net_error);
         } else {
             Fault fault = (Fault) throwable;
-//            ToastUtils.showToast(fault.getMessage());
+            ToastUtil.show(fault.getMessage());
         }
     }
 }

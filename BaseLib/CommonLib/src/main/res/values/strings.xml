@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">>
     <string name="app_name">Enzo</string>
 
+    <string name="net_error">网络异常</string>
+
     <string name="collection_pull_to_refresh">下拉刷新</string>
     <string name="collection_release_refresh">释放刷新</string>
     <string name="collection_refresh_done">刷新完成</string>
