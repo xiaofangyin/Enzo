@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.calendarview.bean.DateBean;
 import com.enzo.commonlib.widget.calendarview.listener.OnPagerChangeListener;
 import com.enzo.commonlib.widget.calendarview.listener.OnSingleChooseListener;
@@ -80,7 +80,7 @@ public class MDCalendarActivity extends BaseActivity implements View.OnClickList
             public void onSingleChoose(View view, DateBean date) {
                 LogUtil.d(date.getSolar()[0] + "年" + date.getSolar()[1] + "月" + date.getSolar()[2] + "日");
                 calendarTitle.setText(date.getSolar()[0] + "年" + date.getSolar()[1] + "月");
-                ToastUtils.showToast(getApplication(), date.getSolar()[1] + "月" + date.getSolar()[2] + "日");
+                ToastUtil.show(date.getSolar()[1] + "月" + date.getSolar()[2] + "日");
             }
         });
     }

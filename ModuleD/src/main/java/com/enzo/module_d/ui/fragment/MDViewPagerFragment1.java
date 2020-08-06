@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.normal.BannerBean;
 import com.enzo.commonlib.widget.banner.normal.UGCBanner;
 import com.enzo.commonlib.widget.snowview.SnowView;
@@ -81,7 +81,7 @@ public class MDViewPagerFragment1 extends BaseFragment {
         banner.setOnBannerClickListener(new UGCBanner.OnBannerClickListener() {
             @Override
             public void onBannerClick(BannerBean bean) {
-                ToastUtils.showToast(getContext(),bean.getPic());
+                ToastUtil.show(bean.getPic());
             }
         });
     }

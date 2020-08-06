@@ -1,8 +1,6 @@
 package com.enzo.commonlib.net.retrofit;
 
-import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
 
 import rx.functions.Action1;
 

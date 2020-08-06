@@ -7,7 +7,7 @@ import android.text.TextUtils;
 
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class AppUpgradeUtil {
             public void onPosClick() {
                 if (!isServiceRunning(context, AppUpgradeService.class.getName())) {
                     //新版本已经下载
-                    ToastUtils.showToast(context, "开始下载新版本...");
+                    ToastUtil.show("开始下载新版本...");
                     File file = new File(ExternalCacheUtil.getApkDownloadPath(context), DOWN_LOAD_APP_NAME);
                     if (file.exists()) {
                         file.delete();
@@ -75,7 +75,7 @@ public class AppUpgradeUtil {
                     intent.putExtra("downloadUrl", versionInfo.getUpgrade_url());
                     context.startService(intent);
                 } else {
-                    ToastUtils.showToast(context, "正在下载...");
+                    ToastUtil.show("正在下载...");
                 }
 
                 if (!versionInfo.getUpdate().equals("1")) {

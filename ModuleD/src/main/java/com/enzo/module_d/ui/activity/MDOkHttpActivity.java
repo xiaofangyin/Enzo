@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.net.okhttp.BaseExecutor;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 import com.enzo.module_d.model.GetSubjectExecutor;
@@ -63,7 +63,7 @@ public class MDOkHttpActivity extends BaseActivity {
                         .callback(new BaseExecutor.JsonCallback<LinkedTreeMap<String, String>>() {
                             @Override
                             public void onSuccess(LinkedTreeMap<String, String> subjectBean) {
-                                ToastUtils.showToast(MDOkHttpActivity.this, subjectBean.toString());
+                                ToastUtil.show(subjectBean.toString());
                             }
 
                             @Override

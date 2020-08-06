@@ -9,7 +9,7 @@ import android.view.View;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.progress.CircularProgressBar;
 import com.enzo.commonlib.widget.progress.CircularProgressBarWithRate;
 import com.enzo.commonlib.widget.progress.FLCSeekBar;
@@ -63,7 +63,7 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
             @Override
             public void onProgressChanged(FLCSeekBar seekBar, int progress) {
                 LogUtil.d("percent: " + progress);
-                ToastUtils.showToast(getContext(), String.valueOf(progress));
+                ToastUtil.show(String.valueOf(progress));
             }
 
             @Override

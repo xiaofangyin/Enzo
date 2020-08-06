@@ -30,8 +30,8 @@ import androidx.core.os.EnvironmentCompat;
 import androidx.fragment.app.Fragment;
 
 import com.enzo.commonlib.utils.common.FileProvider7;
-import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
@@ -84,7 +84,7 @@ public class MediaStoreCompat {
                             @Override
                             public void call(Boolean aBoolean) {
                                 if (!aBoolean) {
-                                    ToastUtils.showToast(context, "打开相机异常");
+                                    ToastUtil.show("打开相机异常");
                                 } else {
                                     Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                     if (captureIntent.resolveActivity(context.getPackageManager()) != null) {

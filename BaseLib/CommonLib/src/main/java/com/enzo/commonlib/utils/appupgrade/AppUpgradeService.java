@@ -12,8 +12,8 @@ import com.enzo.commonlib.net.download.DownloadUtil;
 import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.notification.NotificationUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 import java.io.File;
 
@@ -90,7 +90,7 @@ public class AppUpgradeService extends Service {
                         LogUtil.e(" AppUpgradeService onFailure...");
                         mCurrentProgress = 0;
                         sendNotification("下载失败！请检查网络设置！", mCurrentProgress);
-                        ToastUtils.showAtCenter(AppUpgradeService.this, "下载失败！请检查网络设置！");
+                        ToastUtil.show("下载失败！请检查网络设置！");
                         stopSelf();
                     }
                 });

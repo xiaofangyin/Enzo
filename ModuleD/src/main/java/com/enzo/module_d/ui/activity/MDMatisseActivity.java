@@ -28,12 +28,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseActivity;
-import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
@@ -42,6 +40,7 @@ import com.enzo.commonlib.utils.matisse.filter.Filter;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.matisse.listener.OnCheckedListener;
 import com.enzo.commonlib.utils.matisse.listener.OnSelectedListener;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.filter.GifSizeFilter;
@@ -92,7 +91,7 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void call(Boolean aBoolean) {
                         if (!aBoolean) {
-                            ToastUtils.showToast(getApplicationContext(), "当前应用缺少读取sd卡权限");
+                            ToastUtil.show("当前应用缺少读取sd卡权限");
                             finish();
                         }
                     }

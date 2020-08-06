@@ -12,6 +12,7 @@ import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 public class BaseApplication extends Application {
 
@@ -37,6 +38,8 @@ public class BaseApplication extends Application {
             ARouter.openDebug();
         }
         ARouter.init(application);
+        //toast
+        ToastUtil.initialize(application);
         //初始化手机参数
         PhoneUtils.getInstance().init(application);
         //初始化崩溃捕获

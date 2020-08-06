@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.flkit.plugin.FLPluginBaseCell;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.module_a.R;
@@ -45,7 +45,7 @@ public class MANormalPluginItem extends FLPluginBaseCell implements View.OnClick
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ma_device_name) {
-            ToastUtils.showToast(v.getContext(), baseObject.alias);
+            ToastUtil.show(baseObject.alias);
         }
     }
 }

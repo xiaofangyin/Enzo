@@ -16,8 +16,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.DensityUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.loadingdialog.LoadingDialog;
 import com.enzo.commonlib.widget.photoview.PhotoView;
 import com.enzo.commonlib.widget.photoview.PhotoViewAttacher;
@@ -134,7 +134,7 @@ public class PicPreviewActivity extends BaseActivity {
 
     private void downLoadImage(String url) {
         LoadingDialog.show(PicPreviewActivity.this);
-        ToastUtils.showToast(getApplicationContext(), "开始下载...");
+        ToastUtil.show("开始下载...");
         UGCFileUtils.downLoadImageAndSave(getApplicationContext(),
                 url,
                 UGCFileUtils.UGC_FILE_PARENT,
@@ -146,7 +146,7 @@ public class PicPreviewActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 LoadingDialog.dismiss();
-                                ToastUtils.showToast(getApplicationContext(), "下载成功");
+                                ToastUtil.show("下载成功");
                             }
                         });
                     }
@@ -157,7 +157,7 @@ public class PicPreviewActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 LoadingDialog.dismiss();
-                                ToastUtils.showToast(getApplicationContext(), "下载失败，请重试");
+                                ToastUtil.show("下载失败，请重试");
                             }
                         });
                     }

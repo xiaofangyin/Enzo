@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.flowlayout.FlowLayoutAdapter;
 import com.enzo.commonlib.widget.flowlayout.FlowLayoutScrollView;
 import com.enzo.module_c.R;
@@ -46,7 +46,7 @@ public class MCFragment_3 extends BaseFragment {
                 if (position == 0) {
                     remove(position);
                 }
-                ToastUtils.showToast(getContext(), bean);
+                ToastUtil.show(bean);
             }
 
             @Override

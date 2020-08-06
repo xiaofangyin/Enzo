@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
@@ -138,7 +138,7 @@ public class SAMainActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {
-                ToastUtils.showToast(getApplicationContext(), "再按一次退出程序");
+                ToastUtil.show("再按一次退出程序");
                 firstTime = System.currentTimeMillis();
                 return true;
             } else {

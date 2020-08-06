@@ -25,11 +25,11 @@ import androidx.core.content.ContextCompat;
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
 import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
 import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.utils.zxing.camera.CameraManager;
 import com.enzo.commonlib.utils.zxing.decoding.CaptureActivityHandler;
 import com.enzo.commonlib.utils.zxing.decoding.InactivityTimer;
@@ -188,7 +188,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                     public void call(Boolean aBoolean) {
                         if (!aBoolean) {
                             finish();
-                            ToastUtils.showToast(getApplicationContext(), "打开相机异常");
+                            ToastUtil.show("打开相机异常");
                         }
                     }
                 });
@@ -312,13 +312,12 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                     if (result != null) {
                         onHandleDecode(result.getText());
                     } else {
-                        ToastUtils.showToast(getApplicationContext(), "抱歉，解析失败,换个图片试试.");
+                        ToastUtil.show("抱歉，解析失败,换个图片试试.");
                     }
                 }
             });
         } else {
-            ToastUtils.showToast(getApplicationContext(), "抱歉，解析失败,换个图片试试.");
-
+            ToastUtil.show("抱歉，解析失败,换个图片试试.");
         }
     }
 

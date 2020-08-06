@@ -3,7 +3,7 @@ package com.enzo.module_d.ui.activity;
 import android.os.Bundle;
 
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.ToastUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.utils.zxing.activity.CaptureActivity;
 
 /**
@@ -51,6 +51,6 @@ public class MDScanBarCodeActivity extends CaptureActivity {
 
     private void reportFetch(String code) {
         LogUtil.d("reportFetch code: " + code);
-        ToastUtils.showToast(getApplicationContext(), String.valueOf(code));
+        ToastUtil.show(String.valueOf(code));
     }
 }
