@@ -47,6 +47,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initListener(View rootView) {
+        rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_add_device).setOnClickListener(this);
         rootView.findViewById(R.id.btn_av_loading).setOnClickListener(this);
@@ -58,7 +59,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
         rootView.findViewById(R.id.btn_okhttp).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_shadow).setOnClickListener(this);
     }
 
@@ -84,6 +84,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             });
         } else if (id == R.id.btn_add_device) {
             ARouter.getInstance().build(ARouterPath.MAIN_ADD_DEVICE).navigation();
+        } else if (id == R.id.btn_touch_event) {
+            Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_av_loading) {
             Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);
             startActivity(intent);

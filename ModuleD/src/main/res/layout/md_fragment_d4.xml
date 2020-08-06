@@ -6,13 +6,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <Button
+            android:id="@+id/btn_touch_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="事件分发" />
 
         <Button
             android:id="@+id/btn_app_upgrade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="版本检测" />
 
         <Button
@@ -74,12 +80,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="网络" />
-
-        <Button
-            android:id="@+id/btn_touch_event"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="事件分发" />
 
         <Button
             android:id="@+id/btn_shadow"
