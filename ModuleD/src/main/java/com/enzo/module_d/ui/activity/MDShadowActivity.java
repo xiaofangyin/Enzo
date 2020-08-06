@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.DensityUtil;
-import com.enzo.commonlib.utils.common.shadow.ShadowConfig;
-import com.enzo.commonlib.utils.common.shadow.ShadowHelper;
+import com.enzo.commonlib.widget.shadow.ShadowConfig;
+import com.enzo.commonlib.widget.shadow.ShadowHelper;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 

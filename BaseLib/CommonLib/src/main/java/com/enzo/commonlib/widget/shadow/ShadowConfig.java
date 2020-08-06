@@ -1,4 +1,4 @@
-package com.enzo.commonlib.utils.common.shadow;
+package com.enzo.commonlib.widget.shadow;
 
 import android.graphics.LinearGradient;
 import androidx.annotation.ColorInt;
