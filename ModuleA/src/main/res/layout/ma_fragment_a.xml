@@ -22,7 +22,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_vertical"
-                android:src="@mipmap/notice" />
+                android:src="@mipmap/icon_notice" />
 
             <com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView
                 android:id="@+id/auto_scroll_text_view"

@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.TextUtils;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.net.download.DownloadUtil;
@@ -21,6 +22,7 @@ import java.io.File;
  */
 public class AppUpgradeService extends Service {
 
+    //通知id
     private static final int NOTIFY_ID = 633980;
     //下载进度
     private int mCurrentProgress;
@@ -34,26 +36,14 @@ public class AppUpgradeService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.e("UpdateVersionService onStartCommand...");
         Bundle bundle = intent.getExtras();
-        String url = bundle.getString("downloadUrl");
-        sendNotification("0%", 0);
-        downLoadFile(url);
+        if (bundle != null) {
+            String url = bundle.getString("downloadUrl", "");
+            if (!TextUtils.isEmpty(url)) {
+                sendNotification("0%", 0);
+                downLoadFile(url);
+            }
+        }
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    private void sendNotification(String content, int progress) {
-        NotificationUtils notificationUtils = new NotificationUtils(this);
-        NotificationUtils.Options options = new NotificationUtils.Options();
-        notificationUtils.setOptions(options
-                //让通知左右滑的时候是否可以取消通知
-                .setOngoing(true)
-                //设置状态栏的标题
-                .setTicker("来通知消息啦")
-                //设置优先级
-                .setPriority(Notification.PRIORITY_DEFAULT)
-                //设置进度
-                .setProgress(progress));
-        //必须设置的属性，发送通知
-        notificationUtils.sendNotification(NOTIFY_ID, "正在下载：" + getResources().getString(R.string.app_name), content, R.mipmap.sa_skull_2);
     }
 
     public void downLoadFile(String url) {
@@ -67,14 +57,14 @@ public class AppUpgradeService extends Service {
                     public void onDownloadStart() {
                         LogUtil.e("UpdateVersionService onDownloadStart...");
                         mCurrentProgress = 0;
-                        sendNotification("0%", 0);
+                        sendNotification("0%", mCurrentProgress);
                     }
 
                     @Override
                     public void onDownloadSuccess(File file) {
                         LogUtil.e("UpdateVersionService onSuccess...");
-                        mCurrentProgress = 0;
-                        sendNotification("下载完成!", 100);
+                        mCurrentProgress = 100;
+                        sendNotification("下载完成!", mCurrentProgress);
                         stopSelf();
                         //收起通知栏
                         AppUpgradeUtil.collapseStatusBar(AppUpgradeService.this);
@@ -95,9 +85,34 @@ public class AppUpgradeService extends Service {
                     public void onDownloadFailed() {
                         LogUtil.e("UpdateVersionService onFailure...");
                         mCurrentProgress = 0;
-                        sendNotification("网络异常！请检查网络设置！", 0);
+                        sendNotification("下载失败！请检查网络设置！", mCurrentProgress);
                     }
                 });
+    }
+
+    /**
+     * 发送通知
+     */
+    private void sendNotification(String content, int progress) {
+        NotificationUtils notificationUtils = new NotificationUtils(this);
+        NotificationUtils.Options options = new NotificationUtils.Options();
+        //让通知左右滑的时候是否可以取消通知
+        options.setOngoing(true)
+                //设置优先级
+                .setPriority(Notification.PRIORITY_DEFAULT)
+                //设置进度
+                .setProgress(progress);
+        //设置状态栏的标题
+        if (progress == 0) {
+            options.setTicker("开始下载更新包");
+        } else if (progress == 100) {
+            options.setTicker("下载完成");
+        } else {
+            options.setTicker("正在下载更新包");
+        }
+        notificationUtils.setOptions(options);
+        //必须设置的属性，发送通知
+        notificationUtils.sendNotification(NOTIFY_ID, "正在下载：" + getResources().getString(R.string.app_name), content, R.mipmap.icon_skull_2);
     }
 
     @Override

@@ -128,7 +128,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
         NotificationUtils.Options options = new NotificationUtils.Options();
         options.setContentIntent(resultPendingIntent);
         notificationUtils.setOptions(options);
-        notificationUtils.sendNotification(2, "这个是标题2", "这个是内容2", R.mipmap.sa_skull_2);
+        notificationUtils.sendNotification(2, "这个是标题2", "这个是内容2", R.mipmap.icon_skull_2);
     }
 
     /**
@@ -164,7 +164,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
 
         notificationUtils.setOptions(options);
         //必须设置的属性，发送通知
-        notificationUtils.sendNotification(3, "这个是标题3", "这个是内容3", R.mipmap.sa_skull_2);
+        notificationUtils.sendNotification(3, "这个是标题3", "这个是内容3", R.mipmap.icon_skull_2);
     }
 
     /**
@@ -212,7 +212,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
         for (int a = 0; a < 3; a++) {
             //这三个属性是必须要的，否则异常
             NotificationUtils notificationUtils = new NotificationUtils(this);
-            notificationUtils.sendNotification(8, "这个是标题8", "这个是内容8", R.mipmap.sa_skull_2);
+            notificationUtils.sendNotification(8, "这个是标题8", "这个是内容8", R.mipmap.icon_skull_2);
 
         }
     }
@@ -238,7 +238,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 .setFlags(Notification.FLAG_NO_CLEAR);
         notificationUtils.setOptions(options);
         //必须设置的属性，发送通知
-        notificationUtils.sendNotification(9, "有新消息呢9", "这个是标题9", R.mipmap.sa_skull_2);
+        notificationUtils.sendNotification(9, "有新消息呢9", "这个是标题9", R.mipmap.icon_skull_2);
     }
 
     /**
@@ -276,7 +276,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 .setFlags(Notification.FLAG_AUTO_CANCEL);
         notificationUtils.setOptions(options);
         //必须设置的属性，发送通知
-        notificationUtils.sendNotification(10, "有新消息呢10", "这个是标题10", R.mipmap.sa_skull_2);
+        notificationUtils.sendNotification(10, "有新消息呢10", "这个是标题10", R.mipmap.icon_skull_2);
     }
 
     /**
@@ -293,7 +293,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 .setSound(Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, "2"))
                 .setPriority(Notification.PRIORITY_DEFAULT);
         notificationUtils.setOptions(options);
-        notificationUtils.sendNotification(11, "我是伴有铃声效果的通知11", "美妙么?安静听~11", R.mipmap.sa_skull_2);
+        notificationUtils.sendNotification(11, "我是伴有铃声效果的通知11", "美妙么?安静听~11", R.mipmap.icon_skull_2);
     }
 
     /**
@@ -325,7 +325,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 .setVibrate(vibrate);
         notificationUtils.setOptions(options);
-        notificationUtils.sendNotification(12, "我是伴有震动效果的通知", "颤抖吧,逗比哈哈哈哈哈~", R.mipmap.sa_skull_1);
+        notificationUtils.sendNotification(12, "我是伴有震动效果的通知", "颤抖吧,逗比哈哈哈哈哈~", R.mipmap.icon_skull_1);
 
     }
 
@@ -339,7 +339,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setFlags(Notification.FLAG_ONLY_ALERT_ONCE);
         notificationUtils.setOptions(options);
-        notificationUtils.sendNotification(13, "仔细看,我就执行一遍", "好了,已经一遍了~", R.mipmap.sa_skull_2);
+        notificationUtils.sendNotification(13, "仔细看,我就执行一遍", "好了,已经一遍了~", R.mipmap.icon_skull_2);
 
     }
 
@@ -353,7 +353,7 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setFlags(Notification.FLAG_ONLY_ALERT_ONCE);
         notificationUtils.setOptions(options);
-        notificationUtils.sendNotification(14, "显示进度条14", "显示进度条内容，自定定义", R.mipmap.sa_skull_3);
+        notificationUtils.sendNotification(14, "显示进度条14", "显示进度条内容，自定定义", R.mipmap.icon_skull_3);
     }
 
     /**
@@ -361,6 +361,6 @@ public class MDNotificationActivity extends BaseActivity implements View.OnClick
      */
     private void sendNotification15() {
         NotificationUtils notificationUtils = new NotificationUtils(this);
-        notificationUtils.sendNotification(15, "新消息来了", "周末到了，不用上班了", R.mipmap.sa_skull_4);
+        notificationUtils.sendNotification(15, "新消息来了", "周末到了，不用上班了", R.mipmap.icon_skull_4);
     }
 }

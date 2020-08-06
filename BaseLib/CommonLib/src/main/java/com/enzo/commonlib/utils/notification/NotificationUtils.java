@@ -186,17 +186,13 @@ public class NotificationUtils extends ContextWrapper {
     }
 
     private NotificationCompat.Builder getNotificationCompat(String title, String content, int icon) {
-        NotificationCompat.Builder notification;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
-        } else {
-            //注意用下面这个方法，在8.0以上无法出现通知栏。8.0之前是正常的。这里需要增强判断逻辑
-            notification = new NotificationCompat.Builder(getApplicationContext());
-            notification.setPriority(PRIORITY_DEFAULT);
-        }
-        notification.setContentTitle(title);
-        notification.setContentText(content);
-        notification.setSmallIcon(icon);
+        //注意用下面这个方法，在8.0以上无法出现通知栏。8.0之前是正常的。这里需要增强判断逻辑
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext());
+        notification.setPriority(PRIORITY_DEFAULT)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setSmallIcon(icon)
+                .setAutoCancel(true);
         if (options != null) {
             notification.setPriority(options.priority);
             notification.setOnlyAlertOnce(options.onlyAlertOnce);
@@ -228,9 +224,6 @@ public class NotificationUtils extends ContextWrapper {
                 notification.setDefaults(options.defaults);
             }
         }
-
-        //点击自动删除通知
-        notification.setAutoCancel(true);
         return notification;
     }
 
@@ -292,7 +285,6 @@ public class NotificationUtils extends ContextWrapper {
             return this;
         }
 
-
         /**
          * 设置优先级
          * 注意：
@@ -335,7 +327,6 @@ public class NotificationUtils extends ContextWrapper {
             this.sound = sound;
             return this;
         }
-
 
         /**
          * 设置默认的提示音
