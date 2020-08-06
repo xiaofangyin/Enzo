@@ -32,11 +32,12 @@ public class AppUpgradeService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        LogUtil.e(" AppUpgradeService onCreate...");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LogUtil.e("UpdateVersionService onStartCommand...");
+        LogUtil.e(" AppUpgradeService onStartCommand...");
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             String url = bundle.getString("downloadUrl", "");
@@ -49,7 +50,7 @@ public class AppUpgradeService extends Service {
     }
 
     public void downLoadFile(String url) {
-        LogUtil.e("UpdateVersionService downLoadFile url: " + url);
+        LogUtil.e(" AppUpgradeService downLoadFile url: " + url);
         DownloadUtil.get().download(url,
                 ExternalCacheUtil.getApkDownloadPath(getApplicationContext()),
                 AppUpgradeUtil.DOWN_LOAD_APP_NAME,
@@ -57,14 +58,14 @@ public class AppUpgradeService extends Service {
 
                     @Override
                     public void onDownloadStart() {
-                        LogUtil.e("UpdateVersionService onDownloadStart...");
+                        LogUtil.e(" AppUpgradeService onDownloadStart...");
                         mCurrentProgress = 0;
                         sendNotification("0%", mCurrentProgress);
                     }
 
                     @Override
                     public void onDownloadSuccess(File file) {
-                        LogUtil.e("UpdateVersionService onSuccess...");
+                        LogUtil.e(" AppUpgradeService onSuccess...");
                         mCurrentProgress = 100;
                         sendNotification("下载完成!", mCurrentProgress);
                         stopSelf();
@@ -76,7 +77,7 @@ public class AppUpgradeService extends Service {
 
                     @Override
                     public void onDownloading(int progress) {
-                        LogUtil.e("UpdateVersionService inProgress... progress: " + progress);
+                        LogUtil.e(" AppUpgradeService inProgress... progress: " + progress);
                         if (mCurrentProgress != progress) {
                             mCurrentProgress = progress;
                             sendNotification(progress + "%", progress);
@@ -85,9 +86,10 @@ public class AppUpgradeService extends Service {
 
                     @Override
                     public void onDownloadFailed() {
-                        LogUtil.e("UpdateVersionService onFailure...");
+                        LogUtil.e(" AppUpgradeService onFailure...");
                         mCurrentProgress = 0;
                         sendNotification("下载失败！请检查网络设置！", mCurrentProgress);
+                        stopSelf();
                     }
                 });
     }
