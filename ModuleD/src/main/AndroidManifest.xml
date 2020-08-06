@@ -65,6 +65,9 @@
         <activity
             android:name=".ui.activity.MDAVLoadingActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDShadowActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
