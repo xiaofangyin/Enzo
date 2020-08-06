@@ -8,12 +8,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import android.widget.RemoteViews;
+
+import com.enzo.commonlib.R;
 
 import static androidx.core.app.NotificationCompat.PRIORITY_DEFAULT;
 import static androidx.core.app.NotificationCompat.VISIBILITY_SECRET;
@@ -82,6 +85,13 @@ public class NotificationUtils extends ContextWrapper {
      */
     public void clearNotification() {
         getManager().cancelAll();
+    }
+
+    /**
+     * 清空指定通知
+     */
+    public void cancelNotify(int id) {
+        getManager().cancel(id);
     }
 
     /**
@@ -170,6 +180,14 @@ public class NotificationUtils extends ContextWrapper {
         builder.setPriority(priority);
         builder.setOnlyAlertOnce(onlyAlertOnce);
         builder.setOngoing(ongoing);
+        if (progress > 0 && progress <= 100) {
+            //一种是有进度刻度的（false）,一种是循环流动的（true）
+            //设置为false，表示刻度，设置为true，表示流动
+            builder.setProgress(100, progress, false);
+        } else {
+            //0,0,false,可以将进度条隐藏
+            builder.setProgress(0, 0, false);
+        }
         if (remoteViews != null) {
             builder.setContent(remoteViews);
         }
@@ -193,7 +211,6 @@ public class NotificationUtils extends ContextWrapper {
         return builder;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private Notification.Builder getChannelNotification(String title, String content, int icon) {
         Notification.Builder builder = new Notification.Builder(getApplicationContext(), CHANNEL_ID);
@@ -211,6 +228,14 @@ public class NotificationUtils extends ContextWrapper {
                 //是否提示一次.true - 如果Notification已经存在状态栏即使在调用notify函数也不会更新
                 .setOnlyAlertOnce(onlyAlertOnce)
                 .setAutoCancel(true);
+        if (progress > 0 && progress <= 100) {
+            //一种是有进度刻度的（false）,一种是循环流动的（true）
+            //设置为false，表示刻度，设置为true，表示流动
+            builder.setProgress(100, progress, false);
+        } else {
+            //0,0,false,可以将进度条隐藏
+            builder.setProgress(0, 0, false);
+        }
         if (remoteViews != null) {
             //设置自定义view通知栏
             notificationBuilder.setContent(remoteViews);
@@ -245,6 +270,7 @@ public class NotificationUtils extends ContextWrapper {
     private boolean ongoing = false;
     private RemoteViews remoteViews = null;
     private PendingIntent intent = null;
+    private int progress = -1;
     private String ticker = "";
     private int priority = Notification.PRIORITY_DEFAULT;
     private boolean onlyAlertOnce = false;
@@ -266,9 +292,6 @@ public class NotificationUtils extends ContextWrapper {
 
     /**
      * 设置自定义view通知栏布局
-     *
-     * @param remoteViews view
-     * @return
      */
     public NotificationUtils setContent(RemoteViews remoteViews) {
         this.remoteViews = remoteViews;
@@ -277,9 +300,6 @@ public class NotificationUtils extends ContextWrapper {
 
     /**
      * 设置内容点击
-     *
-     * @param intent intent
-     * @return
      */
     public NotificationUtils setContentIntent(PendingIntent intent) {
         this.intent = intent;
@@ -287,10 +307,15 @@ public class NotificationUtils extends ContextWrapper {
     }
 
     /**
+     * 通知进度
+     */
+    public NotificationUtils setProgress(int progress) {
+        this.progress = progress;
+        return this;
+    }
+
+    /**
      * 设置状态栏的标题
-     *
-     * @param ticker 状态栏的标题
-     * @return
      */
     public NotificationUtils setTicker(String ticker) {
         this.ticker = ticker;

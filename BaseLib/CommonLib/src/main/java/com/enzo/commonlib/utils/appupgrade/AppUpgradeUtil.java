@@ -11,7 +11,7 @@ import com.enzo.commonlib.utils.common.ToastUtils;
 import java.io.File;
 import java.util.ArrayList;
 
-public class UpgradeVersionUtil {
+public class AppUpgradeUtil {
 
     //下载apk名称
     static String DOWN_LOAD_APP_NAME = "my_test.apk";
@@ -62,7 +62,7 @@ public class UpgradeVersionUtil {
 
             @Override
             public void onPosClick() {
-                if (!isServiceRunning(context, UpgradeVersionService.class.getName())) {
+                if (!isServiceRunning(context, AppUpgradeService.class.getName())) {
                     //新版本已经下载
                     ToastUtils.showToast(context, "开始下载新版本...");
                     File file = new File(ExternalCacheUtil.getApkDownloadPath(context), DOWN_LOAD_APP_NAME);
@@ -70,7 +70,7 @@ public class UpgradeVersionUtil {
                         file.delete();
                     }
                     //没有下载，则开启服务下载新版本
-                    Intent intent = new Intent(context, UpgradeVersionService.class);
+                    Intent intent = new Intent(context, AppUpgradeService.class);
                     intent.putExtra("downloadUrl", versionInfo.getUpgrade_url());
                     context.startService(intent);
                 } else {

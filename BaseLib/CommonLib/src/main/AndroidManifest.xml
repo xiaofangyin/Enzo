@@ -51,7 +51,7 @@
 
         <!--升级-->
         <service
-            android:name=".utils.appupgrade.UpgradeVersionService"
+            android:name=".utils.appupgrade.AppUpgradeService"
             android:exported="false"
             android:process=":update" />
 
