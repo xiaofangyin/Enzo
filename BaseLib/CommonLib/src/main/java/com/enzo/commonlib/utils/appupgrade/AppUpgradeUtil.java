@@ -3,6 +3,7 @@ package com.enzo.commonlib.utils.appupgrade;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
@@ -100,15 +101,16 @@ public class AppUpgradeUtil {
     /**
      * 判断服务是否开启
      */
-    private static boolean isServiceRunning(Context context, String ServiceName) {
-        if (("").equals(ServiceName) || ServiceName == null)
+    private static boolean isServiceRunning(Context context, String serviceName) {
+        if (TextUtils.isEmpty(serviceName)) {
             return false;
+        }
         ActivityManager myManager = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
         ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>) myManager
                 .getRunningServices(30);
         for (int i = 0; i < runningService.size(); i++) {
-            if (runningService.get(i).service.getClassName().equals(ServiceName)) {
+            if (runningService.get(i).service.getClassName().equals(serviceName)) {
                 return true;
             }
         }
