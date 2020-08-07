@@ -34,8 +34,8 @@ public class ToastCompat {
             ShadowConfig.Builder config = new ShadowConfig.Builder()
                     .setColor(ContextCompat.getColor(context, R.color.color_orange))
                     .setShadowColor(ContextCompat.getColor(context, R.color.color_orange))
-                    .setOffsetX(DensityUtil.dip2px(context, 0.4f))
-                    .setOffsetY(DensityUtil.dip2px(context, 0.4f));
+                    .setOffsetX(DensityUtil.dip2px(context, 0f))
+                    .setOffsetY(DensityUtil.dip2px(context, 0f));
             ShadowHelper.setShadowBgForView(view, config);
 
             //自定义toast文本
