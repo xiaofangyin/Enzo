@@ -23,6 +23,7 @@ android {
         }
     }
 
+    resourcePrefix 'main_'
 }
 
 dependencies {

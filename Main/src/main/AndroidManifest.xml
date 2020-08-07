@@ -9,7 +9,7 @@
         <activity
             android:name=".ui.activity.SASplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WelLauncher">
+            android:theme="@style/main_WelLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

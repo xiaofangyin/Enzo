@@ -45,7 +45,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     @Override
     public int getLayoutId() {
-        return R.layout.sa_activity_add_device;
+        return R.layout.main_activity_add_device;
     }
 
     @Override

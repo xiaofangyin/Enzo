@@ -2,8 +2,8 @@
 <resources>
 
     <!--splash 点击快速显示欢迎页面-->
-    <style name="WelLauncher" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/sa_splash_bg</item>
+    <style name="main_WelLauncher" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/main_splash_bg</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
