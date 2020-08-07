@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#41ddb5"
+            android:background="@color/color_orange"
             android:orientation="horizontal">
 
             <ImageView
@@ -100,7 +100,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_button_blue_normal"
+            android:background="@drawable/shape_button_orange_normal"
             android:gravity="center"
             android:text="立即更新"
             android:textColor="@drawable/lib_selector_text_color_white"
