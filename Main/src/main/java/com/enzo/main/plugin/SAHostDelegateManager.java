@@ -50,6 +50,13 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
     }
 
     @Override
+    public void openDrawer(Activity activity, int gravity) {
+        if (activity instanceof SAMainActivity) {
+            ((SAMainActivity) activity).openDrawer(gravity);
+        }
+    }
+
+    @Override
     public void initFactories(Application application, List<FLPluginFactory> factoryList) {
         this.application = application;
         for (int i = 0; i < factoryList.size(); i++) {

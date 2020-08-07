@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.KeyEvent;
 
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +17,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
+import com.enzo.commonlib.utils.statusbar.dlBar.DlStatusBar;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
@@ -38,6 +41,7 @@ import java.util.List;
  */
 public class SAMainActivity extends BaseActivity {
 
+    private DrawerLayout drawerLayout;
     private SpiderWebView mSpiderWebView;
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
@@ -49,12 +53,16 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        drawerLayout = findViewById(R.id.home_drawer_layout);
         mSpiderWebView = findViewById(R.id.spider_web_view);
         mTabLayout = findViewById(R.id.tab_layout);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        DlStatusBar.setColorForDrawerLayout(this, drawerLayout,
+                getResources().getColor(R.color.color_main_black), 0);
+
         mSpiderWebView.setPointNum(80);//小点数量
         mSpiderWebView.setPointAcceleration(6);//加速度
 
@@ -134,6 +142,14 @@ public class SAMainActivity extends BaseActivity {
                 transaction.hide(mFragments.get(i));
             }
         }
+    }
+
+    public void openDrawer(int gravity) {
+        drawerLayout.openDrawer(gravity);
+    }
+
+    public void closeDrawer(int gravity) {
+        drawerLayout.closeDrawer(gravity);
     }
 
     private long firstTime = 0; //点击两次退出应用计时

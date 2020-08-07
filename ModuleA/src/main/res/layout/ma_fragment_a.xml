@@ -18,26 +18,33 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/icon_notice" />
-
-            <com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView
-                android:id="@+id/auto_scroll_text_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:padding="5dp" />
-
-            <ImageView
+            <com.enzo.commonlib.widget.roundimageview.RoundImageView
                 android:id="@+id/ma_add_device_icon"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:background="@mipmap/ma_add_icon" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/icon_user_default_avatar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/icon_notice" />
+
+                <com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView
+                    android:id="@+id/auto_scroll_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="5dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

@@ -1,6 +1,7 @@
 package com.enzo.module_a.ui.fragment;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.enzo.commonlib.widget.timeclock.TimePicker;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
+import com.enzo.module_a.plugin.MAPluginFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,7 @@ public class MAFragment extends BaseFragment {
     public void initData(Bundle savedInstanceState) {
         final List<String> list = new ArrayList<>();
         list.add("王者风范");
-        list.add("狭路相逢勇者胜");
+        list.add("狭路相逢");
         list.add("别无出路");
         verticalScrollTV.setText(list.get(0));
         verticalScrollTV.setList(list);
@@ -79,7 +81,7 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_add_device_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
+                MAPluginFactory.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.LEFT);
             }
         });
     }

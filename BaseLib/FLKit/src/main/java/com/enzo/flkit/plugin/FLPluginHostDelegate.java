@@ -22,6 +22,8 @@ public interface FLPluginHostDelegate {
     //返回当前显示的activity
     Activity getCurrentController();
 
+    void openDrawer(Activity activity,int gravity);
+
     //跳转到宿主的家庭页
     boolean popToHomeController(Context context);
 
