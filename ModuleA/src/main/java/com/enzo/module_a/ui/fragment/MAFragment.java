@@ -7,11 +7,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView;
 import com.enzo.commonlib.widget.timeclock.TimePicker;
-import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
 import com.enzo.module_a.plugin.MAPluginFactory;

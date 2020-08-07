@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.Gravity;
 import android.view.KeyEvent;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -129,16 +128,18 @@ public class SAMainActivity extends BaseActivity {
     }
 
     private void showFragment(FragmentTransaction transaction, Fragment fragment) {
-        if (fragment.isAdded()) {
-            transaction.show(fragment);
-        } else {
-            transaction.add(R.id.main_content, fragment, fragment.getClass().getSimpleName());
+        if (fragment != null) {
+            if (fragment.isAdded()) {
+                transaction.show(fragment);
+            } else {
+                transaction.add(R.id.main_content, fragment, fragment.getClass().getSimpleName());
+            }
         }
     }
 
     private void hideFragment(FragmentTransaction transaction) {
         for (int i = 0; i < mFragments.size(); i++) {
-            if (mFragments.get(i).isAdded()) {
+            if (mFragments.get(i) != null && mFragments.get(i).isAdded()) {
                 transaction.hide(mFragments.get(i));
             }
         }
