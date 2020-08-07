@@ -6,16 +6,17 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.enzo.commonlib.widget.loadinglayout.LoadingView
+    <ImageView
         android:id="@+id/ab_iv_loading"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:src="@mipmap/fl_loading_icon" />
 
     <TextView
         android:id="@+id/tv_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
         android:text="努力加载中..."
         android:textColor="#999999"

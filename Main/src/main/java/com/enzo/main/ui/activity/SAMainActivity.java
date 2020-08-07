@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
@@ -19,8 +20,11 @@ import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
+import com.enzo.flkit.router.ModuleARouterPath;
+import com.enzo.flkit.router.ModuleBRouterPath;
+import com.enzo.flkit.router.ModuleCRouterPath;
+import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.main.R;
-import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.main.plugin.SAHostDelegateManager;
 
 import java.util.ArrayList;
@@ -100,9 +104,10 @@ public class SAMainActivity extends BaseActivity {
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < SAFactoryManager.getInstance().getFactoryList().size(); i++) {
-            fragments.add(SAFactoryManager.getInstance().getFactoryList().get(i).buildHomeTabFragment());
-        }
+        fragments.add((Fragment) ARouter.getInstance().build(ModuleARouterPath.MODULE_A_FRAGMENT).navigation());
+        fragments.add((Fragment) ARouter.getInstance().build(ModuleBRouterPath.MODULE_B_FRAGMENT).navigation());
+        fragments.add((Fragment) ARouter.getInstance().build(ModuleCRouterPath.MODULE_C_FRAGMENT).navigation());
+        fragments.add((Fragment) ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_FRAGMENT).navigation());
         return fragments;
     }
 

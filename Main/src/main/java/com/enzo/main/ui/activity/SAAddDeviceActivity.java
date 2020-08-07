@@ -18,7 +18,7 @@ import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginBaseObjectDelegate;
 import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.flkit.plugin.FLPluginTypeList;
-import com.enzo.flkit.router.ARouterPath;
+import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.main.R;
 import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.main.ui.adapter.SAAddDeviceAdapter;
@@ -35,7 +35,7 @@ import java.util.List;
  * 创建日期: 2019-05-29
  * 邮   箱: xiaofangyinwork@163.com
  */
-@Route(path = ARouterPath.MAIN_ADD_DEVICE)
+@Route(path = MainRouterPath.MAIN_ADD_DEVICE)
 public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObjectDelegate {
 
     private LoadingLayout loadingLayout;

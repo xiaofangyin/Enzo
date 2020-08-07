@@ -5,11 +5,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView;
 import com.enzo.commonlib.widget.timeclock.TimePicker;
-import com.enzo.flkit.router.ARouterPath;
+import com.enzo.flkit.router.MainRouterPath;
+import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.List;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
+@Route(path = ModuleARouterPath.MODULE_A_FRAGMENT)
 public class MAFragment extends BaseFragment {
 
     private AutoScrollTextView verticalScrollTV;
@@ -76,7 +79,7 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_add_device_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ARouter.getInstance().build(ARouterPath.MAIN_ADD_DEVICE).navigation();
+                ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
             }
         });
     }

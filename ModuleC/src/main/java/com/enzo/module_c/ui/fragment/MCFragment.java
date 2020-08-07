@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -17,6 +18,7 @@ import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigat
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.ScaleTransitionPagerTitleView;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import com.enzo.flkit.router.ModuleCRouterPath;
 import com.enzo.module_c.R;
 import com.enzo.module_c.model.ColumnBean;
 import com.enzo.module_c.ui.adapter.MCViewPagerAdapter;
@@ -30,6 +32,7 @@ import java.util.List;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
+@Route(path = ModuleCRouterPath.MODULE_C_FRAGMENT)
 public class MCFragment extends BaseFragment implements View.OnClickListener {
 
     private MagicIndicator magicIndicator;

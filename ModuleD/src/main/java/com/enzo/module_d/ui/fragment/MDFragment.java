@@ -6,8 +6,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator;
+import com.enzo.flkit.router.ModuleCRouterPath;
+import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.adapter.MDViewPagerIndicatorAdapter;
 
@@ -21,6 +24,7 @@ import java.util.List;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
+@Route(path = ModuleDRouterPath.MODULE_D_FRAGMENT)
 public class MDFragment extends BaseFragment {
 
     private List<String> itemTitles = Arrays.asList("短信", "收藏", "推荐", "发现");

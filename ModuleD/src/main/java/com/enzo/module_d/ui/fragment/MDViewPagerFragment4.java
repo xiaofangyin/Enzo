@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.appupgrade.AppUpgradeUtil;
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
-import com.enzo.flkit.router.ARouterPath;
+import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
@@ -83,7 +83,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
                 }
             });
         } else if (id == R.id.btn_add_device) {
-            ARouter.getInstance().build(ARouterPath.MAIN_ADD_DEVICE).navigation();
+            ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
         } else if (id == R.id.btn_touch_event) {
             Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
             startActivity(intent);

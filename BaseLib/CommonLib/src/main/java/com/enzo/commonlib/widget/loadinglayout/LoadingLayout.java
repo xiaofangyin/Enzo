@@ -1,12 +1,15 @@
 package com.enzo.commonlib.widget.loadinglayout;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.core.content.ContextCompat;
 
@@ -21,6 +24,7 @@ import com.enzo.commonlib.R;
 public class LoadingLayout extends FrameLayout {
 
     private OnClickListener onRetryClickListener;
+    private ObjectAnimator animator;
 
     public LoadingLayout(Context context) {
         this(context, null);
@@ -114,12 +118,27 @@ public class LoadingLayout extends FrameLayout {
     }
 
     /**
+     * AccelerateDecelerateInterpolator    先加速后减速
+     * AccelerateInterpolator              一直加速
+     * AnticipateInterpolator              开始的时候会在初始位置后退一点，然后加速到目标位置
+     * AnticipateOvershootInterpolator     开始的时候会在初始位置后退一点，然后加速超过目标位置一点，然后返回目标位置
+     * BounceInterpolator                   动画以弹弹的形式到目标位置（具体效果可以往下看）
+     * CycleInterpolator                    动画循环播放特定的次数，速率改变沿着正弦曲线（在Tran中是指定偏移量正反运动（详情看效果））
+     * DecelerateInterpolator                减速到达目标位置
+     * LinearInterpolator                    以线性速度改变（说白了就是匀速）
+     * OvershootInterpolator                 超过目标位置一点，然后回到目标位置
      * 开启动画
      */
     private void startLoadingAnim() {
-        LoadingView imageLoading = findViewById(R.id.ab_iv_loading);
+        ImageView imageLoading = findViewById(R.id.ab_iv_loading);
         if (imageLoading != null) {
-            imageLoading.start();
+            if (animator == null) {
+                animator = ObjectAnimator.ofFloat(imageLoading, "rotation", 0f, 360f);
+                animator.setDuration(1000);
+                animator.setRepeatCount(ValueAnimator.INFINITE);
+                animator.setInterpolator(new LinearInterpolator());
+            }
+            animator.start();
         }
     }
 
@@ -127,9 +146,11 @@ public class LoadingLayout extends FrameLayout {
      * 结束动画
      */
     private void stopLoadingAnim() {
-        LoadingView imageLoading = findViewById(R.id.ab_iv_loading);
+        ImageView imageLoading = findViewById(R.id.ab_iv_loading);
         if (imageLoading != null) {
-            imageLoading.stop();
+            if (animator != null && animator.isRunning()) {
+                animator.cancel();
+            }
         }
     }
 
