@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,9 +33,6 @@ import java.util.List;
  */
 public class LeftMenuFragment extends BaseFragment {
 
-    private ImageLoader.Builder builder;
-    private RoundImageView ivUserIcon;
-    private TextView tvUserName;
     private RecyclerView recyclerView;
     private LeftMenuParentAdapter adapter;
 
@@ -45,15 +43,12 @@ public class LeftMenuFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        ivUserIcon = rootView.findViewById(R.id.left_menu_user_icon);
-        tvUserName = rootView.findViewById(R.id.left_menu_user_name);
         recyclerView = rootView.findViewById(R.id.left_menu_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        builder = new ImageLoader.Builder(getActivity());
         adapter = new LeftMenuParentAdapter();
         recyclerView.setAdapter(adapter);
         setFunctionList();
@@ -64,7 +59,13 @@ public class LeftMenuFragment extends BaseFragment {
         rootView.findViewById(R.id.left_menu_tv_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtil.show("设置");
+                int mode = SPUtils.getDisplayMode(getContext());
+                if (mode == 0) {
+                    SPUtils.setDisplayMode(getContext(), 1);
+                } else {
+                    SPUtils.setDisplayMode(getContext(), 0);
+                }
+                adapter.notifyDataSetChanged();
             }
         });
     }
