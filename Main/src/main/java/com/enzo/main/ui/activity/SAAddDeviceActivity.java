@@ -125,6 +125,20 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     @Override
     public void initListener() {
+        loadingLayout.setOnRetryClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        headWidget.setRightImageVisible(true);
+                        loadingLayout.showContent();
+                        adapter.setNewData(getObjectList(buildData()));
+                    }
+                }, 4000);
+            }
+        });
         recyclerView.setOnLoadListener(new PullToRefreshRecyclerView.OnLoadListener() {
             @Override
             public void onRecyclerViewRefresh() {
