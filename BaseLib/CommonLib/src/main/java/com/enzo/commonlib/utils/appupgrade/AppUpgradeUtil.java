@@ -29,10 +29,10 @@ public class AppUpgradeUtil {
     public static void checkVersion(final Context context, final UpdateListener updateListener) {
         int status = 1;
         AndroidBean versionInfo = new AndroidBean();
-        versionInfo.setIntro("安卓简介安卓简介安卓简介安卓简介安卓简介安卓简介");
+        versionInfo.setIntro("1.修复bug\\n2.优化体验");
         versionInfo.setUpdate("0");
         versionInfo.setUpgrade_url(url);
-        versionInfo.setVersion("5.3.0");
+        versionInfo.setVersion("v5.3.0");
         if (status == 1) {
             updateListener.onNewVersion(versionInfo);
         } else if (status == 2) {
@@ -49,20 +49,20 @@ public class AppUpgradeUtil {
      * @param versionInfo 更新内容
      */
     public static void showDialog(final Context context, final AndroidBean versionInfo) {
+        String version = versionInfo.getVersion();
         String intro = versionInfo.getIntro();
         while (intro.contains("\\n")) {
             intro = intro.replace("\\n", "\n");
         }
-        final AppUpgradeAlertDialog upgradeAlertDialog = new AppUpgradeAlertDialog(context, "版本更新",
-                intro, versionInfo.getUpdate().equals("1") ? "" : "取消", "确定");
-        upgradeAlertDialog.setOnAlertDialogListener(new AppUpgradeAlertDialog.AlertDialogListener() {
+
+        new AppUpgradeDialog(context, version, intro, new AppUpgradeDialog.OnAlertViewClickListener() {
             @Override
-            public void onNegClick() {
-                upgradeAlertDialog.dismiss();
+            public void onNegBtnClick() {
+
             }
 
             @Override
-            public void onPosClick() {
+            public void onPosBtnClick() {
                 if (!isServiceRunning(context, AppUpgradeService.class.getName())) {
                     //新版本已经下载
                     ToastUtil.show("开始下载新版本...");
@@ -77,13 +77,8 @@ public class AppUpgradeUtil {
                 } else {
                     ToastUtil.show("正在下载...");
                 }
-
-                if (!versionInfo.getUpdate().equals("1")) {
-                    upgradeAlertDialog.dismiss();
-                }
             }
-        });
-        upgradeAlertDialog.show();
+        }).show();
     }
 
     /**
