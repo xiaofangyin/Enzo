@@ -9,6 +9,7 @@
         android:label="@string/ma_news_name"
         android:supportsRtl="true"
         android:theme="@style/md_AppTheme">
+
         <activity
             android:name="debug.LauncherActivity"
             android:screenOrientation="portrait">
@@ -19,4 +20,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

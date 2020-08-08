@@ -18,7 +18,7 @@ import java.util.List;
  * 创建日期: 2018/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class LeftMenuConfig {
+public class SALeftMenuConfig {
 
     //企业查询
     private static final int ID_CHAXUN_SHENGCHANG_QIYE = 1001;//生产企业

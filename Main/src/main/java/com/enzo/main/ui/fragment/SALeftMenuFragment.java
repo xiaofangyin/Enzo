@@ -3,23 +3,16 @@ package com.enzo.main.ui.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.TextView;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.utils.imageloader.ImageLoader;
-import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.roundimageview.RoundImageView;
 import com.enzo.main.R;
-import com.enzo.main.config.LeftMenuConfig;
+import com.enzo.main.config.SALeftMenuConfig;
 import com.enzo.main.model.LeftMenuParentBean;
-import com.enzo.main.ui.activity.SAMainActivity;
-import com.enzo.main.ui.adapter.LeftMenuParentAdapter;
+import com.enzo.main.ui.adapter.SALeftMenuParentAdapter;
 import com.enzo.main.util.SPUtils;
 
 import java.util.Iterator;
@@ -31,10 +24,10 @@ import java.util.List;
  * 创建日期: 2018/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class LeftMenuFragment extends BaseFragment {
+public class SALeftMenuFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
-    private LeftMenuParentAdapter adapter;
+    private SALeftMenuParentAdapter adapter;
 
     @Override
     public int getLayoutId() {
@@ -49,7 +42,7 @@ public class LeftMenuFragment extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        adapter = new LeftMenuParentAdapter();
+        adapter = new SALeftMenuParentAdapter();
         recyclerView.setAdapter(adapter);
         setFunctionList();
     }
@@ -82,24 +75,17 @@ public class LeftMenuFragment extends BaseFragment {
             }
             adapter.setNewData(cacheList);
         } else {
-            adapter.setNewData(LeftMenuConfig.getMenuList());
+            adapter.setNewData(SALeftMenuConfig.getMenuList());
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == Activity.RESULT_OK) {
-                    setFunctionList();
-                }
-        }
-    }
-
-    private void closeDrawer() {
-        if (getActivity() != null) {
-            ((SAMainActivity) getActivity()).closeDrawer(Gravity.START);
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                setFunctionList();
+            }
         }
     }
 }

@@ -1,10 +1,12 @@
 package com.enzo.main.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.KeyEvent;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -14,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.statusbar.dlBar.DlStatusBar;
@@ -146,25 +149,35 @@ public class SAMainActivity extends BaseActivity {
     }
 
     public void openDrawer(int gravity) {
-        drawerLayout.openDrawer(gravity);
+        if (drawerLayout != null) {
+            drawerLayout.openDrawer(gravity);
+        }
     }
 
     public void closeDrawer(int gravity) {
-        drawerLayout.closeDrawer(gravity);
+        if (drawerLayout != null) {
+            drawerLayout.closeDrawer(gravity);
+        }
     }
 
     private long firstTime = 0; //点击两次退出应用计时
 
+    @SuppressLint("WrongConstant")
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            long secondTime = System.currentTimeMillis();
-            if (secondTime - firstTime > 2000) {
-                ToastUtil.show("再按一次退出程序");
-                firstTime = System.currentTimeMillis();
+            if (drawerLayout.isDrawerOpen(Gravity.START)) {
+                closeDrawer(Gravity.START);
                 return true;
             } else {
-                System.exit(0);
+                long secondTime = System.currentTimeMillis();
+                if (secondTime - firstTime > 2000) {
+                    ToastUtil.show("再按一次退出程序");
+                    firstTime = System.currentTimeMillis();
+                    return true;
+                } else {
+                    ActivityHelper.getManager().appExit();
+                }
             }
         }
         return super.onKeyDown(keyCode, event);

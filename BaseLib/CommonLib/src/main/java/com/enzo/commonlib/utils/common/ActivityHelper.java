@@ -81,7 +81,7 @@ public class ActivityHelper {
     /**
      * 退出应用程序
      */
-    public void AppExit() {
+    public void appExit() {
         try {
             finishAllActivity();
             System.exit(0);

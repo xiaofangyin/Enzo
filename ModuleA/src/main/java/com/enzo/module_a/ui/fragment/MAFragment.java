@@ -76,10 +76,10 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-        rootView.findViewById(R.id.ma_add_device_icon).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.ma_open_drawer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MAPluginFactory.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.LEFT);
+                MAPluginFactory.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.START);
             }
         });
     }

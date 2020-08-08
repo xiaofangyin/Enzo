@@ -27,11 +27,11 @@ import java.util.Iterator;
  * 创建日期: 2018/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class LeftMenuParentAdapter extends BaseRecyclerViewAdapter<LeftMenuParentBean> {
+public class SALeftMenuParentAdapter extends BaseRecyclerViewAdapter<LeftMenuParentBean> {
 
     private ExpandableViewHoldersUtil.KeepOneH<LeftMenuHolder> keepOne;
 
-    public LeftMenuParentAdapter() {
+    public SALeftMenuParentAdapter() {
         keepOne = new ExpandableViewHoldersUtil.KeepOneH<>();
     }
 
@@ -56,7 +56,7 @@ public class LeftMenuParentAdapter extends BaseRecyclerViewAdapter<LeftMenuParen
         private TextView tvName;
         private ImageView ivArrow;
         private RecyclerView recyclerView;
-        private LeftMenuChildAdapter childAdapter;
+        private SALeftMenuChildAdapter childAdapter;
 
         LeftMenuHolder(View itemView) {
             super(itemView);
@@ -66,7 +66,7 @@ public class LeftMenuParentAdapter extends BaseRecyclerViewAdapter<LeftMenuParen
             tvName = itemView.findViewById(R.id.left_menu_parent_name);
             ivArrow = itemView.findViewById(R.id.left_menu_iv_expend);
             recyclerView = itemView.findViewById(R.id.left_menu_child_recycler_view);
-            childAdapter = new LeftMenuChildAdapter();
+            childAdapter = new SALeftMenuChildAdapter();
             recyclerView.setAdapter(childAdapter);
         }
 

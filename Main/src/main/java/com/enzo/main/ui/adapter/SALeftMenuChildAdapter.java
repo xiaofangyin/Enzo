@@ -23,7 +23,7 @@ import com.enzo.main.model.LeftMenuChildBean;
  * 创建日期: 2018/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class LeftMenuChildAdapter extends BaseRecyclerViewAdapter<LeftMenuChildBean> {
+public class SALeftMenuChildAdapter extends BaseRecyclerViewAdapter<LeftMenuChildBean> {
 
     private int currentMode;
 
@@ -67,7 +67,7 @@ public class LeftMenuChildAdapter extends BaseRecyclerViewAdapter<LeftMenuChildB
 
         @Override
         public void setUpView(final LeftMenuChildBean model, int position, RecyclerView.Adapter adapter) {
-            LeftMenuChildAdapter childAdapter = (LeftMenuChildAdapter) adapter;
+            SALeftMenuChildAdapter childAdapter = (SALeftMenuChildAdapter) adapter;
             if (childAdapter.currentMode == 0) {
                 llLinearLayout.setVisibility(View.VISIBLE);
                 llGridLayout.setVisibility(View.GONE);
