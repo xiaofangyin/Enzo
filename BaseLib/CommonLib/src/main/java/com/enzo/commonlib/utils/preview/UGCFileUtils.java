@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 
 import java.io.File;
@@ -32,15 +33,8 @@ import okhttp3.Response;
  */
 public class UGCFileUtils {
 
-    public static final String UGC_FILE_PARENT = getSDPath() + "/yishian/download";
-
-    public static String getSDPath() {
-        boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED); //判断sd卡是否存在
-        if (sdCardExist) {
-            File sdDir = Environment.getExternalStorageDirectory();//获取跟目录
-            return sdDir.getAbsolutePath();
-        }
-        return "";
+    public static String getDownloadPath(Context context) {
+        return ExternalCacheUtil.getImageCachePath(context) + "download";
     }
 
     public static void downLoadImageAndSave(final Context context, String url, final String path, final String fileName, final OnImageDownLoadCallBack callBack) {

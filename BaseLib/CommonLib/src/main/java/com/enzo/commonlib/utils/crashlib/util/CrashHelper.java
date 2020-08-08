@@ -175,15 +175,16 @@ public final class CrashHelper {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File file = new File(getDefaultCrashDir(application));
             if (file.exists()) {
-                if (file.listFiles().length > 3) {
+                File[] files = file.listFiles();
+                if (files != null && files.length > 3) {
                     int index = 0;
-                    for (File temp : file.listFiles()) {
+                    for (File temp : files) {
                         long time = System.currentTimeMillis() - temp.lastModified();
                         if (time / 1000 > 3600 * 24 * 3) {
                             temp.delete();
                             index++;
                         }
-                        if (index >= file.listFiles().length - 3) break;
+                        if (index >= files.length - 3) break;
                     }
                 }
             }

@@ -137,7 +137,7 @@ public class PicPreviewActivity extends BaseActivity {
         ToastUtil.show("开始下载...");
         UGCFileUtils.downLoadImageAndSave(getApplicationContext(),
                 url,
-                UGCFileUtils.UGC_FILE_PARENT,
+                UGCFileUtils.getDownloadPath(PicPreviewActivity.this),
                 System.currentTimeMillis() + ".jpg",
                 new UGCFileUtils.OnImageDownLoadCallBack() {
                     @Override
