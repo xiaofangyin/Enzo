@@ -128,6 +128,14 @@ public class SAMainActivity extends BaseActivity {
         showFragment(transaction, mFragments.get(index));
         transaction.commitAllowingStateLoss();
         fragmentManager.executePendingTransactions();
+
+        if (index == 0) {
+            //打开手势滑动
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        } else {
+            //禁止手势滑动
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
     }
 
     private void showFragment(FragmentTransaction transaction, Fragment fragment) {
