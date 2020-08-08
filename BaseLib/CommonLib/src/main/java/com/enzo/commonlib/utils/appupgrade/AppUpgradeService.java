@@ -25,8 +25,9 @@ public class AppUpgradeService extends Service {
 
     //通知id
     private static final int NOTIFY_ID = 633980;
-    private static final String CHANNEL_ID = "Upgrade_Id";
-    private static final String CHANNEL_NAME = "Upgrade_Name";
+    private static final String CHANNEL_ID = "UpgradeChannel";
+    //在通知管理显示的名称
+    private static final String CHANNEL_NAME = "Upgrade";
     //下载进度
     private int mCurrentProgress;
 
