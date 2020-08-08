@@ -9,6 +9,7 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.KeyEvent;
 
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -63,7 +64,7 @@ public class SAMainActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         DlStatusBar.setColorForDrawerLayout(this, drawerLayout,
-                getResources().getColor(R.color.color_main_black), 0);
+                ContextCompat.getColor(this,R.color.color_main_black), 0);
 
         mSpiderWebView.setPointNum(80);//小点数量
         mSpiderWebView.setPointAcceleration(6);//加速度
