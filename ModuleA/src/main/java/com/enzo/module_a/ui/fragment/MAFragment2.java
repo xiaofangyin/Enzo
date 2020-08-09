@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
@@ -15,6 +17,8 @@ import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
+import com.enzo.module_a.model.MAHomeBannerBean;
+import com.enzo.module_a.model.MAHomeBaseBean;
 import com.enzo.module_a.ui.activity.MAScanQrCodeActivity;
 import com.enzo.module_a.ui.adapter.MAHomeAdapter;
 
@@ -60,7 +64,7 @@ public class MAFragment2 extends BaseFragment {
         adapter = new MAHomeAdapter();
         recyclerView.setAdapter(adapter);
 
-        List<String> list = buildData(10);
+        List<MAHomeBaseBean> list = buildData(10, true);
         adapter.setNewData(list);
     }
 
@@ -72,8 +76,7 @@ public class MAFragment2 extends BaseFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        List<String> list = buildData(10);
-                        adapter.setNewData(list);
+                        adapter.setNewData(buildData(10, true));
                         recyclerView.refreshSuccess();
                     }
                 }, 3000);
@@ -84,8 +87,7 @@ public class MAFragment2 extends BaseFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        List<String> list = buildData(10);
-                        adapter.setLoadMoreData(list);
+                        adapter.setLoadMoreData(buildData(10, false));
                         recyclerView.loadMoreSuccess();
                     }
                 }, 3000);
@@ -94,6 +96,17 @@ public class MAFragment2 extends BaseFragment {
             @Override
             public void onLoadMoreRetry() {
 
+            }
+        });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {
@@ -106,10 +119,13 @@ public class MAFragment2 extends BaseFragment {
     }
 
     @NotNull
-    private List<String> buildData(int i2) {
-        List<String> list = new ArrayList<>();
+    private List<MAHomeBaseBean> buildData(int i2, boolean addBanner) {
+        List<MAHomeBaseBean> list = new ArrayList<>();
+        if (addBanner) {
+            list.add(new MAHomeBannerBean(1));
+        }
         for (int i = 0; i < i2; i++) {
-            list.add("");
+            list.add(new MAHomeBaseBean(0));
         }
         return list;
     }

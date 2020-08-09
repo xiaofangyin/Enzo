@@ -10,49 +10,42 @@
         android:id="@+id/ma_header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ma_shape_home_header_bg"
+        android:background="@color/color_yellow"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:src="@mipmap/ma_sign_in_icon" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_button_gray_pressed"
+                android:gravity="center"
+                android:text="vivo79手机" />
 
             <ImageView
                 android:id="@+id/ma_qr_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:src="@mipmap/ma_new_qr" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="首页"
-                android:textColor="@color/color_333"
-                android:textSize="22sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:src="@mipmap/ma_sign_in_icon" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_button_gray_pressed"
-            android:gravity="center"
-            android:text="vivo79手机" />
     </LinearLayout>
 
     <com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView
