@@ -14,7 +14,7 @@
         android:paddingEnd="18dp"
         android:paddingBottom="16dp"
         android:shadowRadius="2.75"
-        android:textColor="#ffffff"
+        android:textColor="@color/color_666"
         android:textSize="14sp" />
 
 </RelativeLayout>
