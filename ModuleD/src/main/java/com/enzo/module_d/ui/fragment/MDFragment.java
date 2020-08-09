@@ -59,8 +59,8 @@ public class MDFragment extends BaseFragment {
         Context context = getContext();
         if (context != null) {
             mIndicator.setNormalColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_666));
-            mIndicator.setHighlightColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_yellow));
-            mIndicator.setIndicatorColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_yellow));
+            mIndicator.setHighlightColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_333));
+            mIndicator.setIndicatorColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_333));
         }
         FragmentPagerAdapter mAdapter = new MDViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
         mViewPager.setAdapter(mAdapter);

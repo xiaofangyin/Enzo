@@ -7,13 +7,14 @@
     <color name="color_main_black">#161922</color>
 
     <color name="color_transparent">#00000000</color>
-    <color name="color_common_bg">#f3f3f3</color>
+    <color name="color_common_bg">#161922</color>
     <color name="color_status_bar">#b5b5b5</color>
     <color name="color_aa">#aaaaaa</color>
     <color name="color_c9">#c9c9c9</color>
     <color name="color_d8">#d8d8d8</color>
     <color name="color_d9">#d9d9d9</color>
     <color name="color_df">#dfdfdf</color>
+    <color name="color_f3">#f3f3f3</color>
     <color name="color_gray">#e2e5e2</color>
     <color name="color_line">#d8d8d8</color>
     <color name="color_ef">#efefef</color>

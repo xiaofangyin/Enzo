@@ -103,7 +103,7 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
                 simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, R.color.color_666));
-                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.color_yellow));
+                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.color_333));
                 simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
                 simplePagerTitleView.setText(columnList.get(index).getColumn_name());
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +119,7 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
                 linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                linePagerIndicator.setColors(ContextCompat.getColor(context, R.color.color_yellow));
+                linePagerIndicator.setColors(ContextCompat.getColor(context, R.color.color_333));
                 return linePagerIndicator;
             }
         });

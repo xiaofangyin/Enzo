@@ -1,5 +1,6 @@
 package com.enzo.module_a.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
+import com.enzo.module_a.ui.activity.MAScanQrCodeActivity;
 import com.enzo.module_a.ui.adapter.MAHomeAdapter;
 
 import org.jetbrains.annotations.NotNull;
@@ -92,6 +94,13 @@ public class MAFragment2 extends BaseFragment {
             @Override
             public void onLoadMoreRetry() {
 
+            }
+        });
+        rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MAScanQrCodeActivity.class);
+                startActivity(intent);
             }
         });
     }

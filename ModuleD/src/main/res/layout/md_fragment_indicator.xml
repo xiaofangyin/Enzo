@@ -6,7 +6,8 @@
     <com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
+        android:background="@color/color_yellow"
         android:orientation="horizontal" />
 
     <androidx.viewpager.widget.ViewPager
