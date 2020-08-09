@@ -3,7 +3,9 @@
     android:layout_width="292dp"
     android:layout_height="match_parent"
     android:background="@drawable/main_shape_left_menu_bg"
+    android:clickable="true"
     android:fillViewport="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <LinearLayout
