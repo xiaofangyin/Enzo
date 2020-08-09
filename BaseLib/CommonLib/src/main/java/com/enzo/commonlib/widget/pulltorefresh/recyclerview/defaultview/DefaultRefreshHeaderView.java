@@ -2,10 +2,10 @@ package com.enzo.commonlib.widget.pulltorefresh.recyclerview.defaultview;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +14,8 @@ import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.avi.AVLoadingIndicatorView;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefreshView;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 /**
  * 文 件 名: DefaultRefreshHeaderView
@@ -108,6 +110,9 @@ public class DefaultRefreshHeaderView extends BasePullToRefreshView implements B
                 if (progressView != null) {
                     progressView.setVisibility(View.GONE);
                 }
+
+                Vibrator vibrator = (Vibrator) getContext().getSystemService(VIBRATOR_SERVICE);
+                vibrator.vibrate(30);
                 break;
             case STATE_REFRESHING:
                 if (ivArrow.getRotation() != 0) {
