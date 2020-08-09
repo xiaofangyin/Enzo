@@ -4,12 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -46,6 +49,13 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initView(View rootView) {
+        View view = new View(rootView.getContext());
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                StatusBarUtils.getStatusBarHeight(rootView.getContext()));
+        view.setLayoutParams(layoutParams);
+        ((ViewGroup) rootView).addView(view, 0);
+
         magicIndicator = rootView.findViewById(R.id.mc_indicator);
         viewPager = rootView.findViewById(R.id.mc_view_pager);
     }

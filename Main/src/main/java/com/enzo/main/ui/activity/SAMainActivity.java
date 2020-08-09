@@ -20,7 +20,9 @@ import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
+import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.dlBar.DlStatusBar;
+import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
@@ -45,7 +47,6 @@ import java.util.List;
 public class SAMainActivity extends BaseActivity {
 
     private DrawerLayout drawerLayout;
-    private SpiderWebView mSpiderWebView;
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
 
@@ -56,19 +57,17 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.color_yellow));
+        StatusBarUtils.StatusBarLightMode(this);
+
         drawerLayout = findViewById(R.id.home_drawer_layout);
-        mSpiderWebView = findViewById(R.id.spider_web_view);
         mTabLayout = findViewById(R.id.tab_layout);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        DlStatusBar.setColorForDrawerLayout(this, drawerLayout,
-                ContextCompat.getColor(this, R.color.color_main_black), 0);
-
-        mSpiderWebView.setPointNum(80);//小点数量
-        mSpiderWebView.setPointAcceleration(6);//加速度
-
+//        DlStatusBar.setColorForDrawerLayout(this, drawerLayout,
+//                ContextCompat.getColor(this, R.color.color_yellow), 0);
         mFragments = getFragments();
         switchFragment(0);
 
@@ -115,7 +114,7 @@ public class SAMainActivity extends BaseActivity {
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add((Fragment) ARouter.getInstance().build(ModuleARouterPath.MODULE_A_FRAGMENT).navigation());
+        fragments.add((Fragment) ARouter.getInstance().build(ModuleARouterPath.MODULE_A_FRAGMENT2).navigation());
         fragments.add((Fragment) ARouter.getInstance().build(ModuleBRouterPath.MODULE_B_FRAGMENT).navigation());
         fragments.add((Fragment) ARouter.getInstance().build(ModuleCRouterPath.MODULE_C_FRAGMENT).navigation());
         fragments.add((Fragment) ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_FRAGMENT).navigation());

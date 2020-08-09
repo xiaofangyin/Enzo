@@ -3,6 +3,8 @@ package com.enzo.module_d.ui.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -11,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.R;
@@ -40,6 +43,13 @@ public class MDFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
+        View view = new View(rootView.getContext());
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                StatusBarUtils.getStatusBarHeight(rootView.getContext()));
+        view.setLayoutParams(layoutParams);
+        ((ViewGroup)rootView).addView(view,0);
+
         mViewPager = rootView.findViewById(R.id.view_pager);
         mIndicator = rootView.findViewById(R.id.indicator);
     }

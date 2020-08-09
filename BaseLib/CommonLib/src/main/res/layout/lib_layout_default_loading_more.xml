@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/collection_loading_more"
-            android:textColor="@color/color_white"
+            android:textColor="@color/color_999"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -36,7 +36,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="@string/collection_no_more_data"
-        android:textColor="#999999"
+        android:textColor="@color/color_999"
         android:textSize="14sp"
         android:visibility="gone" />
 
