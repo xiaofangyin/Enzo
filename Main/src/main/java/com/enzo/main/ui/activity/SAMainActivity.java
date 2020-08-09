@@ -64,7 +64,7 @@ public class SAMainActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         DlStatusBar.setColorForDrawerLayout(this, drawerLayout,
-                ContextCompat.getColor(this,R.color.color_main_black), 0);
+                ContextCompat.getColor(this, R.color.color_main_black), 0);
 
         mSpiderWebView.setPointNum(80);//小点数量
         mSpiderWebView.setPointAcceleration(6);//加速度
@@ -72,7 +72,7 @@ public class SAMainActivity extends BaseActivity {
         mFragments = getFragments();
         switchFragment(0);
 
-        mTabLayout.initData(TabEntityConfig.getEntities());
+        mTabLayout.initData(TabEntityConfig.getEntities(this));
         mTabLayout.setCurrentItem(0);
         mTabLayout.showRedPoint(2);
         mHandler.sendEmptyMessage(0);

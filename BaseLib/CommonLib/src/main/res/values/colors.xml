@@ -43,16 +43,12 @@
 
     <color name="color_green_light">#81E8D4</color>
     <color name="color_green">#04d1aa</color>
-    <color name="color_green_55">#8c04d1aa</color>
     <color name="color_green_80">#cc04d1aa</color>
+    <color name="color_green_55">#8c04d1aa</color>
 
-    <color name="color_orange">#ffa726</color>
-    <color name="color_orange_55">#8cffa726</color>
-    <color name="color_orange_80">#ccffa726</color>
-
-    <color name="color_yellow">#F8AC59</color>
-    <color name="color_yellow_55">#8cF8AC59</color>
-    <color name="color_yellow_80">#ccF8AC59</color>
+    <color name="color_yellow">#FFFFDA44</color>
+    <color name="color_yellow_80">#CCFFDA44</color>
+    <color name="color_yellow_55">#8CFFDA44</color>
 
     <!-- pdf -->
     <color name="pdfViewPager_background_color">@android:color/white</color>
