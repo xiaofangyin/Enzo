@@ -14,6 +14,9 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Checkable;
 
+import androidx.core.content.ContextCompat;
+
+import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.LogUtil;
 
 /**
@@ -86,9 +89,8 @@ public class FLSwitchButton extends View implements Checkable, View.OnClickListe
 
         shadowOffset = dp2pxInt(1.5f);
 
-        uncheckColor = 0XffDDDDDD;
-
-        checkedColor = 0Xff41DDB5;
+        uncheckColor = ContextCompat.getColor(getContext(), R.color.color_dd);
+        checkedColor = ContextCompat.getColor(getContext(), R.color.color_yellow);
 
         borderWidth = dp2pxInt(1f);
 

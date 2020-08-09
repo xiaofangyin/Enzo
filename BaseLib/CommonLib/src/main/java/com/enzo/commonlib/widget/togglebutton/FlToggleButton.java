@@ -25,8 +25,8 @@ public class FlToggleButton extends View implements OnClickListener {
     private Paint paint;
     private boolean isOpen = false;//现在状态 true 开  false 关
     private boolean isEnable = true;//button是否可用
-    private int onColor = Color.parseColor("#34c0be");
-    private int offColor = Color.parseColor("#dbdbdb");
+    private int onColor = Color.parseColor("#FFFFDA44");
+    private int offColor = Color.parseColor("#FFDBDBDB");
     private int width;//宽度
     private int height;//高度
     private int centerY;//垂直中间坐标
@@ -284,9 +284,9 @@ public class FlToggleButton extends View implements OnClickListener {
 
     private void flushView() {
         // 确保 slideBtn_left >= minLeft
-        slideBtn_left = (slideBtn_left > minLeft) ? slideBtn_left : minLeft;
+        slideBtn_left = Math.max(slideBtn_left, minLeft);
         // 确保 slideBtn_left <= maxLeft
-        slideBtn_left = (slideBtn_left < maxLeft) ? slideBtn_left : maxLeft;
+        slideBtn_left = Math.min(slideBtn_left, maxLeft);
         invalidate();
     }
 
