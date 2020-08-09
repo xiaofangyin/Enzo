@@ -23,7 +23,6 @@ import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.statusbar.dlBar.DlStatusBar;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
-import com.enzo.commonlib.widget.tablayout.TabEntityConfig;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
 import com.enzo.flkit.router.ModuleARouterPath;
@@ -31,6 +30,7 @@ import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.flkit.router.ModuleCRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.main.R;
+import com.enzo.main.config.TabEntityConfig;
 import com.enzo.main.plugin.SAHostDelegateManager;
 
 import java.util.ArrayList;

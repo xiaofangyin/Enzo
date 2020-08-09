@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_gravity="bottom"
-            android:background="#1d1b21" />
+            android:background="@color/color_white" />
     </LinearLayout>
 
     <fragment
