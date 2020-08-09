@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.flkit.router.ModuleARouterPath;
@@ -36,6 +40,7 @@ import java.util.List;
 @Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
 public class MAFragment2 extends BaseFragment {
 
+    private TextView tvSearch;
     private PullToRefreshRecyclerView recyclerView;
     private MAHomeAdapter adapter;
 
@@ -53,6 +58,7 @@ public class MAFragment2 extends BaseFragment {
         view.setLayoutParams(layoutParams);
         ((ViewGroup) rootView).addView(view, 0);
 
+        tvSearch = rootView.findViewById(R.id.ma_search);
         recyclerView = rootView.findViewById(R.id.ma_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setPullRefreshEnabled(true);
@@ -107,6 +113,11 @@ public class MAFragment2 extends BaseFragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) tvSearch.getLayoutParams();
+                layoutParams.leftMargin = layoutParams.leftMargin - dy / 3;
+                if (layoutParams.leftMargin >= DensityUtil.dip2px(recyclerView.getContext(), 12)) {
+                    tvSearch.setLayoutParams(layoutParams);
+                }
             }
         });
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {

@@ -11,40 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_yellow"
-        android:orientation="vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/ma_sign_in"
+                android:layout_width="60dp"
+                android:layout_height="34dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:src="@mipmap/ma_sign_in_icon" />
 
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/ma_search"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_marginLeft="60dp"
                 android:background="@drawable/shape_button_gray_pressed"
                 android:gravity="center"
                 android:text="vivo79手机" />
 
-            <ImageView
-                android:id="@+id/ma_qr_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:src="@mipmap/ma_new_qr" />
+        </RelativeLayout>
 
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/ma_qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:src="@mipmap/ma_new_qr" />
 
     </LinearLayout>
 
