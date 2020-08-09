@@ -25,10 +25,10 @@
             android:id="@+id/viewfinder_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:corner_color="@color/corner_color"
+            app:corner_color="@color/color_yellow"
             app:frame_color="@color/viewfinder_frame"
             app:label_text_color="@color/color_white"
-            app:laser_color="@color/laser_color"
+            app:laser_color="@color/color_yellow"
             app:mask_color="@color/viewfinder_mask"
             app:result_color="@color/result_view"
             app:result_point_color="@color/result_point_color" />
