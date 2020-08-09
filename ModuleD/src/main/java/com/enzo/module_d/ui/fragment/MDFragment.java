@@ -1,15 +1,17 @@
 package com.enzo.module_d.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator;
-import com.enzo.flkit.router.ModuleCRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.adapter.MDViewPagerIndicatorAdapter;
@@ -44,6 +46,12 @@ public class MDFragment extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        Context context = getContext();
+        if (context != null) {
+            mIndicator.setNormalColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_666));
+            mIndicator.setHighlightColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_yellow));
+            mIndicator.setIndicatorColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_yellow));
+        }
         FragmentPagerAdapter mAdapter = new MDViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
         mViewPager.setAdapter(mAdapter);
         //设置Tab上的标题
