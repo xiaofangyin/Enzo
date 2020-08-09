@@ -74,7 +74,7 @@ public class SAMainActivity extends BaseActivity {
 
         mTabLayout.initData(TabEntityConfig.getEntities(this));
         mTabLayout.setCurrentItem(0);
-        mTabLayout.showRedPoint(2);
+        mTabLayout.showRedPoint(1);
         mHandler.sendEmptyMessage(0);
 
         LogUtil.d(PhoneUtils.getInstance().getUniqueId(this));

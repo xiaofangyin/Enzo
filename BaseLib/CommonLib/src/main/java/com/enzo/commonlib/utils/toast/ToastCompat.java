@@ -17,7 +17,7 @@ import com.enzo.commonlib.widget.shadow.ShadowHelper;
 
 public class ToastCompat {
 
-    @SuppressLint("ShowToast")
+    @SuppressLint("ShowToast,InflateParams")
     public static Toast makeText(Context context, CharSequence text, int duration) {
         Toast toast;
         if (Build.VERSION.SDK_INT == 25) {
@@ -32,8 +32,8 @@ public class ToastCompat {
             View view = inflater.inflate(R.layout.lib_layout_toast, null);
 
             ShadowConfig.Builder config = new ShadowConfig.Builder()
-                    .setColor(ContextCompat.getColor(context, R.color.color_yellow))
-                    .setShadowColor(ContextCompat.getColor(context, R.color.color_yellow))
+                    .setColor(ContextCompat.getColor(context, R.color.color_white))
+                    .setShadowColor(ContextCompat.getColor(context, R.color.color_white))
                     .setOffsetX(DensityUtil.dip2px(context, 0f))
                     .setOffsetY(DensityUtil.dip2px(context, 0f));
             ShadowHelper.setShadowBgForView(view, config);
