@@ -57,7 +57,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/shape_button_gray_pressed"
             android:gravity="center"
             android:text="vivo79手机" />
