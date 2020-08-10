@@ -143,7 +143,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     public void initHeader() {
         HeadWidget headWidget = findViewById(R.id.scanner_header);
         headWidget.setBackgroundColor(ContextCompat.getColor(this, com.enzo.commonlib.R.color.color_green));
-        headWidget.setLeftImage(com.enzo.commonlib.R.mipmap.flc_icon_back_default);
+        headWidget.setLeftImage(com.enzo.commonlib.R.mipmap.icon_white_back_default);
         headWidget.setTitle(getTitleText());
         headWidget.setRightText("相册");
         headWidget.setTitleColor(ContextCompat.getColor(this, com.enzo.commonlib.R.color.color_white));

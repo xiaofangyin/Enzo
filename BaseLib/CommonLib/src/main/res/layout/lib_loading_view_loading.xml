@@ -10,7 +10,7 @@
         android:id="@+id/ab_iv_loading"
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:src="@mipmap/fl_loading_icon" />
+        android:src="@mipmap/icon_loading_icon" />
 
     <TextView
         android:id="@+id/tv_loading"
