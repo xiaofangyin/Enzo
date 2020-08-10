@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -16,6 +17,8 @@ import android.view.animation.Transformation;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
+
+import com.enzo.commonlib.R;
 
 import java.util.List;
 
@@ -33,7 +36,7 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
     private Runnable runnable;
     private List<String> list;
     private int position = 0;
-    private int delayedTime = 3000;//滚动间隔
+    private int delayedTime = 6000;//滚动间隔
     private ItemClickListener mListener;
 
     public AutoScrollTextView(Context context) {
@@ -72,7 +75,7 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
 
     private Rotate3dAnimation createAnim(boolean turnIn, boolean turnUp) {
         Rotate3dAnimation rotation = new Rotate3dAnimation(turnIn, turnUp);
-        rotation.setDuration(1200);//执行动画的时间
+        rotation.setDuration(400);//执行动画的时间
         rotation.setFillAfter(false);//是否保持动画完毕之后的状态
         rotation.setInterpolator(new AccelerateInterpolator());//设置加速模式
         return rotation;
@@ -131,12 +134,18 @@ public class AutoScrollTextView extends TextSwitcher implements ViewSwitcher.Vie
     @Override
     public View makeView() {
         TextView textView = new TextView(mContext);
-        textView.setGravity(Gravity.LEFT);
+        textView.setGravity(Gravity.START);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textView.setSingleLine(true);
         textView.setGravity(Gravity.CENTER_VERTICAL);
         textView.setEllipsize(TextUtils.TruncateAt.END);
-        textView.setTextColor(Color.parseColor("#ffffff"));
+        textView.setTextColor(Color.parseColor("#999999"));
+        Drawable drawableRight = getResources().getDrawable(R.mipmap.icon_search_icon, getContext().getTheme());
+        drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
+        textView.setCompoundDrawables(drawableRight, null, null, null);
+        //设置间距
+        textView.setCompoundDrawablePadding(10);
+
         textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -87,10 +87,6 @@ public class MAHomeSubFragment2 extends BaseFragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Fragment fragment = getParentFragment();
-                if (fragment instanceof MAFragment2) {
-                    ((MAFragment2) fragment).onScroll(dy);
-                }
             }
         });
     }
