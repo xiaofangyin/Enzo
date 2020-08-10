@@ -55,11 +55,11 @@ public class ApkUtils {
      * @return 当前程序的版本号
      */
     public static long getVersionCode(Context context) {
-        long version;
+        int version;
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
-            version = packageInfo.getLongVersionCode();
+            version = packageInfo.versionCode;
         } catch (Exception e) {
             e.printStackTrace();
             version = 0;
