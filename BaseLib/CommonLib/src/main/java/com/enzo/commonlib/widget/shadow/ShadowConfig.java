@@ -33,8 +33,8 @@ public class ShadowConfig {
             //初始化默认值
             mColor = R.color.color_main_black;
             mShadowColor = R.color.color_white_70;
-            mRadius = 10;
-            mShadowRadius = 16;
+            mRadius = 12;
+            mShadowRadius = 8;
             mOffsetX = 0;
             mOffsetY = 0;
         }

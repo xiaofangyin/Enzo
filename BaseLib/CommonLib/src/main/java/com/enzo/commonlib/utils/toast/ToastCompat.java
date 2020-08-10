@@ -32,8 +32,8 @@ public class ToastCompat {
             View view = inflater.inflate(R.layout.lib_layout_toast, null);
 
             ShadowConfig.Builder config = new ShadowConfig.Builder()
-                    .setColor(ContextCompat.getColor(context, R.color.color_white))
-                    .setShadowColor(ContextCompat.getColor(context, R.color.color_white))
+                    .setColor(ContextCompat.getColor(context, R.color.color_main_black))
+                    .setShadowColor(ContextCompat.getColor(context, R.color.color_main_black))
                     .setOffsetX(DensityUtil.dip2px(context, 0f))
                     .setOffsetY(DensityUtil.dip2px(context, 0f));
             ShadowHelper.setShadowBgForView(view, config);
