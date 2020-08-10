@@ -130,7 +130,7 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
         if (id == R.id.zhihu) {
             Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.ofImage(), false)
-                    .theme(R.style.Matisse_Zhihu)
+                    .theme(R.style.Matisse_XianYu)
                     .countable(true)
                     .capture(true)
                     .captureStrategy(new CaptureStrategy(true, "enzo"))

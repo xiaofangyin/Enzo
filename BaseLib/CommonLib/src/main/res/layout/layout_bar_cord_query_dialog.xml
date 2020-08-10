@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_green"
+    android:background="@color/color_yellow"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -35,7 +35,7 @@
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
             android:text="查找"
-            android:textColor="@drawable/lib_selector_text_color_white"
+            android:textColor="@drawable/lib_selector_text_color_333"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

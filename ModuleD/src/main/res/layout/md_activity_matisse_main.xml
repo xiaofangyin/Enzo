@@ -23,11 +23,11 @@
             android:layout_marginLeft="@dimen/md_item_margin_horizontal"
             android:layout_marginTop="8dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
+            android:background="@color/color_yellow"
             android:minHeight="56dp"
-            android:text="Zhihu"
+            android:text="闲鱼"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/md_ZhihuOverlay" />
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/dracula"
@@ -36,11 +36,11 @@
             android:layout_marginLeft="@dimen/md_item_margin_horizontal"
             android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
+            android:background="@color/color_main_black"
             android:minHeight="56dp"
             android:text="Dracula"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/md_DraculaOverlay" />
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/only_gif"
@@ -49,11 +49,11 @@
             android:layout_marginLeft="@dimen/md_item_margin_horizontal"
             android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
+            android:background="@color/color_yellow"
             android:minHeight="56dp"
             android:text="OnlyGif"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/md_ZhihuOverlay" />
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/single"
@@ -62,11 +62,11 @@
             android:layout_marginLeft="@dimen/md_item_margin_horizontal"
             android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
+            android:background="@color/color_yellow"
             android:minHeight="56dp"
             android:text="Single"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/md_ZhihuOverlay" />
+            android:textColor="@android:color/white" />
 
         <ImageView
             android:id="@+id/single_choose_result"

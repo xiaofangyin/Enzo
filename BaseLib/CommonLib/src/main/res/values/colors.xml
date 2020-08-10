@@ -51,6 +51,7 @@
     <color name="color_yellow">#FFFFDA44</color>
     <color name="color_yellow_80">#CCFFDA44</color>
     <color name="color_yellow_55">#8CFFDA44</color>
+    <color name="color_yellow_dark">#FFF8AC59</color>
 
     <!-- pdf -->
     <color name="pdfViewPager_background_color">@android:color/white</color>
