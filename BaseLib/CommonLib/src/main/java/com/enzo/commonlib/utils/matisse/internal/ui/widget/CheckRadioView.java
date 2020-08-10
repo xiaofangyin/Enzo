@@ -31,10 +31,10 @@ public class CheckRadioView extends AppCompatImageView {
 
     private void init() {
         mSelectedColor = ResourcesCompat.getColor(
-                getResources(), R.color.zhihu_item_checkCircle_backgroundColor,
+                getResources(), R.color.xianyu_item_checkCircle_backgroundColor,
                 getContext().getTheme());
         mUnSelectUdColor = ResourcesCompat.getColor(
-                getResources(), R.color.zhihu_check_original_radio_disable,
+                getResources(), R.color.xianyu_check_original_radio_disable,
                 getContext().getTheme());
         setChecked(false);
     }

@@ -24,10 +24,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
             android:background="@color/color_yellow"
-            android:minHeight="56dp"
             android:text="闲鱼"
             android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black" />
 
         <Button
             android:id="@+id/dracula"
@@ -37,7 +36,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
             android:background="@color/color_main_black"
-            android:minHeight="56dp"
             android:text="Dracula"
             android:textAllCaps="false"
             android:textColor="@android:color/white" />
@@ -50,10 +48,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
             android:background="@color/color_yellow"
-            android:minHeight="56dp"
             android:text="OnlyGif"
             android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black" />
 
         <Button
             android:id="@+id/single"
@@ -63,10 +60,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
             android:background="@color/color_yellow"
-            android:minHeight="56dp"
             android:text="Single"
             android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black" />
 
         <ImageView
             android:id="@+id/single_choose_result"

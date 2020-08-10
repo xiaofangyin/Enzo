@@ -15,7 +15,7 @@
   limitations under the License.
   -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/zhihu_bottom_toolbar_preview_text_disable"
+    <item android:color="@color/xianyu_bottom_toolbar_preview_text_disable"
           android:state_enabled="false"/>
-    <item android:color="@color/zhihu_bottom_toolbar_preview_text"/>
+    <item android:color="@color/xianyu_bottom_toolbar_preview_text"/>
 </selector>
