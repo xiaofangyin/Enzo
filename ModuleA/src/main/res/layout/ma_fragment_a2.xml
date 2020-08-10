@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_yellow"
@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/ma_header_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -29,15 +29,14 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator
                     android:id="@+id/magic_indicator"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_centerInParent="true"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true" />
             </RelativeLayout>
 
             <ImageView
@@ -55,13 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="55dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="4dp"
             android:background="@drawable/shape_button_gray_pressed"
             android:gravity="center"
             android:text="vivo79手机" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/ma_view_pager2"

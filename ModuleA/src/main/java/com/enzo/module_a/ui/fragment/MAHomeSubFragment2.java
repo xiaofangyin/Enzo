@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,6 +87,10 @@ public class MAHomeSubFragment2 extends BaseFragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                Fragment fragment = getParentFragment();
+                if (fragment instanceof MAFragment2) {
+                    ((MAFragment2) fragment).onScroll(dy);
+                }
             }
         });
     }

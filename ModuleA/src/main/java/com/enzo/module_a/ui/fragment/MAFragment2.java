@@ -2,7 +2,6 @@ package com.enzo.module_a.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -21,8 +20,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
-import com.enzo.commonlib.widget.indicator.magicindicator.FragmentContainerHelper;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -48,8 +47,10 @@ import java.util.List;
 @Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
 public class MAFragment2 extends BaseFragment {
 
+    private TextView tvSearch;
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
+    private ViewGroup.MarginLayoutParams marginLayoutParams;
 
     @Override
     public int getLayoutId() {
@@ -65,6 +66,7 @@ public class MAFragment2 extends BaseFragment {
         view.setLayoutParams(layoutParams);
         ((ViewGroup) rootView).addView(view, 0);
 
+        tvSearch = rootView.findViewById(R.id.ma_search);
         magicIndicator = rootView.findViewById(R.id.magic_indicator);
         viewPager = rootView.findViewById(R.id.ma_view_pager2);
         initMagicIndicator4();
@@ -72,6 +74,10 @@ public class MAFragment2 extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        LL_SEARCH_MAX_TOP_MARGIN = DensityUtil.dip2px(getContext(), 55);
+        LL_SEARCH_MIN_TOP_MARGIN = DensityUtil.dip2px(getContext(), 4.5f);//布局关闭时顶部距离
+        marginLayoutParams = (ViewGroup.MarginLayoutParams) tvSearch.getLayoutParams();
+
         FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
         viewPager.setAdapter(mAdapter);
 
@@ -149,5 +155,26 @@ public class MAFragment2 extends BaseFragment {
                 return DensityUtil.dip2px(magicIndicator.getContext(), 0);
             }
         });
+    }
+
+    private int LL_SEARCH_MAX_TOP_MARGIN;
+    private int LL_SEARCH_MIN_TOP_MARGIN;
+
+    /**
+     * 往上滑 正数
+     * 往下滑 负数
+     */
+    public void onScroll(int dy) {
+        LogUtil.d("dy: " + dy);
+        float searchLayoutNewTopMargin = marginLayoutParams.topMargin - dy * 0.5f;
+//        float searchLayoutNewWidth = LL_SEARCH_MAX_WIDTH - dy * 1.3f;//此处 * 1.3f 可以设置搜索框宽度缩放的速率
+        if (searchLayoutNewTopMargin < LL_SEARCH_MIN_TOP_MARGIN) {
+            searchLayoutNewTopMargin = LL_SEARCH_MIN_TOP_MARGIN;
+        }
+        if (searchLayoutNewTopMargin > LL_SEARCH_MAX_TOP_MARGIN) {
+            searchLayoutNewTopMargin = LL_SEARCH_MAX_TOP_MARGIN;
+        }
+        marginLayoutParams.topMargin = (int) searchLayoutNewTopMargin;
+        tvSearch.setLayoutParams(marginLayoutParams);
     }
 }
