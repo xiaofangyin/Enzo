@@ -1,16 +1,17 @@
 package com.enzo.commonlib.utils.appupgrade;
 
 import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDialog;
+
 import com.enzo.commonlib.R;
 
-public class AppUpgradeDialog extends Dialog implements View.OnClickListener {
+public class AppUpgradeDialog extends AppCompatDialog implements View.OnClickListener {
 
     private OnAlertViewClickListener mButtonClick;
 

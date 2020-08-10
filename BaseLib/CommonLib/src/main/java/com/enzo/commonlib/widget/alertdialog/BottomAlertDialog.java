@@ -1,6 +1,5 @@
 package com.enzo.commonlib.widget.alertdialog;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -9,6 +8,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.DensityUtil;
@@ -22,7 +23,7 @@ import java.util.List;
  * 创建日期: 2017/4/26
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class BottomAlertDialog extends Dialog {
+public class BottomAlertDialog extends AppCompatDialog {
 
     private Builder mBuilder;
     private LinearLayout llContent;

@@ -1,10 +1,11 @@
 package com.enzo.commonlib.widget.alertdialog;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.enzo.commonlib.R;
 
@@ -14,7 +15,7 @@ import com.enzo.commonlib.R;
  * 创建日期: 2017/4/26
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class CenterAlertDialog extends Dialog {
+public class CenterAlertDialog extends AppCompatDialog {
 
     private Builder builder;
 
