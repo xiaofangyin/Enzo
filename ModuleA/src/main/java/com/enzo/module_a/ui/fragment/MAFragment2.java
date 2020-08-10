@@ -1,32 +1,40 @@
 package com.enzo.module_a.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
-import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
+import com.enzo.commonlib.widget.indicator.magicindicator.FragmentContainerHelper;
+import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.ScaleTransitionPagerTitleView;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
-import com.enzo.module_a.model.MAHomeBannerBean;
-import com.enzo.module_a.model.MAHomeBaseBean;
 import com.enzo.module_a.ui.activity.MAScanQrCodeActivity;
-import com.enzo.module_a.ui.adapter.MAHomeAdapter;
-
-import org.jetbrains.annotations.NotNull;
+import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +48,8 @@ import java.util.List;
 @Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
 public class MAFragment2 extends BaseFragment {
 
-    private TextView tvSearch;
-    private PullToRefreshRecyclerView recyclerView;
-    private MAHomeAdapter adapter;
+    private MagicIndicator magicIndicator;
+    private ViewPager viewPager;
 
     @Override
     public int getLayoutId() {
@@ -58,68 +65,29 @@ public class MAFragment2 extends BaseFragment {
         view.setLayoutParams(layoutParams);
         ((ViewGroup) rootView).addView(view, 0);
 
-        tvSearch = rootView.findViewById(R.id.ma_search);
-        recyclerView = rootView.findViewById(R.id.ma_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setPullRefreshEnabled(true);
-        recyclerView.setLoadMoreEnabled(true);
+        magicIndicator = rootView.findViewById(R.id.magic_indicator);
+        viewPager = rootView.findViewById(R.id.ma_view_pager2);
+        initMagicIndicator4();
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        adapter = new MAHomeAdapter();
-        recyclerView.setAdapter(adapter);
+        FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
+        viewPager.setAdapter(mAdapter);
 
-        List<MAHomeBaseBean> list = buildData(10, true);
-        adapter.setNewData(list);
+        viewPager.setCurrentItem(1);
+    }
+
+    private List<Fragment> getFragments() {
+        List<Fragment> list = new ArrayList<>();
+        list.add(new MAHomeSubFragment1());
+        list.add(new MAHomeSubFragment2());
+        list.add(new MAHomeSubFragment3());
+        return list;
     }
 
     @Override
     public void initListener(View rootView) {
-        recyclerView.setOnLoadListener(new PullToRefreshRecyclerView.OnLoadListener() {
-            @Override
-            public void onRecyclerViewRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.setNewData(buildData(10, true));
-                        recyclerView.refreshSuccess();
-                    }
-                }, 3000);
-            }
-
-            @Override
-            public void onRecyclerViewLoadMore() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.setLoadMoreData(buildData(10, false));
-                        recyclerView.loadMoreSuccess();
-                    }
-                }, 3000);
-            }
-
-            @Override
-            public void onLoadMoreRetry() {
-
-            }
-        });
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) tvSearch.getLayoutParams();
-                layoutParams.leftMargin = layoutParams.leftMargin - dy / 3;
-                if (layoutParams.leftMargin >= DensityUtil.dip2px(recyclerView.getContext(), 12)) {
-                    tvSearch.setLayoutParams(layoutParams);
-                }
-            }
-        });
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,17 +97,57 @@ public class MAFragment2 extends BaseFragment {
         });
     }
 
-    @NotNull
-    private List<MAHomeBaseBean> buildData(int i2, boolean addBanner) {
-        List<MAHomeBaseBean> list = new ArrayList<>();
-        if (addBanner) {
-            list.add(new MAHomeBannerBean(1));
-        }
-        for (int i = 0; i < i2; i++) {
-            list.add(new MAHomeBaseBean(0));
-        }
-        return list;
+    private void initMagicIndicator4() {
+        final List<String> mDataList = new ArrayList<>();
+        mDataList.add("关注");
+        mDataList.add("首页");
+        mDataList.add("福州");
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+
+            @Override
+            public int getCount() {
+                return mDataList.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(mDataList.get(index));
+                simplePagerTitleView.setTextSize(20);
+                simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, R.color.color_333_55));
+                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.color_333));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewPager.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                indicator.setLineHeight(DensityUtil.dip2px(context, 4));
+                indicator.setLineWidth(DensityUtil.dip2px(context, 14));
+                indicator.setRoundRadius(DensityUtil.dip2px(context, 3));
+                indicator.setStartInterpolator(new AccelerateInterpolator());
+                indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
+                indicator.setColors(ContextCompat.getColor(context, R.color.color_333));
+                return indicator;
+            }
+        });
+        magicIndicator.setNavigator(commonNavigator, viewPager);
+        LinearLayout titleContainer = commonNavigator.getTitleContainer(); // must after setNavigator
+        titleContainer.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        titleContainer.setDividerDrawable(new ColorDrawable() {
+            @Override
+            public int getIntrinsicWidth() {
+                return DensityUtil.dip2px(magicIndicator.getContext(), 0);
+            }
+        });
     }
-
-
 }

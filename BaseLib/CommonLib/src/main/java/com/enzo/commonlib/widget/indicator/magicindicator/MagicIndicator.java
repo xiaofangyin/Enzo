@@ -1,10 +1,11 @@
 package com.enzo.commonlib.widget.indicator.magicindicator;
 
 import android.content.Context;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.widget.indicator.magicindicator.abs.IPagerNavigator;
 
@@ -60,23 +61,25 @@ public class MagicIndicator extends FrameLayout {
             addView((View) mNavigator, lp);
             mNavigator.onAttachToMagicIndicator();
 
-            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            if (viewPager != null) {
+                viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    mNavigator.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                }
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        mNavigator.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    }
 
-                @Override
-                public void onPageSelected(int position) {
-                    mNavigator.onPageSelected(position);
-                }
+                    @Override
+                    public void onPageSelected(int position) {
+                        mNavigator.onPageSelected(position);
+                    }
 
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                    mNavigator.onPageScrollStateChanged(state);
-                }
-            });
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                        mNavigator.onPageScrollStateChanged(state);
+                    }
+                });
+            }
         }
     }
 }

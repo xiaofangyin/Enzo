@@ -9,9 +9,9 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.FragmentContainerHelper;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.ArgbEvaluatorHolder;
-import com.enzo.commonlib.widget.indicator.magicindicator.buildins.UIUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.model.PositionData;
 
@@ -50,9 +50,9 @@ public class BezierPagerIndicator extends View implements IPagerIndicator {
     private void init(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
-        mMaxCircleRadius = UIUtil.dip2px(context, 3.5);
-        mMinCircleRadius = UIUtil.dip2px(context, 2);
-        mYOffset = UIUtil.dip2px(context, 1.5);
+        mMaxCircleRadius = DensityUtil.dip2px(context, 3.5f);
+        mMinCircleRadius = DensityUtil.dip2px(context, 2f);
+        mYOffset = DensityUtil.dip2px(context, 1.5f);
     }
 
     @Override

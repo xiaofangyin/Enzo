@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.FragmentContainerHelper;
-import com.enzo.commonlib.widget.indicator.magicindicator.buildins.UIUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.model.PositionData;
 
@@ -42,9 +42,9 @@ public class TriangularPagerIndicator extends View implements IPagerIndicator {
     private void init(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
-        mLineHeight = UIUtil.dip2px(context, 3);
-        mTriangleWidth = UIUtil.dip2px(context, 14);
-        mTriangleHeight = UIUtil.dip2px(context, 8);
+        mLineHeight = DensityUtil.dip2px(context, 3f);
+        mTriangleWidth = DensityUtil.dip2px(context, 14f);
+        mTriangleHeight = DensityUtil.dip2px(context, 8f);
     }
 
     @Override

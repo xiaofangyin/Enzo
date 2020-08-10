@@ -5,9 +5,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.widget.TextView;
 
-import com.enzo.commonlib.widget.indicator.magicindicator.buildins.UIUtil;
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IMeasurablePagerTitleView;
 
 /**
@@ -15,7 +14,7 @@ import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigat
  * 博客: http://hackware.lucode.net
  * Created by hackware on 2016/6/26.
  */
-public class SimplePagerTitleView extends TextView implements IMeasurablePagerTitleView {
+public class SimplePagerTitleView extends androidx.appcompat.widget.AppCompatTextView implements IMeasurablePagerTitleView {
     protected int mSelectedColor;
     protected int mNormalColor;
 
@@ -26,7 +25,7 @@ public class SimplePagerTitleView extends TextView implements IMeasurablePagerTi
 
     private void init(Context context) {
         setGravity(Gravity.CENTER);
-        int padding = UIUtil.dip2px(context, 10);
+        int padding = DensityUtil.dip2px(context, 10f);
         setPadding(padding, 0, padding, 0);
         setSingleLine();
         setEllipsize(TextUtils.TruncateAt.END);

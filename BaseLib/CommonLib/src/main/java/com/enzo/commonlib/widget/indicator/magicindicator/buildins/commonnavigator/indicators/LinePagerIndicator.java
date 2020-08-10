@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.FragmentContainerHelper;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.ArgbEvaluatorHolder;
-import com.enzo.commonlib.widget.indicator.magicindicator.buildins.UIUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.model.PositionData;
 
@@ -53,8 +53,8 @@ public class LinePagerIndicator extends View implements IPagerIndicator {
     private void init(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
-        mLineHeight = UIUtil.dip2px(context, 3);
-        mLineWidth = UIUtil.dip2px(context, 10);
+        mLineHeight = DensityUtil.dip2px(context, 3f);
+        mLineWidth = DensityUtil.dip2px(context, 10f);
     }
 
     @Override

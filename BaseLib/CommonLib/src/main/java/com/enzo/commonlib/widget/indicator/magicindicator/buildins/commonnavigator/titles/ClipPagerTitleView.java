@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
 
-import com.enzo.commonlib.widget.indicator.magicindicator.buildins.UIUtil;
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IMeasurablePagerTitleView;
 
 /**
@@ -30,10 +30,10 @@ public class ClipPagerTitleView extends View implements IMeasurablePagerTitleVie
     }
 
     private void init(Context context) {
-        int textSize = UIUtil.dip2px(context, 16);
+        int textSize = DensityUtil.dip2px(context, 16f);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setTextSize(textSize);
-        int padding = UIUtil.dip2px(context, 10);
+        int padding = DensityUtil.dip2px(context, 10f);
         setPadding(padding, 0, padding, 0);
     }
 

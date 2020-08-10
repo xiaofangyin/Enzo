@@ -86,7 +86,7 @@ public class SAMainActivity extends BaseActivity {
             if (mTabLayout.getMessageNum(3) >= 99) {
                 mTabLayout.resetMessageNum(3);
             }
-            mTabLayout.addMessageNum(3, 1);
+            mTabLayout.addMessageNum(2, 1);
             mHandler.sendEmptyMessageDelayed(0, 2000);
         }
     };
