@@ -36,7 +36,6 @@
     <application
         android:allowBackup="true"
         android:largeHeap="true"
-        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
 
