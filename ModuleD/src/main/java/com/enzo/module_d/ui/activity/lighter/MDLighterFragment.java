@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.lighter.Lighter;
 import com.enzo.commonlib.widget.lighter.interfaces.OnLighterViewClickListener;
 import com.enzo.commonlib.widget.lighter.parameter.Direction;
@@ -64,7 +65,7 @@ public class MDLighterFragment extends Fragment {
         tipView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "You click tip view 1", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click tip view 1");
                 showNext();
             }
         });
@@ -72,7 +73,7 @@ public class MDLighterFragment extends Fragment {
         tipView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "You click tip view 2", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click tip view 2");
                 showNext();
             }
         });
@@ -80,7 +81,7 @@ public class MDLighterFragment extends Fragment {
         tipView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "You click tip view 3", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click tip view 3");
                 showNext();
             }
         });
@@ -88,7 +89,7 @@ public class MDLighterFragment extends Fragment {
         tipView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "You click tip view 4", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click tip view 4");
                 showNext();
             }
         });
@@ -96,7 +97,7 @@ public class MDLighterFragment extends Fragment {
         tipView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "You click tip view 5", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click tip view 5");
                 showNext();
             }
         });
@@ -178,19 +179,19 @@ public class MDLighterFragment extends Fragment {
             int id = v.getId();
             if (id == R.id.vp_btn_1) {
                 showNext();
-                Toast.makeText(getActivity(), "You click button 1", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click button 1", Toast.LENGTH_SHORT);
             } else if (id == R.id.vp_btn_2) {
                 showNext();
-                Toast.makeText(getActivity(), "You click button 2", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click button 2", Toast.LENGTH_SHORT);
             } else if (id == R.id.vp_btn_3) {
                 showNext();
-                Toast.makeText(getActivity(), "You click button 3", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click button 3", Toast.LENGTH_SHORT);
             } else if (id == R.id.vp_btn_4) {
                 showNext();
-                Toast.makeText(getActivity(), "You click button 4", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click button 4", Toast.LENGTH_SHORT);
             } else if (id == R.id.vp_btn_5) {
                 showNext();
-                Toast.makeText(getActivity(), "You click button 5", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("You click button 5", Toast.LENGTH_SHORT);
             }
         }
     };

@@ -48,7 +48,9 @@ public class MDFragment extends BaseFragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
-        ((ViewGroup)rootView).addView(view,0);
+        view.setBackgroundColor(ContextCompat.getColor(
+                rootView.getContext(), R.color.color_yellow));
+        ((ViewGroup) rootView).addView(view, 0);
 
         mViewPager = rootView.findViewById(R.id.view_pager);
         mIndicator = rootView.findViewById(R.id.indicator);

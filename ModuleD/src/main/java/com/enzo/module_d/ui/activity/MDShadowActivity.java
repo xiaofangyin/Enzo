@@ -11,9 +11,10 @@ import android.widget.Toast;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.toast.ToastUtil;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.shadow.ShadowConfig;
 import com.enzo.commonlib.widget.shadow.ShadowHelper;
-import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 
 public class MDShadowActivity extends BaseActivity {
@@ -116,7 +117,7 @@ public class MDShadowActivity extends BaseActivity {
                 mShadowColor = Color.parseColor(etShadowColor.getText().toString());
             }
         } catch (Exception e) {
-            Toast.makeText(this, e + "", Toast.LENGTH_SHORT).show();
+            ToastUtil.show(e + "", Toast.LENGTH_SHORT);
             mColor = new int[]{Color.parseColor("#ffa726")};
             mShadowColor = Color.parseColor("#ffa726");
         }

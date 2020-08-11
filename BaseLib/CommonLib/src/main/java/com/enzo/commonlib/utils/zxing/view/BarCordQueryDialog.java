@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,8 +14,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.KeyboardUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 /**
  * 文 件 名: BarCordQueryDialog
@@ -62,7 +64,7 @@ public class BarCordQueryDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(edtBarCode.getText().toString().trim())) {
-                    Toast.makeText(BarCordQueryDialog.this.getActivity(), "输入内容为空", Toast.LENGTH_LONG).show();
+                    ToastUtil.show("输入内容为空", Toast.LENGTH_LONG);
                 } else {
                     if (queryListener != null)
                         queryListener.onQuery(edtBarCode.getText().toString());

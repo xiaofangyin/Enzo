@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
+import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 
 /**
  * 文 件 名: SASplashActivity
@@ -26,6 +27,7 @@ public class SASplashActivity extends BaseActivity {
     public void initView() {
         //隐藏信号栏
         StateAppBar.translucentStatusBar(this, true);
+        StatusBarUtils.StatusBarLightMode(this);
     }
 
     @Override

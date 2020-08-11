@@ -203,7 +203,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                     boolean flag = (boolean) flashLightIv.getTag();
                     boolean isSuccess = CameraManager.get().setFlashLight(!flag);
                     if (!isSuccess) {
-                        Toast.makeText(CaptureActivity.this, "暂时无法开启闪光灯", Toast.LENGTH_SHORT).show();
+                        ToastUtil.show("暂时无法开启闪光灯", Toast.LENGTH_SHORT);
                         return;
                     }
                     if (flag) {//关闭闪光灯
@@ -363,7 +363,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
         playBeepSoundAndVibrate();
         String resultString = result.getText();
         if (TextUtils.isEmpty(resultString)) {
-            Toast.makeText(CaptureActivity.this, "Scan failed!", Toast.LENGTH_SHORT).show();
+            ToastUtil.show("Scan failed!", Toast.LENGTH_SHORT);
         } else {
             onHandleDecode(resultString);
         }

@@ -5,11 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.core.content.ContextCompat;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
-import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.module_b.R;
 
@@ -36,7 +37,9 @@ public class MBFragment extends BaseFragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
-        ((ViewGroup)rootView).addView(view,0);
+        view.setBackgroundColor(ContextCompat.getColor(
+                rootView.getContext(), R.color.color_yellow));
+        ((ViewGroup) rootView).addView(view, 0);
 
         mSpiderWebView = rootView.findViewById(R.id.spider_web_view);
     }

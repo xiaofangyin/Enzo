@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView;
 import com.enzo.commonlib.widget.timeclock.TimePicker;
 import com.enzo.flkit.router.ModuleARouterPath;
@@ -56,7 +57,7 @@ public class MAFragment extends BaseFragment {
         verticalScrollTV.setClickListener(new AutoScrollTextView.ItemClickListener() {
             @Override
             public void onClick(int position) {
-                Toast.makeText(getContext(), list.get(position), Toast.LENGTH_SHORT).show();
+                ToastUtil.show(list.get(position), Toast.LENGTH_SHORT);
             }
         });
 

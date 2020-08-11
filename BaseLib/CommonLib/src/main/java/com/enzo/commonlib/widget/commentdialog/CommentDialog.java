@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.enzo.commonlib.R;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 /**
  * 文 件 名: UGCVHHomeTopPostDetail
@@ -74,7 +75,7 @@ public class CommentDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(edtComment.getText().toString().trim())) {
-                    Toast.makeText(CommentDialog.this.getActivity(), "输入内容为空", Toast.LENGTH_LONG).show();
+                    ToastUtil.show("输入内容为空", Toast.LENGTH_LONG);
                 } else {
                     if (commentListener != null)
                         commentListener.onSendBack(edtComment.getText().toString());

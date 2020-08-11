@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.lighter.Lighter;
 import com.enzo.commonlib.widget.lighter.interfaces.OnLighterListener;
@@ -72,12 +73,12 @@ public class MDRelativeLayoutActivity extends BaseActivity {
                 .setOnLighterListener(new OnLighterListener() {
                     @Override
                     public void onShow(int index) {
-                        Toast.makeText(getApplicationContext(), "正在显示第" + (index + 1) + "高亮", Toast.LENGTH_SHORT).show();
+                        ToastUtil.show( "正在显示第" + (index + 1) + "高亮");
                     }
 
                     @Override
                     public void onDismiss() {
-                        Toast.makeText(getApplicationContext(), "高亮已全部显示完毕", Toast.LENGTH_SHORT).show();
+                        ToastUtil.show("高亮已全部显示完毕");
                     }
                 })
                 .addHighlight(new LighterParameter.Builder()

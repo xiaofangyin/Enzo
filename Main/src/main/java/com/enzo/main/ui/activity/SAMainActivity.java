@@ -57,7 +57,8 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.color_yellow));
+        StateAppBar.setStatusBarColor(this,
+                ContextCompat.getColor(this, R.color.color_yellow));
         StatusBarUtils.StatusBarLightMode(this);
 
         drawerLayout = findViewById(R.id.home_drawer_layout);

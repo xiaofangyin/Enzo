@@ -22,6 +22,7 @@ import androidx.annotation.IntDef;
 import androidx.fragment.app.FragmentActivity;
 
 import com.enzo.commonlib.utils.matisse.internal.ui.widget.IncapableDialog;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 import java.lang.annotation.Retention;
 
@@ -77,7 +78,7 @@ public class IncapableCause {
                 break;
             case TOAST:
             default:
-                Toast.makeText(context, cause.mMessage, Toast.LENGTH_SHORT).show();
+                ToastUtil.show(cause.mMessage, Toast.LENGTH_SHORT);
                 break;
         }
     }

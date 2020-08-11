@@ -2,14 +2,16 @@ package com.enzo.module_d.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.viewpager.widget.ViewPager;
+
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.mzbanner.MZBannerView;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZHolderCreator;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZViewHolder;
@@ -70,7 +72,7 @@ public class MDMeiZuBannerActivity extends BaseActivity {
         mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
             @Override
             public void onPageClick(View view, int position) {
-                Toast.makeText(getApplicationContext(), "click page:" + position, Toast.LENGTH_LONG).show();
+                ToastUtil.show("click page:" + position, Toast.LENGTH_LONG);
             }
         });
         mMZBanner.addPageChangeListener(new ViewPager.OnPageChangeListener() {

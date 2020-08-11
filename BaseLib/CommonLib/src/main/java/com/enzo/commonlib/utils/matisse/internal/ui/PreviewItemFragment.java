@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -33,6 +32,7 @@ import com.enzo.commonlib.utils.matisse.internal.entity.Item;
 import com.enzo.commonlib.utils.matisse.internal.entity.SelectionSpec;
 import com.enzo.commonlib.utils.matisse.internal.utils.PhotoMetadataUtils;
 import com.enzo.commonlib.utils.matisse.listener.OnFragmentInteractionListener;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.photoview.PhotoView;
 import com.enzo.commonlib.widget.photoview.PhotoViewAttacher;
 
@@ -73,7 +73,7 @@ public class PreviewItemFragment extends Fragment {
                     try {
                         startActivity(intent);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(getContext(), R.string.error_no_video_activity, Toast.LENGTH_SHORT).show();
+                        ToastUtil.show(R.string.error_no_video_activity);
                     }
                 }
             });

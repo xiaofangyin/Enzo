@@ -63,6 +63,8 @@ public class MAFragment2 extends BaseFragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
+        view.setBackgroundColor(ContextCompat.getColor(
+                rootView.getContext(), R.color.color_yellow));
         ((ViewGroup) rootView).addView(view, 0);
 
         tvSearch = rootView.findViewById(R.id.ma_search);

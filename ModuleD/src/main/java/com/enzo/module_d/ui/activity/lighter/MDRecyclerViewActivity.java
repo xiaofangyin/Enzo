@@ -8,12 +8,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.lighter.Lighter;
 import com.enzo.commonlib.widget.lighter.parameter.Direction;
@@ -59,7 +59,7 @@ public class MDRecyclerViewActivity extends BaseActivity {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        Toast.makeText(this, "Click to show highlight(点击显示高亮)~", Toast.LENGTH_LONG).show();
+        ToastUtil.show("Click to show highlight(点击显示高亮)~", Toast.LENGTH_LONG);
     }
 
     private void initListView() {

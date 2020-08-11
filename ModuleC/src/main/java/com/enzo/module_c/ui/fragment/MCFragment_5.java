@@ -1,14 +1,15 @@
 package com.enzo.module_c.ui.fragment;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.horizontal.HorizontalScrollView;
 import com.enzo.module_c.R;
 
@@ -59,7 +60,7 @@ public class MCFragment_5 extends BaseFragment {
                     list.add("");
                 }
                 mAdapter.setLoadMore(list);
-                Toast.makeText(getContext(), "触发了查看更多回调接口", Toast.LENGTH_SHORT).show();
+                ToastUtil.show("触发了查看更多回调接口");
             }
         });
     }

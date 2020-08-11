@@ -2,10 +2,13 @@ package debug;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
+import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.module_c.R;
 import com.enzo.module_c.ui.fragment.MCFragment;
 
@@ -18,7 +21,8 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        StateAppBar.translucentStatusBar(this, true);
+        StatusBarUtils.StatusBarLightMode(this);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class LauncherActivity extends BaseActivity {
     private void replaceFragment() {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.main_content,new MCFragment());
+        transaction.replace(R.id.main_content, new MCFragment());
         transaction.commitAllowingStateLoss();
         fragmentManager.executePendingTransactions();
     }
