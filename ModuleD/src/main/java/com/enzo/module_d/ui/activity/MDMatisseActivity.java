@@ -183,6 +183,7 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
         } else if (id == R.id.single) {
             Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.ofImage(), false)
+                    .theme(R.style.Matisse_XianYu)
                     .countable(true)
                     .singleChoose(true)
                     .crop(true)

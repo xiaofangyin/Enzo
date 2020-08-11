@@ -51,6 +51,7 @@ import com.enzo.commonlib.utils.matisse.internal.ui.widget.AlbumsSpinner;
 import com.enzo.commonlib.utils.matisse.internal.utils.MediaStoreCompat;
 import com.enzo.commonlib.utils.matisse.internal.utils.PathUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.SingleMediaScanner;
+import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.yalantis.ucrop.UCrop;
 
 import java.util.ArrayList;
@@ -84,6 +85,8 @@ public class MatisseSingleActivity extends AppCompatActivity implements
             return;
         }
         setContentView(R.layout.activity_matisse_single);
+        //设置状态栏黑色文字、图标
+        StatusBarUtils.StatusBarLightMode(this);
 
         if (mSpec.needOrientationRestriction()) {
             setRequestedOrientation(mSpec.orientation);

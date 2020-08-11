@@ -68,7 +68,7 @@
         <item name="item.checkCircle.backgroundColor">@color/color_yellow</item>
         <item name="item.checkCircle.borderColor">@color/xianyu_item_checkCircle_borderColor</item>
         <item name="page.bg">@color/color_white</item>
-        <item name="bottomToolbar.bg">@color/color_white</item>
+        <item name="bottomToolbar.bg">@color/color_yellow</item>
         <item name="bottomToolbar.preview.textColor">@color/matisse_xianyu_bottom_toolbar_preview
         </item>
         <item name="bottomToolbar.apply.textColor">@color/matisse_xianyu_bottom_toolbar_apply</item>

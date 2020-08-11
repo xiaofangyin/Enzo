@@ -14,6 +14,7 @@
   limitations under the License.
   -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/color_yellow_55" android:state_enabled="false" />
-    <item android:color="@color/color_yellow" />
+    <item android:color="@color/xianyu_bottom_toolbar_preview_text_disable"
+        android:state_enabled="false"/>
+    <item android:color="@color/xianyu_bottom_toolbar_preview_text"/>
 </selector>

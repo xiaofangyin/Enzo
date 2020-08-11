@@ -54,13 +54,10 @@ import com.enzo.commonlib.utils.matisse.internal.utils.MediaStoreCompat;
 import com.enzo.commonlib.utils.matisse.internal.utils.PathUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.PhotoMetadataUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.SingleMediaScanner;
+import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 
 import java.util.ArrayList;
 
-/**
- * Main Activity to display albums and media content (images/videos) in each album
- * and also support media selecting operations.
- */
 public class MatisseActivity extends AppCompatActivity implements
         AlbumCollection.AlbumCallbacks, AdapterView.OnItemSelectedListener,
         MediaSelectionFragment.SelectionProvider, View.OnClickListener,
@@ -96,6 +93,8 @@ public class MatisseActivity extends AppCompatActivity implements
             return;
         }
         setContentView(R.layout.activity_matisse);
+        //设置状态栏黑色文字、图标
+        StatusBarUtils.StatusBarLightMode(this);
 
         if (mSpec.needOrientationRestriction()) {
             setRequestedOrientation(mSpec.orientation);
