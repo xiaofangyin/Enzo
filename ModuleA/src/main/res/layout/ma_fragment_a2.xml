@@ -20,12 +20,12 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/ma_sign_in"
-                android:layout_width="60dp"
-                android:layout_height="34dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:src="@mipmap/ma_sign_in_icon" />
+                android:id="@+id/ma_menu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="4dp"
+                android:layout_marginStart="12dp"
+                android:src="@mipmap/ma_icon_category" />
 
             <RelativeLayout
                 android:layout_width="0dp"

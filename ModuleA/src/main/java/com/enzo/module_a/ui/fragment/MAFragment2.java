@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -32,6 +33,7 @@ import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigat
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
+import com.enzo.module_a.plugin.MAPluginFactory;
 import com.enzo.module_a.ui.activity.MAScanQrCodeActivity;
 import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
 
@@ -106,6 +108,12 @@ public class MAFragment2 extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
+        rootView.findViewById(R.id.ma_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MAPluginFactory.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.START);
+            }
+        });
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

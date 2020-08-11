@@ -9,7 +9,6 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.KeyEvent;
 
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,10 +20,8 @@ import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
-import com.enzo.commonlib.utils.statusbar.dlBar.DlStatusBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
 import com.enzo.flkit.router.ModuleARouterPath;
@@ -57,8 +54,7 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        StateAppBar.setStatusBarColor(this,
-                ContextCompat.getColor(this, R.color.color_yellow));
+        StateAppBar.translucentStatusBar(this, true);
         StatusBarUtils.StatusBarLightMode(this);
 
         drawerLayout = findViewById(R.id.home_drawer_layout);
@@ -67,8 +63,6 @@ public class SAMainActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-//        DlStatusBar.setColorForDrawerLayout(this, drawerLayout,
-//                ContextCompat.getColor(this, R.color.color_yellow), 0);
         mFragments = getFragments();
         switchFragment(0);
 

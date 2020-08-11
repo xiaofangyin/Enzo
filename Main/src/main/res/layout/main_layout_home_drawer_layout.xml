@@ -12,19 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <com.enzo.commonlib.widget.roundimageview.RoundImageView
             android:id="@+id/left_menu_user_icon"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@mipmap/icon_user_default_avatar" />
+            android:src="@mipmap/icon_skull_1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:orientation="vertical">
@@ -33,7 +33,7 @@
                 android:id="@+id/left_menu_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="罗志祥"
+                android:text="吴彦祖"
                 android:textColor="@color/color_white"
                 android:textSize="24sp" />
 
