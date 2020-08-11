@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_black">
+    android:background="@color/color_dark_black">
 
     <com.enzo.commonlib.widget.photoview.viewpager.MTouchViewPager
         android:id="@+id/pic_preview_view_pager"

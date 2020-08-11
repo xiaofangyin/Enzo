@@ -31,7 +31,7 @@ public class ShadowConfig {
 
         public Builder() {
             //初始化默认值
-            mColor = R.color.color_main_black;
+            mColor = R.color.color_dark_black;
             mShadowColor = R.color.color_white_70;
             mRadius = 12;
             mShadowRadius = 8;

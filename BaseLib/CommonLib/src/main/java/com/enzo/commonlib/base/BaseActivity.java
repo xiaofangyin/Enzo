@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
-import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -41,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     @Override
     public int getStatusBarColor() {
-        return ContextCompat.getColor(this, R.color.color_main_black);
+        return ContextCompat.getColor(this, R.color.color_dark_black);
     }
 
     @Override

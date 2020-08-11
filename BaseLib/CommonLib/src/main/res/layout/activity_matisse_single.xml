@@ -41,31 +41,16 @@
             android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <FrameLayout
-        android:id="@+id/container"
+    <com.enzo.commonlib.widget.loadinglayout.LoadingLayout
+        android:id="@+id/matisse_loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:visibility="gone" />
+        app:com_emptyView="@layout/lib_layout_matisse_empty">
 
-    <FrameLayout
-        android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/empty_view_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableTop="?attr/album.emptyView"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:text="@string/empty_text"
-            android:textColor="?attr/album.emptyView.textColor"
-            android:textSize="16sp" />
-
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.enzo.commonlib.widget.loadinglayout.LoadingLayout>
 </RelativeLayout>

@@ -55,6 +55,7 @@ import com.enzo.commonlib.utils.matisse.internal.utils.PathUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.PhotoMetadataUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.SingleMediaScanner;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 
 import java.util.ArrayList;
 
@@ -79,8 +80,7 @@ public class MatisseActivity extends AppCompatActivity implements
     private AlbumsAdapter mAlbumsAdapter;
     private TextView mButtonPreview;
     private TextView mButtonApply;
-    private View mContainer;
-    private View mEmptyView;
+    private LoadingLayout loadingLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,12 +122,11 @@ public class MatisseActivity extends AppCompatActivity implements
             navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
         }
 
+        loadingLayout = findViewById(R.id.matisse_loading_layout);
         mButtonPreview = findViewById(R.id.button_preview);
         mButtonApply = findViewById(R.id.button_apply);
         mButtonPreview.setOnClickListener(this);
         mButtonApply.setOnClickListener(this);
-        mContainer = findViewById(R.id.container);
-        mEmptyView = findViewById(R.id.empty_view);
 
         mSelectedCollection.onCreate(savedInstanceState);
         updateBottomToolbar();
@@ -324,11 +323,9 @@ public class MatisseActivity extends AppCompatActivity implements
 
     private void onAlbumSelected(Album album) {
         if (album.isAll() && album.isEmpty()) {
-            mContainer.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
+            loadingLayout.showEmpty();
         } else {
-            mContainer.setVisibility(View.VISIBLE);
-            mEmptyView.setVisibility(View.GONE);
+            loadingLayout.showContent();
             Fragment fragment = MediaSelectionFragment.newInstance(album);
             getSupportFragmentManager()
                     .beginTransaction()
