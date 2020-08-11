@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * 文 件 名: BaseFragment
  * 创 建 人: xiaofangyin
@@ -24,7 +26,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initData(savedInstanceState);
         initListener(view);

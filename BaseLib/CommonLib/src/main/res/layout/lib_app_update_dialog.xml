@@ -68,7 +68,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:lineSpacingExtra="4dp"
-            android:textColor="#333333"
+            android:textColor="@color/color_666"
             android:textSize="14sp" />
     </com.enzo.commonlib.utils.appupgrade.MaxHeightScrollView>
 
