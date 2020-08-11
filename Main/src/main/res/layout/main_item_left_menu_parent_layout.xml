@@ -24,7 +24,8 @@
             android:id="@+id/left_menu_parent_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_left_menu_01" />
+            android:src="@mipmap/icon_left_menu_01"
+            android:tint="@color/color_dark_black" />
 
         <TextView
             android:id="@+id/left_menu_parent_name"
@@ -36,7 +37,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="创建企业"
-            android:textColor="@color/color_white"
+            android:textColor="@color/color_dark_black"
             android:textSize="18sp" />
 
         <ImageView
@@ -44,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="6dp"
-            android:src="@mipmap/icon_left_menu_arrow_down" />
+            android:src="@mipmap/icon_left_menu_arrow_down"
+            android:tint="@color/color_dark_black" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_function_qiye_chaxun_white"
+            android:tint="@color/color_dark_black"
             android:visibility="invisible" />
 
         <ImageView
@@ -22,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:src="@mipmap/icon_function_qiye_chaxun_white" />
+            android:src="@mipmap/icon_function_qiye_chaxun_white"
+            android:tint="@color/color_dark_black" />
 
         <TextView
             android:id="@+id/left_menu_child_linear_name"
@@ -33,14 +35,15 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@drawable/lib_selector_text_color_white"
+            android:textColor="@drawable/lib_selector_text_color_333"
             android:textSize="14sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="34dp"
-            android:src="@mipmap/icon_left_menu_arrow_right" />
+            android:src="@mipmap/icon_left_menu_arrow_right"
+            android:tint="@color/color_dark_black" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,7 +61,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/icon_function_qiye_chaxun_white" />
+            android:src="@mipmap/icon_function_qiye_chaxun_white"
+            android:tint="@color/color_dark_black" />
 
         <TextView
             android:id="@+id/left_menu_child_grid_name"
@@ -66,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:gravity="center"
-            android:textColor="@drawable/lib_selector_text_color_white"
+            android:textColor="@drawable/lib_selector_text_color_333"
             android:textSize="14sp" />
     </LinearLayout>
 </RelativeLayout>
