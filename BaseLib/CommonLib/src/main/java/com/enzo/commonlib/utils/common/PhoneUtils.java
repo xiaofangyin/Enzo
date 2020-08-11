@@ -103,7 +103,6 @@ public class PhoneUtils {
             }
         }
         combinedID = ID.toString();
-        LogUtil.d("PhoneUtils getUniqueId: " + combinedID);
         return combinedID;
     }
 
@@ -130,18 +129,14 @@ public class PhoneUtils {
                 serial = Build.SERIAL;
             }
             //API>=9 使用serial号
-            String uuid = new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
-            LogUtil.d("1 PhoneUtils getUUID: " + uuid);
-            return uuid;
+            return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
         } catch (Exception exception) {
             //serial需要一个初始化
             exception.printStackTrace();
             serial = "serial"; // 随便一个初始化
         }
         //使用硬件信息拼凑出来的15位号码
-        String uuid = new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
-        LogUtil.d("2 PhoneUtils getUUID: " + uuid);
-        return uuid;
+        return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
     }
 
     @SuppressLint("HardwareIds")
@@ -150,7 +145,6 @@ public class PhoneUtils {
         if (context != null) {
             androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         }
-        LogUtil.d("PhoneUtils getAndroidId: " + androidId);
         return androidId;
     }
 }

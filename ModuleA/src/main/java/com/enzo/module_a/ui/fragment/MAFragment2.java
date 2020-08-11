@@ -147,7 +147,11 @@ public class MAFragment2 extends BaseFragment {
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewPager.setCurrentItem(index);
+                        if(viewPager.getCurrentItem() != index){
+                            viewPager.setCurrentItem(index);
+                        }else{
+
+                        }
                     }
                 });
                 return simplePagerTitleView;

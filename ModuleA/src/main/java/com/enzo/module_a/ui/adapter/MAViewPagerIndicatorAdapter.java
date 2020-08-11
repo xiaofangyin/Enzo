@@ -21,7 +21,7 @@ public class MAViewPagerIndicatorAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
 
     public MAViewPagerIndicatorAdapter(FragmentManager fm, List<Fragment> list) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         fragments = list;
         fragmentManager = fm;
     }

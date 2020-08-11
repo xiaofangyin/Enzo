@@ -5,11 +5,11 @@ import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.module_a.R;
 import com.enzo.module_a.model.MAHomeBannerBean;
@@ -25,6 +25,18 @@ public class MAHomeSubFragment2 extends BaseFragment {
 
     private PullToRefreshRecyclerView recyclerView;
     private MAHomeAdapter adapter;
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.d("MAHomeSubFragment2 onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.d("MAHomeSubFragment2 onResume...");
+    }
 
     @Override
     public int getLayoutId() {

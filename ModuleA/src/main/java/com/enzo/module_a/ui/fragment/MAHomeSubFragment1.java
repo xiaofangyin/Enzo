@@ -4,9 +4,22 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.module_a.R;
 
 public class MAHomeSubFragment1 extends BaseFragment {
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.d("MAHomeSubFragment1 onPause...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.d("MAHomeSubFragment1 onResume...");
+    }
 
     @Override
     public int getLayoutId() {
