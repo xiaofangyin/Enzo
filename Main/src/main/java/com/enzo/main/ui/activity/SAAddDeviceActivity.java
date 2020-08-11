@@ -139,7 +139,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                 }, 4000);
             }
         });
-        recyclerView.setOnLoadListener(new PullToRefreshRecyclerView.OnLoadListener() {
+        recyclerView.setOnMultiPurposeListener(new PullToRefreshRecyclerView.SimpleMultiPurposeListener() {
             @Override
             public void onRecyclerViewRefresh() {
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {

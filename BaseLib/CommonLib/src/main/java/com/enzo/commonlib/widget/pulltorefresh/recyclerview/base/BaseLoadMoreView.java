@@ -27,7 +27,7 @@ public abstract class BaseLoadMoreView extends LinearLayout {
     public int mState = STATE_SUCCESS;
 
     public View mContainer;
-    public PullToRefreshRecyclerView.OnLoadListener mRetryListener;
+    public PullToRefreshRecyclerView.SimpleMultiPurposeListener mRetryListener;
 
     public BaseLoadMoreView(Context context) {
         super(context);
@@ -59,7 +59,7 @@ public abstract class BaseLoadMoreView extends LinearLayout {
         return mState;
     }
 
-    public void setOnRetryListener(PullToRefreshRecyclerView.OnLoadListener listener){
+    public void setOnRetryListener(PullToRefreshRecyclerView.SimpleMultiPurposeListener listener){
         mRetryListener = listener;
     }
 }

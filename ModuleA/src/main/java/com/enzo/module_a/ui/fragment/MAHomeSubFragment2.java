@@ -62,7 +62,7 @@ public class MAHomeSubFragment2 extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
-        recyclerView.setOnLoadListener(new PullToRefreshRecyclerView.OnLoadListener() {
+        recyclerView.setOnMultiPurposeListener(new PullToRefreshRecyclerView.SimpleMultiPurposeListener() {
             @Override
             public void onRecyclerViewRefresh() {
                 new Handler().postDelayed(new Runnable() {

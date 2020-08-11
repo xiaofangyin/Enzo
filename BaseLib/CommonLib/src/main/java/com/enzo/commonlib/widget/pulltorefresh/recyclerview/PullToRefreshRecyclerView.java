@@ -37,7 +37,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     private static final int TYPE_REFRESH_HEADER = 20000;
     private static final int TYPE_LOAD_MORE_FOOTER = 20001;
     //刷新加载更多监听
-    private OnLoadListener mLoadingListener;
+    private SimpleMultiPurposeListener purposeListener;
     //设置头部底部View的适配器
     public HeaderAndFooterAdapter mHeaderAndFooterAdapter;
     private Adapter insideAdapter;
@@ -104,7 +104,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      * 自动加载
      */
     public void autoRefresh() {
-        if (isAllowRefresh && mLoadingListener != null) {
+        if (isAllowRefresh && purposeListener != null) {
             if (!isLoading() && !isRefreshing()) {
                 isLoadingData = true;
                 headerRefreshView.onActionDown();
@@ -114,7 +114,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mLoadingListener.onRecyclerViewRefresh();
+                        purposeListener.onRecyclerViewRefresh();
                     }
                 }, 500);
                 this.scrollToPosition(0);
@@ -165,7 +165,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     public void loadMoreFailed() {
         isLoadingData = false;
         loadMoreView.setState(BaseLoadMoreView.STATE_FAILED);
-        loadMoreView.setOnRetryListener(new OnLoadListener() {
+        loadMoreView.setOnRetryListener(new SimpleMultiPurposeListener() {
             @Override
             public void onRecyclerViewRefresh() {
 
@@ -179,8 +179,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             @Override
             public void onLoadMoreRetry() {
                 loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-                if (mLoadingListener != null) {
-                    mLoadingListener.onLoadMoreRetry();
+                if (purposeListener != null) {
+                    purposeListener.onLoadMoreRetry();
                 }
             }
         });
@@ -232,13 +232,13 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     private void scrollLoadMore() {
         if (loadMoreView != null) {
             int loadStatus = loadMoreView.getState();
-            if (mLoadingListener != null && !isLoadingData && isAllowLoadMore && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
+            if (purposeListener != null && !isLoadingData && isAllowLoadMore && loadStatus == BaseLoadMoreView.STATE_SUCCESS) {
                 LayoutManager layoutManager = getLayoutManager();
                 if (layoutManager != null) {
                     if (layoutManager.getChildCount() > 0 && (findLastVisibleItemPosition(layoutManager) + 1 == layoutManager.getItemCount())) {
                         isLoadingData = true;
                         loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-                        mLoadingListener.onRecyclerViewLoadMore();
+                        purposeListener.onRecyclerViewLoadMore();
                     }
                 }
             }
@@ -303,8 +303,8 @@ public class PullToRefreshRecyclerView extends RecyclerView {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if (mLoadingListener != null) {
-                                    mLoadingListener.onRecyclerViewRefresh();
+                                if (purposeListener != null) {
+                                    purposeListener.onRecyclerViewRefresh();
                                 }
                             }
                         }, 500);
@@ -614,11 +614,11 @@ public class PullToRefreshRecyclerView extends RecyclerView {
     /**
      * ======================================================= 加载数据 =======================================================
      */
-    public void setOnLoadListener(OnLoadListener listener) {
-        mLoadingListener = listener;
+    public void setOnMultiPurposeListener(SimpleMultiPurposeListener listener) {
+        purposeListener = listener;
     }
 
-    public interface OnLoadListener {
+    public interface SimpleMultiPurposeListener {
 
         void onRecyclerViewRefresh();
 
