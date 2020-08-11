@@ -12,6 +12,7 @@ import android.view.ViewConfiguration;
 import android.widget.Scroller;
 
 import com.enzo.commonlib.R;
+import com.enzo.commonlib.utils.common.DensityUtil;
 
 /**
  * Created by Qin DaChang on 2016/11/20.
@@ -30,16 +31,20 @@ public class RulerView extends View {
     private float mMinValue = 0.0f;
     private float mPerValue = 1;
 
-    private float mLineSpaceWidth = 5;
-    private float mLineWidth = 1;
-    private float mLineMaxHeight = 42;
-    private float mLineMidHeight = 30;
-    private float mLineMinHeight = 17;
+    private float mLineWidth;
+    private float mLineSpaceWidth;
+    private float mLineMaxHeight;
+    private float mLineMidHeight;
+    private float mLineMinHeight;
     private int mLineColor = 1;
 
     private float mTextMarginTop = 8;
     private float mTextSize = 14;
     private int mTextColor = 1;
+
+    private float mIndicatorWidth;
+    private float mIndicatorHeight;
+    private int mIndicatorColor;
 
     private boolean mAlphaEnable;
 
@@ -76,16 +81,16 @@ public class RulerView extends View {
 
         mAlphaEnable = typedArray.getBoolean(R.styleable.RulerView_alphaEnable, false);
 
-        mLineSpaceWidth = typedArray.getDimension(R.styleable.RulerView_lineSpaceWidth, dp2px(context, mLineSpaceWidth));
-        mLineWidth = typedArray.getDimension(R.styleable.RulerView_lineWidth, dp2px(context, mLineWidth));
-        mLineMaxHeight = typedArray.getDimension(R.styleable.RulerView_lineMaxHeight, dp2px(context, mLineMaxHeight));
-        mLineMidHeight = typedArray.getDimension(R.styleable.RulerView_lineMidHeight, dp2px(context, mLineMidHeight));
-        mLineMinHeight = typedArray.getDimension(R.styleable.RulerView_lineMinHeight, dp2px(context, mLineMinHeight));
+        mLineSpaceWidth = typedArray.getDimension(R.styleable.RulerView_lineSpaceWidth, DensityUtil.dip2px(context, 5));
+        mLineWidth = typedArray.getDimension(R.styleable.RulerView_lineWidth, DensityUtil.dip2px(context, 1));
+        mLineMaxHeight = typedArray.getDimension(R.styleable.RulerView_lineMaxHeight, DensityUtil.dip2px(context, 42));
+        mLineMidHeight = typedArray.getDimension(R.styleable.RulerView_lineMidHeight, DensityUtil.dip2px(context, 30));
+        mLineMinHeight = typedArray.getDimension(R.styleable.RulerView_lineMinHeight, DensityUtil.dip2px(context, 17));
         mLineColor = typedArray.getColor(R.styleable.RulerView_lineColor, mLineColor);
 
-        mTextSize = typedArray.getDimension(R.styleable.RulerView_textSize, dp2px(context, mTextSize));
+        mTextSize = typedArray.getDimension(R.styleable.RulerView_textSize, DensityUtil.dip2px(context, mTextSize));
         mTextColor = typedArray.getColor(R.styleable.RulerView_textColor, mTextColor);
-        mTextMarginTop = typedArray.getDimension(R.styleable.RulerView_textMarginTop, dp2px(context, mTextMarginTop));
+        mTextMarginTop = typedArray.getDimension(R.styleable.RulerView_textMarginTop, DensityUtil.dip2px(context, mTextMarginTop));
 
         mSelectorValue = typedArray.getFloat(R.styleable.RulerView_selectorValue, 0.0f);
         mMinValue = typedArray.getFloat(R.styleable.RulerView_minValue, 0.0f);
@@ -108,11 +113,6 @@ public class RulerView extends View {
         typedArray.recycle();
     }
 
-    private int dp2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
     private float getFontHeight(Paint paint) {
         Paint.FontMetrics fm = paint.getFontMetrics();
         return fm.descent - fm.ascent;
@@ -128,43 +128,8 @@ public class RulerView extends View {
         invalidate();
     }
 
-    public void setTextMarginTop(float marginTop) {
-        mTextMarginTop = marginTop;
-        invalidate();
-    }
-
     public void setLineColor(int color) {
         mLinePaint.setColor(color);
-        invalidate();
-    }
-
-    public void setLineWidth(float width) {
-        mLineWidth = width;
-        invalidate();
-    }
-
-    public void setLineSpaceWidth(float width) {
-        mLineSpaceWidth = width;
-        invalidate();
-    }
-
-    public void setLineMinHeight(float height) {
-        mLineMinHeight = height;
-        invalidate();
-    }
-
-    public void setLineMidHeight(float height) {
-        mLineMidHeight = height;
-        invalidate();
-    }
-
-    public void setLineMaxHeight(float height) {
-        mLineMaxHeight = height;
-        invalidate();
-    }
-
-    public void setAlphaEnable(boolean enable) {
-        mAlphaEnable = enable;
         invalidate();
     }
 
@@ -190,6 +155,9 @@ public class RulerView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         if (w > 0 && h > 0) {
             mWidth = w;
+            mIndicatorHeight = h * 0.6f;
+            mIndicatorWidth = DensityUtil.dip2px(getContext(), 2.6f);
+            mIndicatorColor = mLineColor;
         }
     }
 
@@ -201,6 +169,7 @@ public class RulerView extends View {
         int alpha = 0;
         float scale;
         int srcPointX = mWidth / 2;
+        mLinePaint.setStrokeWidth(mLineWidth);
         for (int i = 0; i < mTotalLine; i++) {
             left = srcPointX + mOffset + i * mLineSpaceWidth;
 
@@ -233,6 +202,16 @@ public class RulerView extends View {
             }
 
         }
+
+        mLinePaint.setStrokeWidth(mIndicatorWidth);
+        mLinePaint.setColor(mIndicatorColor);
+        canvas.drawLine(
+                getWidth() / 2f,
+                0,
+                getWidth() / 2f,
+                mIndicatorHeight,
+                mLinePaint
+        );
     }
 
     @Override

@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textColor="@color/color_green"
+            android:textColor="@color/color_yellow"
             android:textSize="40dp" />
 
         <TextView
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="cm"
-            android:textColor="@color/color_green"
+            android:textColor="@color/color_yellow"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:background="#F1FDFB"
-            app:lineColor="@color/color_green_light"
+            app:lineColor="@color/color_yellow"
             app:lineMaxHeight="46dp"
             app:lineMidHeight="34dp"
             app:lineMinHeight="26dp"
@@ -48,14 +48,9 @@
             app:minValue="70.0"
             app:perValue="0.1"
             app:selectorValue="170.0"
-            app:textColor="@color/color_green_light"
+            app:textColor="@color/color_yellow"
             app:textMarginTop="16dp"
             app:textSize="16sp" />
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="54dp"
-            android:layout_centerHorizontal="true"
-            android:background="@color/color_green" />
     </RelativeLayout>
 </LinearLayout>

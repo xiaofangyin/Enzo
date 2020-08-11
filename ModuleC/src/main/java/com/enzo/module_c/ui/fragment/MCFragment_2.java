@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.widget.boheruler.RulerView;
 import com.enzo.module_c.R;
@@ -33,6 +35,8 @@ public class MCFragment_2 extends BaseFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         tvHeight.setText(String.valueOf(rulerView.getValue()));
+        rulerView.setLineColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
+        rulerView.setTextColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
     }
 
     @Override
