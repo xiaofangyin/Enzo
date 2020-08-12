@@ -12,41 +12,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_add_task_low"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:text="添加任务_low" />
 
-            <Button
-                android:id="@+id/btn_add_task_low"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="添加任务_low" />
+        <Button
+            android:id="@+id/btn_add_task_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加任务_default" />
 
-            <Button
-                android:id="@+id/btn_add_task_normal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="添加任务_default" />
+        <Button
+            android:id="@+id/btn_add_definite_task_high"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加不定时间任务_high" />
 
-            <Button
-                android:id="@+id/btn_add_task_high"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="添加任务_high" />
+        <Button
+            android:id="@+id/btn_add_undefinite_task_high"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加定事件任务_high" />
 
-            <Button
-                android:id="@+id/btn_clear_task"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="情况任务" />
-        </LinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/btn_clear_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="清空任务" />
 
+        <TextView
+            android:id="@+id/tv_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/color_white" />
+    </LinearLayout>
 </LinearLayout>

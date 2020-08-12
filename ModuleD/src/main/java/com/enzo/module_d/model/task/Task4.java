@@ -1,5 +1,7 @@
 package com.enzo.module_d.model.task;
 
+import android.os.Handler;
+
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.taskqueue.task.BaseTask;
 
@@ -15,5 +17,11 @@ public class Task4 extends BaseTask {
     public void doTask() {
         super.doTask();
         LogUtil.d("444444444444444444444444");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                unLockBlock();
+            }
+        }, 4000);
     }
 }
