@@ -6,6 +6,7 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.flowlayout.FlowLayoutAdapter;
 import com.enzo.commonlib.widget.flowlayout.FlowLayoutScrollView;
+import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 import com.enzo.module_c.R;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class MCFragment_6 extends BaseFragment {
 
+    private LoadingLayout loadingLayout;
     private FlowLayoutScrollView flowLayout;
 
     @Override
@@ -28,6 +30,7 @@ public class MCFragment_6 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
+        loadingLayout = rootView.findViewById(R.id.loading_layout);
         flowLayout = rootView.findViewById(R.id.mc_flow_layout);
     }
 
@@ -66,6 +69,7 @@ public class MCFragment_6 extends BaseFragment {
                 return R.layout.mc_item_flow_layout;
             }
         });
+        loadingLayout.showContent();
     }
 
     private List<String> buildData() {

@@ -111,17 +111,15 @@ public class LoadingLayout extends FrameLayout {
      * 显示加载成功页面
      */
     public void showContent() {
-        if (getChildAt(SUCCESS_VIEW_INDEX).getVisibility() != View.VISIBLE) {
-            for (int i = 0; i < this.getChildCount(); i++) {
-                View child = this.getChildAt(i);
-                child.setVisibility(i == SUCCESS_VIEW_INDEX ? View.VISIBLE : View.GONE);
-            }
-            stopLoadingAnim();
-
-            ObjectAnimator animator = ObjectAnimator.ofFloat(getChildAt(3), "alpha", 0f, 1f);
-            animator.setDuration(400);
-            animator.start();
+        for (int i = 0; i < this.getChildCount(); i++) {
+            View child = this.getChildAt(i);
+            child.setVisibility(i == SUCCESS_VIEW_INDEX ? View.VISIBLE : View.GONE);
         }
+        stopLoadingAnim();
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(getChildAt(SUCCESS_VIEW_INDEX), "alpha", 0f, 1f);
+        animator.setDuration(800);
+        animator.start();
     }
 
     /**
