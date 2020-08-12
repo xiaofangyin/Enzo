@@ -1,4 +1,4 @@
-package com.enzo.module_d.model;
+package com.enzo.module_d.model.executor;
 
 import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.net.okhttp.OkHttpCallBack;

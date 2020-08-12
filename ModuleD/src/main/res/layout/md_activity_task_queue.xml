@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_common_bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
 
     <com.enzo.commonlib.widget.headerview.HeadWidget
         android:id="@+id/header_view"
@@ -22,12 +24,28 @@
             android:padding="16dp">
 
             <Button
-                android:id="@+id/btn_get_subject"
+                android:id="@+id/btn_add_task_low"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="get subject" />
+                android:text="添加任务_low" />
 
+            <Button
+                android:id="@+id/btn_add_task_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="添加任务_default" />
 
+            <Button
+                android:id="@+id/btn_add_task_high"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="添加任务_high" />
+
+            <Button
+                android:id="@+id/btn_clear_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="情况任务" />
         </LinearLayout>
     </ScrollView>
 

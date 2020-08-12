@@ -88,5 +88,11 @@
             android:layout_height="wrap_content"
             android:text="阴影" />
 
+        <Button
+            android:id="@+id/btn_task_queue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="task queue" />
+
     </LinearLayout>
 </ScrollView>

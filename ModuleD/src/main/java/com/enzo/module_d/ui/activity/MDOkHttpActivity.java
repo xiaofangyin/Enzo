@@ -8,13 +8,13 @@ import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
-import com.enzo.module_d.model.GetSubjectExecutor;
+import com.enzo.module_d.model.executor.GetSubjectExecutor;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.enzo.module_d.model.GetSubjectExecutor.API_KEY;
+import static com.enzo.module_d.model.executor.GetSubjectExecutor.API_KEY;
 
 public class MDOkHttpActivity extends BaseActivity {
 
@@ -26,7 +26,7 @@ public class MDOkHttpActivity extends BaseActivity {
     @Override
     public void initHeader() {
         super.initHeader();
-        HeadWidget headWidget = findViewById(R.id.heander_view);
+        HeadWidget headWidget = findViewById(R.id.header_view);
         headWidget.setTitle("网络");
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override

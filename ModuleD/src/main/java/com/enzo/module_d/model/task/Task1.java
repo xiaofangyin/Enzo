@@ -1,6 +1,7 @@
-package com.enzo.commonlib.utils.taskqueue.task;
+package com.enzo.module_d.model.task;
 
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.taskqueue.task.BaseTask;
 
 /**
  * 文 件 名: Task1

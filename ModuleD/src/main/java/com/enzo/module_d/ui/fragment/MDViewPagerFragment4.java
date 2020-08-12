@@ -18,6 +18,7 @@ import com.enzo.module_d.ui.activity.MDOkHttpActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
 import com.enzo.module_d.ui.activity.MDShadowActivity;
+import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 
@@ -54,6 +55,7 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
         rootView.findViewById(R.id.btn_okhttp).setOnClickListener(this);
         rootView.findViewById(R.id.btn_shadow).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_task_queue).setOnClickListener(this);
     }
 
     @Override
@@ -118,6 +120,9 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
             startActivity(intent);
         } else if (id == R.id.btn_shadow) {
             Intent intent = new Intent(getContext(), MDShadowActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_task_queue) {
+            Intent intent = new Intent(getContext(), MDTaskQueueActivity.class);
             startActivity(intent);
         }
     }

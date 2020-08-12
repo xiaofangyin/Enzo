@@ -99,6 +99,7 @@
 
 #java bean
 -keep class com.enzo.commonlib.utils.taskqueue.task.** { *; }
+-keep class com.enzo.module_d.model.task.** { *; }
 
 
 #third part module library

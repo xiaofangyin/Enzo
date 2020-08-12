@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.enzo.commonlib.widget.headerview.HeadWidget
-        android:id="@+id/heander_view"
+        android:id="@+id/header_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

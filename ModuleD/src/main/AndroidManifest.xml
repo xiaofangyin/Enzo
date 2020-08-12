@@ -68,6 +68,9 @@
         <activity
             android:name=".ui.activity.MDShadowActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDTaskQueueActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
