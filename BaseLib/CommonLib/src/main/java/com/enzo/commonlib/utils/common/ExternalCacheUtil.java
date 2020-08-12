@@ -32,10 +32,10 @@ public class ExternalCacheUtil {
     }
 
     /**
-     * 网络请求日志缓存目录
+     * 图片缓存目录
      */
     public static File getImageCacheDirectory(Context context) {
-        return getExpectedFile(context, "image");
+        return getExpectedFile(context, "images");
     }
 
     /**
