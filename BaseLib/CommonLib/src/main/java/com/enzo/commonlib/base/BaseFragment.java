@@ -10,8 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.enzo.commonlib.utils.common.LogUtil;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -28,16 +26,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
 
     @Override
-    public void onPause() {
-        super.onPause();
-        LogUtil.d(this.getClass().getSimpleName() + " pause...");
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
-        LogUtil.d(this.getClass().getSimpleName() + " resume...");
-        if(isFirstLoad){
+        if (isFirstLoad) {
             isFirstLoad = false;
             lazyLoad();
         }
@@ -46,7 +37,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtil.d(this.getClass().getSimpleName() + " onCreateView...");
         View view = inflater.inflate(getLayoutId(), null);
         initView(view);
         return view;
@@ -55,14 +45,12 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     @Override
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LogUtil.d(this.getClass().getSimpleName() + " onViewCreated...");
         initListener(view);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtil.d(this.getClass().getSimpleName() + " onCreate...");
         if (savedInstanceState != null) {
             boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
             if (getFragmentManager() != null) {
