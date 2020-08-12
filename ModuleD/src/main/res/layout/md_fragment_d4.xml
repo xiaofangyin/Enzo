@@ -92,7 +92,7 @@
             android:id="@+id/btn_task_queue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="task queue" />
+            android:text="任务队列" />
 
     </LinearLayout>
 </ScrollView>
