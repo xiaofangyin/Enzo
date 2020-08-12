@@ -8,17 +8,18 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.yalantis.ucrop.callback.BitmapLoadCallback;
 import com.yalantis.ucrop.model.ExifInfo;
 import com.yalantis.ucrop.util.BitmapLoadUtils;
 import com.yalantis.ucrop.util.FastBitmapDrawable;
 import com.yalantis.ucrop.util.RectUtils;
-
-import androidx.annotation.IntRange;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * Created by Oleksii Shliama (https://github.com/shliama).
@@ -258,6 +259,7 @@ public class TransformImageView extends AppCompatImageView {
 
     protected void init() {
         setScaleType(ScaleType.MATRIX);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
