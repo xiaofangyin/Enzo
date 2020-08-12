@@ -1,6 +1,5 @@
 package com.enzo.module_a.ui.fragment;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.module_a.R;
 import com.enzo.module_a.model.MAHomeBannerBean;
@@ -27,18 +25,6 @@ public class MAHomeSubFragment2 extends BaseFragment {
     private MAHomeAdapter adapter;
 
     @Override
-    public void onPause() {
-        super.onPause();
-        LogUtil.d("MAHomeSubFragment2 onPause...");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LogUtil.d("MAHomeSubFragment2 onResume...");
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.ma_fragment_sub_2;
     }
@@ -49,15 +35,6 @@ public class MAHomeSubFragment2 extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setPullRefreshEnabled(true);
         recyclerView.setLoadMoreEnabled(true);
-    }
-
-    @Override
-    public void initData(Bundle savedInstanceState) {
-        adapter = new MAHomeAdapter();
-        recyclerView.setAdapter(adapter);
-
-        List<MAHomeBaseBean> list = buildData(10, true);
-        adapter.setNewData(list);
     }
 
     @Override
@@ -101,6 +78,15 @@ public class MAHomeSubFragment2 extends BaseFragment {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+    }
+
+    @Override
+    public void lazyLoad() {
+        adapter = new MAHomeAdapter();
+        recyclerView.setAdapter(adapter);
+
+        List<MAHomeBaseBean> list = buildData(10, true);
+        adapter.setNewData(list);
     }
 
     @NotNull

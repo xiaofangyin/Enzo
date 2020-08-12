@@ -1,6 +1,5 @@
 package com.enzo.module_c.ui.fragment;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,13 +32,6 @@ public class MCFragment_2 extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-        tvHeight.setText(String.valueOf(rulerView.getValue()));
-        rulerView.setLineColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
-        rulerView.setTextColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
-    }
-
-    @Override
     public void initListener(View rootView) {
         rulerView.setOnValueChangeListener(new RulerView.OnValueChangeListener() {
             @Override
@@ -47,5 +39,12 @@ public class MCFragment_2 extends BaseFragment {
                 tvHeight.setText(String.valueOf(value));
             }
         });
+    }
+
+    @Override
+    public void lazyLoad() {
+        tvHeight.setText(String.valueOf(rulerView.getValue()));
+        rulerView.setLineColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
+        rulerView.setTextColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
     }
 }

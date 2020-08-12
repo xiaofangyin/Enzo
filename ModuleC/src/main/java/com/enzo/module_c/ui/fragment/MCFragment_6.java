@@ -1,6 +1,5 @@
 package com.enzo.module_c.ui.fragment;
 
-import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
@@ -33,7 +32,12 @@ public class MCFragment_6 extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
+    public void initListener(View rootView) {
+
+    }
+
+    @Override
+    public void lazyLoad() {
         List<String> flowList = buildData();
         flowLayout.setAdapter(new FlowLayoutAdapter<String>(flowList) {
             @Override
@@ -126,8 +130,4 @@ public class MCFragment_6 extends BaseFragment {
         return flowList;
     }
 
-    @Override
-    public void initListener(View rootView) {
-
-    }
 }

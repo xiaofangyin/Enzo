@@ -2,7 +2,6 @@ package com.enzo.module_d.ui.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
@@ -38,7 +37,17 @@ public class MDViewPagerFragment1 extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
+    public void initListener(View rootView) {
+        banner.setOnBannerClickListener(new UGCBanner.OnBannerClickListener() {
+            @Override
+            public void onBannerClick(BannerBean bean) {
+                ToastUtil.show(bean.getPic());
+            }
+        });
+    }
+
+    @Override
+    public void lazyLoad() {
         List<BannerBean> mData = new ArrayList<>();
         BannerBean bannerBean1 = new BannerBean();
         bannerBean1.setId("1");
@@ -74,15 +83,5 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.md_icon_snow);
         fallingView.initSnow(bitmap, 60);
-    }
-
-    @Override
-    public void initListener(View rootView) {
-        banner.setOnBannerClickListener(new UGCBanner.OnBannerClickListener() {
-            @Override
-            public void onBannerClick(BannerBean bean) {
-                ToastUtil.show(bean.getPic());
-            }
-        });
     }
 }

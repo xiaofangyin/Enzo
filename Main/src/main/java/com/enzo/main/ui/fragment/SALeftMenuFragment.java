@@ -2,7 +2,6 @@ package com.enzo.main.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,13 +40,6 @@ public class SALeftMenuFragment extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-        adapter = new SALeftMenuParentAdapter();
-        recyclerView.setAdapter(adapter);
-        setFunctionList();
-    }
-
-    @Override
     public void initListener(View rootView) {
         rootView.findViewById(R.id.left_menu_tv_setting).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +53,13 @@ public class SALeftMenuFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void lazyLoad() {
+        adapter = new SALeftMenuParentAdapter();
+        recyclerView.setAdapter(adapter);
+        setFunctionList();
     }
 
     private void setFunctionList() {

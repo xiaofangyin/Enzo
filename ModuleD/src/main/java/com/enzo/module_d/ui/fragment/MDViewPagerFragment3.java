@@ -1,6 +1,5 @@
 package com.enzo.module_d.ui.fragment;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -38,12 +37,12 @@ public class MDViewPagerFragment3 extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
+    public void initListener(View rootView) {
 
     }
 
     @Override
-    public void initListener(View rootView) {
+    public void lazyLoad() {
 
     }
 

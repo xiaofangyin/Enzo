@@ -1,6 +1,5 @@
 package com.enzo.module_d.ui.fragment;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -52,12 +51,6 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-        mHandler.sendEmptyMessageDelayed(progress++, 30);
-        mDiskProgressBar.setProgress(40772, 90772);
-    }
-
-    @Override
     public void initListener(View rootView) {
         seekBar.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
             @Override
@@ -76,6 +69,12 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
             }
         });
+    }
+
+    @Override
+    public void lazyLoad() {
+        mHandler.sendEmptyMessageDelayed(progress++, 30);
+        mDiskProgressBar.setProgress(40772, 90772);
     }
 
     @Override

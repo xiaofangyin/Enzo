@@ -1,7 +1,6 @@
 package com.enzo.module_d.ui.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -41,11 +40,6 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-
-    }
-
-    @Override
     public void initListener(View rootView) {
         rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
@@ -60,6 +54,11 @@ public class MDViewPagerFragment4 extends BaseFragment implements View.OnClickLi
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
         rootView.findViewById(R.id.btn_okhttp).setOnClickListener(this);
         rootView.findViewById(R.id.btn_shadow).setOnClickListener(this);
+    }
+
+    @Override
+    public void lazyLoad() {
+
     }
 
     @Override

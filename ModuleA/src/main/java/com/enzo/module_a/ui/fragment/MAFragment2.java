@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,29 +74,6 @@ public class MAFragment2 extends BaseFragment {
         initMagicIndicator4();
     }
 
-    @Override
-    public void initData(Bundle savedInstanceState) {
-        final List<String> list = new ArrayList<>();
-        list.add("vivo Y83");
-        list.add("iPhone 11");
-        list.add("华为 P40");
-        tvSearch.setText(list.get(0));
-        tvSearch.setList(list);
-        tvSearch.startScroll();
-        tvSearch.setClickListener(new AutoScrollTextView.ItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                ToastUtil.show(list.get(position));
-            }
-        });
-
-
-        FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
-        viewPager.setAdapter(mAdapter);
-
-        viewPager.setCurrentItem(1);
-    }
-
     private List<Fragment> getFragments() {
         List<Fragment> list = new ArrayList<>();
         list.add(new MAHomeSubFragment1());
@@ -121,6 +97,29 @@ public class MAFragment2 extends BaseFragment {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void lazyLoad() {
+        final List<String> list = new ArrayList<>();
+        list.add("vivo Y83");
+        list.add("iPhone 11");
+        list.add("华为 P40");
+        tvSearch.setText(list.get(0));
+        tvSearch.setList(list);
+        tvSearch.startScroll();
+        tvSearch.setClickListener(new AutoScrollTextView.ItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                ToastUtil.show(list.get(position));
+            }
+        });
+
+
+        FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
+        viewPager.setAdapter(mAdapter);
+
+        viewPager.setCurrentItem(1);
     }
 
     private void initMagicIndicator4() {
@@ -147,9 +146,9 @@ public class MAFragment2 extends BaseFragment {
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(viewPager.getCurrentItem() != index){
+                        if (viewPager.getCurrentItem() != index) {
                             viewPager.setCurrentItem(index);
-                        }else{
+                        } else {
 
                         }
                     }

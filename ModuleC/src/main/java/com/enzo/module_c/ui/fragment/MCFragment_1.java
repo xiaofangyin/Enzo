@@ -1,6 +1,5 @@
 package com.enzo.module_c.ui.fragment;
 
-import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
@@ -32,12 +31,6 @@ public class MCFragment_1 extends BaseFragment {
         seekBarProgress = rootView.findViewById(R.id.seek_bar_progress);
         seekBarSize = rootView.findViewById(R.id.seek_bar_size);
         seekBarAmplitude = rootView.findViewById(R.id.seek_bar_amplitude);
-    }
-
-    @Override
-    public void initData(Bundle savedInstanceState) {
-        waterWaveView.setProgress(50, 1000);
-        seekBarProgress.setProgress(50);
     }
 
     @Override
@@ -90,5 +83,11 @@ public class MCFragment_1 extends BaseFragment {
 
             }
         });
+    }
+
+    @Override
+    public void lazyLoad() {
+        waterWaveView.setProgress(50, 1000);
+        seekBarProgress.setProgress(50);
     }
 }

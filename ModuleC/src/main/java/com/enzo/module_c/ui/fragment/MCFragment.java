@@ -1,7 +1,6 @@
 package com.enzo.module_c.ui.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,12 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
+    public void initListener(View rootView) {
+
+    }
+
+    @Override
+    public void lazyLoad() {
         MCViewPagerAdapter adapter = new MCViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
 
@@ -127,11 +131,6 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
         });
 
         magicIndicator.setNavigator(commonNavigator, viewPager);
-    }
-
-    @Override
-    public void initListener(View rootView) {
-
     }
 
     @Override

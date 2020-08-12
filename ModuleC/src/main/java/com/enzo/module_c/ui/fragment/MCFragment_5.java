@@ -1,6 +1,5 @@
 package com.enzo.module_c.ui.fragment;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,17 +39,6 @@ public class MCFragment_5 extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
-        mRecyclerView.setAdapter(mAdapter = new CardAdapter());
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            list.add("");
-        }
-        mAdapter.setNewData(list);
-    }
-
-    @Override
     public void initListener(View rootView) {
         mScrollView.setOnReleaseListener(new HorizontalScrollView.OnReleaseListener() {
             @Override
@@ -65,7 +53,18 @@ public class MCFragment_5 extends BaseFragment {
         });
     }
 
-    class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    @Override
+    public void lazyLoad() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        mRecyclerView.setAdapter(mAdapter = new CardAdapter());
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            list.add("");
+        }
+        mAdapter.setNewData(list);
+    }
+
+    static class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private List<String> mData;
 

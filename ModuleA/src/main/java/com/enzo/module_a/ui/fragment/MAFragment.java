@@ -1,6 +1,5 @@
 package com.enzo.module_a.ui.fragment;
 
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -46,7 +45,17 @@ public class MAFragment extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
+    public void initListener(View rootView) {
+        rootView.findViewById(R.id.ma_open_drawer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MAPluginFactory.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.START);
+            }
+        });
+    }
+
+    @Override
+    public void lazyLoad() {
         final List<String> list = new ArrayList<>();
         list.add("王者风范");
         list.add("狭路相逢");
@@ -73,15 +82,5 @@ public class MAFragment extends BaseFragment {
             }
         });
         picker.initTime(6, 25, 15, 35);
-    }
-
-    @Override
-    public void initListener(View rootView) {
-        rootView.findViewById(R.id.ma_open_drawer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MAPluginFactory.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.START);
-            }
-        });
     }
 }

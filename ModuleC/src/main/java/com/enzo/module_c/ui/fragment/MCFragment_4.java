@@ -1,6 +1,5 @@
 package com.enzo.module_c.ui.fragment;
 
-import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
@@ -25,12 +24,12 @@ public class MCFragment_4 extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
+    public void initListener(View rootView) {
 
     }
 
     @Override
-    public void initListener(View rootView) {
+    public void lazyLoad() {
 
     }
 }

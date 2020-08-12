@@ -15,7 +15,7 @@ public interface IBaseFragment {
 
     void initView(View rootView);
 
-    void initData(Bundle savedInstanceState);
-
     void initListener(View rootView);
+
+    void lazyLoad();
 }

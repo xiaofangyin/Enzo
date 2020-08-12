@@ -1,6 +1,5 @@
 package com.enzo.module_b.ui.fragment;
 
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -45,13 +44,13 @@ public class MBFragment extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-        mSpiderWebView.setPointNum(80);//小点数量
-        mSpiderWebView.setPointAcceleration(6);//加速度
+    public void initListener(View rootView) {
+
     }
 
     @Override
-    public void initListener(View rootView) {
-
+    public void lazyLoad() {
+        mSpiderWebView.setPointNum(80);//小点数量
+        mSpiderWebView.setPointAcceleration(6);//加速度
     }
 }

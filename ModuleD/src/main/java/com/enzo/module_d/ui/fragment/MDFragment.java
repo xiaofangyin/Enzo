@@ -1,7 +1,6 @@
 package com.enzo.module_d.ui.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -57,22 +56,6 @@ public class MDFragment extends BaseFragment {
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-        Context context = getContext();
-        if (context != null) {
-            mIndicator.setNormalColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_666));
-            mIndicator.setHighlightColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_333));
-            mIndicator.setIndicatorColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_333));
-        }
-        FragmentPagerAdapter mAdapter = new MDViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
-        mViewPager.setAdapter(mAdapter);
-        //设置Tab上的标题
-        mIndicator.setTabItemTitles(itemTitles);
-        //设置关联的ViewPager
-        mIndicator.setViewPager(mViewPager, 0);
-    }
-
-    @Override
     public void initListener(View rootView) {
         mIndicator.setOnTabClickListener(new ViewPagerIndicator.OnTabClickListener() {
             @Override
@@ -88,13 +71,19 @@ public class MDFragment extends BaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
+    public void lazyLoad() {
+        Context context = getContext();
+        if (context != null) {
+            mIndicator.setNormalColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_666));
+            mIndicator.setHighlightColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_333));
+            mIndicator.setIndicatorColor(ContextCompat.getColor(context, com.enzo.commonlib.R.color.color_333));
+        }
+        FragmentPagerAdapter mAdapter = new MDViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
+        mViewPager.setAdapter(mAdapter);
+        //设置Tab上的标题
+        mIndicator.setTabItemTitles(itemTitles);
+        //设置关联的ViewPager
+        mIndicator.setViewPager(mViewPager, 0);
     }
 
     private List<Fragment> getFragments() {
