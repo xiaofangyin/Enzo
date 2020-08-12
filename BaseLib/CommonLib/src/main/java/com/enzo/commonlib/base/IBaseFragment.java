@@ -1,6 +1,5 @@
 package com.enzo.commonlib.base;
 
-import android.os.Bundle;
 import android.view.View;
 
 /**
