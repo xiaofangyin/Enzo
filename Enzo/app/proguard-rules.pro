@@ -97,6 +97,10 @@
 #泛型
 -keepattributes Signature
 
+#java bean
+-keep class com.enzo.commonlib.utils.taskqueue.task.** { *; }
+
+
 #third part module library
 -dontwarn okio.**
 -dontwarn javax.annotation.Nullable

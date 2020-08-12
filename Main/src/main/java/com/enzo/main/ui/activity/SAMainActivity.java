@@ -21,6 +21,12 @@ import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.commonlib.utils.taskqueue.TaskPriority;
+import com.enzo.commonlib.utils.taskqueue.TaskScheduler;
+import com.enzo.commonlib.utils.taskqueue.task.Task1;
+import com.enzo.commonlib.utils.taskqueue.task.Task2;
+import com.enzo.commonlib.utils.taskqueue.task.Task3;
+import com.enzo.commonlib.utils.taskqueue.task.Task4;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
@@ -72,6 +78,27 @@ public class SAMainActivity extends BaseActivity {
         mHandler.sendEmptyMessage(0);
 
         LogUtil.d(PhoneUtils.getInstance().getUniqueId(this));
+
+
+        Task1 task1 = new Task1();
+        task1.setPriority(TaskPriority.LOW);
+        task1.setDuration(5000);
+
+        Task2 task2 = new Task2();
+        task2.setPriority(TaskPriority.HIGH);
+
+        Task3 task3 = new Task3();
+        task3.setPriority(TaskPriority.DEFAULT);
+        task3.setDuration(3000);
+
+        Task4 task4 = new Task4();
+        task4.setPriority(TaskPriority.HIGH);
+        task4.setDuration(6000);
+
+        TaskScheduler.getInstance().enqueue(task1);
+        TaskScheduler.getInstance().enqueue(task2);
+        TaskScheduler.getInstance().enqueue(task3);
+        TaskScheduler.getInstance().enqueue(task4);
     }
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) {
