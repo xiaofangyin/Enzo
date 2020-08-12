@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
 import com.enzo.main.R;
-import com.enzo.main.model.LeftMenuChildBean;
-import com.enzo.main.model.LeftMenuParentBean;
+import com.enzo.main.model.bean.LeftMenuChildBean;
+import com.enzo.main.model.bean.LeftMenuParentBean;
 import com.enzo.main.util.ExpandableViewHoldersUtil;
 import com.enzo.main.util.SPUtils;
 

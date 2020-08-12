@@ -2,6 +2,7 @@ package com.enzo.module_b.plugin;
 
 import androidx.fragment.app.Fragment;
 
+import com.enzo.flkit.account.AccountInfo;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
@@ -55,6 +56,14 @@ public class MBPluginFactory extends FLPluginFactory {
     @Override
     public Fragment buildHomeTabFragment() {
         return new MBFragment();
+    }
+
+    @Override
+    public AccountInfo getAccountInfo() {
+        if (hostDelegate != null) {
+            return hostDelegate.getAccountInfo();
+        }
+        return null;
     }
 
     @Override

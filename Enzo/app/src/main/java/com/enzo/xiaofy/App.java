@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.enzo.commonlib.base.BaseApplication;
 import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.main.app.MainApplication;
 import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.module_a.plugin.MAPluginFactory;
 import com.enzo.module_b.plugin.MBPluginFactory;
@@ -42,7 +43,7 @@ import java.util.List;
  * **             佛祖保佑  镇类之宝              **
  * ***********************************************
  */
-public class App extends BaseApplication {
+public class App extends MainApplication {
 
     @Override
     protected void attachBaseContext(Context base) {

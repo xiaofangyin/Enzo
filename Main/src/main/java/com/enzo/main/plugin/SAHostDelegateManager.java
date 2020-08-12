@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.enzo.commonlib.utils.common.ActivityHelper;
+import com.enzo.flkit.account.AccountInfo;
 import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.main.ui.activity.SAAddDeviceActivity;
@@ -47,6 +48,11 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
     @Override
     public Activity getCurrentController() {
         return ActivityHelper.getManager().currentActivity();
+    }
+
+    @Override
+    public AccountInfo getAccountInfo() {
+        return new AccountInfo();
     }
 
     @Override

@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.enzo.commonlib.utils.common.GsonHelper;
 import com.enzo.commonlib.utils.common.PreferenceUtils;
-import com.enzo.main.model.LeftMenuParentBean;
+import com.enzo.main.model.bean.LeftMenuParentBean;
 
 import java.util.List;
 

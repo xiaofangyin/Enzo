@@ -2,6 +2,8 @@ package com.enzo.flkit.plugin;
 
 import androidx.fragment.app.Fragment;
 
+import com.enzo.flkit.account.AccountInfo;
+
 import org.json.JSONObject;
 
 /**
@@ -20,6 +22,8 @@ public abstract class FLPluginFactory {
     public abstract FLPluginBaseObject buildNormalPluginCellModel(JSONObject data);
 
     public abstract Fragment buildHomeTabFragment();
+
+    public abstract AccountInfo getAccountInfo();
 
     //释放资源
     public abstract void releaseResources();

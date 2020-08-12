@@ -14,7 +14,7 @@ import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.main.R;
-import com.enzo.main.model.LeftMenuChildBean;
+import com.enzo.main.model.bean.LeftMenuChildBean;
 
 
 /**

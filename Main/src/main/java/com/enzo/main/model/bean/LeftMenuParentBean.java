@@ -1,4 +1,4 @@
-package com.enzo.main.model;
+package com.enzo.main.model.bean;
 
 import com.enzo.commonlib.base.BaseBean;
 

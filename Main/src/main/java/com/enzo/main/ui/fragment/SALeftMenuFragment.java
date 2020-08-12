@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.main.R;
 import com.enzo.main.config.SALeftMenuConfig;
-import com.enzo.main.model.LeftMenuParentBean;
+import com.enzo.main.model.bean.LeftMenuParentBean;
 import com.enzo.main.ui.adapter.SALeftMenuParentAdapter;
 import com.enzo.main.util.SPUtils;
 

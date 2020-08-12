@@ -5,8 +5,8 @@ import android.content.Intent;
 
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.main.R;
-import com.enzo.main.model.LeftMenuChildBean;
-import com.enzo.main.model.LeftMenuParentBean;
+import com.enzo.main.model.bean.LeftMenuChildBean;
+import com.enzo.main.model.bean.LeftMenuParentBean;
 import com.enzo.main.ui.activity.SAAddDeviceActivity;
 
 import java.util.ArrayList;
