@@ -3,6 +3,8 @@ package com.enzo.commonlib.utils.common;
 import android.content.Context;
 import android.os.Environment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 
 /**
@@ -26,43 +28,40 @@ public class ExternalCacheUtil {
      * apk下载目录
      */
     public static File getApkDownloadDirectory(Context context) {
-        File file = new File(getExternalCacheDir(context), "apk");
-        if (!file.exists()) file.mkdirs();
-        return file;
+        return getExpectedFile(context, "apk");
     }
 
     /**
      * 网络请求日志缓存目录
      */
     public static File getImageCacheDirectory(Context context) {
-        File file = new File(getExternalCacheDir(context), "image");
-        if (!file.exists()) file.mkdirs();
-        return file;
+        return getExpectedFile(context, "image");
     }
 
     /**
      * 头像缓存目录
      */
     public static File getAvatarCacheDirectory(Context context) {
-        File file = new File(getExternalCacheDir(context), "avatar");
-        if (!file.exists()) file.mkdirs();
-        return file;
+        return getExpectedFile(context, "avatar");
     }
 
     /**
      * 网络请求日志缓存目录
      */
     public static File getNetLogCacheDirectory(Context context) {
-        File file = new File(getExternalCacheDir(context), "log");
-        if (!file.exists()) file.mkdirs();
-        return file;
+        return getExpectedFile(context, "log");
     }
 
     /**
      * crash缓存目录
      */
     public static File getCrashDir(Context context) {
-        File file = new File(getExternalCacheDir(context), "crash");
+        return getExpectedFile(context, "crash");
+    }
+
+    @NotNull
+    private static File getExpectedFile(Context context, String child) {
+        File file = new File(getExternalCacheDir(context), child);
         if (!file.exists()) file.mkdirs();
         return file;
     }
