@@ -17,14 +17,26 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/zhihu"
+            android:id="@+id/xianyu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/md_item_margin_horizontal"
             android:layout_marginTop="8dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
             android:background="@color/color_yellow"
-            android:text="闲鱼"
+            android:text="XianYu"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/md_item_margin_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="@dimen/md_item_margin_horizontal"
+            android:background="@color/color_yellow"
+            android:text="Single"
             android:textAllCaps="false"
             android:textColor="@android:color/black" />
 
@@ -41,28 +53,17 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/only_gif"
+            android:id="@+id/only_mp4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/md_item_margin_horizontal"
             android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/md_item_margin_horizontal"
-            android:background="@color/color_yellow"
-            android:text="OnlyGif"
+            android:background="@color/color_dark_black"
+            android:text="MP4"
             android:textAllCaps="false"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/single"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/md_item_margin_horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="@dimen/md_item_margin_horizontal"
-            android:background="@color/color_yellow"
-            android:text="Single"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black" />
 
         <ImageView
             android:id="@+id/single_choose_result"

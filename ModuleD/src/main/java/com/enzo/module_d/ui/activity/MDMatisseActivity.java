@@ -97,9 +97,9 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initListener() {
-        findViewById(R.id.zhihu).setOnClickListener(this);
+        findViewById(R.id.xianyu).setOnClickListener(this);
         findViewById(R.id.dracula).setOnClickListener(this);
-        findViewById(R.id.only_gif).setOnClickListener(this);
+        findViewById(R.id.only_mp4).setOnClickListener(this);
         findViewById(R.id.single).setOnClickListener(this);
     }
 
@@ -124,7 +124,7 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.zhihu) {
+        if (id == R.id.xianyu) {
             Matisse.from(MDMatisseActivity.this)
                     .choose(MimeType.ofImage(), false)
                     .theme(R.style.Matisse_XianYu)
@@ -164,9 +164,9 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
                     .maxOriginalSize(10)
                     .imageEngine(new GlideEngine())
                     .forResult(REQUEST_CODE_CHOOSE);
-        } else if (id == R.id.only_gif) {
+        } else if (id == R.id.only_mp4) {
             Matisse.from(MDMatisseActivity.this)
-                    .choose(MimeType.of(MimeType.GIF), false)
+                    .choose(MimeType.of(MimeType.MP4), false)
                     .countable(true)
                     .maxSelectable(9)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
