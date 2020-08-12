@@ -23,12 +23,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 
-import androidx.core.os.EnvironmentCompat;
 import androidx.fragment.app.Fragment;
 
+import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.FileProvider7;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.toast.ToastUtil;
@@ -125,28 +125,14 @@ public class MediaStoreCompat {
         String timeStamp =
                 new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = String.format("JPEG_%s.jpg", timeStamp);
-        File storageDir;
-        if (mCaptureStrategy.isPublic) {
-            storageDir = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES);
-            if (!storageDir.exists()) storageDir.mkdirs();
-        } else {
-            storageDir = mContext.get().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        }
-        if (mCaptureStrategy.directory != null) {
+        File storageDir = new File(ExternalCacheUtil.getImageCachePath(mContext.get()));
+        if (!TextUtils.isEmpty(mCaptureStrategy.directory)) {
             storageDir = new File(storageDir, mCaptureStrategy.directory);
             if (!storageDir.exists()) storageDir.mkdirs();
         }
 
         // Avoid joining path components manually
-        File tempFile = new File(storageDir, imageFileName);
-
-        // Handle the situation that user's external storage is not ready
-        if (!Environment.MEDIA_MOUNTED.equals(EnvironmentCompat.getStorageState(tempFile))) {
-            return null;
-        }
-
-        return tempFile;
+        return new File(storageDir, imageFileName);
     }
 
     public Uri getCurrentPhotoUri() {

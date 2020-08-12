@@ -17,15 +17,9 @@ package com.enzo.commonlib.utils.matisse.internal.entity;
 
 public class CaptureStrategy {
 
-    public final boolean isPublic;
     public final String directory;
 
-    public CaptureStrategy(boolean isPublic) {
-        this(isPublic, null);
-    }
-
-    public CaptureStrategy(boolean isPublic, String directory) {
-        this.isPublic = isPublic;
+    public CaptureStrategy(String directory) {
         this.directory = directory;
     }
 }

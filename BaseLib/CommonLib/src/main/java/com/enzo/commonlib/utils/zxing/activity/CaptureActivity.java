@@ -273,7 +273,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                                     .singleChoose(true)
                                     .crop(false)
                                     .capture(false)
-                                    .captureStrategy(new CaptureStrategy(true, "enzo"))
+                                    .captureStrategy(new CaptureStrategy( "enzo"))
                                     .maxSelectable(9)
                                     .spanCount(4)
                                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
