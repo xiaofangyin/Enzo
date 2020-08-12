@@ -1,6 +1,5 @@
 package com.enzo.commonlib.utils.zxing.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
@@ -26,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.common.PermissionsUtils;
 import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
 import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
@@ -53,8 +53,6 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
-
-import rx.functions.Action1;
 
 /**
  * Initial the camera
@@ -180,19 +178,15 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     public void initData(Bundle savedInstanceState) {
         viewfinderView.setLabelText(getStatusText());
 
-        rxPermissions.request(
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean aBoolean) {
-                        if (!aBoolean) {
-                            finish();
-                            ToastUtil.show("打开相机异常");
-                        }
-                    }
-                });
+        PermissionsUtils.requestCameraPermission(this, new PermissionsUtils.OnCheckCallback() {
+            @Override
+            public void granted(boolean granted) {
+                if (!granted) {
+                    finish();
+                    ToastUtil.show("打开相机异常");
+                }
+            }
+        });
     }
 
     @Override
@@ -261,40 +255,37 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     }
 
     private void chooseFromGallery() {
-        rxPermissions.request(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean aBoolean) {
-                        if (aBoolean) {
-                            Matisse.from(CaptureActivity.this)
-                                    .choose(MimeType.ofImage(), false)
-                                    .countable(true)
-                                    .singleChoose(true)
-                                    .crop(false)
-                                    .capture(false)
-                                    .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
-                                    .maxSelectable(9)
-                                    .spanCount(4)
-                                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                                    .thumbnailScale(0.85f)
-                                    .imageEngine(new GlideEngine())
-                                    .showSingleMediaType(true)
-                                    .maxOriginalSize(10)
-                                    .autoHideToolbarOnSingleTap(true)
-                                    .forResult(PICK_IMAGE_REQUEST_CODE);
-                        } else {
-                            LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied...");
-                            CenterAlertDialog.Builder builder = new CenterAlertDialog.Builder(CaptureActivity.this);
-                            builder.title("打开相册异常")
-                                    .content("请检查应用是否具有读取sd卡权限")
-                                    .confirm("确定")
-                                    .build()
-                                    .show();
-                        }
-                    }
-                });
+        PermissionsUtils.requestExternalStoragePermission(this, new PermissionsUtils.OnCheckCallback() {
+            @Override
+            public void granted(boolean granted) {
+                if (granted) {
+                    Matisse.from(CaptureActivity.this)
+                            .choose(MimeType.ofImage(), false)
+                            .countable(true)
+                            .singleChoose(true)
+                            .crop(false)
+                            .capture(false)
+                            .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
+                            .maxSelectable(9)
+                            .spanCount(4)
+                            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                            .thumbnailScale(0.85f)
+                            .imageEngine(new GlideEngine())
+                            .showSingleMediaType(true)
+                            .maxOriginalSize(10)
+                            .autoHideToolbarOnSingleTap(true)
+                            .forResult(PICK_IMAGE_REQUEST_CODE);
+                } else {
+                    LogUtil.d("PERMISSIONS_TAKE_PHOTO onDenied...");
+                    CenterAlertDialog.Builder builder = new CenterAlertDialog.Builder(CaptureActivity.this);
+                    builder.title("打开相册异常")
+                            .content("请检查应用是否具有读取sd卡权限")
+                            .confirm("确定")
+                            .build()
+                            .show();
+                }
+            }
+        });
     }
 
     /**

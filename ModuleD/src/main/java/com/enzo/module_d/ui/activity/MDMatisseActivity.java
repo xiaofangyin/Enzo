@@ -15,7 +15,6 @@
  */
 package com.enzo.module_d.ui.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -33,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.common.PermissionsUtils;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
@@ -45,11 +45,8 @@ import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.filter.GifSizeFilter;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.List;
-
-import rx.functions.Action1;
 
 public class MDMatisseActivity extends BaseActivity implements View.OnClickListener {
 
@@ -87,16 +84,15 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        new RxPermissions(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean aBoolean) {
-                        if (!aBoolean) {
-                            ToastUtil.show("当前应用缺少读取sd卡权限");
-                            finish();
-                        }
-                    }
-                });
+        PermissionsUtils.requestExternalStoragePermission(this, new PermissionsUtils.OnCheckCallback() {
+            @Override
+            public void granted(boolean granted) {
+                if (!granted) {
+                    ToastUtil.show("当前应用缺少读取sd卡权限");
+                    finish();
+                }
+            }
+        });
     }
 
     @Override

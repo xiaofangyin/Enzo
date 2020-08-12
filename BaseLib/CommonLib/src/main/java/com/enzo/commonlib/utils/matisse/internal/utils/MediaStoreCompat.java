@@ -15,7 +15,6 @@
  */
 package com.enzo.commonlib.utils.matisse.internal.utils;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,9 +29,9 @@ import androidx.fragment.app.Fragment;
 
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.FileProvider7;
+import com.enzo.commonlib.utils.common.PermissionsUtils;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,8 +40,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import rx.functions.Action1;
 
 public class MediaStoreCompat {
 
@@ -75,46 +72,41 @@ public class MediaStoreCompat {
         if (mContext.get() != null) {
             Activity activity = mContext.get();
             if (activity != null) {
-                new RxPermissions(activity)
-                        .request(
-                                Manifest.permission.CAMERA,
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .subscribe(new Action1<Boolean>() {
-                            @Override
-                            public void call(Boolean aBoolean) {
-                                if (!aBoolean) {
-                                    ToastUtil.show("打开相机异常");
-                                } else {
-                                    Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                    if (captureIntent.resolveActivity(context.getPackageManager()) != null) {
-                                        File photoFile = null;
-                                        try {
-                                            photoFile = createImageFile();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
+                PermissionsUtils.requestCameraPermission(activity, new PermissionsUtils.OnCheckCallback() {
+                    @Override
+                    public void granted(boolean granted) {
+                        if (!granted) {
+                            ToastUtil.show("打开相机异常");
+                        } else {
+                            Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (captureIntent.resolveActivity(context.getPackageManager()) != null) {
+                                File photoFile = null;
+                                try {
+                                    photoFile = createImageFile();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
-                                        if (photoFile != null) {
-                                            mCurrentPhotoPath = photoFile.getAbsolutePath();
-                                            mCurrentPhotoUri = FileProvider7.getUriForFile(mContext.get(), photoFile);
-                                            captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCurrentPhotoUri);
-                                            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                                                List<ResolveInfo> resInfoList = context.getPackageManager()
-                                                        .queryIntentActivities(captureIntent, PackageManager.MATCH_DEFAULT_ONLY);
-                                                for (ResolveInfo resolveInfo : resInfoList) {
-                                                    String packageName = resolveInfo.activityInfo.packageName;
-                                                    context.grantUriPermission(packageName, mCurrentPhotoUri,
-                                                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                                }
-                                            }
-                                            mContext.get().startActivityForResult(captureIntent, requestCode);
+                                if (photoFile != null) {
+                                    mCurrentPhotoPath = photoFile.getAbsolutePath();
+                                    mCurrentPhotoUri = FileProvider7.getUriForFile(mContext.get(), photoFile);
+                                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCurrentPhotoUri);
+                                    captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                        List<ResolveInfo> resInfoList = context.getPackageManager()
+                                                .queryIntentActivities(captureIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                                        for (ResolveInfo resolveInfo : resInfoList) {
+                                            String packageName = resolveInfo.activityInfo.packageName;
+                                            context.grantUriPermission(packageName, mCurrentPhotoUri,
+                                                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                         }
                                     }
+                                    mContext.get().startActivityForResult(captureIntent, requestCode);
                                 }
                             }
-                        });
+                        }
+                    }
+                });
             }
         }
     }

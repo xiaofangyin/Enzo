@@ -17,8 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.ActivityHelper;
-import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.common.PermissionsUtils;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
@@ -71,8 +71,8 @@ public class SAMainActivity extends BaseActivity {
         mTabLayout.showRedPoint(1);
         mHandler.sendEmptyMessage(0);
 
-        if (!ApkUtils.areNotificationsEnabled(this)) {
-            ApkUtils.showEnableNotificationsDialog(this);
+        if (!PermissionsUtils.areNotificationsEnabled(this)) {
+            PermissionsUtils.showEnableNotificationsDialog(this);
         }
     }
 

@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 /**
  * 文 件 名: BaseActivity
@@ -19,13 +18,10 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
     public static String TAG = BaseActivity.class.getSimpleName();
-    protected RxPermissions rxPermissions;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rxPermissions = new RxPermissions(BaseActivity.this);
-
         if (getStatusBarColor() != 0) {
             StateAppBar.setStatusBarColor(this, getStatusBarColor());
         }
