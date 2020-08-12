@@ -29,7 +29,6 @@ import java.util.concurrent.Future;
  * 异常捕获工具类  by zc 2018年05月07日15:24:15
  */
 public final class CrashHelper {
-    private static String defaultDir;
     private static String versionName;
     private static int versionCode;
 
@@ -37,7 +36,6 @@ public final class CrashHelper {
     private static final Format FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 
     public static void init(Context context) {
-        defaultDir = getDefaultCrashDir(context);
 
         try {
             PackageInfo pi = context
@@ -99,7 +97,7 @@ public final class CrashHelper {
     public static void saveCrashLogToLocal(Application application, String crashInfo) {
         final String time = FORMAT.format(new Date(System.currentTimeMillis()));
         String fileName = "crash-" + time + ".txt";
-        final String fullPath = defaultDir + fileName;
+        final String fullPath = new File(getDefaultCrashDir(application).getAbsolutePath(), fileName).getAbsolutePath();
         if (createOrExistsFile(fullPath)) {
             input2File(application, crashInfo, fullPath);
         } else {
@@ -112,9 +110,8 @@ public final class CrashHelper {
      *
      * @return dir
      */
-    private static String getDefaultCrashDir(Context context) {
-        return ExternalCacheUtil.getCrashDir(context)
-                + File.separator + "crash" + File.separator;
+    private static File getDefaultCrashDir(Context context) {
+        return ExternalCacheUtil.getCrashDir(context);
     }
 
     private static void input2File(final Application application, final String input, final String filePath) {
@@ -173,7 +170,7 @@ public final class CrashHelper {
      */
     private static void onClearFile(Application application) {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            File file = new File(getDefaultCrashDir(application));
+            File file = getDefaultCrashDir(application);
             if (file.exists()) {
                 File[] files = file.listFiles();
                 if (files != null && files.length > 3) {

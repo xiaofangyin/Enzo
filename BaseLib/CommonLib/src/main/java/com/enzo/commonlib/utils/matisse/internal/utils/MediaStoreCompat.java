@@ -125,7 +125,7 @@ public class MediaStoreCompat {
         String timeStamp =
                 new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = String.format("JPEG_%s.jpg", timeStamp);
-        File storageDir = new File(ExternalCacheUtil.getImageCachePath(mContext.get()));
+        File storageDir = ExternalCacheUtil.getImageCacheDirectory(mContext.get());
         if (!TextUtils.isEmpty(mCaptureStrategy.directory)) {
             storageDir = new File(storageDir, mCaptureStrategy.directory);
             if (!storageDir.exists()) storageDir.mkdirs();

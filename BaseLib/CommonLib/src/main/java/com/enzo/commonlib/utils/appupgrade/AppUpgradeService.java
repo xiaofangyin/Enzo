@@ -54,7 +54,7 @@ public class AppUpgradeService extends Service {
     public void downLoadFile(String url) {
         LogUtil.e(" AppUpgradeService downLoadFile url: " + url);
         DownloadUtil.get().download(url,
-                ExternalCacheUtil.getApkDownloadPath(getApplicationContext()),
+                ExternalCacheUtil.getApkDownloadDirectory(getApplicationContext()),
                 AppUpgradeUtil.DOWN_LOAD_APP_NAME,
                 new DownloadUtil.OnDownloadListener() {
 

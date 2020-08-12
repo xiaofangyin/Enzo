@@ -66,7 +66,7 @@ public class AppUpgradeUtil {
                 if (!isServiceRunning(context, AppUpgradeService.class.getName())) {
                     //新版本已经下载
                     ToastUtil.show("开始下载新版本...");
-                    File file = new File(ExternalCacheUtil.getApkDownloadPath(context), DOWN_LOAD_APP_NAME);
+                    File file = new File(ExternalCacheUtil.getApkDownloadDirectory(context), DOWN_LOAD_APP_NAME);
                     if (file.exists()) {
                         file.delete();
                     }

@@ -81,7 +81,7 @@ public class BitmapUtils {
      * 保存图片
      */
     public static void saveBitmap(Context context, String name, Bitmap bitmap, OnSaveBitmapListener listener) {
-        File _file = new File(ExternalCacheUtil.getImageCachePath(context), name);
+        File _file = new File(ExternalCacheUtil.getImageCacheDirectory(context), name);
         if (_file.exists()) {
             _file.delete();
         }

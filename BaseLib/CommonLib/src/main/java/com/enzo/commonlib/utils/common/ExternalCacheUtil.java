@@ -25,19 +25,8 @@ public class ExternalCacheUtil {
     /**
      * apk下载目录
      */
-    public static String getApkDownloadPath(Context context) {
-        return getExternalCacheDir(context) + "/apk/";
-    }
-
-    /**
-     * 网络请求日志缓存目录
-     */
-    public static String getImageCachePath(Context context) {
-        return getExternalCacheDir(context) + "/image/";
-    }
-
-    public static File getAvatarCacheDirectory(Context context) {
-        File file = new File(getExternalCacheDir(context),"avatar");
+    public static File getApkDownloadDirectory(Context context) {
+        File file = new File(getExternalCacheDir(context), "apk");
         if (!file.exists()) file.mkdirs();
         return file;
     }
@@ -45,15 +34,37 @@ public class ExternalCacheUtil {
     /**
      * 网络请求日志缓存目录
      */
-    public static String getNetLogCachePath(Context context) {
-        return getExternalCacheDir(context) + "/log/";
+    public static File getImageCacheDirectory(Context context) {
+        File file = new File(getExternalCacheDir(context), "image");
+        if (!file.exists()) file.mkdirs();
+        return file;
+    }
+
+    /**
+     * 头像缓存目录
+     */
+    public static File getAvatarCacheDirectory(Context context) {
+        File file = new File(getExternalCacheDir(context), "avatar");
+        if (!file.exists()) file.mkdirs();
+        return file;
+    }
+
+    /**
+     * 网络请求日志缓存目录
+     */
+    public static File getNetLogCacheDirectory(Context context) {
+        File file = new File(getExternalCacheDir(context), "log");
+        if (!file.exists()) file.mkdirs();
+        return file;
     }
 
     /**
      * crash缓存目录
      */
-    public static String getCrashDir(Context context) {
-        return getExternalCacheDir(context) + "/crash/";
+    public static File getCrashDir(Context context) {
+        File file = new File(getExternalCacheDir(context), "crash");
+        if (!file.exists()) file.mkdirs();
+        return file;
     }
 
     /**

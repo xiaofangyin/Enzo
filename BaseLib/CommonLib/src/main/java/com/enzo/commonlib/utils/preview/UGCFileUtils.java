@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.text.TextUtils;
 
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
@@ -34,7 +33,7 @@ import okhttp3.Response;
 public class UGCFileUtils {
 
     public static String getDownloadPath(Context context) {
-        return ExternalCacheUtil.getImageCachePath(context) + "download";
+        return new File(ExternalCacheUtil.getImageCacheDirectory(context), "download").getAbsolutePath();
     }
 
     public static void downLoadImageAndSave(final Context context, String url, final String path, final String fileName, final OnImageDownLoadCallBack callBack) {

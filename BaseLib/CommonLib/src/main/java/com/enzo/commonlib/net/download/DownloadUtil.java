@@ -43,7 +43,7 @@ public class DownloadUtil {
      * @param saveDir  储存下载文件的SDCard目录
      * @param listener 下载监听
      */
-    public void download(final String url, final String saveDir, final String fileName, final OnDownloadListener listener) {
+    public void download(final String url, final File saveDir, final String fileName, final OnDownloadListener listener) {
         listener.onDownloadStart();
         Request request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -67,7 +67,7 @@ public class DownloadUtil {
                 int len = 0;
                 FileOutputStream fos = null;
                 // 储存下载文件的目录
-                String savePath = isExistDir(saveDir);
+                String savePath = isExistDir(saveDir.getAbsolutePath());
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
