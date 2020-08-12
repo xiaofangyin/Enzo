@@ -1,19 +1,20 @@
 package com.enzo.module_c.ui.adapter;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.module_c.model.ColumnBean;
 import com.enzo.module_c.ui.fragment.MCFragment_1;
 import com.enzo.module_c.ui.fragment.MCFragment_2;
 import com.enzo.module_c.ui.fragment.MCFragment_3;
 import com.enzo.module_c.ui.fragment.MCFragment_4;
 import com.enzo.module_c.ui.fragment.MCFragment_5;
 import com.enzo.module_c.ui.fragment.MCFragment_6;
-import com.enzo.module_c.model.ColumnBean;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,13 @@
 package com.enzo.module_d.ui.adapter;
 
 import android.os.Bundle;
+import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -20,24 +23,26 @@ public class MDViewPagerIndicatorAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
 
     public MDViewPagerIndicatorAdapter(FragmentManager fm, List<Fragment> list) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         fragments = list;
         fragmentManager = fm;
     }
 
+    @NotNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NotNull ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
         fragmentManager.beginTransaction().show(fragment).commit();
         return fragment;
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NotNull ViewGroup container, int position, @NotNull Object object) {
         Fragment fragment = fragments.get(position);
         fragmentManager.beginTransaction().hide(fragment).commit();
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = fragments.get(position);
