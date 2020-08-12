@@ -10,6 +10,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.text.TextUtils;
@@ -273,7 +274,7 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
                                     .singleChoose(true)
                                     .crop(false)
                                     .capture(false)
-                                    .captureStrategy(new CaptureStrategy( "enzo"))
+                                    .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
                                     .maxSelectable(9)
                                     .spanCount(4)
                                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)

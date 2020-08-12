@@ -2,8 +2,8 @@ package com.enzo.commonlib.utils.matisse;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Environment;
 
+import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -33,23 +33,6 @@ public class PhotoCropConfig {
     }
 
     public static File getAvatarCroppedFile(Context context) {
-        return new File(getDiskCacheDir(context), "avatar.jpeg");
-    }
-
-    private static String getDiskCacheDir(Context context) {
-        String cachePath;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable()) {
-            if (context.getExternalCacheDir() != null) {
-                // /storage/emulated/0/Android/data/com.ifenglian.enzotest/cache
-                cachePath = context.getExternalCacheDir().getPath();
-            } else {
-                // /data/user/0/com.ifenglian.enzotest/cache
-                cachePath = context.getCacheDir().getPath();
-            }
-        } else {
-            cachePath = context.getCacheDir().getPath();
-        }
-        return cachePath;
+        return new File(ExternalCacheUtil.getAvatarCacheDirectory(context), "avatar.jpeg");
     }
 }

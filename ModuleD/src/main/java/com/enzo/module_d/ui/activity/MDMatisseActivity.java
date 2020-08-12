@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -133,7 +134,7 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
                     .theme(R.style.Matisse_XianYu)
                     .countable(true)
                     .capture(true)
-                    .captureStrategy(new CaptureStrategy("enzo"))
+                    .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
                     .maxSelectable(9)
                     .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                     .spanCount(4)
@@ -188,7 +189,7 @@ public class MDMatisseActivity extends BaseActivity implements View.OnClickListe
                     .singleChoose(true)
                     .crop(true)
                     .capture(true)
-                    .captureStrategy(new CaptureStrategy("enzo"))
+                    .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
                     .maxSelectable(9)
                     .spanCount(4)
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)

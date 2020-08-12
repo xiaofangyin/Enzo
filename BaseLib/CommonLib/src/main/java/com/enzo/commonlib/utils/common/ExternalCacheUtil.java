@@ -3,6 +3,8 @@ package com.enzo.commonlib.utils.common;
 import android.content.Context;
 import android.os.Environment;
 
+import java.io.File;
+
 /**
  * 文 件 名: ExternalCacheUtil
  * 创 建 人: xiaofangyin
@@ -32,6 +34,12 @@ public class ExternalCacheUtil {
      */
     public static String getImageCachePath(Context context) {
         return getExternalCacheDir(context) + "/image/";
+    }
+
+    public static File getAvatarCacheDirectory(Context context) {
+        File file = new File(getExternalCacheDir(context),"avatar");
+        if (!file.exists()) file.mkdirs();
+        return file;
     }
 
     /**
