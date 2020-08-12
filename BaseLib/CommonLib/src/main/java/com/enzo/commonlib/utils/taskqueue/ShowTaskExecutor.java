@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.taskqueue.task.ITask;
 
 public class ShowTaskExecutor {
@@ -27,8 +28,10 @@ public class ShowTaskExecutor {
             public void run() {
                 try {
                     while (isRunning) { //死循环
+                        LogUtil.d("task executor running1...");
                         ITask iTask;
                         iTask = taskQueue.take(); //取任务
+                        LogUtil.d("task executor running2...");
                         if (iTask != null) {
                             //执行任务
                             TaskEvent doEvent = new TaskEvent();
