@@ -32,14 +32,16 @@ public class MDViewPagerIndicatorAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(@NotNull ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        fragmentManager.beginTransaction().show(fragment).commit();
+        fragmentManager.beginTransaction().show(fragment).commitAllowingStateLoss();
+        fragmentManager.executePendingTransactions();
         return fragment;
     }
 
     @Override
     public void destroyItem(@NotNull ViewGroup container, int position, @NotNull Object object) {
         Fragment fragment = fragments.get(position);
-        fragmentManager.beginTransaction().hide(fragment).commit();
+        fragmentManager.beginTransaction().hide(fragment).commitAllowingStateLoss();
+        fragmentManager.executePendingTransactions();
     }
 
     @NotNull

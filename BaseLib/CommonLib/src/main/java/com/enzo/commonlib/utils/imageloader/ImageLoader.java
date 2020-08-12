@@ -19,7 +19,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
-import com.enzo.commonlib.utils.common.LogUtil;
 
 import java.io.File;
 
@@ -62,16 +61,12 @@ public class ImageLoader {
             RequestManager requestManager = Glide.with(builder.context);
             if (builder.file != null) {
                 glideRequest = requestManager.load(builder.file);
-                LogUtil.d("glide load file: " + builder.file.getAbsolutePath());
             } else if (builder.drawable != 0) {
                 glideRequest = requestManager.load(builder.drawable);
-                LogUtil.d("glide load drawable: " + builder.drawable);
             } else if (builder.path != null) {
                 glideRequest = requestManager.load(builder.path);
-                LogUtil.d("glide load url: " + builder.path);
             } else if (builder.uri != null) {
                 glideRequest = requestManager.load(builder.uri);
-                LogUtil.d("glide load uri: " + builder.uri.getPath());
             }
 
             if (glideRequest != null) {
@@ -96,14 +91,12 @@ public class ImageLoader {
                     glideRequest.listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            LogUtil.d("glide load success...");
                             builder.listener.onSuccess();
                             return false;
                         }
 
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) {
-                            LogUtil.d("glide load failed...");
                             builder.listener.onFailed(e);
                             return false;
                         }
@@ -116,13 +109,11 @@ public class ImageLoader {
     public void into(ImageView imageView) {
         if (glideRequest != null) {
             if (mBuilder != null && mBuilder.listener != null) {
-                LogUtil.d("glide load start...");
                 mBuilder.listener.onStart();
             }
             try {
                 glideRequest.into(imageView);
             } catch (Exception e) {
-                LogUtil.e("glide load error: " + e.getMessage());
                 if (mBuilder != null && mBuilder.listener != null) {
                     mBuilder.listener.onFailed(e);
                 }

@@ -16,6 +16,8 @@ import com.enzo.module_c.ui.fragment.MCFragment_4;
 import com.enzo.module_c.ui.fragment.MCFragment_5;
 import com.enzo.module_c.ui.fragment.MCFragment_6;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,38 +42,30 @@ public class MCViewPagerAdapter extends BasePagerAdapter {
         notifyDataSetChanged();
     }
 
-    public List<BaseFragment> getFragments() {
-        return mFragments;
-    }
-
-    public List<ColumnBean> getColumns() {
-        return mColumns;
-    }
-
     private List<BaseFragment> generateFragments(List<ColumnBean> titles) {
         List<BaseFragment> temp = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {
-            String id = titles.get(i).getColumn_id();
+            int id = titles.get(i).getColumn_id();
             BaseFragment fragment = (BaseFragment) mFragmentManager.
-                    findFragmentByTag(makeFragmentName(id));
+                    findFragmentByTag(makeFragmentName(titles.get(i).hashCode(), id));
             if (fragment == null) {
                 switch (id) {
-                    case "1":
+                    case 1:
                         fragment = new MCFragment_1();
                         break;
-                    case "2":
+                    case 2:
                         fragment = new MCFragment_2();
                         break;
-                    case "3":
+                    case 3:
                         fragment = new MCFragment_3();
                         break;
-                    case "4":
+                    case 4:
                         fragment = new MCFragment_4();
                         break;
-                    case "5":
+                    case 5:
                         fragment = new MCFragment_5();
                         break;
-                    case "6":
+                    case 6:
                         fragment = new MCFragment_6();
                         break;
                 }
@@ -82,6 +76,12 @@ public class MCViewPagerAdapter extends BasePagerAdapter {
     }
 
     @Override
+    public int getCount() {
+        return mFragments == null ? 0 : mFragments.size();
+    }
+
+    @NotNull
+    @Override
     public Fragment getItem(int position) {
         Fragment fragment = mFragments.get(position);
         Bundle bundle = new Bundle();
@@ -90,18 +90,7 @@ public class MCViewPagerAdapter extends BasePagerAdapter {
         return fragment;
     }
 
-    @Override
-    public String getItemId(int position) {
-        return String.valueOf(mColumns.get(position).getColumn_id());
-    }
-
-    @Override
-    public int getCount() {
-        return mFragments == null ? 0 : mFragments.size();
-    }
-
-    @Override
-    public int getItemPosition(@NonNull Object object) {
-        return PagerAdapter.POSITION_NONE;
+    private String makeFragmentName(int viewId, long id) {
+        return "android:switcher:" + viewId + ":" + id;
     }
 }
