@@ -2,10 +2,8 @@ package com.enzo.module_c.ui.adapter;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.module_c.model.ColumnBean;
@@ -46,31 +44,30 @@ public class MCViewPagerAdapter extends BasePagerAdapter {
         List<BaseFragment> temp = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {
             int id = titles.get(i).getColumn_id();
-            BaseFragment fragment = (BaseFragment) mFragmentManager.
-                    findFragmentByTag(makeFragmentName(titles.get(i).hashCode(), id));
-            if (fragment == null) {
-                switch (id) {
-                    case 1:
-                        fragment = new MCFragment_1();
-                        break;
-                    case 2:
-                        fragment = new MCFragment_2();
-                        break;
-                    case 3:
-                        fragment = new MCFragment_3();
-                        break;
-                    case 4:
-                        fragment = new MCFragment_4();
-                        break;
-                    case 5:
-                        fragment = new MCFragment_5();
-                        break;
-                    case 6:
-                        fragment = new MCFragment_6();
-                        break;
-                }
+            BaseFragment fragment = null;
+            switch (id) {
+                case 1:
+                    fragment = new MCFragment_1();
+                    break;
+                case 2:
+                    fragment = new MCFragment_2();
+                    break;
+                case 3:
+                    fragment = new MCFragment_3();
+                    break;
+                case 4:
+                    fragment = new MCFragment_4();
+                    break;
+                case 5:
+                    fragment = new MCFragment_5();
+                    break;
+                case 6:
+                    fragment = new MCFragment_6();
+                    break;
             }
-            temp.add(fragment);
+            if (fragment != null) {
+                temp.add(fragment);
+            }
         }
         return temp;
     }
@@ -88,9 +85,5 @@ public class MCViewPagerAdapter extends BasePagerAdapter {
         bundle.putSerializable("entity", mColumns.get(position));
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    private String makeFragmentName(int viewId, long id) {
-        return "android:switcher:" + viewId + ":" + id;
     }
 }
