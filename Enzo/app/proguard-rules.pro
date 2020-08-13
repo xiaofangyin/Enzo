@@ -97,11 +97,6 @@
 #泛型
 -keepattributes Signature
 
-#java bean
--keep class com.enzo.commonlib.utils.taskqueue.task.** { *; }
--keep class com.enzo.module_d.model.task.** { *; }
-
-
 #third part module library
 -dontwarn okio.**
 -dontwarn javax.annotation.Nullable
@@ -158,3 +153,9 @@
 -keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
 # 如果使用了 单类注入，即不定义接口实现 IProvider，需添加下面规则，保护实现
 # -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
+
+
+#java bean
+-keep class com.enzo.commonlib.utils.taskqueue.task.** { *; }
+-keep class com.enzo.module_d.model.task.** { *; }
+-keep class com.enzo.flkit.account.** { *; }
