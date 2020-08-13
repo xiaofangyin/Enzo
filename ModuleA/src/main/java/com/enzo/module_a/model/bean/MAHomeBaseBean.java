@@ -1,4 +1,4 @@
-package com.enzo.module_a.model;
+package com.enzo.module_a.model.bean;
 
 /**
  * 文 件 名: MAHomeBaseBean

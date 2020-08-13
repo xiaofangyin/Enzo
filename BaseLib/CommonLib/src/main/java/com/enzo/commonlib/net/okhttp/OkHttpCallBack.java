@@ -3,7 +3,7 @@ package com.enzo.commonlib.net.okhttp;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public abstract class OkHttpCallBack<T> extends BaseCallBack<T> {
+public abstract class OkHttpCallBack extends BaseCallBack {
 
     @Override
     public void onRequestBefore(Request request) {

@@ -66,6 +66,10 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         init(context);
     }
 
+    public boolean fullSpan(int position) {
+        return false;
+    }
+
     /**
      * 初始化下拉刷新、上拉加载更多的状态显示View
      */
@@ -564,7 +568,11 @@ public class PullToRefreshRecyclerView extends RecyclerView {
                 gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
                     public int getSpanSize(int position) {
-                        return (isFooter(position) || isRefreshHeader(position)) ? gridManager.getSpanCount() : 1;
+                        if (isFooter(position) || isRefreshHeader(position) || fullSpan(position)) {
+                            return gridManager.getSpanCount();
+                        } else {
+                            return 1;
+                        }
                     }
                 });
             }
@@ -582,7 +590,9 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
             if ((lp instanceof StaggeredGridLayoutManager.LayoutParams)
                     && (isRefreshHeader(holder.getLayoutPosition())
-                    || isFooter(holder.getLayoutPosition()))) {
+                    || isFooter(holder.getLayoutPosition())
+                    || fullSpan(holder.getLayoutPosition())
+            )) {
                 StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
                 p.setFullSpan(true);
             }

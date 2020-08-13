@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,13 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
+import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.mzbanner.MZBannerView;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZHolderCreator;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZViewHolder;
 import com.enzo.module_a.R;
-import com.enzo.module_a.model.MAHomeBannerBean;
-import com.enzo.module_a.model.MAHomeBaseBean;
+import com.enzo.module_a.model.bean.MAHomeBannerBean;
+import com.enzo.module_a.model.bean.MAHomeBaseBean;
+import com.enzo.module_a.model.bean.MAHomeGoodsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,14 @@ import java.util.List;
  * 邮   箱: xiaofywork@163.com
  */
 public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
+
+    private static final int TYPE_BANNER = 1;
+    private static final int TYPE_GOODS = 2;
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
 
     @Override
     public int getItemViewType(int position) {
@@ -44,6 +55,10 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.ma_item_home_banner, parent, false);
             return new HomeBannerHolder(view);
+        } else if (viewType == 2) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.ma_item_home_goods, parent, false);
+            return new HomeGoodsViewHolder(view);
         } else {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.ma_item_home_, parent, false);
@@ -110,6 +125,28 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
                 // 数据绑定
                 mImageView.setImageResource(data);
             }
+        }
+    }
+
+    private static class HomeGoodsViewHolder extends BaseViewHolder<MAHomeGoodsBean> {
+
+        private ImageView imageView;
+        private TextView textView;
+
+        public HomeGoodsViewHolder(View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.ma_goods_thumbnail);
+            textView = itemView.findViewById(R.id.ma_goods_author);
+        }
+
+        @Override
+        public void setUpView(MAHomeGoodsBean model, int position, RecyclerView.Adapter adapter) {
+            new ImageLoader.Builder(getContext())
+                    .placeHolder(R.mipmap.icon_default_photo)
+                    .load(model.getDownload_url())
+                    .build()
+                    .into(imageView);
+            textView.setText(model.getAuthor());
         }
     }
 

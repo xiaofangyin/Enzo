@@ -159,3 +159,4 @@
 -keep class com.enzo.commonlib.utils.taskqueue.task.** { *; }
 -keep class com.enzo.module_d.model.task.** { *; }
 -keep class com.enzo.flkit.account.** { *; }
+-keep class com.enzo.module_a.model.bean.** { *; }

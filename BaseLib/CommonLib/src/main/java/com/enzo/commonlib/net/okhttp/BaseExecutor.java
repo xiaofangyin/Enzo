@@ -8,7 +8,7 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public abstract class BaseExecutor<T> {
+public abstract class BaseExecutor {
 
     protected JsonCallback jsonCallback;
     protected Map<String, String> mParams = new HashMap<>();
@@ -18,19 +18,19 @@ public abstract class BaseExecutor<T> {
 
     protected abstract String getVirtual();
 
-    public BaseExecutor<T> callback(JsonCallback<T> jsonCallback) {
+    public BaseExecutor callback(JsonCallback jsonCallback) {
         this.jsonCallback = jsonCallback;
         return this;
     }
 
-    public BaseExecutor<T> params(Map<String, String> params) {
+    public BaseExecutor params(Map<String, String> params) {
         if (params != null && !params.isEmpty()) {
             mParams.putAll(params);
         }
         return this;
     }
 
-    public BaseExecutor<T> headers(Map<String, String> headers) {
+    public BaseExecutor headers(Map<String, String> headers) {
         if (headers != null && !headers.isEmpty()) {
             mHeaders.putAll(headers);
         }
@@ -39,11 +39,11 @@ public abstract class BaseExecutor<T> {
 
     public abstract void execute();
 
-    protected void post(final OkHttpCallBack<T> callback) {
+    protected void post(final OkHttpCallBack callback) {
         mParams.putAll(PhoneUtils.getInstance().getDefaultParams());
-        OkHttpManager.getInstance().postRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack<T>() {
+        OkHttpManager.getInstance().postRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack() {
             @Override
-            public void onSuccess(Call call, Response response, T o) {
+            public void onSuccess(Call call, Response response, String o) {
                 if (callback != null) {
                     callback.onSuccess(call, response, o);
                 }
@@ -58,11 +58,11 @@ public abstract class BaseExecutor<T> {
         });
     }
 
-    protected void get(final OkHttpCallBack<T> callback) {
+    protected void get(final OkHttpCallBack callback) {
         mParams.putAll(PhoneUtils.getInstance().getDefaultParams());
-        OkHttpManager.getInstance().getRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack<T>() {
+        OkHttpManager.getInstance().getRequest(getHost().concat(getVirtual()), mParams, mHeaders, new OkHttpCallBack() {
             @Override
-            public void onSuccess(Call call, Response response, T o) {
+            public void onSuccess(Call call, Response response, String o) {
                 if (callback != null) {
                     callback.onSuccess(call, response, o);
                 }

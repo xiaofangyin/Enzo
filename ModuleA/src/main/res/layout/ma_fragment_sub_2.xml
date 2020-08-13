@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView
+    <com.enzo.module_a.ui.view.MAHomePullRecyclerView
         android:id="@+id/ma_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

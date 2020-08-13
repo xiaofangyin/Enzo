@@ -13,7 +13,7 @@ import okhttp3.Response;
  * 创建日期: 2020/8/1
  * 邮   箱: xiaofywork@163.com
  */
-public class GetSubjectExecutor extends BaseExecutor<LinkedTreeMap<String, String>> {
+public class GetSubjectExecutor extends BaseExecutor{
 
     public static final String BASE_URL = "http://api.douban.com/v2/movie/";
     // 豆瓣电影申请的开发者 API KEY（暂时不对个人开发者开放）
@@ -33,9 +33,9 @@ public class GetSubjectExecutor extends BaseExecutor<LinkedTreeMap<String, Strin
 
     @Override
     public void execute() {
-        get(new OkHttpCallBack<LinkedTreeMap<String, String>>() {
+        get(new OkHttpCallBack() {
             @Override
-            public void onSuccess(Call call, Response response, LinkedTreeMap<String, String> o) {
+            public void onSuccess(Call call, Response response, String o) {
                 if (jsonCallback != null) {
                     jsonCallback.onSuccess(o);
                 }

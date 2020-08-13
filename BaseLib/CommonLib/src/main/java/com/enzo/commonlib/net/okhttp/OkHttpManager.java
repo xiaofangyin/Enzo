@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -298,17 +297,7 @@ public class OkHttpManager {
                 int code = response.code();
                 if (response.isSuccessful()) {
                     logResult(request, params, result, code);
-                    if (callBack.mType == String.class) {
-                        callBackSuccess(callBack, call, response, result);
-                    } else {
-                        try {
-                            Object object = gson.fromJson(result, callBack.mType);//自动转化为 泛型对象
-                            callBackSuccess(callBack, call, response, object);
-                        } catch (JsonParseException e) {
-                            //json解析错误时调用
-                            callBackFailure(call, e, callBack);
-                        }
-                    }
+                    callBackSuccess(callBack, call, response, result);
                 } else {
                     logResult(request, params, result, code);
                     Exception errorException = new HttpErrorException(response.code(), result);
@@ -347,7 +336,7 @@ public class OkHttpManager {
         return builder.build();
     }
 
-    private void callBackSuccess(final BaseCallBack callBack, final Call call, final Response response, final Object object) {
+    private void callBackSuccess(final BaseCallBack callBack, final Call call, final Response response, final String object) {
         handler.post(new Runnable() {
             @Override
             public void run() {

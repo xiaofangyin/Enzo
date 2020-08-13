@@ -1,20 +1,20 @@
 package com.enzo.module_a.ui.fragment;
 
-import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.module_a.R;
-import com.enzo.module_a.model.MAHomeBannerBean;
-import com.enzo.module_a.model.MAHomeBaseBean;
+import com.enzo.module_a.model.bean.MAHomeBannerBean;
+import com.enzo.module_a.model.bean.MAHomeBaseBean;
+import com.enzo.module_a.model.bean.MAHomeGoodsBean;
+import com.enzo.module_a.model.exetutor.MAPhotoListExecutor;
 import com.enzo.module_a.ui.adapter.MAHomeAdapter;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,19 @@ public class MAHomeSubFragment2 extends BaseFragment {
     @Override
     public void initView(View rootView) {
         recyclerView = rootView.findViewById(R.id.ma_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                layoutManager.invalidateSpanAssignments(); //防止第一行到顶部有空白区域
+            }
+        });
+
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setPullRefreshEnabled(true);
         recyclerView.setLoadMoreEnabled(true);
     }
@@ -42,29 +54,17 @@ public class MAHomeSubFragment2 extends BaseFragment {
         recyclerView.setOnMultiPurposeListener(new PullToRefreshRecyclerView.SimpleMultiPurposeListener() {
             @Override
             public void onRecyclerViewRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.setNewData(buildData(10, true));
-                        recyclerView.refreshSuccess();
-                    }
-                }, 3000);
+                getPhotoList(true);
             }
 
             @Override
             public void onRecyclerViewLoadMore() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.setLoadMoreData(buildData(10, false));
-                        recyclerView.loadMoreSuccess();
-                    }
-                }, 3000);
+                getPhotoList(false);
             }
 
             @Override
             public void onLoadMoreRetry() {
-
+                getPhotoList(false);
             }
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -84,20 +84,35 @@ public class MAHomeSubFragment2 extends BaseFragment {
     public void lazyLoad() {
         adapter = new MAHomeAdapter();
         recyclerView.setAdapter(adapter);
-
-        List<MAHomeBaseBean> list = buildData(10, true);
-        adapter.setNewData(list);
+        recyclerView.autoRefresh();
     }
 
-    @NotNull
-    private List<MAHomeBaseBean> buildData(int i2, boolean addBanner) {
-        List<MAHomeBaseBean> list = new ArrayList<>();
-        if (addBanner) {
-            list.add(new MAHomeBannerBean(1));
-        }
-        for (int i = 0; i < i2; i++) {
-            list.add(new MAHomeBaseBean(0));
-        }
-        return list;
+    private void getPhotoList(final boolean pullRefresh) {
+        new MAPhotoListExecutor()
+                .callback(new BaseExecutor.JsonCallback<List<MAHomeGoodsBean>>() {
+                    @Override
+                    public void onSuccess(List<MAHomeGoodsBean> response) {
+                        if (pullRefresh) {
+                            recyclerView.refreshSuccess();
+                            List<MAHomeBaseBean> list = new ArrayList<>();
+                            list.add(new MAHomeBannerBean(1));
+                            list.addAll(new ArrayList<>(response));
+                            adapter.setNewData(list);
+                        } else {
+                            recyclerView.loadMoreSuccess();
+                            adapter.setLoadMoreData(new ArrayList<MAHomeBaseBean>(response));
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(Exception e) {
+                        if (pullRefresh) {
+                            recyclerView.refreshFailed();
+                        } else {
+                            recyclerView.loadMoreFailed();
+                        }
+                    }
+                })
+                .execute();
     }
 }
