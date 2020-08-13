@@ -13,6 +13,8 @@ import androidx.core.app.NotificationManagerCompat;
 import com.enzo.commonlib.widget.alertdialog.CenterAlertDialog;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.util.Objects;
+
 import rx.functions.Action1;
 
 /**
@@ -40,10 +42,10 @@ public class PermissionsUtils {
      */
     public static void showEnableNotificationsDialog(final Context context) {
         new CenterAlertDialog.Builder(context)
-                .title("通知权限")
-                .content("还没有开启通知权限，点击去开启")
+                .title("开启通知权限")
+                .content("请开启".concat(Objects.requireNonNull(ApkUtils.getAppName(context))).concat("的通知权限，获取实时信息"))
                 .cancel("取消")
-                .confirm("开启")
+                .confirm("设置")
                 .listener(new CenterAlertDialog.AlertDialogListener() {
                     @Override
                     public void onNegClick() {
