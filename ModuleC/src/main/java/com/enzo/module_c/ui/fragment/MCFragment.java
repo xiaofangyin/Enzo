@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -40,6 +41,18 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
     private List<ColumnBean> columnList;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.d("fragment c on resume...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.d("fragment c on pause...");
+    }
 
     @Override
     public int getLayoutId() {

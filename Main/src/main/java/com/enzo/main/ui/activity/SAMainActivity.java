@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseActivity;
@@ -46,6 +47,7 @@ public class SAMainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
+    private Fragment mCurrentPrimaryFragment;
 
     @Override
     public int getLayoutId() {
@@ -136,20 +138,21 @@ public class SAMainActivity extends BaseActivity {
     }
 
     private void showFragment(FragmentTransaction transaction, Fragment fragment) {
-        if (fragment != null) {
+        if (fragment != null && fragment != mCurrentPrimaryFragment) {
             if (fragment.isAdded()) {
                 transaction.show(fragment);
             } else {
                 transaction.add(R.id.main_content, fragment, fragment.getClass().getSimpleName());
             }
+            transaction.setMaxLifecycle(fragment, Lifecycle.State.RESUMED);
+            mCurrentPrimaryFragment = fragment;
         }
     }
 
     private void hideFragment(FragmentTransaction transaction) {
-        for (int i = 0; i < mFragments.size(); i++) {
-            if (mFragments.get(i) != null && mFragments.get(i).isAdded()) {
-                transaction.hide(mFragments.get(i));
-            }
+        if (mCurrentPrimaryFragment != null && mCurrentPrimaryFragment.isAdded()) {
+            transaction.hide(mCurrentPrimaryFragment);
+            transaction.setMaxLifecycle(mCurrentPrimaryFragment, Lifecycle.State.STARTED);
         }
     }
 

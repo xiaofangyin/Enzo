@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator;
 import com.enzo.flkit.router.ModuleDRouterPath;
@@ -34,6 +35,18 @@ public class MDFragment extends BaseFragment {
     private List<String> itemTitles = Arrays.asList("短信", "收藏", "推荐", "发现");
     private ViewPager mViewPager;
     private ViewPagerIndicator mIndicator;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.d("fragment d on resume...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.d("fragment d on pause...");
+    }
 
     @Override
     public int getLayoutId() {

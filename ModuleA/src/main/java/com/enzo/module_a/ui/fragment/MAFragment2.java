@@ -19,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView;
@@ -51,6 +52,18 @@ public class MAFragment2 extends BaseFragment {
     private AutoScrollTextView tvSearch;
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.d("fragment a on resume...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.d("fragment a on pause...");
+    }
 
     @Override
     public int getLayoutId() {
