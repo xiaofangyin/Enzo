@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:background="#243233"
         android:fitsSystemWindows="true"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"
-        />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -21,9 +20,9 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/content_view"
-            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:overScrollMode="never"
             app:layout_behavior="@string/bottom_sheet_behavior"
             tools:ignore="MissingConstraints">
 

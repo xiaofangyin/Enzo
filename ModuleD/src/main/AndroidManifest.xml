@@ -1,10 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.enzo.module_d">
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
 
+        <activity
+            android:name=".ui.activity.MDBossCompanyDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDLoadingLayoutActivity"
             android:screenOrientation="portrait" />

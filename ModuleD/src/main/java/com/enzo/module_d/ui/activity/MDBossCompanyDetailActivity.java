@@ -1,4 +1,4 @@
-package com.enzo.module_a.ui.activity;
+package com.enzo.module_d.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,14 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseActivity;
-import com.enzo.module_a.R;
+import com.enzo.flkit.router.ModuleDRouterPath;
+import com.enzo.module_d.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 /**
  * Boss公司详情
  */
-public class MABossCompanyDetailActivity extends BaseActivity {
+@Route(path = ModuleDRouterPath.MODULE_D_BOSS_COMPANY)
+public class MDBossCompanyDetailActivity extends BaseActivity {
 
     private BottomSheetBehavior bottomSheetBehavior;
     private NestedScrollView contentLayout;
@@ -25,7 +28,7 @@ public class MABossCompanyDetailActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.ma_activity_company_detail;
+        return R.layout.md_activity_company_detail;
     }
 
     @Override

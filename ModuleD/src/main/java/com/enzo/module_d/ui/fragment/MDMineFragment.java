@@ -17,6 +17,7 @@ import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
+import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
@@ -63,6 +64,7 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_add_device).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_boss_company).setOnClickListener(this);
         rootView.findViewById(R.id.btn_av_loading).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
@@ -106,6 +108,9 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
             });
         } else if (id == R.id.btn_add_device) {
             ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
+        } else if (id == R.id.btn_boss_company) {
+            Intent intent = new Intent(getContext(), MDBossCompanyDetailActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_touch_event) {
             Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
             startActivity(intent);

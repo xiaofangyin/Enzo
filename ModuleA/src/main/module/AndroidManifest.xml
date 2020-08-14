@@ -22,12 +22,6 @@
         <activity
             android:name=".ui.activity.MAScanQrCodeActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.MABossCompanyDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.MABossMineActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

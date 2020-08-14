@@ -1,7 +1,6 @@
 package com.enzo.module_a.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
 import com.enzo.commonlib.utils.common.DensityUtil;
@@ -23,12 +23,11 @@ import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.mzbanner.MZBannerView;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZHolderCreator;
 import com.enzo.commonlib.widget.banner.mzbanner.holder.MZViewHolder;
+import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_a.R;
 import com.enzo.module_a.model.bean.MAHomeBannerBean;
 import com.enzo.module_a.model.bean.MAHomeBaseBean;
 import com.enzo.module_a.model.bean.MAHomeGoodsBean;
-import com.enzo.module_a.ui.activity.MABossMineActivity;
-import com.enzo.module_a.ui.activity.MABossCompanyDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,16 +160,10 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
                     .into(imageView);
             textView.setText(model.getAuthor());
 
-            imageView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getContext().startActivity(new Intent(getContext(), MABossCompanyDetailActivity.class));
-                }
-            });
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getContext().startActivity(new Intent(getContext(), MABossMineActivity.class));
+                    ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_BOSS_COMPANY).navigation();
                 }
             });
         }
