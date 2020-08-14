@@ -1,5 +1,7 @@
 package com.enzo.module_a.model.bean;
 
+import com.enzo.module_a.ui.adapter.MAHomeAdapter;
+
 import java.io.Serializable;
 
 /**
@@ -27,7 +29,7 @@ public class MAHomeGoodsBean extends MAHomeBaseBean implements Serializable {
     private String download_url;
 
     public MAHomeGoodsBean() {
-        super(2);
+        super(MAHomeAdapter.TYPE_GOODS);
     }
 
     public String getId() {

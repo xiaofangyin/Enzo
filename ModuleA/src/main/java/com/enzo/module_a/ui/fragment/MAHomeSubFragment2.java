@@ -47,8 +47,6 @@ public class MAHomeSubFragment2 extends BaseFragment {
             }
         });
 
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-//        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setPullRefreshEnabled(true);
         recyclerView.setLoadMoreEnabled(true);
     }
@@ -106,7 +104,7 @@ public class MAHomeSubFragment2 extends BaseFragment {
                     public void onSuccess(List<MAHomeGoodsBean> response) {
                         if (pullRefresh) {
                             List<MAHomeBaseBean> list = new ArrayList<>();
-                            list.add(new MAHomeBannerBean(1));
+                            list.add(new MAHomeBannerBean(MAHomeAdapter.TYPE_BANNER));
                             list.addAll(new ArrayList<>(response));
                             adapter.setNewData(list);
                             recyclerView.refreshSuccess();

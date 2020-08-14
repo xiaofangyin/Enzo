@@ -6,7 +6,7 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
-    <com.enzo.commonlib.widget.squarelayout.SquareImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ma_goods_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

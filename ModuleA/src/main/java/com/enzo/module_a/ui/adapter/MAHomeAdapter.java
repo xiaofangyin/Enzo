@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.mzbanner.MZBannerView;
@@ -34,8 +36,8 @@ import java.util.List;
  */
 public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
 
-    private static final int TYPE_BANNER = 1;
-    private static final int TYPE_GOODS = 2;
+    public static final int TYPE_BANNER = 1;
+    public static final int TYPE_GOODS = 2;
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -141,6 +143,11 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
 
         @Override
         public void setUpView(MAHomeGoodsBean model, int position, RecyclerView.Adapter adapter) {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+            int height = model.getHeight() % 100;
+            layoutParams.height = DensityUtil.dip2px(getContext(), 150) + height;
+            imageView.setLayoutParams(layoutParams);
+
             new ImageLoader.Builder(getContext())
                     .placeHolder(R.mipmap.icon_default_photo)
                     .load(model.getDownload_url())
