@@ -71,7 +71,7 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
         holder.setUpView(mData.get(position), position, this);
     }
 
-    private static class HomeBannerHolder extends BaseViewHolder<MAHomeBannerBean> {
+    public static class HomeBannerHolder extends BaseViewHolder<MAHomeBannerBean> {
 
         private MZBannerView mMZBanner;
         private final List<Integer> bannerList;
