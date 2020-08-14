@@ -19,6 +19,8 @@ import com.enzo.commonlib.widget.pulltorefresh.recyclerview.base.BasePullToRefre
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultLoadMoreView;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.defaultview.DefaultRefreshHeaderView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -441,8 +443,9 @@ public class PullToRefreshRecyclerView extends RecyclerView {
             return isAllowRefresh && position == 0;
         }
 
+        @NotNull
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
             if (viewType == TYPE_REFRESH_HEADER) {
                 return new HeaderAndFooterViewHolder(headerRefreshView);
             } else if (viewType == TYPE_LOAD_MORE_FOOTER) {
@@ -453,7 +456,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(@NotNull ViewHolder holder, int position) {
             if (isRefreshHeader(position)) {
                 return;
             }
@@ -470,7 +473,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+        public void onBindViewHolder(@NotNull ViewHolder holder, int position, @NotNull List<Object> payloads) {
             if (isRefreshHeader(position)) {
                 return;
             }
@@ -560,7 +563,7 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         @Override
-        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        public void onAttachedToRecyclerView(@NotNull RecyclerView recyclerView) {
             super.onAttachedToRecyclerView(recyclerView);
             LayoutManager manager = recyclerView.getLayoutManager();
             if (manager instanceof GridLayoutManager) {
@@ -580,12 +583,12 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         @Override
-        public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        public void onDetachedFromRecyclerView(@NotNull RecyclerView recyclerView) {
             adapter.onDetachedFromRecyclerView(recyclerView);
         }
 
         @Override
-        public void onViewAttachedToWindow(ViewHolder holder) {
+        public void onViewAttachedToWindow(@NotNull ViewHolder holder) {
             super.onViewAttachedToWindow(holder);
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
             if ((lp instanceof StaggeredGridLayoutManager.LayoutParams)
@@ -600,17 +603,17 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
 
         @Override
-        public void onViewDetachedFromWindow(ViewHolder holder) {
+        public void onViewDetachedFromWindow(@NotNull ViewHolder holder) {
             adapter.onViewDetachedFromWindow(holder);
         }
 
         @Override
-        public void onViewRecycled(ViewHolder holder) {
+        public void onViewRecycled(@NotNull ViewHolder holder) {
             adapter.onViewRecycled(holder);
         }
 
         @Override
-        public boolean onFailedToRecycleView(ViewHolder holder) {
+        public boolean onFailedToRecycleView(@NotNull ViewHolder holder) {
             return adapter.onFailedToRecycleView(holder);
         }
 
