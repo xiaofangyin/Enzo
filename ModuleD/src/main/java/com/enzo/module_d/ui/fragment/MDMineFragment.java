@@ -24,6 +24,7 @@ import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDOkHttpActivity;
 import com.enzo.module_d.ui.activity.MDProgressActivity;
+import com.enzo.module_d.ui.activity.MDRulerActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
 import com.enzo.module_d.ui.activity.MDScrollingImageViewActivity;
@@ -79,6 +80,7 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         rootView.findViewById(R.id.btn_progress).setOnClickListener(this);
         rootView.findViewById(R.id.btn_scrolling_image_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
     }
 
     @Override
@@ -158,6 +160,9 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
             startActivity(intent);
         } else if (id == R.id.btn_ugc_banner) {
             Intent intent = new Intent(getContext(), MDUGCBannerActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_ruler) {
+            Intent intent = new Intent(getContext(), MDRulerActivity.class);
             startActivity(intent);
         }
     }

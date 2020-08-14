@@ -5,35 +5,12 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.enzo.commonlib.widget.progress.WaterWaveView
-        android:id="@+id/water_wave_view"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="20dp"
-        android:src="@mipmap/ic_launcher_round" />
-
-    <com.enzo.commonlib.widget.progress.FLCSeekBar
-        android:id="@+id/seek_bar_progress"
+    <TextView
+        android:id="@+id/text_view"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp" />
-
-    <com.enzo.commonlib.widget.progress.FLCSeekBar
-        android:id="@+id/seek_bar_size"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp" />
-
-    <com.enzo.commonlib.widget.progress.FLCSeekBar
-        android:id="@+id/seek_bar_amplitude"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/color_white"
+        android:textSize="28sp" />
 
 </LinearLayout>

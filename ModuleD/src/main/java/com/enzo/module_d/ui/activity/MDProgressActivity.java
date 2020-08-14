@@ -16,6 +16,7 @@ import com.enzo.commonlib.widget.progress.CircularProgressBarWithRate;
 import com.enzo.commonlib.widget.progress.FLCSeekBar;
 import com.enzo.commonlib.widget.progress.HorizontalProgressBar;
 import com.enzo.commonlib.widget.progress.SRDiskCapacityProgressBar;
+import com.enzo.commonlib.widget.progress.WaterWaveView;
 import com.enzo.module_d.R;
 
 /**
@@ -32,6 +33,7 @@ public class MDProgressActivity extends BaseActivity {
     private SRDiskCapacityProgressBar mDiskProgressBar;
     private CircularProgressBar mCircularProgressBar;
     private CircularProgressBarWithRate mRateTextCircularProgressBar;
+    private WaterWaveView waterWaveView;
 
     @Override
     public int getLayoutId() {
@@ -63,6 +65,7 @@ public class MDProgressActivity extends BaseActivity {
 
         mCustomProgressBar = findViewById(R.id.web_view_progress_bar);
         mDiskProgressBar = findViewById(R.id.disk_capacity_progress);
+        waterWaveView = findViewById(R.id.water_wave_view);
     }
 
     @Override
@@ -99,6 +102,7 @@ public class MDProgressActivity extends BaseActivity {
             mCircularProgressBar.setProgress(msg.what);
             mRateTextCircularProgressBar.setProgress(msg.what);
             mCustomProgressBar.setProgress(msg.what);
+            waterWaveView.setProgress(msg.what, 1000);
             if (progress >= 100) {
                 progress = 0;
             }

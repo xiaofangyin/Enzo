@@ -1,11 +1,12 @@
 package com.enzo.module_c.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.widget.progress.FLCSeekBar;
-import com.enzo.commonlib.widget.progress.WaterWaveView;
 import com.enzo.module_c.R;
+import com.enzo.module_c.model.ColumnBean;
 
 /**
  * 文 件 名: MCFragment_1
@@ -15,10 +16,7 @@ import com.enzo.module_c.R;
  */
 public class MCFragment_1 extends BaseFragment {
 
-    private WaterWaveView waterWaveView;
-    private FLCSeekBar seekBarProgress;
-    private FLCSeekBar seekBarSize;
-    private FLCSeekBar seekBarAmplitude;
+    private TextView textView;
 
     @Override
     public int getLayoutId() {
@@ -27,67 +25,23 @@ public class MCFragment_1 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        waterWaveView = rootView.findViewById(R.id.water_wave_view);
-        seekBarProgress = rootView.findViewById(R.id.seek_bar_progress);
-        seekBarSize = rootView.findViewById(R.id.seek_bar_size);
-        seekBarAmplitude = rootView.findViewById(R.id.seek_bar_amplitude);
+
     }
 
     @Override
     public void initListener(View rootView) {
-        seekBarProgress.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
-            @Override
-            public void onProgressChanged(FLCSeekBar seekBar, int progress) {
-                waterWaveView.setProgress(progress);
-            }
-
-            @Override
-            public void onStartTrackingTouch(FLCSeekBar seekBar, int progress) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(FLCSeekBar seekBar, int progress) {
-
-            }
-        });
-        seekBarSize.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
-            @Override
-            public void onProgressChanged(FLCSeekBar seekBar, int progress) {
-                waterWaveView.setBorderWidth(progress / 100f * waterWaveView.getWidth() / 2);
-            }
-
-            @Override
-            public void onStartTrackingTouch(FLCSeekBar seekBar, int progress) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(FLCSeekBar seekBar, int progress) {
-
-            }
-        });
-        seekBarAmplitude.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
-            @Override
-            public void onProgressChanged(FLCSeekBar seekBar, int progress) {
-                waterWaveView.setAmplitudeRatio((float) progress / 1000);
-            }
-
-            @Override
-            public void onStartTrackingTouch(FLCSeekBar seekBar, int progress) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(FLCSeekBar seekBar, int progress) {
-
-            }
-        });
+        textView = rootView.findViewById(R.id.text_view);
     }
 
     @Override
     public void lazyLoad() {
-        waterWaveView.setProgress(50, 1000);
-        seekBarProgress.setProgress(50);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ColumnBean bean = (ColumnBean) getArguments().getSerializable("entity");
+            if (bean != null) {
+                textView.setText(bean.getColumn_name());
+            }
+        }
+
     }
 }

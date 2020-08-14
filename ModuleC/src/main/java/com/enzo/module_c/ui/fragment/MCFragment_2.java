@@ -1,13 +1,12 @@
 package com.enzo.module_c.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.widget.boheruler.RulerView;
 import com.enzo.module_c.R;
+import com.enzo.module_c.model.ColumnBean;
 
 /**
  * 文 件 名: MCFragment_2
@@ -17,8 +16,7 @@ import com.enzo.module_c.R;
  */
 public class MCFragment_2 extends BaseFragment {
 
-    private TextView tvHeight;
-    private RulerView rulerView;
+    private TextView textView;
 
     @Override
     public int getLayoutId() {
@@ -27,24 +25,22 @@ public class MCFragment_2 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        tvHeight = rootView.findViewById(R.id.supply_height_current_height);
-        rulerView = rootView.findViewById(R.id.supply_height_ruler);
+        textView = rootView.findViewById(R.id.text_view);
     }
 
     @Override
     public void initListener(View rootView) {
-        rulerView.setOnValueChangeListener(new RulerView.OnValueChangeListener() {
-            @Override
-            public void onValueChange(float value) {
-                tvHeight.setText(String.valueOf(value));
-            }
-        });
+
     }
 
     @Override
     public void lazyLoad() {
-        tvHeight.setText(String.valueOf(rulerView.getValue()));
-        rulerView.setLineColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
-        rulerView.setTextColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ColumnBean bean = (ColumnBean) getArguments().getSerializable("entity");
+            if (bean != null) {
+                textView.setText(bean.getColumn_name());
+            }
+        }
     }
 }

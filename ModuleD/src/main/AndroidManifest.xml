@@ -1,5 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.enzo.module_d">
 
     <application
@@ -83,6 +82,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDUGCBannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDRulerActivity"
             android:screenOrientation="portrait" />
 
     </application>
