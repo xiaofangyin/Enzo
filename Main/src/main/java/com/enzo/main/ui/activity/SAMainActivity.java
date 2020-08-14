@@ -137,6 +137,13 @@ public class SAMainActivity extends BaseActivity {
         }
     }
 
+    private void hideFragment(FragmentTransaction transaction) {
+        if (mCurrentPrimaryFragment != null && mCurrentPrimaryFragment.isAdded()) {
+            transaction.hide(mCurrentPrimaryFragment);
+            transaction.setMaxLifecycle(mCurrentPrimaryFragment, Lifecycle.State.STARTED);
+        }
+    }
+
     private void showFragment(FragmentTransaction transaction, Fragment fragment) {
         if (fragment != null && fragment != mCurrentPrimaryFragment) {
             if (fragment.isAdded()) {
@@ -146,13 +153,6 @@ public class SAMainActivity extends BaseActivity {
             }
             transaction.setMaxLifecycle(fragment, Lifecycle.State.RESUMED);
             mCurrentPrimaryFragment = fragment;
-        }
-    }
-
-    private void hideFragment(FragmentTransaction transaction) {
-        if (mCurrentPrimaryFragment != null && mCurrentPrimaryFragment.isAdded()) {
-            transaction.hide(mCurrentPrimaryFragment);
-            transaction.setMaxLifecycle(mCurrentPrimaryFragment, Lifecycle.State.STARTED);
         }
     }
 
