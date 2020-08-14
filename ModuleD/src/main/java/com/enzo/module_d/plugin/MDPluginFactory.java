@@ -7,7 +7,7 @@ import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.plugin.FLPluginTypeList;
-import com.enzo.module_d.ui.fragment.MDFragment;
+import com.enzo.module_d.ui.fragment.MDMineFragment;
 
 import org.json.JSONObject;
 
@@ -55,7 +55,7 @@ public class MDPluginFactory extends FLPluginFactory {
 
     @Override
     public Fragment buildHomeTabFragment() {
-        return new MDFragment();
+        return new MDMineFragment();
     }
 
     @Override

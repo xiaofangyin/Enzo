@@ -9,7 +9,7 @@ import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.module_d.R;
-import com.enzo.module_d.ui.fragment.MDFragment;
+import com.enzo.module_d.ui.fragment.MDMineFragment;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -37,7 +37,7 @@ public class LauncherActivity extends BaseActivity {
     private void replaceFragment() {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.main_content, new MDFragment());
+        transaction.replace(R.id.main_content, new MDMineFragment());
         transaction.commitAllowingStateLoss();
         fragmentManager.executePendingTransactions();
     }

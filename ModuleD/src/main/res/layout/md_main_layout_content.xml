@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:focusable="true"
+    android:overScrollMode="never"
     android:scrollbars="none"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -97,5 +98,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="任务队列" />
+
+        <Button
+            android:id="@+id/btn_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="进度" />
+
+        <Button
+            android:id="@+id/btn_scrolling_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="滚动动画" />
+
+        <Button
+            android:id="@+id/btn_ugc_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="轮播图" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

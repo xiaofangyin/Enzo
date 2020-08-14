@@ -1,13 +1,15 @@
-package com.enzo.module_d.ui.fragment;
+package com.enzo.module_d.ui.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.View;
 
-import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.normal.BannerBean;
 import com.enzo.commonlib.widget.banner.normal.UGCBanner;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.snowview.SnowView;
 import com.enzo.module_d.R;
 
@@ -15,39 +17,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: MDViewPagerFragment1
- * 创 建 人: xiaofangyin
- * 创建日期: 2017/4/1
- * 邮   箱: xiaofangyinwork@163.com
+ * 文 件 名: MDScrollingImageViewActivity
+ * 创 建 人: xiaofy
+ * 创建日期: 2020/8/2
+ * 邮   箱: xiaofywork@163.com
  */
-public class MDViewPagerFragment1 extends BaseFragment {
+public class MDUGCBannerActivity extends BaseActivity {
 
     private UGCBanner banner;
     private SnowView fallingView;
 
     @Override
     public int getLayoutId() {
-        return R.layout.md_fragment_d1;
+        return R.layout.md_activity_ugc_banner;
     }
 
     @Override
-    public void initView(View rootView) {
-        banner = rootView.findViewById(R.id.md_circle_banner);
-        fallingView = rootView.findViewById(R.id.fall_view);
-    }
-
-    @Override
-    public void initListener(View rootView) {
-        banner.setOnBannerClickListener(new UGCBanner.OnBannerClickListener() {
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_view);
+        headWidget.setTitle("轮播图");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
-            public void onBannerClick(BannerBean bean) {
-                ToastUtil.show(bean.getPic());
+            public void onClick(View v) {
+                finish();
             }
         });
     }
 
     @Override
-    public void lazyLoad() {
+    public void initView() {
+        banner = findViewById(R.id.md_circle_banner);
+        fallingView = findViewById(R.id.fall_view);
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
         List<BannerBean> mData = new ArrayList<>();
         BannerBean bannerBean1 = new BannerBean();
         bannerBean1.setId("1");
@@ -83,5 +88,15 @@ public class MDViewPagerFragment1 extends BaseFragment {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.md_icon_snow);
         fallingView.initSnow(bitmap, 60);
+    }
+
+    @Override
+    public void initListener() {
+        banner.setOnBannerClickListener(new UGCBanner.OnBannerClickListener() {
+            @Override
+            public void onBannerClick(BannerBean bean) {
+                ToastUtil.show(bean.getPic());
+            }
+        });
     }
 }

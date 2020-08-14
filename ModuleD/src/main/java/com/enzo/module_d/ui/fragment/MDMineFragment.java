@@ -22,11 +22,14 @@ import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDOkHttpActivity;
+import com.enzo.module_d.ui.activity.MDProgressActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
+import com.enzo.module_d.ui.activity.MDScrollingImageViewActivity;
 import com.enzo.module_d.ui.activity.MDShadowActivity;
 import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTouchEventActivity;
+import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 
 /**
@@ -71,6 +74,9 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         rootView.findViewById(R.id.btn_okhttp).setOnClickListener(this);
         rootView.findViewById(R.id.btn_shadow).setOnClickListener(this);
         rootView.findViewById(R.id.btn_task_queue).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_progress).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_scrolling_image_view).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
     }
 
     @Override
@@ -138,6 +144,15 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
             startActivity(intent);
         } else if (id == R.id.btn_task_queue) {
             Intent intent = new Intent(getContext(), MDTaskQueueActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_progress) {
+            Intent intent = new Intent(getContext(), MDProgressActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_scrolling_image_view) {
+            Intent intent = new Intent(getContext(), MDScrollingImageViewActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_ugc_banner) {
+            Intent intent = new Intent(getContext(), MDUGCBannerActivity.class);
             startActivity(intent);
         }
     }

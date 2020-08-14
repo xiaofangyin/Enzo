@@ -1,14 +1,16 @@
-package com.enzo.module_d.ui.fragment;
+package com.enzo.module_d.ui.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 
-import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.toast.ToastUtil;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.progress.CircularProgressBar;
 import com.enzo.commonlib.widget.progress.CircularProgressBarWithRate;
 import com.enzo.commonlib.widget.progress.FLCSeekBar;
@@ -17,12 +19,12 @@ import com.enzo.commonlib.widget.progress.SRDiskCapacityProgressBar;
 import com.enzo.module_d.R;
 
 /**
- * 文 件 名: MDViewPagerFragment2
- * 创 建 人: xiaofangyin
- * 创建日期: 2017/4/1
- * 邮   箱: xiaofangyinwork@163.com
+ * 文 件 名: MDProgressActivity
+ * 创 建 人: xiaofy
+ * 创建日期: 2020/8/2
+ * 邮   箱: xiaofywork@163.com
  */
-public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickListener {
+public class MDProgressActivity extends BaseActivity {
 
     private int progress = 0;
     private FLCSeekBar seekBar;
@@ -33,25 +35,44 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
     @Override
     public int getLayoutId() {
-        return R.layout.md_fragment_d2;
+        return R.layout.md_activity_progress;
     }
 
     @Override
-    public void initView(View rootView) {
-        seekBar = rootView.findViewById(R.id.seek_bar1);
-        mCircularProgressBar = rootView.findViewById(R.id.circular_progress_bar);
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_view);
+        headWidget.setTitle("进度");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void initView() {
+        seekBar = findViewById(R.id.seek_bar1);
+        mCircularProgressBar = findViewById(R.id.circular_progress_bar);
         mCircularProgressBar.setMax(100);
 
-        mRateTextCircularProgressBar = rootView.findViewById(R.id.rate_progress_bar);
+        mRateTextCircularProgressBar = findViewById(R.id.rate_progress_bar);
         mRateTextCircularProgressBar.setMax(100);
-        mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(getContext(), 10));
+        mRateTextCircularProgressBar.setCircleWidth(DensityUtil.dip2px(this, 10));
 
-        mCustomProgressBar = rootView.findViewById(R.id.web_view_progress_bar);
-        mDiskProgressBar = rootView.findViewById(R.id.disk_capacity_progress);
+        mCustomProgressBar = findViewById(R.id.web_view_progress_bar);
+        mDiskProgressBar = findViewById(R.id.disk_capacity_progress);
     }
 
     @Override
-    public void initListener(View rootView) {
+    public void initData(Bundle savedInstanceState) {
+        mHandler.sendEmptyMessageDelayed(progress++, 30);
+        mDiskProgressBar.setProgress(40772, 90772);
+    }
+
+    @Override
+    public void initListener() {
         seekBar.setOnSeekChangedListener(new FLCSeekBar.OnSeekBarChangedListener() {
             @Override
             public void onProgressChanged(FLCSeekBar seekBar, int progress) {
@@ -69,17 +90,6 @@ public class MDViewPagerFragment2 extends BaseFragment implements View.OnClickLi
 
             }
         });
-    }
-
-    @Override
-    public void lazyLoad() {
-        mHandler.sendEmptyMessageDelayed(progress++, 30);
-        mDiskProgressBar.setProgress(40772, 90772);
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) {
