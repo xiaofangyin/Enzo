@@ -9,7 +9,6 @@ import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 import com.enzo.module_d.model.executor.GetSubjectExecutor;
-import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,10 +59,10 @@ public class MDOkHttpActivity extends BaseActivity {
                 new GetSubjectExecutor()
                         .params(params)
                         .headers(headers)
-                        .callback(new BaseExecutor.JsonCallback<LinkedTreeMap<String, String>>() {
+                        .callback(new BaseExecutor.JsonCallback<String>() {
                             @Override
-                            public void onSuccess(LinkedTreeMap<String, String> subjectBean) {
-                                ToastUtil.show(subjectBean.toString());
+                            public void onSuccess(String subjectBean) {
+                                ToastUtil.show(subjectBean);
                             }
 
                             @Override
