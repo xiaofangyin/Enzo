@@ -1,6 +1,7 @@
 package com.enzo.module_a.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ import com.enzo.module_a.R;
 import com.enzo.module_a.model.bean.MAHomeBannerBean;
 import com.enzo.module_a.model.bean.MAHomeBaseBean;
 import com.enzo.module_a.model.bean.MAHomeGoodsBean;
+import com.enzo.module_a.ui.activity.MABossMineActivity;
+import com.enzo.module_a.ui.activity.MABossCompanyDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,16 +161,16 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
                     .into(imageView);
             textView.setText(model.getAuthor());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (adapter instanceof MAHomeAdapter) {
-                        MAHomeAdapter adapter2 = (MAHomeAdapter) adapter;
-                        if (adapter2.onItemClickListener != null) {
-                            adapter2.onItemClickListener.onItemClick(position);
-                        }
-                    }
-
+                    getContext().startActivity(new Intent(getContext(), MABossCompanyDetailActivity.class));
+                }
+            });
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getContext().startActivity(new Intent(getContext(), MABossMineActivity.class));
                 }
             });
         }

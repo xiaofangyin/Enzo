@@ -16,8 +16,8 @@
         android:id="@+id/ma_goods_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:ellipsize="end"
+        android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/color_dark_black" />
+        android:textColor="@drawable/lib_selector_text_color_333" />
 </LinearLayout>

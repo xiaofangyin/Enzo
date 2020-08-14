@@ -102,13 +102,6 @@ public class MAHomeSubFragment2 extends BaseFragment {
         adapter = new MAHomeAdapter();
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), MABossCompanyDetailActivity.class));
-            }
-        });
-
         getPhotoList();
     }
 
