@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.appupgrade.AppUpgradeUtil;
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
@@ -42,6 +43,18 @@ import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
  */
 @Route(path = ModuleDRouterPath.MODULE_D_FRAGMENT)
 public class MDMineFragment extends BaseFragment implements View.OnClickListener {
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.d("fragment d on resume...");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.d("fragment d on pause...");
+    }
 
     @Override
     public int getLayoutId() {

@@ -7,7 +7,6 @@ import android.view.View;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.module_d.R;
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -161,7 +160,6 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
 
         //设置名字平移
         int offset2 = (mToolBar.getBottom() / 2) + (mNameTitle.getHeight() / 2 - (mToolBar.getBottom() - mNameTitle.getTop()));
-        LogUtil.d("offset: " + percent);
         mNameTitle.setTranslationY(-offset2 * percent);
     }
 
