@@ -29,7 +29,6 @@ import java.util.List;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-@Route(path = ModuleDRouterPath.MODULE_D_FRAGMENT)
 public class MDFragment extends BaseFragment {
 
     private List<String> itemTitles = Arrays.asList("短信", "收藏", "推荐", "发现");
