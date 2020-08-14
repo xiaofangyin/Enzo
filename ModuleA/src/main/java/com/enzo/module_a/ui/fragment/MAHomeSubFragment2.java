@@ -1,6 +1,5 @@
 package com.enzo.module_a.ui.fragment;
 
-import android.content.Intent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
@@ -18,7 +16,6 @@ import com.enzo.module_a.model.bean.MAHomeBannerBean;
 import com.enzo.module_a.model.bean.MAHomeBaseBean;
 import com.enzo.module_a.model.bean.MAHomeGoodsBean;
 import com.enzo.module_a.model.exetutor.MAPhotoListExecutor;
-import com.enzo.module_a.ui.activity.MABossCompanyDetailActivity;
 import com.enzo.module_a.ui.adapter.MAHomeAdapter;
 
 import java.util.ArrayList;

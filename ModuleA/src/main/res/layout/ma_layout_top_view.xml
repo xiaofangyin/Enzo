@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorAccent"
+    android:background="@color/color_yellow"
     android:orientation="vertical"
     android:paddingTop="40dp">
 
@@ -23,7 +23,7 @@
             android:paddingTop="35dp"
             android:paddingBottom="15dp"
             android:text="我的在线简历 "
-            android:textColor="@android:color/white" />
+            android:textColor="@color/color_333" />
 
         <com.enzo.commonlib.widget.roundimageview.RoundImageView
             android:id="@+id/me_icon"
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="301\n沟通过"
-            android:textColor="@android:color/white"
+            android:textColor="@color/color_333"
             android:textSize="16sp" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="301\n沟通过"
-            android:textColor="@android:color/white"
+            android:textColor="@color/color_333"
             android:textSize="16sp" />
 
         <TextView
@@ -69,7 +69,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="301\n沟通过"
-            android:textColor="@android:color/white"
+            android:textColor="@color/color_333"
             android:textSize="16sp" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="301\n沟通过"
-            android:textColor="@android:color/white"
+            android:textColor="@color/color_333"
             android:textSize="16sp" />
 
     </LinearLayout>
