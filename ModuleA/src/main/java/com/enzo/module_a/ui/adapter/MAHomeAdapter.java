@@ -145,7 +145,7 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
         }
 
         @Override
-        public void setUpView(MAHomeGoodsBean model, int position, RecyclerView.Adapter adapter) {
+        public void setUpView(MAHomeGoodsBean model, final int position, final RecyclerView.Adapter adapter) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
             int height = model.getHeight() % 100;
             layoutParams.height = DensityUtil.dip2px(getContext(), 150) + height;
@@ -157,6 +157,19 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
                     .build()
                     .into(imageView);
             textView.setText(model.getAuthor());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (adapter instanceof MAHomeAdapter) {
+                        MAHomeAdapter adapter2 = (MAHomeAdapter) adapter;
+                        if (adapter2.onItemClickListener != null) {
+                            adapter2.onItemClickListener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
         }
     }
 

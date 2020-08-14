@@ -1,5 +1,6 @@
 package com.enzo.module_a.ui.fragment;
 
+import android.content.Intent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -7,14 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.module_a.R;
 import com.enzo.module_a.model.bean.MAHomeBannerBean;
 import com.enzo.module_a.model.bean.MAHomeBaseBean;
 import com.enzo.module_a.model.bean.MAHomeGoodsBean;
 import com.enzo.module_a.model.exetutor.MAPhotoListExecutor;
+import com.enzo.module_a.ui.activity.MABossCompanyDetailActivity;
 import com.enzo.module_a.ui.adapter.MAHomeAdapter;
 
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ import java.util.Random;
 
 public class MAHomeSubFragment2 extends BaseFragment {
 
+    private LoadingLayout loadingLayout;
     private PullToRefreshRecyclerView recyclerView;
     private MAHomeAdapter adapter;
 
@@ -35,6 +40,7 @@ public class MAHomeSubFragment2 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
+        loadingLayout = rootView.findViewById(R.id.loading_layout);
         recyclerView = rootView.findViewById(R.id.ma_recycler_view);
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
@@ -53,6 +59,12 @@ public class MAHomeSubFragment2 extends BaseFragment {
 
     @Override
     public void initListener(View rootView) {
+        loadingLayout.setOnRetryClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPhotoList();
+            }
+        });
         recyclerView.setOnMultiPurposeListener(new PullToRefreshRecyclerView.SimpleMultiPurposeListener() {
             @Override
             public void onRecyclerViewRefresh() {
@@ -89,7 +101,40 @@ public class MAHomeSubFragment2 extends BaseFragment {
     public void lazyLoad() {
         adapter = new MAHomeAdapter();
         recyclerView.setAdapter(adapter);
-        recyclerView.autoRefresh();
+
+        adapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getActivity(), MABossCompanyDetailActivity.class));
+            }
+        });
+
+        getPhotoList();
+    }
+
+    private void getPhotoList() {
+        Map<String, String> params = new HashMap<>();
+        params.put("page", String.valueOf(new Random().nextInt(100)));
+        params.put("limit", "20");
+
+        new MAPhotoListExecutor()
+                .params(params)
+                .callback(new BaseExecutor.JsonCallback<List<MAHomeGoodsBean>>() {
+                    @Override
+                    public void onSuccess(List<MAHomeGoodsBean> response) {
+                        List<MAHomeBaseBean> list = new ArrayList<>();
+                        list.add(new MAHomeBannerBean(MAHomeAdapter.TYPE_BANNER));
+                        list.addAll(new ArrayList<>(response));
+                        adapter.setNewData(list);
+                        loadingLayout.showContent();
+                    }
+
+                    @Override
+                    public void onFailed(Exception e) {
+                        loadingLayout.showError();
+                    }
+                })
+                .execute();
     }
 
     private void getPhotoList(final boolean pullRefresh) {
