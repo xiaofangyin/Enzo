@@ -1,6 +1,8 @@
 package com.enzo.module_a.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import com.enzo.module_a.model.bean.MAHomeGoodsBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 文 件 名: MAHomeAdapter
@@ -149,7 +152,7 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
             imageView.setLayoutParams(layoutParams);
 
             new ImageLoader.Builder(getContext())
-                    .placeHolder(R.mipmap.icon_default_photo)
+                    .placeHolder(new ColorDrawable(getRandomColor()))
                     .load(model.getDownload_url())
                     .build()
                     .into(imageView);
@@ -169,4 +172,11 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
         }
     }
 
+    public static int getRandomColor() {
+        Random random = new Random();
+        int r = random.nextInt(255);
+        int g = random.nextInt(255);
+        int b = random.nextInt(255);
+        return Color.rgb(r, g, b);
+    }
 }

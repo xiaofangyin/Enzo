@@ -72,6 +72,8 @@ public class ImageLoader {
             if (glideRequest != null) {
                 if (builder.placeHolder != 0) {
                     glideRequest.apply(RequestOptions.placeholderOf(builder.placeHolder));
+                } else if (builder.drawablePlaceHolder != null) {
+                    glideRequest.apply(RequestOptions.placeholderOf(builder.drawablePlaceHolder));
                 }
                 if (builder.errorImage != 0) {
                     glideRequest.apply(RequestOptions.errorOf(builder.errorImage));
@@ -129,6 +131,7 @@ public class ImageLoader {
         private Uri uri;
 
         private int placeHolder;//加载中图片
+        private Drawable drawablePlaceHolder;//加载中图片
         private int errorImage;//加载失败图片
         private boolean clearAnimate;//加载不使用动画
         private String signature;//添加签名
@@ -165,6 +168,14 @@ public class ImageLoader {
          */
         public Builder placeHolder(int placeHolder) {
             this.placeHolder = placeHolder;
+            return this;
+        }
+
+        /**
+         * 加载中显示的图片
+         */
+        public Builder placeHolder(Drawable placeHolder) {
+            this.drawablePlaceHolder = placeHolder;
             return this;
         }
 
