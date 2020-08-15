@@ -46,12 +46,13 @@ public class MDBossCompanyDetailActivity extends BaseActivity {
         //设置底部
         View bottomSheet = findViewById(R.id.boss_bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             /**
              * 状态的改变
              */
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
+
             }
 
             /**
@@ -59,6 +60,7 @@ public class MDBossCompanyDetailActivity extends BaseActivity {
              */
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
 
