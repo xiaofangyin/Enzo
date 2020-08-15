@@ -118,7 +118,7 @@ public class FlToggleButton extends View implements OnClickListener {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         padding = dip2px(2f);
-        margin = dip2px(1.5f);
+        margin = dip2px(1f);
         width = w - padding * 2;
         height = h - padding * 2;
         centerY = h / 2;
