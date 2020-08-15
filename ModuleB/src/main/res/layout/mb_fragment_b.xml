@@ -53,13 +53,13 @@
 
                 <com.enzo.commonlib.widget.togglebutton.FlToggleButton
                     android:id="@+id/toggle_button"
-                    android:layout_width="101dp"
-                    android:layout_height="62dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <com.enzo.commonlib.widget.togglebutton.FLSwitchButton
                     android:id="@+id/switch_button"
-                    android:layout_width="101dp"
-                    android:layout_height="62dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp" />
 
             </LinearLayout>

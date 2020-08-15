@@ -80,7 +80,7 @@ public class FlToggleButton extends View implements OnClickListener {
         int specSize = MeasureSpec.getSize(measureSpec);
         switch (specMode) {
             case MeasureSpec.AT_MOST:
-                defaultWidth = (int) dip2px(51);
+                defaultWidth = (int) dip2px(55);
                 break;
             case MeasureSpec.EXACTLY:
                 defaultWidth = specSize;
@@ -96,7 +96,7 @@ public class FlToggleButton extends View implements OnClickListener {
         int specSize = MeasureSpec.getSize(measureSpec);
         switch (specMode) {
             case MeasureSpec.AT_MOST:
-                defaultHeight = (int) dip2px(30);
+                defaultHeight = (int) dip2px(34);
                 break;
             case MeasureSpec.EXACTLY:
                 defaultHeight = specSize;
