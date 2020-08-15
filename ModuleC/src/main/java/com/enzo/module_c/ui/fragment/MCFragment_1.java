@@ -42,6 +42,5 @@ public class MCFragment_1 extends BaseFragment {
                 textView.setText(bean.getColumn_name());
             }
         }
-
     }
 }
