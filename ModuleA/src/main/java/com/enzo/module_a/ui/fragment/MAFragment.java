@@ -67,7 +67,7 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.ma_fragment_a2;
+        return R.layout.ma_fragment_a;
     }
 
     @Override
