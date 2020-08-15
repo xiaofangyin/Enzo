@@ -128,5 +128,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="尺子" />
+
+        <Button
+            android:id="@+id/btn_time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Picker" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

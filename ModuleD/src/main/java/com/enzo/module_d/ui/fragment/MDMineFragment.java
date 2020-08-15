@@ -31,6 +31,7 @@ import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
 import com.enzo.module_d.ui.activity.MDScrollingImageViewActivity;
 import com.enzo.module_d.ui.activity.MDShadowActivity;
 import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
+import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
@@ -94,6 +95,7 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         rootView.findViewById(R.id.btn_scrolling_image_view).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_time_picker).setOnClickListener(this);
     }
 
     @Override
@@ -176,6 +178,9 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
             startActivity(intent);
         } else if (id == R.id.btn_ruler) {
             Intent intent = new Intent(getContext(), MDRulerActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_time_picker) {
+            Intent intent = new Intent(getContext(), MDTimePickerActivity.class);
             startActivity(intent);
         }
     }
