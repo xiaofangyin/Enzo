@@ -1,6 +1,7 @@
 package com.enzo.commonlib.widget.togglebutton;
 
 
+import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -25,6 +26,7 @@ import com.enzo.commonlib.R;
 public class FlToggleButton extends View implements OnClickListener {
 
     private Paint paint;
+    private ArgbEvaluator argbEvaluator;
     private RadialGradient shadowGradient;
     private boolean isOpen = false;//现在状态 true 开  false 关
     private boolean isEnable = true;//button是否可用
@@ -59,6 +61,7 @@ public class FlToggleButton extends View implements OnClickListener {
         // 初始化 画笔
         paint = new Paint();
         paint.setAntiAlias(true);
+        argbEvaluator = new ArgbEvaluator();
         // 初始化 圆角矩形
         rectF = new RectF();
         setOnClickListener(this);
@@ -129,7 +132,7 @@ public class FlToggleButton extends View implements OnClickListener {
             paint.reset();
             paint.setAntiAlias(true);
             paint.setDither(true);
-            paint.setColor(onColor);
+            paint.setColor((int) argbEvaluator.evaluate(percent, offColor, onColor));
             if (isOpen) {
                 rectF.set(0, 0, width, height);
             } else {
