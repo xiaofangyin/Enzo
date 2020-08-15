@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -31,6 +32,9 @@ import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigat
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.ScaleTransitionPagerTitleView;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import com.enzo.commonlib.widget.popup.EasyPopup;
+import com.enzo.commonlib.widget.popup.XGravity;
+import com.enzo.commonlib.widget.popup.YGravity;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.module_a.R;
 import com.enzo.module_a.plugin.MAPluginFactory;
@@ -108,8 +112,43 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MAScanQrCodeActivity.class);
-                startActivity(intent);
+                EasyPopup mCirclePop = EasyPopup.create()
+                        .setContentView(v.getContext(), R.layout.ma_layout_circle_comment)
+                        .setAnimationStyle(R.style.ma_RightTopPopAnim)
+                        .setFocusAndOutsideEnable(true)
+                        .setBackgroundDimEnable(true)
+                        .setDimValue(0.4f)
+                        .setOnViewListener(new EasyPopup.OnViewListener() {
+                            @Override
+                            public void initViews(View view, final EasyPopup popup) {
+                                view.findViewById(R.id.tv_zan).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(getContext(), MAScanQrCodeActivity.class);
+                                        startActivity(intent);
+                                        popup.dismiss();
+                                    }
+                                });
+                                view.findViewById(R.id.tv_comment).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(getContext(), MAScanQrCodeActivity.class);
+                                        startActivity(intent);
+                                        popup.dismiss();
+                                    }
+                                });
+                            }
+                        })
+                        .apply();
+
+                mCirclePop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        LogUtil.e("onDismiss: mCirclePop");
+                    }
+                });
+
+                mCirclePop.showAtAnchorView(v, YGravity.BELOW, XGravity.LEFT, 0, 0);
             }
         });
     }
