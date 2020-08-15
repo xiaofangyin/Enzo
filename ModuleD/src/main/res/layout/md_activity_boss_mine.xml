@@ -58,10 +58,10 @@
         <include layout="@layout/md_main_layout_content" />
 
 
-        <androidx.appcompat.widget.Toolbar
+        <View
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:alpha="0"
             android:background="@color/color_yellow" />
 
@@ -72,7 +72,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="大白"
+            android:text="吴彦祖"
             android:textColor="@color/color_333"
             android:textSize="28sp"
             android:textStyle="bold" />
