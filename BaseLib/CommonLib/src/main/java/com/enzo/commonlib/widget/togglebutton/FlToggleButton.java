@@ -27,10 +27,9 @@ public class FlToggleButton extends View implements OnClickListener {
     private Paint paint;
     private RadialGradient shadowGradient;
     private boolean isOpen = false;//现在状态 true 开  false 关
-    private boolean isEnable = true;//button是否可用
     private int onColor = Color.parseColor("#FFFFDA44");
     private int offColor = Color.parseColor("#FFFFFFFF");
-    private int strokeColor = Color.parseColor("#8Caaaaaa");
+    private int strokeColor = Color.parseColor("#8CAAAAAA");
     private int width;//宽度
     private int height;//高度
     private int centerY;//垂直中间坐标
@@ -128,7 +127,7 @@ public class FlToggleButton extends View implements OnClickListener {
     protected void onDraw(Canvas canvas) {
         //主要用于控制offRectF的大小，isOpen为true时，percent = 1;isOpen为false时，percent = 0;
         float percent = (slideBtn_left - minLeft) / (getWidth() - radius * 2 - margin * 2 - padding * 2);
-        if (isEnable) {//可用状态
+        if (isEnabled()) {//可用状态
             paint.reset();
             paint.setStyle(Paint.Style.FILL);
             paint.setAntiAlias(true);
@@ -174,8 +173,28 @@ public class FlToggleButton extends View implements OnClickListener {
             rectF.set(padding, padding, getWidth() - padding, getHeight() - padding);
             canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
-            paint.setColor(Color.WHITE);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(strokeColor);
             paint.setAlpha(127);//半透明
+            rectF.set(padding, padding, width + padding, height + padding);
+            canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
+
+            //绘制阴影
+            canvas.save();
+            canvas.translate(slideBtn_left - minLeft, radius * 0.2f);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setShader(shadowGradient);
+            canvas.drawCircle(minLeft, centerY, radius, paint);
+            paint.setShader(null);
+            canvas.restore();
+
+            //绘制实心圆
+            paint.setColor(Color.WHITE);
+            canvas.drawCircle(slideBtn_left, centerY, radius, paint);
+
+            //绘制边框
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(strokeColor);
             canvas.drawCircle(slideBtn_left, centerY, radius, paint);
         }
     }
@@ -273,14 +292,9 @@ public class FlToggleButton extends View implements OnClickListener {
         startValueAnimator(slideBtn_left, isOpen ? maxLeft : minLeft);
     }
 
-    /**
-     * 设置button是否可用
-     *
-     * @param enable 可用状态
-     */
-    public void setButtonEnable(boolean enable) {
-        this.isEnable = enable;
-        setEnabled(enable);
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
         invalidate();
     }
 

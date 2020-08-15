@@ -3,6 +3,7 @@ package com.enzo.module_b.ui.fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ToggleButton;
 
 import androidx.core.content.ContextCompat;
 
@@ -11,6 +12,8 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
+import com.enzo.commonlib.widget.togglebutton.FLSwitchButton;
+import com.enzo.commonlib.widget.togglebutton.FlToggleButton;
 import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.module_b.R;
 
@@ -24,6 +27,8 @@ import com.enzo.module_b.R;
 public class MBFragment extends BaseFragment {
 
     private SpiderWebView mSpiderWebView;
+    private FlToggleButton toggleButton;
+    private FLSwitchButton switchButton;
 
     @Override
     public void onResume() {
@@ -54,11 +59,18 @@ public class MBFragment extends BaseFragment {
         ((ViewGroup) rootView).addView(view, 0);
 
         mSpiderWebView = rootView.findViewById(R.id.spider_web_view);
+        toggleButton = rootView.findViewById(R.id.toggle_button);
+        switchButton = rootView.findViewById(R.id.switch_button);
     }
 
     @Override
     public void initListener(View rootView) {
-
+        switchButton.setOnCheckedChangeListener(new FLSwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(FLSwitchButton switchButton, boolean isChecked) {
+                toggleButton.setEnabled(isChecked);
+            }
+        });
     }
 
     @Override
