@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--    <com.enzo.commonlib.widget.flowlayout.FlowLayout-->
+    <!--        android:id="@+id/mc_flow_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="16dp"-->
+    <!--        app:height_space="10dp"-->
+    <!--        app:width_space="10dp" />-->
+    <com.enzo.commonlib.widget.flowlayout.FlowLayoutScrollView
+        android:id="@+id/mc_flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:height_space="10dp"
+        app:width_space="10dp" />
+</LinearLayout>

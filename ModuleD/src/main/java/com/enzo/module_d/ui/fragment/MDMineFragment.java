@@ -20,6 +20,7 @@ import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
+import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
@@ -96,6 +97,7 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
         rootView.findViewById(R.id.btn_time_picker).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_flow_layout).setOnClickListener(this);
     }
 
     @Override
@@ -181,6 +183,9 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
             startActivity(intent);
         } else if (id == R.id.btn_time_picker) {
             Intent intent = new Intent(getContext(), MDTimePickerActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_flow_layout) {
+            Intent intent = new Intent(getContext(), MDFlowLayoutActivity.class);
             startActivity(intent);
         }
     }

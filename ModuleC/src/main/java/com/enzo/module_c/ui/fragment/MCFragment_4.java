@@ -1,10 +1,13 @@
 package com.enzo.module_c.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.module_c.R;
+import com.enzo.module_c.model.ColumnBean;
 
 /**
  * 文 件 名: MCFragment_4
@@ -14,7 +17,7 @@ import com.enzo.module_c.R;
  */
 public class MCFragment_4 extends BaseFragment {
 
-    private LottieAnimationView animationView;
+    private TextView textView;
 
     @Override
     public int getLayoutId() {
@@ -23,7 +26,7 @@ public class MCFragment_4 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        animationView = rootView.findViewById(R.id.lottieAnimationView);
+        textView = rootView.findViewById(R.id.text_view);
     }
 
     @Override
@@ -33,18 +36,12 @@ public class MCFragment_4 extends BaseFragment {
 
     @Override
     public void lazyLoad() {
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        animationView.playAnimation();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        animationView.pauseAnimation();
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ColumnBean bean = (ColumnBean) getArguments().getSerializable("entity");
+            if (bean != null) {
+                textView.setText(bean.getColumn_name());
+            }
+        }
     }
 }

@@ -1,16 +1,13 @@
 package com.enzo.module_c.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.flowlayout.FlowLayoutAdapter;
-import com.enzo.commonlib.widget.flowlayout.FlowLayoutScrollView;
-import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 import com.enzo.module_c.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.enzo.module_c.model.ColumnBean;
 
 /**
  * 文 件 名: MCFragment_6
@@ -20,8 +17,7 @@ import java.util.List;
  */
 public class MCFragment_6 extends BaseFragment {
 
-    private LoadingLayout loadingLayout;
-    private FlowLayoutScrollView flowLayout;
+    private TextView textView;
 
     @Override
     public int getLayoutId() {
@@ -30,8 +26,7 @@ public class MCFragment_6 extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        loadingLayout = rootView.findViewById(R.id.loading_layout);
-        flowLayout = rootView.findViewById(R.id.mc_flow_layout);
+        textView = rootView.findViewById(R.id.text_view);
     }
 
     @Override
@@ -41,97 +36,12 @@ public class MCFragment_6 extends BaseFragment {
 
     @Override
     public void lazyLoad() {
-        List<String> flowList = buildData();
-        flowLayout.setAdapter(new FlowLayoutAdapter<String>(flowList) {
-            @Override
-            public void bindDataToView(ViewHolder holder, int position, String bean) {
-                holder.setText(R.id.tv, bean);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ColumnBean bean = (ColumnBean) getArguments().getSerializable("entity");
+            if (bean != null) {
+                textView.setText(bean.getColumn_name());
             }
-
-            @Override
-            public void onItemClick(int position, String bean) {
-                if (position == 0) {
-                    remove(position);
-                }
-                ToastUtil.show(bean);
-            }
-
-            @Override
-            public void onItemLongClick(int position, String bean) {
-
-            }
-
-            @Override
-            public int getItemLayoutID(int position, String bean) {
-                if (position % 2 == 0) {
-                    return R.layout.mc_item_flow_layout2;
-                }
-                return R.layout.mc_item_flow_layout;
-            }
-        });
-        loadingLayout.showContent();
+        }
     }
-
-    private List<String> buildData() {
-        List<String> flowList = new ArrayList();
-        flowList.add("11111");
-        flowList.add("22222222");
-        flowList.add("333333");
-        flowList.add("444444444444444");
-        flowList.add("5555555555");
-        flowList.add("66666");
-        flowList.add("7777777777777");
-        flowList.add("88888888888888");
-        flowList.add("9999999999999999");
-        flowList.add("66666");
-        flowList.add("33333333");
-        flowList.add("11111");
-        flowList.add("22222222");
-        flowList.add("333333");
-        flowList.add("444444444444444");
-        flowList.add("55555555555555");
-        flowList.add("66666666666");
-        flowList.add("77777777");
-        flowList.add("88888888888");
-        flowList.add("9999999999999");
-        flowList.add("6666666");
-        flowList.add("33333333");
-        flowList.add("11111");
-        flowList.add("22222222");
-        flowList.add("333333");
-        flowList.add("4444444444444444");
-        flowList.add("5555555");
-        flowList.add("66666");
-        flowList.add("77777777");
-        flowList.add("8888888888888888");
-        flowList.add("9999999999999");
-        flowList.add("66666");
-        flowList.add("33333333");
-        flowList.add("6666666");
-        flowList.add("33333333");
-        flowList.add("11111");
-        flowList.add("22222222");
-        flowList.add("333333");
-        flowList.add("4444444444444444");
-        flowList.add("5555555");
-        flowList.add("66666");
-        flowList.add("77777777");
-        flowList.add("8888888888888888");
-        flowList.add("9999999999999");
-        flowList.add("66666");
-        flowList.add("33333333");
-        flowList.add("1111111111111111");
-        flowList.add("22222222");
-        flowList.add("333333");
-        flowList.add("444444444444444");
-        flowList.add("5555555555");
-        flowList.add("66666");
-        flowList.add("77777777");
-        flowList.add("88888888888");
-        flowList.add("9999999999999");
-        flowList.add("66666");
-        flowList.add("3333333333333333333");
-        return flowList;
-    }
-
 }
