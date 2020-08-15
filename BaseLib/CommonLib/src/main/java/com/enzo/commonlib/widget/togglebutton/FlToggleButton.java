@@ -7,7 +7,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,10 +25,11 @@ import com.enzo.commonlib.R;
 public class FlToggleButton extends View implements OnClickListener {
 
     private Paint paint;
+    private RadialGradient shadowGradient;
     private boolean isOpen = false;//现在状态 true 开  false 关
     private boolean isEnable = true;//button是否可用
     private int onColor = Color.parseColor("#FFFFDA44");
-    private int offColor = Color.parseColor("#FFDBDBDB");
+    private int offColor = Color.parseColor("#FFFFFFFF");
     private int width;//宽度
     private int height;//高度
     private int centerY;//垂直中间坐标
@@ -110,11 +113,12 @@ public class FlToggleButton extends View implements OnClickListener {
         width = getWidth();
         height = getHeight();
         centerY = height / 2;
-        margin = dip2px(1.5f);
+        margin = dip2px(2f);
         radius = height / 2f - margin;
         minLeft = radius + margin;
         maxLeft = width - radius - margin;
         slideBtn_left = isOpen ? maxLeft : minLeft;
+        shadowGradient = new RadialGradient(minLeft, centerY, radius, Color.BLACK, Color.TRANSPARENT, Shader.TileMode.CLAMP);
     }
 
     @Override
@@ -132,7 +136,6 @@ public class FlToggleButton extends View implements OnClickListener {
                 float offset = dip2px(0.4f);
                 rectF.set(offset, offset, width - offset, height - offset);
             }
-            //第一个参数：RectF对象，第二个参数：x方向上的圆角半径，第三个参数：y方向上的圆角半径
             canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
             paint.setColor(offColor);
@@ -140,8 +143,22 @@ public class FlToggleButton extends View implements OnClickListener {
                     width - width / 2f * percent, height - height / 2f * percent);
             canvas.drawRoundRect(rectF, height / 2f * (1 - percent), height / 2f * (1 - percent), paint);
 
+            //绘制阴影
+            canvas.save();
+            canvas.translate(slideBtn_left - minLeft, radius * 0.25f);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setShader(shadowGradient);
+            canvas.drawCircle(minLeft, centerY, radius, paint);
+            paint.setShader(null);
+            canvas.restore();
+
+            //绘制实心圆
             paint.setColor(Color.WHITE);
-            //第一个参数：圆心X轴坐标，第二个参数：圆心Y轴坐标，第三个参数：半径值
+            canvas.drawCircle(slideBtn_left, centerY, radius, paint);
+
+            // 绘制边框
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(0xFFD7D7D7);
             canvas.drawCircle(slideBtn_left, centerY, radius, paint);
         } else {//不可用状态
             paint.reset();
