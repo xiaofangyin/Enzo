@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.enzo.commonlib.R;
+import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 
 /**
  * 文 件 名: TabLayout
@@ -32,11 +34,13 @@ public class FlToggleButton extends View implements OnClickListener {
     private boolean isEnable = true;//button是否可用
     private int onColor = Color.parseColor("#FFFFDA44");
     private int offColor = Color.parseColor("#FFFFFFFF");
+    private int strokeColor = Color.parseColor("#8Caaaaaa");
     private int width;//宽度
     private int height;//高度
     private int centerY;//垂直中间坐标
+    private int padding;//内边距
+    private int margin;//圆球里圆角矩形距离
     private float radius;//圆形半径
-    private float margin;//左右边距
     private float maxLeft;//滑动最大距离
     private float minLeft;//滑动最小距离
     private float slideBtn_left;//滑动按钮的圆心X坐标
@@ -113,13 +117,14 @@ public class FlToggleButton extends View implements OnClickListener {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        width = getWidth();
-        height = getHeight();
-        centerY = height / 2;
-        margin = dip2px(2f);
-        radius = height / 2f - margin;
-        minLeft = radius + margin;
-        maxLeft = width - radius - margin;
+        padding = dip2px(2f);
+        margin = dip2px(1.5f);
+        width = w - padding * 2;
+        height = h - padding * 2;
+        centerY = h / 2;
+        radius = h / 2f - margin - padding;
+        minLeft = radius + margin + padding;
+        maxLeft = w - minLeft;
         slideBtn_left = isOpen ? maxLeft : minLeft;
         shadowGradient = new RadialGradient(minLeft, centerY, radius, Color.BLACK, Color.TRANSPARENT, Shader.TileMode.CLAMP);
     }
@@ -127,28 +132,30 @@ public class FlToggleButton extends View implements OnClickListener {
     @Override
     protected void onDraw(Canvas canvas) {
         //主要用于控制offRectF的大小，isOpen为true时，percent = 1;isOpen为false时，percent = 0;
-        float percent = (slideBtn_left - minLeft) / (width - radius * 2 - margin * 2);
+        float percent = (slideBtn_left - minLeft) / (getWidth() - radius * 2 - margin * 2 - padding * 2);
+        LogUtil.e("percent: " + percent);
         if (isEnable) {//可用状态
             paint.reset();
+            paint.setStyle(Paint.Style.FILL);
             paint.setAntiAlias(true);
             paint.setDither(true);
             paint.setColor((int) argbEvaluator.evaluate(percent, offColor, onColor));
-            if (isOpen) {
-                rectF.set(0, 0, width, height);
-            } else {
-                float offset = dip2px(0.4f);
-                rectF.set(offset, offset, width - offset, height - offset);
-            }
+            rectF.set(padding, padding, width + padding, height + padding);
             canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
+            paint.setStyle(Paint.Style.FILL);
             paint.setColor(offColor);
-            rectF.set(width / 2f * percent, height / 2f * percent,
-                    width - width / 2f * percent, height - height / 2f * percent);
+            rectF.set(width / 2f * percent + padding, height / 2f * percent + padding,
+                    width - width / 2f * percent + padding, height - height / 2f * percent + padding);
             canvas.drawRoundRect(rectF, height / 2f * (1 - percent), height / 2f * (1 - percent), paint);
+
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(strokeColor);
+            canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
             //绘制阴影
             canvas.save();
-            canvas.translate(slideBtn_left - minLeft, radius * 0.25f);
+            canvas.translate(slideBtn_left - minLeft, radius * 0.2f);
             paint.setStyle(Paint.Style.FILL);
             paint.setShader(shadowGradient);
             canvas.drawCircle(minLeft, centerY, radius, paint);
@@ -159,9 +166,9 @@ public class FlToggleButton extends View implements OnClickListener {
             paint.setColor(Color.WHITE);
             canvas.drawCircle(slideBtn_left, centerY, radius, paint);
 
-            // 绘制边框
+            //绘制边框
             paint.setStyle(Paint.Style.STROKE);
-            paint.setColor(0xFFD7D7D7);
+            paint.setColor(strokeColor);
             canvas.drawCircle(slideBtn_left, centerY, radius, paint);
         } else {//不可用状态
             paint.reset();
@@ -169,7 +176,7 @@ public class FlToggleButton extends View implements OnClickListener {
             paint.setDither(true);
             paint.setColor(offColor);
             paint.setAlpha(127);//半透明
-            rectF.set(0, 0, width, height);
+            rectF.set(padding, padding, getWidth() - padding, getHeight() - padding);
             canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
             paint.setColor(Color.WHITE);
@@ -320,8 +327,8 @@ public class FlToggleButton extends View implements OnClickListener {
         void onToggle(boolean on);
     }
 
-    private float dip2px(float dip) {
+    private int dip2px(float dip) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
-        return dip * scale;
+        return (int) (dip * scale);
     }
 }
