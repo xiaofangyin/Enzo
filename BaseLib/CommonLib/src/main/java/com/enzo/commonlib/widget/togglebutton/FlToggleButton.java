@@ -308,7 +308,7 @@ public class FlToggleButton extends View implements OnClickListener {
             valueAnimator.cancel();
         }
         valueAnimator = ValueAnimator.ofFloat(startX, stopX);
-        valueAnimator.setDuration(230);
+        valueAnimator.setDuration(300);
         valueAnimator.setRepeatCount(0);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
