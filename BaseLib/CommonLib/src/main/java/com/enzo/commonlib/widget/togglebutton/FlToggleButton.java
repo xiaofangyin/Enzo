@@ -1,7 +1,6 @@
 package com.enzo.commonlib.widget.togglebutton;
 
 
-import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,8 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.enzo.commonlib.R;
-import com.enzo.commonlib.utils.common.DensityUtil;
-import com.enzo.commonlib.utils.common.LogUtil;
 
 /**
  * 文 件 名: TabLayout
@@ -28,7 +25,6 @@ import com.enzo.commonlib.utils.common.LogUtil;
 public class FlToggleButton extends View implements OnClickListener {
 
     private Paint paint;
-    private ArgbEvaluator argbEvaluator;
     private RadialGradient shadowGradient;
     private boolean isOpen = false;//现在状态 true 开  false 关
     private boolean isEnable = true;//button是否可用
@@ -65,7 +61,6 @@ public class FlToggleButton extends View implements OnClickListener {
         // 初始化 画笔
         paint = new Paint();
         paint.setAntiAlias(true);
-        argbEvaluator = new ArgbEvaluator();
         // 初始化 圆角矩形
         rectF = new RectF();
         setOnClickListener(this);
@@ -133,13 +128,12 @@ public class FlToggleButton extends View implements OnClickListener {
     protected void onDraw(Canvas canvas) {
         //主要用于控制offRectF的大小，isOpen为true时，percent = 1;isOpen为false时，percent = 0;
         float percent = (slideBtn_left - minLeft) / (getWidth() - radius * 2 - margin * 2 - padding * 2);
-        LogUtil.e("percent: " + percent);
         if (isEnable) {//可用状态
             paint.reset();
             paint.setStyle(Paint.Style.FILL);
             paint.setAntiAlias(true);
             paint.setDither(true);
-            paint.setColor((int) argbEvaluator.evaluate(percent, offColor, onColor));
+            paint.setColor(onColor);
             rectF.set(padding, padding, width + padding, height + padding);
             canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
@@ -151,6 +145,7 @@ public class FlToggleButton extends View implements OnClickListener {
 
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(strokeColor);
+            rectF.set(padding, padding, width + padding, height + padding);
             canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
 
             //绘制阴影
