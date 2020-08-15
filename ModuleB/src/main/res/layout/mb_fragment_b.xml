@@ -51,16 +51,17 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <com.enzo.commonlib.widget.togglebutton.FLSwitchButton
-                    android:id="@+id/switch_button"
-                    android:layout_width="101dp"
-                    android:layout_height="62dp" />
-
                 <com.enzo.commonlib.widget.togglebutton.FlToggleButton
                     android:id="@+id/toggle_button"
                     android:layout_width="101dp"
+                    android:layout_height="62dp" />
+
+                <com.enzo.commonlib.widget.togglebutton.FLSwitchButton
+                    android:id="@+id/switch_button"
+                    android:layout_width="101dp"
                     android:layout_height="62dp"
                     android:layout_marginStart="40dp" />
+
             </LinearLayout>
 
             <com.enzo.commonlib.widget.flickeringtextview.FlickeringTextView

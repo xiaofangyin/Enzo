@@ -142,10 +142,12 @@ public class FlToggleButton extends View implements OnClickListener {
                     width - width / 2f * percent + padding, height - height / 2f * percent + padding);
             canvas.drawRoundRect(rectF, height / 2f * (1 - percent), height / 2f * (1 - percent), paint);
 
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setColor(strokeColor);
-            rectF.set(padding, padding, width + padding, height + padding);
-            canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
+            if (!isOpen) {
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setColor(strokeColor);
+                rectF.set(padding, padding, width + padding, height + padding);
+                canvas.drawRoundRect(rectF, height / 2f, height / 2f, paint);
+            }
 
             //绘制阴影
             canvas.save();

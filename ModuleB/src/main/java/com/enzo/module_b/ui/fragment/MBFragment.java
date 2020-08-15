@@ -3,7 +3,6 @@ package com.enzo.module_b.ui.fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ToggleButton;
 
 import androidx.core.content.ContextCompat;
 
@@ -68,7 +67,13 @@ public class MBFragment extends BaseFragment {
         switchButton.setOnCheckedChangeListener(new FLSwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(FLSwitchButton switchButton, boolean isChecked) {
-                toggleButton.setEnabled(isChecked);
+
+            }
+        });
+        toggleButton.setOnToggleChanged(new FlToggleButton.OnToggleChanged() {
+            @Override
+            public void onToggle(boolean on) {
+
             }
         });
     }
