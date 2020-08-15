@@ -21,7 +21,6 @@ public class LauncherActivity extends BaseActivity {
     @Override
     public void initView() {
         StateAppBar.translucentStatusBar(this, true);
-        StatusBarUtils.StatusBarLightMode(this);
     }
 
     @Override
