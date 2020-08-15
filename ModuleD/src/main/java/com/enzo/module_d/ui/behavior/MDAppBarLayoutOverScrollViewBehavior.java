@@ -1,10 +1,14 @@
 package com.enzo.module_d.ui.behavior;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.enzo.module_d.R;
@@ -34,6 +38,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     private View mToolBar;
     private float scaleValue = 2f / 3;// 显示卡片的三分之一 所以抛出三分之二
     private View mNameTitle;
+    private ValueAnimator valueAnimator;
 
     public MDAppBarLayoutOverScrollViewBehavior() {
     }
@@ -99,6 +104,22 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     }
 
 
+    @Override
+    public boolean onInterceptTouchEvent(@NonNull CoordinatorLayout parent, @NonNull AppBarLayout child, @NonNull MotionEvent ev) {
+        if (valueAnimator != null) {
+            return true;
+        }
+        return super.onInterceptTouchEvent(parent, child, ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(@NonNull CoordinatorLayout parent, @NonNull AppBarLayout child, @NonNull MotionEvent ev) {
+        if (valueAnimator != null) {
+            return false;
+        }
+        return super.onTouchEvent(parent, child, ev);
+    }
+
     /**
      * 初始化数据
      */
@@ -112,21 +133,29 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         mLimitHeight = mAppBarHeight - (int) (mCardViewHeight * scaleValue);
 
         //默认1s折叠
+        valueAnimator = ValueAnimator.ofFloat(0, 1f).setDuration(200);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                appBarLayout.setBottom((int) (mAppBarHeight - value * mCardViewHeight * scaleValue));
+            }
+        });
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                valueAnimator = null;
+            }
+        });
         appBarLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ValueAnimator anim = ValueAnimator.ofFloat(0, 1f).setDuration(200);
-                anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        float value = (float) animation.getAnimatedValue();
-                        appBarLayout.setBottom((int) (mAppBarHeight - value * mCardViewHeight * scaleValue));
-                    }
-                });
-                anim.start();
+                if (valueAnimator != null) {
+                    valueAnimator.start();
+                }
             }
         }, 1000);
-
     }
 
 
