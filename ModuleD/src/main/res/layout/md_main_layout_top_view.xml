@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="301\n待面试"
+            android:text="11\n待面试"
             android:textColor="@color/color_333"
             android:textSize="16sp" />
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="301\n已投简历"
+            android:text="43\n已投简历"
             android:textColor="@color/color_333"
             android:textSize="16sp" />
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="301\收藏"
+            android:text="31\n收藏"
             android:textColor="@color/color_333"
             android:textSize="16sp" />
 
