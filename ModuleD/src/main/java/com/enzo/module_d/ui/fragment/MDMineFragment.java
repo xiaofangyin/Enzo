@@ -1,10 +1,16 @@
 package com.enzo.module_d.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
+import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -13,6 +19,11 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.appupgrade.AppUpgradeUtil;
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.imageloader.ImageLoader;
+import com.enzo.commonlib.utils.matisse.Matisse;
+import com.enzo.commonlib.utils.matisse.MimeType;
+import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
+import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
@@ -37,6 +48,8 @@ import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 
+import java.util.List;
+
 /**
  * 文 件 名: MDMineFragment
  * 创 建 人: xiaofy
@@ -45,6 +58,9 @@ import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
  */
 @Route(path = ModuleDRouterPath.MODULE_D_FRAGMENT)
 public class MDMineFragment extends BaseFragment implements View.OnClickListener {
+
+    private static final int REQUEST_CODE_CHOOSE_AVATAR = 101;
+    private ImageView ivAvatar;
 
     @Override
     public void onResume() {
@@ -73,10 +89,13 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         view.setBackgroundColor(ContextCompat.getColor(
                 rootView.getContext(), R.color.color_yellow));
         ((ViewGroup) rootView).addView(view, 0);
+
+        ivAvatar = rootView.findViewById(R.id.me_icon);
     }
 
     @Override
     public void initListener(View rootView) {
+        rootView.findViewById(R.id.me_icon).setOnClickListener(this);
         rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_add_device).setOnClickListener(this);
@@ -106,9 +125,44 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CHOOSE_AVATAR && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                List<Uri> list = Matisse.obtainResult(data);
+                if (list != null && !list.isEmpty()) {
+                    ImageLoader.Builder builder = new ImageLoader.Builder(getActivity());
+                    builder.load(list.get(0))
+                            .signature(String.valueOf(System.currentTimeMillis()))
+                            .build()
+                            .into(ivAvatar);
+                }
+            }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_app_upgrade) {
+        if (id == R.id.me_icon) {
+            Matisse.from(this)
+                    .choose(MimeType.ofImage(), false)
+                    .theme(R.style.Matisse_XianYu)
+                    .countable(true)
+                    .singleChoose(true)
+                    .crop(true)
+                    .capture(true)
+                    .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
+                    .maxSelectable(9)
+                    .spanCount(4)
+                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                    .thumbnailScale(0.85f)
+                    .imageEngine(new GlideEngine())
+                    .showSingleMediaType(true)
+                    .maxOriginalSize(10)
+                    .autoHideToolbarOnSingleTap(true)
+                    .forResult(REQUEST_CODE_CHOOSE_AVATAR);
+        } else if (id == R.id.btn_app_upgrade) {
             AppUpgradeUtil.checkVersion(getContext(), new AppUpgradeUtil.UpdateListener() {
                 @Override
                 public void onNewVersion(AndroidBean versionInfo) {
