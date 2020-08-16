@@ -11,8 +11,11 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.module_d.R;
 import com.google.android.material.appbar.AppBarLayout;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 上滑时
@@ -31,7 +34,6 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
 
     private int mAppBarHeight;
     private View mCardView;
-    private boolean isAnimate;
     private float mTotalDy;
     private int mCardViewHeight;
     private int mLimitHeight;
@@ -39,9 +41,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     private float scaleValue = 2f / 3;// 显示卡片的三分之一 所以抛出三分之二
     private View mNameTitle;
     private ValueAnimator valueAnimator;
-
-    public MDAppBarLayoutOverScrollViewBehavior() {
-    }
+    private ValueAnimator recoveryAnim;
 
     public MDAppBarLayoutOverScrollViewBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -49,8 +49,10 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
 
 
     @Override
-    public boolean onLayoutChild(CoordinatorLayout parent, AppBarLayout abl, int layoutDirection) {
-        boolean handled = super.onLayoutChild(parent, abl, layoutDirection);
+    public boolean onLayoutChild(@NotNull CoordinatorLayout parent,
+                                 @NotNull AppBarLayout appBarLayout,
+                                 int layoutDirection) {
+        boolean handled = super.onLayoutChild(parent, appBarLayout, layoutDirection);
         if (null == mCardView) {
             mCardView = parent.findViewById(R.id.cardview);
         }
@@ -60,41 +62,27 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         if (null == mNameTitle) {
             mNameTitle = parent.findViewById(R.id.name);
         }
-
-        init(abl);
+        init(appBarLayout);
         return handled;
     }
 
 
     @Override
-    public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, float velocityX, float velocityY) {
-        if (velocityY > 100) {
-            isAnimate = false;
-        }
+    public boolean onNestedPreFling(@NotNull CoordinatorLayout coordinatorLayout,
+                                    @NotNull AppBarLayout child,
+                                    @NotNull View target,
+                                    float velocityX,
+                                    float velocityY) {
+        LogUtil.d("onNestedPreFling");
         return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
+
     }
 
-
     @Override
-    public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout abl, View target, int type) {
-        super.onStopNestedScroll(coordinatorLayout, abl, target, type);
-        //恢复位置
-        if (abl.getBottom() > mLimitHeight) {
-            recovery(abl);
-        }
-    }
-
-
-    @Override
-    public boolean onStartNestedScroll(CoordinatorLayout parent, AppBarLayout child, View directTargetChild, View target, int nestedScrollAxes, int type) {
-        //开始滚动了 就动画归位
-        isAnimate = true;
-        return super.onStartNestedScroll(parent, child, directTargetChild, target, nestedScrollAxes, type);
-    }
-
-
-    @Override
-    public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, int dx, int dy, int[] consumed, int type) {
+    public void onNestedPreScroll(@NotNull CoordinatorLayout coordinatorLayout,
+                                  @NotNull AppBarLayout child, View target,
+                                  int dx, int dy, int[] consumed, int type) {
+        LogUtil.d("onNestedPreScroll");
         if (mCardView != null && ((dy <= 0 && child.getBottom() >= mLimitHeight) || (dy > 0 && child.getBottom() > mLimitHeight))) {
             scrollY(child, target, dy);
         } else {
@@ -103,18 +91,60 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         }
     }
 
+    @Override
+    public boolean onStartNestedScroll(@NotNull CoordinatorLayout parent,
+                                       @NotNull AppBarLayout child,
+                                       @NotNull View directTargetChild,
+                                       View target, int nestedScrollAxes, int type) {
+        return super.onStartNestedScroll(parent, child, directTargetChild, target, nestedScrollAxes, type);
+    }
 
     @Override
-    public boolean onInterceptTouchEvent(@NonNull CoordinatorLayout parent, @NonNull AppBarLayout child, @NonNull MotionEvent ev) {
-        if (valueAnimator != null && valueAnimator.isRunning()) {
+    public void onNestedScroll(@NotNull CoordinatorLayout coordinatorLayout,
+                               @NonNull AppBarLayout child,
+                               View target,
+                               int dxConsumed,
+                               int dyConsumed,
+                               int dxUnconsumed,
+                               int dyUnconsumed,
+                               int type,
+                               int[] consumed) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed);
+        LogUtil.d("onNestedScroll");
+    }
+
+    @Override
+    public void onStopNestedScroll(@NotNull CoordinatorLayout coordinatorLayout,
+                                   @NotNull AppBarLayout appBarLayout,
+                                   View target,
+                                   int type) {
+        super.onStopNestedScroll(coordinatorLayout, appBarLayout, target, type);
+        LogUtil.d("onStopNestedScroll");
+        //恢复位置
+        if (appBarLayout.getBottom() > mLimitHeight) {
+            if (recoveryAnim == null) {
+                recovery(appBarLayout);
+            }
+        }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(@NonNull CoordinatorLayout parent,
+                                         @NonNull AppBarLayout child,
+                                         @NonNull MotionEvent ev) {
+        if ((valueAnimator != null && valueAnimator.isRunning()) ||
+                (recoveryAnim != null && recoveryAnim.isRunning())) {
             return true;
         }
         return super.onInterceptTouchEvent(parent, child, ev);
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull CoordinatorLayout parent, @NonNull AppBarLayout child, @NonNull MotionEvent ev) {
-        if (valueAnimator != null && valueAnimator.isRunning()) {
+    public boolean onTouchEvent(@NonNull CoordinatorLayout parent,
+                                @NonNull AppBarLayout child,
+                                @NonNull MotionEvent ev) {
+        if ((valueAnimator != null && valueAnimator.isRunning()) ||
+                (recoveryAnim != null && recoveryAnim.isRunning())) {
             return false;
         }
         return super.onTouchEvent(parent, child, ev);
@@ -198,23 +228,25 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
      */
     private void recovery(final AppBarLayout abl) {
         if (mTotalDy >= 0) {
-            mTotalDy = 0;
-            if (isAnimate) {
-                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1f).setDuration(200);
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        float value = (float) animation.getAnimatedValue();
-                        int offsetY = abl.getBottom() - mLimitHeight;
-                        abl.setBottom((int) (abl.getBottom() - (value * offsetY)));
-                        abl.setScrollY(0);
-                    }
-                });
-                valueAnimator.start();
-            } else {
-                abl.setBottom(mLimitHeight);
-                abl.setScrollY(0);
-            }
+            recoveryAnim = ValueAnimator.ofFloat(abl.getBottom(), mLimitHeight).setDuration(200);
+            recoveryAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (float) animation.getAnimatedValue();
+                    LogUtil.e("value: " + value);
+                    abl.setBottom((int) value);
+                    abl.setScrollY(0);
+                }
+            });
+            recoveryAnim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    recoveryAnim = null;
+                    mTotalDy = 0;
+                }
+            });
+            recoveryAnim.start();
         }
     }
 
