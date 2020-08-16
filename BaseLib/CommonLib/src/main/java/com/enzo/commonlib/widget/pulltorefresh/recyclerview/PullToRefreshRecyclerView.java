@@ -100,9 +100,11 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      */
     public void setNoMoreData(boolean noMore) {
         isLoadingData = false;
-        loadMoreView.setState(noMore ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_SUCCESS);
-        if (noMore) {
-            insideAdapter.notifyDataSetChanged();
+        if (loadMoreView != null) {
+            loadMoreView.setState(noMore ? BaseLoadMoreView.STATE_NO_DATA : BaseLoadMoreView.STATE_SUCCESS);
+            if (noMore) {
+                insideAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -135,11 +137,10 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         isLoadingData = false;
         if (headerRefreshView != null) {
             headerRefreshView.refreshSuccess();
+            mDataObserver.onChanged();
+            setNoMoreData(false);
+            scrollLoadMore();
         }
-        mDataObserver.onChanged();
-        setNoMoreData(false);
-
-        scrollLoadMore();
     }
 
     /**
@@ -149,9 +150,9 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         isLoadingData = false;
         if (headerRefreshView != null) {
             headerRefreshView.refreshFailed();
+            mDataObserver.onChanged();
+            setNoMoreData(false);
         }
-        mDataObserver.onChanged();
-        setNoMoreData(false);
     }
 
     /**
@@ -159,10 +160,12 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      */
     public void loadMoreSuccess() {
         isLoadingData = false;
-        loadMoreView.setState(BaseLoadMoreView.STATE_SUCCESS);
-        insideAdapter.notifyDataSetChanged();
+        if (loadMoreView != null) {
+            loadMoreView.setState(BaseLoadMoreView.STATE_SUCCESS);
+            insideAdapter.notifyDataSetChanged();
 
-        scrollLoadMore();
+            scrollLoadMore();
+        }
     }
 
     /**
@@ -170,26 +173,28 @@ public class PullToRefreshRecyclerView extends RecyclerView {
      */
     public void loadMoreFailed() {
         isLoadingData = false;
-        loadMoreView.setState(BaseLoadMoreView.STATE_FAILED);
-        loadMoreView.setOnRetryListener(new SimpleMultiPurposeListener() {
-            @Override
-            public void onRecyclerViewRefresh() {
+        if (loadMoreView != null) {
+            loadMoreView.setState(BaseLoadMoreView.STATE_FAILED);
+            loadMoreView.setOnRetryListener(new SimpleMultiPurposeListener() {
+                @Override
+                public void onRecyclerViewRefresh() {
 
-            }
-
-            @Override
-            public void onRecyclerViewLoadMore() {
-
-            }
-
-            @Override
-            public void onLoadMoreRetry() {
-                loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
-                if (purposeListener != null) {
-                    purposeListener.onLoadMoreRetry();
                 }
-            }
-        });
+
+                @Override
+                public void onRecyclerViewLoadMore() {
+
+                }
+
+                @Override
+                public void onLoadMoreRetry() {
+                    loadMoreView.setState(BaseLoadMoreView.STATE_LOADING);
+                    if (purposeListener != null) {
+                        purposeListener.onLoadMoreRetry();
+                    }
+                }
+            });
+        }
     }
 
     /**
