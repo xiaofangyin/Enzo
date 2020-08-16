@@ -29,6 +29,7 @@ import java.util.List;
  */
 public class ScrollViewPagerIndicator extends HorizontalScrollView {
 
+    private static final float scaleValue = 1.2f;
     private ArrayList<IndicatorBean> entities;
     private ViewPager mViewPager;
     private LinearLayout myLinearLayout;
@@ -112,8 +113,8 @@ public class ScrollViewPagerIndicator extends HorizontalScrollView {
         tabView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         tabView.setTextColor(ContextCompat.getColor(getContext(),
                 isSelected ? R.color.color_red : R.color.color_333));
-        tabView.setScaleX(isSelected ? 1.1f : 1f);
-        tabView.setScaleY(isSelected ? 1.1f : 1f);
+        tabView.setScaleX(isSelected ? scaleValue : 1f);
+        tabView.setScaleY(isSelected ? scaleValue : 1f);
         int paddingLeft = DensityUtil.dip2px(getContext(), index == 0 ? 16 : 10);
         int paddingRight = DensityUtil.dip2px(getContext(), lastItem ? 60 : 10);
         tabView.setPadding(paddingLeft, 0, paddingRight, 0);
@@ -126,8 +127,8 @@ public class ScrollViewPagerIndicator extends HorizontalScrollView {
      * 被选中的动画
      */
     private void animation(View view) {
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.1f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.1f);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", scaleValue);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", scaleValue);
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(scaleX).with(scaleY);
         animSet.setDuration(250);

@@ -1,17 +1,28 @@
 package com.enzo.module_d.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
+import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.indicators.TriangularPagerIndicator;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.ScaleTransitionPagerTitleView;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator;
 import com.enzo.commonlib.widget.indicator.scroll.IndicatorBean;
 import com.enzo.commonlib.widget.indicator.scroll.ScrollViewPagerIndicator;
@@ -30,6 +41,7 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
 
     private ViewPagerIndicator viewPagerIndicator;
     private ScrollViewPagerIndicator scrollViewPagerIndicator;
+    private MagicIndicator magicIndicator;
     private ViewPager viewPager;
 
     @Override
@@ -41,7 +53,7 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
     public void initHeader() {
         super.initHeader();
         HeadWidget headWidget = findViewById(R.id.header_view);
-        headWidget.setTitle("事件分发");
+        headWidget.setTitle("ViewPagerIndicator");
         headWidget.setLeftLayoutClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,22 +66,53 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
     public void initView() {
         viewPagerIndicator = findViewById(R.id.md_indicator);
         scrollViewPagerIndicator = findViewById(R.id.md_scroll_indicator);
+        magicIndicator = findViewById(R.id.md_magic_indicator);
         viewPager = findViewById(R.id.view_pager);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        viewPagerIndicator.setTabItemTitles(buildTabs());
+        final List<IndicatorBean> list = buildTabs();
+        viewPagerIndicator.setTabItemTitles(list);
         viewPagerIndicator.bindViewPager(viewPager);
 
-        scrollViewPagerIndicator.setTitles(buildTabs());
+        scrollViewPagerIndicator.setTitles(list);
         scrollViewPagerIndicator.bindViewPager(viewPager);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter();
-        adapter.setNewData(buildTabs());
-        viewPager.setAdapter(adapter);
+        CommonNavigator commonNavigator = new CommonNavigator(this);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
 
-        viewPager.setCurrentItem(2);
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+                simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, R.color.color_666));
+                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.color_333));
+                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+                simplePagerTitleView.setText(list.get(index).getTitle());
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewPager.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                TriangularPagerIndicator linePagerIndicator = new TriangularPagerIndicator(context);
+                linePagerIndicator.setLineColor(ContextCompat.getColor(context, R.color.color_333));
+                return linePagerIndicator;
+            }
+        });
+        commonNavigator.setAdjustMode(true);
+        magicIndicator.setNavigator(commonNavigator, viewPager);
+
+        setAdapter(list);
     }
 
     @Override
@@ -96,6 +139,13 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void setAdapter(List<IndicatorBean> list) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter();
+        adapter.setNewData(list);
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(2);
     }
 
     private List<IndicatorBean> buildTabs() {

@@ -20,8 +20,15 @@
         android:id="@+id/md_scroll_indicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@color/color_yellow" />
+
+    <com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator
+        android:id="@+id/md_magic_indicator"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
