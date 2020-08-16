@@ -73,23 +73,11 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
                                     @NotNull View target,
                                     float velocityX,
                                     float velocityY) {
-        LogUtil.d("onNestedPreFling");
         return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
 
     }
 
-    @Override
-    public void onNestedPreScroll(@NotNull CoordinatorLayout coordinatorLayout,
-                                  @NotNull AppBarLayout child, View target,
-                                  int dx, int dy, int[] consumed, int type) {
-        LogUtil.d("onNestedPreScroll");
-        if (mCardView != null && ((dy <= 0 && child.getBottom() >= mLimitHeight) || (dy > 0 && child.getBottom() > mLimitHeight))) {
-            scrollY(child, target, dy);
-        } else {
-            setViewAlpha(child, dy);
-            super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
-        }
-    }
+
 
     @Override
     public boolean onStartNestedScroll(@NotNull CoordinatorLayout parent,
@@ -103,6 +91,18 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     }
 
     @Override
+    public void onNestedPreScroll(@NotNull CoordinatorLayout coordinatorLayout,
+                                  @NotNull AppBarLayout child, View target,
+                                  int dx, int dy, int[] consumed, int type) {
+        if (mCardView != null && ((dy <= 0 && child.getBottom() >= mLimitHeight) || (dy > 0 && child.getBottom() > mLimitHeight))) {
+            scrollY(child, target, dy);
+        } else {
+            setViewAlpha(child, dy);
+            super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
+        }
+    }
+
+    @Override
     public void onNestedScroll(@NotNull CoordinatorLayout coordinatorLayout,
                                @NonNull AppBarLayout child,
                                View target,
@@ -113,7 +113,6 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
                                int type,
                                int[] consumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed);
-        LogUtil.d("onNestedScroll");
     }
 
     @Override
@@ -122,7 +121,6 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
                                    View target,
                                    int type) {
         super.onStopNestedScroll(coordinatorLayout, appBarLayout, target, type);
-        LogUtil.d("onStopNestedScroll");
         //恢复位置
         if (appBarLayout.getBottom() > mLimitHeight) {
             if (recoveryAnim == null) {
@@ -135,7 +133,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     public boolean onInterceptTouchEvent(@NonNull CoordinatorLayout parent,
                                          @NonNull AppBarLayout child,
                                          @NonNull MotionEvent ev) {
-        if ((valueAnimator != null && valueAnimator.isRunning())){
+        if ((valueAnimator != null && valueAnimator.isRunning())) {
             return true;
         }
         return super.onInterceptTouchEvent(parent, child, ev);
