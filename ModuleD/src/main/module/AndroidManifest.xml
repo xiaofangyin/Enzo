@@ -107,6 +107,9 @@
         <activity
             android:name=".ui.activity.MDFlowLayoutActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDViewPagerIndicatorActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

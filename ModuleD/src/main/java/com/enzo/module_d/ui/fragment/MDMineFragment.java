@@ -46,6 +46,7 @@ import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
+import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 
 import java.util.List;
@@ -117,6 +118,7 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
         rootView.findViewById(R.id.btn_time_picker).setOnClickListener(this);
         rootView.findViewById(R.id.btn_flow_layout).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_viewpager_indicator).setOnClickListener(this);
     }
 
     @Override
@@ -240,6 +242,9 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
             startActivity(intent);
         } else if (id == R.id.btn_flow_layout) {
             Intent intent = new Intent(getContext(), MDFlowLayoutActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_viewpager_indicator) {
+            Intent intent = new Intent(getContext(), MDViewPagerIndicatorActivity.class);
             startActivity(intent);
         }
     }

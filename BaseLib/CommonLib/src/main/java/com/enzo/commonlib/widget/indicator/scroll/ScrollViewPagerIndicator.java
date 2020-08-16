@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.DensityUtil;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.List;
  * 创建日期: 2018/6/8
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class MyIndicator extends HorizontalScrollView {
+public class ScrollViewPagerIndicator extends HorizontalScrollView {
 
     private ArrayList<IndicatorBean> entities;
     private ViewPager mViewPager;
@@ -34,17 +35,17 @@ public class MyIndicator extends HorizontalScrollView {
     private OnTabClickListener tabClickListener;
     private Runnable mTabSelector;
 
-    public MyIndicator(Context context) {
+    public ScrollViewPagerIndicator(Context context) {
         super(context);
         init(context);
     }
 
-    public MyIndicator(Context context, AttributeSet attrs) {
+    public ScrollViewPagerIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public MyIndicator(Context context, AttributeSet attrs, int defStyle) {
+    public ScrollViewPagerIndicator(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }
@@ -67,19 +68,19 @@ public class MyIndicator extends HorizontalScrollView {
         return entities.get(mViewPager.getCurrentItem()).getId() + "";
     }
 
-    public void setTitles(int selectedPosition, List<IndicatorBean> list) {
+    public void setTitles(List<IndicatorBean> list) {
         if (list != null && list.size() > 0) {
             entities = (ArrayList<IndicatorBean>) list;
             myLinearLayout.removeAllViews();
             for (int i = 0; i < list.size(); i++) {
-                addTab(i, list.get(i), i == list.size() - 1, i == selectedPosition);
+                addTab(i, list.get(i), i == list.size() - 1, i == 0);
             }
             requestLayout();
         }
     }
 
-    public void setViewPager(ViewPager viewPager) {
-        if (mViewPager == viewPager || viewPager.getAdapter() == null) {
+    public void bindViewPager(ViewPager viewPager) {
+        if (mViewPager == viewPager) {
             return;
         }
         mViewPager = viewPager;
@@ -110,7 +111,7 @@ public class MyIndicator extends HorizontalScrollView {
         tabView.setText(bean.getTitle());
         tabView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         tabView.setTextColor(ContextCompat.getColor(getContext(),
-                isSelected ? com.enzo.commonlib.R.color.color_green : com.enzo.commonlib.R.color.color_333));
+                isSelected ? R.color.color_red : R.color.color_333));
         tabView.setScaleX(isSelected ? 1.1f : 1f);
         tabView.setScaleY(isSelected ? 1.1f : 1f);
         int paddingLeft = DensityUtil.dip2px(getContext(), index == 0 ? 16 : 10);
@@ -154,11 +155,11 @@ public class MyIndicator extends HorizontalScrollView {
             TextView child = (TextView) myLinearLayout.getChildAt(i);
             boolean isSelected = (i == item);
             if (isSelected) {
-                child.setTextColor(ContextCompat.getColor(getContext(), com.enzo.commonlib.R.color.color_green));
+                child.setTextColor(ContextCompat.getColor(getContext(), R.color.color_red));
                 animation(child);
                 animateToTab(item, animate);
             } else {
-                child.setTextColor(ContextCompat.getColor(getContext(), com.enzo.commonlib.R.color.color_333));
+                child.setTextColor(ContextCompat.getColor(getContext(), R.color.color_333));
                 animation2(child);
             }
         }

@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -14,6 +13,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.ViewPager;
+
+import com.enzo.commonlib.widget.indicator.scroll.IndicatorBean;
 
 import java.util.List;
 
@@ -31,9 +34,9 @@ public class ViewPagerIndicator extends LinearLayout {
     private int marginLeft;//指示器初始偏移量
     private int tabCount;//指示器个数
     private int translateX;//指示器偏移量
-    private static int COLOR_TEXT_NORMAL = 0x77FFFFFF;
-    private static int COLOR_TEXT_HIGHLIGHT = 0xFFFFFFFF;
-    private static int COLOR_INDICATOR = 0xFFFFFFFF;
+    private static int COLOR_TEXT_NORMAL = 0x77161922;
+    private static int COLOR_TEXT_HIGHLIGHT = 0xFF161922;
+    private static int COLOR_INDICATOR = 0xFF161922;
 
     public ViewPagerIndicator(Context context) {
         this(context, null);
@@ -90,19 +93,21 @@ public class ViewPagerIndicator extends LinearLayout {
         invalidate();
     }
 
-    public void setTabItemTitles(List<String> datas) {
+    public void setTabItemTitles(List<IndicatorBean> datas) {
         if (datas != null && datas.size() > 0) {
             this.removeAllViews();
             tabCount = datas.size();
             for (int i = 0; i < datas.size(); i++) {
                 addView(generateTextView(i, datas.get(i)));
             }
-
         }
+        resetTextViewColor();
+        // 高亮
+        highLightTextView(0);
     }
 
     // 设置关联的ViewPager
-    public void setViewPager(ViewPager viewPager, int pos) {
+    public void bindViewPager(ViewPager viewPager) {
         this.mViewPager = viewPager;
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -121,10 +126,6 @@ public class ViewPagerIndicator extends LinearLayout {
 
             }
         });
-        // 设置当前页
-        mViewPager.setCurrentItem(pos);
-        // 高亮
-        highLightTextView(pos);
     }
 
     /**
@@ -153,18 +154,15 @@ public class ViewPagerIndicator extends LinearLayout {
 
     /**
      * 根据标题生成我们的TextView
-     *
-     * @param text
-     * @return
      */
-    private TextView generateTextView(int position, String text) {
+    private TextView generateTextView(int position, IndicatorBean text) {
         TextView tv = new TextView(getContext());
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         lp.width = getScreenWidth() / tabCount;
         tv.setTag(position);
         tv.setGravity(Gravity.CENTER);
         tv.setTextColor(COLOR_TEXT_NORMAL);
-        tv.setText(text);
+        tv.setText(text.getTitle());
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         tv.setLayoutParams(lp);
         tv.setOnClickListener(mTabClickListener);
