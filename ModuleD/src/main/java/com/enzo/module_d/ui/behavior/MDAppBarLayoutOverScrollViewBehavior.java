@@ -106,7 +106,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
 
     @Override
     public boolean onInterceptTouchEvent(@NonNull CoordinatorLayout parent, @NonNull AppBarLayout child, @NonNull MotionEvent ev) {
-        if (valueAnimator != null) {
+        if (valueAnimator != null && valueAnimator.isRunning()) {
             return true;
         }
         return super.onInterceptTouchEvent(parent, child, ev);
@@ -114,7 +114,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
 
     @Override
     public boolean onTouchEvent(@NonNull CoordinatorLayout parent, @NonNull AppBarLayout child, @NonNull MotionEvent ev) {
-        if (valueAnimator != null) {
+        if (valueAnimator != null && valueAnimator.isRunning()) {
             return false;
         }
         return super.onTouchEvent(parent, child, ev);
@@ -131,9 +131,10 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         mCardViewHeight = mCardView.getMeasuredHeight();
         //折叠正常的高度
         mLimitHeight = mAppBarHeight - (int) (mCardViewHeight * scaleValue);
+        appBarLayout.setBottom(mLimitHeight);
 
         //默认1s折叠
-        valueAnimator = ValueAnimator.ofFloat(0, 1f).setDuration(200);
+        valueAnimator = ValueAnimator.ofFloat(1f, 0, 1f).setDuration(1000);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -155,7 +156,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
                     valueAnimator.start();
                 }
             }
-        }, 1000);
+        }, 100);
     }
 
 
