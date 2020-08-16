@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior {
 
+    private boolean initAnimShown;//是否初始化过
     private int mAppBarHeight;
     private View mCardView;
     private float mTotalDy;
@@ -151,30 +152,33 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         mLimitHeight = mAppBarHeight - (int) (mCardViewHeight * scaleValue);
         appBarLayout.setBottom(mLimitHeight);
 
-        //默认1s折叠
-        valueAnimator = ValueAnimator.ofFloat(1f, 0, 0, 0, 1f).setDuration(1200);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                appBarLayout.setBottom((int) (mAppBarHeight - value * mCardViewHeight * scaleValue));
-            }
-        });
-        valueAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                valueAnimator = null;
-            }
-        });
-        appBarLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (valueAnimator != null) {
-                    valueAnimator.start();
+        if (!initAnimShown) {
+            initAnimShown = true;
+            //默认1s折叠
+            valueAnimator = ValueAnimator.ofFloat(1f, 0, 0, 0, 1f).setDuration(1200);
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (float) animation.getAnimatedValue();
+                    appBarLayout.setBottom((int) (mAppBarHeight - value * mCardViewHeight * scaleValue));
                 }
-            }
-        }, 100);
+            });
+            valueAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    valueAnimator = null;
+                }
+            });
+            appBarLayout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (valueAnimator != null) {
+                        valueAnimator.start();
+                    }
+                }
+            }, 100);
+        }
     }
 
 

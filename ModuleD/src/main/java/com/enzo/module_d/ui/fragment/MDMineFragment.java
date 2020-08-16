@@ -135,6 +135,7 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
                 if (list != null && !list.isEmpty()) {
                     ImageLoader.Builder builder = new ImageLoader.Builder(getActivity());
                     builder.load(list.get(0))
+                            .placeHolder(R.mipmap.icon_user_default_avatar)
                             .signature(String.valueOf(System.currentTimeMillis()))
                             .build()
                             .into(ivAvatar);
