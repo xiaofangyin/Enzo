@@ -11,7 +11,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.module_d.R;
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -47,7 +46,6 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         super(context, attrs);
     }
 
-
     @Override
     public boolean onLayoutChild(@NotNull CoordinatorLayout parent,
                                  @NotNull AppBarLayout appBarLayout,
@@ -74,9 +72,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
                                     float velocityX,
                                     float velocityY) {
         return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
-
     }
-
 
 
     @Override
@@ -232,7 +228,6 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     float value = (float) animation.getAnimatedValue();
-                    LogUtil.e("value: " + value);
                     abl.setBottom((int) value);
                     abl.setScrollY(0);
                 }
