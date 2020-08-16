@@ -96,6 +96,9 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
                                        @NotNull AppBarLayout child,
                                        @NotNull View directTargetChild,
                                        View target, int nestedScrollAxes, int type) {
+        if (recoveryAnim != null && recoveryAnim.isRunning()) {
+            recoveryAnim.cancel();
+        }
         return super.onStartNestedScroll(parent, child, directTargetChild, target, nestedScrollAxes, type);
     }
 
@@ -132,8 +135,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     public boolean onInterceptTouchEvent(@NonNull CoordinatorLayout parent,
                                          @NonNull AppBarLayout child,
                                          @NonNull MotionEvent ev) {
-        if ((valueAnimator != null && valueAnimator.isRunning()) ||
-                (recoveryAnim != null && recoveryAnim.isRunning())) {
+        if ((valueAnimator != null && valueAnimator.isRunning())){
             return true;
         }
         return super.onInterceptTouchEvent(parent, child, ev);
@@ -143,8 +145,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     public boolean onTouchEvent(@NonNull CoordinatorLayout parent,
                                 @NonNull AppBarLayout child,
                                 @NonNull MotionEvent ev) {
-        if ((valueAnimator != null && valueAnimator.isRunning()) ||
-                (recoveryAnim != null && recoveryAnim.isRunning())) {
+        if ((valueAnimator != null && valueAnimator.isRunning())) {
             return false;
         }
         return super.onTouchEvent(parent, child, ev);
@@ -164,7 +165,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         appBarLayout.setBottom(mLimitHeight);
 
         //默认1s折叠
-        valueAnimator = ValueAnimator.ofFloat(1f, 0, 1f).setDuration(1000);
+        valueAnimator = ValueAnimator.ofFloat(1f, 0, 1f).setDuration(800);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
