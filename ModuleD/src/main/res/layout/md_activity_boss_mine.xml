@@ -23,9 +23,10 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     app:layout_collapseMode="parallax">
 
                     <include
@@ -46,7 +47,7 @@
                             android:layout_height="wrap_content"
                             android:src="@mipmap/boss_card_bg" />
                     </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

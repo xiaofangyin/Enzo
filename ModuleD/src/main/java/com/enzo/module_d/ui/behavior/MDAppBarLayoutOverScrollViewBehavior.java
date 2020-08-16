@@ -181,7 +181,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
             percent = 1f;
         }
         //设置toolbar的透明度
-        mToolBar.setAlpha(percent);
+        mToolBar.setAlpha(percent * 1.3f > 1 ? 1 : percent * 1.3f);
 
         //设置名字缩放
         mNameTitle.setScaleX(Math.max(0.8f, 1 - percent * 0.2f));
