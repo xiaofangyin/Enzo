@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Environment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.appupgrade.AppUpgradeUtil;
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.matisse.Matisse;
@@ -48,6 +50,7 @@ import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
+import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
 
 import java.util.List;
 
@@ -99,8 +102,9 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
         rootView.findViewById(R.id.me_icon).setOnClickListener(this);
         rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_add_device).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_boss_bottom_dialog).setOnClickListener(this);
         rootView.findViewById(R.id.btn_boss_company).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_add_device).setOnClickListener(this);
         rootView.findViewById(R.id.btn_av_loading).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
@@ -182,11 +186,24 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
 
                 }
             });
-        } else if (id == R.id.btn_add_device) {
-            ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
+        } else if (id == R.id.btn_boss_bottom_dialog) {
+            View content = LayoutInflater.from(getActivity()).inflate(R.layout.md_dialog_view, null);
+
+            //默认的效果
+//        BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(getActivity());
+//        bottomSheetDialog.setContentView(content);
+//        bottomSheetDialog.show();
+
+            //自定义的BottomSheetDialog 主要是解决高度问题
+            int height = DensityUtil.dip2px(v.getContext(), 550);
+            CommonBottomSheetDialog bottomSheetDialog = new CommonBottomSheetDialog(v.getContext(), height, height);
+            bottomSheetDialog.setContentView(content);
+            bottomSheetDialog.show();
         } else if (id == R.id.btn_boss_company) {
             Intent intent = new Intent(getContext(), MDBossCompanyDetailActivity.class);
             startActivity(intent);
+        } else if (id == R.id.btn_add_device) {
+            ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
         } else if (id == R.id.btn_touch_event) {
             Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
             startActivity(intent);
