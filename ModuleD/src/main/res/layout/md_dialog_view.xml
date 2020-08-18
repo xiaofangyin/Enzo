@@ -18,6 +18,7 @@
         android:id="@+id/boss_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
         tools:ignore="MissingConstraints">
 
 
