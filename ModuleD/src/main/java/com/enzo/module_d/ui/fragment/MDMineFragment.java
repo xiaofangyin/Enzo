@@ -195,7 +195,7 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
 //        bottomSheetDialog.show();
 
             //自定义的BottomSheetDialog 主要是解决高度问题
-            int height = DensityUtil.dip2px(v.getContext(), 550);
+            int height = (int) (DensityUtil.getScreenHeight(v.getContext()) / 3 * 2f);
             CommonBottomSheetDialog bottomSheetDialog = new CommonBottomSheetDialog(v.getContext(), height, height);
             bottomSheetDialog.setContentView(content);
             bottomSheetDialog.show();
