@@ -2,8 +2,6 @@ package com.enzo.commonlib.widget.pulltorefresh.recyclerview.base;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -32,14 +30,12 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     public int mState = STATE_PULL_DOWN;
 
     protected int mMeasuredHeight;
-    private Handler handler;
     public View mContainer;
 
     private OnStateChangeListener onStateChangeListener;
 
     public BasePullToRefreshView(Context context) {
         super(context);
-        handler = new Handler(Looper.getMainLooper());
         LayoutParams lp = new LayoutParams(
                 RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
         this.setLayoutParams(lp);
@@ -102,7 +98,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
         if (onStateChangeListener != null) {
             onStateChangeListener.onStateChange(STATE_SUCCESS);
         }
-        handler.postDelayed(new Runnable() {
+        postDelayed(new Runnable() {
             public void run() {
                 reset();
             }
@@ -116,7 +112,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
         if (onStateChangeListener != null) {
             onStateChangeListener.onStateChange(STATE_FAILED);
         }
-        handler.postDelayed(new Runnable() {
+        postDelayed(new Runnable() {
             public void run() {
                 reset();
             }
@@ -128,7 +124,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
      */
     public void reset() {
         scrollTo(0);
-        handler.postDelayed(new Runnable() {
+        postDelayed(new Runnable() {
             public void run() {
                 if (onStateChangeListener != null) {
                     onStateChangeListener.onStateChange(STATE_PULL_DOWN);
