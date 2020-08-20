@@ -127,10 +127,18 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     }
 
     @Override
+    public boolean onInterceptTouchEvent(@NonNull CoordinatorLayout parent, @NonNull AppBarLayout child, @NonNull MotionEvent ev) {
+        if ((valueAnimator != null)) {
+            return true;
+        }
+        return super.onInterceptTouchEvent(parent, child, ev);
+    }
+
+    @Override
     public boolean onTouchEvent(@NonNull CoordinatorLayout parent,
                                 @NonNull AppBarLayout child,
                                 @NonNull MotionEvent ev) {
-        if ((valueAnimator != null && valueAnimator.isRunning())) {
+        if ((valueAnimator != null)) {
             return false;
         }
         if (ev.getY() > child.getTop() && ev.getY() < child.getBottom()) {
