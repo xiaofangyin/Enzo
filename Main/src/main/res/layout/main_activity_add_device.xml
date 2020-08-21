@@ -19,6 +19,8 @@
             android:id="@+id/add_device_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never" />
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:scrollbars="vertical" />
     </com.enzo.commonlib.widget.loadinglayout.LoadingLayout>
 </LinearLayout>
