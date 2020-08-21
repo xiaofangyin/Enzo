@@ -176,7 +176,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         if (!initAnimShown) {
             initAnimShown = true;
             //默认1s折叠
-            valueAnimator = ValueAnimator.ofFloat(1f, 0, 0, 0, 1f).setDuration(1200);
+            valueAnimator = ValueAnimator.ofFloat(1f, 0, 0, 0, 0, 1f).setDuration(1500);
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
