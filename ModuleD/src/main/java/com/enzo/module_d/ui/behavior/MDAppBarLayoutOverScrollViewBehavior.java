@@ -7,6 +7,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -32,14 +33,15 @@ import org.jetbrains.annotations.NotNull;
 public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior {
 
     private boolean initAnimShown;//是否初始化过
-    private int mAppBarHeight;
+    private View mToolBar;
+    private View mNameTitle;
     private View mCardView;
-    private float mTotalDy;
+    private View mNestedView;
+    private int mAppBarHeight;
     private int mCardViewHeight;
     private int mLimitHeight;
-    private View mToolBar;
+    private float mTotalDy;
     private float scaleValue = 2f / 3;// 显示卡片的三分之一 所以抛出三分之二
-    private View mNameTitle;
     private ValueAnimator valueAnimator;
     private ValueAnimator recoveryAnim;
 
@@ -60,6 +62,9 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         }
         if (null == mNameTitle) {
             mNameTitle = parent.findViewById(R.id.name);
+        }
+        if (null == mNestedView) {
+            mNestedView = parent.findViewById(R.id.nested_view);
         }
         init(appBarLayout);
         return handled;
@@ -159,6 +164,14 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         //折叠正常的高度
         mLimitHeight = mAppBarHeight - (int) (mCardViewHeight * scaleValue);
         appBarLayout.setBottom(mLimitHeight);
+
+        appBarLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                appBarLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                mNestedView.setBottom(mNestedView.getBottom() + (int) (mCardViewHeight * scaleValue));
+            }
+        });
 
         if (!initAnimShown) {
             initAnimShown = true;
