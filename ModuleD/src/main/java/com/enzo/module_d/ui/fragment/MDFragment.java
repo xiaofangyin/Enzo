@@ -157,7 +157,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                 @Override
                 public void granted(boolean granted) {
                     if (granted) {
-                        Matisse.from(getActivity())
+                        Matisse.from(MDFragment.this)
                                 .choose(MimeType.ofImage(), false)
                                 .theme(R.style.Matisse_XianYu)
                                 .countable(true)
