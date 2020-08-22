@@ -21,6 +21,7 @@ import com.enzo.commonlib.utils.appupgrade.AppUpgradeUtil;
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.common.PermissionsUtils;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
@@ -55,13 +56,13 @@ import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
 import java.util.List;
 
 /**
- * 文 件 名: MDMineFragment
+ * 文 件 名: MDFragment
  * 创 建 人: xiaofy
  * 创建日期: 2020/8/14
  * 邮   箱: xiaofywork@163.com
  */
 @Route(path = ModuleDRouterPath.MODULE_D_FRAGMENT)
-public class MDMineFragment extends BaseFragment implements View.OnClickListener {
+public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     private static final int REQUEST_CODE_CHOOSE_AVATAR = 101;
     private ImageView ivAvatar;
@@ -152,23 +153,30 @@ public class MDMineFragment extends BaseFragment implements View.OnClickListener
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.me_icon) {
-            Matisse.from(this)
-                    .choose(MimeType.ofImage(), false)
-                    .theme(R.style.Matisse_XianYu)
-                    .countable(true)
-                    .singleChoose(true)
-                    .crop(true)
-                    .capture(true)
-                    .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
-                    .maxSelectable(9)
-                    .spanCount(4)
-                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                    .thumbnailScale(0.85f)
-                    .imageEngine(new GlideEngine())
-                    .showSingleMediaType(true)
-                    .maxOriginalSize(10)
-                    .autoHideToolbarOnSingleTap(true)
-                    .forResult(REQUEST_CODE_CHOOSE_AVATAR);
+            PermissionsUtils.requestExternalStoragePermission(getActivity(), new PermissionsUtils.OnCheckCallback() {
+                @Override
+                public void granted(boolean granted) {
+                    if (granted) {
+                        Matisse.from(getActivity())
+                                .choose(MimeType.ofImage(), false)
+                                .theme(R.style.Matisse_XianYu)
+                                .countable(true)
+                                .singleChoose(true)
+                                .crop(true)
+                                .capture(true)
+                                .captureStrategy(new CaptureStrategy(Environment.DIRECTORY_PICTURES))
+                                .maxSelectable(9)
+                                .spanCount(4)
+                                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                                .thumbnailScale(0.85f)
+                                .imageEngine(new GlideEngine())
+                                .showSingleMediaType(true)
+                                .maxOriginalSize(10)
+                                .autoHideToolbarOnSingleTap(true)
+                                .forResult(REQUEST_CODE_CHOOSE_AVATAR);
+                    }
+                }
+            });
         } else if (id == R.id.btn_app_upgrade) {
             AppUpgradeUtil.checkVersion(getContext(), new AppUpgradeUtil.UpdateListener() {
                 @Override
