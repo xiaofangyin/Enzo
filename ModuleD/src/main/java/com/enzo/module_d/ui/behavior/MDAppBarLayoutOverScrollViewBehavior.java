@@ -12,7 +12,6 @@ import android.view.ViewTreeObserver;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.module_d.R;
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -221,7 +220,6 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
      * 根据滑动设置 toolbar  名字显示效果
      */
     private void setViewAlpha(View target, int dy) {
-        LogUtil.e("gety: " + target.getY());
         float percent = Math.abs(target.getY() / mLimitHeight);
         if (percent >= 1) {
             percent = 1f;
