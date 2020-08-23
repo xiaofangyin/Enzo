@@ -58,13 +58,11 @@
             android:background="@drawable/shape_button_gray_pressed"
             android:gravity="center">
 
-            <ViewFlipper
+            <com.enzo.commonlib.widget.flipper.FlipperView
                 android:id="@+id/view_flipper"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:inAnimation="@anim/ma_flipper_anim_in"
-                android:outAnimation="@anim/ma_flipper_anim_out" />
+                android:layout_gravity="center" />
         </LinearLayout>
 
     </LinearLayout>

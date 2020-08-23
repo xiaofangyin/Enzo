@@ -15,7 +15,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -28,6 +27,8 @@ import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
+import com.enzo.commonlib.widget.flipper.FlipperView;
+import com.enzo.commonlib.widget.flipper.adapter.FlipperAdapter;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -57,7 +58,7 @@ import java.util.List;
 @Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
 public class MAFragment extends BaseFragment {
 
-    private ViewFlipper viewFlipper;
+    private FlipperView viewFlipper;
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
 
@@ -90,7 +91,6 @@ public class MAFragment extends BaseFragment {
         ((ViewGroup) rootView).addView(view, 0);
 
         viewFlipper = rootView.findViewById(R.id.view_flipper);
-        viewFlipper.setFlipInterval(5000);
         magicIndicator = rootView.findViewById(R.id.magic_indicator);
         viewPager = rootView.findViewById(R.id.ma_view_pager2);
         initMagicIndicator4();
@@ -164,27 +164,37 @@ public class MAFragment extends BaseFragment {
         list.add("vivo Y83");
         list.add("iPhone 11");
         list.add("华为 P40");
-        for (int i = 0; i < list.size(); i++) {
-            final TextView textView = new TextView(getActivity());
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            textView.setSingleLine(true);
-            textView.setGravity(Gravity.CENTER_VERTICAL);
-            textView.setEllipsize(TextUtils.TruncateAt.END);
-            textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.color_999));
-            Drawable drawableRight = getResources().getDrawable(R.mipmap.icon_search_icon, getContext().getTheme());
-            drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
-            textView.setCompoundDrawables(drawableRight, null, null, null);
-            textView.setCompoundDrawablePadding(DensityUtil.dip2px(getActivity(), 6));
-            textView.setText(list.get(i));
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ToastUtil.show(textView.getText().toString());
-                }
-            });
-            viewFlipper.addView(textView);
-        }
-        viewFlipper.startFlipping();
+
+        viewFlipper.setAdapter(new FlipperAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public View getItemView(Context context, int position) {
+                final TextView textView = new TextView(context);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                textView.setSingleLine(true);
+                textView.setGravity(Gravity.CENTER_VERTICAL);
+                textView.setEllipsize(TextUtils.TruncateAt.END);
+                textView.setTextColor(ContextCompat.getColor(context, R.color.color_999));
+                Drawable drawableRight = getResources().getDrawable(R.mipmap.icon_search_icon, context.getTheme());
+                drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
+                textView.setCompoundDrawables(drawableRight, null, null, null);
+                textView.setCompoundDrawablePadding(DensityUtil.dip2px(context, 6));
+                textView.setText(list.get(position));
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ToastUtil.show(textView.getText().toString());
+                    }
+                });
+                return textView;
+            }
+        });
+        viewFlipper.setInterval(5000);
+        viewFlipper.start();
 
         FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
         viewPager.setAdapter(mAdapter);
