@@ -8,6 +8,6 @@
 
     <style name="ma_RightTopPopAnim" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/ma_right_top_in</item>
-        <item name="android:windowExitAnimation">@anim/right_top_out</item>
+        <item name="android:windowExitAnimation">@anim/ma_right_top_out</item>
     </style>
 </resources>

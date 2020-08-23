@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -22,8 +25,6 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
-import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -53,7 +54,7 @@ import java.util.List;
 @Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
 public class MAFragment extends BaseFragment {
 
-    private AutoScrollTextView tvSearch;
+    private ViewFlipper viewFlipper;
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
 
@@ -85,7 +86,8 @@ public class MAFragment extends BaseFragment {
                 rootView.getContext(), R.color.color_yellow));
         ((ViewGroup) rootView).addView(view, 0);
 
-        tvSearch = rootView.findViewById(R.id.ma_search);
+        viewFlipper = rootView.findViewById(R.id.view_flipper);
+        viewFlipper.setFlipInterval(5000);
         magicIndicator = rootView.findViewById(R.id.magic_indicator);
         viewPager = rootView.findViewById(R.id.ma_view_pager2);
         initMagicIndicator4();
@@ -159,16 +161,12 @@ public class MAFragment extends BaseFragment {
         list.add("vivo Y83");
         list.add("iPhone 11");
         list.add("华为 P40");
-        tvSearch.setText(list.get(0));
-        tvSearch.setList(list);
-        tvSearch.startScroll();
-        tvSearch.setClickListener(new AutoScrollTextView.ItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                ToastUtil.show(list.get(position));
-            }
-        });
-
+        for (int i = 0; i < list.size(); i++) {
+            TextView textView = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.ma_item_view_flipper, null);
+            textView.setText(list.get(i));
+            viewFlipper.addView(textView);
+        }
+        viewFlipper.startFlipping();
 
         FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
         viewPager.setAdapter(mAdapter);

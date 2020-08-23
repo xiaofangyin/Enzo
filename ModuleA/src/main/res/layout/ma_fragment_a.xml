@@ -23,8 +23,8 @@
                 android:id="@+id/ma_menu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:padding="4dp"
                 android:layout_marginStart="12dp"
+                android:padding="4dp"
                 android:src="@mipmap/ma_icon_category" />
 
             <RelativeLayout
@@ -58,11 +58,13 @@
             android:background="@drawable/shape_button_gray_pressed"
             android:gravity="center">
 
-            <com.enzo.commonlib.widget.autoscrolltextview.AutoScrollTextView
-                android:id="@+id/ma_search"
+            <ViewFlipper
+                android:id="@+id/view_flipper"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp" />
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:inAnimation="@anim/ma_flipper_anim_in"
+                android:outAnimation="@anim/ma_flipper_anim_out" />
         </LinearLayout>
 
     </LinearLayout>
