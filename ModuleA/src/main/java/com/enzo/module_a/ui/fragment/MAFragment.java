@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -25,6 +27,7 @@ import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -162,8 +165,23 @@ public class MAFragment extends BaseFragment {
         list.add("iPhone 11");
         list.add("华为 P40");
         for (int i = 0; i < list.size(); i++) {
-            TextView textView = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.ma_item_view_flipper, null);
+            final TextView textView = new TextView(getActivity());
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            textView.setSingleLine(true);
+            textView.setGravity(Gravity.CENTER_VERTICAL);
+            textView.setEllipsize(TextUtils.TruncateAt.END);
+            textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.color_999));
+            Drawable drawableRight = getResources().getDrawable(R.mipmap.icon_search_icon, getContext().getTheme());
+            drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
+            textView.setCompoundDrawables(drawableRight, null, null, null);
+            textView.setCompoundDrawablePadding(DensityUtil.dip2px(getActivity(), 6));
             textView.setText(list.get(i));
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ToastUtil.show(textView.getText().toString());
+                }
+            });
             viewFlipper.addView(textView);
         }
         viewFlipper.startFlipping();
