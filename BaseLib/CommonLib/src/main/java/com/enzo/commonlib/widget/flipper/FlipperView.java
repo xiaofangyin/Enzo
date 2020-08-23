@@ -59,6 +59,9 @@ public class FlipperView extends FrameLayout {
     }
 
     public void setAdapter(FlipperAdapter adapter) {
+        if (mAdapter == adapter) {
+            return;
+        }
         if (mAdapter != null) {
             mAdapter.unregisterDataSetObserver(mObserver);
         }
@@ -73,7 +76,7 @@ public class FlipperView extends FrameLayout {
         }
     }
 
-    public void start() {
+    public void startFlipping() {
         viewFlipper.startFlipping();
     }
 
@@ -81,7 +84,11 @@ public class FlipperView extends FrameLayout {
         viewFlipper.setFlipInterval(interval);
     }
 
-    public void setAutoStart(boolean autoStart) {
-        viewFlipper.setAutoStart(autoStart);
+    public void showNext() {
+        viewFlipper.showNext();
+    }
+
+    public void showPrevious() {
+        viewFlipper.showPrevious();
     }
 }

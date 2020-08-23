@@ -194,7 +194,7 @@ public class MAFragment extends BaseFragment {
             }
         });
         viewFlipper.setInterval(5000);
-        viewFlipper.start();
+        viewFlipper.startFlipping();
 
         FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
         viewPager.setAdapter(mAdapter);
