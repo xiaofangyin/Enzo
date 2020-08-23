@@ -21,7 +21,6 @@ import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PermissionsUtils;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
-import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
@@ -57,7 +56,6 @@ public class SAMainActivity extends BaseActivity {
     @Override
     public void initView() {
         StateAppBar.translucentStatusBar(this, true);
-        StatusBarUtils.StatusBarLightMode(this);
 
         drawerLayout = findViewById(R.id.home_drawer_layout);
         mTabLayout = findViewById(R.id.tab_layout);
