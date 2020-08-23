@@ -74,7 +74,7 @@ public class MDBossCompanyDetailActivity extends BaseActivity {
                  */
                 if (scrollY - oldScrollY > mTouchSlop) {
                     Log.e("onScrollChange", "上滑");
-                    if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+                    if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN && bottomSheetBehavior.isHideable()) {
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     }
                 }
