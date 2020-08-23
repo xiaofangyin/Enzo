@@ -1,7 +1,6 @@
 package com.enzo.main.app;
 
 import com.enzo.commonlib.base.BaseApplication;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.main.model.manager.AccountManager;
 
 /**
