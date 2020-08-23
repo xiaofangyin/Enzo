@@ -36,24 +36,21 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
     private CommonNavigatorAdapter mAdapter;
     private NavigatorHelper mNavigatorHelper;
 
-    /**
-     * 提供给外部的参数配置
-     */
-    /****************************************************/
+    /******************提供给外部的参数配置******************/
     private boolean mAdjustMode;   // 自适应模式，适用于数目固定的、少量的title
     private boolean mEnablePivotScroll; // 启动中心点滚动
     private float mScrollPivotX = 0.5f; // 滚动中心点 0.0f - 1.0f
     private boolean mSmoothScroll = true;   // 是否平滑滚动，适用于 !mAdjustMode && !mFollowTouch
     private boolean mFollowTouch = true;    // 是否手指跟随滚动
-    private int mRightPadding;
     private int mLeftPadding;
+    private int mRightPadding;
     private boolean mIndicatorOnTop;    // 指示器是否在title上层，默认为下层
     private boolean mSkimOver;  // 跨多页切换时，中间页是否显示 "掠过" 效果
     private boolean mReselectWhenLayout = true; // PositionData准备好时，是否重新选中当前页，为true可保证在极端情况下指示器状态正确
     /****************************************************/
 
     // 保存每个title的位置信息，为扩展indicator提供保障
-    private List<PositionData> mPositionDataList = new ArrayList<PositionData>();
+    private List<PositionData> mPositionDataList = new ArrayList();
 
     private DataSetObserver mObserver = new DataSetObserver() {
 
@@ -73,21 +70,6 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
         super(context);
         mNavigatorHelper = new NavigatorHelper();
         mNavigatorHelper.setNavigatorScrollListener(this);
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        if (mAdapter != null) {
-            mAdapter.notifyDataSetChanged();
-        }
-    }
-
-    public boolean isAdjustMode() {
-        return mAdjustMode;
-    }
-
-    public void setAdjustMode(boolean is) {
-        mAdjustMode = is;
     }
 
     public CommonNavigatorAdapter getAdapter() {
@@ -212,7 +194,6 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (mAdapter != null) {
-
             mNavigatorHelper.onPageScrolled(position, positionOffset, positionOffsetPixels);
             if (mIndicator != null) {
                 mIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels);
@@ -228,19 +209,9 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
                     float scrollTo = current.horizontalCenter() - mScrollView.getWidth() * mScrollPivotX;
                     float nextScrollTo = next.horizontalCenter() - mScrollView.getWidth() * mScrollPivotX;
                     mScrollView.scrollTo((int) (scrollTo + (nextScrollTo - scrollTo) * positionOffset), 0);
-                } else if (!mEnablePivotScroll) {
-                    // TODO 实现待选中项完全显示出来
                 }
             }
         }
-    }
-
-    public float getScrollPivotX() {
-        return mScrollPivotX;
-    }
-
-    public void setScrollPivotX(float scrollPivotX) {
-        mScrollPivotX = scrollPivotX;
     }
 
     @Override
@@ -270,18 +241,14 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
 
     @Override
     public void onDetachFromMagicIndicator() {
+
     }
 
-    public IPagerIndicator getPagerIndicator() {
-        return mIndicator;
-    }
-
-    public boolean isEnablePivotScroll() {
-        return mEnablePivotScroll;
-    }
-
-    public void setEnablePivotScroll(boolean is) {
-        mEnablePivotScroll = is;
+    @Override
+    public void notifyDataSetChanged() {
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -304,31 +271,6 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
         if (v instanceof IPagerTitleView) {
             ((IPagerTitleView) v).onLeave(index, totalCount, leavePercent, leftToRight);
         }
-    }
-
-    public boolean isSmoothScroll() {
-        return mSmoothScroll;
-    }
-
-    public void setSmoothScroll(boolean smoothScroll) {
-        mSmoothScroll = smoothScroll;
-    }
-
-    public boolean isFollowTouch() {
-        return mFollowTouch;
-    }
-
-    public void setFollowTouch(boolean followTouch) {
-        mFollowTouch = followTouch;
-    }
-
-    public boolean isSkimOver() {
-        return mSkimOver;
-    }
-
-    public void setSkimOver(boolean skimOver) {
-        mSkimOver = skimOver;
-        mNavigatorHelper.setSkimOver(skimOver);
     }
 
     @Override
@@ -378,6 +320,59 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
         if (v instanceof IPagerTitleView) {
             ((IPagerTitleView) v).onDeselected(index, totalCount);
         }
+    }
+
+    public boolean isAdjustMode() {
+        return mAdjustMode;
+    }
+
+    public void setAdjustMode(boolean is) {
+        mAdjustMode = is;
+    }
+
+    public float getScrollPivotX() {
+        return mScrollPivotX;
+    }
+
+    public void setScrollPivotX(float scrollPivotX) {
+        mScrollPivotX = scrollPivotX;
+    }
+
+    public IPagerIndicator getPagerIndicator() {
+        return mIndicator;
+    }
+
+    public boolean isEnablePivotScroll() {
+        return mEnablePivotScroll;
+    }
+
+    public void setEnablePivotScroll(boolean is) {
+        mEnablePivotScroll = is;
+    }
+
+    public boolean isSmoothScroll() {
+        return mSmoothScroll;
+    }
+
+    public void setSmoothScroll(boolean smoothScroll) {
+        mSmoothScroll = smoothScroll;
+    }
+
+    public boolean isFollowTouch() {
+        return mFollowTouch;
+    }
+
+    public void setFollowTouch(boolean followTouch) {
+        mFollowTouch = followTouch;
+    }
+
+    public boolean isSkimOver() {
+        return mSkimOver;
+    }
+
+    public void setSkimOver(boolean skimOver) {
+        mSkimOver = skimOver;
+        mNavigatorHelper.setSkimOver(skimOver);
     }
 
     public IPagerTitleView getPagerTitleView(int index) {
