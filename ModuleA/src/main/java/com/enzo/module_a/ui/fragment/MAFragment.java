@@ -27,7 +27,7 @@ import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.flipper.FlipperView;
+import com.enzo.commonlib.widget.flipper.AdvertFlipperView;
 import com.enzo.commonlib.widget.flipper.adapter.FlipperAdapter;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -58,7 +58,7 @@ import java.util.List;
 @Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
 public class MAFragment extends BaseFragment {
 
-    private FlipperView viewFlipper;
+    private AdvertFlipperView viewFlipper;
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
 

@@ -14,25 +14,25 @@ import com.enzo.commonlib.R;
 import com.enzo.commonlib.widget.flipper.adapter.FlipperAdapter;
 
 /**
- * 文 件 名: FlipperView
+ * 文 件 名: AdvertFlipperView 垂直滚动广告条
  * 创 建 人: xiaofy
  * 创建日期: 2020/8/23
  * 邮   箱: xiaofywork@163.com
  */
-public class FlipperView extends FrameLayout {
+public class AdvertFlipperView extends FrameLayout {
 
     private ViewFlipper viewFlipper;
     private FlipperAdapter mAdapter;
 
-    public FlipperView(@NonNull Context context) {
+    public AdvertFlipperView(@NonNull Context context) {
         this(context, null);
     }
 
-    public FlipperView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public AdvertFlipperView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FlipperView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public AdvertFlipperView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
