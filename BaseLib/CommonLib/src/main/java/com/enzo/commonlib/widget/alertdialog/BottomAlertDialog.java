@@ -39,7 +39,6 @@ public class BottomAlertDialog extends AppCompatDialog {
 
     private void findView() {
         llContent = findViewById(R.id.ll_alert_dialog_bottom_layout);
-        TextView tvCancel = findViewById(R.id.tv_cancel);
         for (int i = 0; i < mBuilder.mItems.size(); i++) {
             final int j = i;
             TextView textView = new TextView(getContext());
@@ -65,6 +64,8 @@ public class BottomAlertDialog extends AppCompatDialog {
                 }
             });
         }
+
+        TextView tvCancel = findViewById(R.id.tv_cancel);
         String cancel = TextUtils.isEmpty(mBuilder.mCancel) ? "取消" : mBuilder.mCancel;
         tvCancel.setText(cancel);
         tvCancel.setOnClickListener(new View.OnClickListener() {
