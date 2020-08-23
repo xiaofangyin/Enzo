@@ -68,6 +68,7 @@ public class MAFragment extends BaseFragment {
         StatusBarUtils.StatusBarLightMode(getActivity());
         if (!isFirstLoad) {
             flipperView.showNext();
+            flipperView.startFlipping();
         }
         super.onResume();
     }
