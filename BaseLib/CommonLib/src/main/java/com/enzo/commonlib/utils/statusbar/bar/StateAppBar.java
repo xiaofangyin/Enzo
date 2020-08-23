@@ -194,15 +194,20 @@ public final class StateAppBar {
     public static boolean setStatusBarLightMode(Activity activity, boolean darkmode) {
         StatusBarUtils.checkNull(activity);
         try {
-            //1. 在新的 MIUI 版本（即基于 Android 6.0 ，开发版 7.7.13 及以后版本）
-            Window window = activity.getWindow();
-            //具体参考小米的解决方案
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            //先清除
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                //相当于在布局中设置android:fitsSystemWindows="true"，让contentView顶上去
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            if (darkmode) {
+                //1. 在新的 MIUI 版本（即基于 Android 6.0 ，开发版 7.7.13 及以后版本）
+                Window window = activity.getWindow();
+                //具体参考小米的解决方案
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                //先清除
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    //相当于在布局中设置android:fitsSystemWindows="true"，让contentView顶上去
+                    window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            } else {
+                int flag = activity.getWindow().getDecorView().getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                activity.getWindow().getDecorView().setSystemUiVisibility(flag);
             }
 
             //2.还有大量的用户使用旧的 MIUI 版本，因此仍然需要使用 MIUI 原有的方法，即

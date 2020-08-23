@@ -65,6 +65,7 @@ public class MAFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        StatusBarUtils.StatusBarLightMode(getActivity());
         LogUtil.d("fragment a on resume...");
     }
 

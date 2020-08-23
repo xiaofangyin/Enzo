@@ -32,6 +32,7 @@ public class MBFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        StatusBarUtils.StatusBarDarkMode(getActivity());
         LogUtil.d("fragment b on resume...");
     }
 
