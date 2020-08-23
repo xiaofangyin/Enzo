@@ -195,6 +195,7 @@ public final class StateAppBar {
         StatusBarUtils.checkNull(activity);
         try {
             if (darkmode) {
+                //黑色字体
                 //1. 在新的 MIUI 版本（即基于 Android 6.0 ，开发版 7.7.13 及以后版本）
                 Window window = activity.getWindow();
                 //具体参考小米的解决方案
@@ -206,6 +207,7 @@ public final class StateAppBar {
                     window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
             } else {
+                //白色字体
                 int flag = activity.getWindow().getDecorView().getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                 activity.getWindow().getDecorView().setSystemUiVisibility(flag);
             }

@@ -48,7 +48,6 @@ public class StatusBarUtils {
      * 判断状态栏是否存在
      *
      * @param activity activity
-     * @return
      */
     public static boolean isStatusBarVisible(Activity activity) {
         if ((activity.getWindow().getAttributes().flags &
@@ -81,21 +80,21 @@ public class StatusBarUtils {
      * @return 1:MIUUI 2:Flyme 3:android6.0
      */
     public static int StatusBarLightMode(Activity activity) {
-        int result = 0;
         if (StateAppBar.setStatusBarLightMode(activity, true)) {
             //是否是MIUI
-            result = 1;
+            return 1;
         } else if (StateAppBar.FlymeSetStatusBarLightMode(activity, true)) {
             //是否是Flyme
-            result = 2;
+            return 2;
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //其他
             activity.getWindow().getDecorView().
                     setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
                             View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            result = 3;
+            return 3;
         }
-        return result;
+        //其他
+        return 3;
     }
 
 
@@ -104,14 +103,19 @@ public class StatusBarUtils {
      */
     public static int StatusBarDarkMode(Activity activity) {
         if (StateAppBar.setStatusBarLightMode(activity, false)) {
+            //是否是MIUI
             return 1;
         } else if (StateAppBar.FlymeSetStatusBarLightMode(activity, false)) {
+            //是否是Flyme
             return 2;
-        } else {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity.getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_VISIBLE);
+            //其他
             return 3;
         }
+        //其他
+        return 3;
     }
 
     public static void checkNull(Object object) {
