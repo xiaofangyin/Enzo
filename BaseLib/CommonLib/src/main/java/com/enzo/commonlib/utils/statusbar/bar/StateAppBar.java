@@ -53,8 +53,9 @@ public final class StateAppBar {
 
     /**
      * 设置状态栏颜色，使用该方法也可以，如果是设置状态栏为白色或者黑色，请使用setStatusBarLightMode方法
-     * @param activity                      activity
-     * @param statusColor                   颜色
+     *
+     * @param activity    activity
+     * @param statusColor 颜色
      */
     public static void setStatusBarColor(Activity activity, @ColorInt int statusColor) {
         StatusBarUtils.checkNull(activity);
@@ -69,7 +70,8 @@ public final class StateAppBar {
 
     /**
      * 设置透明状态栏
-     * @param activity                      activity
+     *
+     * @param activity activity
      */
     public static void translucentStatusBar(Activity activity) {
         StatusBarUtils.checkNull(activity);
@@ -79,8 +81,9 @@ public final class StateAppBar {
 
     /**
      * 设置透明状态栏
-     * @param activity                      activity
-     * @param hideStatusBarBackground       是否隐藏状态栏
+     *
+     * @param activity                activity
+     * @param hideStatusBarBackground 是否隐藏状态栏
      */
     public static void translucentStatusBar(Activity activity, boolean hideStatusBarBackground) {
         StatusBarUtils.checkNull(activity);
@@ -95,11 +98,12 @@ public final class StateAppBar {
 
     /**
      * 设置AppBarLayout折叠布局的状态栏颜色
-     * @param activity                      activity
-     * @param appBarLayout                  appBar
-     * @param collapsingToolbarLayout       collapsingToolbarLayout
-     * @param toolbar                       toolbar
-     * @param statusColor                   颜色
+     *
+     * @param activity                activity
+     * @param appBarLayout            appBar
+     * @param collapsingToolbarLayout collapsingToolbarLayout
+     * @param toolbar                 toolbar
+     * @param statusColor             颜色
      */
     public static void setStatusBarColorForCollapsingToolbar(
             @NonNull Activity activity, AppBarLayout appBarLayout,
@@ -117,8 +121,9 @@ public final class StateAppBar {
 
     /**
      * 设置状态栏颜色，设置状态栏白色，或者灰色，请用这个方法。
-     * @param activity                      activity
-     * @param color                         颜色
+     *
+     * @param activity activity
+     * @param color    颜色
      */
     @SuppressLint("NewApi")
     public static void setStatusBarLightMode(Activity activity, @ColorInt int color) {
@@ -189,8 +194,7 @@ public final class StateAppBar {
     public static boolean setStatusBarLightMode(Activity activity, boolean darkmode) {
         StatusBarUtils.checkNull(activity);
         try {
-            @SuppressLint("PrivateApi")
-            Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
+            //1. 在新的 MIUI 版本（即基于 Android 6.0 ，开发版 7.7.13 及以后版本）
             Window window = activity.getWindow();
             //具体参考小米的解决方案
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -201,6 +205,9 @@ public final class StateAppBar {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
 
+            //2.还有大量的用户使用旧的 MIUI 版本，因此仍然需要使用 MIUI 原有的方法，即
+            @SuppressLint("PrivateApi")
+            Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
             Class<? extends Window> clazz = activity.getWindow().getClass();
             Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
             int darkModeFlag = field.getInt(layoutParams);
@@ -239,13 +246,14 @@ public final class StateAppBar {
             e.printStackTrace();
         }
         return false;*/
-        return StatusBarColorUtils.setStatusBarDarkIcon(activity,darkmode);
+        return StatusBarColorUtils.setStatusBarDarkIcon(activity, darkmode);
     }
 
     /**
      * 设置content布局的top的padding间距值
-     * @param activity                      activity
-     * @param padding                       padding值
+     *
+     * @param activity activity
+     * @param padding  padding值
      */
     static void setContentTopPadding(Activity activity, int padding) {
         StatusBarUtils.checkNull(activity);
