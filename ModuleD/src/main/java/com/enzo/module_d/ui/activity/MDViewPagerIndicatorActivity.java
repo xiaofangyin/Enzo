@@ -1,11 +1,16 @@
 package com.enzo.module_d.ui.activity;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,12 +19,14 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.indicators.TriangularPagerIndicator;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.ScaleTransitionPagerTitleView;
 import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
@@ -42,6 +49,7 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
     private ViewPagerIndicator viewPagerIndicator;
     private ScrollViewPagerIndicator scrollViewPagerIndicator;
     private MagicIndicator magicIndicator;
+    private MagicIndicator magicIndicator2;
     private ViewPager viewPager;
 
     @Override
@@ -67,6 +75,7 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
         viewPagerIndicator = findViewById(R.id.md_indicator);
         scrollViewPagerIndicator = findViewById(R.id.md_scroll_indicator);
         magicIndicator = findViewById(R.id.md_magic_indicator);
+        magicIndicator2 = findViewById(R.id.md_magic_indicator2);
         viewPager = findViewById(R.id.view_pager);
     }
 
@@ -79,6 +88,40 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
         scrollViewPagerIndicator.setTitles(list);
         scrollViewPagerIndicator.bindViewPager(viewPager);
 
+        initMagicIndicator1(list);
+
+        initMagicIndicator2(list);
+
+        setAdapter(list);
+    }
+
+    @Override
+    public void initListener() {
+        viewPagerIndicator.setOnTabClickListener(new ViewPagerIndicator.OnTabClickListener() {
+            @Override
+            public void onClick(int position) {
+
+            }
+
+            @Override
+            public void onReClick(int position) {
+
+            }
+        });
+        scrollViewPagerIndicator.setOnTabClickListener(new ScrollViewPagerIndicator.OnTabClickListener() {
+            @Override
+            public void onClick(int position) {
+
+            }
+
+            @Override
+            public void onReClick(int position) {
+
+            }
+        });
+    }
+
+    private void initMagicIndicator1(final List<IndicatorBean> list) {
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
@@ -111,32 +154,56 @@ public class MDViewPagerIndicatorActivity extends BaseActivity {
         });
         commonNavigator.setAdjustMode(true);
         magicIndicator.setNavigator(commonNavigator, viewPager);
-
-        setAdapter(list);
     }
 
-    @Override
-    public void initListener() {
-        viewPagerIndicator.setOnTabClickListener(new ViewPagerIndicator.OnTabClickListener() {
-            @Override
-            public void onClick(int position) {
+    private void initMagicIndicator2(final List<IndicatorBean> list) {
+        CommonNavigator commonNavigator2 = new CommonNavigator(this);
+        commonNavigator2.setAdapter(new CommonNavigatorAdapter() {
 
+            @Override
+            public int getCount() {
+                return list.size();
             }
 
             @Override
-            public void onReClick(int position) {
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(list.get(index).getTitle());
+                simplePagerTitleView.setTextSize(20);
+                simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, R.color.color_333_55));
+                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.color_333));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (viewPager.getCurrentItem() != index) {
+                            viewPager.setCurrentItem(index);
+                        }
+                    }
+                });
+                return simplePagerTitleView;
+            }
 
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                indicator.setLineHeight(DensityUtil.dip2px(context, 4));
+                indicator.setLineWidth(DensityUtil.dip2px(context, 14));
+                indicator.setRoundRadius(DensityUtil.dip2px(context, 3));
+                indicator.setStartInterpolator(new AccelerateInterpolator());
+                indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
+                indicator.setColors(ContextCompat.getColor(context, R.color.color_333));
+                return indicator;
             }
         });
-        scrollViewPagerIndicator.setOnTabClickListener(new ScrollViewPagerIndicator.OnTabClickListener() {
+        magicIndicator2.setNavigator(commonNavigator2, viewPager);
+        LinearLayout titleContainer = commonNavigator2.getTitleContainer(); // must after setNavigator
+        titleContainer.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        titleContainer.setDividerDrawable(new ColorDrawable() {
             @Override
-            public void onClick(int position) {
-
-            }
-
-            @Override
-            public void onReClick(int position) {
-
+            public int getIntrinsicWidth() {
+                return DensityUtil.dip2px(magicIndicator.getContext(), 40);
             }
         });
     }
