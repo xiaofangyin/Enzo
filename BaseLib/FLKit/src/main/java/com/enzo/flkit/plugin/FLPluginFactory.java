@@ -16,6 +16,9 @@ public abstract class FLPluginFactory {
 
     public FLPluginHostDelegate hostDelegate;
 
+    //获取插件名称
+    public abstract String getPluginName();
+
     //给插件的factory传上下文
     public abstract void setHostDelegate(FLPluginHostDelegate delegate);
 
@@ -24,6 +27,12 @@ public abstract class FLPluginFactory {
     public abstract Fragment buildHomeTabFragment();
 
     public abstract AccountInfo getAccountInfo();
+
+    //推送相关
+    public abstract boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state);
+
+    //用户退出后会通知各个插件做相应的处理
+    public abstract void appLogout();
 
     //释放资源
     public abstract void releaseResources();

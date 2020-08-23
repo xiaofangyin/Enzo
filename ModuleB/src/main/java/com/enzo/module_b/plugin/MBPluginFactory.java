@@ -3,6 +3,7 @@ package com.enzo.module_b.plugin;
 import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.account.AccountInfo;
+import com.enzo.flkit.plugin.FLApplicationState;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
@@ -37,6 +38,11 @@ public class MBPluginFactory extends FLPluginFactory {
     }
 
     @Override
+    public String getPluginName() {
+        return "Module B";
+    }
+
+    @Override
     public void setHostDelegate(FLPluginHostDelegate delegate) {
         hostDelegate = delegate;
     }
@@ -47,7 +53,7 @@ public class MBPluginFactory extends FLPluginFactory {
             MBNormalPluginModel normalPluginModel = new MBNormalPluginModel();
             normalPluginModel.type = data.optInt("type");
             normalPluginModel.rid = data.optString("rid");
-            normalPluginModel.alias = data.optString("alias");
+            normalPluginModel.alias = getPluginName() + " " + data.optString("alias");
             return normalPluginModel;
         }
         return null;
@@ -64,6 +70,16 @@ public class MBPluginFactory extends FLPluginFactory {
             return hostDelegate.getAccountInfo();
         }
         return null;
+    }
+
+    @Override
+    public boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state) {
+        return false;
+    }
+
+    @Override
+    public void appLogout() {
+
     }
 
     @Override
