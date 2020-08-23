@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
 
-import com.enzo.commonlib.base.BaseApplication;
 import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.main.app.MainApplication;
@@ -62,12 +61,12 @@ public class App extends MainApplication {
         super.onConfigurationChanged(newConfig);
     }
 
-    private  void initEnv() {
+    private void initEnv() {
         //初始化配置参数
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
     }
 
-    private  void initFactory(Application application) {
+    private void initFactory(Application application) {
         List<FLPluginFactory> factoryList = new ArrayList<>();
         factoryList.add(MAPluginFactory.getInstance());
         factoryList.add(MBPluginFactory.getInstance());

@@ -1,6 +1,7 @@
 package com.enzo.main.app;
 
 import com.enzo.commonlib.base.BaseApplication;
+import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.main.model.manager.AccountManager;
 
 /**
@@ -16,6 +17,5 @@ public class MainApplication extends BaseApplication {
         super.onCreate();
         //登录信息初始化
         AccountManager.getInstance().init(this);
-
     }
 }
