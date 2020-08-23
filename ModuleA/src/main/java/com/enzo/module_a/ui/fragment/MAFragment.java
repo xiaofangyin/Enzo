@@ -58,21 +58,25 @@ import java.util.List;
 @Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
 public class MAFragment extends BaseFragment {
 
-    private AdvertFlipperView viewFlipper;
+    private AdvertFlipperView flipperView;
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
 
     @Override
     public void onResume() {
-        super.onResume();
-        StatusBarUtils.StatusBarLightMode(getActivity());
         LogUtil.d("fragment a on resume...");
+        StatusBarUtils.StatusBarLightMode(getActivity());
+        if (!isFirstLoad) {
+            flipperView.showNext();
+        }
+        super.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         LogUtil.d("fragment a on pause...");
+        flipperView.stopFlipping();
     }
 
     @Override
@@ -91,7 +95,7 @@ public class MAFragment extends BaseFragment {
                 rootView.getContext(), R.color.color_yellow));
         ((ViewGroup) rootView).addView(view, 0);
 
-        viewFlipper = rootView.findViewById(R.id.view_flipper);
+        flipperView = rootView.findViewById(R.id.view_flipper);
         magicIndicator = rootView.findViewById(R.id.magic_indicator);
         viewPager = rootView.findViewById(R.id.ma_view_pager2);
         initMagicIndicator4();
@@ -166,7 +170,7 @@ public class MAFragment extends BaseFragment {
         list.add("iPhone 11");
         list.add("华为 P40");
 
-        viewFlipper.setAdapter(new FlipperAdapter() {
+        flipperView.setAdapter(new FlipperAdapter() {
             @Override
             public int getCount() {
                 return list.size();
@@ -194,8 +198,8 @@ public class MAFragment extends BaseFragment {
                 return textView;
             }
         });
-        viewFlipper.setInterval(5000);
-        viewFlipper.startFlipping();
+        flipperView.setInterval(5000);
+        flipperView.startFlipping();
 
         FragmentPagerAdapter mAdapter = new MAViewPagerIndicatorAdapter(getChildFragmentManager(), getFragments());
         viewPager.setAdapter(mAdapter);

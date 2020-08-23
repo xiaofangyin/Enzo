@@ -80,6 +80,10 @@ public class AdvertFlipperView extends FrameLayout {
         viewFlipper.startFlipping();
     }
 
+    public void stopFlipping() {
+        viewFlipper.stopFlipping();
+    }
+
     public void setInterval(int interval) {
         viewFlipper.setFlipInterval(interval);
     }

@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
 
-    boolean isFirstLoad = true;
+    public boolean isFirstLoad = true;
     //发生Fragment重叠的根本原因在于FragmentState没有保存Fragment的显示状态，
     //即mHidden，导致页面重启后，该值为默认的false，即show状态，所以导致了Fragment的重叠。
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";

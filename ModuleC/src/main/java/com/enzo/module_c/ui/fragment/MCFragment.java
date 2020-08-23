@@ -45,8 +45,8 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        StatusBarUtils.StatusBarLightMode(getActivity());
         LogUtil.d("fragment c on resume...");
+        StatusBarUtils.StatusBarLightMode(getActivity());
     }
 
     @Override
