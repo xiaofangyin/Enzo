@@ -55,7 +55,7 @@ import java.util.List;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-@Route(path = ModuleARouterPath.MODULE_A_FRAGMENT2)
+@Route(path = ModuleARouterPath.MODULE_A_FRAGMENT)
 public class MAFragment extends BaseFragment {
 
     private AdvertFlipperView flipperView;
@@ -67,7 +67,6 @@ public class MAFragment extends BaseFragment {
         LogUtil.d("fragment a on resume...");
         StatusBarUtils.StatusBarLightMode(getActivity());
         if (!isFirstLoad) {
-            flipperView.showNext();
             flipperView.startFlipping();
         }
         super.onResume();
