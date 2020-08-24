@@ -71,7 +71,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         LogUtil.d("fragment d on resume...");
-        StatusBarUtils.StatusBarDarkMode(getActivity());
+        StatusBarUtils.StatusBarLightMode(getActivity());
     }
 
     @Override
