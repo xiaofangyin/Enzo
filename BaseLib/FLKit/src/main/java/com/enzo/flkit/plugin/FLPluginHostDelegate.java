@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
-import com.enzo.flkit.account.AccountInfo;
+import com.enzo.flkit.account.UserAccountInfo;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface FLPluginHostDelegate {
     //返回当前显示的activity
     Activity getCurrentController();
 
-    AccountInfo getAccountInfo();
+    UserAccountInfo getAccountInfo();
 
     void openDrawer(Activity activity, int gravity);
 

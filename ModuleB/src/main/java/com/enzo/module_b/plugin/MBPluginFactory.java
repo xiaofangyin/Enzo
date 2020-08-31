@@ -2,7 +2,7 @@ package com.enzo.module_b.plugin;
 
 import androidx.fragment.app.Fragment;
 
-import com.enzo.flkit.account.AccountInfo;
+import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginFactory;
@@ -65,7 +65,7 @@ public class MBPluginFactory extends FLPluginFactory {
     }
 
     @Override
-    public AccountInfo getAccountInfo() {
+    public UserAccountInfo getAccountInfo() {
         if (hostDelegate != null) {
             return hostDelegate.getAccountInfo();
         }
