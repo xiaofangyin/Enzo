@@ -2,7 +2,7 @@ package com.enzo.flkit.plugin;
 
 import androidx.fragment.app.Fragment;
 
-import com.enzo.flkit.account.AccountInfo;
+import com.enzo.flkit.account.UserAccountInfo;
 
 import org.json.JSONObject;
 
@@ -26,7 +26,7 @@ public abstract class FLPluginFactory {
 
     public abstract Fragment buildHomeTabFragment();
 
-    public abstract AccountInfo getAccountInfo();
+    public abstract UserAccountInfo getAccountInfo();
 
     //推送相关
     public abstract boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state);
