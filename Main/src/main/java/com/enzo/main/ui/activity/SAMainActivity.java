@@ -9,6 +9,7 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.KeyEvent;
 
+import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -187,6 +188,12 @@ public class SAMainActivity extends BaseActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+
     }
 
     @Override
