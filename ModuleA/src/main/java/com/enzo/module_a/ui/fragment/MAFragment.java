@@ -1,7 +1,6 @@
 package com.enzo.module_a.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,6 +21,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
@@ -41,9 +41,9 @@ import com.enzo.commonlib.widget.popup.EasyPopup;
 import com.enzo.commonlib.widget.popup.XGravity;
 import com.enzo.commonlib.widget.popup.YGravity;
 import com.enzo.flkit.router.ModuleARouterPath;
+import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_a.R;
 import com.enzo.module_a.plugin.MAPluginFactory;
-import com.enzo.module_a.ui.activity.MAScanQrCodeActivity;
 import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
 
 import java.util.ArrayList;
@@ -134,16 +134,14 @@ public class MAFragment extends BaseFragment {
                                 view.findViewById(R.id.tv_zan).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent intent = new Intent(getContext(), MAScanQrCodeActivity.class);
-                                        startActivity(intent);
+                                        ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_QR_CODE).navigation();
                                         popup.dismiss();
                                     }
                                 });
                                 view.findViewById(R.id.tv_comment).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Intent intent = new Intent(getContext(), MAScanQrCodeActivity.class);
-                                        startActivity(intent);
+                                        ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_BAR_CODE).navigation();
                                         popup.dismiss();
                                     }
                                 });

@@ -2,9 +2,11 @@ package com.enzo.module_d.ui.activity;
 
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.utils.zxing.activity.CaptureActivity;
+import com.enzo.flkit.router.ModuleDRouterPath;
 
 /**
  * 文 件 名: MDScanQrCodeActivity
@@ -12,6 +14,7 @@ import com.enzo.commonlib.utils.zxing.activity.CaptureActivity;
  * 创建日期: 2018/6/30
  * 邮   箱: xiaofangyinwork@163.com
  */
+@Route(path = ModuleDRouterPath.MODULE_D_QR_CODE)
 public class MDScanQrCodeActivity extends CaptureActivity {
 
     @Override
