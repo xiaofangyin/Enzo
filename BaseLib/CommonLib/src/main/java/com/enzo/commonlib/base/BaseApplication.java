@@ -13,6 +13,7 @@ import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.commonlib.utils.toast.ToastUtil;
+import com.squareup.leakcanary.LeakCanary;
 
 public class BaseApplication extends Application {
 
@@ -22,7 +23,12 @@ public class BaseApplication extends Application {
         initEnv(this);
     }
 
-    private static void initEnv(Application application) {
+    private void initEnv(Application application) {
+        //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
+        //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
+        if (!LeakCanary.isInAnalyzerProcess(application)) {
+            LeakCanary.install(application);
+        }
         //ARouter
         if (ApkUtils.isAppDebug(application)) {
             ARouter.openLog();

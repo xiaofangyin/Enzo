@@ -41,10 +41,8 @@ android {
             }
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             zipAlignEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release  //调用 keystore 的规则
         }
     }
