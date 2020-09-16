@@ -111,7 +111,7 @@ public class TabView extends LinearLayout {
         int radius = DensityUtil.dip2px(getContext(), 3);
         mRedPointRectF.left = getWidth() / 2f + imageView.getWidth() / 2f - radius;
         mRedPointRectF.top = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f;
-        mRedPointRectF.right = getWidth() / 2 + imageView.getWidth() / 2 + radius;
+        mRedPointRectF.right = getWidth() / 2f + imageView.getWidth() / 2f + radius;
         mRedPointRectF.bottom = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f + radius * 2;
         canvas.drawOval(mRedPointRectF, mRedPointPaint);
     }
@@ -143,7 +143,7 @@ public class TabView extends LinearLayout {
         int radius = DensityUtil.dip2px(getContext(), 8);
         mMessageRectF.left = getWidth() / 2f + imageView.getWidth() / 2f - radius;
         mMessageRectF.top = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f;
-        mMessageRectF.right = getWidth() / 2 + imageView.getWidth() / 2 + radius;
+        mMessageRectF.right = getWidth() / 2f + imageView.getWidth() / 2f + radius;
         mMessageRectF.bottom = getHeight() / 2f - (imageView.getHeight() + textView.getHeight()) / 2f + radius * 2;
 
         mRedPointPaint.setStyle(Paint.Style.FILL);
