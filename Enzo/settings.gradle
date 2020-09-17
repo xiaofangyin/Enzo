@@ -1,6 +1,7 @@
 include ':app'
 include ':Main', ':ModuleA', ':ModuleB', ':ModuleC', ':ModuleD'
 include ':BaseLib:FLKit', ':BaseLib:CommonLib', ':BaseLib:ucrop'
+include ':BaseLib:android-skin-loader-lib'
 
 project(':Main').projectDir = new File('../Main')
 project(':ModuleA').projectDir = new File('../ModuleA')
@@ -10,3 +11,4 @@ project(':ModuleD').projectDir = new File('../ModuleD')
 project(':BaseLib:CommonLib').projectDir = new File('../BaseLib/CommonLib')
 project(':BaseLib:FLKit').projectDir = new File('../BaseLib/FLKit')
 project(':BaseLib:ucrop').projectDir = new File('../BaseLib/ucrop')
+project(':BaseLib:android-skin-loader-lib').projectDir = new File('../BaseLib/android-skin-loader-lib')

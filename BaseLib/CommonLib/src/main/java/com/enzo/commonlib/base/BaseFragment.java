@@ -6,9 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import org.jetbrains.annotations.NotNull;
+
+import cn.feng.skin.manager.base.SkinBaseFragment;
 
 /**
  * 文 件 名: BaseFragment
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  * 创建日期: 2017/9/26
  * 邮   箱: xiaofangyinwork@163.com
  */
-public abstract class BaseFragment extends Fragment implements IBaseFragment {
+public abstract class BaseFragment extends SkinBaseFragment implements IBaseFragment {
 
     public boolean isFirstLoad = true;
     //发生Fragment重叠的根本原因在于FragmentState没有保存Fragment的显示状态，

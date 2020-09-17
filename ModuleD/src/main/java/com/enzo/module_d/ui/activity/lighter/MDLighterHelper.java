@@ -71,15 +71,15 @@ public class MDLighterHelper {
         return view;
     }
 
-    public static void setupToolBarBackAction(final AppCompatActivity appCompatActivity, Toolbar toolbar){
+    public static void setupToolBarBackAction(final Activity appCompatActivity, Toolbar toolbar){
         if (appCompatActivity == null
                 || toolbar == null){
             return;
         }
 
-        appCompatActivity.setSupportActionBar(toolbar);
-        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
-        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        appCompatActivity.setSupportActionBar(toolbar);
+//        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
+//        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

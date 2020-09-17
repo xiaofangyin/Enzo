@@ -9,13 +9,15 @@ import androidx.core.content.ContextCompat;
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 
+import cn.feng.skin.manager.base.SkinFragmentActivity;
+
 /**
  * 文 件 名: BaseActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/4/8
  * 邮   箱: xiaofangyinwork@163.com
  */
-public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
+public abstract class BaseActivity extends SkinFragmentActivity implements IBaseActivity {
 
     public static String TAG = BaseActivity.class.getSimpleName();
 

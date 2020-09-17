@@ -39,6 +39,8 @@ dependencies {
     debugApi 'com.squareup.leakcanary:leakcanary-android:1.6.1'
     releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
 
+    //主题
+    api project(path: ':BaseLib:android-skin-loader-lib')
     //ucrop
     //api 'com.github.yalantis:ucrop:2.2.2'
     implementation project(':BaseLib:ucrop')
