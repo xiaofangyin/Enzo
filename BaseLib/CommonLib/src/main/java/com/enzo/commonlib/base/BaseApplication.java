@@ -15,6 +15,8 @@ import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.squareup.leakcanary.LeakCanary;
 
+import cn.feng.skin.manager.loader.SkinManager;
+
 public class BaseApplication extends Application {
 
     @Override
@@ -35,6 +37,9 @@ public class BaseApplication extends Application {
             ARouter.openDebug();
         }
         ARouter.init(application);
+        //主题
+        SkinManager.getInstance().init(application);
+        SkinManager.getInstance().load();
         //toast
         ToastUtil.initialize(application);
         //初始化手机参数

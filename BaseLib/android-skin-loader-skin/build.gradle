@@ -29,37 +29,10 @@ android {
 
     productFlavors {
         //霓虹灯
-        theme_nihongdeng {
+        orange {
 
         }
-        //轻薄
-        theme_qingbo {
 
-        }
-        //土豪金
-        theme_tuhaojin {
-
-        }
-        //线性
-        theme_xianxing {
-
-        }
-        //BT21
-        theme_bt21 {
-
-        }
-        //梦幻森林
-        theme_menghuan {
-
-        }
-        //酷炫
-        theme_kuxuan {
-
-        }
-        //轻拟物
-        theme_qingniwu {
-
-        }
         productFlavors.all {
             flavor -> flavor.manifestPlaceholders.put("CHANNEL_ID", name)
         }
