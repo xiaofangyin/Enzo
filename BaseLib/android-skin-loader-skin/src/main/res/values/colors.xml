@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--霓虹灯-->
+    <!--
+    <color name="c10">#161824</color>
+    <color name="c11">#06101e</color>
+    <color name="c12">#1c223f</color>
+    <color name="c13">#1affffff</color>
+    <color name="c14">#2a3461</color>
+    <color name="c15">#4dffffff</color>
+    <color name="c16">#99000000</color>
+
+    <color name="i10">#a4a6ae</color>
+    <color name="i11">#b3a4a6ae</color>
+    <color name="i12">#80a4a6ae</color>
+
+    <color name="t10">#e6ffffff</color>
+    <color name="t11">#b3ffffff</color>
+    <color name="t12">#80ffffff</color>
+    <color name="t13">#5b5aff</color>-->
+
+    <!--轻薄-->
+    <!--
+    <color name="c10">#ffffff</color>
+    <color name="c11">#ffffff</color>
+    <color name="c12">#0d000000</color>
+    <color name="c13">#1a000000</color>
+    <color name="c14">#33000000</color>
+    <color name="c15">#0d000000</color>
+    <color name="c16">#ffffff</color>
+
+    <color name="i10">#99000000</color>
+    <color name="i11">#66000000</color>
+    <color name="i12">#4d000000</color>
+
+    <color name="t10">#cc000000</color>
+    <color name="t11">#80000000</color>
+    <color name="t12">#4d000000</color>
+    <color name="t13">#067eff</color>-->
+
+    <!--土豪金-->
+    <!--
+    <color name="c10">#2a2725</color>
+    <color name="c11">#66000000</color>
+    <color name="c12">#66000000</color>
+    <color name="c13">#80e7b051</color>
+    <color name="c14">#514b47</color>
+    <color name="c15">#66000000</color>
+    <color name="c16">#4d000000</color>
+
+    <color name="i10">#ffe7b051</color>
+    <color name="i11">#ffe7b051</color>
+    <color name="i12">#ffe7b051</color>
+
+    <color name="t10">#e7b051</color>
+    <color name="t11">#e7b051</color>
+    <color name="t12">#80e7b051</color>
+    <color name="t13">#e7b051</color>
+-->
+
+    <!--线性-->
+<!--    <color name="c10">#161824</color>-->
+<!--    <color name="c11">#06101e</color>-->
+<!--    <color name="c12">#1c223f</color>-->
+<!--    <color name="c13">#1Affffff</color>-->
+<!--    <color name="c14">#2a3461</color>-->
+<!--    <color name="c15">#80000000</color>-->
+<!--    <color name="c16">#9A000000</color>-->
+
+<!--    <color name="i10">#bebddc</color>-->
+<!--    <color name="i11">#b3bebddc</color>-->
+<!--    <color name="i12">#80bebddc</color>-->
+
+<!--    <color name="t10">#e64dc8e2</color>-->
+<!--    <color name="t11">#b34dc8e2</color>-->
+<!--    <color name="t12">#804dc8e2</color>-->
+<!--    <color name="t13">#5b5aff</color>-->
+
+    <!--酷炫-->
+<!--    <color name="c10">#161824</color>-->
+<!--    <color name="c11">#060821</color>-->
+<!--    <color name="c12">#1c223f</color>-->
+<!--    <color name="c13">#1Affffff</color>-->
+<!--    <color name="c14">#2a3461</color>-->
+<!--    <color name="c15">#80000000</color>-->
+<!--    <color name="c16">#99000000</color>-->
+
+<!--    <color name="t10">#e6ffffff</color>-->
+<!--    <color name="t11">#b3ffffff</color>-->
+<!--    <color name="t12">#80ffffff</color>-->
+<!--    <color name="t13">#62e2f6</color>-->
+
+<!--    <color name="i10">#a4a6ae</color>-->
+<!--    <color name="i11">#b3a4a6ae</color>-->
+<!--    <color name="i12">#80a4a6ae</color>-->
+
+    <!--梦幻森林-->
+<!--    <color name="c10">#000a2b</color>-->
+<!--    <color name="c11">#000a2b</color>-->
+<!--    <color name="c12">#1a2341</color>-->
+<!--    <color name="c13">#1Affffff</color>-->
+<!--    <color name="c14">#1b397b</color>-->
+<!--    <color name="c15">#1Affffff</color>-->
+<!--    <color name="c16">#99000a2b</color>-->
+
+<!--    <color name="t10">#e6ffffff</color>-->
+<!--    <color name="t11">#b3ffffff</color>-->
+<!--    <color name="t12">#80ffffff</color>-->
+<!--    <color name="t13">#60d3e5</color>-->
+
+<!--    <color name="i10">#99ffffff</color>-->
+<!--    <color name="i11">#b3a4a6ae</color>-->
+<!--    <color name="i12">#80a4a6ae</color>-->
+
+    <!--BT21-->
+<!--    <color name="c10">#6597e7</color>-->
+<!--    <color name="c11">#5573da</color>-->
+<!--    <color name="c12">#595846BA</color>-->
+<!--    <color name="c13">#80FCE111</color>-->
+<!--    <color name="c14">#4A3AA0</color>-->
+<!--    <color name="c15">#CC5846BA</color>-->
+<!--    <color name="c16">#4D000000</color>-->
+
+<!--    <color name="t10">#FCE111</color>-->
+<!--    <color name="t11">#FCE111</color>-->
+<!--    <color name="t12">#FFFFFF</color>-->
+<!--    <color name="t13">#FCE111</color>-->
+
+<!--    <color name="i10">#FCE111</color>-->
+<!--    <color name="i11">#FCE111</color>-->
+<!--    <color name="i12">#FFFFFF</color>-->
+
+    <!--清拟物-->
+    <color name="c10">#1a1a1a</color>
+    <color name="c11">#353535</color>
+    <color name="c12">#0dffffff</color>
+    <color name="c13">#1affffff</color>
+    <color name="c14">#33ffffff</color>
+    <color name="c15">#1affffff</color>
+    <color name="c16">#801a1a1a</color>
+
+    <color name="t10">#ccffffff</color>
+    <color name="t11">#80ffffff</color>
+    <color name="t12">#4dffffff</color>
+    <color name="t13">#0cdfce</color>
+
+    <color name="i10">#99ffffff</color>
+    <color name="i11">#66ffffff</color>
+    <color name="i12">#4dffffff</color>
+</resources>

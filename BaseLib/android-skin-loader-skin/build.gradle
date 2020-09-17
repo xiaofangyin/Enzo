@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.igg.android_skin_laoder_skin"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "${variant.productFlavors[0].name}_v${variant.versionName}.skin"
+            }
+    }
+
+    flavorDimensions "normal"
+
+    productFlavors {
+        //霓虹灯
+        theme_nihongdeng {
+
+        }
+        //轻薄
+        theme_qingbo {
+
+        }
+        //土豪金
+        theme_tuhaojin {
+
+        }
+        //线性
+        theme_xianxing {
+
+        }
+        //BT21
+        theme_bt21 {
+
+        }
+        //梦幻森林
+        theme_menghuan {
+
+        }
+        //酷炫
+        theme_kuxuan {
+
+        }
+        //轻拟物
+        theme_qingniwu {
+
+        }
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders.put("CHANNEL_ID", name)
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+}
