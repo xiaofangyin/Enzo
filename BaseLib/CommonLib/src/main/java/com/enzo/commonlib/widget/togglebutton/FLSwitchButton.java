@@ -90,7 +90,7 @@ public class FLSwitchButton extends View implements Checkable, View.OnClickListe
         shadowOffset = dp2pxInt(1.5f);
 
         uncheckColor = ContextCompat.getColor(getContext(), R.color.color_dd);
-        checkedColor = ContextCompat.getColor(getContext(), R.color.color_yellow);
+        checkedColor = ContextCompat.getColor(getContext(), R.color.color_major_c1);
 
         borderWidth = dp2pxInt(1f);
 

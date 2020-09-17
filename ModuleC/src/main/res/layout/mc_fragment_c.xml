@@ -6,7 +6,7 @@
 
     <com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator
         android:id="@+id/mc_indicator"
-        android:background="@color/color_yellow"
+        android:background="@color/color_major_c1"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 

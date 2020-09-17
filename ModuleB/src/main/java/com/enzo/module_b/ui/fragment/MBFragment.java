@@ -55,7 +55,7 @@ public class MBFragment extends BaseFragment {
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
         view.setBackgroundColor(ContextCompat.getColor(
-                rootView.getContext(), R.color.color_yellow));
+                rootView.getContext(), R.color.color_major_c1));
         ((ViewGroup) rootView).addView(view, 0);
 
         mSpiderWebView = rootView.findViewById(R.id.spider_web_view);

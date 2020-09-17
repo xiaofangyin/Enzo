@@ -52,8 +52,11 @@ import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
+import com.enzo.module_d.utils.ThemeUtils;
 
 import java.util.List;
+
+import cn.feng.skin.manager.loader.SkinManager;
 
 /**
  * 文 件 名: MDFragment
@@ -93,7 +96,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
         view.setBackgroundColor(ContextCompat.getColor(
-                rootView.getContext(), R.color.color_yellow));
+                rootView.getContext(), R.color.color_major_c1));
         ((ViewGroup) rootView).addView(view, 0);
 
         ivAvatar = rootView.findViewById(R.id.me_icon);
@@ -102,6 +105,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initListener(View rootView) {
         rootView.findViewById(R.id.me_icon).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_change_skin).setOnClickListener(this);
         rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_boss_bottom_dialog).setOnClickListener(this);
@@ -178,6 +182,12 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                     }
                 }
             });
+        } else if (id == R.id.btn_change_skin) {
+            if (SkinManager.getInstance().isExternalSkin()) {
+                SkinManager.getInstance().restoreDefaultTheme();
+            } else {
+                ThemeUtils.applyTheme(getActivity());
+            }
         } else if (id == R.id.btn_app_upgrade) {
             AppUpgradeUtil.checkVersion(getContext(), new AppUpgradeUtil.UpdateListener() {
                 @Override

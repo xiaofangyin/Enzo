@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/color_yellow"
+                android:textColor="@color/color_major_c1"
                 android:textSize="40dp" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="cm"
-                android:textColor="@color/color_yellow"
+                android:textColor="@color/color_major_c1"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:background="#F1FDFB"
-                app:lineColor="@color/color_yellow"
+                app:lineColor="@color/color_major_c1"
                 app:lineMaxHeight="46dp"
                 app:lineMidHeight="34dp"
                 app:lineMinHeight="26dp"
@@ -59,7 +59,7 @@
                 app:minValue="70.0"
                 app:perValue="0.1"
                 app:selectorValue="170.0"
-                app:textColor="@color/color_yellow"
+                app:textColor="@color/color_major_c1"
                 app:textMarginTop="16dp"
                 app:textSize="16sp" />
 

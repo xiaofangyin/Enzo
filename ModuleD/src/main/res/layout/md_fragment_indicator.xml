@@ -7,7 +7,7 @@
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/color_yellow"
+        android:background="@color/color_major_c1"
         android:orientation="horizontal" />
 
     <androidx.viewpager.widget.ViewPager

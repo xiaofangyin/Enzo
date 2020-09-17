@@ -4,7 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="color_yellow">#81E8D4</color>
+    <color name="color_major_c1">#81E8D4</color>
+    <color name="color_major_c2">#cc04d1aa</color>
+    <color name="color_major_c3">#8c04d1aa</color>
+    <color name="color_major_c4">#0086aa</color>
 
     <!--清拟物-->
     <color name="c10">#1a1a1a</color>

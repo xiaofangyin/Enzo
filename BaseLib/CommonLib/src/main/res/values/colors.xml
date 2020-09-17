@@ -47,10 +47,10 @@
     <color name="color_green_80">#cc04d1aa</color>
     <color name="color_green_55">#8c04d1aa</color>
 
-    <color name="color_yellow">#FFFFDA44</color>
-    <color name="color_yellow_80">#CCFFDA44</color>
-    <color name="color_yellow_55">#8CFFDA44</color>
-    <color name="color_yellow_dark">#FFF8AC59</color>
+    <color name="color_major_c1">#FFFFDA44</color>
+    <color name="color_major_c2">#CCFFDA44</color>
+    <color name="color_major_c3">#8CFFDA44</color>
+    <color name="color_major_c4">#FFF8AC59</color>
 
     <!-- pdf -->
     <color name="pdfViewPager_background_color">@android:color/white</color>

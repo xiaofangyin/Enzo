@@ -54,8 +54,8 @@
     //==================== Theme XianYu Start ===================
 
     <style name="Matisse.XianYu" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/color_yellow</item>
-        <item name="colorPrimaryDark">@color/color_yellow</item>
+        <item name="colorPrimary">@color/color_major_c1</item>
+        <item name="colorPrimaryDark">@color/color_major_c1</item>
         <item name="toolbar">@style/Toolbar.XianYu</item>
         <item name="album.dropdown.title.color">@color/xianyu_album_dropdown_title_text</item>
         <item name="album.dropdown.count.color">@color/xianyu_album_dropdown_count_text</item>
@@ -65,10 +65,10 @@
         <item name="album.emptyView">@mipmap/matisse_ic_empty_zhihu</item>
         <item name="album.emptyView.textColor">@color/xianyu_album_empty_view</item>
         <item name="item.placeholder">@color/xianyu_item_placeholder</item>
-        <item name="item.checkCircle.backgroundColor">@color/color_yellow</item>
+        <item name="item.checkCircle.backgroundColor">@color/color_major_c1</item>
         <item name="item.checkCircle.borderColor">@color/xianyu_item_checkCircle_borderColor</item>
         <item name="page.bg">@color/color_dark_black</item>
-        <item name="bottomToolbar.bg">@color/color_yellow</item>
+        <item name="bottomToolbar.bg">@color/color_major_c1</item>
         <item name="bottomToolbar.preview.textColor">@color/matisse_xianyu_bottom_toolbar_preview
         </item>
         <item name="bottomToolbar.apply.textColor">@color/matisse_xianyu_bottom_toolbar_apply</item>

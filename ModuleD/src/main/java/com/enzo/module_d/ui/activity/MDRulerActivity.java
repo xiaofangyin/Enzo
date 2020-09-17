@@ -49,8 +49,8 @@ public class MDRulerActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         tvHeight.setText(String.valueOf(rulerView.getValue()));
-        rulerView.setLineColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
-        rulerView.setTextColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_yellow));
+        rulerView.setLineColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_major_c1));
+        rulerView.setTextColor(ContextCompat.getColor(rulerView.getContext(), R.color.color_major_c1));
     }
 
     @Override

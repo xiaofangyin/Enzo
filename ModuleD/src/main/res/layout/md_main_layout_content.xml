@@ -17,6 +17,12 @@
         android:paddingTop="10dp">
 
         <Button
+            android:id="@+id/btn_change_skin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="切换主题" />
+
+        <Button
             android:id="@+id/btn_touch_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

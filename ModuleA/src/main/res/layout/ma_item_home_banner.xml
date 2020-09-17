@@ -8,7 +8,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/color_yellow" />
+        android:background="@color/color_major_c1" />
 
     <com.enzo.commonlib.widget.banner.mzbanner.MZBannerView
         android:id="@+id/banner"

@@ -14,26 +14,26 @@
         android:id="@+id/md_indicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/color_yellow" />
+        android:background="@color/color_major_c1" />
 
     <com.enzo.commonlib.widget.indicator.scroll.ScrollViewPagerIndicator
         android:id="@+id/md_scroll_indicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="@color/color_yellow" />
+        android:background="@color/color_major_c1" />
 
     <com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator
         android:id="@+id/md_magic_indicator"
         android:layout_marginTop="10dp"
-        android:background="@color/color_yellow"
+        android:background="@color/color_major_c1"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
     <com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator
         android:id="@+id/md_magic_indicator2"
         android:layout_marginTop="10dp"
-        android:background="@color/color_yellow"
+        android:background="@color/color_major_c1"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 

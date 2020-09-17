@@ -2,7 +2,6 @@ package com.enzo.main.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,7 +19,6 @@ import androidx.lifecycle.Lifecycle;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.ActivityHelper;
-import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PermissionsUtils;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
@@ -35,12 +33,8 @@ import com.enzo.main.R;
 import com.enzo.main.config.TabEntityConfig;
 import com.enzo.main.plugin.SAHostDelegateManager;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.feng.skin.manager.listener.ILoaderListener;
-import cn.feng.skin.manager.loader.SkinManager;
 
 /**
  * 文 件 名: SAMainActivity
@@ -81,44 +75,6 @@ public class SAMainActivity extends BaseActivity {
         if (!PermissionsUtils.areNotificationsEnabled(this)) {
             PermissionsUtils.showEnableNotificationsDialog(this);
         }
-
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                new AsyncTask<Void, Integer, File>() {
-
-                    @Override
-                    protected File doInBackground(Void... voids) {
-                        File toFile = new File(ExternalCacheUtil.getThemeDir(SAMainActivity.this).getAbsolutePath(), "orange_v1.0.0.skin");
-                        ExternalCacheUtil.copyAssetsFile(SAMainActivity.this,
-                                "orange_v1.0.0.skin", toFile.getAbsolutePath()
-                        );
-                        return toFile;
-                    }
-
-                    @Override
-                    protected void onPostExecute(File file) {
-                        super.onPostExecute(file);
-                        SkinManager.getInstance().load(file.getAbsolutePath(), new ILoaderListener() {
-                            @Override
-                            public void onStart() {
-                                LogUtil.d("start load skin");
-                            }
-
-                            @Override
-                            public void onSuccess() {
-                                LogUtil.d("load skin success");
-                            }
-
-                            @Override
-                            public void onFailed() {
-                                LogUtil.d("load skin failed");
-                            }
-                        });
-                    }
-                }.execute();
-            }
-        }, 5000);
 
     }
 

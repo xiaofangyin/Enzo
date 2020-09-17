@@ -6,8 +6,6 @@ import android.os.Environment;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 
 /**
  * 文 件 名: ExternalCacheUtil
@@ -91,29 +89,4 @@ public class ExternalCacheUtil {
         }
     }
 
-    public static boolean copyAssetsFile(Context context, String fileFromName, String toDir) {
-        try {
-            InputStream its = context.getAssets().open(fileFromName);
-            int fileLength = its.available();
-            File book_file = new File(toDir);
-            if (!book_file.exists()) {
-                book_file.createNewFile();
-            }
-
-            FileOutputStream fots = new FileOutputStream(book_file, true);
-            byte[] buffer = new byte[fileLength];
-            int readCount = 0; // 已经成功读取的字节的个数
-            while (readCount < fileLength) {
-                readCount += its.read(buffer, readCount, fileLength - readCount);
-            }
-            fots.write(buffer, 0, fileLength);
-
-            its.close();
-            fots.close();
-            return true;
-        } catch (Exception e1) {
-            e1.printStackTrace();
-            return false;
-        }
-    }
 }

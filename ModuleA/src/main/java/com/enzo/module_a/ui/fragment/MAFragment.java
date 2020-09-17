@@ -92,7 +92,7 @@ public class MAFragment extends BaseFragment {
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
         view.setBackgroundColor(ContextCompat.getColor(
-                rootView.getContext(), R.color.color_yellow));
+                rootView.getContext(), R.color.color_major_c1));
         ((ViewGroup) rootView).addView(view, 0);
 
         flipperView = rootView.findViewById(R.id.view_flipper);
