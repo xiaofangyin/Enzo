@@ -67,8 +67,6 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
-        view.setBackgroundColor(ContextCompat.getColor(
-                rootView.getContext(), R.color.color_major_c1));
         ((ViewGroup) rootView).addView(view, 0);
 
         magicIndicator = rootView.findViewById(R.id.mc_indicator);

@@ -65,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:alpha="0"
-            android:background="@color/color_major_c1" />
+            android:background="@color/color_major_c1"
+            skin:enable="true" />
 
         <TextView
             android:id="@+id/name"

@@ -4,8 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import androidx.core.content.ContextCompat;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.LogUtil;
@@ -54,8 +52,6 @@ public class MBFragment extends BaseFragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
-        view.setBackgroundColor(ContextCompat.getColor(
-                rootView.getContext(), R.color.color_major_c1));
         ((ViewGroup) rootView).addView(view, 0);
 
         mSpiderWebView = rootView.findViewById(R.id.spider_web_view);

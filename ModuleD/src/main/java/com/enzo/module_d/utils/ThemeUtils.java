@@ -1,10 +1,13 @@
 package com.enzo.module_d.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
+import com.enzo.module_d.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,7 +18,7 @@ import cn.feng.skin.manager.loader.SkinManager;
 
 public class ThemeUtils {
 
-    public static void applyTheme(final Context context) {
+    public static void applyTheme(final Activity context) {
         new AsyncTask<Void, Integer, File>() {
 
             @Override
@@ -41,6 +44,7 @@ public class ThemeUtils {
                     @Override
                     public void onSuccess() {
                         LogUtil.d("load skin success");
+                        StateAppBar.setStatusBarColor(context, SkinManager.getInstance().getColor(R.color.color_major_c1));
                     }
 
                     @Override

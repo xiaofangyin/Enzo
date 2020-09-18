@@ -36,6 +36,8 @@ import com.enzo.main.plugin.SAHostDelegateManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.feng.skin.manager.loader.SkinManager;
+
 /**
  * 文 件 名: SAMainActivity
  * 创 建 人: xiaofangyin
@@ -57,6 +59,7 @@ public class SAMainActivity extends BaseActivity {
     @Override
     public void initView() {
         StateAppBar.translucentStatusBar(this, true);
+        StateAppBar.setStatusBarColor(this, SkinManager.getInstance().getColor(R.color.color_major_c1));
 
         drawerLayout = findViewById(R.id.home_drawer_layout);
         mTabLayout = findViewById(R.id.tab_layout);

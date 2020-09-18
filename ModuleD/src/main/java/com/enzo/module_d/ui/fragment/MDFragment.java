@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -27,6 +26,7 @@ import com.enzo.commonlib.utils.matisse.Matisse;
 import com.enzo.commonlib.utils.matisse.MimeType;
 import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
+import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
@@ -95,8 +95,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 StatusBarUtils.getStatusBarHeight(rootView.getContext()));
         view.setLayoutParams(layoutParams);
-        view.setBackgroundColor(ContextCompat.getColor(
-                rootView.getContext(), R.color.color_major_c1));
         ((ViewGroup) rootView).addView(view, 0);
 
         ivAvatar = rootView.findViewById(R.id.me_icon);
@@ -185,6 +183,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         } else if (id == R.id.btn_change_skin) {
             if (SkinManager.getInstance().isExternalSkin()) {
                 SkinManager.getInstance().restoreDefaultTheme();
+                StateAppBar.setStatusBarColor(getActivity(), SkinManager.getInstance().getColor(R.color.color_major_c1));
             } else {
                 ThemeUtils.applyTheme(getActivity());
             }
