@@ -28,13 +28,18 @@ public class ThemesUtils {
                 if (toFile.exists()) {
                     toFile.delete();
                 }
-                copyAssetsFile(context, skinName, toFile.getAbsolutePath());
-                return toFile;
+                if (copyAssetsFile(context, skinName, toFile.getAbsolutePath())) {
+                    return toFile;
+                }
+                return null;
             }
 
             @Override
             protected void onPostExecute(File file) {
                 super.onPostExecute(file);
+                if (file == null) {
+                    return;
+                }
                 SkinManager.getInstance().load(file.getAbsolutePath(), new ILoaderListener() {
                     @Override
                     public void onStart() {
