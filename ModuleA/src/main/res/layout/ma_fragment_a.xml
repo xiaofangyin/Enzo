@@ -57,7 +57,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/shape_button_gray_pressed"
+            android:background="@drawable/shape_bg_white_radius_37"
             android:gravity="center">
 
             <com.enzo.commonlib.widget.flipper.AdvertFlipperView
