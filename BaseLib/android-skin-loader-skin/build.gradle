@@ -28,8 +28,8 @@ android {
     flavorDimensions "normal"
 
     productFlavors {
-        //霓虹灯
-        orange {
+
+        major {
 
         }
 

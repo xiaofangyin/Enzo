@@ -16,14 +16,14 @@ import java.io.InputStream;
 import cn.feng.skin.manager.listener.ILoaderListener;
 import cn.feng.skin.manager.loader.SkinManager;
 
-public class ThemeUtils {
+public class ThemesUtils {
 
     public static void applyTheme(final Activity context) {
         new AsyncTask<Void, Integer, File>() {
 
             @Override
             protected File doInBackground(Void... voids) {
-                String skinName = "orange_v1.0.0.skin";
+                String skinName = "major_v1.0.0.skin";
                 File toFile = new File(ExternalCacheUtil.getThemeDir(context).getAbsolutePath(), skinName);
                 if (toFile.exists()) {
                     toFile.delete();

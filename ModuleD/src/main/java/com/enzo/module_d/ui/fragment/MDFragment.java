@@ -52,7 +52,7 @@ import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
-import com.enzo.module_d.utils.ThemeUtils;
+import com.enzo.module_d.utils.ThemesUtils;
 
 import java.util.List;
 
@@ -185,7 +185,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                 SkinManager.getInstance().restoreDefaultTheme();
                 StateAppBar.setStatusBarColor(getActivity(), SkinManager.getInstance().getColor(R.color.color_major_c1));
             } else {
-                ThemeUtils.applyTheme(getActivity());
+                ThemesUtils.applyTheme(getActivity());
             }
         } else if (id == R.id.btn_app_upgrade) {
             AppUpgradeUtil.checkVersion(getContext(), new AppUpgradeUtil.UpdateListener() {
