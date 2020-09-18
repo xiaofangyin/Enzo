@@ -27,8 +27,7 @@ import cn.feng.skin.manager.util.L;
 
 public class SkinManager implements ISkinLoader {
 
-    private static final String NOT_INIT_ERROR = "SkinManager MUST init with Context first";
-    private static Object synchronizedLock = new Object();
+    private static final Object synchronizedLock = new Object();
     private static SkinManager instance;
 
     private List<ISkinUpdate> skinObservers;
@@ -38,29 +37,14 @@ public class SkinManager implements ISkinLoader {
     private String skinPath;
     private boolean isDefaultSkin = false;
 
-    /**
-     * whether the skin being used is from external .skin file
-     *
-     * @return is external skin = true
-     */
     public boolean isExternalSkin() {
         return !isDefaultSkin && mResources != null;
     }
 
-    /**
-     * get current skin path
-     *
-     * @return current skin path
-     */
     public String getSkinPath() {
         return skinPath;
     }
 
-    /**
-     * return a global static instance of {@link SkinManager}
-     *
-     * @return
-     */
     public static SkinManager getInstance() {
         if (instance == null) {
             synchronized (synchronizedLock) {
@@ -107,12 +91,6 @@ public class SkinManager implements ISkinLoader {
         load(skin, callback);
     }
 
-    /**
-     * Load resources from apk in asyc task
-     *
-     * @param skinPackagePath path of skin apk
-     * @param callback        callback to notify user
-     */
     public void load(String skinPackagePath, final ILoaderListener callback) {
         new MyLoaderTask(context, callback).execute(skinPackagePath);
     }
@@ -187,9 +165,9 @@ public class SkinManager implements ISkinLoader {
     @Override
     public void attach(ISkinUpdate observer) {
         if (skinObservers == null) {
-            skinObservers = new ArrayList<ISkinUpdate>();
+            skinObservers = new ArrayList<>();
         }
-        if (!skinObservers.contains(skinObservers)) {
+        if (!skinObservers.contains(observer)) {
             skinObservers.add(observer);
         }
     }
@@ -245,7 +223,7 @@ public class SkinManager implements ISkinLoader {
 
         int trueResId = mResources.getIdentifier(resName, "drawable", skinPackageName);
 
-        Drawable trueDrawable = null;
+        Drawable trueDrawable;
         try {
             L.e("ttgg", "SDK_INT = " + android.os.Build.VERSION.SDK_INT);
             if (android.os.Build.VERSION.SDK_INT < 22) {

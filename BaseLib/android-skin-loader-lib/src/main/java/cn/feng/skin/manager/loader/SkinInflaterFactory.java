@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.LayoutInflater.Factory;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class SkinInflaterFactory implements Factory {
     private List<SkinItem> mSkinItems = new ArrayList<>();
 
     @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
+    public View onCreateView(@NonNull String name,@NonNull Context context, AttributeSet attrs) {
         // if this is NOT enable to be skined , simplly skip it
         boolean isSkinEnable = attrs.getAttributeBooleanValue(SkinConfig.NAMESPACE, SkinConfig.ATTR_SKIN_ENABLE, false);
         if (!isSkinEnable) {
