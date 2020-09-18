@@ -25,36 +25,6 @@ import cn.feng.skin.manager.listener.ISkinLoader;
 import cn.feng.skin.manager.listener.ISkinUpdate;
 import cn.feng.skin.manager.util.L;
 
-/**
- * Skin Manager Instance
- *
- *
- * <ul>
- * <strong>global init skin manager, MUST BE CALLED FIRST ! </strong>
- * </ul>
- * <ul>
- * <strong>get single runtime instance</strong>
- * <li> {@link #getInstance()} </li>
- * </ul>
- * <ul>
- * <strong>attach a listener (Activity or fragment) to SkinManager</strong>
- * </ul>
- * <ul>
- * <strong>detach a listener (Activity or fragment) to SkinManager</strong>
- * <li> {@link #detach(ISkinUpdate observer)} </li>
- * </ul>
- * <ul>
- * <strong>load latest theme </strong>
- * <li> {@link #load()} </li>
- * <li> {@link #load(ILoaderListener callback)} </li>
- * </ul>
- * <ul>
- * <strong>load new theme with the giving skinPackagePath</strong>
- * <li> {@link #load(String skinPackagePath, ILoaderListener callback)} </li>
- * </ul>
- *
- * @author fengjun
- */
 public class SkinManager implements ISkinLoader {
 
     private static final String NOT_INIT_ERROR = "SkinManager MUST init with Context first";

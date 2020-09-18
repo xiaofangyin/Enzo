@@ -18,13 +18,6 @@ import cn.feng.skin.manager.entity.SkinItem;
 import cn.feng.skin.manager.util.L;
 import cn.feng.skin.manager.util.ListUtils;
 
-/**
- * Supply {@link SkinInflaterFactory} to be called when inflating from a LayoutInflater.
- *
- * <p>Use this to collect the {skin:enable="true|false"} views availabled in our XML layout files.
- *
- * @author fengjun
- */
 public class SkinInflaterFactory implements Factory {
 
     private static final boolean DEBUG = true;

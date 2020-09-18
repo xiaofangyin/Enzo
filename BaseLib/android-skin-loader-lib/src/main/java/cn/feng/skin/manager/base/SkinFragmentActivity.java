@@ -13,14 +13,6 @@ import cn.feng.skin.manager.listener.ISkinUpdate;
 import cn.feng.skin.manager.loader.SkinInflaterFactory;
 import cn.feng.skin.manager.loader.SkinManager;
 
-/**
- * Base Fragment Activity for development
- *
- * <p>NOTICE:<br>
- * You should extends from this if you want to do skin change
- *
- * @author fengjun
- */
 public class SkinFragmentActivity extends FragmentActivity implements ISkinUpdate, IDynamicNewView {
 
     /**
@@ -46,8 +38,8 @@ public class SkinFragmentActivity extends FragmentActivity implements ISkinUpdat
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         SkinManager.getInstance().detach(this);
+        super.onDestroy();
     }
 
     protected void dynamicAddSkinEnableView(View view, String attrName, int attrValueResId) {

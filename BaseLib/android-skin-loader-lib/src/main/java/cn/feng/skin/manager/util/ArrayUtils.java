@@ -1,23 +1,6 @@
 package cn.feng.skin.manager.util;
 
-/**
- * Array Utils
- * <ul>
- * <li>{@link #isEmpty(Object[])} is null or its length is 0</li>
- * <li>{@link #getLast(Object[], Object, Object, boolean)} get last element of the target element, before the first one
- * that match the target element front to back</li>
- * <li>{@link #getNext(Object[], Object, Object, boolean)} get next element of the target element, after the first one
- * that match the target element front to back</li>
- * <li>{@link #getLast(Object[], Object, boolean)}</li>
- * <li>{@link #getLast(int[], int, int, boolean)}</li>
- * <li>{@link #getLast(long[], long, long, boolean)}</li>
- * <li>{@link #getNext(Object[], Object, boolean)}</li>
- * <li>{@link #getNext(int[], int, int, boolean)}</li>
- * <li>{@link #getNext(long[], long, long, boolean)}</li>
- * </ul>
- * 
- * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2011-10-24
- */
+
 public class ArrayUtils {
 
     private ArrayUtils() {

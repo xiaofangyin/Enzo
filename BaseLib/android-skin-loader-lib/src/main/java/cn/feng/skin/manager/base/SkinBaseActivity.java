@@ -12,14 +12,7 @@ import cn.feng.skin.manager.listener.ISkinUpdate;
 import cn.feng.skin.manager.loader.SkinInflaterFactory;
 import cn.feng.skin.manager.loader.SkinManager;
 
-/**
- * Base Activity for development
- * 
- * <p>NOTICE:<br> 
- * You should extends from this if you what to do skin change
- * 
- * @author fengjun
- */
+
 public class SkinBaseActivity extends Activity implements ISkinUpdate, IDynamicNewView{
 	
 	/**

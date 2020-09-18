@@ -14,11 +14,7 @@ public class SkinConfig {
     public 	static final int 		FROM_EXTERNAL 			= 	1;
     public 	static final String 	ATTR_SKIN_ENABLE	    =   "enable";
 	
-	/**
-	 * get path of last skin package path
-	 * @param context
-	 * @return path of skin package
-	 */
+
 	public static String getCustomSkinPath(Context context){
 		return PreferencesUtils.getString(context, PREF_CUSTOM_SKIN_PATH, DEFALT_SKIN);
 	}
