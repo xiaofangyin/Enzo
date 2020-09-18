@@ -1,6 +1,7 @@
 package cn.feng.skin.manager.loader;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -61,7 +62,7 @@ public class SkinManager implements ISkinLoader {
     private static SkinManager instance;
 
     private List<ISkinUpdate> skinObservers;
-    private Context context;
+    private Application context;
     private String skinPackageName;
     private Resources mResources;
     private String skinPath;
@@ -112,8 +113,8 @@ public class SkinManager implements ISkinLoader {
     private SkinManager() {
     }
 
-    public void init(Context ctx) {
-        context = ctx.getApplicationContext();
+    public void init(Application ctx) {
+        context = ctx;
     }
 
     public void restoreDefaultTheme() {
@@ -148,11 +149,11 @@ public class SkinManager implements ISkinLoader {
 
     private static class MyLoaderTask extends AsyncTask<String, Void, Resources> {
 
-        private WeakReference<Context> mContext;
+        private Application mContext;
         private ILoaderListener loaderListener;
 
-        public MyLoaderTask(Context context, ILoaderListener listener) {
-            mContext = new WeakReference<>(context);
+        public MyLoaderTask(Application context, ILoaderListener listener) {
+            mContext = context;
             loaderListener = listener;
         }
 
@@ -174,7 +175,7 @@ public class SkinManager implements ISkinLoader {
                         return null;
                     }
 
-                    PackageManager mPm = mContext.get().getPackageManager();
+                    PackageManager mPm = mContext.getPackageManager();
                     PackageInfo mInfo = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
                     assert mInfo != null;
                     SkinManager.getInstance().skinPackageName = mInfo.packageName;
@@ -183,10 +184,10 @@ public class SkinManager implements ISkinLoader {
                     Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
                     addAssetPath.invoke(assetManager, skinPkgPath);
 
-                    Resources superRes = mContext.get().getResources();
+                    Resources superRes = mContext.getResources();
                     Resources skinResource = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
 
-                    SkinConfig.saveSkinPath(mContext.get(), skinPkgPath);
+                    SkinConfig.saveSkinPath(mContext, skinPkgPath);
 
                     SkinManager.getInstance().skinPath = skinPkgPath;
                     SkinManager.getInstance().isDefaultSkin = false;
