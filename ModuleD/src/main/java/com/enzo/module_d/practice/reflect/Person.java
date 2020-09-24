@@ -5,6 +5,10 @@ public class Person {
     int age;
     private String name;
 
+    public Person(String name){
+        this.name = name;
+    }
+
     public int getAge() {
         return age;
     }
@@ -19,5 +23,9 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    private void hello() {
+        System.out.println("person hello...");
     }
 }

@@ -2,7 +2,7 @@ package com.enzo.module_d.practice.reflect;
 
 import java.lang.reflect.Field;
 
-public class ReflectTest {
+public class FieldTest {
 
     public static void main(String[] args) {
         try{
