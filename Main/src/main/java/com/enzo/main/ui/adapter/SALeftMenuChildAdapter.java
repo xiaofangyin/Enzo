@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
-import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.main.R;
+import com.enzo.main.config.SALeftMenuConfig;
 import com.enzo.main.model.bean.LeftMenuChildBean;
 
 
@@ -83,7 +83,7 @@ public class SALeftMenuChildAdapter extends BaseRecyclerViewAdapter<LeftMenuChil
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtil.show(model.getName());
+                    SALeftMenuConfig.launch(view.getContext(),model);
                 }
             });
         }
