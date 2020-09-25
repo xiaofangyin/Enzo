@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -39,6 +42,8 @@ dependencies {
     debugApi 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
+    //kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //主题
     api project(path: ':BaseLib:android-skin-loader-lib')
     //ucrop

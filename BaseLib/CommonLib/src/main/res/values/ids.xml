@@ -33,4 +33,16 @@
 
     <!-- 弹幕 -->
     <item name="barrage_view_holder" type="id" />
+
+    <!-- picker -->
+    <item name="wheel_linkage1" type="id"/>
+    <item name="wheel_linkage2" type="id"/>
+    <item name="wheel_linkage3" type="id"/>
+    <item name="wheel_year" type="id"/>
+    <item name="wheel_month" type="id"/>
+    <item name="wheel_day" type="id"/>
+    <item name="wheel_am_pm" type="id"/>
+    <item name="wheel_hour" type="id"/>
+    <item name="wheel_minute" type="id"/>
+    <item name="wheel_second" type="id"/>
 </resources>

@@ -150,6 +150,12 @@
             android:text="Time Picker" />
 
         <Button
+            android:id="@+id/btn_time_picker2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Picker2" />
+
+        <Button
             android:id="@+id/btn_flow_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

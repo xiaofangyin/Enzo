@@ -90,6 +90,9 @@
             android:name=".ui.activity.MDTimePickerActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.MDTimePickerActivity2"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.MDFlowLayoutActivity"
             android:screenOrientation="portrait" />
         <activity

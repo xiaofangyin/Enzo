@@ -47,6 +47,7 @@ import com.enzo.module_d.ui.activity.MDScrollingImageViewActivity;
 import com.enzo.module_d.ui.activity.MDShadowActivity;
 import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity;
+import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
 import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
@@ -125,6 +126,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
         rootView.findViewById(R.id.btn_time_picker).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_time_picker2).setOnClickListener(this);
         rootView.findViewById(R.id.btn_flow_layout).setOnClickListener(this);
         rootView.findViewById(R.id.btn_viewpager_indicator).setOnClickListener(this);
     }
@@ -275,6 +277,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_time_picker) {
             Intent intent = new Intent(getContext(), MDTimePickerActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_time_picker2) {
+            Intent intent = new Intent(getContext(), MDTimePickerActivity2.class);
             startActivity(intent);
         } else if (id == R.id.btn_flow_layout) {
             Intent intent = new Intent(getContext(), MDFlowLayoutActivity.class);
