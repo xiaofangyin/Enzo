@@ -70,13 +70,13 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_24_title"
-                    app:tpv_hourRightText="时"
+                    app:tpv_hourRightText=":"
                     app:tpv_is24Hour="true"
-                    app:tpv_minuteRightText="分"
-                    app:tpv_rightTextColor="@color/colorAccent"
+                    app:tpv_minuteRightText=":"
+                    app:tpv_rightTextColor="@color/color_dark_black"
                     app:tpv_rightTextGravity="top"
-                    app:tpv_rightTextSize="13sp"
-                    app:tpv_secondRightText="秒"
+                    app:tpv_rightTextSize="20sp"
+                    app:tpv_secondRightText=" "
                     app:tpv_textSize="20sp" />
 
                 <TextView

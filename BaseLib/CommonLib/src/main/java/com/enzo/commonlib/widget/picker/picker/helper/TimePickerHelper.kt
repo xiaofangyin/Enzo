@@ -61,10 +61,10 @@ class TimePickerHelper(private var wheelAmPmView: WheelAmPmView?,
             }
         }
         val is24Hour = wheelHourView?.is24Hour ?: false
-        val hour = wheelHourView?.getAdapter()?.getItem(position) ?: -1
+        val hour = wheelHourView?.getAdapter()?.getSelectedItem<Int>() ?: 0
         val isAm = wheelHourView?.hourType == WheelHourView.HourType.AM
-        val minute = wheelMinuteView?.getAdapter()?.getItem(position) ?: -1
-        val second = wheelSecondView?.getAdapter()?.getItem(position) ?: -1
+        val minute = wheelMinuteView?.getAdapter()?.getSelectedItem<Int>() ?: 0
+        val second = wheelSecondView?.getAdapter()?.getSelectedItem<Int>() ?: 0
         timeSelectedListener?.onTimeSelected(is24Hour, hour, minute, second, isAm)
     }
 

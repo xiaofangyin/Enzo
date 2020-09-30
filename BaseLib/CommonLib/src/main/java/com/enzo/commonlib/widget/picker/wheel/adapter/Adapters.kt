@@ -153,7 +153,7 @@ open class ArrayWheelAdapter<T> @JvmOverloads constructor(data: List<T>? = null)
      * 获取选中条目数据
      */
     fun <V> getSelectedItem(): V? {
-        finishScrollCallback?.onFinishScroll()
+//        finishScrollCallback?.onFinishScroll()
         return getItem(selectedItemPosition)
     }
 
