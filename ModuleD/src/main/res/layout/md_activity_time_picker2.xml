@@ -21,31 +21,26 @@
             android:layout_height="match_parent"
             android:fillViewport="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_auto_title"
+                    android:id="@+id/tv_12_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="自动获取系统时制"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:text="12小时制" />
 
                 <com.enzo.commonlib.widget.picker.picker.TimePickerView
                     android:id="@+id/time_picker_auto"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_auto_title"
-                    app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="0.7"
                     app:tpv_hourRightText="时"
+                    app:tpv_is24Hour="false"
                     app:tpv_minuteRightText="分"
                     app:tpv_rightTextMarginLeft="5dp"
                     app:tpv_secondRightText="秒"
@@ -57,19 +52,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="24小时制"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/time_picker_auto" />
+                    android:text="24小时制" />
 
                 <com.enzo.commonlib.widget.picker.picker.TimePickerView
                     android:id="@+id/time_picker_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_24_title"
                     app:tpv_hourRightText=":"
                     app:tpv_is24Hour="true"
                     app:tpv_minuteRightText=":"
@@ -80,51 +69,32 @@
                     app:tpv_textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tv_12_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="12小时制"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/time_picker_24" />
+                    android:text="年月日" />
 
-                <com.enzo.commonlib.widget.picker.picker.TimePickerView
-                    android:id="@+id/time_picker_12"
+                <com.enzo.commonlib.widget.picker.picker.DatePickerView
+                    android:id="@+id/date_picker_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="#00ffff"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_12_title"
-                    app:tpv_hourRightText=" : "
-                    app:tpv_is24Hour="true"
-                    app:tpv_minuteRightText=""
-                    app:tpv_rightTextColor="@color/colorPrimary"
-                    app:tpv_rightTextGravity="top"
-                    app:tpv_rightTextSize="30sp"
-                    app:tpv_secondRightText=""
-                    app:tpv_showSecond="false"
-                    app:tpv_textSize="25sp" />
+                    android:layout_marginTop="20dp"
+                    app:dpv_cyclic="false"
+                    app:dpv_dayRightText="日"
+                    app:dpv_dividerType="wrap"
+                    app:dpv_endYear="2088"
+                    app:dpv_monthRightText="月"
+                    app:dpv_rightTextMarginLeft="10dp"
+                    app:dpv_selectedDay="4"
+                    app:dpv_selectedMonth="5"
+                    app:dpv_selectedTextColor="#801BACC9"
+                    app:dpv_selectedYear="2000"
+                    app:dpv_showDivider="true"
+                    app:dpv_startYear="1988"
+                    app:dpv_textSize="22sp"
+                    app:dpv_yearRightText="年" />
 
-                <com.enzo.commonlib.widget.picker.picker.TimePickerView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/time_picker_12"
-                    app:tpv_hourRightText="时"
-                    app:tpv_is24Hour="false"
-                    app:tpv_minuteRightText="分"
-                    app:tpv_rightTextColor="@color/colorPrimary"
-                    app:tpv_rightTextGravity="top"
-                    app:tpv_rightTextSize="13sp"
-                    app:tpv_secondRightText="秒"
-                    app:tpv_showHour="false"
-                    app:tpv_textSize="25sp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </LinearLayout>
