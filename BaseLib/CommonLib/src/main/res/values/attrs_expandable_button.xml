@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="AllAngleExpandableButton">
+    <declare-styleable name="ExpandableMenu">
         <attr name="aebMainButtonSizeDp" format="dimension|reference" />
         <attr name="aebSubButtonSizeDp" format="dimension|reference" />
         <attr name="aebButtonGapDp" format="dimension|reference" />

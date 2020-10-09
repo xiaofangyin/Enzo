@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.allangleexpandablebutton.AllAngleExpandableButton;
+import com.enzo.commonlib.widget.allangleexpandablebutton.ExpandableMenu;
 import com.enzo.commonlib.widget.allangleexpandablebutton.ButtonData;
 import com.enzo.commonlib.widget.allangleexpandablebutton.ButtonEventListener;
 import com.enzo.module_c.R;
@@ -49,7 +49,7 @@ public class MCFragment_2 extends BaseFragment {
     }
 
     private void installButton90to90(View rootView) {
-        final AllAngleExpandableButton button = (AllAngleExpandableButton) rootView.findViewById(R.id.button_expandable_90_90);
+        final ExpandableMenu button = (ExpandableMenu) rootView.findViewById(R.id.button_expandable_90_90);
         final List<ButtonData> buttonDatas = new ArrayList<>();
         int[] drawable = {R.drawable.plus, R.drawable.mark, R.drawable.settings, R.drawable.heart};
         int[] color = {R.color.mc_blue, R.color.mc_red, R.color.mc_green, R.color.mc_yellow};
@@ -68,7 +68,7 @@ public class MCFragment_2 extends BaseFragment {
     }
 
     private void installButton90to180(View rootView) {
-        final AllAngleExpandableButton button = (AllAngleExpandableButton) rootView.findViewById(R.id.button_expandable_90_180);
+        final ExpandableMenu button = (ExpandableMenu) rootView.findViewById(R.id.button_expandable_90_180);
         final List<ButtonData> buttonDatas = new ArrayList<>();
         int[] drawable = {R.drawable.plus, R.drawable.mark, R.drawable.settings, R.drawable.heart};
         int[] color = {R.color.mc_blue, R.color.mc_red, R.color.mc_green, R.color.mc_yellow};
@@ -87,7 +87,7 @@ public class MCFragment_2 extends BaseFragment {
     }
 
     private void installButton110to250(View rootView) {
-        final AllAngleExpandableButton button = (AllAngleExpandableButton) rootView.findViewById(R.id.button_expandable_110_250);
+        final ExpandableMenu button = (ExpandableMenu) rootView.findViewById(R.id.button_expandable_110_250);
         final List<ButtonData> buttonDatas = new ArrayList<>();
         int[] drawable = {R.drawable.edit, R.drawable.refresh, R.drawable.mark, R.drawable.settings, R.drawable.heart, R.drawable.search, R.drawable.copy};
         int[] color = {R.color.mc_black, R.color.mc_orange, R.color.mc_blue, R.color.mc_pink, R.color.mc_yellow, R.color.mc_red, R.color.mc_green};
@@ -106,7 +106,7 @@ public class MCFragment_2 extends BaseFragment {
     }
 
     private void installButton0to360(View rootView) {
-        final AllAngleExpandableButton button = (AllAngleExpandableButton) rootView.findViewById(R.id.button_expandable_0_360);
+        final ExpandableMenu button = (ExpandableMenu) rootView.findViewById(R.id.button_expandable_0_360);
         final List<ButtonData> buttonDatas = new ArrayList<>();
         int[] drawable = {R.drawable.edit, R.drawable.refresh, R.drawable.mark, R.drawable.settings, R.drawable.heart, R.drawable.search, R.drawable.copy};
         int[] color = {R.color.mc_black, R.color.mc_orange, R.color.mc_blue, R.color.mc_pink, R.color.mc_yellow, R.color.mc_red, R.color.mc_green};
@@ -124,7 +124,7 @@ public class MCFragment_2 extends BaseFragment {
         setListener(button);
     }
 
-    private void setListener(AllAngleExpandableButton button) {
+    private void setListener(ExpandableMenu button) {
         button.setButtonEventListener(new ButtonEventListener() {
             @Override
             public void onButtonClicked(int index) {
