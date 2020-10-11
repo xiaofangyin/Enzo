@@ -35,6 +35,7 @@ import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
+import com.enzo.module_d.ui.activity.MDHookActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
@@ -48,11 +49,11 @@ import com.enzo.module_d.ui.activity.MDShadowActivity;
 import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
-import com.enzo.module_d.ui.activity.MDTouchEventActivity;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
+import com.enzo.module_d.utils.HookHelper;
 import com.enzo.module_d.utils.ThemesUtils;
 
 import java.util.List;
@@ -105,7 +106,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     public void initListener(View rootView) {
         rootView.findViewById(R.id.me_icon).setOnClickListener(this);
         rootView.findViewById(R.id.btn_change_skin).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_touch_event).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_hook).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_boss_bottom_dialog).setOnClickListener(this);
         rootView.findViewById(R.id.btn_boss_company).setOnClickListener(this);
@@ -224,8 +225,10 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_add_device) {
             ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
-        } else if (id == R.id.btn_touch_event) {
-            Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
+        } else if (id == R.id.btn_hook) {
+            HookHelper.hookIActivityManager();
+            HookHelper.hookHandler();
+            Intent intent = new Intent(getContext(), MDHookActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_av_loading) {
             Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);
@@ -253,9 +256,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_okhttp) {
             Intent intent = new Intent(getContext(), MDOkHttpActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_touch_event) {
-            Intent intent = new Intent(getContext(), MDTouchEventActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_shadow) {
             Intent intent = new Intent(getContext(), MDShadowActivity.class);

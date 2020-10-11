@@ -23,10 +23,10 @@
             android:text="切换主题" />
 
         <Button
-            android:id="@+id/btn_touch_event"
+            android:id="@+id/btn_hook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="事件分发" />
+            android:text="hook" />
 
         <Button
             android:id="@+id/btn_app_upgrade"
