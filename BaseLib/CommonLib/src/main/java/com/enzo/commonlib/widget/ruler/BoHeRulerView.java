@@ -1,4 +1,4 @@
-package com.enzo.commonlib.widget.boheruler;
+package com.enzo.commonlib.widget.ruler;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -20,7 +20,7 @@ import com.enzo.commonlib.utils.common.DensityUtil;
  * @see <a href="https://github.com/qindachang">https://github.com/qindachang</a>
  */
 
-public class RulerView extends View {
+public class BoHeRulerView extends View {
     private int mMinVelocity;
     private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
@@ -60,15 +60,15 @@ public class RulerView extends View {
     private OnValueChangeListener mListener;
 
 
-    public RulerView(Context context) {
+    public BoHeRulerView(Context context) {
         this(context, null);
     }
 
-    public RulerView(Context context, AttributeSet attrs) {
+    public BoHeRulerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RulerView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BoHeRulerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -77,25 +77,25 @@ public class RulerView extends View {
         mScroller = new Scroller(context);
 
         final TypedArray typedArray = context.obtainStyledAttributes(attrs,
-                R.styleable.RulerView);
+                R.styleable.BoHeRulerView);
 
-        mAlphaEnable = typedArray.getBoolean(R.styleable.RulerView_alphaEnable, false);
+        mAlphaEnable = typedArray.getBoolean(R.styleable.BoHeRulerView_alphaEnable, false);
 
-        mLineSpaceWidth = typedArray.getDimension(R.styleable.RulerView_lineSpaceWidth, DensityUtil.dip2px(context, 5));
-        mLineWidth = typedArray.getDimension(R.styleable.RulerView_lineWidth, DensityUtil.dip2px(context, 1));
-        mLineMaxHeight = typedArray.getDimension(R.styleable.RulerView_lineMaxHeight, DensityUtil.dip2px(context, 42));
-        mLineMidHeight = typedArray.getDimension(R.styleable.RulerView_lineMidHeight, DensityUtil.dip2px(context, 30));
-        mLineMinHeight = typedArray.getDimension(R.styleable.RulerView_lineMinHeight, DensityUtil.dip2px(context, 17));
-        mLineColor = typedArray.getColor(R.styleable.RulerView_lineColor, mLineColor);
+        mLineSpaceWidth = typedArray.getDimension(R.styleable.BoHeRulerView_lineSpaceWidth, DensityUtil.dip2px(context, 5));
+        mLineWidth = typedArray.getDimension(R.styleable.BoHeRulerView_lineWidth, DensityUtil.dip2px(context, 1));
+        mLineMaxHeight = typedArray.getDimension(R.styleable.BoHeRulerView_lineMaxHeight, DensityUtil.dip2px(context, 42));
+        mLineMidHeight = typedArray.getDimension(R.styleable.BoHeRulerView_lineMidHeight, DensityUtil.dip2px(context, 30));
+        mLineMinHeight = typedArray.getDimension(R.styleable.BoHeRulerView_lineMinHeight, DensityUtil.dip2px(context, 17));
+        mLineColor = typedArray.getColor(R.styleable.BoHeRulerView_lineColor, mLineColor);
 
-        mTextSize = typedArray.getDimension(R.styleable.RulerView_textSize, DensityUtil.dip2px(context, mTextSize));
-        mTextColor = typedArray.getColor(R.styleable.RulerView_textColor, mTextColor);
-        mTextMarginTop = typedArray.getDimension(R.styleable.RulerView_textMarginTop, DensityUtil.dip2px(context, mTextMarginTop));
+        mTextSize = typedArray.getDimension(R.styleable.BoHeRulerView_textSize, DensityUtil.dip2px(context, mTextSize));
+        mTextColor = typedArray.getColor(R.styleable.BoHeRulerView_textColor, mTextColor);
+        mTextMarginTop = typedArray.getDimension(R.styleable.BoHeRulerView_textMarginTop, DensityUtil.dip2px(context, mTextMarginTop));
 
-        mSelectorValue = typedArray.getFloat(R.styleable.RulerView_selectorValue, 0.0f);
-        mMinValue = typedArray.getFloat(R.styleable.RulerView_minValue, 0.0f);
-        mMaxValue = typedArray.getFloat(R.styleable.RulerView_maxValue, 100.0f);
-        mPerValue = typedArray.getFloat(R.styleable.RulerView_perValue, 0.1f);
+        mSelectorValue = typedArray.getFloat(R.styleable.BoHeRulerView_selectorValue, 0.0f);
+        mMinValue = typedArray.getFloat(R.styleable.BoHeRulerView_minValue, 0.0f);
+        mMaxValue = typedArray.getFloat(R.styleable.BoHeRulerView_maxValue, 100.0f);
+        mPerValue = typedArray.getFloat(R.styleable.BoHeRulerView_perValue, 0.1f);
 
         mMinVelocity = ViewConfiguration.get(getContext()).getScaledMinimumFlingVelocity();
 
@@ -119,6 +119,7 @@ public class RulerView extends View {
     }
 
     public void setTextColor(int color) {
+        mTextColor = color;
         mTextPaint.setColor(color);
         invalidate();
     }
@@ -129,6 +130,7 @@ public class RulerView extends View {
     }
 
     public void setLineColor(int color) {
+        mLineColor = color;
         mLinePaint.setColor(color);
         invalidate();
     }
