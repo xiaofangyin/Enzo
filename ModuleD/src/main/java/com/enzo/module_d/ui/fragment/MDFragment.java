@@ -32,6 +32,7 @@ import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
+import com.enzo.module_d.ui.activity.MDAidlActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
@@ -106,6 +107,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     public void initListener(View rootView) {
         rootView.findViewById(R.id.me_icon).setOnClickListener(this);
         rootView.findViewById(R.id.btn_change_skin).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_aidl).setOnClickListener(this);
         rootView.findViewById(R.id.btn_hook).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_boss_bottom_dialog).setOnClickListener(this);
@@ -220,6 +222,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             CommonBottomSheetDialog bottomSheetDialog = new CommonBottomSheetDialog(v.getContext(), height, height);
             bottomSheetDialog.setContentView(content);
             bottomSheetDialog.show();
+        } else if (id == R.id.btn_aidl) {
+            Intent intent = new Intent(getContext(), MDAidlActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_boss_company) {
             Intent intent = new Intent(getContext(), MDBossCompanyDetailActivity.class);
             startActivity(intent);

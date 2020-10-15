@@ -35,6 +35,12 @@
             android:text="版本检测" />
 
         <Button
+            android:id="@+id/btn_aidl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="aidl" />
+
+        <Button
             android:id="@+id/btn_boss_bottom_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,5 +172,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ViewPagerIndicator" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
