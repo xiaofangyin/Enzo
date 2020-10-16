@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.module_c.aidl.ICalInterface;
+import com.enzo.module_c.ICalculateInterface;
 import com.enzo.module_d.R;
 
 /**
@@ -26,13 +26,13 @@ public class MDAidlActivity extends BaseActivity {
     private EditText edtText1;
     private EditText edtText2;
     private EditText edtResult;
-    private ICalInterface iCallInterface;
+    private ICalculateInterface iCallInterface;
 
     private final ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LogUtil.d("MDAidlActivity onServiceConnected...");
-            iCallInterface = ICalInterface.Stub.asInterface(service);
+            iCallInterface = ICalculateInterface.Stub.asInterface(service);
         }
 
         @Override
@@ -57,7 +57,7 @@ public class MDAidlActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         Intent intent = new Intent();
-        intent.setComponent(new ComponentName("com.enzo.module_c", "com.enzo.module_c.aidl.ICalInterface"));
+        intent.setComponent(new ComponentName("com.enzo.module_c", "com.enzo.module_c.ICalculateInterface"));
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
     }
 

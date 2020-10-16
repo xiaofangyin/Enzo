@@ -8,6 +8,7 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.module_c.ICalculateInterface;
 
 /**
  * 文 件 名: IRemoteService
@@ -23,7 +24,7 @@ public class RemoteService extends Service {
         return iBinder;
     }
 
-    private final IBinder iBinder = new ICalInterface.Stub() {
+    private final IBinder iBinder = new ICalculateInterface.Stub() {
 
         @Override
         public int add(int a, int b) throws RemoteException {
