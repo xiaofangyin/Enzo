@@ -87,7 +87,7 @@
                     app:dpv_rightTextMarginLeft="10dp"
                     app:dpv_selectedDay="4"
                     app:dpv_selectedMonth="5"
-                    app:dpv_selectedTextColor="#801BACC9"
+                    app:dpv_selectedTextColor="@color/color_green"
                     app:dpv_selectedYear="2000"
                     app:dpv_showDivider="true"
                     app:dpv_startYear="1988"
