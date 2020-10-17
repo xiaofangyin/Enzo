@@ -16,38 +16,13 @@ import java.lang.reflect.Proxy;
 import java.util.List;
 
 public class HookHelper {
-    private static final String TAG = "Zero";
+    private static final String TAG = "xfy";
 
     public static final String EXTRA_TARGET_INTENT = "extra_target_intent";
 
     public static void hookIActivityManager() {
-        //TODO:
-//        1. 找到了Hook的点
-//        2. hook点 动态代理 静态？
-//        3. 获取到getDefault的IActivityManager原始对象
-//        4. 动态代理 准备classloader 接口
-//        5  classloader, 获取当前线程
-//        6. 接口 Class.forName("android.app.IActivityManager");
-//        7. Proxy.newProxyInstance() 得到一个IActivityManagerProxy
-//        8. IActivityManagerProxy融入到framework
-
-//            public abstract class Singleton<T> {
-//                private T mInstance;
-//
-//                protected abstract T create();
-//
-//                public final T get() {
-//                    synchronized (this) {
-//                        if (mInstance == null) {
-//                            mInstance = create();
-//                        }
-//                        return mInstance;
-//                    }
-//                }
-//            }
-
         try {
-            Field gDefaultField = null;
+            Field gDefaultField;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Class<?> activityManager = Class.forName("android.app.ActivityManager");
                 gDefaultField = activityManager.getDeclaredField("IActivityManagerSingleton");
@@ -152,7 +127,8 @@ public class HookHelper {
                                 intentField.setAccessible(true);
                                 Intent intent = (Intent) intentField.get(msg.obj);
                                 Intent targetIntent = intent.getParcelableExtra(EXTRA_TARGET_INTENT);
-                                intent.setComponent(targetIntent.getComponent());
+//                                intent.setComponent(targetIntent.getComponent());
+                                intentField.set(msg.obj,targetIntent);
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -168,38 +144,6 @@ public class HookHelper {
                                 mActivityCallbacksField.setAccessible(true);
                                 List mActivityCallbacks = (List) mActivityCallbacksField.get(obj);
                                 Log.i(TAG, "handleMessage: mActivityCallbacks= " + mActivityCallbacks);
-                                //注意了 这里如果有同学debug调试会发现第一次size=0 原因如下
-                                //在Android O之前
-                                //public static final int LAUNCH_ACTIVITY         = 100;
-                                //public static final int PAUSE_ACTIVITY          = 101;
-                                //public static final int PAUSE_ACTIVITY_FINISHING= 102;
-                                //public static final int STOP_ACTIVITY_SHOW      = 103;
-                                //public static final int STOP_ACTIVITY_HIDE      = 104;
-                                //public static final int SHOW_WINDOW             = 105;
-                                //public static final int HIDE_WINDOW             = 106;
-                                //public static final int RESUME_ACTIVITY         = 107;
-                                //public static final int SEND_RESULT             = 108;
-                                //public static final int DESTROY_ACTIVITY        = 109;
-                                //end
-                                //从AndroidP开始重构了状态模式
-                                //public static final int EXECUTE_TRANSACTION = 159;
-                                // 首先一个app 只有一个ActivityThread 然后就只有一个mH
-                                //我们app所有的activity的生命周期的处理都在mH的handleMessage里面处理
-                                //在Android 8.0之前，不同的生命周期对应不同的msg.what处理
-                                //在Android 8.0 改成了全部由EXECUTE_TRANSACTION来处理
-                                //所以这里第一次mActivityCallbacks是MainActivity的生命周期回调的
-//                                handleMessage: 159
-//                                handleMessage: obj=android.app.servertransaction.ClientTransaction@efd342
-//                                handleMessage: mActivityCallbacks= []
-//                                invoke: method activityPaused
-//                                handleMessage: 159
-//                                handleMessage: obj=android.app.servertransaction.ClientTransaction@4962
-//                                handleMessage: mActivityCallbacks= [WindowVisibilityItem{showWindow=true}]
-//                                handleMessage: size= 1
-//                                handleMessage: 159
-//                                handleMessage: obj=android.app.servertransaction.ClientTransaction@9e98c6b
-//                                handleMessage: mActivityCallbacks= [LaunchActivityItem{intent=Intent { cmp=com.zero.activityhookdemo/.StubActivity (has extras) },ident=168243404,info=ActivityInfo{5b8d769 com.zero.activityhookdemo.StubActivity},curConfig={1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h659dp 420dpi nrml port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 0, 0) mAppBounds=Rect(0, 0 - 1080, 1794) mWindowingMode=fullscreen mActivityType=undefined} s.6},overrideConfig={1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h659dp 420dpi nrml port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 1794) mAppBounds=Rect(0, 0 - 1080, 1794) mWindowingMode=fullscreen mActivityType=standard} s.6},referrer=com.zero.activityhookdemo,procState=2,state=null,persistentState=null,pendingResults=null,pendingNewIntents=null,profilerInfo=null}]
-//                                handleMessage: size= 1
                                 if (mActivityCallbacks.size() > 0) {
                                     Log.i(TAG, "handleMessage: size= " + mActivityCallbacks.size());
                                     String className = "android.app.servertransaction.LaunchActivityItem";
@@ -209,7 +153,8 @@ public class HookHelper {
                                         intentField.setAccessible(true);
                                         Intent intent = (Intent) intentField.get(object);
                                         Intent targetIntent = intent.getParcelableExtra(EXTRA_TARGET_INTENT);
-                                        intent.setComponent(targetIntent.getComponent());
+//                                        intent.setComponent(targetIntent.getComponent());
+                                        intentField.set(object,targetIntent);
                                     }
                                 }
                             } catch (Exception e) {

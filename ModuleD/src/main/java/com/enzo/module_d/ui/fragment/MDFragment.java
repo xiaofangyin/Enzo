@@ -1,6 +1,7 @@
 package com.enzo.module_d.ui.fragment;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -233,7 +234,8 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         } else if (id == R.id.btn_hook) {
             HookHelper.hookIActivityManager();
             HookHelper.hookHandler();
-            Intent intent = new Intent(getContext(), MDHookActivity.class);
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName("com.enzo.module_d","com.enzo.module_d.ui.activity.MDHookActivity"));
             startActivity(intent);
         } else if (id == R.id.btn_av_loading) {
             Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);
