@@ -1,16 +1,16 @@
 include ':app'
-include ':Main', ':ModuleA', ':ModuleB', ':ModuleC', ':ModuleD'
+include ':Module:Main', ':Module:ModuleA', ':Module:ModuleB', ':Module:ModuleC', ':Module:ModuleD'
 include ':BaseLib:FLKit', ':BaseLib:CommonLib', ':BaseLib:ucrop'
 include ':BaseLib:android-skin-loader-lib'
 include ':BaseLib:android-skin-loader-skin'
 
-project(':Main').projectDir = new File('../Main')
-project(':ModuleA').projectDir = new File('../ModuleA')
-project(':ModuleB').projectDir = new File('../ModuleB')
-project(':ModuleC').projectDir = new File('../ModuleC')
-project(':ModuleD').projectDir = new File('../ModuleD')
-project(':BaseLib:CommonLib').projectDir = new File('../BaseLib/CommonLib')
-project(':BaseLib:FLKit').projectDir = new File('../BaseLib/FLKit')
-project(':BaseLib:ucrop').projectDir = new File('../BaseLib/ucrop')
-project(':BaseLib:android-skin-loader-lib').projectDir = new File('../BaseLib/android-skin-loader-lib')
-project(':BaseLib:android-skin-loader-skin').projectDir = new File('../BaseLib/android-skin-loader-skin')
+//project(':Main').projectDir = new File('../Main')
+//project(':ModuleA').projectDir = new File('../ModuleA')
+//project(':ModuleB').projectDir = new File('../ModuleB')
+//project(':ModuleC').projectDir = new File('../ModuleC')
+//project(':ModuleD').projectDir = new File('../ModuleD')
+//project(':BaseLib:CommonLib').projectDir = new File('../BaseLib/CommonLib')
+//project(':BaseLib:FLKit').projectDir = new File('../BaseLib/FLKit')
+//project(':BaseLib:ucrop').projectDir = new File('../BaseLib/ucrop')
+//project(':BaseLib:android-skin-loader-lib').projectDir = new File('../BaseLib/android-skin-loader-lib')
+//project(':BaseLib:android-skin-loader-skin').projectDir = new File('../BaseLib/android-skin-loader-skin')

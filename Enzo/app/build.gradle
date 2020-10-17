@@ -74,11 +74,11 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation project(':Main')
-    implementation project(':ModuleA')
-    implementation project(':ModuleB')
-    implementation project(':ModuleC')
-    implementation project(':ModuleD')
+    implementation project(':Module:Main')
+    implementation project(':Module:ModuleA')
+    implementation project(':Module:ModuleB')
+    implementation project(':Module:ModuleC')
+    implementation project(':Module:ModuleD')
 }
 
 static def buildTime() {
