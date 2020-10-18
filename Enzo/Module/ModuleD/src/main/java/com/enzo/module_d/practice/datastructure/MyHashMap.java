@@ -18,7 +18,7 @@ public class MyHashMap<K, V> {
 
     public Object get(Object key) {
         int hash = key.hashCode();
-        int i = hash % CAPACITY;
+        int i = Math.abs(hash % CAPACITY);
 
         for (Entry<K, V> entry = table[i]; entry != null; entry = entry.next) {
             if (entry.key.equals(key)) {
