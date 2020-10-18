@@ -9,8 +9,8 @@ package com.enzo.module_d.practice.datastructure;
  */
 public class MyHashMap<K, V> {
 
-    private Entry[] table;
-    private static Integer CAPACITY = 8;
+    private final Entry[] table;
+    private static final Integer CAPACITY = 8;//容量
 
     public MyHashMap() {
         table = new Entry[CAPACITY];
@@ -48,7 +48,7 @@ public class MyHashMap<K, V> {
         table[i] = entry;
     }
 
-    private class Entry<K, V> {
+    private static class Entry<K, V> {
         private K key;
         private V value;
         private Entry next;
