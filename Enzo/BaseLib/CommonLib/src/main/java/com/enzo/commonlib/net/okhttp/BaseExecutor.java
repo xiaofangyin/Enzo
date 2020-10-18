@@ -2,6 +2,8 @@ package com.enzo.commonlib.net.okhttp;
 
 import com.enzo.commonlib.utils.common.PhoneUtils;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,6 +77,14 @@ public abstract class BaseExecutor {
                 }
             }
         });
+    }
+
+    private Class<?> analysisClassInfo(Object object) {
+        //getGenericSuperclass()得到包含原始类型，参数化，数组，类型变量，基本数据
+        Type getType = object.getClass().getGenericSuperclass();
+        // 获取参数化类型
+        Type[] params = ((ParameterizedType) getType).getActualTypeArguments();
+        return (Class<?>) params[0];
     }
 
     public interface JsonCallback<T> {
