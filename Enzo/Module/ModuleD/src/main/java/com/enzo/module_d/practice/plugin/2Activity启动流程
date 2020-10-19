@@ -1,0 +1,14 @@
+android 8.0
+
+1.Activity   ->   startActivity()   ->   startActivityForResult()   ->     mInstrumentation.execStartActivity
+2.Instrumentation   ->   ActivityManager.getService().startActivity()
+
+3.ActivityManagerService(IActivityManager.Stub的实现类)   ->   startActivityAsUser()   ->   ActivityTaskManagerService.startActivityAsUser()
+4.ActivityTaskManagerService   ->   ActivityStarter.startActivityMayWait()
+.
+.
+.
+
+5.ApplicationThread(ActivityThread静态内部类)   ->   scheduleLaunchActivity(){sendMessage(H.LAUNCH_ACTIVITY, r);}
+6.ActivityThread   ->   H.handleLaunchActivity()   ->   performLaunchActivity()   ->   mInstrumentation.callActivityOnCreate()
+7.Activity   ->   onCreate()
