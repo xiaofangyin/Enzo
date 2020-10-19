@@ -9,10 +9,10 @@ package com.enzo.module_d.practice.datastructure;
  */
 public class QueueX {
 
-    private int maxSize;
+    private final int maxSize;
+    private final Object[] queueArray;
     private int front;
     private int rear;
-    private Object[] queueArray;
 
     public QueueX(int n) {
         this.maxSize = n;
