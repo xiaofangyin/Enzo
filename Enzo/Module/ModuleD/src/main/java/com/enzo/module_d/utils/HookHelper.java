@@ -22,26 +22,26 @@ public class HookHelper {
 
     public static void hookIActivityManager() {
         try {
-            Field gDefaultField;
+            Field gIActivityManagerSingleton;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Class<?> activityManager = Class.forName("android.app.ActivityManager");
-                gDefaultField = activityManager.getDeclaredField("IActivityManagerSingleton");
+                gIActivityManagerSingleton = activityManager.getDeclaredField("IActivityManagerSingleton");
             } else {
                 Class<?> activityManager = Class.forName("android.app.ActivityManagerNative");
                 //拿到 Singleton<IActivityManager> gDefault
-                gDefaultField = activityManager.getDeclaredField("gDefault");
+                gIActivityManagerSingleton = activityManager.getDeclaredField("gDefault");
             }
 
-            gDefaultField.setAccessible(true);
+            gIActivityManagerSingleton.setAccessible(true);
             //Singlon<IActivityManager>
-            Object gDefault = gDefaultField.get(null);
+            Object gIActivityManager = gIActivityManagerSingleton.get(null);
 
             //拿到Singleton的Class对象
             Class<?> singletonClass = Class.forName("android.util.Singleton");
             Field mInstanceField = singletonClass.getDeclaredField("mInstance");
             mInstanceField.setAccessible(true);
-            //获取到ActivityManagerNative里面的gDefault对象里面的原始的IActivityManager对象
-            final Object rawIActivityManager = mInstanceField.get(gDefault);
+            //获取IActivityManager对象
+            final Object rawIActivityManager = mInstanceField.get(gIActivityManager);
 
             //进行动态代理
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -84,9 +84,7 @@ public class HookHelper {
             });
 
             //把我们的代理对象融入到framework
-            mInstanceField.set(gDefault, proxy);
-
-
+            mInstanceField.set(gIActivityManager, proxy);
         } catch (Exception e) {
             Log.e(TAG, "hookIActivityManager: " + e.getMessage());
             e.printStackTrace();
