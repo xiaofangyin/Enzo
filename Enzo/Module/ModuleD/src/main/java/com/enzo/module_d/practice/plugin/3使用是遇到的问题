@@ -1,14 +1,10 @@
 
-2.插件文件64K（multidex）了怎么破？需要对插件进行编译拆包。com.ceabie.dextools:gradle-dexknife-plugin:1.6.1分包的问题，打包后虽然有主classes有找到com.qihoo360.replugin.Entry但还是报错，自己手动添加maindexlist.txt在里面添加com.qihoo360.replugin打包进去就好了，具体操作请参考https://blog.csdn.net/qq_36282231/article/details/81026296
-
 3.context异常，当前是的上下文是谁的，这个要明确。宿主or插件。
 
 5.插件相关权限要提前在宿主中注册。
 
 7.intent传serializable对象失败。
 检测是否serializable对象里面是否有id，建议用Parcelable来传值。
-
-10.LocalBoradcastManager和PluginLocalBroadcastManager 是平行关系，非继承！
 
 13.插件可以复用主程序的资源,可以的，因为会同时把host和plugin的Context传递给插件.
 
