@@ -9,8 +9,8 @@ package com.enzo.module_d.practice.datastructure;
  */
 public class QueueC {
 
-    private int maxSize;
-    private Object[] queueArray;
+    private final int maxSize;
+    private final Object[] queueArray;
     private int front;
     private int rear;
     private int nItems;
