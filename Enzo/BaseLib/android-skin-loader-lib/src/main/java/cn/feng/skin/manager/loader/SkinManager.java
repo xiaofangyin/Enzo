@@ -2,7 +2,6 @@ package cn.feng.skin.manager.loader;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -12,9 +11,9 @@ import android.content.res.Resources.NotFoundException;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -214,23 +213,19 @@ public class SkinManager implements ISkinLoader {
     }
 
     @SuppressLint("NewApi")
-    public Drawable getDrawable(int resId) {
-        Drawable originDrawable = context.getResources().getDrawable(resId);
+    public Drawable getDrawable(int resId, String attrValueTypeName) {
+        Log.e("xfy", "getDrawable name: " + attrValueTypeName);
+        Drawable originDrawable = context.getResources().getDrawable(resId, context.getTheme());
         if (mResources == null || isDefaultSkin) {
             return originDrawable;
         }
         String resName = context.getResources().getResourceEntryName(resId);
 
-        int trueResId = mResources.getIdentifier(resName, "drawable", skinPackageName);
+        int trueResId = mResources.getIdentifier(resName, attrValueTypeName, skinPackageName);
 
         Drawable trueDrawable;
         try {
-            L.e("ttgg", "SDK_INT = " + android.os.Build.VERSION.SDK_INT);
-            if (android.os.Build.VERSION.SDK_INT < 22) {
-                trueDrawable = mResources.getDrawable(trueResId);
-            } else {
-                trueDrawable = mResources.getDrawable(trueResId, null);
-            }
+            trueDrawable = mResources.getDrawable(trueResId, null);
         } catch (NotFoundException e) {
             e.printStackTrace();
             trueDrawable = originDrawable;

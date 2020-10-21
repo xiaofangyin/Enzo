@@ -74,6 +74,13 @@
                 android:textColor="#f3f"
                 android:textSize="30sp"
                 app:flickeringColor="#FFFF00" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/mb_icon_skull_1"
+                skin:enable="true" />
         </LinearLayout>
     </FrameLayout>
 
