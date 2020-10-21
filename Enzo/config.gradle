@@ -8,8 +8,12 @@ ext {
             versionName      : '1.0.0',
     ]
 
+    module = [
+            isModule: true,//isModule是“集成开发模式”和“组件开发模式”的切换开关
+    ]
+
     dependencies = [
-            arouter    : 'com.alibaba:arouter-api:1.4.0',
-            arouter_annotation : 'com.alibaba:arouter-compiler:1.2.1',
+            arouter           : 'com.alibaba:arouter-api:1.4.0',
+            arouter_annotation: 'com.alibaba:arouter-compiler:1.2.1',
     ]
 }

@@ -1,4 +1,4 @@
-if (isModule.toBoolean()) {
+if (rootProject.ext.module.isModule) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -8,6 +8,9 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
+        if (rootProject.ext.module.isModule) {
+            applicationId "com.enzo.module_a"
+        }
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -29,7 +32,7 @@ android {
 
     sourceSets {
         main {
-            if (isModule.toBoolean()) {
+            if (rootProject.ext.module.isModule) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
