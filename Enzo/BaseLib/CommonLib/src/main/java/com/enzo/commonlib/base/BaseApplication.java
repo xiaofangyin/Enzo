@@ -15,7 +15,7 @@ import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.squareup.leakcanary.LeakCanary;
 
-import cn.feng.skin.manager.loader.SkinManager;
+import com.enzo.skin.manager.loader.SkinManager;
 
 public class BaseApplication extends Application {
 

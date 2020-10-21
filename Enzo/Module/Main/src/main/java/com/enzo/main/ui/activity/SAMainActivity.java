@@ -36,7 +36,7 @@ import com.enzo.main.plugin.SAHostDelegateManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.feng.skin.manager.loader.SkinManager;
+import com.enzo.skin.manager.loader.SkinManager;
 
 /**
  * 文 件 名: SAMainActivity

@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
-import cn.feng.skin.manager.base.SkinBaseFragment;
+import com.enzo.skin.manager.base.SkinBaseFragment;
 
 /**
  * 文 件 名: BaseFragment

@@ -37,7 +37,6 @@ import com.enzo.module_d.ui.activity.MDAidlActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
-import com.enzo.module_d.ui.activity.MDHookActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
@@ -60,7 +59,7 @@ import com.enzo.module_d.utils.ThemesUtils;
 
 import java.util.List;
 
-import cn.feng.skin.manager.loader.SkinManager;
+import com.enzo.skin.manager.loader.SkinManager;
 
 /**
  * 文 件 名: MDFragment

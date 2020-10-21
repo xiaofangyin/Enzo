@@ -3,13 +3,12 @@ package com.enzo.commonlib.base;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 
-import cn.feng.skin.manager.base.SkinFragmentActivity;
+import com.enzo.skin.manager.base.SkinFragmentActivity;
 
 /**
  * 文 件 名: BaseActivity
