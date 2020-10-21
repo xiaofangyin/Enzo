@@ -20,7 +20,6 @@ import com.enzo.flkit.plugin.FLPluginFactory;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.main.R;
-import com.enzo.main.model.manager.TestManager;
 import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.main.ui.adapter.SAAddDeviceAdapter;
 
@@ -122,8 +121,6 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
                 adapter.setNewData(getObjectList(buildData()));
             }
         }, 4000);
-
-        TestManager.getInstance(this);
     }
 
     @Override
