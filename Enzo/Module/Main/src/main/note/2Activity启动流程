@@ -9,6 +9,6 @@ android 8.0
 .
 .
 
-5.ApplicationThread(ActivityThread静态内部类)   ->   scheduleLaunchActivity(){sendMessage(H.LAUNCH_ACTIVITY, r);}
+5.ApplicationThread(ActivityThread内部类)   ->   scheduleLaunchActivity(){sendMessage(H.LAUNCH_ACTIVITY, r);}
 6.ActivityThread   ->   H.handleLaunchActivity()   ->   performLaunchActivity()   ->   mInstrumentation.callActivityOnCreate()
 7.Activity   ->   onCreate()
