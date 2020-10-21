@@ -1,0 +1,29 @@
+android6.0:
+	1.动态权限
+
+android7.0:
+	1.Android7.0 （N） 开始，将严格执行 StrictMode 模式，也就是说，将对安全做更严格的校验。而从 Android N 开始，将不允许在 App 间，使用 file:// 的方式，传递一个 File ，否者	会抛出 FileUriExposedException的错误，会直接引发 Crash。 但是，既然官方对文件的分享做了一个这么强硬的修改（直接抛出异常），实际上也提供了解决方案，那就是 FileProvider		，通过 content://的模式替换掉 file://，同时，需要开发者主动升级 targetSdkVersion 到 24 才会执行此策略。FileProvider是android support v4包提供的，是ContentProvider的子类	，便于将自己app的数据提供给其他app访问。
+        	在app开发过程中需要用到FileProvider的主要有
+		a.相机拍照以及图片裁剪
+		b.调用系统应用安装器安装apk（应用升级）
+
+android8.0:
+	1.安装apk:<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+	2.Application添加android:usesCleartextTraffic="true"指示应用程序打算使用明文网络流量（http）
+	3.通知适配
+	4.如果针对 Android 8.0 的应用尝试在不允许其创建后台服务的情况下使用 startService() 函数，则该函数将引发一个 IllegalStateException。新的 Context.startForegroundService() 函		数将启动一个前台服务。即使应用在后台运行，系统也允许其调用 Context.startForegroundService()。不过，应用必须在创建服务后的五秒内调用该服务的 startForeground() 函			数。
+	
+android9.0:
+	1.隐私权变更-现在收的原来越紧，安卓也越来越规范.为了增强用户隐私
+		Android 9 引入了若干行为变更，如限制后台应用访问设备传感器、限制通过 Wi-Fi 扫描检索到的信息，以及与通话、手机状态和 Wi-Fi 扫描相关的新权限规	则和权限组。无论采用哪一种目标 SDK 版本，这些变更都会影响运行于 Android 9 上的所有应用。
+	2.限制访问通话记录
+		Android 9 引入 CALL_LOG 权限组并将 READ_CALL_LOG、WRITE_CALL_LOG 和 PROCESS_OUTGOING_CALLS 权限移入该组。 在之前的 Android 版本中，这些权限位于 		PHONE 权限组。如果应用需要访问通话记录或者需要处理去电，则您必须向 CALL_LOG 权限组明确请求这些权限。 否则会发生 <mark>SecurityException</mark>。
+	3.限制访问电话号码
+		在未首先获得 READ_CALL_LOG 权限的情况下，除了应用的用例需要的其他权限之外，运行于 Android 9 上的应用无法读取电话号码或手机状态。
+	4.非Activity-Context启动Activity，现在强制执行 FLAG_ACTIVITY_NEW_TASK 要求
+	5.前台服务，针对 Android 9 或更高版本并使用前台服务的应用<mark>必须请求</mark> FOREGROUND_SERVICE 权限。 这是普通权限，因此，系统会自动为请求权限的应用授予此权		限。如果针对 Android 9 或更高版本的应用尝试创建一个前台服务且未请求 FOREGROUND_SERVICE，则系统会引发 SecurityException。
+
+android10:
+	1.禁止在后台启动activity
+	2.Application需要加：android:requestLegacyExternalStorage="true"访问权限
+	3.存储权限。当应用运行在Q平台上时，取消对READ_EXTERNAL_STORAGE 和 WRITE_EXTERNAL_STORAGE两个权限的申请。并替换为新的媒体特定权限。
