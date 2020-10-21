@@ -4,5 +4,5 @@ import android.content.Context;
 
 public interface ISkinChecker {
 
-	boolean isSkinPackageLegality(Context context, String path);
+    boolean isSkinPackageLegality(Context context, String path);
 }
