@@ -2,9 +2,7 @@ package cn.feng.skin.manager.entity;
 
 public class DynamicAttr {
 	
-
 	public String attrName;
-
 	public int refResId;
 	
 	public DynamicAttr(String attrName, int refResId){

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import cn.feng.skin.manager.loader.SkinManager;
 
 public class SrcAttr extends SkinAttr {
+
     @Override
     public void apply(View view) {
         if (view instanceof ImageView) {
