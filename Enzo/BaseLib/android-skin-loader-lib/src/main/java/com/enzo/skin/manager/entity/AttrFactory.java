@@ -1,6 +1,8 @@
 package com.enzo.skin.manager.entity;
 
 
+import com.enzo.skin.manager.util.L;
+
 public class AttrFactory {
 
     public static final String BACKGROUND = "background";
@@ -10,6 +12,7 @@ public class AttrFactory {
     public static final String SRC = "src";
 
     public static SkinAttr get(String attrName, int attrValueRefId, String attrValueRefName, String typeName) {
+        L.e("AttrFactory get attrName: " + attrName + "...attrValueRefName: " + attrValueRefName + "...typeName: " + typeName);
         SkinAttr mSkinAttr;
 
         if (BACKGROUND.equals(attrName)) {

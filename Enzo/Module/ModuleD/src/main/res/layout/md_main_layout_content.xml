@@ -11,16 +11,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
+        android:id="@+id/ll_button_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="10dp">
-
-        <Button
-            android:id="@+id/btn_change_skin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="切换主题" />
 
         <Button
             android:id="@+id/btn_hook"

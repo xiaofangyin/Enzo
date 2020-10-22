@@ -44,10 +44,6 @@ public class SkinBaseActivity extends Activity implements ISkinUpdate, IDynamicN
 
     /**
      * dynamic add a skin view
-     *
-     * @param view
-     * @param attrName
-     * @param attrValueResId
      */
     protected void dynamicAddSkinEnableView(View view, String attrName, int attrValueResId) {
         mSkinInflaterFactory.dynamicAddSkinEnableView(this, view, attrName, attrValueResId);

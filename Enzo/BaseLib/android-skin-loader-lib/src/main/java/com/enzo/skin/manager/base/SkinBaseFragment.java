@@ -20,7 +20,7 @@ public class SkinBaseFragment extends Fragment implements IDynamicNewView {
     private IDynamicNewView mIDynamicNewView;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         try {
             mIDynamicNewView = (IDynamicNewView) context;

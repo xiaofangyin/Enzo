@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -56,10 +57,12 @@ import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
 import com.enzo.module_d.utils.HookHelper;
 import com.enzo.module_d.utils.ThemesUtils;
-
-import java.util.List;
-
+import com.enzo.skin.manager.entity.AttrFactory;
+import com.enzo.skin.manager.entity.DynamicAttr;
 import com.enzo.skin.manager.loader.SkinManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 文 件 名: MDFragment
@@ -72,6 +75,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     private static final int REQUEST_CODE_CHOOSE_AVATAR = 101;
     private ImageView ivAvatar;
+    private LinearLayout llButtonContainer;
 
     @Override
     public void onResume() {
@@ -101,12 +105,13 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         ((ViewGroup) rootView).addView(view, 0);
 
         ivAvatar = rootView.findViewById(R.id.me_icon);
+        llButtonContainer = rootView.findViewById(R.id.ll_button_content);
+        dynamicAddThemeButton();
     }
 
     @Override
     public void initListener(View rootView) {
         rootView.findViewById(R.id.me_icon).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_change_skin).setOnClickListener(this);
         rootView.findViewById(R.id.btn_aidl).setOnClickListener(this);
         rootView.findViewById(R.id.btn_hook).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
@@ -137,6 +142,30 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void lazyLoad() {
 
+    }
+
+    private void dynamicAddThemeButton() {
+        Button button = new Button(getActivity());
+        button.setText("切换主题");
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        button.setLayoutParams(param);
+        button.setTextColor(SkinManager.getInstance().getColor(R.color.color_major_c4));
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SkinManager.getInstance().isExternalSkin()) {
+                    SkinManager.getInstance().restoreDefaultTheme();
+                    StateAppBar.setStatusBarColor(getActivity(), SkinManager.getInstance().getColor(R.color.color_major_c1));
+                } else {
+                    ThemesUtils.applyTheme(getActivity());
+                }
+            }
+        });
+        llButtonContainer.addView(button, 0);
+
+        List<DynamicAttr> mDynamicAttr = new ArrayList();
+        mDynamicAttr.add(new DynamicAttr(AttrFactory.TEXT_COLOR, R.color.color_major_c4));
+        dynamicAddView(button, mDynamicAttr);
     }
 
     @Override
@@ -185,14 +214,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                     }
                 }
             });
-        } else if (id == R.id.btn_change_skin) {
-            if (SkinManager.getInstance().isExternalSkin()) {
-                SkinManager.getInstance().restoreDefaultTheme();
-                StateAppBar.setStatusBarColor(getActivity(), SkinManager.getInstance().getColor(R.color.color_major_c1));
-            } else {
-                ThemesUtils.applyTheme(getActivity());
-            }
-        } else if (id == R.id.btn_app_upgrade) {
+        }else if (id == R.id.btn_app_upgrade) {
             AppUpgradeUtil.checkVersion(getContext(), new AppUpgradeUtil.UpdateListener() {
                 @Override
                 public void onNewVersion(AndroidBean versionInfo) {
@@ -234,7 +256,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             HookHelper.hookIActivityManager();
             HookHelper.hookHandler();
             Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.enzo.module_d","com.enzo.module_d.ui.activity.MDHookActivity"));
+            intent.setComponent(new ComponentName("com.enzo.module_d", "com.enzo.module_d.ui.activity.MDHookActivity"));
             startActivity(intent);
         } else if (id == R.id.btn_av_loading) {
             Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);
