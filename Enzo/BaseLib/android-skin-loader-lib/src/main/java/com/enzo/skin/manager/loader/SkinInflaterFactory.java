@@ -9,9 +9,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.enzo.skin.manager.config.SkinConfig;
 import com.enzo.skin.manager.entity.AttrFactory;
 import com.enzo.skin.manager.entity.DynamicAttr;
@@ -19,6 +16,9 @@ import com.enzo.skin.manager.entity.SkinAttr;
 import com.enzo.skin.manager.entity.SkinItem;
 import com.enzo.skin.manager.util.L;
 import com.enzo.skin.manager.util.ListUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SkinInflaterFactory implements Factory {
 
@@ -75,7 +75,8 @@ public class SkinInflaterFactory implements Factory {
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
             String attrName = attrs.getAttributeName(i);
             String attrValue = attrs.getAttributeValue(i);
-
+            //attrName: background...attrValue: @2131034189
+            L.e("parseSkinAttr attrName: " + attrName + "...attrValue: " + attrValue);
             if (!AttrFactory.isSupportedAttr(attrName)) {
                 continue;
             }
@@ -85,6 +86,8 @@ public class SkinInflaterFactory implements Factory {
                     int id = Integer.parseInt(attrValue.substring(1));
                     String entryName = context.getResources().getResourceEntryName(id);
                     String typeName = context.getResources().getResourceTypeName(id);
+                    //entryName: color_major_c1...typeName: color
+                    L.e("parseSkinAttr entryName: " + entryName + "...typeName: " + typeName);
                     SkinAttr mSkinAttr = AttrFactory.get(attrName, id, entryName, typeName);
                     if (mSkinAttr != null) {
                         viewAttrs.add(mSkinAttr);
