@@ -33,13 +33,6 @@ public class AttrFactory {
         return mSkinAttr;
     }
 
-    /**
-     * Check whether the attribute is supported
-     *
-     * @param attrName
-     * @return true : supported <br>
-     * false: not supported
-     */
     public static boolean isSupportedAttr(String attrName) {
         if (BACKGROUND.equals(attrName)) {
             return true;

@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class L {
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private static final String TAG = "SkinLoader";
     private static final String LINE = "________________________________________________________";
 

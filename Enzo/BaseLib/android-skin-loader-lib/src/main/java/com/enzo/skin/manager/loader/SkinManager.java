@@ -11,18 +11,17 @@ import android.content.res.Resources.NotFoundException;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
-
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.enzo.skin.manager.config.SkinConfig;
 import com.enzo.skin.manager.listener.ILoaderListener;
 import com.enzo.skin.manager.listener.ISkinLoader;
 import com.enzo.skin.manager.listener.ISkinUpdate;
 import com.enzo.skin.manager.util.L;
+
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SkinManager implements ISkinLoader {
 
@@ -214,13 +213,13 @@ public class SkinManager implements ISkinLoader {
 
     @SuppressLint("NewApi")
     public Drawable getDrawable(int resId, String attrValueTypeName) {
-        Log.e("xfy", "getDrawable name: " + attrValueTypeName);
+        L.e("getDrawable skinPackageName: " + skinPackageName + " ... attrValueTypeName: " + attrValueTypeName);
         Drawable originDrawable = context.getResources().getDrawable(resId, context.getTheme());
         if (mResources == null || isDefaultSkin) {
             return originDrawable;
         }
         String resName = context.getResources().getResourceEntryName(resId);
-
+        L.e("getDrawable resName: " + resName);
         int trueResId = mResources.getIdentifier(resName, attrValueTypeName, skinPackageName);
 
         Drawable trueDrawable;
@@ -237,10 +236,6 @@ public class SkinManager implements ISkinLoader {
     /**
      * 加载指定资源颜色drawable,转化为ColorStateList，保证selector类型的Color也能被转换。</br>
      * 无皮肤包资源返回默认主题颜色
-     *
-     * @param resId
-     * @return
-     * @author pinotao
      */
     public ColorStateList convertToColorStateList(int resId) {
         L.e("attr1", "convertToColorStateList");
@@ -252,25 +247,19 @@ public class SkinManager implements ISkinLoader {
         }
 
         String resName = context.getResources().getResourceEntryName(resId);
-        L.e("attr1", "resName = " + resName);
+        L.e("resName = " + resName);
         if (isExtendSkin) {
-            L.e("attr1", "isExtendSkin");
             int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
-            L.e("attr1", "trueResId = " + trueResId);
-            ColorStateList trueColorList = null;
             if (trueResId == 0) { // 如果皮肤包没有复写该资源，但是需要判断是否是ColorStateList
                 try {
-                    ColorStateList originColorList = context.getResources().getColorStateList(resId);
-                    return originColorList;
+                    return context.getResources().getColorStateList(resId, null);
                 } catch (NotFoundException e) {
                     e.printStackTrace();
                     L.e("resName = " + resName + " NotFoundException : " + e.getMessage());
                 }
             } else {
                 try {
-                    trueColorList = mResources.getColorStateList(trueResId);
-                    L.e("attr1", "trueColorList = " + trueColorList);
-                    return trueColorList;
+                    return mResources.getColorStateList(trueResId, null);
                 } catch (NotFoundException e) {
                     e.printStackTrace();
                     L.w("resName = " + resName + " NotFoundException :" + e.getMessage());
@@ -278,8 +267,7 @@ public class SkinManager implements ISkinLoader {
             }
         } else {
             try {
-                ColorStateList originColorList = context.getResources().getColorStateList(resId);
-                return originColorList;
+                return context.getResources().getColorStateList(resId, null);
             } catch (NotFoundException e) {
                 e.printStackTrace();
                 L.w("resName = " + resName + " NotFoundException :" + e.getMessage());
@@ -288,6 +276,6 @@ public class SkinManager implements ISkinLoader {
         }
 
         int[][] states = new int[1][1];
-        return new ColorStateList(states, new int[]{context.getResources().getColor(resId)});
+        return new ColorStateList(states, new int[]{context.getResources().getColor(resId, null)});
     }
 }

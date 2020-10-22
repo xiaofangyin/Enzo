@@ -27,7 +27,6 @@ public class SkinFragmentActivity extends FragmentActivity implements ISkinUpdat
         super.onCreate(savedInstanceState);
         mSkinInflaterFactory = new SkinInflaterFactory();
         getLayoutInflater().setFactory(mSkinInflaterFactory);
-
     }
 
     @Override

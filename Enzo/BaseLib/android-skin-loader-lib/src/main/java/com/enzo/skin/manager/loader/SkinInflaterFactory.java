@@ -22,7 +22,7 @@ import com.enzo.skin.manager.util.ListUtils;
 
 public class SkinInflaterFactory implements Factory {
 
-    private List<SkinItem> mSkinItems = new ArrayList<>();
+    private final List<SkinItem> mSkinItems = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull String name, @NonNull Context context, AttributeSet attrs) {
