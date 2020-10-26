@@ -168,5 +168,11 @@
             android:layout_height="wrap_content"
             android:text="ViewPagerIndicator" />
 
+        <Button
+            android:id="@+id/btn_retrofit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="retrofit" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -101,6 +101,9 @@
         <activity
             android:name=".ui.activity.MDAidlActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDRetrofitActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>

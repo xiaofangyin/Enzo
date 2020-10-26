@@ -53,6 +53,7 @@ import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
+import com.enzo.module_d.ui.activity.MDRetrofitActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
 import com.enzo.module_d.utils.HookHelper;
@@ -137,6 +138,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_time_picker2).setOnClickListener(this);
         rootView.findViewById(R.id.btn_flow_layout).setOnClickListener(this);
         rootView.findViewById(R.id.btn_viewpager_indicator).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_retrofit).setOnClickListener(this);
     }
 
     @Override
@@ -314,6 +316,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_viewpager_indicator) {
             Intent intent = new Intent(getContext(), MDViewPagerIndicatorActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_retrofit) {
+            Intent intent = new Intent(getContext(), MDRetrofitActivity.class);
             startActivity(intent);
         }
     }
