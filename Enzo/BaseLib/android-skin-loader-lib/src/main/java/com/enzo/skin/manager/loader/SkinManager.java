@@ -1,6 +1,5 @@
 package com.enzo.skin.manager.loader;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -36,12 +35,11 @@ public class SkinManager implements ISkinLoader {
     private String skinPath;
     private boolean isDefaultSkin = false;
 
-    public boolean isExternalSkin() {
-        return !isDefaultSkin && mResources != null;
+    private SkinManager() {
     }
 
-    public String getSkinPath() {
-        return skinPath;
+    public void init(Application ctx) {
+        context = ctx;
     }
 
     public static SkinManager getInstance() {
@@ -55,19 +53,20 @@ public class SkinManager implements ISkinLoader {
         return instance;
     }
 
+    public boolean isExternalSkin() {
+        return !isDefaultSkin && mResources != null;
+    }
+
+    public String getSkinPath() {
+        return skinPath;
+    }
+
     public String getSkinPackageName() {
         return skinPackageName;
     }
 
     public Resources getResources() {
         return mResources;
-    }
-
-    private SkinManager() {
-    }
-
-    public void init(Application ctx) {
-        context = ctx;
     }
 
     public void restoreDefaultTheme() {
@@ -150,7 +149,6 @@ public class SkinManager implements ISkinLoader {
         @Override
         protected void onPostExecute(Resources result) {
             SkinManager.getInstance().mResources = result;
-
             if (SkinManager.getInstance().mResources != null) {
                 if (loaderListener != null) loaderListener.onSuccess();
                 SkinManager.getInstance().notifySkinUpdate();
@@ -193,26 +191,21 @@ public class SkinManager implements ISkinLoader {
             if (mResources == null || isDefaultSkin) {
                 return originColor;
             }
-
             String resName = context.getResources().getResourceEntryName(resId);
-
             int trueResId = mResources.getIdentifier(resName, SkinAttr.RES_TYPE_NAME_COLOR, skinPackageName);
-            int trueColor = 0;
-
+            int trueColor;
             try {
                 trueColor = mResources.getColor(trueResId, context.getTheme());
             } catch (Exception e) {
                 e.printStackTrace();
                 trueColor = originColor;
             }
-
             return trueColor;
         } else {
             return Color.parseColor("#ffffff");
         }
     }
 
-    @SuppressLint("NewApi")
     public Drawable getDrawable(int resId) {
         L.e("getDrawable skinPackageName: " + skinPackageName);
         Drawable originDrawable = context.getResources().getDrawable(resId, context.getTheme());
@@ -222,7 +215,6 @@ public class SkinManager implements ISkinLoader {
         String resName = context.getResources().getResourceEntryName(resId);
         L.e("getDrawable resName: " + resName);
         int trueResId = mResources.getIdentifier(resName, SkinAttr.RES_TYPE_NAME_DRAWABLE, skinPackageName);
-
         Drawable trueDrawable;
         try {
             trueDrawable = mResources.getDrawable(trueResId, null);
@@ -230,11 +222,9 @@ public class SkinManager implements ISkinLoader {
             e.printStackTrace();
             trueDrawable = originDrawable;
         }
-
         return trueDrawable;
     }
 
-    @SuppressLint("NewApi")
     public Drawable getMipmap(int resId) {
         L.e("getMipmap skinPackageName: " + skinPackageName);
         Drawable originDrawable = context.getResources().getDrawable(resId, context.getTheme());
@@ -244,7 +234,6 @@ public class SkinManager implements ISkinLoader {
         String resName = context.getResources().getResourceEntryName(resId);
         L.e("getMipmap resName: " + resName);
         int trueResId = mResources.getIdentifier(resName, SkinAttr.RES_TYPE_NAME_MIPMAP, skinPackageName);
-
         Drawable trueDrawable;
         try {
             trueDrawable = mResources.getDrawable(trueResId, null);
@@ -252,7 +241,6 @@ public class SkinManager implements ISkinLoader {
             e.printStackTrace();
             trueDrawable = originDrawable;
         }
-
         return trueDrawable;
     }
 
@@ -261,14 +249,11 @@ public class SkinManager implements ISkinLoader {
      * 无皮肤包资源返回默认主题颜色
      */
     public ColorStateList convertToColorStateList(int resId) {
-        L.e("attr1", "convertToColorStateList");
-
+        L.e("convertToColorStateList");
         boolean isExtendSkin = true;
-
         if (mResources == null || isDefaultSkin) {
             isExtendSkin = false;
         }
-
         String resName = context.getResources().getResourceEntryName(resId);
         L.e("resName = " + resName);
         if (isExtendSkin) {
@@ -295,7 +280,6 @@ public class SkinManager implements ISkinLoader {
                 e.printStackTrace();
                 L.w("resName = " + resName + " NotFoundException :" + e.getMessage());
             }
-
         }
 
         int[][] states = new int[1][1];
