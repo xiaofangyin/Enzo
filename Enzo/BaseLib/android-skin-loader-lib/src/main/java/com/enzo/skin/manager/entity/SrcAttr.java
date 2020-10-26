@@ -12,8 +12,11 @@ public class SrcAttr extends SkinAttr {
     public void apply(View view) {
         if (view instanceof ImageView) {
             ImageView imageView = (ImageView) view;
-            if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName) || RES_TYPE_NAME_MIPMAP.equals(attrValueTypeName)) {
-                Drawable bg = SkinManager.getInstance().getDrawable(attrValueRefId, attrValueTypeName);
+            if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)) {
+                Drawable bg = SkinManager.getInstance().getDrawable(attrValueRefId);
+                imageView.setImageDrawable(bg);
+            } else if (RES_TYPE_NAME_MIPMAP.equals(attrValueTypeName)) {
+                Drawable bg = SkinManager.getInstance().getMipmap(attrValueRefId);
                 imageView.setImageDrawable(bg);
             }
         }

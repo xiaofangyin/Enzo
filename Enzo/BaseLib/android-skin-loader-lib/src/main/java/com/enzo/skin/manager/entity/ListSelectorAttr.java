@@ -15,7 +15,9 @@ public class ListSelectorAttr extends SkinAttr {
             if (RES_TYPE_NAME_COLOR.equals(attrValueTypeName)) {
                 tv.setSelector(SkinManager.getInstance().getColor(attrValueRefId));
             } else if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)) {
-                tv.setSelector(SkinManager.getInstance().getDrawable(attrValueRefId, attrValueTypeName));
+                tv.setSelector(SkinManager.getInstance().getDrawable(attrValueRefId));
+            } else if (RES_TYPE_NAME_MIPMAP.equals(attrValueTypeName)) {
+                tv.setSelector(SkinManager.getInstance().getMipmap(attrValueRefId));
             }
         }
     }

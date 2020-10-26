@@ -4,9 +4,9 @@ import android.view.View;
 
 public abstract class SkinAttr {
 
-    protected static final String RES_TYPE_NAME_COLOR = "color";
-    protected static final String RES_TYPE_NAME_DRAWABLE = "drawable";
-    protected static final String RES_TYPE_NAME_MIPMAP = "mipmap";
+    public static final String RES_TYPE_NAME_COLOR = "color";
+    public static final String RES_TYPE_NAME_DRAWABLE = "drawable";
+    public static final String RES_TYPE_NAME_MIPMAP = "mipmap";
 
     /**
      * name of the attr, ex: background or textSize or textColor

@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
 import com.enzo.skin.manager.config.SkinConfig;
+import com.enzo.skin.manager.entity.SkinAttr;
 import com.enzo.skin.manager.listener.ILoaderListener;
 import com.enzo.skin.manager.listener.ISkinLoader;
 import com.enzo.skin.manager.listener.ISkinUpdate;
@@ -195,7 +196,7 @@ public class SkinManager implements ISkinLoader {
 
             String resName = context.getResources().getResourceEntryName(resId);
 
-            int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
+            int trueResId = mResources.getIdentifier(resName, SkinAttr.RES_TYPE_NAME_COLOR, skinPackageName);
             int trueColor = 0;
 
             try {
@@ -212,15 +213,37 @@ public class SkinManager implements ISkinLoader {
     }
 
     @SuppressLint("NewApi")
-    public Drawable getDrawable(int resId, String attrValueTypeName) {
-        L.e("getDrawable skinPackageName: " + skinPackageName + " ... attrValueTypeName: " + attrValueTypeName);
+    public Drawable getDrawable(int resId) {
+        L.e("getDrawable skinPackageName: " + skinPackageName);
         Drawable originDrawable = context.getResources().getDrawable(resId, context.getTheme());
         if (mResources == null || isDefaultSkin) {
             return originDrawable;
         }
         String resName = context.getResources().getResourceEntryName(resId);
         L.e("getDrawable resName: " + resName);
-        int trueResId = mResources.getIdentifier(resName, attrValueTypeName, skinPackageName);
+        int trueResId = mResources.getIdentifier(resName, SkinAttr.RES_TYPE_NAME_DRAWABLE, skinPackageName);
+
+        Drawable trueDrawable;
+        try {
+            trueDrawable = mResources.getDrawable(trueResId, null);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            trueDrawable = originDrawable;
+        }
+
+        return trueDrawable;
+    }
+
+    @SuppressLint("NewApi")
+    public Drawable getMipmap(int resId) {
+        L.e("getMipmap skinPackageName: " + skinPackageName);
+        Drawable originDrawable = context.getResources().getDrawable(resId, context.getTheme());
+        if (mResources == null || isDefaultSkin) {
+            return originDrawable;
+        }
+        String resName = context.getResources().getResourceEntryName(resId);
+        L.e("getMipmap resName: " + resName);
+        int trueResId = mResources.getIdentifier(resName, SkinAttr.RES_TYPE_NAME_MIPMAP, skinPackageName);
 
         Drawable trueDrawable;
         try {
@@ -249,7 +272,7 @@ public class SkinManager implements ISkinLoader {
         String resName = context.getResources().getResourceEntryName(resId);
         L.e("resName = " + resName);
         if (isExtendSkin) {
-            int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
+            int trueResId = mResources.getIdentifier(resName, SkinAttr.RES_TYPE_NAME_COLOR, skinPackageName);
             if (trueResId == 0) { // 如果皮肤包没有复写该资源，但是需要判断是否是ColorStateList
                 try {
                     return context.getResources().getColorStateList(resId, null);

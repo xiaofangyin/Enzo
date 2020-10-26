@@ -20,7 +20,9 @@ public class DividerAttr extends SkinAttr {
                 tv.setDivider(sage);
                 tv.setDividerHeight(dividerHeight);
             } else if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)) {
-                tv.setDivider(SkinManager.getInstance().getDrawable(attrValueRefId, attrValueTypeName));
+                tv.setDivider(SkinManager.getInstance().getDrawable(attrValueRefId));
+            } else if (RES_TYPE_NAME_MIPMAP.equals(attrValueTypeName)) {
+                tv.setDivider(SkinManager.getInstance().getMipmap(attrValueRefId));
             }
         }
     }
