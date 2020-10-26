@@ -61,10 +61,6 @@ public class SkinManager implements ISkinLoader {
         return skinPath;
     }
 
-    public String getSkinPackageName() {
-        return skinPackageName;
-    }
-
     public Resources getResources() {
         return mResources;
     }
