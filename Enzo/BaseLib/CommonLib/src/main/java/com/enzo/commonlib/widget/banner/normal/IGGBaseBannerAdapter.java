@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.enzo.commonlib.utils.imageloader.ImageLoader;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,16 +18,12 @@ import java.util.List;
  */
 public abstract class IGGBaseBannerAdapter extends PagerAdapter {
 
-    protected ImageLoader.Builder builder;
-    protected ArrayList<View> mViewCaches;
-    protected List<IGGBannerBean> mData;
     protected Context context;
-    protected IGGBanner.OnBannerClickListener mClickListener;
+    private final List<IGGBannerBean> mData = new ArrayList<>();
+    private final ArrayList<View> mViewCaches = new ArrayList<>();
+    private IGGBanner.OnBannerClickListener mClickListener;
 
     public IGGBaseBannerAdapter(Context context) {
-        builder = new ImageLoader.Builder(context);
-        mData = new ArrayList<>();
-        this.mViewCaches = new ArrayList<>();
         this.context = context;
     }
 
@@ -47,7 +41,7 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if (mData != null && mData.size() > 0) {
+        if (mData.size() > 0) {
             return mData.size() == 1 ? 1 : Short.MAX_VALUE;
         } else {
             return 0;
@@ -56,7 +50,7 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        if (mData != null && mData.size() > 0) {
+        if (mData.size() > 0) {
             View view;
             if (mViewCaches.isEmpty()) {
                 view = generateItem(position % mData.size());
@@ -64,6 +58,14 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
                 view = mViewCaches.remove(0);
             }
             bindItem(mData.get(position % mData.size()), view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mClickListener != null) {
+                        mClickListener.onBannerClick(mData.get(position % mData.size()));
+                    }
+                }
+            });
             container.addView(view);
             return view;
         } else {
