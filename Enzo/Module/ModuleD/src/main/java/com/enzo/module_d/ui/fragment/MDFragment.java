@@ -56,8 +56,8 @@ import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
-import com.enzo.module_d.utils.HookHelper;
-import com.enzo.module_d.utils.ThemesUtils;
+import com.enzo.module_d.utils.hook.HookHelper;
+import com.enzo.module_d.utils.themes.ThemesHelper;
 import com.enzo.skin.manager.entity.AttrFactory;
 import com.enzo.skin.manager.entity.DynamicAttr;
 import com.enzo.skin.manager.loader.SkinManager;
@@ -159,7 +159,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                     SkinManager.getInstance().restoreDefaultTheme();
                     StateAppBar.setStatusBarColor(getActivity(), SkinManager.getInstance().getColor(R.color.color_major_c1));
                 } else {
-                    ThemesUtils.applyTheme(getActivity());
+                    ThemesHelper.applyTheme(getActivity());
                 }
             }
         });

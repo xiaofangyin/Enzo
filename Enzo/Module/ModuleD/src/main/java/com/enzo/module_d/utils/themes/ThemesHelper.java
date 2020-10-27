@@ -1,4 +1,4 @@
-package com.enzo.module_d.utils;
+package com.enzo.module_d.utils.themes;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +16,7 @@ import java.io.InputStream;
 import com.enzo.skin.manager.listener.ILoaderListener;
 import com.enzo.skin.manager.loader.SkinManager;
 
-public class ThemesUtils {
+public class ThemesHelper {
 
     public static void applyTheme(final Activity context) {
         new AsyncTask<Void, Integer, File>() {
