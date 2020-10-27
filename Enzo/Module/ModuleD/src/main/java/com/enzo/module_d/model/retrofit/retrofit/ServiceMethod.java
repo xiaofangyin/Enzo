@@ -20,7 +20,6 @@ public class ServiceMethod {
 
     private final Call.Factory callFactory;
     private final String relativeUrl;
-    private final boolean hasBody;
     private final ParameterHandler[] parameterHandler;
     private FormBody.Builder formBuild;
     HttpUrl baseUrl;
@@ -33,11 +32,10 @@ public class ServiceMethod {
 
         httpMethod = builder.httpMethod;
         relativeUrl = builder.relativeUrl;
-        hasBody = builder.hasBody;
         parameterHandler = builder.parameterHandler;
 
         //如果是有请求体,创建一个okhttp的请求体对象
-        if (hasBody) {
+        if (builder.hasBody) {
             formBuild = new FormBody.Builder();
         }
     }
