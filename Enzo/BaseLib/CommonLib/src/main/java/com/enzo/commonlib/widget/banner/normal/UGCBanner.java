@@ -3,13 +3,15 @@ package com.enzo.commonlib.widget.banner.normal;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.viewpager.widget.ViewPager;
+
 import com.enzo.commonlib.R;
+import com.enzo.commonlib.utils.common.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,9 @@ public class UGCBanner extends RelativeLayout {
         mData = new ArrayList<>();
         viewPager = new UGCViewPager(context);
         viewPager.setOffscreenPageLimit(4);
+        viewPager.setPadding(DensityUtil.dip2px(getContext(), 28), 0, DensityUtil.dip2px(getContext(), 28), 0);
+        viewPager.setClipToPadding(false);
+        viewPager.setPageMargin(DensityUtil.dip2px(getContext(), 15));
         addView(viewPager);
 
         indicatorLayout = new LinearLayout(context);

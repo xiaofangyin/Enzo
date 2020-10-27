@@ -43,6 +43,7 @@ import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDOkHttpActivity;
 import com.enzo.module_d.ui.activity.MDProgressActivity;
+import com.enzo.module_d.ui.activity.MDRetrofitActivity;
 import com.enzo.module_d.ui.activity.MDRulerActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
@@ -53,7 +54,6 @@ import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
 import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
-import com.enzo.module_d.ui.activity.MDRetrofitActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
 import com.enzo.module_d.utils.HookHelper;
@@ -123,6 +123,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
         rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
@@ -132,7 +133,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_task_queue).setOnClickListener(this);
         rootView.findViewById(R.id.btn_progress).setOnClickListener(this);
         rootView.findViewById(R.id.btn_scrolling_image_view).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ruler).setOnClickListener(this);
         rootView.findViewById(R.id.btn_time_picker).setOnClickListener(this);
         rootView.findViewById(R.id.btn_time_picker2).setOnClickListener(this);
@@ -216,7 +216,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                     }
                 }
             });
-        }else if (id == R.id.btn_app_upgrade) {
+        } else if (id == R.id.btn_app_upgrade) {
             AppUpgradeUtil.checkVersion(getContext(), new AppUpgradeUtil.UpdateListener() {
                 @Override
                 public void onNewVersion(AndroidBean versionInfo) {
@@ -272,6 +272,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         } else if (id == R.id.btn_meizu_banner) {
             Intent intent = new Intent(getContext(), MDMeiZuBannerActivity.class);
             startActivity(intent);
+        } else if (id == R.id.btn_ugc_banner) {
+            Intent intent = new Intent(getContext(), MDUGCBannerActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_notification) {
             Intent intent = new Intent(getContext(), MDNotificationActivity.class);
             startActivity(intent);
@@ -298,9 +301,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_scrolling_image_view) {
             Intent intent = new Intent(getContext(), MDScrollingImageViewActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_ugc_banner) {
-            Intent intent = new Intent(getContext(), MDUGCBannerActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_ruler) {
             Intent intent = new Intent(getContext(), MDRulerActivity.class);
