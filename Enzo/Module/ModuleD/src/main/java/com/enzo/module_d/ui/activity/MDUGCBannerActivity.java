@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.normal.IGGBanner;
@@ -57,6 +58,7 @@ public class MDUGCBannerActivity extends BaseActivity {
         banner.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(int position) {
+                LogUtil.d("generateItem position: " + position);
                 ImageView imageView = new ImageView(context);
                 imageView.setLayoutParams(new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -67,6 +69,7 @@ public class MDUGCBannerActivity extends BaseActivity {
 
             @Override
             public void bindItem(IGGBannerBean bean, View view) {
+                LogUtil.d("bindItem...");
                 new ImageLoader.Builder(context)
                         .load(bean.getPic())
                         .build()

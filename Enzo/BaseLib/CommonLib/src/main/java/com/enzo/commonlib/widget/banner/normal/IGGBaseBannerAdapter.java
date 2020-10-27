@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.enzo.commonlib.utils.common.LogUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +57,7 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
             if (mViewCaches.isEmpty()) {
                 view = generateItem(position % mData.size());
             } else {
+                LogUtil.d("IGGBaseBannerAdapter instantiateItem position: " + position + "...mViewCaches: " + mViewCaches.size());
                 view = mViewCaches.remove(0);
             }
             bindItem(mData.get(position % mData.size()), view);
@@ -79,9 +82,10 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
-        View imageView = (View) object;
-        container.removeView(imageView);
-        mViewCaches.add(imageView);
+        LogUtil.d("IGGBaseBannerAdapter destroyItem position: " + position);
+        View view = (View) object;
+        container.removeView(view);
+        mViewCaches.add(view);
     }
 
     @Override
