@@ -16,31 +16,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: CircleBanner  375 / 200
+ * 文 件 名: CircleBanner
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/3/16
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class UGCBanner extends RelativeLayout {
+public class IGGBanner extends RelativeLayout {
 
     private int mSelectedIndex = 0;
     private Handler mUIHandler;
-    private List<BannerBean> mData;
+    private List<IGGBannerBean> mData;
     private ViewPager viewPager;
     private LinearLayout indicatorLayout;
     private ImageView[] indicators;
     private OnBannerClickListener mClickListener;
-    private UGCBannerAdapter adapter;
+    private IGGBaseBannerAdapter adapter;
+    private boolean showIndicator = true;
 
-    public UGCBanner(Context context) {
+    public IGGBanner(Context context) {
         this(context, null);
     }
 
-    public UGCBanner(Context context, AttributeSet attrs) {
+    public IGGBanner(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public UGCBanner(Context context, AttributeSet attrs, int defStyleAttr) {
+    public IGGBanner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -48,7 +49,7 @@ public class UGCBanner extends RelativeLayout {
     private void init(Context context) {
         mUIHandler = new Handler(Looper.getMainLooper());
         mData = new ArrayList<>();
-        viewPager = new UGCViewPager(context);
+        viewPager = new IGGViewPager(context);
         viewPager.setOffscreenPageLimit(4);
         addView(viewPager);
 
@@ -59,10 +60,16 @@ public class UGCBanner extends RelativeLayout {
         layoutParams.bottomMargin = dip2px(10);
         indicatorLayout.setLayoutParams(layoutParams);
         addView(indicatorLayout);
+    }
 
-        adapter = new UGCBannerAdapter(getContext());
+    public void setAdapter(IGGBaseBannerAdapter adapter) {
+        this.adapter = adapter;
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
+    }
+
+    public void setShowIndicator(boolean show) {
+        showIndicator = show;
     }
 
     /**
@@ -74,17 +81,17 @@ public class UGCBanner extends RelativeLayout {
         viewPager.setPageMargin(pageMargin);
     }
 
-    public void play(List<BannerBean> data) {
+    public void play(List<IGGBannerBean> data) {
         if (data != null && data.size() > 0) {
             if (mData.size() != data.size()) {
                 stopAdvertPlay();
                 mData = data;
-                adapter = new UGCBannerAdapter(getContext());
+//                adapter = new IGGBaseBannerAdapter(getContext());
                 adapter.setNewData(mData);
                 viewPager.setAdapter(adapter);
                 adapter.setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
-                    public void onBannerClick(BannerBean bean) {
+                    public void onBannerClick(IGGBannerBean bean) {
                         if (mClickListener != null) {
                             mClickListener.onBannerClick(bean);
                         }
@@ -94,19 +101,21 @@ public class UGCBanner extends RelativeLayout {
                 indicatorLayout.removeAllViews();
                 indicators = new ImageView[data.size()];
                 if (mData.size() > 1) {
-                    for (int i = 0; i < indicators.length; i++) {
-                        ImageView imageView = new ImageView(getContext());
-                        imageView.setImageResource(R.drawable.lib_selector_banner_indicator);
-                        indicators[i] = imageView;
-                        indicatorLayout.addView(imageView);
-                        if (i != 0) {
-                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT);
-                            layoutParams.leftMargin = dip2px(6);
-                            indicators[i].setLayoutParams(layoutParams);
+                    if (showIndicator) {
+                        for (int i = 0; i < indicators.length; i++) {
+                            ImageView imageView = new ImageView(getContext());
+                            imageView.setImageResource(R.drawable.lib_selector_banner_indicator);
+                            indicators[i] = imageView;
+                            indicatorLayout.addView(imageView);
+                            if (i != 0) {
+                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                                layoutParams.leftMargin = dip2px(6);
+                                indicators[i].setLayoutParams(layoutParams);
+                            }
                         }
+                        setIndicator(0);
                     }
-                    setIndicator(0);
                     startAdvertPlay();
                 }
 
@@ -117,7 +126,7 @@ public class UGCBanner extends RelativeLayout {
 
                 adapter.setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
-                    public void onBannerClick(BannerBean bean) {
+                    public void onBannerClick(IGGBannerBean bean) {
                         if (mClickListener != null) {
                             mClickListener.onBannerClick(bean);
                         }
@@ -214,7 +223,7 @@ public class UGCBanner extends RelativeLayout {
     }
 
     public interface OnBannerClickListener {
-        void onBannerClick(BannerBean bean);
+        void onBannerClick(IGGBannerBean bean);
     }
 
     public void setOnBannerClickListener(OnBannerClickListener clickListener) {

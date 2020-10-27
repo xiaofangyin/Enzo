@@ -1,8 +1,9 @@
 package com.enzo.commonlib.widget.banner.normal;
 
 import android.content.Context;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
+
+import androidx.viewpager.widget.ViewPager;
 
 import java.lang.reflect.Field;
 
@@ -16,15 +17,15 @@ import java.lang.reflect.Field;
  * 1.RecyclerView滚动上去，直至ViewPager看不见，再滚动下来，ViewPager下一次切换没有动画
  * 2.当ViewPage滚动到一半的时候，RecyclerView滚动上去，再滚动下来，ViewPager会卡在一半
  */
-public class UGCViewPager extends ViewPager {
+public class IGGViewPager extends ViewPager {
 
     private boolean hasActivityDestroy;
 
-    public UGCViewPager(Context context) {
+    public IGGViewPager(Context context) {
         this(context, null);
     }
 
-    public UGCViewPager(Context context, AttributeSet attrs) {
+    public IGGViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         initViewPagerScroll();
     }
@@ -36,7 +37,7 @@ public class UGCViewPager extends ViewPager {
         try {
             Field mScroller = ViewPager.class.getDeclaredField("mScroller");
             mScroller.setAccessible(true);
-            UGCViewPagerScroller mViewPagerScroller = new UGCViewPagerScroller(getContext());
+            IGGViewPagerScroller mViewPagerScroller = new IGGViewPagerScroller(getContext());
             mScroller.set(this, mViewPagerScroller);
         } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
             e.printStackTrace();

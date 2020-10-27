@@ -10,19 +10,19 @@ import android.widget.Scroller;
  * 创建日期: 2018/3/16
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class UGCViewPagerScroller extends Scroller {
+public class IGGViewPagerScroller extends Scroller {
 
     private int mDuration = 1000;// ViewPager默认的最大Duration 为600。
 
-    UGCViewPagerScroller(Context context) {
+    IGGViewPagerScroller(Context context) {
         super(context);
     }
 
-    public UGCViewPagerScroller(Context context, Interpolator interpolator) {
+    public IGGViewPagerScroller(Context context, Interpolator interpolator) {
         super(context, interpolator);
     }
 
-    public UGCViewPagerScroller(Context context, Interpolator interpolator, boolean flywheel) {
+    public IGGViewPagerScroller(Context context, Interpolator interpolator, boolean flywheel) {
         super(context, interpolator, flywheel);
     }
 

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 创建日期: 2018/6/15
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class BannerBean implements Serializable {
+public class IGGBannerBean implements Serializable {
     /**
      * id : 1
      * link : http://weibo.com
@@ -22,6 +22,7 @@ public class BannerBean implements Serializable {
     private String pic;
     private String title;
     private String type;
+    private int resourceId;
 
     public String getId() {
         return id;
@@ -61,5 +62,13 @@ public class BannerBean implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 }
