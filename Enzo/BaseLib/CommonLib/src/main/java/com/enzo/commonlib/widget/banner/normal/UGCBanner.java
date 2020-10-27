@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.R;
-import com.enzo.commonlib.utils.common.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +50,6 @@ public class UGCBanner extends RelativeLayout {
         mData = new ArrayList<>();
         viewPager = new UGCViewPager(context);
         viewPager.setOffscreenPageLimit(4);
-        viewPager.setPadding(DensityUtil.dip2px(getContext(), 28), 0, DensityUtil.dip2px(getContext(), 28), 0);
-        viewPager.setClipToPadding(false);
-        viewPager.setPageMargin(DensityUtil.dip2px(getContext(), 15));
         addView(viewPager);
 
         indicatorLayout = new LinearLayout(context);
@@ -67,6 +63,15 @@ public class UGCBanner extends RelativeLayout {
         adapter = new UGCBannerAdapter(getContext());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
+    }
+
+    /**
+     * 默认情况clipToPadding为true,也就是把padding中的值进行裁剪
+     */
+    public void setNotClipToPadding(int padding, int pageMargin) {
+        viewPager.setPadding(padding, 0, padding, 0);
+        viewPager.setClipToPadding(false);
+        viewPager.setPageMargin(pageMargin);
     }
 
     public void play(List<BannerBean> data) {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.banner.normal.BannerBean;
 import com.enzo.commonlib.widget.banner.normal.UGCBanner;
@@ -48,6 +49,7 @@ public class MDUGCBannerActivity extends BaseActivity {
     @Override
     public void initView() {
         banner = findViewById(R.id.md_circle_banner);
+        banner.setNotClipToPadding(DensityUtil.dip2px(this, 28), DensityUtil.dip2px(this, 15));
         fallingView = findViewById(R.id.fall_view);
     }
 
