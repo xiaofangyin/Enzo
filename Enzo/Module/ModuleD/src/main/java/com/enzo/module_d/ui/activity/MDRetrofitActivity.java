@@ -1,11 +1,13 @@
 package com.enzo.module_d.ui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 import com.enzo.module_d.model.retrofit.api.EnjoyWeatherApi;
 import com.enzo.module_d.model.retrofit.api.WeatherApi;
@@ -19,44 +21,59 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MDRetrofitActivity extends AppCompatActivity {
+public class MDRetrofitActivity extends BaseActivity {
 
-    private WeatherApi weatherApi;
     private static final String TAG = "MainActivity";
+    private WeatherApi weatherApi;
     private EnjoyWeatherApi enjoyWeatherApi;
+    private TextView tvResult;
+    private Handler mHandler;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.md_activity_retrofit);
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_view);
+        headWidget.setTitle("Retrofit");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://restapi.amap.com")
-                .build();
+    @Override
+    public int getLayoutId() {
+        return R.layout.md_activity_retrofit;
+    }
 
+    @Override
+    public void initView() {
+        tvResult = findViewById(R.id.tv_result);
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        mHandler = new Handler();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://restapi.amap.com").build();
         weatherApi = retrofit.create(WeatherApi.class);
 
         EnjoyRetrofit enjoyRetrofit = new EnjoyRetrofit.Builder().baseUrl("https://restapi.amap.com").build();
         enjoyWeatherApi = enjoyRetrofit.create(EnjoyWeatherApi.class);
     }
 
+    @Override
+    public void initListener() {
+
+    }
 
     public void get(View view) {
         Call<ResponseBody> call = weatherApi.getWeather("110101", "ae6c53e2186f33bbf240a12d80672d1b");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    ResponseBody body = response.body();
-                    try {
-                        String string = body.string();
-                        Log.i(TAG, "onResponse get: " + string);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        body.close();
-                    }
-                }
-
+                result1(response);
             }
 
             @Override
@@ -71,15 +88,7 @@ public class MDRetrofitActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                ResponseBody body = response.body();
-                try {
-                    String string = body.string();
-                    Log.i(TAG, "onResponse post: " + string);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    body.close();
-                }
+                result1(response);
             }
 
             @Override
@@ -99,8 +108,7 @@ public class MDRetrofitActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-                Log.i(TAG, "onResponse enjoy get: " + response.body().string());
-                response.close();
+                enjoyResult(response);
             }
         });
 
@@ -116,9 +124,55 @@ public class MDRetrofitActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-                Log.i(TAG, "onResponse enjoy post: " + response.body().string());
-                response.close();
+                enjoyResult(response);
             }
         });
     }
+
+    private void result1(Response<ResponseBody> response) {
+        if (response.isSuccessful()) {
+            ResponseBody body = response.body();
+            try {
+                final String string = body.string();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvResult.setText("");
+                        tvResult.append("time: " + System.currentTimeMillis());
+                        tvResult.append("\n");
+                        tvResult.append(string);
+                        Log.i(TAG, "onResponse get: " + string);
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                body.close();
+            }
+        }
+    }
+
+    private void enjoyResult(okhttp3.Response response) {
+        if (response.isSuccessful()) {
+            ResponseBody body = response.body();
+            try {
+                final String string = body.string();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvResult.setText("");
+                        tvResult.append("time: " + System.currentTimeMillis());
+                        tvResult.append("\n");
+                        tvResult.append(string);
+                        Log.i(TAG, "onResponse get: " + string);
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                body.close();
+            }
+        }
+    }
+
 }
