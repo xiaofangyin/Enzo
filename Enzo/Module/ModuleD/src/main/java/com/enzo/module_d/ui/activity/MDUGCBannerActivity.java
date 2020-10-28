@@ -75,6 +75,11 @@ public class MDUGCBannerActivity extends BaseActivity {
                         .build()
                         .into((ImageView) view);
             }
+
+            @Override
+            public int getIndicatorResource() {
+                return R.drawable.lib_selector_banner_indicator;
+            }
         });
         fallingView = findViewById(R.id.fall_view);
     }

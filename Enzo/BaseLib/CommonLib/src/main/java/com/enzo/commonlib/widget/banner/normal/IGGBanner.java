@@ -10,8 +10,6 @@ import android.widget.RelativeLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.enzo.commonlib.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +29,6 @@ public class IGGBanner extends RelativeLayout {
     private ImageView[] indicators;
     private OnBannerClickListener mClickListener;
     private IGGBaseBannerAdapter adapter;
-    private boolean showIndicator = true;
 
     public IGGBanner(Context context) {
         this(context, null);
@@ -68,10 +65,6 @@ public class IGGBanner extends RelativeLayout {
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
     }
 
-    public void setShowIndicator(boolean show) {
-        showIndicator = show;
-    }
-
     /**
      * 默认情况clipToPadding为true,也就是把padding中的值进行裁剪
      */
@@ -82,6 +75,8 @@ public class IGGBanner extends RelativeLayout {
     }
 
     public void play(List<IGGBannerBean> data) {
+        if (adapter == null) return;
+
         if (data != null && data.size() > 0) {
             stopAdvertPlay();
             mData = data;
@@ -98,22 +93,20 @@ public class IGGBanner extends RelativeLayout {
 
             indicatorLayout.removeAllViews();
             if (mData.size() > 1) {
-                if (showIndicator) {
-                    indicators = new ImageView[data.size()];
-                    for (int i = 0; i < indicators.length; i++) {
-                        ImageView imageView = new ImageView(getContext());
-                        imageView.setImageResource(R.drawable.lib_selector_banner_indicator);
-                        indicators[i] = imageView;
-                        indicatorLayout.addView(imageView);
-                        if (i != 0) {
-                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT);
-                            layoutParams.leftMargin = dip2px(6);
-                            indicators[i].setLayoutParams(layoutParams);
-                        }
+                indicators = new ImageView[data.size()];
+                for (int i = 0; i < indicators.length; i++) {
+                    ImageView imageView = new ImageView(getContext());
+                    imageView.setImageResource(adapter.getIndicatorResource());
+                    indicators[i] = imageView;
+                    indicatorLayout.addView(imageView);
+                    if (i != 0) {
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        layoutParams.leftMargin = dip2px(6);
+                        indicators[i].setLayoutParams(layoutParams);
                     }
-                    setIndicator(0);
                 }
+                setIndicator(0);
                 startAdvertPlay();
             }
 
@@ -124,7 +117,7 @@ public class IGGBanner extends RelativeLayout {
     /**
      * 轮播图片状态监听器
      */
-    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+    private final ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int position) {
@@ -147,7 +140,7 @@ public class IGGBanner extends RelativeLayout {
         }
     };
 
-    private Runnable timerTask = new Runnable() {
+    private final Runnable timerTask = new Runnable() {
         @Override
         public void run() {
             if (mSelectedIndex == Short.MAX_VALUE - 1 || mSelectedIndex == 0) {

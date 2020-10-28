@@ -80,6 +80,8 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
 
     public abstract void bindItem(IGGBannerBean bean, View view);
 
+    public abstract int getIndicatorResource();
+
     @Override
     public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
         LogUtil.d("IGGBaseBannerAdapter destroyItem position: " + position);
