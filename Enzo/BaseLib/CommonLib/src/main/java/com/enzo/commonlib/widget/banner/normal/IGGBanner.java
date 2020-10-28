@@ -10,6 +10,8 @@ import android.widget.RelativeLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.enzo.commonlib.utils.common.LogUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,14 +145,17 @@ public class IGGBanner extends RelativeLayout {
     private final Runnable timerTask = new Runnable() {
         @Override
         public void run() {
-            if (mSelectedIndex == Short.MAX_VALUE - 1 || mSelectedIndex == 0) {
-                viewPager.setCurrentItem(getInitPosition(), false);
+            mSelectedIndex++;
+            if (mSelectedIndex == Short.MAX_VALUE - 1 || mSelectedIndex == 1) {
+                mSelectedIndex = getInitPosition();
+                viewPager.setCurrentItem(mSelectedIndex, false);
                 setIndicator(0);
                 startAdvertPlay();
             } else {
                 // 常规执行这里
-                viewPager.setCurrentItem(mSelectedIndex + 1, true);
+                viewPager.setCurrentItem(mSelectedIndex, true);
             }
+            LogUtil.e("mSelectedIndex: " + mSelectedIndex);
         }
     };
 
@@ -196,8 +201,8 @@ public class IGGBanner extends RelativeLayout {
             return 0;
         }
         int halfValue = Short.MAX_VALUE / 2;
-        int position = halfValue % mData.size();
-        return halfValue - position;
+        int remainder = halfValue % mData.size();
+        return halfValue - remainder;
     }
 
     public interface OnBannerClickListener {
