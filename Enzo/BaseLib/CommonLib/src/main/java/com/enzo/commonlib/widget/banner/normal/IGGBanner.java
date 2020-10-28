@@ -83,56 +83,41 @@ public class IGGBanner extends RelativeLayout {
 
     public void play(List<IGGBannerBean> data) {
         if (data != null && data.size() > 0) {
-            if (mData.size() != data.size()) {
-                stopAdvertPlay();
-                mData = data;
-//                adapter = new IGGBaseBannerAdapter(getContext());
-                adapter.setNewData(mData);
-                viewPager.setAdapter(adapter);
-                adapter.setOnBannerClickListener(new OnBannerClickListener() {
-                    @Override
-                    public void onBannerClick(IGGBannerBean bean) {
-                        if (mClickListener != null) {
-                            mClickListener.onBannerClick(bean);
-                        }
+            stopAdvertPlay();
+            mData = data;
+            adapter.setNewData(mData);
+            viewPager.setAdapter(adapter);
+            adapter.setOnBannerClickListener(new OnBannerClickListener() {
+                @Override
+                public void onBannerClick(IGGBannerBean bean) {
+                    if (mClickListener != null) {
+                        mClickListener.onBannerClick(bean);
                     }
-                });
-
-                indicatorLayout.removeAllViews();
-                indicators = new ImageView[data.size()];
-                if (mData.size() > 1) {
-                    if (showIndicator) {
-                        for (int i = 0; i < indicators.length; i++) {
-                            ImageView imageView = new ImageView(getContext());
-                            imageView.setImageResource(R.drawable.lib_selector_banner_indicator);
-                            indicators[i] = imageView;
-                            indicatorLayout.addView(imageView);
-                            if (i != 0) {
-                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                                layoutParams.leftMargin = dip2px(6);
-                                indicators[i].setLayoutParams(layoutParams);
-                            }
-                        }
-                        setIndicator(0);
-                    }
-                    startAdvertPlay();
                 }
+            });
 
-                viewPager.setCurrentItem(getInitPosition());
-            } else {
-                mData = data;
-                adapter.setNewData(mData);
-
-                adapter.setOnBannerClickListener(new OnBannerClickListener() {
-                    @Override
-                    public void onBannerClick(IGGBannerBean bean) {
-                        if (mClickListener != null) {
-                            mClickListener.onBannerClick(bean);
+            indicatorLayout.removeAllViews();
+            if (mData.size() > 1) {
+                if (showIndicator) {
+                    indicators = new ImageView[data.size()];
+                    for (int i = 0; i < indicators.length; i++) {
+                        ImageView imageView = new ImageView(getContext());
+                        imageView.setImageResource(R.drawable.lib_selector_banner_indicator);
+                        indicators[i] = imageView;
+                        indicatorLayout.addView(imageView);
+                        if (i != 0) {
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT);
+                            layoutParams.leftMargin = dip2px(6);
+                            indicators[i].setLayoutParams(layoutParams);
                         }
                     }
-                });
+                    setIndicator(0);
+                }
+                startAdvertPlay();
             }
+
+            viewPager.setCurrentItem(getInitPosition());
         }
     }
 
