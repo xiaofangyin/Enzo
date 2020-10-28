@@ -57,7 +57,7 @@ public class MDUGCBannerActivity extends BaseActivity {
         banner.setNotClipToPadding(DensityUtil.dip2px(this, 28), DensityUtil.dip2px(this, 15));
         banner.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
-            public View generateItem(int position) {
+            public View generateItem(IGGBannerBean bean, int position) {
                 LogUtil.d("generateItem position: " + position);
                 ImageView imageView = new ImageView(context);
                 imageView.setLayoutParams(new ViewGroup.LayoutParams(

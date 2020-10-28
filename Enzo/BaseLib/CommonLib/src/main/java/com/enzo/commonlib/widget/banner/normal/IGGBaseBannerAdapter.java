@@ -50,33 +50,30 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
         }
     }
 
+    @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        if (mData.size() > 0) {
-            View view;
-            if (mViewCaches.isEmpty()) {
-                view = generateItem(position % mData.size());
-            } else {
-                LogUtil.d("IGGBaseBannerAdapter instantiateItem position: " + position + "...mViewCaches: " + mViewCaches.size());
-                view = mViewCaches.remove(0);
-            }
-            bindItem(mData.get(position % mData.size()), view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mClickListener != null) {
-                        mClickListener.onBannerClick(mData.get(position % mData.size()));
-                    }
-                }
-            });
-            container.addView(view);
-            return view;
+        View view;
+        if (mViewCaches.isEmpty()) {
+            view = generateItem(mData.get(position % mData.size()), position % mData.size());
         } else {
-            return null;
+            LogUtil.d("IGGBaseBannerAdapter instantiateItem position: " + position + "...mViewCaches: " + mViewCaches.size());
+            view = mViewCaches.remove(0);
         }
+        bindItem(mData.get(position % mData.size()), view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickListener != null) {
+                    mClickListener.onBannerClick(mData.get(position % mData.size()));
+                }
+            }
+        });
+        container.addView(view);
+        return view;
     }
 
-    public abstract View generateItem(int position);
+    public abstract View generateItem(IGGBannerBean bean, int position);
 
     public abstract void bindItem(IGGBannerBean bean, View view);
 
