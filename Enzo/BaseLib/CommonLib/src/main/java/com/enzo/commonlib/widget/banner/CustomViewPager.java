@@ -1,4 +1,4 @@
-package com.enzo.commonlib.widget.banner.normal;
+package com.enzo.commonlib.widget.banner;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,13 +7,12 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.enzo.commonlib.widget.banner.normal.IGGViewPagerScroller;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CustomViewPager extends ViewPager {
+
     private final ArrayList<Integer> childCenterXAbs = new ArrayList<>();
     private final SparseArray<Integer> childIndex = new SparseArray<>();
 

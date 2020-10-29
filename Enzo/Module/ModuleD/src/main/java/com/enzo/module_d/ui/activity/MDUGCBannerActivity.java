@@ -10,9 +10,9 @@ import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.banner.normal.IGGBanner;
-import com.enzo.commonlib.widget.banner.normal.IGGBannerBean;
-import com.enzo.commonlib.widget.banner.normal.IGGBaseBannerAdapter;
+import com.enzo.commonlib.widget.banner.IGGBanner;
+import com.enzo.commonlib.widget.banner.IGGBannerBean;
+import com.enzo.commonlib.widget.banner.IGGBaseBannerAdapter;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 
@@ -52,7 +52,6 @@ public class MDUGCBannerActivity extends BaseActivity {
     public void initView() {
         banner = findViewById(R.id.md_circle_banner);
         banner.setMeiZuModel();
-//        banner.setIndicatorAlign(IGGBanner.IndicatorAlign.RIGHT);
         banner.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(IGGBannerBean bean, int position) {
@@ -97,7 +96,10 @@ public class MDUGCBannerActivity extends BaseActivity {
             @Override
             public void bindItem(IGGBannerBean bean, View view) {
                 LogUtil.d("bindItem...");
-                ((ImageView) view).setImageResource(bean.getResourceId());
+                new ImageLoader.Builder(context)
+                        .load(bean.getResourceId())
+                        .build()
+                        .into((ImageView) view);
             }
 
             @Override

@@ -1,4 +1,4 @@
-package com.enzo.commonlib.widget.banner.normal;
+package com.enzo.commonlib.widget.banner;
 
 import android.content.Context;
 import android.view.animation.Interpolator;

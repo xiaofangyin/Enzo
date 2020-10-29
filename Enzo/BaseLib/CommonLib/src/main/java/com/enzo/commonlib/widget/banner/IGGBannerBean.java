@@ -1,4 +1,4 @@
-package com.enzo.commonlib.widget.banner.normal;
+package com.enzo.commonlib.widget.banner;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.enzo.commonlib.widget.banner.normal;
+package com.enzo.commonlib.widget.banner;
 
 import android.content.Context;
 import android.os.Handler;
@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.widget.banner.normal.transformer.CoverModeTransformer;
+import com.enzo.commonlib.widget.banner.transformer.CoverModeTransformer;
 
 import java.util.ArrayList;
 import java.util.List;

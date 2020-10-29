@@ -1,6 +1,5 @@
 package com.enzo.module_a.ui.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +16,11 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
 import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
-import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.commonlib.widget.banner.mzbanner.MZBannerView;
-import com.enzo.commonlib.widget.banner.mzbanner.holder.MZHolderCreator;
-import com.enzo.commonlib.widget.banner.mzbanner.holder.MZViewHolder;
+import com.enzo.commonlib.widget.banner.IGGBanner;
+import com.enzo.commonlib.widget.banner.IGGBannerBean;
+import com.enzo.commonlib.widget.banner.IGGBaseBannerAdapter;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_a.R;
 import com.enzo.module_a.model.bean.MAHomeBannerBean;
@@ -80,65 +78,71 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
 
     public static class HomeBannerHolder extends BaseViewHolder<MAHomeBannerBean> {
 
-        private MZBannerView mMZBanner;
-        private final List<Integer> bannerList;
+        private IGGBanner iggBanner;
 
         public HomeBannerHolder(View itemView) {
             super(itemView);
-            mMZBanner = itemView.findViewById(R.id.banner);
-            bannerList = new ArrayList<>();
-            bannerList.add(R.mipmap.ma_banner1);
-            bannerList.add(R.mipmap.ma_banner2);
-            bannerList.add(R.mipmap.ma_banner3);
-            bannerList.add(R.mipmap.ma_banner4);
-            bannerList.add(R.mipmap.ma_banner5);
+            iggBanner = itemView.findViewById(R.id.banner);
+            iggBanner.setMeiZuModel();
+            iggBanner.setAdapter(new IGGBaseBannerAdapter(getContext()) {
+                @Override
+                public View generateItem(IGGBannerBean bean, int position) {
+                    LogUtil.d("generateItem position: " + position);
+                    ImageView imageView = new ImageView(context);
+                    imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT));
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    return imageView;
+                }
+
+                @Override
+                public void bindItem(IGGBannerBean bean, View view) {
+                    LogUtil.d("bindItem...");
+                    new ImageLoader.Builder(context)
+                            .load(bean.getResourceId())
+                            .build()
+                            .into((ImageView) view);
+                }
+
+                @Override
+                public int getIndicatorResource() {
+                    return R.drawable.lib_selector_banner_indicator;
+                }
+            });
         }
 
         @Override
         public void setUpView(MAHomeBannerBean model, int position, RecyclerView.Adapter adapter) {
-            mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
-                @Override
-                public void onPageClick(View view, int position) {
-                    ToastUtil.show("click page:" + position, Toast.LENGTH_LONG);
-                }
-            });
+            List<IGGBannerBean> mData2 = new ArrayList<>();
+            IGGBannerBean bannerBean21 = new IGGBannerBean();
+            bannerBean21.setId("1");
+            bannerBean21.setResourceId(R.mipmap.ma_banner1);
 
-            mMZBanner.setIndicatorVisible(true);
-            // 代码中更改indicator 的位置
-            //mMZBanner.setIndicatorAlign(MZBannerView.IndicatorAlign.LEFT);
-            //mMZBanner.setIndicatorPadding(10,0,0,150);
-            mMZBanner.setPages(bannerList, new MZHolderCreator<BannerViewHolder>() {
-                @Override
-                public BannerViewHolder createViewHolder() {
-                    return new BannerViewHolder();
-                }
-            });
-            mMZBanner.start();
-        }
+            IGGBannerBean bannerBean22 = new IGGBannerBean();
+            bannerBean22.setId("2");
+            bannerBean22.setResourceId(R.mipmap.ma_banner2);
 
-        public static class BannerViewHolder implements MZViewHolder<Integer> {
-            private ImageView mImageView;
+            IGGBannerBean bannerBean23 = new IGGBannerBean();
+            bannerBean23.setId("3");
+            bannerBean23.setResourceId(R.mipmap.ma_banner3);
 
-            @Override
-            public View createView(Context context) {
-                // 返回页面布局文件
-                View view = LayoutInflater.from(context).inflate(R.layout.ma_item_banner_item, null);
-                mImageView = view.findViewById(R.id.banner_image);
-                return view;
-            }
+            IGGBannerBean bannerBean24 = new IGGBannerBean();
+            bannerBean24.setId("4");
+            bannerBean24.setResourceId(R.mipmap.ma_banner4);
 
-            @Override
-            public void onBind(Context context, int position, Integer data) {
-                // 数据绑定
-                mImageView.setImageResource(data);
-            }
+            mData2.add(bannerBean21);
+            mData2.add(bannerBean22);
+            mData2.add(bannerBean23);
+            mData2.add(bannerBean24);
+            iggBanner.play(mData2);
         }
     }
 
     private static class HomeGoodsViewHolder extends BaseViewHolder<MAHomeGoodsBean> {
 
-        private ImageView imageView;
-        private TextView textView;
+        private final ImageView imageView;
+        private final TextView textView;
 
         public HomeGoodsViewHolder(View itemView) {
             super(itemView);

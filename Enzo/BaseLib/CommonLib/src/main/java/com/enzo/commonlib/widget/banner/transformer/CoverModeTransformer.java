@@ -1,4 +1,4 @@
-package com.enzo.commonlib.widget.banner.normal.transformer;
+package com.enzo.commonlib.widget.banner.transformer;
 
 import android.view.View;
 
