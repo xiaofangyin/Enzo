@@ -51,6 +51,7 @@ public class MDUGCBannerActivity extends BaseActivity {
     @Override
     public void initView() {
         banner = findViewById(R.id.md_circle_banner);
+        banner.setIndicatorAlign(IGGBanner.IndicatorAlign.RIGHT);
         banner.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(IGGBannerBean bean, int position) {
