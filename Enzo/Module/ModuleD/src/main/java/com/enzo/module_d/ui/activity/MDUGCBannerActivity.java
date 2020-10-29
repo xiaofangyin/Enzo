@@ -1,7 +1,5 @@
 package com.enzo.module_d.ui.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import com.enzo.commonlib.widget.banner.normal.IGGBanner;
 import com.enzo.commonlib.widget.banner.normal.IGGBannerBean;
 import com.enzo.commonlib.widget.banner.normal.IGGBaseBannerAdapter;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
-import com.enzo.commonlib.widget.snowview.SnowView;
 import com.enzo.module_d.R;
 
 import java.util.ArrayList;
@@ -31,7 +28,7 @@ import java.util.List;
 public class MDUGCBannerActivity extends BaseActivity {
 
     private IGGBanner banner;
-    private SnowView fallingView;
+    private IGGBanner banner2;
 
     @Override
     public int getLayoutId() {
@@ -54,7 +51,6 @@ public class MDUGCBannerActivity extends BaseActivity {
     @Override
     public void initView() {
         banner = findViewById(R.id.md_circle_banner);
-        banner.setNotClipToPadding(DensityUtil.dip2px(this, 28), DensityUtil.dip2px(this, 15));
         banner.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(IGGBannerBean bean, int position) {
@@ -81,46 +77,92 @@ public class MDUGCBannerActivity extends BaseActivity {
                 return R.drawable.lib_selector_banner_indicator;
             }
         });
-        fallingView = findViewById(R.id.fall_view);
+
+        banner2 = findViewById(R.id.md_circle_banner2);
+        banner2.setNotClipToPadding(DensityUtil.dip2px(this, 28), DensityUtil.dip2px(this, 15));
+        banner2.setAdapter(new IGGBaseBannerAdapter(this) {
+            @Override
+            public View generateItem(IGGBannerBean bean, int position) {
+                LogUtil.d("generateItem position: " + position);
+                ImageView imageView = new ImageView(context);
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                return imageView;
+            }
+
+            @Override
+            public void bindItem(IGGBannerBean bean, View view) {
+                LogUtil.d("bindItem...");
+                ((ImageView) view).setImageResource(bean.getResourceId());
+            }
+
+            @Override
+            public int getIndicatorResource() {
+                return R.drawable.lib_selector_banner_indicator;
+            }
+        });
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         List<IGGBannerBean> mData = new ArrayList<>();
-        IGGBannerBean IGGBannerBean1 = new IGGBannerBean();
-        IGGBannerBean1.setId("1");
-        IGGBannerBean1.setPic("http://file06.16sucai.com/2016/0428/cd094f5623151c096b820400fc71eac3.jpg");
+        IGGBannerBean bannerBean1 = new IGGBannerBean();
+        bannerBean1.setId("1");
+        bannerBean1.setPic("http://file06.16sucai.com/2016/0428/cd094f5623151c096b820400fc71eac3.jpg");
+        bannerBean1.setResourceId(R.mipmap.banner1);
 
-        IGGBannerBean IGGBannerBean2 = new IGGBannerBean();
-        IGGBannerBean2.setId("2");
-        IGGBannerBean2.setPic("http://file06.16sucai.com/2016/0425/67a5159babcb1df3ecf68197a513af61.jpg");
+        IGGBannerBean bannerBean2 = new IGGBannerBean();
+        bannerBean2.setId("2");
+        bannerBean2.setPic("http://file06.16sucai.com/2016/0425/67a5159babcb1df3ecf68197a513af61.jpg");
 
-        IGGBannerBean IGGBannerBean3 = new IGGBannerBean();
-        IGGBannerBean3.setId("3");
-        IGGBannerBean3.setPic("http://file06.16sucai.com/2016/0425/73e2fc8d7871ae4952ea2789f3f5b24f.jpg");
+        IGGBannerBean bannerBean3 = new IGGBannerBean();
+        bannerBean3.setId("3");
+        bannerBean3.setPic("http://file06.16sucai.com/2016/0425/73e2fc8d7871ae4952ea2789f3f5b24f.jpg");
 
-        IGGBannerBean IGGBannerBean4 = new IGGBannerBean();
-        IGGBannerBean4.setId("4");
-        IGGBannerBean4.setPic("http://file06.16sucai.com/2016/0425/006fb503a3ec0822c2b1a10405b069a8.jpg");
+        IGGBannerBean bannerBean4 = new IGGBannerBean();
+        bannerBean4.setId("4");
+        bannerBean4.setPic("http://file06.16sucai.com/2016/0425/006fb503a3ec0822c2b1a10405b069a8.jpg");
 
-        IGGBannerBean IGGBannerBean5 = new IGGBannerBean();
-        IGGBannerBean5.setId("5");
-        IGGBannerBean5.setPic("http://file06.16sucai.com/2016/0425/bbdec65210c15d347dbc17d88c5535be.jpg");
+        IGGBannerBean bannerBean5 = new IGGBannerBean();
+        bannerBean5.setId("5");
+        bannerBean5.setPic("http://file06.16sucai.com/2016/0425/bbdec65210c15d347dbc17d88c5535be.jpg");
 
-        IGGBannerBean IGGBannerBean6 = new IGGBannerBean();
-        IGGBannerBean6.setId("6");
-        IGGBannerBean6.setPic("http://file06.16sucai.com/2016/0425/a768086eef8c2abb98eabbcee8ecd578.jpg");
+        IGGBannerBean bannerBean6 = new IGGBannerBean();
+        bannerBean6.setId("6");
+        bannerBean6.setPic("http://file06.16sucai.com/2016/0425/a768086eef8c2abb98eabbcee8ecd578.jpg");
 
-        mData.add(IGGBannerBean1);
-        mData.add(IGGBannerBean2);
-        mData.add(IGGBannerBean3);
-        mData.add(IGGBannerBean4);
-        mData.add(IGGBannerBean5);
-        mData.add(IGGBannerBean6);
+        mData.add(bannerBean1);
+        mData.add(bannerBean2);
+        mData.add(bannerBean3);
+        mData.add(bannerBean4);
+        mData.add(bannerBean5);
+        mData.add(bannerBean6);
         banner.play(mData);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.md_icon_snow);
-        fallingView.initSnow(bitmap, 60);
+        List<IGGBannerBean> mData2 = new ArrayList<>();
+        IGGBannerBean bannerBean21 = new IGGBannerBean();
+        bannerBean21.setId("1");
+        bannerBean21.setResourceId(R.mipmap.banner_1);
+
+        IGGBannerBean bannerBean22 = new IGGBannerBean();
+        bannerBean22.setId("2");
+        bannerBean22.setResourceId(R.mipmap.banner_2);
+
+        IGGBannerBean bannerBean23 = new IGGBannerBean();
+        bannerBean23.setId("3");
+        bannerBean23.setResourceId(R.mipmap.banner_3);
+
+        IGGBannerBean bannerBean24 = new IGGBannerBean();
+        bannerBean24.setId("4");
+        bannerBean24.setResourceId(R.mipmap.banner_4);
+
+        mData2.add(bannerBean21);
+        mData2.add(bannerBean22);
+        mData2.add(bannerBean23);
+        mData2.add(bannerBean24);
+        banner2.play(mData2);
     }
 
     @Override

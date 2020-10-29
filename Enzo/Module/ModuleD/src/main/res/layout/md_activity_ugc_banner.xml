@@ -12,11 +12,14 @@
     <com.enzo.commonlib.widget.banner.normal.IGGBanner
         android:id="@+id/md_circle_banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp" />
 
-    <com.enzo.commonlib.widget.snowview.SnowView
-        android:id="@+id/fall_view"
+    <com.enzo.commonlib.widget.banner.normal.IGGBanner
+        android:id="@+id/md_circle_banner2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp" />
+
 </LinearLayout>
 
