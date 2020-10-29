@@ -7,10 +7,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import androidx.viewpager.widget.ViewPager;
-
-import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.banner.transformer.CoverModeTransformer;
 
@@ -35,7 +32,7 @@ public class IGGBanner extends RelativeLayout {
     private IGGBaseBannerAdapter adapter;
 
     public enum IndicatorAlign {
-        LEFT,//做对齐
+        LEFT,//左对齐
         CENTER,//居中对齐
         RIGHT //右对齐
     }
@@ -75,7 +72,7 @@ public class IGGBanner extends RelativeLayout {
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
     }
 
-    public void setMeiZuModel() {
+    public void setMeiZuStyle() {
         setClipChildren(false);
         viewPager.setClipChildren(false);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -103,14 +100,14 @@ public class IGGBanner extends RelativeLayout {
         }
         if (align == IndicatorAlign.LEFT) {
             lp.addRule(RelativeLayout.ALIGN_PARENT_START);
-            lp.leftMargin = DensityUtil.dip2px(getContext(), 12);
+            lp.leftMargin = dip2px(12);
         } else if (align == IndicatorAlign.CENTER) {
             lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         } else if (align == IndicatorAlign.RIGHT) {
             lp.addRule(RelativeLayout.ALIGN_PARENT_END);
-            lp.rightMargin = DensityUtil.dip2px(getContext(), 12);
+            lp.rightMargin = dip2px(12);
         }
-        lp.bottomMargin = DensityUtil.dip2px(getContext(), 10);
+        lp.bottomMargin = dip2px(10);
         indicatorLayout.setLayoutParams(lp);
     }
 

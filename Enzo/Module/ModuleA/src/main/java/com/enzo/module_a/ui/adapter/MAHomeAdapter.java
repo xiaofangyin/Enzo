@@ -83,7 +83,7 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
         public HomeBannerHolder(View itemView) {
             super(itemView);
             iggBanner = itemView.findViewById(R.id.banner);
-            iggBanner.setMeiZuModel();
+            iggBanner.setMeiZuStyle();
             iggBanner.setAdapter(new IGGBaseBannerAdapter(getContext()) {
                 @Override
                 public View generateItem(IGGBannerBean bean, int position) {

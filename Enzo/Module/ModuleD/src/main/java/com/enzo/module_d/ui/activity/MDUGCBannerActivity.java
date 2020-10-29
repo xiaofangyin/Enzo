@@ -81,7 +81,7 @@ public class MDUGCBannerActivity extends BaseActivity {
         });
 
         banner2 = findViewById(R.id.md_circle_banner2);
-        banner2.setMeiZuModel();
+        banner2.setMeiZuStyle();
         banner2.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(IGGBannerBean bean, int position) {
