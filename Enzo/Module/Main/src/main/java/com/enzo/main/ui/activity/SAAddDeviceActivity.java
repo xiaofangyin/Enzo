@@ -109,7 +109,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        adapter = new SAAddDeviceAdapter(SAAddDeviceActivity.this);
+        adapter = new SAAddDeviceAdapter();
         recyclerView.setAdapter(adapter);
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {

@@ -27,11 +27,9 @@ import java.util.LinkedList;
  */
 public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObject> {
 
-    private Context context;
     private SparseArray<LinkedList<FLPluginBaseCell>> mViewCache;
 
-    public SAAddDeviceAdapter(Context context) {
-        this.context = context;
+    public SAAddDeviceAdapter() {
         mViewCache = new SparseArray<>();
     }
 
