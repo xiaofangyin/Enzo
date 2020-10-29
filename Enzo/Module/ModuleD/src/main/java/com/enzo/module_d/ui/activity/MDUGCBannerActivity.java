@@ -27,8 +27,9 @@ import java.util.List;
  */
 public class MDUGCBannerActivity extends BaseActivity {
 
-    private IGGBanner banner;
+    private IGGBanner banner1;
     private IGGBanner banner2;
+    private IGGBanner banner3;
 
     @Override
     public int getLayoutId() {
@@ -50,9 +51,38 @@ public class MDUGCBannerActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        banner = findViewById(R.id.md_circle_banner);
-        banner.setMeiZuModel();
-        banner.setAdapter(new IGGBaseBannerAdapter(this) {
+        banner1 = findViewById(R.id.md_circle_banner1);
+        banner1.setIndicatorAlign(IGGBanner.IndicatorAlign.RIGHT);
+        banner1.setAdapter(new IGGBaseBannerAdapter(this) {
+            @Override
+            public View generateItem(IGGBannerBean bean, int position) {
+                LogUtil.d("generateItem position: " + position);
+                ImageView imageView = new ImageView(context);
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                return imageView;
+            }
+
+            @Override
+            public void bindItem(IGGBannerBean bean, View view) {
+                LogUtil.d("bindItem...");
+                new ImageLoader.Builder(context)
+                        .load(bean.getResourceId())
+                        .build()
+                        .into((ImageView) view);
+            }
+
+            @Override
+            public int getIndicatorResource() {
+                return R.drawable.lib_selector_banner_indicator;
+            }
+        });
+
+        banner2 = findViewById(R.id.md_circle_banner2);
+        banner2.setMeiZuModel();
+        banner2.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(IGGBannerBean bean, int position) {
                 LogUtil.d("generateItem position: " + position);
@@ -79,9 +109,9 @@ public class MDUGCBannerActivity extends BaseActivity {
             }
         });
 
-        banner2 = findViewById(R.id.md_circle_banner2);
-        banner2.setNotClipToPadding(DensityUtil.dip2px(this, 28), DensityUtil.dip2px(this, 15));
-        banner2.setAdapter(new IGGBaseBannerAdapter(this) {
+        banner3 = findViewById(R.id.md_circle_banner3);
+        banner3.setNotClipToPadding(DensityUtil.dip2px(this, 28), DensityUtil.dip2px(this, 15));
+        banner3.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(IGGBannerBean bean, int position) {
                 LogUtil.d("generateItem position: " + position);
@@ -111,6 +141,29 @@ public class MDUGCBannerActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        List<IGGBannerBean> mData1 = new ArrayList<>();
+        IGGBannerBean bannerBean11 = new IGGBannerBean();
+        bannerBean11.setId("1");
+        bannerBean11.setResourceId(R.mipmap.banner_1);
+
+        IGGBannerBean bannerBean12 = new IGGBannerBean();
+        bannerBean12.setId("2");
+        bannerBean12.setResourceId(R.mipmap.banner_2);
+
+        IGGBannerBean bannerBean13 = new IGGBannerBean();
+        bannerBean13.setId("3");
+        bannerBean13.setResourceId(R.mipmap.banner_3);
+
+        IGGBannerBean bannerBean14 = new IGGBannerBean();
+        bannerBean14.setId("4");
+        bannerBean14.setResourceId(R.mipmap.banner_4);
+
+        mData1.add(bannerBean11);
+        mData1.add(bannerBean12);
+        mData1.add(bannerBean13);
+        mData1.add(bannerBean14);
+        banner1.play(mData1);
+
         List<IGGBannerBean> mData = new ArrayList<>();
         IGGBannerBean bannerBean1 = new IGGBannerBean();
         bannerBean1.setId("1");
@@ -143,7 +196,7 @@ public class MDUGCBannerActivity extends BaseActivity {
         mData.add(bannerBean4);
         mData.add(bannerBean5);
         mData.add(bannerBean6);
-        banner.play(mData);
+        banner2.play(mData);
 
         List<IGGBannerBean> mData2 = new ArrayList<>();
         IGGBannerBean bannerBean21 = new IGGBannerBean();
@@ -166,12 +219,12 @@ public class MDUGCBannerActivity extends BaseActivity {
         mData2.add(bannerBean22);
         mData2.add(bannerBean23);
         mData2.add(bannerBean24);
-        banner2.play(mData2);
+        banner3.play(mData2);
     }
 
     @Override
     public void initListener() {
-        banner.setOnBannerClickListener(new IGGBanner.OnBannerClickListener() {
+        banner1.setOnBannerClickListener(new IGGBanner.OnBannerClickListener() {
             @Override
             public void onBannerClick(IGGBannerBean bean) {
                 ToastUtil.show(bean.getPic());
