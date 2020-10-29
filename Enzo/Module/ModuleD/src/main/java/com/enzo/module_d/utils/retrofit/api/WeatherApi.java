@@ -1,4 +1,4 @@
-package com.enzo.module_d.model.retrofit.api;
+package com.enzo.module_d.utils.retrofit.api;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

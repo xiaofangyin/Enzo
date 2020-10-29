@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
-import com.enzo.module_d.model.retrofit.api.EnjoyWeatherApi;
-import com.enzo.module_d.model.retrofit.api.WeatherApi;
-import com.enzo.module_d.model.retrofit.retrofit.EnjoyRetrofit;
+import com.enzo.module_d.utils.retrofit.api.EnjoyWeatherApi;
+import com.enzo.module_d.utils.retrofit.api.WeatherApi;
+import com.enzo.module_d.utils.retrofit.retrofit.EnjoyRetrofit;
 
 import java.io.IOException;
 

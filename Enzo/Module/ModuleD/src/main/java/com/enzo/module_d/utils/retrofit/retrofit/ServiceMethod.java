@@ -1,9 +1,9 @@
-package com.enzo.module_d.model.retrofit.retrofit;
+package com.enzo.module_d.utils.retrofit.retrofit;
 
-import com.enzo.module_d.model.retrofit.retrofit.annotation.Field;
-import com.enzo.module_d.model.retrofit.retrofit.annotation.GET;
-import com.enzo.module_d.model.retrofit.retrofit.annotation.POST;
-import com.enzo.module_d.model.retrofit.retrofit.annotation.Query;
+import com.enzo.module_d.utils.retrofit.retrofit.annotation.Field;
+import com.enzo.module_d.utils.retrofit.retrofit.annotation.GET;
+import com.enzo.module_d.utils.retrofit.retrofit.annotation.POST;
+import com.enzo.module_d.utils.retrofit.retrofit.annotation.Query;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

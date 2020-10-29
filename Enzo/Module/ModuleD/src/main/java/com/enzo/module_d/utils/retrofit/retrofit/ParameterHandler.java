@@ -1,4 +1,4 @@
-package com.enzo.module_d.model.retrofit.retrofit;
+package com.enzo.module_d.utils.retrofit.retrofit;
 
 
 public abstract class ParameterHandler {
