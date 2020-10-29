@@ -39,7 +39,6 @@ import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
-import com.enzo.module_d.ui.activity.MDMeiZuBannerActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDOkHttpActivity;
 import com.enzo.module_d.ui.activity.MDProgressActivity;
@@ -122,7 +121,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_av_loading).setOnClickListener(this);
         rootView.findViewById(R.id.btn_lighter).setOnClickListener(this);
         rootView.findViewById(R.id.btn_calendar).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_meizu_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_ugc_banner).setOnClickListener(this);
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
@@ -268,9 +266,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_calendar) {
             Intent intent = new Intent(getContext(), MDCalendarActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_meizu_banner) {
-            Intent intent = new Intent(getContext(), MDMeiZuBannerActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_ugc_banner) {
             Intent intent = new Intent(getContext(), MDUGCBannerActivity.class);

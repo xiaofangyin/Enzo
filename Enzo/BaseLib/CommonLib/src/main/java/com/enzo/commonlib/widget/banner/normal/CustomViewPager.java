@@ -1,17 +1,21 @@
-package com.enzo.commonlib.widget.banner.mzbanner;
+package com.enzo.commonlib.widget.banner.normal;
 
 import android.content.Context;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.enzo.commonlib.widget.banner.normal.IGGViewPagerScroller;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CustomViewPager extends ViewPager {
-    private ArrayList<Integer> childCenterXAbs = new ArrayList<>();
-    private SparseArray<Integer> childIndex = new SparseArray<>();
+    private final ArrayList<Integer> childCenterXAbs = new ArrayList<>();
+    private final SparseArray<Integer> childIndex = new SparseArray<>();
 
     public CustomViewPager(Context context) {
         super(context);
@@ -26,12 +30,24 @@ public class CustomViewPager extends ViewPager {
     private void init() {
         setClipToPadding(false);
         setOverScrollMode(OVER_SCROLL_NEVER);
+        initViewPagerScroll();
     }
 
+    /**
+     * 设置ViewPager的滑动速度
+     */
+    private void initViewPagerScroll() {
+        try {
+            Field mScroller = ViewPager.class.getDeclaredField("mScroller");
+            mScroller.setAccessible(true);
+            IGGViewPagerScroller mViewPagerScroller = new IGGViewPagerScroller(getContext());
+            mScroller.set(this, mViewPagerScroller);
+        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
-     * @param childCount
-     * @param n
      * @return 第n个位置的child 的绘制索引
      */
     @Override

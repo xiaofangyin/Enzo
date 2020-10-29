@@ -1,7 +1,8 @@
-package com.enzo.commonlib.widget.banner.mzbanner.transformer;
+package com.enzo.commonlib.widget.banner.normal.transformer;
+
+import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
-import android.view.View;
 
 /**
  * Created by zhouwei on 17/8/20.
@@ -13,9 +14,7 @@ public class CoverModeTransformer implements ViewPager.PageTransformer {
     private float itemWidth = 0;
     private float offsetPosition = 0f;
     private int mCoverWidth;
-    private float mScaleMax = 1.0f;
-    private float mScaleMin = 0.9f;
-    private ViewPager mViewPager;
+    private final ViewPager mViewPager;
 
     public CoverModeTransformer(ViewPager pager) {
         mViewPager = pager;
@@ -30,6 +29,8 @@ public class CoverModeTransformer implements ViewPager.PageTransformer {
             offsetPosition = paddingLeft / (width - paddingLeft - paddingRight);
         }
         float currentPos = position - offsetPosition;
+        float mScaleMax = 1.0f;
+        float mScaleMin = 0.9f;
         if (itemWidth == 0) {
             itemWidth = view.getWidth();
             //由于左右边的缩小而减小的x的大小的一半

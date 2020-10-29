@@ -14,7 +14,7 @@ public class IGGViewPagerScroller extends Scroller {
 
     private int mDuration = 1000;// ViewPager默认的最大Duration 为600。
 
-    IGGViewPagerScroller(Context context) {
+    public IGGViewPagerScroller(Context context) {
         super(context);
     }
 

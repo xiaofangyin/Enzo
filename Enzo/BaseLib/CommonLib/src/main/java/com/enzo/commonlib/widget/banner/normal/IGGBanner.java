@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.widget.banner.normal.transformer.CoverModeTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class IGGBanner extends RelativeLayout {
     private int mSelectedIndex = 0;
     private Handler mUIHandler;
     private List<IGGBannerBean> mData;
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
     private LinearLayout indicatorLayout;
     private ImageView[] indicators;
     private OnBannerClickListener mClickListener;
@@ -55,7 +56,7 @@ public class IGGBanner extends RelativeLayout {
     private void init(Context context) {
         mUIHandler = new Handler(Looper.getMainLooper());
         mData = new ArrayList<>();
-        viewPager = new IGGViewPager(context);
+        viewPager = new CustomViewPager(context);
         viewPager.setOffscreenPageLimit(4);
         addView(viewPager);
 
@@ -72,6 +73,16 @@ public class IGGBanner extends RelativeLayout {
         this.adapter = adapter;
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
+    }
+
+    public void setMeiZuModel() {
+        setClipChildren(false);
+        viewPager.setClipChildren(false);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        layoutParams.leftMargin = dip2px(30);
+        layoutParams.rightMargin = dip2px(30);
+        viewPager.setLayoutParams(layoutParams);
+        viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
     }
 
     /**

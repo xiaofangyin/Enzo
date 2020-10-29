@@ -73,12 +73,6 @@
             android:text="日历" />
 
         <Button
-            android:id="@+id/btn_meizu_banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="魅族轮播图" />
-
-        <Button
             android:id="@+id/btn_ugc_banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

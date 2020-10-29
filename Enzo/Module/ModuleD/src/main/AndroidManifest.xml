@@ -18,9 +18,6 @@
             android:name=".ui.activity.MDCalendarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDMeiZuBannerActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDNotificationActivity"
             android:screenOrientation="portrait" />
         <activity
