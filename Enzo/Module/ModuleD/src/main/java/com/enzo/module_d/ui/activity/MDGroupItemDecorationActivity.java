@@ -1,11 +1,13 @@
 package com.enzo.module_d.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseActivity;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 import com.enzo.module_d.model.bean.Star;
 import com.enzo.module_d.ui.adapter.MDStarAdapter;
@@ -23,6 +25,20 @@ import java.util.List;
 public class MDGroupItemDecorationActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
+
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_view);
+        headWidget.setTitle("分组");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
 
     @Override
     public int getLayoutId() {
