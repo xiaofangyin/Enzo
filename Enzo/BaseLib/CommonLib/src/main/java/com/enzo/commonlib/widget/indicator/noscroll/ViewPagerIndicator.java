@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.indicator.scroll.IndicatorBean;
 
 import java.util.List;
@@ -117,6 +118,7 @@ public class ViewPagerIndicator extends LinearLayout {
 
             @Override
             public void onPageSelected(int position) {
+                LogUtil.d("ViewPagerIndicator onPageSelected position: " + position);
                 resetTextViewColor();
                 highLightTextView(position);
             }
@@ -176,6 +178,7 @@ public class ViewPagerIndicator extends LinearLayout {
                 int newSelected = (int) view.getTag();
                 if (tabClickListener != null) {
                     if (oldSelected != newSelected) {
+                        mViewPager.setCurrentItem(newSelected);
                         tabClickListener.onClick(newSelected);
                     } else {
                         tabClickListener.onReClick(newSelected);

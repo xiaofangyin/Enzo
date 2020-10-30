@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.R;
 import com.enzo.commonlib.utils.common.DensityUtil;
+import com.enzo.commonlib.utils.common.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +94,8 @@ public class ScrollViewPagerIndicator extends HorizontalScrollView {
 
             @Override
             public void onPageSelected(int position) {
-                setCurrentItem(position, true);
+                LogUtil.d("scroll onPageSelected position: " + position);
+                highLightTextView(position);
             }
 
             @Override
@@ -147,18 +149,17 @@ public class ScrollViewPagerIndicator extends HorizontalScrollView {
         animSet.start();
     }
 
-    public void setCurrentItem(int item, boolean animate) {
+    private void highLightTextView(int item) {
         if (mViewPager == null) {
             return;
         }
-        mViewPager.setCurrentItem(item, animate);
         for (int i = 0; i < myLinearLayout.getChildCount(); i++) {
             TextView child = (TextView) myLinearLayout.getChildAt(i);
             boolean isSelected = (i == item);
             if (isSelected) {
                 child.setTextColor(ContextCompat.getColor(getContext(), R.color.color_red));
                 animation(child);
-                animateToTab(item, animate);
+                animateToTab(item, true);
             } else {
                 child.setTextColor(ContextCompat.getColor(getContext(), R.color.color_333));
                 animation2(child);
@@ -192,6 +193,7 @@ public class ScrollViewPagerIndicator extends HorizontalScrollView {
                 int newSelected = (int) view.getTag();
                 if (tabClickListener != null) {
                     if (oldSelected != newSelected) {
+                        mViewPager.setCurrentItem(newSelected);
                         tabClickListener.onClick(newSelected);
                     } else {
                         tabClickListener.onReClick(newSelected);
