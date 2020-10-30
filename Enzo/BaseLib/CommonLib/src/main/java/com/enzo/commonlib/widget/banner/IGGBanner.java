@@ -7,7 +7,9 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import androidx.viewpager.widget.ViewPager;
+
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.banner.transformer.CoverModeTransformer;
 
@@ -69,16 +71,37 @@ public class IGGBanner extends RelativeLayout {
     public void setAdapter(IGGBaseBannerAdapter adapter) {
         this.adapter = adapter;
         viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(mOnPageChangeListener);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                mSelectedIndex = position;
+                setIndicator(position % mData.size());
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    startAdvertPlay();
+                } else {
+                    stopAdvertPlay();
+                }
+            }
+        });
     }
 
     public void setMeiZuStyle() {
         setClipChildren(false);
-        viewPager.setClipChildren(false);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         layoutParams.leftMargin = dip2px(30);
         layoutParams.rightMargin = dip2px(30);
         viewPager.setLayoutParams(layoutParams);
+        viewPager.setClipChildren(false);
         viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
     }
 
@@ -86,8 +109,8 @@ public class IGGBanner extends RelativeLayout {
      * 默认情况clipToPadding为true,也就是把padding中的值进行裁剪
      */
     public void setNotClipToPadding(int padding, int pageMargin) {
-        viewPager.setPadding(padding, 0, padding, 0);
         viewPager.setClipToPadding(false);
+        viewPager.setPadding(padding, 0, padding, 0);
         viewPager.setPageMargin(pageMargin);
     }
 
@@ -151,37 +174,11 @@ public class IGGBanner extends RelativeLayout {
         }
     }
 
-    /**
-     * 轮播图片状态监听器
-     */
-    private final ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageSelected(int position) {
-            mSelectedIndex = position;
-            setIndicator(position % mData.size());
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                startAdvertPlay();
-            } else {
-                stopAdvertPlay();
-            }
-        }
-    };
-
     private final Runnable timerTask = new Runnable() {
         @Override
         public void run() {
             mSelectedIndex++;
-            if (mSelectedIndex == Short.MAX_VALUE - 1 || mSelectedIndex == 1) {
+            if (mSelectedIndex == adapter.getCount() - 1 || mSelectedIndex == 1) {
                 mSelectedIndex = getInitPosition();
                 viewPager.setCurrentItem(mSelectedIndex, false);
                 setIndicator(0);
@@ -235,7 +232,7 @@ public class IGGBanner extends RelativeLayout {
         if (mData.isEmpty()) {
             return 0;
         }
-        int halfValue = Short.MAX_VALUE / 2;
+        int halfValue = adapter.getCount() / 2;
         int remainder = halfValue % mData.size();
         return halfValue - remainder;
     }
