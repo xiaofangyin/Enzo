@@ -38,6 +38,7 @@ import com.enzo.module_d.ui.activity.MDAidlActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
+import com.enzo.module_d.ui.activity.MDGroupItemDecorationActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDOkHttpActivity;
@@ -137,6 +138,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_flow_layout).setOnClickListener(this);
         rootView.findViewById(R.id.btn_viewpager_indicator).setOnClickListener(this);
         rootView.findViewById(R.id.btn_retrofit).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_group_item).setOnClickListener(this);
     }
 
     @Override
@@ -314,6 +316,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_retrofit) {
             Intent intent = new Intent(getContext(), MDRetrofitActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_group_item) {
+            Intent intent = new Intent(getContext(), MDGroupItemDecorationActivity.class);
             startActivity(intent);
         }
     }

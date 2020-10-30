@@ -168,5 +168,11 @@
             android:layout_height="wrap_content"
             android:text="retrofit" />
 
+        <Button
+            android:id="@+id/btn_group_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RecyclerView分组" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
