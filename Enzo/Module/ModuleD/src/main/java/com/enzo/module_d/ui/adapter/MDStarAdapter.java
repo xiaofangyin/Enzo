@@ -25,7 +25,7 @@ public class MDStarAdapter extends RecyclerView.Adapter<MDStarAdapter.StarViewHo
     /**
      * 是否是组的第一个item
      */
-    public boolean isGourpHeader(int position) {
+    public boolean isGroupHeader(int position) {
         if (position == 0) {
             return true;
         } else {

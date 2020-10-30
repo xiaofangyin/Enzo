@@ -23,7 +23,7 @@ public class MDStarDecoration extends RecyclerView.ItemDecoration {
     private final Rect textRect;
 
     public MDStarDecoration(Context context) {
-        groupHeaderHeight = dp2px(context, 100);
+        groupHeaderHeight = dp2px(context, 50);
 
         headPaint = new Paint();
         headPaint.setColor(Color.RED);
@@ -50,13 +50,13 @@ public class MDStarDecoration extends RecyclerView.ItemDecoration {
                 // 获取View的布局位置
                 int position = parent.getChildLayoutPosition(view);
                 // 是否是头部
-                boolean isGroupHeader = adapter.isGourpHeader(position);
+                boolean isGroupHeader = adapter.isGroupHeader(position);
                 if (isGroupHeader && view.getTop() - groupHeaderHeight - parent.getPaddingTop() >= 0) {
                     c.drawRect(left, view.getTop() - groupHeaderHeight, right, view.getTop(), headPaint);
                     String groupName = adapter.getGroupName(position);
                     textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
                     c.drawText(groupName, left + 20, view.getTop() -
-                            groupHeaderHeight / 2 + textRect.height() / 2, textPaint);
+                            groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
                 } else if (view.getTop() - groupHeaderHeight - parent.getPaddingTop() >= 0) {
                     // 分割线
                     c.drawRect(left, view.getTop() - 4, right, view.getTop(), headPaint);
@@ -78,7 +78,7 @@ public class MDStarDecoration extends RecyclerView.ItemDecoration {
             int right = parent.getWidth() - parent.getPaddingRight();
             int top = parent.getPaddingTop();
             // 当第二个是组的头部的时候
-            boolean isGroupHeader = adapter.isGourpHeader(position + 1);
+            boolean isGroupHeader = adapter.isGroupHeader(position + 1);
             if (isGroupHeader) {
                 int bottom = Math.min(groupHeaderHeight, itemView.getBottom() - parent.getPaddingTop());
 
@@ -90,12 +90,12 @@ public class MDStarDecoration extends RecyclerView.ItemDecoration {
                 c.clipRect(left, top, right, top + bottom);
 
                 c.drawText(groupName, left + 20, top + bottom
-                        - groupHeaderHeight / 2 + textRect.height() / 2, textPaint);
+                        - groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
             } else {
                 c.drawRect(left, top, right, top + groupHeaderHeight, headPaint);
                 String groupName = adapter.getGroupName(position);
                 textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
-                c.drawText(groupName, left + 20, top + groupHeaderHeight / 2 + textRect.height() / 2, textPaint);
+                c.drawText(groupName, left + 20, top + groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
             }
 
         }
@@ -108,7 +108,7 @@ public class MDStarDecoration extends RecyclerView.ItemDecoration {
         if (parent.getAdapter() instanceof MDStarAdapter) {
             MDStarAdapter adapter = (MDStarAdapter) parent.getAdapter();
             int position = parent.getChildLayoutPosition(view);
-            boolean isGroupHeader = adapter.isGourpHeader(position);
+            boolean isGroupHeader = adapter.isGroupHeader(position);
             // 怎么判断 itemView是头部
             if (isGroupHeader) {
                 // 如果是头部，预留更大的地方
@@ -122,6 +122,6 @@ public class MDStarDecoration extends RecyclerView.ItemDecoration {
 
     private int dp2px(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale * 0.5f);
+        return (int) (dpValue * scale + 0.5f);
     }
 }
