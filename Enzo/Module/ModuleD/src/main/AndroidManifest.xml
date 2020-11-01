@@ -60,9 +60,6 @@
             android:name=".ui.activity.MDOkHttpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDTouchEventActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDAVLoadingActivity"
             android:screenOrientation="portrait" />
         <activity

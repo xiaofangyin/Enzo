@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: MDScrollingImageViewActivity
+ * 文 件 名: MDUGCBannerActivity
  * 创 建 人: xiaofy
  * 创建日期: 2020/8/2
  * 邮   箱: xiaofywork@163.com

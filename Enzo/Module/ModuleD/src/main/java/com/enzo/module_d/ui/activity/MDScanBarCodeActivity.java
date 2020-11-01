@@ -9,7 +9,7 @@ import com.enzo.commonlib.utils.zxing.activity.CaptureActivity;
 import com.enzo.flkit.router.ModuleDRouterPath;
 
 /**
- * 文 件 名: CheckReportActivity
+ * 文 件 名: MDScanBarCodeActivity
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/6/30
  * 邮   箱: xiaofangyinwork@163.com
