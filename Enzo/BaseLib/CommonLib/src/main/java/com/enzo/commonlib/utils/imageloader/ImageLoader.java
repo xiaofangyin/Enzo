@@ -31,7 +31,7 @@ import java.io.File;
 public class ImageLoader {
 
     private RequestBuilder<Drawable> glideRequest;
-    private Builder mBuilder;
+    private final Builder mBuilder;
 
     private ImageLoader(Builder builder) {
         mBuilder = builder;
@@ -124,7 +124,7 @@ public class ImageLoader {
     }
 
     public static class Builder {
-        private Context context;
+        private final Context context;
         private File file;//要展示的本地图片
         private int drawable;//要展示的drawable资源
         private String path;//要展示的图片的url地址
