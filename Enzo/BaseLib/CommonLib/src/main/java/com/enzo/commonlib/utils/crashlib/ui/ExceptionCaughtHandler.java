@@ -9,12 +9,12 @@ import com.enzo.commonlib.utils.crashlib.util.CrashHelper;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
-public class ExceptionCaughtAdapter implements UncaughtExceptionHandler {
+public class ExceptionCaughtHandler implements UncaughtExceptionHandler {
 
     private final Application application;
     private final Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 
-    public ExceptionCaughtAdapter(Application application, Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
+    public ExceptionCaughtHandler(Application application, Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
         this.application = application;
         this.uncaughtExceptionHandler = uncaughtExceptionHandler;
     }

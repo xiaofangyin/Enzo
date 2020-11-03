@@ -2,7 +2,7 @@ package com.enzo.commonlib.utils.crashlib;
 
 import android.app.Application;
 
-import com.enzo.commonlib.utils.crashlib.ui.ExceptionCaughtAdapter;
+import com.enzo.commonlib.utils.crashlib.ui.ExceptionCaughtHandler;
 import com.enzo.commonlib.utils.crashlib.util.CrashHelper;
 
 public class CrashManager {
@@ -20,7 +20,7 @@ public class CrashManager {
     public void init(Application application) {
         CrashHelper.init(application);
         Thread.UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
-        ExceptionCaughtAdapter exceptionCaughtAdapter = new ExceptionCaughtAdapter(application, handler);
-        Thread.setDefaultUncaughtExceptionHandler(exceptionCaughtAdapter);
+        ExceptionCaughtHandler exceptionCaughtHandler = new ExceptionCaughtHandler(application, handler);
+        Thread.setDefaultUncaughtExceptionHandler(exceptionCaughtHandler);
     }
 }
