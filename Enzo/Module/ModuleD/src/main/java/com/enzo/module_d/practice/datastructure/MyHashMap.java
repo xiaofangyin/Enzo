@@ -10,7 +10,7 @@ package com.enzo.module_d.practice.datastructure;
 public class MyHashMap<K, V> {
 
     private final Entry[] table;
-    private static final Integer CAPACITY = 8;//容量
+    private static final Integer CAPACITY = 16;//容量
 
     public MyHashMap() {
         table = new Entry[CAPACITY];
