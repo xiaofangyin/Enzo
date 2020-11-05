@@ -3,6 +3,7 @@ package com.enzo.commonlib.base;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,9 @@ import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.squareup.leakcanary.LeakCanary;
-
 import com.enzo.skin.manager.loader.SkinManager;
+import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.crashreport.CrashReport;
 
 public class BaseApplication extends Application {
 
@@ -26,28 +27,37 @@ public class BaseApplication extends Application {
     }
 
     private void initEnv(Application application) {
-        //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
-        //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
-        if (!LeakCanary.isInAnalyzerProcess(application)) {
-            LeakCanary.install(application);
+        Log.e("xfy", "1 initEnv...");
+        //判断是否是主进程
+        if (PhoneUtils.isMainProcess(application)) {
+            Log.e("xfy", "2 initEnv is Main Process...");
+            //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
+            //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
+            if (!LeakCanary.isInAnalyzerProcess(application)) {
+                LeakCanary.install(application);
+            }
+            //ARouter
+            if (ApkUtils.isAppDebug(application)) {
+                ARouter.openLog();
+                ARouter.openDebug();
+            }
+            ARouter.init(application);
+            //主题
+            SkinManager.getInstance().init(application);
+            SkinManager.getInstance().load();
+            //toast
+            ToastUtil.initialize(application);
+            //初始化手机参数
+            PhoneUtils.getInstance().init(application);
+            //初始化崩溃捕获
+            CrashManager.getInstance().init(application);
+            //收集Activity任务栈
+            application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
+
+            // 初始化Bugly appId:8ac8d8a126   appKey:6552f636-bb34-4146-845e-637f57785e1c
+            CrashReport.initCrashReport(application, "8ac8d8a126", true);
         }
-        //ARouter
-        if (ApkUtils.isAppDebug(application)) {
-            ARouter.openLog();
-            ARouter.openDebug();
-        }
-        ARouter.init(application);
-        //主题
-        SkinManager.getInstance().init(application);
-        SkinManager.getInstance().load();
-        //toast
-        ToastUtil.initialize(application);
-        //初始化手机参数
-        PhoneUtils.getInstance().init(application);
-        //初始化崩溃捕获
-        CrashManager.getInstance().init(application);
-        //收集Activity任务栈
-        application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
+
     }
 
     private static class ActivityCallbacks implements ActivityLifecycleCallbacks {

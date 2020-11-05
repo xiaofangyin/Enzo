@@ -4,7 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -146,5 +151,47 @@ public class PhoneUtils {
             androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         }
         return androidId;
+    }
+
+    /**
+     * 是否是主进程
+     */
+    public static boolean isMainProcess(Context ctx){
+        Context context = ctx.getApplicationContext();
+        // 获取当前包名
+        String packageName = context.getPackageName();
+        // 获取当前进程名
+        String processName = getProcessName(android.os.Process.myPid());
+        Log.e("xfy","processName: " + processName);
+        return processName == null || processName.equals(packageName);
+    }
+
+    /**
+     * 获取进程号对应的进程名
+     *
+     * @param pid 进程号
+     * @return 进程名
+     */
+    public static String getProcessName(int pid) {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));
+            String processName = reader.readLine();
+            if (!TextUtils.isEmpty(processName)) {
+                processName = processName.trim();
+            }
+            return processName;
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return null;
     }
 }
