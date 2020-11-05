@@ -11,27 +11,27 @@ public class QueueX {
 
     private final int maxSize;
     private final Object[] queueArray;
-    private int front;
-    private int rear;
+    private int startIndex;
+    private int endIndex;
 
     public QueueX(int n) {
         this.maxSize = n;
-        this.front = -1;
-        this.rear = -1;
+        this.startIndex = -1;
+        this.endIndex = -1;
         this.queueArray = new Object[maxSize];
     }
 
     public void insert(Object j) {
-        if (rear < maxSize - 1) {
-            queueArray[++rear] = j;
+        if (endIndex < maxSize - 1) {
+            queueArray[++endIndex] = j;
         } else {
             System.out.println("队列已满.....");
         }
     }
 
     public Object remove() {
-        if (front != rear) {
-            return queueArray[++front];
+        if (startIndex != endIndex) {
+            return queueArray[++startIndex];
         } else {
             System.out.println("队列为空不能删除。。。。");
         }

@@ -11,24 +11,24 @@ public class QueueC {
 
     private final int maxSize;
     private final Object[] queueArray;
-    private int front;
-    private int rear;
+    private int startIndex;
+    private int endIndex;
     private int nItems;
 
     public QueueC(int n) {
         this.maxSize = n;
         this.queueArray = new Object[maxSize];
-        this.front = 0;
-        this.rear = -1;
+        this.startIndex = 0;
+        this.endIndex = -1;
         this.nItems = 0;
     }
 
     public void insert(Object j) {
         if (!isFull()) {
-            if (rear == maxSize - 1) {
-                rear = -1;
+            if (endIndex == maxSize - 1) {
+                endIndex = -1;
             }
-            queueArray[++rear] = j;
+            queueArray[++endIndex] = j;
             nItems++;
         } else {
             System.out.println("队列已满.....");
@@ -37,9 +37,9 @@ public class QueueC {
 
     public Object remove() {
         if (!isEmpty()) {
-            Object temp = queueArray[front++];
-            if (front == maxSize) {
-                front = 0;
+            Object temp = queueArray[startIndex++];
+            if (startIndex == maxSize) {
+                startIndex = 0;
             }
             nItems--;
             return temp;

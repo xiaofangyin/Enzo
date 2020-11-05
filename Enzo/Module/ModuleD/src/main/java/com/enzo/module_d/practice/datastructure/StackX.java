@@ -7,8 +7,8 @@ package com.enzo.module_d.practice.datastructure;
  * 邮   箱: xiaofangyinwork@163.com
  */
 public class StackX {
-    private int maxSize;
-    private long[] stackArray;
+    private final int maxSize;
+    private final long[] stackArray;
     private int top;
 
     public StackX(int max) {
