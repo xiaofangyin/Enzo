@@ -9,17 +9,17 @@ package com.enzo.module_d.practice.datastructure;
 public class StackX {
     private final int maxSize;
     private final long[] stackArray;
-    private int top;
+    private int topIndex;
 
     public StackX(int max) {
         stackArray = new long[max];
         maxSize = max;
-        top = -1;//空栈
+        topIndex = -1;//空栈
     }
 
     public void push(long j) {
         if (!isFull()) {
-            stackArray[++top] = j;
+            stackArray[++topIndex] = j;
         } else {
             System.out.println("数组已经满了。。。");
         }
@@ -27,22 +27,22 @@ public class StackX {
 
     public long pop() {
         if (!isEmpty()) {
-            return stackArray[top--];
+            return stackArray[topIndex--];
         } else {
             return -1;
         }
     }
 
     public long peek() {
-        return stackArray[top];
+        return stackArray[topIndex];
     }
 
     public boolean isEmpty() {
-        return top == -1;
+        return topIndex == -1;
     }
 
     public boolean isFull() {
-        return top == (maxSize - 1);
+        return topIndex == (maxSize - 1);
     }
 
     public static void main(String[] args) {
