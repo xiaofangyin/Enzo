@@ -60,7 +60,7 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
             LogUtil.d("IGGBaseBannerAdapter instantiateItem position: " + position + "...mViewCaches: " + mViewCaches.size());
             view = mViewCaches.remove(0);
         }
-        bindItem(mData.get(position % mData.size()), view);
+        bindItem(view, mData.get(position % mData.size()), position % mData.size());
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
 
     public abstract View generateItem(IGGBannerBean bean, int position);
 
-    public abstract void bindItem(IGGBannerBean bean, View view);
+    public abstract void bindItem(View view, IGGBannerBean bean, int position);
 
     public abstract int getIndicatorResource();
 

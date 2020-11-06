@@ -70,7 +70,7 @@ public class MDUGCBannerActivity extends BaseActivity {
             }
 
             @Override
-            public void bindItem(IGGBannerBean bean, View view) {
+            public void bindItem(View view, IGGBannerBean bean, int position) {
                 LogUtil.d("bindItem...");
                 new ImageLoader.Builder(context)
                         .load(bean.getResourceId())
@@ -99,7 +99,7 @@ public class MDUGCBannerActivity extends BaseActivity {
             }
 
             @Override
-            public void bindItem(IGGBannerBean bean, View view) {
+            public void bindItem(View view, IGGBannerBean bean, int position) {
                 LogUtil.d("bindItem...");
                 new ImageLoader.Builder(context)
                         .load(bean.getPic())
@@ -128,7 +128,7 @@ public class MDUGCBannerActivity extends BaseActivity {
             }
 
             @Override
-            public void bindItem(IGGBannerBean bean, View view) {
+            public void bindItem(View view, IGGBannerBean bean, int position) {
                 LogUtil.d("bindItem...");
                 new ImageLoader.Builder(context)
                         .load(bean.getResourceId())
@@ -157,7 +157,7 @@ public class MDUGCBannerActivity extends BaseActivity {
             }
 
             @Override
-            public void bindItem(IGGBannerBean bean, View view) {
+            public void bindItem(View view, IGGBannerBean bean, int position) {
                 LogUtil.d("bindItem...");
                 new ImageLoader.Builder(context)
                         .load(bean.getResourceId())
