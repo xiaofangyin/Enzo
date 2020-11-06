@@ -12,12 +12,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.banner.transformer.CoverModeTransformer;
+import com.enzo.commonlib.widget.banner.transformer.RotationPageTransformer;
+import com.enzo.commonlib.widget.banner.transformer.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文 件 名: CircleBanner
+ * 文 件 名: IGGBanner
  * 创 建 人: xiaofangyin
  * 创建日期: 2018/3/16
  * 邮   箱: xiaofangyinwork@163.com
@@ -103,6 +105,20 @@ public class IGGBanner extends RelativeLayout {
         viewPager.setLayoutParams(layoutParams);
         viewPager.setClipChildren(false);
         viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
+    }
+
+    public void setZoomOutStyle() {
+        setClipChildren(false);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        layoutParams.leftMargin = dip2px(30);
+        layoutParams.rightMargin = dip2px(30);
+        viewPager.setLayoutParams(layoutParams);
+        viewPager.setClipChildren(false);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+    }
+
+    public void setRotationStyle() {
+        viewPager.setPageTransformer(true, new RotationPageTransformer());
     }
 
     /**
