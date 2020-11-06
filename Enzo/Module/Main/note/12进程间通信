@@ -1,17 +1,17 @@
-Client(aidl.add(3,5))
+Client
 
-    |
+    | aidl.add(3,5)
 
-Proxy(mRemote.transact())
+Proxy
 
-    |
+    | mRemote.transact()
 
-Binder(onTransact())
+Binder
 
-    |
+    | onTransact()
 
-Stub(this.add(int a, int b))
+Stub
 
-    |
+    | this.add(int a, int b)
 
 Service
