@@ -21,9 +21,7 @@
         </activity>
         <service
             android:name=".aidl.RemoteService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote" />
+            android:exported="true" />
     </application>
 
 </manifest>

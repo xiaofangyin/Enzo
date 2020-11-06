@@ -33,9 +33,6 @@
             android:name=".ui.activity.MDCalendarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDMeiZuBannerActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDNotificationActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -78,9 +75,6 @@
             android:name=".ui.activity.MDOkHttpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDTouchEventActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.MDAVLoadingActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -105,6 +99,9 @@
             android:name=".ui.activity.MDTimePickerActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.MDTimePickerActivity2"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.MDFlowLayoutActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -113,6 +110,13 @@
         <activity
             android:name=".ui.activity.MDAidlActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDRetrofitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDGroupItemDecorationActivity"
+            android:screenOrientation="portrait" />
+
 
     </application>
 
