@@ -1,5 +1,15 @@
 android 8.0
 
+app启动流程：
+Launcher  ->(Binder)   SystemServer(AMS)   ->(Socket)   ->   Zygote
+->   fock   ->   app   ->   启动ActivityThread的main()方法
+->   方法里执行ActivityThread thread = new ActivityThread()   ->
+->   thread.attach()   ->   IActivityManager.attachApplication()又回到了AMS
+->   AMS.bindApplication()   ->   ApplicationThread发送H.BIND_APPLICATION
+->   ActivityThread.handleBindApplication()
+
+
+Activity启动流程：
 1.Activity   ->   startActivity()   ->   startActivityForResult()   ->     mInstrumentation.execStartActivity
 2.Instrumentation   ->   ActivityManager.getService().startActivity()
 
