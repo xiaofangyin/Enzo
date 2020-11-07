@@ -90,7 +90,7 @@
             android:name=".ui.activity.MDScrollingImageViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDUGCBannerActivity"
+            android:name=".ui.activity.MDBannerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDRulerActivity"

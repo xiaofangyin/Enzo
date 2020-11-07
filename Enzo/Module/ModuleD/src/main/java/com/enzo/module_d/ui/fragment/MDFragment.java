@@ -52,7 +52,7 @@ import com.enzo.module_d.ui.activity.MDShadowActivity;
 import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
-import com.enzo.module_d.ui.activity.MDUGCBannerActivity;
+import com.enzo.module_d.ui.activity.MDBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
@@ -270,7 +270,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), MDCalendarActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_ugc_banner) {
-            Intent intent = new Intent(getContext(), MDUGCBannerActivity.class);
+            Intent intent = new Intent(getContext(), MDBannerActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_notification) {
             Intent intent = new Intent(getContext(), MDNotificationActivity.class);

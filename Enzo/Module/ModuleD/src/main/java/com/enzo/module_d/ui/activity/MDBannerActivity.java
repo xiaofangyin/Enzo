@@ -27,7 +27,7 @@ import java.util.List;
  * 创建日期: 2020/8/2
  * 邮   箱: xiaofywork@163.com
  */
-public class MDUGCBannerActivity extends BaseActivity {
+public class MDBannerActivity extends BaseActivity {
 
     private IGGBanner banner1;
     private IGGBanner banner2;
