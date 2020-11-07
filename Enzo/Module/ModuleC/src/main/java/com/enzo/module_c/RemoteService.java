@@ -1,4 +1,4 @@
-package com.enzo.module_c.aidl;
+package com.enzo.module_c;
 
 import android.app.Service;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.module_c.ICalculateInterface;
+import com.enzo.commonlib.utils.toast.ToastUtil;
 
 /**
  * 文 件 名: IRemoteService
@@ -29,6 +29,7 @@ public class RemoteService extends Service {
         @Override
         public int add(int a, int b) throws RemoteException {
             LogUtil.d("a + b = " + (a + b));
+            ToastUtil.show("ModuleC 计算结果: " + (a + b));
             return a + b;
         }
     };

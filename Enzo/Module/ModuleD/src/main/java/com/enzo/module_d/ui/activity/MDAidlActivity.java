@@ -7,8 +7,10 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
@@ -25,20 +27,20 @@ public class MDAidlActivity extends BaseActivity {
 
     private EditText edtText1;
     private EditText edtText2;
-    private EditText edtResult;
-    private ICalculateInterface iCallInterface;
+    private TextView tvResult;
+    private ICalculateInterface aidl;
 
     private final ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LogUtil.d("MDAidlActivity onServiceConnected...");
-            iCallInterface = ICalculateInterface.Stub.asInterface(service);
+            aidl = ICalculateInterface.Stub.asInterface(service);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             LogUtil.d("MDAidlActivity onServiceDisconnected...");
-            iCallInterface = null;
+            aidl = null;
         }
     };
 
@@ -51,13 +53,13 @@ public class MDAidlActivity extends BaseActivity {
     public void initView() {
         edtText1 = findViewById(R.id.edt_num1);
         edtText2 = findViewById(R.id.edt_num2);
-        edtResult = findViewById(R.id.edt_result);
+        tvResult = findViewById(R.id.tv_result);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         Intent intent = new Intent();
-        intent.setComponent(new ComponentName("com.enzo.module_c", "com.enzo.module_c.ICalculateInterface"));
+        intent.setComponent(new ComponentName("com.enzo.module_c", "com.enzo.module_c.RemoteService"));
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
     }
 
@@ -66,16 +68,20 @@ public class MDAidlActivity extends BaseActivity {
         findViewById(R.id.btn_calculate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int num1 = Integer.parseInt(edtText1.getText().toString());
-                int num2 = Integer.parseInt(edtText2.getText().toString());
-                try {
-                    if (iCallInterface != null) {
-                        edtResult.setText(iCallInterface.add(num1, num2));
-                    } else {
-                        edtResult.setText("iCallInterface = null");
+                String str1 = edtText1.getText().toString();
+                String str2 = edtText2.getText().toString();
+                if (!TextUtils.isEmpty(str1) && !TextUtils.isEmpty(str2)) {
+                    int num1 = Integer.parseInt(str1);
+                    int num2 = Integer.parseInt(str2);
+                    try {
+                        if (aidl != null) {
+                            tvResult.setText(String.valueOf(aidl.add(num1, num2)));
+                        } else {
+                            tvResult.setText("服务未连接!");
+                        }
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
                     }
-                } catch (RemoteException e) {
-                    e.printStackTrace();
                 }
             }
         });

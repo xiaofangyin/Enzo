@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".aidl.RemoteService"
+            android:name=".RemoteService"
             android:exported="true" />
     </application>
 
