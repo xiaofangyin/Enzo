@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_c.ICalculateInterface;
 import com.enzo.module_d.R;
 
@@ -43,6 +44,19 @@ public class MDAidlActivity extends BaseActivity {
             aidl = null;
         }
     };
+
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_view);
+        headWidget.setTitle("Aidl");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     @Override
     public int getLayoutId() {
