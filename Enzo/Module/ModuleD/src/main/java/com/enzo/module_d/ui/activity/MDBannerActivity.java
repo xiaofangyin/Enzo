@@ -29,6 +29,7 @@ import java.util.List;
  */
 public class MDBannerActivity extends BaseActivity {
 
+    private IGGBanner banner;
     private IGGBanner banner1;
     private IGGBanner banner2;
     private IGGBanner banner3;
@@ -54,6 +55,35 @@ public class MDBannerActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        banner = findViewById(R.id.md_circle_banner);
+        banner.setIndicatorAlign(IGGBanner.IndicatorAlign.LEFT);
+        banner.setAdapter(new IGGBaseBannerAdapter(this) {
+            @Override
+            public View generateItem(IGGBannerBean bean, int position) {
+                LogUtil.d("generateItem position: " + position);
+                ImageView imageView = new ImageView(context);
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                return imageView;
+            }
+
+            @Override
+            public void bindItem(View view, IGGBannerBean bean, int position) {
+                LogUtil.d("bindItem...");
+                new ImageLoader.Builder(context)
+                        .load(bean.getResourceId())
+                        .build()
+                        .into((ImageView) view);
+            }
+
+            @Override
+            public int getIndicatorResource() {
+                return R.drawable.lib_selector_banner_indicator;
+            }
+        });
+
         banner1 = findViewById(R.id.md_circle_banner1);
         banner1.setIndicatorAlign(IGGBanner.IndicatorAlign.RIGHT);
         banner1.setRotationStyle();
@@ -175,16 +205,13 @@ public class MDBannerActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         List<IGGBannerBean> mData1 = getIggBannerBeans(R.mipmap.banner_1, R.mipmap.banner_2, R.mipmap.banner_3, R.mipmap.banner_4);
+        banner.play(mData1);
         banner1.play(mData1);
+        banner3.play(mData1);
+        banner4.play(mData1);
 
         List<IGGBannerBean> mData2 = getIggBannerNetBeans();
         banner2.play(mData2);
-
-        List<IGGBannerBean> mData3 = getIggBannerBeans(R.mipmap.banner_1, R.mipmap.banner_2, R.mipmap.banner_3, R.mipmap.banner_4);
-        banner3.play(mData3);
-
-        List<IGGBannerBean> mData4 = getIggBannerBeans(R.mipmap.banner_1, R.mipmap.banner_2, R.mipmap.banner_3, R.mipmap.banner_4);
-        banner4.play(mData4);
     }
 
     @Override
