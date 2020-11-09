@@ -10,23 +10,26 @@ Proxy
         }
  }
 
-
     |
 
 Stub(抽象类，没有实现aidl接口的方法)
 abstract class Stub extends android.os.Binder implements ICalculateInterface{
-    case TRANSACTION_add:
-        {
-          data.enforceInterface(descriptor);
-          int _arg0;
-          _arg0 = data.readInt();
-          int _arg1;
-          _arg1 = data.readInt();
-          int _result = this.add(_arg0, _arg1);
-          reply.writeNoException();
-          reply.writeInt(_result);
-          return true;
+    @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException{
+        switch(code){
+                case TRANSACTION_add:
+                    {
+                      data.enforceInterface(descriptor);
+                      int _arg0;
+                      _arg0 = data.readInt();
+                      int _arg1;
+                      _arg1 = data.readInt();
+                      int _result = this.add(_arg0, _arg1);
+                      reply.writeNoException();
+                      reply.writeInt(_result);
+                      return true;
+                    }
         }
+    }
 }
 
     |
