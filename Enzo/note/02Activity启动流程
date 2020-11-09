@@ -1,6 +1,10 @@
 android 8.0
 
 app启动流程：
+Android系统在启动过程中，首先会在用户空间启动init进程，然后启动zygote进程，zygote接着fork出ServerManager进程，
+ServerManager进程启动完成后，会接着启动system_server进程，system_server进程中会启动AMS，WMS等framework的服务，
+并将这些服务的binder句柄添加到到ServerManager中维护，最后启动Launcher这个应用进程
+
 Launcher  ->(Binder)   SystemServer(AMS)   ->(Socket)   ->   Zygote
 ->   fock   ->   app   ->   启动ActivityThread的main()方法
 ->   方法里执行ActivityThread thread = new ActivityThread()   ->
