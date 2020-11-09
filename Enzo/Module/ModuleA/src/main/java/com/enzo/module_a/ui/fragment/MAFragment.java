@@ -43,7 +43,7 @@ import com.enzo.commonlib.widget.popup.YGravity;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_a.R;
-import com.enzo.module_a.plugin.MAPluginFactory;
+import com.enzo.module_a.plugin.MAPluginManager;
 import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
 
 import java.util.ArrayList;
@@ -112,8 +112,8 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MAPluginFactory.getInstance().hostDelegate != null) {
-                    MAPluginFactory.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.START);
+                if (MAPluginManager.getInstance().hostDelegate != null) {
+                    MAPluginManager.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.START);
                 }
             }
         });

@@ -7,7 +7,7 @@ import android.content.Intent;
 
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.flkit.account.UserAccountInfo;
-import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.main.ui.activity.SAMainActivity;
 
@@ -62,7 +62,7 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
     }
 
     @Override
-    public void initFactories(Application application, List<FLPluginFactory> factoryList) {
+    public void initFactories(Application application, List<FLPluginBaseManager> factoryList) {
         this.application = application;
         for (int i = 0; i < factoryList.size(); i++) {
             factoryList.get(i).setHostDelegate(this);
@@ -79,7 +79,7 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
 
     @Override
     public void releaseResources() {
-        List<FLPluginFactory> factoryList = SAFactoryManager.getInstance().getFactoryList();
+        List<FLPluginBaseManager> factoryList = SAFactoryManager.getInstance().getFactoryList();
         for (int i = 0; i < factoryList.size(); i++) {
             factoryList.get(i).releaseResources();
         }

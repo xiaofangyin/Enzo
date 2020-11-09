@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface FLPluginHostDelegate {
 
-    void initFactories(Application application, List<FLPluginFactory> factoryList);
+    void initFactories(Application application, List<FLPluginBaseManager> factoryList);
 
     //获取Application Context
     Context getApplicationContext();

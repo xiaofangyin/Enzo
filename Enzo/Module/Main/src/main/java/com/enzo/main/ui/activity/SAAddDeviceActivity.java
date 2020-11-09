@@ -16,7 +16,7 @@ import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginBaseObjectDelegate;
-import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.main.R;
@@ -176,7 +176,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     }
 
     private List<FLPluginBaseObject> getObjectList(List<JSONObject> dataList) {
-        List<FLPluginFactory> factories = SAFactoryManager.getInstance().getFactoryList();
+        List<FLPluginBaseManager> factories = SAFactoryManager.getInstance().getFactoryList();
         List<FLPluginBaseObject> baseObjects = new ArrayList<>();
         for (int i = 0; i < dataList.size(); i++) {
             for (int j = 0; j < factories.size(); j++) {

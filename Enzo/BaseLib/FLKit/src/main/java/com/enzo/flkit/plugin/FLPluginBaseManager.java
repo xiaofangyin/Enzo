@@ -7,12 +7,12 @@ import com.enzo.flkit.account.UserAccountInfo;
 import org.json.JSONObject;
 
 /**
- * 文 件 名: FLPluginFactory
+ * 文 件 名: FLPluginBaseManager
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public abstract class FLPluginFactory {
+public abstract class FLPluginBaseManager {
 
     public FLPluginHostDelegate hostDelegate;
 

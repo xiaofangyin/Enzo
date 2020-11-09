@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
-import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.module_c.ui.fragment.MCFragment;
@@ -13,24 +13,24 @@ import com.enzo.module_c.ui.fragment.MCFragment;
 import org.json.JSONObject;
 
 /**
- * 文 件 名: MCPluginFactory
+ * 文 件 名: MCPluginManager
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class MCPluginFactory extends FLPluginFactory {
+public class MCPluginManager extends FLPluginBaseManager {
 
-    private static MCPluginFactory mInstance;
+    private static MCPluginManager mInstance;
 
-    private MCPluginFactory() {
+    private MCPluginManager() {
 
     }
 
-    public static MCPluginFactory getInstance() {
+    public static MCPluginManager getInstance() {
         if (mInstance == null) {
-            synchronized (MCPluginFactory.class) {
+            synchronized (MCPluginManager.class) {
                 if (mInstance == null) {
-                    mInstance = new MCPluginFactory();
+                    mInstance = new MCPluginManager();
                 }
             }
         }

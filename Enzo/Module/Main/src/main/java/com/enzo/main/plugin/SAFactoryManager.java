@@ -2,7 +2,7 @@ package com.enzo.main.plugin;
 
 import android.app.Application;
 
-import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginBaseManager;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class SAFactoryManager {
 
     private static SAFactoryManager mInstance;
-    private List<FLPluginFactory> mFactoryList;
+    private List<FLPluginBaseManager> mFactoryList;
 
     private SAFactoryManager() {
 
@@ -32,12 +32,12 @@ public class SAFactoryManager {
         return mInstance;
     }
 
-    public void init(Application application, List<FLPluginFactory> factoryList) {
+    public void init(Application application, List<FLPluginBaseManager> factoryList) {
         this.mFactoryList = factoryList;
         SAHostDelegateManager.getInstance().initFactories(application, factoryList);
     }
 
-    public List<FLPluginFactory> getFactoryList() {
+    public List<FLPluginBaseManager> getFactoryList() {
         return mFactoryList;
     }
 }

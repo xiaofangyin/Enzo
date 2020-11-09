@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
-import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.module_a.ui.fragment.MAFragment;
@@ -18,19 +18,19 @@ import org.json.JSONObject;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class MAPluginFactory extends FLPluginFactory {
+public class MAPluginManager extends FLPluginBaseManager {
 
-    private static MAPluginFactory mInstance;
+    private static MAPluginManager mInstance;
 
-    private MAPluginFactory() {
+    private MAPluginManager() {
 
     }
 
-    public static MAPluginFactory getInstance() {
+    public static MAPluginManager getInstance() {
         if (mInstance == null) {
-            synchronized (MAPluginFactory.class) {
+            synchronized (MAPluginManager.class) {
                 if (mInstance == null) {
-                    mInstance = new MAPluginFactory();
+                    mInstance = new MAPluginManager();
                 }
             }
         }

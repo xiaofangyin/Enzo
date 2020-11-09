@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
-import com.enzo.flkit.plugin.FLPluginFactory;
+import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.module_b.ui.fragment.MBFragment;
@@ -13,24 +13,24 @@ import com.enzo.module_b.ui.fragment.MBFragment;
 import org.json.JSONObject;
 
 /**
- * 文 件 名: MBPluginFactory
+ * 文 件 名: MBPluginManager
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public class MBPluginFactory extends FLPluginFactory {
+public class MBPluginManager extends FLPluginBaseManager {
 
-    private static MBPluginFactory mInstance;
+    private static MBPluginManager mInstance;
 
-    private MBPluginFactory() {
+    private MBPluginManager() {
 
     }
 
-    public static MBPluginFactory getInstance() {
+    public static MBPluginManager getInstance() {
         if (mInstance == null) {
-            synchronized (MBPluginFactory.class) {
+            synchronized (MBPluginManager.class) {
                 if (mInstance == null) {
-                    mInstance = new MBPluginFactory();
+                    mInstance = new MBPluginManager();
                 }
             }
         }
