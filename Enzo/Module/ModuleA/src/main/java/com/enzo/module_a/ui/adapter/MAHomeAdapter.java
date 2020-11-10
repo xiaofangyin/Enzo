@@ -16,7 +16,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
 import com.enzo.commonlib.utils.common.DensityUtil;
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
 import com.enzo.commonlib.widget.banner.IGGBanner;
 import com.enzo.commonlib.widget.banner.IGGBannerBean;
@@ -78,7 +77,7 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
 
     public static class HomeBannerHolder extends BaseViewHolder<MAHomeBannerBean> {
 
-        private IGGBanner iggBanner;
+        private final IGGBanner iggBanner;
 
         public HomeBannerHolder(View itemView) {
             super(itemView);
@@ -87,7 +86,6 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
             iggBanner.setAdapter(new IGGBaseBannerAdapter(getContext()) {
                 @Override
                 public View generateItem(IGGBannerBean bean, int position) {
-                    LogUtil.d("generateItem position: " + position);
                     ImageView imageView = new ImageView(context);
                     imageView.setLayoutParams(new ViewGroup.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -98,7 +96,6 @@ public class MAHomeAdapter extends BaseRecyclerViewAdapter<MAHomeBaseBean> {
 
                 @Override
                 public void bindItem(View view, IGGBannerBean bean, int position) {
-                    LogUtil.d("bindItem...");
                     new ImageLoader.Builder(context)
                             .load(bean.getResourceId())
                             .build()

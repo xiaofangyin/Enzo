@@ -57,7 +57,6 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
         if (mViewCaches.isEmpty()) {
             view = generateItem(mData.get(position % mData.size()), position % mData.size());
         } else {
-            LogUtil.d("IGGBaseBannerAdapter instantiateItem position: " + position + "...mViewCaches: " + mViewCaches.size());
             view = mViewCaches.remove(0);
         }
         bindItem(view, mData.get(position % mData.size()), position % mData.size());
@@ -81,7 +80,6 @@ public abstract class IGGBaseBannerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
-        LogUtil.d("IGGBaseBannerAdapter destroyItem position: " + position);
         View view = (View) object;
         container.removeView(view);
         mViewCaches.add(view);

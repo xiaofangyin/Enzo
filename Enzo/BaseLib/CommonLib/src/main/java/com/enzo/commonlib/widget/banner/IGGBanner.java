@@ -203,7 +203,6 @@ public class IGGBanner extends RelativeLayout {
                 // 常规执行这里
                 viewPager.setCurrentItem(mSelectedIndex, true);
             }
-            LogUtil.e("mSelectedIndex: " + mSelectedIndex);
         }
     };
 

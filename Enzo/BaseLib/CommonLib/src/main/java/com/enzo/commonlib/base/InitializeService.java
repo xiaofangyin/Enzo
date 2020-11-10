@@ -66,6 +66,9 @@ public class InitializeService extends IntentService {
         long beforeTime = System.currentTimeMillis();
         Log.e("xfy", "InitializeService beforeTime: " + beforeTime);
         Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
+
+        //收集Activity任务栈
+        application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
@@ -86,11 +89,10 @@ public class InitializeService extends IntentService {
         PhoneUtils.getInstance().init(application);
         //初始化崩溃捕获
         CrashManager.getInstance().init(application);
-        //收集Activity任务栈
-        application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
 
         // 初始化Bugly appId:8ac8d8a126   appKey:6552f636-bb34-4146-845e-637f57785e1c
         CrashReport.initCrashReport(application, "8ac8d8a126", true);
+
         Debug.stopMethodTracing();
         long afterTime = System.currentTimeMillis();
         Log.e("xfy", "InitializeService after: " + afterTime);
@@ -101,7 +103,7 @@ public class InitializeService extends IntentService {
 
         @Override
         public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-            LogUtil.d("ActivityCallbacks onActivityCreated...");
+            LogUtil.d("ActivityCallbacks onActivityCreated..." + activity.getComponentName().getClassName());
             ActivityHelper.getManager().addActivity(activity);
         }
 
@@ -132,7 +134,7 @@ public class InitializeService extends IntentService {
 
         @Override
         public void onActivityDestroyed(@NonNull Activity activity) {
-            LogUtil.d("ActivityCallbacks onActivityDestroyed...");
+            LogUtil.d("ActivityCallbacks onActivityDestroyed..." + activity.getComponentName().getClassName());
             ActivityHelper.getManager().finishActivity(activity);
         }
     }
