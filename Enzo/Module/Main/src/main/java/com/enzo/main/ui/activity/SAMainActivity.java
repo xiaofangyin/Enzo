@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Lifecycle;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.LogUtil;
@@ -25,18 +24,15 @@ import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
-import com.enzo.flkit.router.ModuleARouterPath;
-import com.enzo.flkit.router.ModuleBRouterPath;
-import com.enzo.flkit.router.ModuleCRouterPath;
-import com.enzo.flkit.router.ModuleDRouterPath;
+import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.main.R;
 import com.enzo.main.config.TabEntityConfig;
+import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.main.plugin.SAHostDelegateManager;
+import com.enzo.skin.manager.loader.SkinManager;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.enzo.skin.manager.loader.SkinManager;
 
 /**
  * 文 件 名: SAMainActivity
@@ -116,10 +112,16 @@ public class SAMainActivity extends BaseActivity {
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add((Fragment) ARouter.getInstance().build(ModuleARouterPath.MODULE_A_FRAGMENT).navigation());
-        fragments.add((Fragment) ARouter.getInstance().build(ModuleBRouterPath.MODULE_B_FRAGMENT).navigation());
-        fragments.add((Fragment) ARouter.getInstance().build(ModuleCRouterPath.MODULE_C_FRAGMENT).navigation());
-        fragments.add((Fragment) ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_FRAGMENT).navigation());
+//        fragments.add((Fragment) ARouter.getInstance().build(ModuleARouterPath.MODULE_A_FRAGMENT).navigation());
+//        fragments.add((Fragment) ARouter.getInstance().build(ModuleBRouterPath.MODULE_B_FRAGMENT).navigation());
+//        fragments.add((Fragment) ARouter.getInstance().build(ModuleCRouterPath.MODULE_C_FRAGMENT).navigation());
+//        fragments.add((Fragment) ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_FRAGMENT).navigation());
+        for (FLPluginBaseManager manager : SAFactoryManager.getInstance().getFactoryList()) {
+            Fragment fragment = manager.buildHomeTabFragment();
+            if (fragment != null) {
+                fragments.add(manager.buildHomeTabFragment());
+            }
+        }
         return fragments;
     }
 
