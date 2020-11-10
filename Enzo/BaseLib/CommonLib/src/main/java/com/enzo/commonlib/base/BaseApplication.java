@@ -2,7 +2,7 @@ package com.enzo.commonlib.base;
 
 import android.app.Application;
 
-import com.enzo.commonlib.utils.common.PhoneUtils;
+import com.enzo.commonlib.utils.common.ApkUtils;
 
 public class BaseApplication extends Application {
 
@@ -14,7 +14,7 @@ public class BaseApplication extends Application {
 
     private void initialize(Application application) {
         //判断是否是主进程
-        if (PhoneUtils.isMainProcess(application)) {
+        if (ApkUtils.isMainProcess(application)) {
             InitializeService.start(application);
         }
     }
