@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,13 +45,13 @@ public class InitializeService extends IntentService {
 
     @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
-        Log.e("xfy", "InitializeService onStartCommand...");
+        LogUtil.d("InitializeService onStartCommand...");
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        Log.e("xfy", "InitializeService onHandleIntent...");
+        LogUtil.d("InitializeService onHandleIntent...");
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_INIT_WHEN_APP_CREATE.equals(action)) {
@@ -62,9 +61,9 @@ public class InitializeService extends IntentService {
     }
 
     private void performInit(Application application) {
-        Log.e("xfy", "InitializeService performInit...");
+        LogUtil.d("InitializeService performInit...");
         long beforeTime = System.currentTimeMillis();
-        Log.e("xfy", "InitializeService beforeTime: " + beforeTime);
+        LogUtil.d("InitializeService beforeTime: " + beforeTime);
         Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
 
         //收集Activity任务栈
@@ -94,8 +93,8 @@ public class InitializeService extends IntentService {
 
         Debug.stopMethodTracing();
         long afterTime = System.currentTimeMillis();
-        Log.e("xfy", "InitializeService after: " + afterTime);
-        Log.e("xfy", "InitializeService use time: " + (afterTime - beforeTime));
+        LogUtil.d("InitializeService after: " + afterTime);
+        LogUtil.d("InitializeService use time: " + (afterTime - beforeTime));
     }
 
     private static class ActivityCallbacks implements Application.ActivityLifecycleCallbacks {
@@ -136,5 +135,11 @@ public class InitializeService extends IntentService {
             LogUtil.d("ActivityCallbacks onActivityDestroyed..." + activity.getComponentName().getClassName());
             ActivityHelper.getManager().finishActivity(activity);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtil.d("InitializeService onDestroy...");
     }
 }
