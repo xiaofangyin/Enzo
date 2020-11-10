@@ -66,6 +66,13 @@ public class ExternalCacheUtil {
         return getExpectedFile(context, "theme");
     }
 
+    /**
+     * tracing缓存目录
+     */
+    public static File getTracingDir(Context context) {
+        return getExpectedFile(context, "tracing");
+    }
+
     @NotNull
     private static File getExpectedFile(Context context, String child) {
         File file = new File(getExternalCacheDir(context), child);

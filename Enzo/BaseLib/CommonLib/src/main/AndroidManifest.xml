@@ -58,6 +58,7 @@
             android:name=".utils.appupgrade.AppUpgradeService"
             android:exported="false"
             android:process=":update" />
+        <service android:name=".base.InitializeService" />
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
