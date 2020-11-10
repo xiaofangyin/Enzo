@@ -89,7 +89,6 @@ public class InitializeService extends IntentService {
         PhoneUtils.getInstance().init(application);
         //初始化崩溃捕获
         CrashManager.getInstance().init(application);
-
         // 初始化Bugly appId:8ac8d8a126   appKey:6552f636-bb34-4146-845e-637f57785e1c
         CrashReport.initCrashReport(application, "8ac8d8a126", true);
 
