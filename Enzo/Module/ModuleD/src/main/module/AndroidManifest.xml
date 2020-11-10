@@ -116,7 +116,9 @@
         <activity
             android:name=".ui.activity.MDGroupItemDecorationActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".ui.activity.MDHandlerThreadActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

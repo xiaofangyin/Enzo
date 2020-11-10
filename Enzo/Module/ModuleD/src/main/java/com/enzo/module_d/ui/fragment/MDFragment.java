@@ -35,10 +35,12 @@ import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDAidlActivity;
+import com.enzo.module_d.ui.activity.MDBannerActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
 import com.enzo.module_d.ui.activity.MDGroupItemDecorationActivity;
+import com.enzo.module_d.ui.activity.MDHandlerThreadActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDOkHttpActivity;
@@ -52,7 +54,6 @@ import com.enzo.module_d.ui.activity.MDShadowActivity;
 import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
-import com.enzo.module_d.ui.activity.MDBannerActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
@@ -139,6 +140,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_viewpager_indicator).setOnClickListener(this);
         rootView.findViewById(R.id.btn_retrofit).setOnClickListener(this);
         rootView.findViewById(R.id.btn_group_item).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_handler_thread).setOnClickListener(this);
     }
 
     @Override
@@ -319,6 +321,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_group_item) {
             Intent intent = new Intent(getContext(), MDGroupItemDecorationActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_handler_thread) {
+            Intent intent = new Intent(getContext(), MDHandlerThreadActivity.class);
             startActivity(intent);
         }
     }

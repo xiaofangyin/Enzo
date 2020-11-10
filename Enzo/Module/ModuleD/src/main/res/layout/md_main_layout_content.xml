@@ -174,5 +174,11 @@
             android:layout_height="wrap_content"
             android:text="RecyclerView分组" />
 
+        <Button
+            android:id="@+id/btn_handler_thread"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Handler Thread" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
