@@ -24,6 +24,12 @@ import com.enzo.skin.manager.loader.SkinManager;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
+/**
+ * 文 件 名: InitializeService
+ * 创 建 人: xiaofangyin
+ * 创建日期: 2017/12/23
+ * 邮   箱: xiaofangyinwork@163.com
+ */
 public class InitializeService extends IntentService {
 
     private static final String ACTION_INIT_WHEN_APP_CREATE = "com.enzo.xfy.service.action.INIT";
@@ -58,7 +64,7 @@ public class InitializeService extends IntentService {
     private void performInit(Application application) {
         Log.e("xfy", "InitializeService performInit...");
         long beforeTime = System.currentTimeMillis();
-        Log.e("xfy", "2 initEnv is Main Process time: " + beforeTime);
+        Log.e("xfy", "InitializeService beforeTime: " + beforeTime);
         Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
@@ -87,8 +93,8 @@ public class InitializeService extends IntentService {
         CrashReport.initCrashReport(application, "8ac8d8a126", true);
         Debug.stopMethodTracing();
         long afterTime = System.currentTimeMillis();
-        Log.e("xfy", "after: " + afterTime);
-        Log.e("xfy", "use time: " + (afterTime - beforeTime));
+        Log.e("xfy", "InitializeService after: " + afterTime);
+        Log.e("xfy", "InitializeService use time: " + (afterTime - beforeTime));
     }
 
     private static class ActivityCallbacks implements Application.ActivityLifecycleCallbacks {
