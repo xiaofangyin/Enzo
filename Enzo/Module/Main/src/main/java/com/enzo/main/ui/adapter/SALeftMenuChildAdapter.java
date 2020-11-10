@@ -33,14 +33,14 @@ public class SALeftMenuChildAdapter extends BaseRecyclerViewAdapter<LeftMenuChil
 
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseViewHolder<LeftMenuChildBean> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.main_item_left_menu_child_layout, parent, false);
         return new LeftMenuChildHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BaseViewHolder<LeftMenuChildBean> holder, int position) {
         holder.setUpView(mData.get(position), position, this);
     }
 

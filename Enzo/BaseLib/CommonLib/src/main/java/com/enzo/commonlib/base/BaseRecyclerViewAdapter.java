@@ -11,7 +11,7 @@ import java.util.List;
  * 创建日期: 2018/5/26
  * 邮   箱: xiaofangyinwork@163.com
  */
-public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
+public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     protected List<T> mData = new ArrayList<>();
     public OnItemClickListener onItemClickListener;

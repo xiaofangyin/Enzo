@@ -27,7 +27,7 @@ import java.util.LinkedList;
  */
 public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObject> {
 
-    private SparseArray<LinkedList<FLPluginBaseCell>> mViewCache;
+    private final SparseArray<LinkedList<FLPluginBaseCell>> mViewCache;
 
     public SAAddDeviceAdapter() {
         mViewCache = new SparseArray<>();
@@ -35,19 +35,19 @@ public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObje
 
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public BaseViewHolder<FLPluginBaseObject> onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.main_item_add_device, viewGroup, false);
         return new AddDeviceHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
+    public void onBindViewHolder(@NonNull BaseViewHolder<FLPluginBaseObject> baseViewHolder, int i) {
         baseViewHolder.setUpView(mData.get(i), i, this);
     }
 
     private class AddDeviceHolder extends BaseViewHolder<FLPluginBaseObject> {
 
-        private FrameLayout flContainer;
+        private final FrameLayout flContainer;
 
         AddDeviceHolder(View itemView) {
             super(itemView);
