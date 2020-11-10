@@ -1,0 +1,135 @@
+ANR全名Application Not Responding, 也就是"应用无响应". 当操作在一段时间内系统无法处理时, 系统层面会弹出上图那样的ANR对话框.
+
+1.2 为什么会产生ANR
+    在Android里, App的响应能力是由Activity Manager和Window Manager系统服务来监控的. 通常在如下两种情况下会弹出ANR对话框:
+        1.5s内无法响应用户输入事件(例如键盘输入, 触摸屏幕等).
+        2.BroadcastReceiver在10s内无法结束.
+    造成以上两种情况的首要原因就是在主线程(UI线程)里面做了太多的阻塞耗时操作, 例如文件读写, 数据库读写, 网络查询等等.
+
+1.3 如何避免ANR
+    知道了ANR产生的原因, 那么想要避免ANR, 也就很简单了, 就一条规则:不要在主线程(UI线程)里面做繁重的操作.
+
+
+2.1 获取ANR产生的trace文件
+    ANR产生时, 系统会生成一个traces.txt的文件放在/data/anr/下. 可以通过adb命令将其导出到本地:$adb pull data/anr/traces.txt .
+
+2.2 分析traces.txt
+
+2.2.1 普通阻塞导致的ANR
+    ----- pid 2976 at 2016-09-08 23:02:47 -----
+    Cmd line: com.anly.githubapp  // 最新的ANR发生的进程(包名)
+
+    ...
+
+    DALVIK THREADS (41):
+    "main" prio=5 tid=1 Sleeping
+      | group="main" sCount=1 dsCount=0 obj=0x73467fa8 self=0x7fbf66c95000
+      | sysTid=2976 nice=0 cgrp=default sched=0/0 handle=0x7fbf6a8953e0
+      | state=S schedstat=( 0 0 0 ) utm=60 stm=37 core=1 HZ=100
+      | stack=0x7ffff4ffd000-0x7ffff4fff000 stackSize=8MB
+      | held mutexes=
+      at java.lang.Thread.sleep!(Native method)
+      - sleeping on <0x35fc9e33> (a java.lang.Object)
+      at java.lang.Thread.sleep(Thread.java:1031)
+      - locked <0x35fc9e33> (a java.lang.Object)
+      at java.lang.Thread.sleep(Thread.java:985) // 主线程中sleep过长时间, 阻塞导致无响应.
+      at com.tencent.bugly.crashreport.crash.c.l(BUGLY:258)
+      - locked <@addr=0x12dadc70> (a com.tencent.bugly.crashreport.crash.c)
+      at com.tencent.bugly.crashreport.CrashReport.testANRCrash(BUGLY:166)  // 产生ANR的那个函数调用
+      - locked <@addr=0x12d1e840> (a java.lang.Class<com.tencent.bugly.crashreport.CrashReport>)
+      at com.anly.githubapp.common.wrapper.CrashHelper.testAnr(CrashHelper.java:23)
+      at com.anly.githubapp.ui.module.main.MineFragment.onClick(MineFragment.java:80) // ANR的起点
+      at com.anly.githubapp.ui.module.main.MineFragment_ViewBinding$2.doClick(MineFragment_ViewBinding.java:47)
+      at butterknife.internal.DebouncingOnClickListener.onClick(DebouncingOnClickListener.java:22)
+      at android.view.View.performClick(View.java:4780)
+      at android.view.View$PerformClick.run(View.java:19866)
+      at android.os.Handler.handleCallback(Handler.java:739)
+      at android.os.Handler.dispatchMessage(Handler.java:95)
+      at android.os.Looper.loop(Looper.java:135)
+      at android.app.ActivityThread.main(ActivityThread.java:5254)
+      at java.lang.reflect.Method.invoke!(Native method)
+      at java.lang.reflect.Method.invoke(Method.java:372)
+      at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:903)
+      at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:698)
+
+      1.文件最上的即为最新产生的ANR的trace信息.
+      2.前面两行表明ANR发生的进程pid, 时间, 以及进程名字(包名).
+      3.寻找我们的代码点, 然后往前推, 看方法调用栈, 追溯到问题产生的根源.
+
+2.2.2 CPU满负荷
+    Process:com.anly.githubapp
+    ...
+    CPU usage from 3330ms to 814ms ago:
+    6% 178/system_server: 3.5% user + 1.4% kernel / faults: 86 minor 20 major
+    4.6% 2976/com.anly.githubapp: 0.7% user + 3.7% kernel /faults: 52 minor 19 major
+    0.9% 252/com.android.systemui: 0.9% user + 0% kernel
+    ...
+
+    100%TOTAL: 5.9% user + 4.1% kernel + 89% iowait
+
+    最后一句表明了:
+    1.当是CPU占用100%, 满负荷了.
+    2.其中绝大数是被iowait即I/O操作占用了.
+    此时分析方法调用栈, 一般来说会发现是方法中有频繁的文件读写或是数据库读写操作放在主线程来做了.
+
+2.2.3 内存原因
+    其实内存原因有可能会导致ANR, 例如如果由于内存泄露, App可使用内存所剩无几, 我们点击按钮启动一个大图片作为背景的activity, 就可能会产生ANR, 这时trace信息可能是这样的:
+    // 以下trace信息来自网络, 用来做个示例
+    Cmdline: android.process.acore
+
+    DALVIK THREADS:
+    "main"prio=5 tid=3 VMWAIT
+    |group="main" sCount=1 dsCount=0 s=N obj=0x40026240self=0xbda8
+    | sysTid=1815 nice=0 sched=0/0 cgrp=unknownhandle=-1344001376
+    atdalvik.system.VMRuntime.trackExternalAllocation(NativeMethod)
+    atandroid.graphics.Bitmap.nativeCreate(Native Method)
+    atandroid.graphics.Bitmap.createBitmap(Bitmap.java:468)
+    atandroid.view.View.buildDrawingCache(View.java:6324)
+    atandroid.view.View.getDrawingCache(View.java:6178)
+
+    ...
+
+    MEMINFO in pid 1360 [android.process.acore] **
+    native dalvik other total
+    size: 17036 23111 N/A 40147
+    allocated: 16484 20675 N/A 37159
+    free: 296 2436 N/A 2732
+
+
+    可以看到free的内存已所剩无几.当然这种情况可能更多的是会产生OOM的异常...
+
+2.2 ANR的处理
+    针对三种不同的情况, 一般的处理情况如下
+
+    1.主线程阻塞的
+    开辟单独的子线程来处理耗时阻塞事务.
+
+    2.CPU满负荷, I/O阻塞的
+    I/O阻塞一般来说就是文件读写或数据库操作执行在主线程了, 也可以通过开辟子线程的方式异步执行.
+
+    3.内存不够用的
+    增大VM内存, 使用largeHeap属性, 排查内存泄露(这个在内存优化那篇细说吧)等.
+
+
+3.1 哪些地方是执行在主线程的
+    Activity的所有生命周期回调都是执行在主线程的.
+    Service默认是执行在主线程的.
+    BroadcastReceiver的onReceive回调是执行在主线程的.
+    没有使用子线程的looper的Handler的handleMessage, post(Runnable)是执行在主线程的.
+    AsyncTask的回调中除了doInBackground, 其他都是执行在主线程的.
+    View的post(Runnable)是执行在主线程的.
+
+3.2 使用子线程的方式有哪些
+    3.2.1 启Thread方式
+    3.2.2 使用AsyncTask
+    3.2.3 HandlerThread
+    3.2.4 IntentService
+    3.2.6 特别注意使用Thread和HandlerThread时, 为了使效果更好, 建议设置Thread的优先级偏低一点:
+          Process.setThreadPriority(THREAD_PRIORITY_BACKGROUND);
+          因为如果没有做任何优先级设置的话, 你创建的Thread默认和UI Thread是具有同样的优先级的, 你懂的.
+          同样的优先级的Thread, CPU调度上还是可能会阻塞掉你的UI Thread, 导致ANR的.
+
+结语
+对于ANR问题, 个人认为还是预防为主, 认清代码中的阻塞点, 善用线程. 同时形成良好的编程习惯, 要有MainThread和Worker Thread的概念的...(实际上人的工作状态也是这样的~~哈哈)
+
+
