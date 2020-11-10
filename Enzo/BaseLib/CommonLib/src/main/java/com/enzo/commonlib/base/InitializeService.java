@@ -28,6 +28,12 @@ import com.tencent.bugly.crashreport.CrashReport;
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/12/23
  * 邮   箱: xiaofangyinwork@163.com
+ * IntentService是继承于Service并处理异步请求的一个类，在IntentService内有一个工作线程来处理耗时操作，
+ * 启动IntentService的方式和启动传统Service一样，同时，当任务执行完后，IntentService会自动停止，
+ * 而不需要我们去手动控制。另外，可以启动IntentService多次，而每一个耗时操作会以工作队列的方式在
+ * IntentService的onHandleIntent回调方法中执行，并且，每次只会执行一个工作线程，执行完第一个再执行第二个，以此类推。
+ * 而且，所有请求都在一个单线程中，不会阻塞应用程序的主线程（UI Thread），同一时间只处理一个请求。
+ * 那么，用IntentService有什么好处呢？首先，我们省去了在Service中手动开线程的麻烦，第二，当操作完成时，我们不用手动停止Service。
  */
 public class InitializeService extends IntentService {
 
