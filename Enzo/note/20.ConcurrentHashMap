@@ -1,4 +1,4 @@
-1.ConcurrentHashMap中主要实体类就是三个：ConcurrentHashMap（整个Hash表）,Segment（桶），HashEntry（节点）
+1.ConcurrentHashMap中主要实体类就是三个：ConcurrentHashMap（整个Hash表）,Segment（段），HashEntry（节点）
 
     static final class Segment<K,V> extends ReentrantLock implements Serializable {
         transient volatile int count;
