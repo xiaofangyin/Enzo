@@ -51,12 +51,6 @@ public class SAMainActivity extends BaseActivity {
     private Fragment mCurrentPrimaryFragment;
 
     @Override
-    public void onThemeUpdate() {
-        super.onThemeUpdate();
-        StateAppBar.setStatusBarColor(this, SkinManager.getInstance().getColor(R.color.color_major_c1));
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.main_activity_main;
     }
