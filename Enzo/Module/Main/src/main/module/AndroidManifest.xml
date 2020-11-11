@@ -28,7 +28,7 @@
             android:name="com.enzo.main.ui.activity.SAAddDeviceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.SAAdvertActivity"
+            android:name="com.enzo.main.ui.activity.SAAdvertActivity"
             android:screenOrientation="portrait" />
     </application>
 
