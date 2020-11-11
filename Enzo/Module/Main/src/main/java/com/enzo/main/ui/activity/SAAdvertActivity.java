@@ -27,7 +27,7 @@ public class SAAdvertActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         ImageView ivAd = findViewById(R.id.iv_advert);
         new ImageLoader.Builder(this)
-                .load(R.mipmap.ic_launcher)
+                .load(R.mipmap.icon_girl)
                 .build()
                 .into(ivAd);
 

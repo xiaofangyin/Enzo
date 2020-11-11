@@ -25,14 +25,12 @@ import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
-import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.flkit.router.ModuleCRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.main.R;
 import com.enzo.main.config.TabEntityConfig;
-import com.enzo.main.plugin.SAFactoryManager;
 import com.enzo.main.plugin.SAHostDelegateManager;
 import com.enzo.skin.manager.loader.SkinManager;
 
@@ -51,6 +49,12 @@ public class SAMainActivity extends BaseActivity {
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
     private Fragment mCurrentPrimaryFragment;
+
+    @Override
+    public void onThemeUpdate() {
+        super.onThemeUpdate();
+        StateAppBar.setStatusBarColor(this, SkinManager.getInstance().getColor(R.color.color_major_c1));
+    }
 
     @Override
     public int getLayoutId() {
