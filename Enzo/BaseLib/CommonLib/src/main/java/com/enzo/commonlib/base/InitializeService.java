@@ -74,20 +74,20 @@ public class InitializeService extends IntentService {
 
         //收集Activity任务栈
         application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
-        //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
-        //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
-        if (!LeakCanary.isInAnalyzerProcess(application)) {
-            LeakCanary.install(application);
-        }
+        //主题
+        SkinManager.getInstance().init(application);
+        SkinManager.getInstance().load();
         //ARouter
         if (ApkUtils.isAppDebug(application)) {
             ARouter.openLog();
             ARouter.openDebug();
         }
         ARouter.init(application);
-        //主题
-        SkinManager.getInstance().init(application);
-        SkinManager.getInstance().load();
+        //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
+        //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
+        if (!LeakCanary.isInAnalyzerProcess(application)) {
+            LeakCanary.install(application);
+        }
         //toast
         ToastUtil.initialize(application);
         //初始化手机参数
