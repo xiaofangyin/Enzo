@@ -36,5 +36,5 @@ public ConcurrentHashMap(int initialCapacity,float loadFactor, int concurrencyLe
 
 4.锁分离
         通过HashMap分析知道，Synchronized是针对整张hash表的，即每次锁住整张表，而ConcurrentHashMap允许多个修改操作并发进行。
-    其关键是采用了锁分离技术。ConCurrentHashMap内部使用段（segment）来表示这些不同的部分，每个段就是一个小的hashtable。
+    其关键是采用了锁分离技术。ConcurrentHashMap内部使用段（segment）来表示这些不同的部分，每个段就是一个小的hashtable。
     但是size()和containsValue()，则可能需要锁住整个表。
