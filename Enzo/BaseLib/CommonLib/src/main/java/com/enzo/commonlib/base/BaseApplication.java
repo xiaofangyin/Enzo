@@ -23,6 +23,7 @@ public class BaseApplication extends Application {
             }
             ARouter.init(application);
 
+            //可以延迟加载的放这里
             InitializeService.start(application);
         }
     }
