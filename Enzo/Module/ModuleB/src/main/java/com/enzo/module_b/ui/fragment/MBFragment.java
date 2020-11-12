@@ -6,12 +6,14 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.togglebutton.ios.FLSwitchButton;
 import com.enzo.commonlib.widget.togglebutton.ios.FlToggleButton;
 import com.enzo.flkit.router.ModuleBRouterPath;
+import com.enzo.module_b.BuildConfig;
 import com.enzo.module_b.R;
 
 /**
@@ -47,12 +49,14 @@ public class MBFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        View view = new View(rootView.getContext());
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                StatusBarUtils.getStatusBarHeight(rootView.getContext()));
-        view.setLayoutParams(layoutParams);
-        ((ViewGroup) rootView).addView(view, 0);
+        if (!BuildConfig.IS_MODULE) {
+            View view = new View(rootView.getContext());
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    StatusBarUtils.getStatusBarHeight(rootView.getContext()));
+            view.setLayoutParams(layoutParams);
+            ((ViewGroup) rootView).addView(view, 0);
+        }
 
         mSpiderWebView = rootView.findViewById(R.id.spider_web_view);
         toggleButton = rootView.findViewById(R.id.toggle_button);

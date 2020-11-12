@@ -23,6 +23,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
@@ -42,6 +43,7 @@ import com.enzo.commonlib.widget.popup.XGravity;
 import com.enzo.commonlib.widget.popup.YGravity;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
+import com.enzo.module_a.BuildConfig;
 import com.enzo.module_a.R;
 import com.enzo.module_a.plugin.MAPluginManager;
 import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
@@ -86,12 +88,14 @@ public class MAFragment extends BaseFragment {
 
     @Override
     public void initView(View rootView) {
-        View view = new View(rootView.getContext());
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                StatusBarUtils.getStatusBarHeight(rootView.getContext()));
-        view.setLayoutParams(layoutParams);
-        ((ViewGroup) rootView).addView(view, 0);
+        if (!BuildConfig.IS_MODULE) {
+            View view = new View(rootView.getContext());
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    StatusBarUtils.getStatusBarHeight(rootView.getContext()));
+            view.setLayoutParams(layoutParams);
+            ((ViewGroup) rootView).addView(view, 0);
+        }
 
         flipperView = rootView.findViewById(R.id.view_flipper);
         magicIndicator = rootView.findViewById(R.id.magic_indicator);

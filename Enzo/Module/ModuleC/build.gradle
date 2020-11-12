@@ -16,6 +16,8 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
 
+        //是否是组件模式
+        buildConfigField("Boolean", "IS_MODULE", String.valueOf(rootProject.ext.module.isModule))
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]

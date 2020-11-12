@@ -7,12 +7,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.enzo.commonlib.base.BaseActivity;
-import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.module_c.R;
 import com.enzo.module_c.RemoteService;
 import com.enzo.module_c.ui.fragment.MCFragment;
+import com.enzo.skin.manager.loader.SkinManager;
 
 public class LauncherActivity extends BaseActivity {
+
+    @Override
+    public int getStatusBarColor() {
+        return R.color.color_major_c1;
+    }
 
     @Override
     public int getLayoutId() {
@@ -21,7 +26,7 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        StateAppBar.translucentStatusBar(this, true);
+
     }
 
     @Override

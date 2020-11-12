@@ -9,7 +9,7 @@ ext {
     ]
 
     module = [
-            isModule: false,//isModule是“集成开发模式”和“组件开发模式”的切换开关
+            isModule: true,//isModule是“集成开发模式”和“组件开发模式”的切换开关
     ]
 
     dependencies = [

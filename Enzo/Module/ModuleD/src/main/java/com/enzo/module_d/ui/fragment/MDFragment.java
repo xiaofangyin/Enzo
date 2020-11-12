@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
+import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.appupgrade.AppUpgradeUtil;
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
 import com.enzo.commonlib.utils.common.DensityUtil;
@@ -32,6 +34,7 @@ import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
+import com.enzo.module_d.BuildConfig;
 import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDAidlActivity;
@@ -99,12 +102,14 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initView(View rootView) {
-        View view = new View(rootView.getContext());
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                StatusBarUtils.getStatusBarHeight(rootView.getContext()));
-        view.setLayoutParams(layoutParams);
-        ((ViewGroup) rootView).addView(view, 0);
+        if (!BuildConfig.IS_MODULE) {
+            View view = new View(rootView.getContext());
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    StatusBarUtils.getStatusBarHeight(rootView.getContext()));
+            view.setLayoutParams(layoutParams);
+            ((ViewGroup) rootView).addView(view, 0);
+        }
 
         ivAvatar = rootView.findViewById(R.id.me_icon);
         llButtonContainer = rootView.findViewById(R.id.ll_button_content);
