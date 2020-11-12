@@ -11,9 +11,7 @@ import android.os.Debug;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.utils.common.ActivityHelper;
-import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
@@ -77,12 +75,6 @@ public class InitializeService extends IntentService {
         //主题
         SkinManager.getInstance().init(application);
         SkinManager.getInstance().load();
-        //ARouter
-        if (ApkUtils.isAppDebug(application)) {
-            ARouter.openLog();
-            ARouter.openDebug();
-        }
-        ARouter.init(application);
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
