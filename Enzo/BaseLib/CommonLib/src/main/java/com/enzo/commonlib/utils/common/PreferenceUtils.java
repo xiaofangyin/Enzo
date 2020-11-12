@@ -57,7 +57,7 @@ public class PreferenceUtils {
         SharedPreferences sp = getSp(context);
         Editor editor = sp.edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
     }
 
 
@@ -72,7 +72,7 @@ public class PreferenceUtils {
         SharedPreferences sp = getSp(context);
         Editor editor = sp.edit();
         editor.putBoolean(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -123,7 +123,7 @@ public class PreferenceUtils {
         SharedPreferences sp = getSp(context);
         Editor editor = sp.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -161,7 +161,7 @@ public class PreferenceUtils {
         SharedPreferences sp = getSp(context);
         Editor editor = sp.edit();
         editor.putLong(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -174,6 +174,6 @@ public class PreferenceUtils {
         SharedPreferences sp = getSp(context);
         Editor editor = sp.edit();
         editor.remove(key);
-        editor.commit();
+        editor.apply();
     }
 }
