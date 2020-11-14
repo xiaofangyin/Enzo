@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator;
@@ -27,6 +26,8 @@ import com.enzo.module_c.BuildConfig;
 import com.enzo.module_c.R;
 import com.enzo.module_c.model.ColumnBean;
 import com.enzo.module_c.ui.adapter.MCViewPagerAdapter;
+import com.enzo.skin.manager.entity.AttrFactory;
+import com.enzo.skin.manager.entity.DynamicAttr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,10 @@ public class MCFragment extends BaseFragment implements View.OnClickListener {
                     StatusBarUtils.getStatusBarHeight(rootView.getContext()));
             view.setLayoutParams(layoutParams);
             ((ViewGroup) rootView).addView(view, 0);
+
+            List<DynamicAttr> mDynamicAttr = new ArrayList();
+            mDynamicAttr.add(new DynamicAttr(AttrFactory.BACKGROUND, R.color.color_major_c1));
+            dynamicAddView(view, mDynamicAttr);
         }
 
         magicIndicator = rootView.findViewById(R.id.mc_indicator);

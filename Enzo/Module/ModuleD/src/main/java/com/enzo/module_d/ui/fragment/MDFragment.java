@@ -109,6 +109,10 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
                     StatusBarUtils.getStatusBarHeight(rootView.getContext()));
             view.setLayoutParams(layoutParams);
             ((ViewGroup) rootView).addView(view, 0);
+
+            List<DynamicAttr> mDynamicAttr = new ArrayList();
+            mDynamicAttr.add(new DynamicAttr(AttrFactory.BACKGROUND, R.color.color_major_c1));
+            dynamicAddView(view, mDynamicAttr);
         }
 
         ivAvatar = rootView.findViewById(R.id.me_icon);

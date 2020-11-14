@@ -6,7 +6,6 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
@@ -15,6 +14,11 @@ import com.enzo.commonlib.widget.togglebutton.ios.FlToggleButton;
 import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.module_b.BuildConfig;
 import com.enzo.module_b.R;
+import com.enzo.skin.manager.entity.AttrFactory;
+import com.enzo.skin.manager.entity.DynamicAttr;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 文 件 名: MBFragment
@@ -56,6 +60,10 @@ public class MBFragment extends BaseFragment {
                     StatusBarUtils.getStatusBarHeight(rootView.getContext()));
             view.setLayoutParams(layoutParams);
             ((ViewGroup) rootView).addView(view, 0);
+
+            List<DynamicAttr> mDynamicAttr = new ArrayList();
+            mDynamicAttr.add(new DynamicAttr(AttrFactory.BACKGROUND, R.color.color_major_c1));
+            dynamicAddView(view, mDynamicAttr);
         }
 
         mSpiderWebView = rootView.findViewById(R.id.spider_web_view);

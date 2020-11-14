@@ -23,7 +23,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
@@ -47,6 +46,8 @@ import com.enzo.module_a.BuildConfig;
 import com.enzo.module_a.R;
 import com.enzo.module_a.plugin.MAPluginManager;
 import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
+import com.enzo.skin.manager.entity.AttrFactory;
+import com.enzo.skin.manager.entity.DynamicAttr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,10 @@ public class MAFragment extends BaseFragment {
                     StatusBarUtils.getStatusBarHeight(rootView.getContext()));
             view.setLayoutParams(layoutParams);
             ((ViewGroup) rootView).addView(view, 0);
+
+            List<DynamicAttr> mDynamicAttr = new ArrayList();
+            mDynamicAttr.add(new DynamicAttr(AttrFactory.BACKGROUND, R.color.color_major_c1));
+            dynamicAddView(view, mDynamicAttr);
         }
 
         flipperView = rootView.findViewById(R.id.view_flipper);
