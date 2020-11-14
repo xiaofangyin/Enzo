@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.MessageQueue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 
@@ -78,6 +79,14 @@ public class SAMainActivity extends BaseActivity {
             PermissionsUtils.showEnableNotificationsDialog(this);
         }
 
+        //闲时加载
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+            @Override
+            public boolean queueIdle() {
+                LogUtil.d("IdleHandler queueIdle...");
+                return false;
+            }
+        });
     }
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) {
