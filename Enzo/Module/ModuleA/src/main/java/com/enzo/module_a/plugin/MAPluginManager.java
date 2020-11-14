@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
-import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginBaseManager;
+import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.module_a.ui.fragment.MAFragment;
@@ -20,7 +20,7 @@ import org.json.JSONObject;
  */
 public class MAPluginManager extends FLPluginBaseManager {
 
-    private static MAPluginManager mInstance;
+    private static volatile MAPluginManager mInstance;
 
     private MAPluginManager() {
 

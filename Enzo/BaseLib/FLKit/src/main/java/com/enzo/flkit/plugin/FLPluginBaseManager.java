@@ -28,6 +28,10 @@ public abstract class FLPluginBaseManager {
 
     public abstract UserAccountInfo getAccountInfo();
 
+    public boolean openURL(String url) {
+        return false;
+    }
+
     //推送相关
     public abstract boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state);
 

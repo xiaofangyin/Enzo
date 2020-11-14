@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
-import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginBaseManager;
+import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.module_b.ui.fragment.MBFragment;
@@ -20,7 +20,7 @@ import org.json.JSONObject;
  */
 public class MBPluginManager extends FLPluginBaseManager {
 
-    private static MBPluginManager mInstance;
+    private static volatile MBPluginManager mInstance;
 
     private MBPluginManager() {
 
