@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 
 import com.enzo.commonlib.base.BaseActivity;
@@ -44,5 +45,10 @@ public class SAAdvertActivity extends BaseActivity {
     @Override
     public void initListener() {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyCode == KeyEvent.KEYCODE_BACK;
     }
 }
