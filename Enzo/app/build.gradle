@@ -53,7 +53,7 @@ android {
 
     productFlavors {
         beta {//用于公司内日常发包测试
-            applicationId "com.ifenglian.enzotest"
+            applicationId "com.enzo.test"
             versionCode 1
             versionName "1.0.0"
 
