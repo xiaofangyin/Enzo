@@ -9,6 +9,7 @@ import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
+import com.enzo.main.model.manager.AccountManager;
 import com.enzo.main.ui.activity.SAMainActivity;
 
 import java.util.List;
@@ -87,6 +88,6 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
 
     @Override
     public void logout() {
-
+        AccountManager.getInstance().logout();
     }
 }

@@ -36,7 +36,7 @@ public abstract class FLPluginBaseManager {
     public abstract boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state);
 
     //用户退出后会通知各个插件做相应的处理
-    public abstract void appLogout();
+    public abstract void onAppLogout();
 
     //释放资源
     public abstract void releaseResources();

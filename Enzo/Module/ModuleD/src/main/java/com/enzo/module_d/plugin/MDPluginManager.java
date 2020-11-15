@@ -78,7 +78,7 @@ public class MDPluginManager extends FLPluginBaseManager {
     }
 
     @Override
-    public void appLogout() {
+    public void onAppLogout() {
 
     }
 

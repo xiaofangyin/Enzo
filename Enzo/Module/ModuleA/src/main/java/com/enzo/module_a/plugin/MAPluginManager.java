@@ -78,7 +78,7 @@ public class MAPluginManager extends FLPluginBaseManager {
     }
 
     @Override
-    public void appLogout() {
+    public void onAppLogout() {
 
     }
 
