@@ -8,7 +8,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
-import com.enzo.commonlib.widget.spiderweb.SpiderWebView;
 import com.enzo.commonlib.widget.togglebutton.ios.FLSwitchButton;
 import com.enzo.commonlib.widget.togglebutton.ios.FlToggleButton;
 import com.enzo.flkit.router.ModuleBRouterPath;
@@ -29,7 +28,6 @@ import java.util.List;
 @Route(path = ModuleBRouterPath.MODULE_B_FRAGMENT)
 public class MBFragment extends BaseFragment {
 
-    private SpiderWebView mSpiderWebView;
     private FlToggleButton toggleButton;
     private FLSwitchButton switchButton;
 
@@ -66,7 +64,6 @@ public class MBFragment extends BaseFragment {
             dynamicAddView(view, mDynamicAttr);
         }
 
-        mSpiderWebView = rootView.findViewById(R.id.spider_web_view);
         toggleButton = rootView.findViewById(R.id.toggle_button);
         switchButton = rootView.findViewById(R.id.switch_button);
     }
@@ -89,7 +86,6 @@ public class MBFragment extends BaseFragment {
 
     @Override
     public void lazyLoad() {
-        mSpiderWebView.setPointNum(80);//小点数量
-        mSpiderWebView.setPointAcceleration(6);//加速度
+
     }
 }
