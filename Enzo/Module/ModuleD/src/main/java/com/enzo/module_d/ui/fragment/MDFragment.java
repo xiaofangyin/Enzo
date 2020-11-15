@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.commonlib.utils.appupgrade.AppUpgradeUtil;
 import com.enzo.commonlib.utils.appupgrade.bean.AndroidBean;
 import com.enzo.commonlib.utils.common.DensityUtil;
@@ -46,7 +44,6 @@ import com.enzo.module_d.ui.activity.MDGroupItemDecorationActivity;
 import com.enzo.module_d.ui.activity.MDHandlerThreadActivity;
 import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
-import com.enzo.module_d.ui.activity.MDOkHttpActivity;
 import com.enzo.module_d.ui.activity.MDProgressActivity;
 import com.enzo.module_d.ui.activity.MDRetrofitActivity;
 import com.enzo.module_d.ui.activity.MDRulerActivity;
@@ -137,7 +134,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_okhttp).setOnClickListener(this);
         rootView.findViewById(R.id.btn_shadow).setOnClickListener(this);
         rootView.findViewById(R.id.btn_task_queue).setOnClickListener(this);
         rootView.findViewById(R.id.btn_progress).setOnClickListener(this);
@@ -294,9 +290,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_matisse) {
             Intent intent = new Intent(getContext(), MDMatisseActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_okhttp) {
-            Intent intent = new Intent(getContext(), MDOkHttpActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_shadow) {
             Intent intent = new Intent(getContext(), MDShadowActivity.class);

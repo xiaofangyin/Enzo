@@ -33,4 +33,6 @@ public interface FLPluginHostDelegate {
 
     //释放资源
     void releaseResources();
+
+    void logout();
 }

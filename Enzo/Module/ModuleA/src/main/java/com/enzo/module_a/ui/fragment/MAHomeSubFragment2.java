@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.enzo.commonlib.base.BaseFragment;
-import com.enzo.commonlib.net.okhttp.BaseExecutor;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 import com.enzo.commonlib.widget.pulltorefresh.recyclerview.PullToRefreshRecyclerView;
@@ -15,14 +14,14 @@ import com.enzo.module_a.R;
 import com.enzo.module_a.model.bean.MAHomeBannerBean;
 import com.enzo.module_a.model.bean.MAHomeBaseBean;
 import com.enzo.module_a.model.bean.MAHomeGoodsBean;
-import com.enzo.module_a.model.exetutor.MAPhotoListExecutor;
+import com.enzo.module_a.model.loader.PhotosLoader;
 import com.enzo.module_a.ui.adapter.MAHomeAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
+
+import rx.functions.Action1;
 
 public class MAHomeSubFragment2 extends BaseFragment {
 
@@ -103,40 +102,31 @@ public class MAHomeSubFragment2 extends BaseFragment {
     }
 
     private void getPhotoList() {
-        Map<String, String> params = new HashMap<>();
-        params.put("page", String.valueOf(new Random().nextInt(100)));
-        params.put("limit", "20");
-
-        new MAPhotoListExecutor()
-                .params(params)
-                .callback(new BaseExecutor.JsonCallback<List<MAHomeGoodsBean>>() {
+        PhotosLoader photosLoader = new PhotosLoader();
+        photosLoader.getPhotos(new Random().nextInt(100), 20)
+                .subscribe(new Action1<List<MAHomeGoodsBean>>() {
                     @Override
-                    public void onSuccess(List<MAHomeGoodsBean> response) {
+                    public void call(List<MAHomeGoodsBean> response) {
                         List<MAHomeBaseBean> list = new ArrayList<>();
                         list.add(new MAHomeBannerBean(MAHomeAdapter.TYPE_BANNER));
                         list.addAll(new ArrayList<>(response));
                         adapter.setNewData(list);
                         loadingLayout.showContent();
                     }
-
+                }, new Action1<Throwable>() {
                     @Override
-                    public void onFailed(Exception e) {
-                        loadingLayout.showError();
+                    public void call(Throwable throwable) {
+
                     }
-                })
-                .execute();
+                });
     }
 
     private void getPhotoList(final boolean pullRefresh) {
-        Map<String, String> params = new HashMap<>();
-        params.put("page", String.valueOf(new Random().nextInt(100)));
-        params.put("limit", "20");
-
-        new MAPhotoListExecutor()
-                .params(params)
-                .callback(new BaseExecutor.JsonCallback<List<MAHomeGoodsBean>>() {
+        PhotosLoader photosLoader = new PhotosLoader();
+        photosLoader.getPhotos(new Random().nextInt(100), 20)
+                .subscribe(new Action1<List<MAHomeGoodsBean>>() {
                     @Override
-                    public void onSuccess(List<MAHomeGoodsBean> response) {
+                    public void call(List<MAHomeGoodsBean> response) {
                         if (pullRefresh) {
                             List<MAHomeBaseBean> list = new ArrayList<>();
                             list.add(new MAHomeBannerBean(MAHomeAdapter.TYPE_BANNER));
@@ -148,16 +138,15 @@ public class MAHomeSubFragment2 extends BaseFragment {
                             recyclerView.loadMoreSuccess();
                         }
                     }
-
+                }, new Action1<Throwable>() {
                     @Override
-                    public void onFailed(Exception e) {
+                    public void call(Throwable throwable) {
                         if (pullRefresh) {
                             recyclerView.refreshFailed();
                         } else {
                             recyclerView.loadMoreFailed();
                         }
                     }
-                })
-                .execute();
+                });
     }
 }

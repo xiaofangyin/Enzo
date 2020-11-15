@@ -4,7 +4,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class ObjectLoader {
+public class BaseLoader {
 
     protected <T> Observable<T> observe(Observable<T> observable) {
         return observable.subscribeOn(Schedulers.io())

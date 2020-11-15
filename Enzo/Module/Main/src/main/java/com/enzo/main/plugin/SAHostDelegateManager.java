@@ -84,4 +84,9 @@ public class SAHostDelegateManager implements FLPluginHostDelegate {
             factoryList.get(i).releaseResources();
         }
     }
+
+    @Override
+    public void logout() {
+
+    }
 }

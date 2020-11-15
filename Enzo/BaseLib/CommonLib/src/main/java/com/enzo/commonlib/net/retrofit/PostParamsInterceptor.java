@@ -11,7 +11,7 @@ import okhttp3.Response;
 
 public class PostParamsInterceptor implements Interceptor {
 
-    private Map<String, String> mParamsMap = new HashMap<>();
+    private final Map<String, String> mParamsMap = new HashMap<>();
 
     private PostParamsInterceptor() {
 

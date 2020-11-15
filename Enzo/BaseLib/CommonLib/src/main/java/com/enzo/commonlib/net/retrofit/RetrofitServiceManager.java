@@ -15,7 +15,7 @@ public class RetrofitServiceManager {
     private static final int DEFAULT_TIME_OUT = 15;//超时时间 15s
     private static final int DEFAULT_WRITE_TIME_OUT = 15;
     private static final int DEFAULT_READ_TIME_OUT = 15;
-    private Retrofit mRetrofit;
+    private final Retrofit mRetrofit;
 
     private RetrofitServiceManager() {
         // 创建 OKHttpClient
