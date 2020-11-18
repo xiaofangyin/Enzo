@@ -11,12 +11,14 @@ import android.os.Debug;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.enzo.commonlib.BuildConfig;
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.commonlib.utils.toast.ToastUtil;
+import com.enzo.skin.manager.loader.SkinManager;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -66,8 +68,9 @@ public class InitializeService extends IntentService {
     private void performInit(Application application) {
         LogUtil.d("InitializeService performInit...");
         long beforeTime = System.currentTimeMillis();
-        LogUtil.d("InitializeService beforeTime: " + beforeTime);
-        Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
+        if (BuildConfig.DEBUG) {
+            Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
+        }
 
         //收集Activity任务栈
         application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacksAdapter() {
@@ -83,6 +86,9 @@ public class InitializeService extends IntentService {
                 ActivityHelper.getManager().finishActivity(activity);
             }
         });
+        //主题
+        SkinManager.getInstance().init(application);
+        SkinManager.getInstance().load();
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
@@ -97,9 +103,10 @@ public class InitializeService extends IntentService {
         // 初始化Bugly appId:8ac8d8a126   appKey:6552f636-bb34-4146-845e-637f57785e1c
         CrashReport.initCrashReport(application, "8ac8d8a126", true);
 
-        Debug.stopMethodTracing();
+        if (BuildConfig.DEBUG) {
+            Debug.stopMethodTracing();
+        }
         long afterTime = System.currentTimeMillis();
-        LogUtil.d("InitializeService after: " + afterTime);
         LogUtil.d("InitializeService use time: " + (afterTime - beforeTime));
     }
 
