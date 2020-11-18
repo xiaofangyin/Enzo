@@ -17,7 +17,6 @@ import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.commonlib.utils.toast.ToastUtil;
-import com.enzo.skin.manager.loader.SkinManager;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -71,7 +70,19 @@ public class InitializeService extends IntentService {
         Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
 
         //收集Activity任务栈
-        application.registerActivityLifecycleCallbacks(new ActivityCallbacks());
+        application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacksAdapter() {
+            @Override
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+                LogUtil.d("ActivityCallbacks onActivityCreated..." + activity.getComponentName().getClassName());
+                ActivityHelper.getManager().addActivity(activity);
+            }
+
+            @Override
+            public void onActivityDestroyed(@NonNull Activity activity) {
+                LogUtil.d("ActivityCallbacks onActivityDestroyed..." + activity.getComponentName().getClassName());
+                ActivityHelper.getManager().finishActivity(activity);
+            }
+        });
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
@@ -90,46 +101,6 @@ public class InitializeService extends IntentService {
         long afterTime = System.currentTimeMillis();
         LogUtil.d("InitializeService after: " + afterTime);
         LogUtil.d("InitializeService use time: " + (afterTime - beforeTime));
-    }
-
-    private static class ActivityCallbacks implements Application.ActivityLifecycleCallbacks {
-
-        @Override
-        public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-            LogUtil.d("ActivityCallbacks onActivityCreated..." + activity.getComponentName().getClassName());
-            ActivityHelper.getManager().addActivity(activity);
-        }
-
-        @Override
-        public void onActivityStarted(@NonNull Activity activity) {
-
-        }
-
-        @Override
-        public void onActivityResumed(@NonNull Activity activity) {
-
-        }
-
-        @Override
-        public void onActivityPaused(@NonNull Activity activity) {
-
-        }
-
-        @Override
-        public void onActivityStopped(@NonNull Activity activity) {
-
-        }
-
-        @Override
-        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
-
-        }
-
-        @Override
-        public void onActivityDestroyed(@NonNull Activity activity) {
-            LogUtil.d("ActivityCallbacks onActivityDestroyed..." + activity.getComponentName().getClassName());
-            ActivityHelper.getManager().finishActivity(activity);
-        }
     }
 
     @Override
