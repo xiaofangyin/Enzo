@@ -1,7 +1,6 @@
 package com.enzo.module_d.ui.fragment;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -57,7 +56,6 @@ import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
-import com.enzo.module_d.utils.hook.HookHelper;
 import com.enzo.module_d.utils.themes.ThemesHelper;
 import com.enzo.skin.manager.entity.AttrFactory;
 import com.enzo.skin.manager.entity.DynamicAttr;
@@ -121,7 +119,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     public void initListener(View rootView) {
         rootView.findViewById(R.id.me_icon).setOnClickListener(this);
         rootView.findViewById(R.id.btn_aidl).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_hook).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
         rootView.findViewById(R.id.btn_boss_bottom_dialog).setOnClickListener(this);
         rootView.findViewById(R.id.btn_boss_company).setOnClickListener(this);
@@ -261,12 +258,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_add_device) {
             ARouter.getInstance().build(MainRouterPath.MAIN_ADD_DEVICE).navigation();
-        } else if (id == R.id.btn_hook) {
-            HookHelper.hookIActivityManager();
-            HookHelper.hookHandler();
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.enzo.module_d", "com.enzo.module_d.ui.activity.MDHookActivity"));
-            startActivity(intent);
         } else if (id == R.id.btn_av_loading) {
             Intent intent = new Intent(getContext(), MDAVLoadingActivity.class);
             startActivity(intent);
