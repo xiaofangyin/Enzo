@@ -14,7 +14,8 @@ Proxy
 
 Stub(抽象类，没有实现aidl接口的方法)
 abstract class Stub extends android.os.Binder implements ICalculateInterface{
-    @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException{
+    @Override
+    public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException{
         switch(code){
                 case TRANSACTION_add:
                     {
