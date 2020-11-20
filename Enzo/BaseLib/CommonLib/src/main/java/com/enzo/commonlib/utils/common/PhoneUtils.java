@@ -16,15 +16,16 @@ public class PhoneUtils {
 
     private static PhoneUtils instance;
 
-    private String combinedID;
-    private String versionname;
-    private String versioncode;
-    private String ostype;
-    private String phonetype;
-    private int osversion;
-    private int screenwidth;
-    private int screenheight;
-    private int density;
+    private String combinedID;//device token
+    private String versionname;//apk版本名称
+    private String versioncode;//apk版本号
+    private String ostype;////获得当前手机系统
+    private String brand;//获得当前手机品牌
+    private String model;//获得当前手机型号
+    private int osversion;//获得当前系统版本号
+    private int screenwidth;//获得当前屏幕的X宽度
+    private int screenheight;//获得当前屏幕的Y高度
+    private int density;//获得当前屏幕的密度
 
     private PhoneUtils() {
     }
@@ -45,7 +46,8 @@ public class PhoneUtils {
         this.versionname = ApkUtils.getVersionName(context);
         this.versioncode = String.valueOf(ApkUtils.getVersionCode(context));
         this.osversion = android.os.Build.VERSION.SDK_INT;//获得当前系统版本号
-        this.phonetype = android.os.Build.MODEL;//获得当前手机型号
+        this.brand = android.os.Build.BRAND;//获得当前手机品牌
+        this.model = android.os.Build.MODEL;//获得当前手机型号
         this.screenwidth = DensityUtil.getScreenWidth(context);//获得当前屏幕的X宽度
         this.screenheight = DensityUtil.getScreenHeight(context);//获得当前屏幕的Y高度
         this.density = DensityUtil.getScreenDensity(context);//获得当前屏幕的密度
@@ -66,8 +68,11 @@ public class PhoneUtils {
         if (!params.containsKey("osversion")) {
             params.put("osversion", "" + osversion);
         }
-        if (!params.containsKey("phonetype")) {
-            params.put("phonetype", "" + phonetype);
+        if (!params.containsKey("brand")) {
+            params.put("brand", "" + brand);
+        }
+        if (!params.containsKey("model")) {
+            params.put("model", "" + model);
         }
         if (!params.containsKey("screenwidth")) {
             params.put("screenwidth", "" + screenwidth);
