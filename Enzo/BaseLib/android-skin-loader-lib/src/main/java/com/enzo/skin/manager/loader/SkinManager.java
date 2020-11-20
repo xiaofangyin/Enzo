@@ -66,10 +66,12 @@ public class SkinManager implements ISkinLoader {
     }
 
     public void restoreDefaultTheme() {
-        SkinConfig.saveSkinPath(context, SkinConfig.DEFAULT_SKIN);
-        isDefaultSkin = true;
-        mResources = context.getResources();
-        notifySkinUpdate();
+        if (context != null) {
+            SkinConfig.saveSkinPath(context, SkinConfig.DEFAULT_SKIN);
+            isDefaultSkin = true;
+            mResources = context.getResources();
+            notifySkinUpdate();
+        }
     }
 
     public void load() {
