@@ -16,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 public class ApkUtils {
@@ -32,6 +34,11 @@ public class ApkUtils {
             return context.getResources().getString(labelRes);
         } catch (NameNotFoundException e) {
             e.printStackTrace();
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            LogUtil.e("getAppName message: " + str);
         }
         return null;
     }
