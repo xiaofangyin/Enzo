@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.banner.transformer.CoverModeTransformer;
+import com.enzo.commonlib.widget.banner.transformer.HorizontalStackTransformerWithRotation;
 import com.enzo.commonlib.widget.banner.transformer.RotationPageTransformer;
 import com.enzo.commonlib.widget.banner.transformer.ZoomOutPageTransformer;
 
@@ -115,6 +115,11 @@ public class IGGBanner extends RelativeLayout {
         viewPager.setLayoutParams(layoutParams);
         viewPager.setClipChildren(false);
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+    }
+
+    public void setHorizontalStackStyle(int offscreenPageLimit) {
+        viewPager.setOffscreenPageLimit(offscreenPageLimit);
+        viewPager.setPageTransformer(true, new HorizontalStackTransformerWithRotation(viewPager));
     }
 
     public void setRotationStyle() {

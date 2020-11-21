@@ -57,6 +57,7 @@ public class MDBannerActivity extends BaseActivity {
     public void initView() {
         banner = findViewById(R.id.md_circle_banner);
         banner.setIndicatorAlign(IGGBanner.IndicatorAlign.LEFT);
+        banner.setHorizontalStackStyle(3);
         banner.setAdapter(new IGGBaseBannerAdapter(this) {
             @Override
             public View generateItem(IGGBannerBean bean, int position) {
@@ -80,7 +81,7 @@ public class MDBannerActivity extends BaseActivity {
 
             @Override
             public int getIndicatorResource() {
-                return R.drawable.lib_selector_banner_indicator;
+                return 0;
             }
         });
 
