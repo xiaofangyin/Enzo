@@ -97,44 +97,6 @@ public class IGGBanner extends RelativeLayout {
         });
     }
 
-    public void setMeiZuStyle() {
-        setClipChildren(false);
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        layoutParams.leftMargin = dip2px(30);
-        layoutParams.rightMargin = dip2px(30);
-        viewPager.setLayoutParams(layoutParams);
-        viewPager.setClipChildren(false);
-        viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
-    }
-
-    public void setZoomOutStyle() {
-        setClipChildren(false);
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        layoutParams.leftMargin = dip2px(30);
-        layoutParams.rightMargin = dip2px(30);
-        viewPager.setLayoutParams(layoutParams);
-        viewPager.setClipChildren(false);
-        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-    }
-
-    public void setHorizontalStackStyle(int offscreenPageLimit) {
-        viewPager.setOffscreenPageLimit(offscreenPageLimit);
-        viewPager.setPageTransformer(true, new HorizontalStackTransformerWithRotation(viewPager));
-    }
-
-    public void setRotationStyle() {
-        viewPager.setPageTransformer(true, new RotationPageTransformer());
-    }
-
-    /**
-     * 默认情况clipToPadding为true,也就是把padding中的值进行裁剪
-     */
-    public void setNotClipToPadding(int padding, int pageMargin) {
-        viewPager.setClipToPadding(false);
-        viewPager.setPadding(padding, 0, padding, 0);
-        viewPager.setPageMargin(pageMargin);
-    }
-
     public void setIndicatorAlign(IndicatorAlign align) {
         RelativeLayout.LayoutParams lp;
         if (indicatorLayout.getLayoutParams() != null) {
@@ -256,6 +218,46 @@ public class IGGBanner extends RelativeLayout {
         int remainder = halfValue % mData.size();
         return halfValue - remainder;
     }
+
+    //////////////////////////////////////////////设置Style//////////////////////////////////////////////
+    public void setMeiZuStyle() {
+        setClipChildren(false);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        layoutParams.leftMargin = dip2px(30);
+        layoutParams.rightMargin = dip2px(30);
+        viewPager.setLayoutParams(layoutParams);
+        viewPager.setClipChildren(false);
+        viewPager.setPageTransformer(true, new CoverModeTransformer(viewPager));
+    }
+
+    public void setZoomOutStyle() {
+        setClipChildren(false);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        layoutParams.leftMargin = dip2px(30);
+        layoutParams.rightMargin = dip2px(30);
+        viewPager.setLayoutParams(layoutParams);
+        viewPager.setClipChildren(false);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+    }
+
+    public void setHorizontalStackStyle(int offscreenPageLimit) {
+        viewPager.setOffscreenPageLimit(offscreenPageLimit);
+        viewPager.setPageTransformer(true, new HorizontalStackTransformerWithRotation(viewPager));
+    }
+
+    public void setRotationStyle() {
+        viewPager.setPageTransformer(true, new RotationPageTransformer());
+    }
+
+    /**
+     * 默认情况clipToPadding为true,也就是把padding中的值进行裁剪
+     */
+    public void setNotClipToPadding(int padding, int pageMargin) {
+        viewPager.setClipToPadding(false);
+        viewPager.setPadding(padding, 0, padding, 0);
+        viewPager.setPageMargin(pageMargin);
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public interface OnBannerClickListener {
         void onBannerClick(IGGBannerBean bean);
