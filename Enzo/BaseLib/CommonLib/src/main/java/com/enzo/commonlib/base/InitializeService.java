@@ -13,13 +13,13 @@ import androidx.annotation.Nullable;
 
 import com.enzo.commonlib.BuildConfig;
 import com.enzo.commonlib.utils.common.ActivityHelper;
+import com.enzo.commonlib.utils.common.ApkUtils;
 import com.enzo.commonlib.utils.common.ExternalCacheUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.common.PhoneUtils;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
-import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.skin.manager.loader.SkinManager;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.internal.LeakCanaryInternals;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -66,7 +66,11 @@ public class InitializeService extends IntentService {
     }
 
     private void performInit(Application application) {
-        LogUtil.d("InitializeService performInit...");
+        Context context = application.getApplicationContext();
+        // 获取当前进程名
+        String processName = ApkUtils.getProcessName(android.os.Process.myPid());
+        LogUtil.d("InitializeService performInit..." + processName);
+
         long beforeTime = System.currentTimeMillis();
         if (BuildConfig.DEBUG) {
             Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
@@ -92,12 +96,10 @@ public class InitializeService extends IntentService {
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
-            LeakCanary.install(application);
+            if (LeakCanaryInternals.installedRefWatcher == null) {
+                LeakCanary.install(application);
+            }
         }
-        //toast
-        ToastUtil.initialize(application);
-        //初始化手机参数
-        PhoneUtils.getInstance().init(application);
         //初始化崩溃捕获
         CrashManager.getInstance().init(application);
         // 初始化Bugly appId:8ac8d8a126   appKey:6552f636-bb34-4146-845e-637f57785e1c
