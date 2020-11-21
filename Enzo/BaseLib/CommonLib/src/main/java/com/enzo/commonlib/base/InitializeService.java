@@ -66,7 +66,6 @@ public class InitializeService extends IntentService {
     }
 
     private void performInit(Application application) {
-        Context context = application.getApplicationContext();
         // 获取当前进程名
         String processName = ApkUtils.getProcessName(android.os.Process.myPid());
         LogUtil.d("InitializeService performInit..." + processName);
