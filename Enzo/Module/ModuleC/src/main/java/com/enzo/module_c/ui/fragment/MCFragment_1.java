@@ -100,7 +100,6 @@ public class MCFragment_1 extends BaseFragment {
             }
         });
         mRMSwitch1.setChecked(true);
-        mRMSwitch1.setEnabled(false);
         mRMSwitch1.setForceAspectRatio(false);
         mRMSwitch1.setSwitchBkgCheckedColor(ContextCompat.getColor(rootView.getContext(), R.color.color_green));
         mRMSwitch1.setSwitchBkgNotCheckedColor(ContextCompat.getColor(rootView.getContext(), R.color.color_red));

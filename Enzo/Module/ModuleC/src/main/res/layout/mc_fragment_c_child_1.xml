@@ -331,7 +331,7 @@
 
                 <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
                     android:id="@+id/rm_switch6"
-                    android:layout_width="72dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
                     app:forceAspectRatio="false"
                     app:switchBkgCheckedColor="#4CAF50"
@@ -381,7 +381,7 @@
 
                 <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
                     android:id="@+id/rm_switch1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="54dp"
                     android:layout_height="wrap_content" />
 
                 <TextView
