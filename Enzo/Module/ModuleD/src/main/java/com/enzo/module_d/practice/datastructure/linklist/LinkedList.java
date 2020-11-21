@@ -13,9 +13,7 @@ public class LinkedList<T> {
     //添加节点
     //在头部添加节点
     public void put(T data) {
-        Node head = list;
-        Node curNode = new Node(data, list);
-        list = curNode;
+        list = new Node(data, list);
         size++;
     }
 
@@ -28,8 +26,7 @@ public class LinkedList<T> {
             head = cur;
             cur = cur.next;
         }
-        Node node = new Node(data, cur);
-        head.next = node;
+        head.next = new Node(data, cur);
         size++;
 
     }

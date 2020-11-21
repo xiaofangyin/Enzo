@@ -43,8 +43,7 @@ public class LruLinkedList<T> extends LinkedList<T> {
         T resultData = node.data;
         //将访问的节点移到表头
         pre.next = node.next;
-        Node head = list;
-        node.next = head;
+        node.next = list;
         list = node;
         return resultData;
     }
