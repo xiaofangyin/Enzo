@@ -1,0 +1,21 @@
+ArrayList<ViewHolder> mAttachedScrap：
+缓存屏幕中可见范围的ViewHolder
+
+ArrayList<ViewHolder> mCachedViews：
+缓存滑动时即将与RecyclerView分离的ViewHolder，按子View的position或id缓存，默认最多存放2个
+
+ViewCacheExtension mViewCacheExtension
+开发者自行实现的缓存
+
+RecycledViewPool mRecyclerPool
+ViewHolder缓存池，本质上是一个SparseArray，其中key是ViewType(int类型)，
+value存放的是 ArrayList< ViewHolder>，默认每个ArrayList中最多存放5个ViewHolder
+
+
+
+通过mAttachedScrap、mCachedViews及mViewCacheExtension获取的ViewHolder不需要重新创建布局
+及绑定数据；通过缓存池mRecyclerPool获取的ViewHolder不需要重新创建布局，但是需要重新绑定数据；
+如果上述缓存中都没有获取到目标ViewHolder，那么就会回调Adapter#onCreateViewHolder创建布局，
+以及回调Adapter#onBindViewHolder来绑定数据。
+
+
