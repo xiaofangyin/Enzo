@@ -36,6 +36,7 @@ import com.enzo.module_d.R;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDAidlActivity;
 import com.enzo.module_d.ui.activity.MDBannerActivity;
+import com.enzo.module_d.ui.activity.MDBoltsActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
@@ -143,6 +144,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_retrofit).setOnClickListener(this);
         rootView.findViewById(R.id.btn_group_item).setOnClickListener(this);
         rootView.findViewById(R.id.btn_handler_thread).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_bolts).setOnClickListener(this);
     }
 
     @Override
@@ -317,6 +319,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_handler_thread) {
             Intent intent = new Intent(getContext(), MDHandlerThreadActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_bolts) {
+            Intent intent = new Intent(getContext(), MDBoltsActivity.class);
             startActivity(intent);
         }
     }

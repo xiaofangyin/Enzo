@@ -101,6 +101,9 @@
         <activity
             android:name=".ui.activity.MDHandlerThreadActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDBoltsActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
