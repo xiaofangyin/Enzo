@@ -3,13 +3,18 @@ package com.enzo.commonlib.base;
 import android.app.Activity;
 import android.app.Application;
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import com.enzo.commonlib.BuildConfig;
 import com.enzo.commonlib.utils.common.ActivityHelper;
@@ -45,7 +50,12 @@ public class InitializeService extends IntentService {
     public static void start(Context context) {
         Intent intent = new Intent(context, InitializeService.class);
         intent.setAction(ACTION_INIT_WHEN_APP_CREATE);
-        context.startService(intent);
+        if (Build.VERSION.SDK_INT >= 26) {
+            context.startForegroundService(intent);
+        } else {
+            // Pre-O behavior.
+            context.startService(intent);
+        }
     }
 
     @Override
@@ -57,6 +67,18 @@ public class InitializeService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         LogUtil.d("InitializeService onHandleIntent...");
+        if (Build.VERSION.SDK_INT >= 26) {
+            String CHANNEL_ID = "InitializeId";
+            String CHANNEL_NAME = "Initialize";
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setContentTitle("")
+                    .setContentText("")
+                    .build();
+            startForeground(1024, notification);
+        }
+
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_INIT_WHEN_APP_CREATE.equals(action)) {
