@@ -50,7 +50,7 @@ public class InitializeService extends IntentService {
     public static void start(Context context) {
         Intent intent = new Intent(context, InitializeService.class);
         intent.setAction(ACTION_INIT_WHEN_APP_CREATE);
-        if (Build.VERSION.SDK_INT >= 26) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(intent);
         } else {
             // Pre-O behavior.
@@ -67,7 +67,7 @@ public class InitializeService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         LogUtil.d("InitializeService onHandleIntent...");
-        if (Build.VERSION.SDK_INT >= 26) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String CHANNEL_ID = "InitializeId";
             String CHANNEL_NAME = "Initialize";
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
