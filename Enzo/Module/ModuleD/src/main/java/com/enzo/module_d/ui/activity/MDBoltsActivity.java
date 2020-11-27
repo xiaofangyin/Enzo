@@ -7,6 +7,7 @@ import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.bolts.Continuation;
 import com.enzo.commonlib.utils.bolts.Task;
 import com.enzo.commonlib.utils.common.LogUtil;
+import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
 
 import java.util.ArrayList;
@@ -17,6 +18,19 @@ import java.util.concurrent.Callable;
  * http://www.mamicode.com/info-detail-1334607.html
  */
 public class MDBoltsActivity extends BaseActivity {
+
+    @Override
+    public void initHeader() {
+        super.initHeader();
+        HeadWidget headWidget = findViewById(R.id.header_view);
+        headWidget.setTitle("Bolts");
+        headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     @Override
     public int getLayoutId() {
@@ -178,7 +192,24 @@ public class MDBoltsActivity extends BaseActivity {
         findViewById(R.id.btn_delay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Task.call(new Callable<Integer>() {
+                    @Override
+                    public Integer call() throws Exception {
+                        LogUtil.e("delay..." + Thread.currentThread().getName());
+                        Thread.sleep(3000);
+                        return 3 + 7;
+                    }
+                }, Task.BACKGROUND_EXECUTOR).continueWith(new Continuation<Integer, Void>() {
+                    @Override
+                    public Void then(Task<Integer> task) throws Exception {
+                        if (task.isFaulted()) {
+                            LogUtil.e("delay then faulted..." + Thread.currentThread().getName());
+                        } else if (task.isCompleted()) {
+                            LogUtil.e("delay then completed..." + Thread.currentThread().getName());
+                        }
+                        return null;
+                    }
+                }, Task.UI_THREAD_EXECUTOR);
             }
         });
     }
