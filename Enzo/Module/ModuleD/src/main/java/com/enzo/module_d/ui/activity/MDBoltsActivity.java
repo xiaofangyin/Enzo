@@ -12,7 +12,10 @@ import com.enzo.module_d.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * http://www.mamicode.com/info-detail-1334607.html
@@ -75,17 +78,18 @@ public class MDBoltsActivity extends BaseActivity {
                         LogUtil.e("continue with..." + Thread.currentThread().getName());
                         return 3 + 7;
                     }
-                }, Task.BACKGROUND_EXECUTOR).continueWith(new Continuation<Integer, Void>() {
-                    @Override
-                    public Void then(Task<Integer> task) throws Exception {
-                        if (task.isFaulted()) {
-                            LogUtil.e("continue with then faulted..." + Thread.currentThread().getName());
-                        } else if (task.isCompleted()) {
-                            LogUtil.e("continue with then completed..." + Thread.currentThread().getName());
-                        }
-                        return null;
-                    }
-                }, Task.UI_THREAD_EXECUTOR);
+                }, Task.BACKGROUND_EXECUTOR)
+                        .continueWith(new Continuation<Integer, Void>() {
+                            @Override
+                            public Void then(Task<Integer> task) throws Exception {
+                                if (task.isFaulted()) {
+                                    LogUtil.e("continue with then faulted..." + Thread.currentThread().getName());
+                                } else if (task.isCompleted()) {
+                                    LogUtil.e("continue with then completed..." + Thread.currentThread().getName());
+                                }
+                                return null;
+                            }
+                        }, Task.UI_THREAD_EXECUTOR);
             }
         });
 
@@ -99,13 +103,14 @@ public class MDBoltsActivity extends BaseActivity {
                         LogUtil.e("on success..." + Thread.currentThread().getName());
                         return 3 + 7;
                     }
-                }, Task.BACKGROUND_EXECUTOR).onSuccess(new Continuation<Integer, Void>() {
-                    @Override
-                    public Void then(Task<Integer> task) throws Exception {
-                        LogUtil.e("on success then..." + Thread.currentThread().getName());
-                        return null;
-                    }
-                });
+                }, Task.BACKGROUND_EXECUTOR)
+                        .onSuccess(new Continuation<Integer, Void>() {
+                            @Override
+                            public Void then(Task<Integer> task) throws Exception {
+                                LogUtil.e("on success then..." + Thread.currentThread().getName());
+                                return null;
+                            }
+                        });
             }
         });
 
@@ -119,19 +124,21 @@ public class MDBoltsActivity extends BaseActivity {
                         LogUtil.e("sync task call..." + Thread.currentThread().getName());
                         return 6 + 8;
                     }
-                }, Task.BACKGROUND_EXECUTOR).onSuccess(new Continuation<Integer, Void>() {
-                    @Override
-                    public Void then(Task<Integer> task) throws Exception {
-                        LogUtil.e("sync task on success then..." + Thread.currentThread().getName());
-                        return null;
-                    }
-                }, Task.BACKGROUND_EXECUTOR).continueWith(new Continuation<Void, String>() {
-                    @Override
-                    public String then(Task<Void> task) throws Exception {
-                        LogUtil.e("sync task continue with then..." + Thread.currentThread().getName());
-                        return null;
-                    }
-                }, Task.UI_THREAD_EXECUTOR);
+                }, Task.BACKGROUND_EXECUTOR)
+                        .onSuccess(new Continuation<Integer, Void>() {
+                            @Override
+                            public Void then(Task<Integer> task) throws Exception {
+                                LogUtil.e("sync task on success then..." + Thread.currentThread().getName());
+                                return null;
+                            }
+                        }, Task.BACKGROUND_EXECUTOR)
+                        .continueWith(new Continuation<Void, String>() {
+                            @Override
+                            public String then(Task<Void> task) throws Exception {
+                                LogUtil.e("sync task continue with then..." + Thread.currentThread().getName());
+                                return null;
+                            }
+                        }, Task.UI_THREAD_EXECUTOR);
             }
         });
 
@@ -188,6 +195,7 @@ public class MDBoltsActivity extends BaseActivity {
             }
         });
 
+        final ExecutorService executorService = Executors.newSingleThreadExecutor();
         //task执行continueWith之前还可以进行延时，只需要在调用continueWith之前调用.delay(time)即可
         findViewById(R.id.btn_delay).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,20 +204,27 @@ public class MDBoltsActivity extends BaseActivity {
                     @Override
                     public Integer call() throws Exception {
                         LogUtil.e("delay..." + Thread.currentThread().getName());
-                        Thread.sleep(3000);
-                        return 3 + 7;
-                    }
-                }, Task.BACKGROUND_EXECUTOR).continueWith(new Continuation<Integer, Void>() {
-                    @Override
-                    public Void then(Task<Integer> task) throws Exception {
-                        if (task.isFaulted()) {
-                            LogUtil.e("delay then faulted..." + Thread.currentThread().getName());
-                        } else if (task.isCompleted()) {
-                            LogUtil.e("delay then completed..." + Thread.currentThread().getName());
+                        int a = new Random().nextInt(10);
+                        int b = new Random().nextInt(10);
+                        Thread.sleep(2000);
+                        if (a + b > 10) {
+                            throw new RuntimeException("error: a + b = " + (a + b));
+                        } else {
+                            return a + b;
                         }
-                        return null;
                     }
-                }, Task.UI_THREAD_EXECUTOR);
+                }, executorService)
+                        .continueWith(new Continuation<Integer, Void>() {
+                            @Override
+                            public Void then(Task<Integer> task) throws Exception {
+                                if (task.isFaulted()) {
+                                    LogUtil.e("delay then faulted..." + task.getError().getMessage());
+                                } else if (task.isCompleted()) {
+                                    LogUtil.e("delay then completed..." + Thread.currentThread().getName() + "...result: " + task.getResult());
+                                }
+                                return null;
+                            }
+                        }, Task.UI_THREAD_EXECUTOR);
             }
         });
     }

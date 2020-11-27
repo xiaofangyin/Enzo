@@ -50,6 +50,6 @@
             android:id="@+id/btn_delay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="延时" />
+            android:text="异常" />
     </LinearLayout>
 </LinearLayout>
