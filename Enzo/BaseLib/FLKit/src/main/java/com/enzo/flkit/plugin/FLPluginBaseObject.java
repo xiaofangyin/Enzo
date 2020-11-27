@@ -12,6 +12,7 @@ public abstract class FLPluginBaseObject {
     public String rid = "";     //设备标识
     public String alias = "";     //设备名称
     public FLPluginBaseObjectDelegate delegate;
+    public boolean animated = false;
 
     //生成相应的item
     public abstract FLPluginBaseCell buildCellWithStyle(FLPluginCellStyle pluginStyle);

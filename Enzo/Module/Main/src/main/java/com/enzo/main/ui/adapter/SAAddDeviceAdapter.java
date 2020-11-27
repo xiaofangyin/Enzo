@@ -4,6 +4,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -68,6 +69,13 @@ public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObje
             if (baseCell != null) {
                 baseCell.layoutWithModel(model);
                 flContainer.addView(baseCell);
+            }
+
+            if (!model.animated) {
+                model.animated = true;
+                itemView.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.main_anim_recycler_item_in));
+            } else {
+                itemView.clearAnimation();
             }
         }
 
