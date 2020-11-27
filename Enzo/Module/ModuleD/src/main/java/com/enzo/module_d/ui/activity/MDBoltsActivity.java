@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+/**
+ * http://www.mamicode.com/info-detail-1334607.html
+ */
 public class MDBoltsActivity extends BaseActivity {
 
     @Override
