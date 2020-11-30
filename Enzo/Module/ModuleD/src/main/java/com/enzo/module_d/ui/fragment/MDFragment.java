@@ -33,7 +33,7 @@ import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.BuildConfig;
 import com.enzo.module_d.R;
-import com.enzo.module_d.plugin.MDPluginManager;
+import com.enzo.module_d.plugin.MDPluginHostDelegate;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDAidlActivity;
 import com.enzo.module_d.ui.activity.MDBannerActivity;
@@ -151,7 +151,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void lazyLoad() {
         new ImageLoader.Builder(getActivity())
-                .load(MDPluginManager.getInstance().getManager().getAccountInfo().getmAvatarUrl())
+                .load(MDPluginHostDelegate.getInstance().getAccountInfo().getmAvatarUrl())
                 .placeHolder(R.mipmap.icon_user_default_avatar)
                 .build()
                 .into(ivAvatar);
