@@ -43,7 +43,7 @@ import com.enzo.commonlib.widget.popup.YGravity;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
-import com.enzo.flkit.services.ServicesLoader;
+import com.enzo.flkit.services.FLServiceLoader;
 import com.enzo.module_a.BuildConfig;
 import com.enzo.module_a.R;
 import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
@@ -122,7 +122,7 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ServicesLoader.load(FLPluginHostDelegate.class).openDrawer(getActivity(), Gravity.START);
+                FLServiceLoader.load(FLPluginHostDelegate.class).openDrawer(getActivity(), Gravity.START);
             }
         });
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {

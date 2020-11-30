@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.flkit.plugin.FLPluginInterface;
-import com.enzo.flkit.services.ServicesLoader;
+import com.enzo.flkit.services.FLServiceLoader;
 import com.enzo.main.app.MainApplication;
 import com.enzo.main.plugin.SAPluginManager;
 
@@ -62,7 +62,7 @@ public class App extends MainApplication {
     }
 
     private void initFactory() {
-        List<FLPluginInterface> factoryList = ServicesLoader.loadList(FLPluginInterface.class);
+        List<FLPluginInterface> factoryList = FLServiceLoader.loadList(FLPluginInterface.class);
         SAPluginManager.getInstance().init(factoryList);
     }
 }

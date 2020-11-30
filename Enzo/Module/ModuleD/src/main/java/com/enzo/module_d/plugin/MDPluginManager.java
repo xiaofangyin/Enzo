@@ -2,14 +2,14 @@ package com.enzo.module_d.plugin;
 
 import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.plugin.FLPluginTypeList;
-import com.enzo.flkit.services.ServicesLoader;
+import com.enzo.flkit.services.FLServiceLoader;
 
 import java.util.List;
 
 public class MDPluginManager {
 
     private static volatile MDPluginManager mInstance;
-    private FLPluginInterface baseManagerImpl;
+    private FLPluginInterface pluginImpl;
 
     private MDPluginManager() {
 
@@ -27,14 +27,14 @@ public class MDPluginManager {
     }
 
     public FLPluginInterface getManager() {
-        if (baseManagerImpl == null) {
-            List<FLPluginInterface> list = ServicesLoader.loadList(FLPluginInterface.class);
+        if (pluginImpl == null) {
+            List<FLPluginInterface> list = FLServiceLoader.loadList(FLPluginInterface.class);
             for (int i = 0; i < list.size(); i++) {
                 if (FLPluginTypeList.FL_DEVICE_TYPE_D == list.get(i).getPluginType()) {
-                    baseManagerImpl = list.get(i);
+                    pluginImpl = list.get(i);
                 }
             }
         }
-        return baseManagerImpl;
+        return pluginImpl;
     }
 }
