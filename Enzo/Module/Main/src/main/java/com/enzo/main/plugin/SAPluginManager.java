@@ -1,6 +1,6 @@
 package com.enzo.main.plugin;
 
-import com.enzo.flkit.plugin.FLPluginBaseManagerInterface;
+import com.enzo.flkit.plugin.FLPluginInterface;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class SAPluginManager {
 
     private static SAPluginManager mInstance;
-    private List<FLPluginBaseManagerInterface> mFactoryList;
+    private List<FLPluginInterface> mFactoryList;
 
     private SAPluginManager() {
 
@@ -30,11 +30,11 @@ public class SAPluginManager {
         return mInstance;
     }
 
-    public void init( List<FLPluginBaseManagerInterface> factoryList) {
+    public void init( List<FLPluginInterface> factoryList) {
         this.mFactoryList = factoryList;
     }
 
-    public List<FLPluginBaseManagerInterface> getFactoryList() {
+    public List<FLPluginInterface> getFactoryList() {
         return mFactoryList;
     }
 }

@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.flkit.account.UserAccountInfo;
-import com.enzo.flkit.plugin.FLPluginBaseManagerInterface;
+import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.main.model.manager.AccountManager;
 import com.enzo.main.ui.activity.SAMainActivity;
@@ -43,7 +43,7 @@ public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
 
     @Override
     public void releaseResources() {
-        List<FLPluginBaseManagerInterface> factoryList = SAPluginManager.getInstance().getFactoryList();
+        List<FLPluginInterface> factoryList = SAPluginManager.getInstance().getFactoryList();
         for (int i = 0; i < factoryList.size(); i++) {
             factoryList.get(i).releaseResources();
         }

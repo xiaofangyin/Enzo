@@ -31,7 +31,7 @@ import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.flkit.router.ModuleCRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
-import com.enzo.flkit.services.Services;
+import com.enzo.flkit.services.ServicesLoader;
 import com.enzo.main.R;
 import com.enzo.main.config.TabEntityConfig;
 import com.enzo.skin.manager.loader.SkinManager;
@@ -220,6 +220,6 @@ public class SAMainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Services.load(FLPluginHostDelegate.class).releaseResources();
+        ServicesLoader.load(FLPluginHostDelegate.class).releaseResources();
     }
 }

@@ -1,25 +1,25 @@
-package com.enzo.module_d.plugin;
+package com.enzo.module_a.plugin;
 
 import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
-import com.enzo.flkit.plugin.FLPluginBaseManagerInterface;
+import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginTypeList;
-import com.enzo.module_d.ui.fragment.MDFragment;
+import com.enzo.module_a.ui.fragment.MAFragment;
 import com.google.auto.service.AutoService;
 
 import org.json.JSONObject;
 
-@AutoService(FLPluginBaseManagerInterface.class)
-public class MDPluginManagerImpl implements FLPluginBaseManagerInterface {
+@AutoService(FLPluginInterface.class)
+public class MAPluginImpl implements FLPluginInterface {
 
-    public static final String PLUGIN_NAME = "Module D";
+    public static final String PLUGIN_NAME = "Module A";
 
     @Override
     public int getPluginType() {
-        return FLPluginTypeList.FL_DEVICE_TYPE_D;
+        return FLPluginTypeList.FL_DEVICE_TYPE_A;
     }
 
     @Override
@@ -29,8 +29,8 @@ public class MDPluginManagerImpl implements FLPluginBaseManagerInterface {
 
     @Override
     public FLPluginBaseObject buildNormalPluginCellModel(JSONObject data) {
-        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_D) {
-            MDNormalPluginModel normalPluginModel = new MDNormalPluginModel();
+        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_A) {
+            MANormalPluginModel normalPluginModel = new MANormalPluginModel();
             normalPluginModel.type = data.optInt("type");
             normalPluginModel.rid = data.optString("rid");
             normalPluginModel.alias = getPluginName() + " " + data.optString("alias");
@@ -41,7 +41,7 @@ public class MDPluginManagerImpl implements FLPluginBaseManagerInterface {
 
     @Override
     public Fragment buildHomeTabFragment() {
-        return new MDFragment();
+        return new MAFragment();
     }
 
     @Override

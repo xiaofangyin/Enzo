@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
  */
-public interface FLPluginBaseManagerInterface {
+public interface FLPluginInterface {
 
     int getPluginType();
 

@@ -1,14 +1,13 @@
 package com.enzo.xiaofy;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
 
 import com.enzo.commonlib.env.EnvConstants;
-import com.enzo.flkit.plugin.FLPluginBaseManagerInterface;
-import com.enzo.flkit.services.Services;
+import com.enzo.flkit.plugin.FLPluginInterface;
+import com.enzo.flkit.services.ServicesLoader;
 import com.enzo.main.app.MainApplication;
 import com.enzo.main.plugin.SAPluginManager;
 
@@ -49,7 +48,7 @@ public class App extends MainApplication {
     public void onCreate() {
         super.onCreate();
         initEnv();
-        initFactory(this);
+        initFactory();
     }
 
     @Override
@@ -62,15 +61,8 @@ public class App extends MainApplication {
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
     }
 
-    private void initFactory(Application application) {
-//        List<FLPluginBaseManager> factoryList = new ArrayList<>();
-//        factoryList.add(MAPluginManager.getInstance());
-//        factoryList.add(MBPluginManager.getInstance());
-//        factoryList.add(MCPluginManager.getInstance());
-//        factoryList.add(MDPluginManager.getInstance());
-//        SAFactoryManager.getInstance().init(application, factoryList);
-
-        List<FLPluginBaseManagerInterface> factoryList = Services.loadList(FLPluginBaseManagerInterface.class);
+    private void initFactory() {
+        List<FLPluginInterface> factoryList = ServicesLoader.loadList(FLPluginInterface.class);
         SAPluginManager.getInstance().init(factoryList);
     }
 }

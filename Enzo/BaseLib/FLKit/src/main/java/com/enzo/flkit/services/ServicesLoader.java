@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ServiceLoader;
 
-public final class Services {
+public final class ServicesLoader {
 
     public static <T> T load(Class<T> tClass) throws ServiceNotFoundException {
         Iterator<T> iterator = ServiceLoader.load(tClass).iterator();
