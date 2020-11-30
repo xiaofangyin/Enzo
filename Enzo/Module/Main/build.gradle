@@ -58,6 +58,6 @@ dependencies {
     api rootProject.ext.dependencies.arouter
     annotationProcessor rootProject.ext.dependencies.arouter_annotation
     //auto-service
-    annotationProcessor "com.google.auto.service:auto-service:1.0-rc4"
-    compileOnly "com.google.auto.service:auto-service:1.0-rc4"
+    annotationProcessor rootProject.ext.dependencies.auto_service
+    compileOnly rootProject.ext.dependencies.auto_service
 }
