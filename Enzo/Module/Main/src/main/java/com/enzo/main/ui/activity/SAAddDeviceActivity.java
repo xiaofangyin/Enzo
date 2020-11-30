@@ -176,7 +176,7 @@ public class SAAddDeviceActivity extends BaseActivity implements FLPluginBaseObj
     }
 
     private List<FLPluginBaseObject> getObjectList(List<JSONObject> dataList) {
-        List<FLPluginInterface> factories = SAPluginManager.getInstance().getFactoryList();
+        List<FLPluginInterface> factories = SAPluginManager.getInstance().getPluginList();
         List<FLPluginBaseObject> baseObjects = new ArrayList<>();
         for (int i = 0; i < dataList.size(); i++) {
             for (int j = 0; j < factories.size(); j++) {

@@ -49,7 +49,7 @@ public class MAPluginImpl implements FLPluginInterface {
     }
 
     @Override
-    public boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state) {
+    public boolean onDidReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state) {
         return false;
     }
 
@@ -59,7 +59,7 @@ public class MAPluginImpl implements FLPluginInterface {
     }
 
     @Override
-    public void releaseResources() {
+    public void onReleaseResources() {
 
     }
 }

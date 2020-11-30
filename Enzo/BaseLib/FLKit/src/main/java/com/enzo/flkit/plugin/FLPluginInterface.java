@@ -26,11 +26,11 @@ public interface FLPluginInterface {
     boolean openURL(String url);
 
     //推送相关
-    boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state);
+    boolean onDidReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state);
 
     //用户退出后会通知各个插件做相应的处理
     void onAppLogout();
 
     //释放资源
-    void releaseResources();
+    void onReleaseResources();
 }

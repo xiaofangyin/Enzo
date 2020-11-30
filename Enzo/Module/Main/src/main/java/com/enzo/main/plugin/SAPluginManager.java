@@ -2,6 +2,7 @@ package com.enzo.main.plugin;
 
 import com.enzo.flkit.plugin.FLPluginInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 public class SAPluginManager {
 
     private static SAPluginManager mInstance;
-    private List<FLPluginInterface> mFactoryList;
+    private final List<FLPluginInterface> mPluginList = new ArrayList<>();
 
     private SAPluginManager() {
 
@@ -30,11 +31,14 @@ public class SAPluginManager {
         return mInstance;
     }
 
-    public void init( List<FLPluginInterface> factoryList) {
-        this.mFactoryList = factoryList;
+    public void init(List<FLPluginInterface> list) {
+        mPluginList.clear();
+        if (list != null) {
+            mPluginList.addAll(list);
+        }
     }
 
-    public List<FLPluginInterface> getFactoryList() {
-        return mFactoryList;
+    public List<FLPluginInterface> getPluginList() {
+        return mPluginList;
     }
 }
