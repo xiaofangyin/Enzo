@@ -61,7 +61,7 @@ public class App extends BaseApplication {
         //登录信息初始化
         AccountManager.getInstance().init(this);
         //初始化配置参数
-        EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
+        EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN);
     }
 
     private void initPlugins() {

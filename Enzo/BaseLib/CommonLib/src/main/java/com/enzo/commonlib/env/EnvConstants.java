@@ -13,8 +13,6 @@ public class EnvConstants {
     private boolean PROD_ENV;
     //是否开启log
     private boolean LOG_OPEN;
-    //微信AppID
-    private String WX_APP_ID;
 
     private EnvConstants() {
 
@@ -31,10 +29,9 @@ public class EnvConstants {
         return mInstance;
     }
 
-    public void init(boolean prodEnv, boolean logOpen, String wxAppId) {
+    public void init(boolean prodEnv, boolean logOpen) {
         this.PROD_ENV = prodEnv;
         this.LOG_OPEN = logOpen;
-        this.WX_APP_ID = wxAppId;
     }
 
     public boolean isLogOpen() {
@@ -43,9 +40,5 @@ public class EnvConstants {
 
     public boolean isProdEnv() {
         return PROD_ENV;
-    }
-
-    public String getWX_APP_ID() {
-        return WX_APP_ID;
     }
 }
