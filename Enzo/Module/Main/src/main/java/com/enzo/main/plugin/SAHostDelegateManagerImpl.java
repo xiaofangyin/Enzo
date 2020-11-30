@@ -55,10 +55,10 @@ public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
 
     @Override
     public void logout() {
+        AccountManager.getInstance().logout();
         List<FLPluginInterface> factoryList = SAPluginManager.getInstance().getPluginList();
         for (int i = 0; i < factoryList.size(); i++) {
             factoryList.get(i).onAppLogout();
         }
-        AccountManager.getInstance().logout();
     }
 }
