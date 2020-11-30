@@ -26,14 +26,14 @@ import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
-import com.enzo.flkit.plugin.FLPluginHostDelegate;
+import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.flkit.router.ModuleCRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
-import com.enzo.flkit.services.FLServiceLoader;
 import com.enzo.main.R;
 import com.enzo.main.config.TabEntityConfig;
+import com.enzo.main.plugin.SAPluginManager;
 import com.enzo.skin.manager.loader.SkinManager;
 
 import java.util.ArrayList;
@@ -220,6 +220,9 @@ public class SAMainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        FLServiceLoader.load(FLPluginHostDelegate.class).releaseResources();
+        List<FLPluginInterface> factoryList = SAPluginManager.getInstance().getPluginList();
+        for (int i = 0; i < factoryList.size(); i++) {
+            factoryList.get(i).onReleaseResources();
+        }
     }
 }
