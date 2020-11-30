@@ -23,8 +23,6 @@ public interface FLPluginInterface {
 
     Fragment buildHomeTabFragment();
 
-    UserAccountInfo getAccountInfo();
-
     boolean openURL(String url);
 
     //推送相关

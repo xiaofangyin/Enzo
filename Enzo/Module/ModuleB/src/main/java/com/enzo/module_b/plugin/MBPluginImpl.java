@@ -2,13 +2,10 @@ package com.enzo.module_b.plugin;
 
 import androidx.fragment.app.Fragment;
 
-import com.enzo.flkit.account.UserAccountInfo;
 import com.enzo.flkit.plugin.FLApplicationState;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
-import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.plugin.FLPluginTypeList;
-import com.enzo.flkit.services.FLServiceLoader;
 import com.enzo.module_b.ui.fragment.MBFragment;
 import com.google.auto.service.AutoService;
 
@@ -44,11 +41,6 @@ public class MBPluginImpl implements FLPluginInterface {
     @Override
     public Fragment buildHomeTabFragment() {
         return new MBFragment();
-    }
-
-    @Override
-    public UserAccountInfo getAccountInfo() {
-        return FLServiceLoader.load(FLPluginHostDelegate.class).getAccountInfo();
     }
 
     @Override
