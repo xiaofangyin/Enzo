@@ -5,10 +5,11 @@ import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
 
+import com.enzo.commonlib.base.BaseApplication;
 import com.enzo.commonlib.env.EnvConstants;
 import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.services.FLServiceLoader;
-import com.enzo.main.app.MainApplication;
+import com.enzo.main.model.manager.AccountManager;
 import com.enzo.main.plugin.SAPluginManager;
 
 import java.util.List;
@@ -37,7 +38,7 @@ import java.util.List;
  * **             佛祖保佑  镇类之宝              **
  * ***********************************************
  */
-public class App extends MainApplication {
+public class App extends BaseApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -48,7 +49,7 @@ public class App extends MainApplication {
     public void onCreate() {
         super.onCreate();
         initEnv();
-        initFactory();
+        initPlugins();
     }
 
     @Override
@@ -57,11 +58,13 @@ public class App extends MainApplication {
     }
 
     private void initEnv() {
+        //登录信息初始化
+        AccountManager.getInstance().init(this);
         //初始化配置参数
         EnvConstants.getInstance().init(BuildConfig.PROD_ENV, BuildConfig.LOG_OPEN, "");
     }
 
-    private void initFactory() {
+    private void initPlugins() {
         List<FLPluginInterface> factoryList = FLServiceLoader.loadList(FLPluginInterface.class);
         SAPluginManager.getInstance().init(factoryList);
     }
