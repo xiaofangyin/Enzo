@@ -1,26 +1,15 @@
 package com.enzo.module_d.plugin;
 
-import androidx.fragment.app.Fragment;
-
-import com.enzo.flkit.account.UserAccountInfo;
-import com.enzo.flkit.plugin.FLApplicationState;
-import com.enzo.flkit.plugin.FLPluginBaseManager;
-import com.enzo.flkit.plugin.FLPluginBaseObject;
-import com.enzo.flkit.plugin.FLPluginHostDelegate;
+import com.enzo.flkit.plugin.FLPluginBaseManagerInterface;
 import com.enzo.flkit.plugin.FLPluginTypeList;
-import com.enzo.module_d.ui.fragment.MDFragment;
+import com.enzo.flkit.services.Services;
 
-import org.json.JSONObject;
+import java.util.List;
 
-/**
- * 文 件 名: MDPluginManager
- * 创 建 人: xiaofangyin
- * 创建日期: 2017/11/18
- * 邮   箱: xiaofangyinwork@163.com
- */
-public class MDPluginManager extends FLPluginBaseManager {
+public class MDPluginManager {
 
     private static volatile MDPluginManager mInstance;
+    private FLPluginBaseManagerInterface baseManagerImpl;
 
     private MDPluginManager() {
 
@@ -37,53 +26,15 @@ public class MDPluginManager extends FLPluginBaseManager {
         return mInstance;
     }
 
-    @Override
-    public String getPluginName() {
-        return "Module D";
-    }
-
-    @Override
-    public void setHostDelegate(FLPluginHostDelegate delegate) {
-        hostDelegate = delegate;
-    }
-
-    @Override
-    public FLPluginBaseObject buildNormalPluginCellModel(JSONObject data) {
-        if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_D) {
-            MDNormalPluginModel normalPluginModel = new MDNormalPluginModel();
-            normalPluginModel.type = data.optInt("type");
-            normalPluginModel.rid = data.optString("rid");
-            normalPluginModel.alias = getPluginName() + " " + data.optString("alias");
-            return normalPluginModel;
+    public FLPluginBaseManagerInterface getManager() {
+        if (baseManagerImpl == null) {
+            List<FLPluginBaseManagerInterface> list = Services.loadList(FLPluginBaseManagerInterface.class);
+            for (int i = 0; i < list.size(); i++) {
+                if (FLPluginTypeList.FL_DEVICE_TYPE_D == list.get(i).getPluginType()) {
+                    baseManagerImpl = list.get(i);
+                }
+            }
         }
-        return null;
-    }
-
-    @Override
-    public Fragment buildHomeTabFragment() {
-        return new MDFragment();
-    }
-
-    @Override
-    public UserAccountInfo getAccountInfo() {
-        if (hostDelegate != null) {
-            return hostDelegate.getAccountInfo();
-        }
-        return null;
-    }
-
-    @Override
-    public boolean didReceiveRemoteNotification(JSONObject jMsg, FLApplicationState state) {
-        return false;
-    }
-
-    @Override
-    public void onAppLogout() {
-
-    }
-
-    @Override
-    public void releaseResources() {
-
+        return baseManagerImpl;
     }
 }

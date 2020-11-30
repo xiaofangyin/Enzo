@@ -1,13 +1,12 @@
 package com.enzo.main.plugin;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.flkit.account.UserAccountInfo;
-import com.enzo.flkit.plugin.FLPluginBaseManager;
+import com.enzo.flkit.plugin.FLPluginBaseManagerInterface;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.main.model.manager.AccountManager;
 import com.enzo.main.ui.activity.SAMainActivity;
@@ -36,13 +35,6 @@ public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
     }
 
     @Override
-    public void initFactories(Application application, List<FLPluginBaseManager> factoryList) {
-        for (int i = 0; i < factoryList.size(); i++) {
-            factoryList.get(i).setHostDelegate(this);
-        }
-    }
-
-    @Override
     public void popToHomeController(Context context) {
         Intent intent = new Intent();
         intent.setClass(context, SAMainActivity.class);
@@ -51,7 +43,7 @@ public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
 
     @Override
     public void releaseResources() {
-        List<FLPluginBaseManager> factoryList = SAFactoryManager.getInstance().getFactoryList();
+        List<FLPluginBaseManagerInterface> factoryList = SAPluginManager.getInstance().getFactoryList();
         for (int i = 0; i < factoryList.size(); i++) {
             factoryList.get(i).releaseResources();
         }

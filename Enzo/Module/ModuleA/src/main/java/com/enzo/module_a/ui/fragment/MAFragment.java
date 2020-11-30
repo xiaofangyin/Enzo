@@ -40,11 +40,12 @@ import com.enzo.commonlib.widget.indicator.magicindicator.buildins.commonnavigat
 import com.enzo.commonlib.widget.popup.EasyPopup;
 import com.enzo.commonlib.widget.popup.XGravity;
 import com.enzo.commonlib.widget.popup.YGravity;
+import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
+import com.enzo.flkit.services.Services;
 import com.enzo.module_a.BuildConfig;
 import com.enzo.module_a.R;
-import com.enzo.module_a.plugin.MAPluginManager;
 import com.enzo.module_a.ui.adapter.MAViewPagerIndicatorAdapter;
 import com.enzo.skin.manager.entity.AttrFactory;
 import com.enzo.skin.manager.entity.DynamicAttr;
@@ -121,9 +122,7 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MAPluginManager.getInstance().hostDelegate != null) {
-                    MAPluginManager.getInstance().hostDelegate.openDrawer(getActivity(), Gravity.START);
-                }
+                Services.load(FLPluginHostDelegate.class).openDrawer(getActivity(), Gravity.START);
             }
         });
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {

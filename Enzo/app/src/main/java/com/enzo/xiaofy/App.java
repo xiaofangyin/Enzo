@@ -7,15 +7,11 @@ import android.content.res.Configuration;
 import androidx.annotation.NonNull;
 
 import com.enzo.commonlib.env.EnvConstants;
-import com.enzo.flkit.plugin.FLPluginBaseManager;
+import com.enzo.flkit.plugin.FLPluginBaseManagerInterface;
+import com.enzo.flkit.services.Services;
 import com.enzo.main.app.MainApplication;
-import com.enzo.main.plugin.SAFactoryManager;
-import com.enzo.module_a.plugin.MAPluginManager;
-import com.enzo.module_b.plugin.MBPluginManager;
-import com.enzo.module_c.plugin.MCPluginManager;
-import com.enzo.module_d.plugin.MDPluginManager;
+import com.enzo.main.plugin.SAPluginManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,11 +63,14 @@ public class App extends MainApplication {
     }
 
     private void initFactory(Application application) {
-        List<FLPluginBaseManager> factoryList = new ArrayList<>();
-        factoryList.add(MAPluginManager.getInstance());
-        factoryList.add(MBPluginManager.getInstance());
-        factoryList.add(MCPluginManager.getInstance());
-        factoryList.add(MDPluginManager.getInstance());
-        SAFactoryManager.getInstance().init(application, factoryList);
+//        List<FLPluginBaseManager> factoryList = new ArrayList<>();
+//        factoryList.add(MAPluginManager.getInstance());
+//        factoryList.add(MBPluginManager.getInstance());
+//        factoryList.add(MCPluginManager.getInstance());
+//        factoryList.add(MDPluginManager.getInstance());
+//        SAFactoryManager.getInstance().init(application, factoryList);
+
+        List<FLPluginBaseManagerInterface> factoryList = Services.loadList(FLPluginBaseManagerInterface.class);
+        SAPluginManager.getInstance().init(factoryList);
     }
 }

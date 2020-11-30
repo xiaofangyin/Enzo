@@ -26,13 +26,14 @@ import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;
+import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.router.ModuleARouterPath;
 import com.enzo.flkit.router.ModuleBRouterPath;
 import com.enzo.flkit.router.ModuleCRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
+import com.enzo.flkit.services.Services;
 import com.enzo.main.R;
 import com.enzo.main.config.TabEntityConfig;
-import com.enzo.main.plugin.SAHostDelegateManager;
 import com.enzo.skin.manager.loader.SkinManager;
 
 import java.util.ArrayList;
@@ -128,7 +129,7 @@ public class SAMainActivity extends BaseActivity {
         fragments.add((Fragment) ARouter.getInstance().build(ModuleBRouterPath.MODULE_B_FRAGMENT).navigation());
         fragments.add((Fragment) ARouter.getInstance().build(ModuleCRouterPath.MODULE_C_FRAGMENT).navigation());
         fragments.add((Fragment) ARouter.getInstance().build(ModuleDRouterPath.MODULE_D_FRAGMENT).navigation());
-//        for (FLPluginBaseManager manager : SAFactoryManager.getInstance().getFactoryList()) {
+//        for (FLPluginBaseManagerInterface manager : SAPluginManager.getInstance().getFactoryList()) {
 //            Fragment fragment = manager.buildHomeTabFragment();
 //            if (fragment != null) {
 //                fragments.add(manager.buildHomeTabFragment());
@@ -138,6 +139,8 @@ public class SAMainActivity extends BaseActivity {
     }
 
     private void switchFragment(int index) {
+        if (mFragments == null || mFragments.isEmpty()) return;
+
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         hideFragment(transaction);
@@ -217,6 +220,6 @@ public class SAMainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SAHostDelegateManager.getInstance().releaseResources();
+        Services.load(FLPluginHostDelegate.class).releaseResources();
     }
 }

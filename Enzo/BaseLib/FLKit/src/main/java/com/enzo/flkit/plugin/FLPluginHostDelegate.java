@@ -16,8 +16,6 @@ import java.util.List;
  */
 public interface FLPluginHostDelegate {
 
-    void initFactories(Application application, List<FLPluginBaseManager> factoryList);
-
     //返回当前显示的activity
     Activity getCurrentController();
 

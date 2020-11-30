@@ -14,11 +14,10 @@ import org.json.JSONObject;
  */
 public interface FLPluginBaseManagerInterface {
 
+    int getPluginType();
+
     //获取插件名称
     String getPluginName();
-
-    //给插件的factory传上下文
-    void setHostDelegate(FLPluginHostDelegate delegate);
 
     FLPluginBaseObject buildNormalPluginCellModel(JSONObject data);
 
