@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -76,6 +77,7 @@ import java.util.List;
 public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     private static final int REQUEST_CODE_CHOOSE_AVATAR = 101;
+    private TextView tvName;
     private ImageView ivAvatar;
     private LinearLayout llButtonContainer;
 
@@ -112,6 +114,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             dynamicAddView(view, mDynamicAttr);
         }
 
+        tvName = rootView.findViewById(R.id.name);
         ivAvatar = rootView.findViewById(R.id.me_icon);
         llButtonContainer = rootView.findViewById(R.id.ll_button_content);
         dynamicAddThemeButton();
@@ -150,6 +153,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void lazyLoad() {
+        tvName.setText(MDPluginHostDelegate.getInstance().getAccountInfo().getNickName());
         new ImageLoader.Builder(getActivity())
                 .load(MDPluginHostDelegate.getInstance().getAccountInfo().getmAvatarUrl())
                 .placeHolder(R.mipmap.icon_user_default_avatar)

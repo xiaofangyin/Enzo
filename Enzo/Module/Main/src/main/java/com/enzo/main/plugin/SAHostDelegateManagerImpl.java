@@ -26,6 +26,7 @@ public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
     public UserAccountInfo getAccountInfo() {
         UserAccountInfo accountInfo = new UserAccountInfo();
         accountInfo.setUid("633980");
+        accountInfo.setNickName("吴彦祖666");
         accountInfo.setmAvatarUrl("http://file06.16sucai.com/2016/0425/bbdec65210c15d347dbc17d88c5535be.jpg");
         return accountInfo;
     }

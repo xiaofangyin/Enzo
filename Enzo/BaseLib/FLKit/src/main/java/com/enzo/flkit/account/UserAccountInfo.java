@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class UserAccountInfo implements Serializable {
 
     private String mAvatarUrl;
+    private String nickName;
     private String uid;
     private String token;
     private JSONObject orgInfo;
@@ -31,6 +32,14 @@ public class UserAccountInfo implements Serializable {
 
     public void setmAvatarUrl(String mAvatarUrl) {
         this.mAvatarUrl = mAvatarUrl;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getUid() {

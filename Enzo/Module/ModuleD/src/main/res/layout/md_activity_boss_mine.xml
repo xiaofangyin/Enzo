@@ -71,13 +71,13 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:text="吴彦祖"
             android:textColor="@color/color_333"
             android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:transformPivotX="0dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
