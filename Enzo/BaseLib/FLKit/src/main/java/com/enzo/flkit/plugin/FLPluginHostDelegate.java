@@ -18,9 +18,6 @@ public interface FLPluginHostDelegate {
 
     void initFactories(Application application, List<FLPluginBaseManager> factoryList);
 
-    //获取Application Context
-    Context getApplicationContext();
-
     //返回当前显示的activity
     Activity getCurrentController();
 
@@ -29,7 +26,7 @@ public interface FLPluginHostDelegate {
     void openDrawer(Activity activity, int gravity);
 
     //跳转到宿主的家庭页
-    boolean popToHomeController(Context context);
+    void popToHomeController(Context context);
 
     //释放资源
     void releaseResources();

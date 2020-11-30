@@ -11,33 +11,12 @@ import com.enzo.flkit.plugin.FLPluginBaseManager;
 import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.main.model.manager.AccountManager;
 import com.enzo.main.ui.activity.SAMainActivity;
+import com.google.auto.service.AutoService;
 
 import java.util.List;
 
-/**
- * 文 件 名: SAHostDelegateManager
- * 创 建 人: xiaofangyin
- * 创建日期: 2017/11/18
- * 邮   箱: xiaofangyinwork@163.com
- */
-public class SAHostDelegateManager implements FLPluginHostDelegate {
-
-    private static SAHostDelegateManager mInstance;
-
-    private SAHostDelegateManager() {
-
-    }
-
-    public static SAHostDelegateManager getInstance() {
-        if (mInstance == null) {
-            synchronized (SAHostDelegateManager.class) {
-                if (mInstance == null) {
-                    mInstance = new SAHostDelegateManager();
-                }
-            }
-        }
-        return mInstance;
-    }
+@AutoService(FLPluginHostDelegate.class)
+public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
 
     @Override
     public Activity getCurrentController() {
