@@ -54,7 +54,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':BaseLib:CommonLib')
     api project(':BaseLib:FLKit')
-
+    //arouter
     api rootProject.ext.dependencies.arouter
     annotationProcessor rootProject.ext.dependencies.arouter_annotation
     //auto-service
