@@ -2,8 +2,6 @@ package com.enzo.flkit.plugin;
 
 import androidx.fragment.app.Fragment;
 
-import com.enzo.flkit.account.UserAccountInfo;
-
 import org.json.JSONObject;
 
 /**
@@ -19,7 +17,7 @@ public interface FLPluginInterface {
     //获取插件名称
     String getPluginName();
 
-    FLPluginBaseObject buildNormalPluginCellModel(JSONObject data);
+    FLPluginBaseObject buildNormalPluginCellModel(FLPluginBaseObjectDelegate delegate, JSONObject data);
 
     Fragment buildHomeTabFragment();
 

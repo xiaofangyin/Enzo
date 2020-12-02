@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.plugin.FLApplicationState;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
+import com.enzo.flkit.plugin.FLPluginBaseObjectDelegate;
 import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.plugin.FLPluginTypeList;
 import com.enzo.module_d.ui.fragment.MDFragment;
@@ -27,9 +28,10 @@ public class MDPluginImpl implements FLPluginInterface {
     }
 
     @Override
-    public FLPluginBaseObject buildNormalPluginCellModel(JSONObject data) {
+    public FLPluginBaseObject buildNormalPluginCellModel(FLPluginBaseObjectDelegate delegate, JSONObject data) {
         if (data.optInt("type") == FLPluginTypeList.FL_DEVICE_TYPE_D) {
             MDNormalPluginModel normalPluginModel = new MDNormalPluginModel();
+            normalPluginModel.delegate = delegate;
             normalPluginModel.type = data.optInt("type");
             normalPluginModel.rid = data.optString("rid");
             normalPluginModel.alias = getPluginName() + " " + data.optString("alias");
