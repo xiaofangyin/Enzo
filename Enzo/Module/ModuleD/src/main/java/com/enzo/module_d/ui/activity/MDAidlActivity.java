@@ -107,6 +107,7 @@ public class MDAidlActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LogUtil.d("on destroy...");
         unbindService(conn);
     }
 }
