@@ -121,7 +121,7 @@ public class MAFragment extends BaseFragment {
         rootView.findViewById(R.id.ma_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MAPluginHostDelegate.getInstance().openDrawer(getActivity(), Gravity.START);
+                MAPluginHostDelegate.getInstance().getHostDelegate().openDrawer(getActivity(), Gravity.START);
             }
         });
         rootView.findViewById(R.id.ma_qr_code).setOnClickListener(new View.OnClickListener() {

@@ -153,9 +153,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void lazyLoad() {
-        tvName.setText(MDPluginHostDelegate.getInstance().getAccountInfo().getNickName());
+        tvName.setText(MDPluginHostDelegate.getInstance().getHostDelegate().getAccountInfo().getNickName());
         new ImageLoader.Builder(getActivity())
-                .load(MDPluginHostDelegate.getInstance().getAccountInfo().getmAvatarUrl())
+                .load(MDPluginHostDelegate.getInstance().getHostDelegate().getAccountInfo().getmAvatarUrl())
                 .placeHolder(R.mipmap.icon_user_default_avatar)
                 .build()
                 .into(ivAvatar);
