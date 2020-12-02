@@ -48,6 +48,7 @@ public class MDAidlActivity extends BaseActivity {
     @Override
     public void initHeader() {
         super.initHeader();
+        LogUtil.d("init header...");
         HeadWidget headWidget = findViewById(R.id.header_view);
         headWidget.setTitle("Aidl");
         headWidget.setLeftLayoutClickListener(new View.OnClickListener() {
