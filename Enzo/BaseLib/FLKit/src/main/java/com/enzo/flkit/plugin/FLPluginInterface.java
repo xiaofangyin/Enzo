@@ -9,6 +9,7 @@ import org.json.JSONObject;
  * 创 建 人: xiaofangyin
  * 创建日期: 2017/11/18
  * 邮   箱: xiaofangyinwork@163.com
+ * 各个组件自己实现，供主工程调用
  */
 public interface FLPluginInterface {
 
