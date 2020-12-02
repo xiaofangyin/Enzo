@@ -75,6 +75,7 @@ public class MDAidlActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        LogUtil.d("init data...");
         Intent intent = new Intent();
         intent.setComponent(new ComponentName("com.enzo.module_c", "com.enzo.module_c.RemoteService"));
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
