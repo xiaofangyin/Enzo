@@ -67,6 +67,7 @@ public class MDAidlActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        LogUtil.d("init view...");
         edtText1 = findViewById(R.id.edt_num1);
         edtText2 = findViewById(R.id.edt_num2);
         tvResult = findViewById(R.id.tv_result);
