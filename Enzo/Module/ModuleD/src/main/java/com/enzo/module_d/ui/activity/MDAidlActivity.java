@@ -83,6 +83,7 @@ public class MDAidlActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        LogUtil.d("init listener...");
         findViewById(R.id.btn_calculate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
