@@ -34,7 +34,7 @@ public class MDAidlActivity extends BaseActivity {
     private final ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            LogUtil.d("MDAidlActivity onServiceConnected...");
+            LogUtil.d("MDAidlActivity onServiceConnected...test1");
             aidl = ICalculateInterface.Stub.asInterface(service);
         }
 
