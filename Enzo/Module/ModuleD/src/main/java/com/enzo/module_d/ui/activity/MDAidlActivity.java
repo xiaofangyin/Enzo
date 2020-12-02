@@ -40,7 +40,7 @@ public class MDAidlActivity extends BaseActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            LogUtil.d("MDAidlActivity onServiceDisconnected...");
+            LogUtil.d("MDAidlActivity onServiceDisconnected...test2");
             aidl = null;
         }
     };
