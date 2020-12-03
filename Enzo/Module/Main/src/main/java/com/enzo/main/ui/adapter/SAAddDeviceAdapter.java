@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enzo.commonlib.base.BaseRecyclerViewAdapter;
 import com.enzo.commonlib.base.BaseViewHolder;
+import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.flkit.plugin.FLPluginBaseCell;
 import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginCellStyle;
@@ -56,19 +57,32 @@ public class SAAddDeviceAdapter extends BaseRecyclerViewAdapter<FLPluginBaseObje
 
         @Override
         public void setUpView(FLPluginBaseObject model, int position, RecyclerView.Adapter adapter) {
+            FLPluginBaseCell baseCell;
             if (flContainer.getChildCount() != 0) {
                 FLPluginBaseCell view = (FLPluginBaseCell) flContainer.getChildAt(0);
-                ((ViewGroup) view.getParent()).removeAllViews();
-                putCell(view);
+                if (view.getType() == model.type) {
+                    LogUtil.d("1 view.getType() == model.type");
+                    baseCell = view;
+                } else {
+                    LogUtil.d("2 view.getType() != model.type");
+                    ((ViewGroup) view.getParent()).removeAllViews();
+                    putCell(view);
+                    baseCell = getCell(model.type);
+                }
+            } else {
+                LogUtil.d("3 flContainer.getChildCount() = 0");
+                baseCell = getCell(model.type);
             }
 
-            FLPluginBaseCell baseCell = getCell(model.type);
             if (baseCell == null) {
+                LogUtil.d("4 model.buildCellWithStyle");
                 baseCell = model.buildCellWithStyle(FLPluginCellStyle.FLPluginCellStyleNormal);
             }
             if (baseCell != null) {
                 baseCell.layoutWithModel(model);
-                flContainer.addView(baseCell);
+                if (baseCell.getParent() == null) {
+                    flContainer.addView(baseCell);
+                }
             }
 
             if (!model.animated) {
