@@ -24,7 +24,6 @@ import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.crashlib.CrashManager;
 import com.enzo.skin.manager.loader.SkinManager;
 import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.internal.LeakCanaryInternals;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -117,9 +116,7 @@ public class InitializeService extends IntentService {
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
-            if (LeakCanaryInternals.installedRefWatcher == null) {
-                LeakCanary.install(application);
-            }
+            LeakCanary.install(application);
         }
         //初始化崩溃捕获
         CrashManager.getInstance().init(application);
