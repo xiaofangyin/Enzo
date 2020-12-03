@@ -30,10 +30,10 @@ public class SkinManager implements ISkinLoader {
 
     private List<ISkinUpdate> skinObservers;
     private Application context;
-    private String skinPackageName;
-    private Resources mResources;
-    private String skinPath;
-    private boolean isDefaultSkin = false;
+    private volatile String skinPackageName;
+    private volatile Resources mResources;
+    private volatile String skinPath;
+    private volatile boolean isDefaultSkin = false;
 
     private SkinManager() {
     }

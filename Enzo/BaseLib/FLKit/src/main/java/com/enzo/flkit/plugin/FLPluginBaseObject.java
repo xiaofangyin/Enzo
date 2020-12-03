@@ -8,10 +8,10 @@ package com.enzo.flkit.plugin;
  */
 public abstract class FLPluginBaseObject {
 
+    public FLPluginBaseObjectDelegate delegate;
     public int type;    //设备类型1001,1002,1003,1004
     public String rid = "";     //设备标识
     public String alias = "";     //设备名称
-    public FLPluginBaseObjectDelegate delegate;
     public boolean animated = false;
 
     //生成相应的item

@@ -23,6 +23,9 @@ public class MBNormalPluginModel extends FLPluginBaseObject {
 
     @Override
     public void release() {
+        if (delegate != null) {
+            delegate = null;
+        }
         LogUtil.d("MBNormalPluginModel release...");
     }
 }

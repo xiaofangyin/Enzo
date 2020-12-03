@@ -24,5 +24,8 @@ public class MANormalPluginModel extends FLPluginBaseObject {
     @Override
     public void release() {
         LogUtil.d("MANormalPluginModel release...");
+        if (delegate != null) {
+            delegate = null;
+        }
     }
 }

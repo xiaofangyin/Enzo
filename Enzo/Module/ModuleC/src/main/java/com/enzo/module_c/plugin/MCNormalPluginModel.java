@@ -24,5 +24,8 @@ public class MCNormalPluginModel extends FLPluginBaseObject {
     @Override
     public void release() {
         LogUtil.d("MCNormalPluginModel release...");
+        if (delegate != null) {
+            delegate = null;
+        }
     }
 }
