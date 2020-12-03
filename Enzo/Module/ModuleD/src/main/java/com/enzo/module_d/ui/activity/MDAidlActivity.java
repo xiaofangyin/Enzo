@@ -61,7 +61,7 @@ public class MDAidlActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        LogUtil.d("get layout id...");
+        LogUtil.d("get layout id...456");
         return R.layout.md_activity_aidl;
     }
 
