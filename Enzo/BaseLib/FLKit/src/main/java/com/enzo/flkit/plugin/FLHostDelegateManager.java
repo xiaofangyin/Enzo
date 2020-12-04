@@ -2,20 +2,20 @@ package com.enzo.flkit.plugin;
 
 import com.enzo.flkit.services.FLServiceLoader;
 
-public class FLHostDelegate {
+public class FLHostDelegateManager {
 
-    private static volatile FLHostDelegate mInstance;
+    private static volatile FLHostDelegateManager mInstance;
     private final FLHostInterface hostDelegate;
 
-    private FLHostDelegate() {
+    private FLHostDelegateManager() {
         hostDelegate = FLServiceLoader.load(FLHostInterface.class);
     }
 
-    public static FLHostDelegate getInstance() {
+    public static FLHostDelegateManager getInstance() {
         if (mInstance == null) {
-            synchronized (FLHostDelegate.class) {
+            synchronized (FLHostDelegateManager.class) {
                 if (mInstance == null) {
-                    mInstance = new FLHostDelegate();
+                    mInstance = new FLHostDelegateManager();
                 }
             }
         }

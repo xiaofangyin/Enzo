@@ -15,7 +15,7 @@ import com.google.auto.service.AutoService;
 import java.util.List;
 
 @AutoService(FLHostInterface.class)
-public class SAHostDelegateManagerImpl implements FLHostInterface {
+public class SAHostDelegateImpl implements FLHostInterface {
 
     @Override
     public Activity getCurrentController() {
