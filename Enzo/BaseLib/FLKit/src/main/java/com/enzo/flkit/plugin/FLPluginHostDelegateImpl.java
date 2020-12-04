@@ -1,22 +1,21 @@
-package com.enzo.module_c.plugin;
+package com.enzo.flkit.plugin;
 
-import com.enzo.flkit.plugin.FLPluginHostDelegate;
 import com.enzo.flkit.services.FLServiceLoader;
 
-public class MCPluginHostDelegate {
+public class FLPluginHostDelegateImpl {
 
-    private static volatile MCPluginHostDelegate mInstance;
+    private static volatile FLPluginHostDelegateImpl mInstance;
     private final FLPluginHostDelegate hostDelegate;
 
-    private MCPluginHostDelegate() {
+    private FLPluginHostDelegateImpl() {
         hostDelegate = FLServiceLoader.load(FLPluginHostDelegate.class);
     }
 
-    public static MCPluginHostDelegate getInstance() {
+    public static FLPluginHostDelegateImpl getInstance() {
         if (mInstance == null) {
-            synchronized (MCPluginHostDelegate.class) {
+            synchronized (FLPluginHostDelegateImpl.class) {
                 if (mInstance == null) {
-                    mInstance = new MCPluginHostDelegate();
+                    mInstance = new FLPluginHostDelegateImpl();
                 }
             }
         }

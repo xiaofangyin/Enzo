@@ -30,11 +30,11 @@ import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.flkit.plugin.FLPluginHostDelegateImpl;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.BuildConfig;
 import com.enzo.module_d.R;
-import com.enzo.module_d.plugin.MDPluginHostDelegate;
 import com.enzo.module_d.ui.activity.MDAVLoadingActivity;
 import com.enzo.module_d.ui.activity.MDAidlActivity;
 import com.enzo.module_d.ui.activity.MDBannerActivity;
@@ -153,9 +153,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void lazyLoad() {
-        tvName.setText(MDPluginHostDelegate.getInstance().getHostDelegate().getAccountInfo().getNickName());
+        tvName.setText(FLPluginHostDelegateImpl.getInstance().getHostDelegate().getAccountInfo().getNickName());
         new ImageLoader.Builder(getActivity())
-                .load(MDPluginHostDelegate.getInstance().getHostDelegate().getAccountInfo().getmAvatarUrl())
+                .load(FLPluginHostDelegateImpl.getInstance().getHostDelegate().getAccountInfo().getmAvatarUrl())
                 .placeHolder(R.mipmap.icon_user_default_avatar)
                 .build()
                 .into(ivAvatar);
