@@ -30,7 +30,7 @@ import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
-import com.enzo.flkit.plugin.FLPluginHostDelegateImpl;
+import com.enzo.flkit.plugin.FLHostDelegate;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
 import com.enzo.module_d.BuildConfig;
@@ -153,9 +153,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void lazyLoad() {
-        tvName.setText(FLPluginHostDelegateImpl.getInstance().getHostDelegate().getAccountInfo().getNickName());
+        tvName.setText(FLHostDelegate.getInstance().getHostDelegate().getAccountInfo().getNickName());
         new ImageLoader.Builder(getActivity())
-                .load(FLPluginHostDelegateImpl.getInstance().getHostDelegate().getAccountInfo().getmAvatarUrl())
+                .load(FLHostDelegate.getInstance().getHostDelegate().getAccountInfo().getmAvatarUrl())
                 .placeHolder(R.mipmap.icon_user_default_avatar)
                 .build()
                 .into(ivAvatar);

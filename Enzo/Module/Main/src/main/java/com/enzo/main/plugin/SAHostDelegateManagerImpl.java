@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.flkit.account.UserAccountInfo;
-import com.enzo.flkit.plugin.FLPluginHostDelegate;
+import com.enzo.flkit.plugin.FLHostInterface;
 import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.main.model.manager.AccountManager;
 import com.enzo.main.ui.activity.SAMainActivity;
@@ -14,8 +14,8 @@ import com.google.auto.service.AutoService;
 
 import java.util.List;
 
-@AutoService(FLPluginHostDelegate.class)
-public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
+@AutoService(FLHostInterface.class)
+public class SAHostDelegateManagerImpl implements FLHostInterface {
 
     @Override
     public Activity getCurrentController() {
@@ -42,6 +42,9 @@ public class SAHostDelegateManagerImpl implements FLPluginHostDelegate {
     public void popToHomeController(Context context) {
         Intent intent = new Intent();
         intent.setClass(context, SAMainActivity.class);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         context.startActivity(intent);
     }
 

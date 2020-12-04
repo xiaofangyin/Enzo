@@ -12,7 +12,7 @@ import com.enzo.flkit.account.UserAccountInfo;
  * 邮   箱: xiaofangyinwork@163.com
  * 由主工程实现，供各个组件调用
  */
-public interface FLPluginHostDelegate {
+public interface FLHostInterface {
 
     //返回当前显示的activity
     Activity getCurrentController();
