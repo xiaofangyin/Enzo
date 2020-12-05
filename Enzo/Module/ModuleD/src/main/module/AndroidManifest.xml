@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Base_AppTheme">
 
+        <service
+            android:name=".model.impl.ICalculateAidlImpl"
+            android:exported="true" />
+
         <activity
             android:name="debug.LauncherActivity"
             android:screenOrientation="portrait">
@@ -106,6 +110,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDAidlActivity"
+            android:process=":calculate"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDRetrofitActivity"

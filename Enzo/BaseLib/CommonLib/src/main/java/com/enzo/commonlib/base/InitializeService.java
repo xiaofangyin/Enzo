@@ -116,7 +116,7 @@ public class InitializeService extends IntentService {
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
-            LeakCanary.install(application);
+//            LeakCanary.install(application);
         }
         //初始化崩溃捕获
         CrashManager.getInstance().init(application);

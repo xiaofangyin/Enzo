@@ -5,6 +5,11 @@
         android:allowBackup="true"
         android:supportsRtl="true">
 
+        <service
+            android:name=".model.impl.ICalculateAidlImpl"
+            android:exported="true" />
+
+
         <activity
             android:name=".ui.activity.MDBossCompanyDetailActivity"
             android:screenOrientation="portrait" />
@@ -91,6 +96,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDAidlActivity"
+            android:process=":calculate"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDRetrofitActivity"

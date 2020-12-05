@@ -1,6 +1,5 @@
 package debug;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentManager;
@@ -8,9 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.module_c.R;
-import com.enzo.module_c.RemoteService;
 import com.enzo.module_c.ui.fragment.MCFragment;
-import com.enzo.skin.manager.loader.SkinManager;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -45,7 +42,5 @@ public class LauncherActivity extends BaseActivity {
         transaction.replace(R.id.main_content, new MCFragment());
         transaction.commitAllowingStateLoss();
         fragmentManager.executePendingTransactions();
-
-        startService(new Intent(this, RemoteService.class));
     }
 }

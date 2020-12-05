@@ -15,8 +15,9 @@ import android.widget.TextView;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
-import com.enzo.module_c.ICalculateInterface;
+import com.enzo.module_d.ICalculateAidlInterface;
 import com.enzo.module_d.R;
+import com.enzo.module_d.model.impl.ICalculateAidlImpl;
 
 /**
  * 文 件 名: MDAidlActivity
@@ -29,13 +30,13 @@ public class MDAidlActivity extends BaseActivity {
     private EditText edtText1;
     private EditText edtText2;
     private TextView tvResult;
-    private ICalculateInterface aidl;
+    private ICalculateAidlInterface aidl;
 
     private final ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LogUtil.d("MDAidlActivity onServiceConnected...test1111");
-            aidl = ICalculateInterface.Stub.asInterface(service);
+            aidl = ICalculateAidlInterface.Stub.asInterface(service);
         }
 
         @Override
@@ -76,8 +77,7 @@ public class MDAidlActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         LogUtil.d("init data...");
-        Intent intent = new Intent();
-        intent.setComponent(new ComponentName("com.enzo.module_c", "com.enzo.module_c.RemoteService"));
+        Intent intent = new Intent(this, ICalculateAidlImpl.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
     }
 
