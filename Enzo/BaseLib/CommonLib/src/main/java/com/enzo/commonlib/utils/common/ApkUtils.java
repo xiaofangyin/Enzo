@@ -10,7 +10,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -164,7 +163,6 @@ public class ApkUtils {
         String packageName = context.getPackageName();
         // 获取当前进程名
         String processName = getProcessName(android.os.Process.myPid());
-        Log.e("xfy", "processName: " + processName);
         return processName == null || processName.equals(packageName);
     }
 

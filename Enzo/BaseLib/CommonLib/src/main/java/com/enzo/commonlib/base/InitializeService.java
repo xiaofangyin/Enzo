@@ -52,7 +52,6 @@ public class InitializeService extends IntentService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(intent);
         } else {
-            // Pre-O behavior.
             context.startService(intent);
         }
     }
@@ -87,10 +86,6 @@ public class InitializeService extends IntentService {
     }
 
     private void performInit(Application application) {
-        // 获取当前进程名
-        String processName = ApkUtils.getProcessName(android.os.Process.myPid());
-        LogUtil.d("InitializeService performInit..." + processName);
-
         long beforeTime = System.currentTimeMillis();
         if (BuildConfig.DEBUG) {
             Debug.startMethodTracing(ExternalCacheUtil.getTracingDir(application).getAbsolutePath() + "/tracing.trace");
@@ -116,7 +111,7 @@ public class InitializeService extends IntentService {
         //LeakCanary:在注册之前先判断LeakCanary是否已经运行在手机上，
         //比如你同时有多个APP集成了LeakCanary，其他app已经运行了LeakCanary则不需要重新install
         if (!LeakCanary.isInAnalyzerProcess(application)) {
-//            LeakCanary.install(application);
+            LeakCanary.install(application);
         }
         //初始化崩溃捕获
         CrashManager.getInstance().init(application);
