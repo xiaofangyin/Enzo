@@ -11,6 +11,7 @@ import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
 
 import com.enzo.module_d.R;
 import com.google.android.material.appbar.AppBarLayout;
@@ -99,7 +100,7 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         if (mCardView != null && ((dy <= 0 && child.getBottom() >= mLimitHeight) || (dy > 0 && child.getBottom() > mLimitHeight))) {
             scrollY(child, target, dy);
         } else {
-            setViewAlpha(child, dy);
+            setTitleScaleAndTranslate(child);
             super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
         }
     }
@@ -127,6 +128,10 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
         if (appBarLayout.getBottom() > mLimitHeight) {
             if (recoveryAnim == null) {
                 recovery(appBarLayout);
+            }
+        } else {
+            if (type == ViewCompat.TYPE_NON_TOUCH) {
+                setTitleScaleAndTranslate(appBarLayout);
             }
         }
     }
@@ -219,8 +224,8 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     /**
      * 根据滑动设置 toolbar  名字显示效果
      */
-    private void setViewAlpha(View target, int dy) {
-        float percent = Math.abs(target.getY() / mLimitHeight);
+    private void setTitleScaleAndTranslate(View appBarLayout) {
+        float percent = Math.abs(appBarLayout.getY() / mLimitHeight);
         if (percent >= 1) {
             percent = 1f;
         }
@@ -239,21 +244,22 @@ public class MDAppBarLayoutOverScrollViewBehavior extends AppBarLayout.Behavior 
     /**
      * 恢复位置
      */
-    private void recovery(final AppBarLayout abl) {
+    private void recovery(final AppBarLayout appBarLayout) {
         if (mTotalDy >= 0) {
-            recoveryAnim = ValueAnimator.ofFloat(abl.getBottom(), mLimitHeight).setDuration(200);
+            recoveryAnim = ValueAnimator.ofFloat(appBarLayout.getBottom(), mLimitHeight).setDuration(200);
             recoveryAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     float value = (float) animation.getAnimatedValue();
-                    abl.setBottom((int) value);
-                    abl.setScrollY(0);
+                    appBarLayout.setBottom((int) value);
+                    appBarLayout.setScrollY(0);
                 }
             });
             recoveryAnim.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
+                    setTitleScaleAndTranslate(appBarLayout);
                     recoveryAnim = null;
                     mTotalDy = 0;
                 }
