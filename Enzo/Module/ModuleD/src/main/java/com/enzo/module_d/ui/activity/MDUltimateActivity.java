@@ -10,6 +10,23 @@ import com.enzo.module_d.R;
 
 /**
  * https://github.com/Zackratos/UltimateBarX
+ *
+ * val config = BarConfig.newInstance()          // 创建配置对象
+ *     .fitWindow(true)                          // 布局是否侵入状态栏（true 不侵入，false 侵入）
+ *     .color(Color.RED)                         // 状态栏背景颜色（色值）
+ *     .colorRes(R.color.deepSkyBlue)            // 状态栏背景颜色（资源id）
+ *     .drawableRes(R.drawable.bg_gradient)      // 状态栏背景 drawable
+ *     .light(false)                             // light模式
+ *                                               // 状态栏字体 true: 灰色，false: 白色 Android 6.0+
+ *                                               // 导航栏按钮 true: 灰色，false: 白色 Android 8.0+
+ *
+ * UltimateBarX.with(this)                       // 对当前 Activity 或 Fragment 生效
+ *     .config(config)                           // 使用配置
+ *     .applyStatusBar()                         // 应用到状态栏
+ *
+ * UltimateBarX.with(this)                       // 对当前 Activity 或 Fragment 生效
+ *     .config(config)                           // 使用配置
+ *     .applyNavigationBar()                     // 应用到导航栏
  */
 public class MDUltimateActivity extends BaseActivity {
 
