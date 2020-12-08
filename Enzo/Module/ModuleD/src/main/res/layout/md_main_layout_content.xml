@@ -174,5 +174,11 @@
             android:layout_height="wrap_content"
             android:text="Bolts" />
 
+        <Button
+            android:id="@+id/btn_ultimate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ultimate" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -57,6 +57,7 @@ import com.enzo.module_d.ui.activity.MDShadowActivity;
 import com.enzo.module_d.ui.activity.MDTaskQueueActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity;
 import com.enzo.module_d.ui.activity.MDTimePickerActivity2;
+import com.enzo.module_d.ui.activity.MDUltimateActivity;
 import com.enzo.module_d.ui.activity.MDViewPagerIndicatorActivity;
 import com.enzo.module_d.ui.activity.lighter.MDLighterActivity;
 import com.enzo.module_d.ui.dialog.CommonBottomSheetDialog;
@@ -150,6 +151,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_group_item).setOnClickListener(this);
         rootView.findViewById(R.id.btn_handler_thread).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bolts).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_ultimate).setOnClickListener(this);
     }
 
     @Override
@@ -334,6 +336,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_bolts) {
             Intent intent = new Intent(getContext(), MDBoltsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_ultimate) {
+            Intent intent = new Intent(getContext(), MDUltimateActivity.class);
             startActivity(intent);
         }
     }

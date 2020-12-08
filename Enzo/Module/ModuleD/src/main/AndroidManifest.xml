@@ -110,6 +110,9 @@
         <activity
             android:name=".ui.activity.MDBoltsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDUltimateActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>
