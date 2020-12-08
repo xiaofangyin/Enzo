@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.enzo.commonlib.utils.statusbar.bar;
+package com.enzo.commonlib.utils.statusbar.stateappbar.bar;
 
 
 import android.annotation.TargetApi;
@@ -34,7 +34,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import static com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils.getStatusBarHeight;
+import static com.enzo.commonlib.utils.statusbar.stateappbar.utils.StatusBarUtils.getStatusBarHeight;
 
 
 /**

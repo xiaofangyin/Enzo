@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.enzo.commonlib.R;
-import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
+import com.enzo.commonlib.utils.statusbar.stateappbar.bar.StateAppBar;
 
 import com.enzo.skin.manager.base.SkinFragmentActivity;
 

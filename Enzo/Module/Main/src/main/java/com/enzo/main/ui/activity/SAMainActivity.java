@@ -22,7 +22,7 @@ import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.ActivityHelper;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.utils.common.PermissionsUtils;
-import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
+import com.enzo.commonlib.utils.statusbar.stateappbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.tablayout.TabLayout;
 import com.enzo.commonlib.widget.tablayout.TabView;

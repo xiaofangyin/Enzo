@@ -1,4 +1,4 @@
-package com.enzo.commonlib.utils.statusbar.utils;
+package com.enzo.commonlib.utils.statusbar.stateappbar.utils;
 
 
 import android.app.Activity;
@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
+import com.enzo.commonlib.utils.statusbar.stateappbar.bar.StateAppBar;
 
 /**
  * <pre>

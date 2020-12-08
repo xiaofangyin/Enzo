@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.enzo.commonlib.utils.statusbar.bar;
+package com.enzo.commonlib.utils.statusbar.stateappbar.bar;
 
 
 import android.annotation.SuppressLint;
@@ -31,8 +31,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 
-import com.enzo.commonlib.utils.statusbar.utils.StatusBarColorUtils;
-import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.commonlib.utils.statusbar.stateappbar.utils.StatusBarColorUtils;
+import com.enzo.commonlib.utils.statusbar.stateappbar.utils.StatusBarUtils;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 

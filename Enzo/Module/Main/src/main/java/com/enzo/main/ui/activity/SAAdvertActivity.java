@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.imageloader.ImageLoader;
-import com.enzo.commonlib.utils.statusbar.bar.StateAppBar;
+import com.enzo.commonlib.utils.statusbar.stateappbar.bar.StateAppBar;
 import com.enzo.main.R;
 
 public class SAAdvertActivity extends BaseActivity {

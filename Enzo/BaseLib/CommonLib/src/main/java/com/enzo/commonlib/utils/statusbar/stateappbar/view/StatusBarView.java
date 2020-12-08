@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.enzo.commonlib.utils.statusbar.view;
+package com.enzo.commonlib.utils.statusbar.stateappbar.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

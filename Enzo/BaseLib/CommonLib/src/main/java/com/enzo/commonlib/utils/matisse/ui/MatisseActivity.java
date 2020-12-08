@@ -54,7 +54,7 @@ import com.enzo.commonlib.utils.matisse.internal.utils.MediaStoreCompat;
 import com.enzo.commonlib.utils.matisse.internal.utils.PathUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.PhotoMetadataUtils;
 import com.enzo.commonlib.utils.matisse.internal.utils.SingleMediaScanner;
-import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.commonlib.utils.statusbar.stateappbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.loadinglayout.LoadingLayout;
 
 import java.util.ArrayList;

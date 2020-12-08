@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.commonlib.utils.statusbar.stateappbar.utils.StatusBarUtils;
 import com.enzo.commonlib.widget.togglebutton.ios.FLSwitchButton;
 import com.enzo.commonlib.widget.togglebutton.ios.FlToggleButton;
 import com.enzo.flkit.router.ModuleBRouterPath;

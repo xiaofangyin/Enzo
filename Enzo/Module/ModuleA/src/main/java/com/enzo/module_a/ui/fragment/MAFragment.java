@@ -25,7 +25,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.enzo.commonlib.base.BaseFragment;
 import com.enzo.commonlib.utils.common.DensityUtil;
 import com.enzo.commonlib.utils.common.LogUtil;
-import com.enzo.commonlib.utils.statusbar.utils.StatusBarUtils;
+import com.enzo.commonlib.utils.statusbar.stateappbar.utils.StatusBarUtils;
 import com.enzo.commonlib.utils.toast.ToastUtil;
 import com.enzo.commonlib.widget.flipper.AdvertFlipperView;
 import com.enzo.commonlib.widget.flipper.adapter.FlipperAdapter;
