@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public abstract class BasePullToRefreshView extends LinearLayout {
 
+    private static final int ANIMATE_TIME = 250;
     //下拉的状态（还没到下拉到固定的高度时）
     public static final int STATE_PULL_DOWN = 0;
     //下拉到固定高度提示释放刷新的状态
@@ -102,7 +103,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
             public void run() {
                 reset();
             }
-        }, 500);
+        }, ANIMATE_TIME);
     }
 
     /**
@@ -116,7 +117,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
             public void run() {
                 reset();
             }
-        }, 500);
+        }, ANIMATE_TIME);
     }
 
     /**
@@ -130,7 +131,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
                     onStateChangeListener.onStateChange(STATE_PULL_DOWN);
                 }
             }
-        }, 500);
+        }, ANIMATE_TIME);
     }
 
     /**
@@ -146,7 +147,7 @@ public abstract class BasePullToRefreshView extends LinearLayout {
     public void scrollTo(int height) {
         //动画设置高度
         ValueAnimator animator = ValueAnimator.ofInt(getVisibleHeight(), height);
-        animator.setDuration(250).start();
+        animator.setDuration(ANIMATE_TIME).start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
