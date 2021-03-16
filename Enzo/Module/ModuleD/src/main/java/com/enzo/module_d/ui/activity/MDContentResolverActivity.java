@@ -20,6 +20,7 @@ import java.util.Random;
 
 public class MDContentResolverActivity extends BaseActivity {
 
+    private static final String URI_PATH = "content://com.enzo.module_d.MyFirstContentProvider/boy";
     private EditText edtBoyName;
     private TextView tvResult;
     private SQLiteDatabase sqLiteDatabase;
@@ -60,7 +61,7 @@ public class MDContentResolverActivity extends BaseActivity {
             public void onClick(View v) {
                 // 1.使用ContentResolver查询
                 try {
-                    Uri boyUri = Uri.parse("content://com.enzo.module_d.MyFirstContentProvider/boy");
+                    Uri boyUri = Uri.parse(URI_PATH);
                     Cursor boyCursor;
                     if (TextUtils.isEmpty(edtBoyName.getText().toString())) {
                         boyCursor = getContentResolver().query(boyUri, new String[]{"_id", "name", "age"},
@@ -107,7 +108,7 @@ public class MDContentResolverActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Uri boyUri = Uri.parse("content://com.enzo.module_d.MyFirstContentProvider/boy");
+                    Uri boyUri = Uri.parse(URI_PATH);
 
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("name", edtBoyName.getText().toString());
@@ -122,7 +123,7 @@ public class MDContentResolverActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Uri boyUri = Uri.parse("content://com.enzo.module_d.MyFirstContentProvider/boy");
+                    Uri boyUri = Uri.parse(URI_PATH);
                     getContentResolver().delete(boyUri, "name = ?", new String[]{edtBoyName.getText().toString()});
                 } catch (Exception e) {
                     e.printStackTrace();
