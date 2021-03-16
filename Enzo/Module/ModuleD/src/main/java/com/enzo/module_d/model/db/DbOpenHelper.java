@@ -23,9 +23,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     //创建表-男孩（两列：主键自增长、姓名）
     private static final String CREATE_BOY_TABLE = "create table " + BOY_TABLE_NAME + "(_id integer primary key autoincrement, name text)";
 
-    //创建表-女孩（两列：主键自增长、姓名）
-    private static final String CREATE_GIRL_TABLE = "create table " + GIRL_TABLE_NAME + "(_id integer primary key autoincrement, name text)";
-
     public DbOpenHelper(Context context) {
         super(context, DATA_BASE_NAME, null, DATE_BASE_VERSION);
     }
@@ -34,7 +31,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         LogUtil.d("DbOpenHelper onCreate...");
         db.execSQL(CREATE_BOY_TABLE);//创建男孩表
-        db.execSQL(CREATE_GIRL_TABLE);//创建女孩表
     }
 
     @Override
@@ -43,7 +39,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         if (oldVersion == 1) {
             // 新增一个字段
             db.execSQL("ALTER TABLE " + BOY_TABLE_NAME + " ADD COLUMN age integer");
-            db.execSQL("ALTER TABLE " + GIRL_TABLE_NAME + " ADD COLUMN age integer");
         }
     }
 }

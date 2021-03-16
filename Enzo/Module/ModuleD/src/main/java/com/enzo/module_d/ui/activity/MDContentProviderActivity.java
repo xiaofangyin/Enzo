@@ -1,9 +1,11 @@
 package com.enzo.module_d.ui.activity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,8 +18,6 @@ public class MDContentProviderActivity extends BaseActivity {
 
     private EditText edtBoyName;
     private EditText edtBoyAge;
-    private EditText edtGirlName;
-    private EditText edtGirlAge;
 
     @Override
     public void initHeader() {
@@ -41,8 +41,6 @@ public class MDContentProviderActivity extends BaseActivity {
     public void initView() {
         edtBoyName = findViewById(R.id.edt_boy_name);
         edtBoyAge = findViewById(R.id.edt_boy_age);
-        edtGirlName = findViewById(R.id.edt_girl_name);
-        edtGirlAge = findViewById(R.id.edt_girl_age);
     }
 
     @Override
@@ -67,20 +65,23 @@ public class MDContentProviderActivity extends BaseActivity {
                 }
             }
         });
-
-        findViewById(R.id.btn_add_girl).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_all_data).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(edtGirlName.getText().toString())) {
-                    SQLiteDatabase sqLiteDatabase = new DbOpenHelper(MDContentProviderActivity.this).getWritableDatabase();
-                    sqLiteDatabase.beginTransaction();
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("name", edtGirlName.getText().toString());
-                    contentValues.put("age", Integer.parseInt(edtGirlAge.getText().toString()));
-                    sqLiteDatabase.insert(DbOpenHelper.GIRL_TABLE_NAME, null, contentValues);
-                    sqLiteDatabase.setTransactionSuccessful();
-                    sqLiteDatabase.endTransaction();
+                SQLiteDatabase sqLiteDatabase = new DbOpenHelper(MDContentProviderActivity.this).getWritableDatabase();
+                sqLiteDatabase.beginTransaction();
+                Cursor boyCursor = sqLiteDatabase.query(DbOpenHelper.BOY_TABLE_NAME, new String[]{"_id", "name", "age"},
+                        null, null, null, null, null);
+                if (boyCursor != null) {
+                    while (boyCursor.moveToNext()) {
+                        Log.e("xfy", "ID:" + boyCursor.getInt(boyCursor.getColumnIndex("_id"))
+                                + "  name:" + boyCursor.getString(boyCursor.getColumnIndex("name"))
+                                + "  age:" + boyCursor.getString(boyCursor.getColumnIndex("age")));
+                    }
+                    boyCursor.close();
                 }
+                sqLiteDatabase.setTransactionSuccessful();
+                sqLiteDatabase.endTransaction();
             }
         });
     }

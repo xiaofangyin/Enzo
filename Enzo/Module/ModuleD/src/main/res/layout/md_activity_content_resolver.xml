@@ -18,28 +18,40 @@
         <EditText
             android:id="@+id/edt_boy_name"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="请输入名字" />
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:hint="请输入男孩的名字" />
 
-        <EditText
-            android:id="@+id/edt_boy_age"
+        <Button
+            android:id="@+id/btn_search"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="请输入年龄"
-            android:inputType="number" />
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:text="查询" />
 
         <Button
             android:id="@+id/btn_add_boy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="新增男孩" />
+            android:layout_margin="12dp"
+            android:text="增加" />
 
         <Button
-            android:id="@+id/btn_all_data"
+            android:id="@+id/btn_remove_boy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="查看表中数据" />
+            android:layout_margin="12dp"
+            android:text="删除" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>
