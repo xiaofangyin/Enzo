@@ -9,6 +9,10 @@
             android:name=".model.impl.ICalculateAidlImpl"
             android:exported="true" />
 
+        <provider
+            android:name=".model.db.MyFirstContentProvider"
+            android:authorities="com.enzo.module_d.MyFirstContentProvider"
+            android:exported="true" />
 
         <activity
             android:name=".ui.activity.MDBossCompanyDetailActivity"
@@ -112,6 +116,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MDUltimateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDContentProviderActivity"
             android:screenOrientation="portrait" />
 
     </application>

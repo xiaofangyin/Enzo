@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <EditText
+            android:id="@+id/edt_boy_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <EditText
+            android:id="@+id/edt_boy_age"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_add_boy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="男孩" />
+
+        <EditText
+            android:id="@+id/edt_girl_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <EditText
+            android:id="@+id/edt_girl_age"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_add_girl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="女孩" />
+    </LinearLayout>
+</LinearLayout>

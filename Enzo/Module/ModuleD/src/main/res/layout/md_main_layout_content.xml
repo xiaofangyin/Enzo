@@ -180,5 +180,11 @@
             android:layout_height="wrap_content"
             android:text="Ultimate" />
 
+        <Button
+            android:id="@+id/btn_content_provider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="内容提供者" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
