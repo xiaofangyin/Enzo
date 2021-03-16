@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
@@ -18,6 +19,7 @@ public class MDContentProviderActivity extends BaseActivity {
 
     private EditText edtBoyName;
     private EditText edtBoyAge;
+    private TextView tvResult;
 
     @Override
     public void initHeader() {
@@ -41,6 +43,7 @@ public class MDContentProviderActivity extends BaseActivity {
     public void initView() {
         edtBoyName = findViewById(R.id.edt_boy_name);
         edtBoyAge = findViewById(R.id.edt_boy_age);
+        tvResult = findViewById(R.id.tv_result);
     }
 
     @Override
@@ -73,11 +76,16 @@ public class MDContentProviderActivity extends BaseActivity {
                 Cursor boyCursor = sqLiteDatabase.query(DbOpenHelper.BOY_TABLE_NAME, new String[]{"_id", "name", "age"},
                         null, null, null, null, null);
                 if (boyCursor != null) {
+                    StringBuilder builder = new StringBuilder();
                     while (boyCursor.moveToNext()) {
-                        Log.e("xfy", "ID:" + boyCursor.getInt(boyCursor.getColumnIndex("_id"))
+                        String result = "ID:" + boyCursor.getInt(boyCursor.getColumnIndex("_id"))
                                 + "  name:" + boyCursor.getString(boyCursor.getColumnIndex("name"))
-                                + "  age:" + boyCursor.getString(boyCursor.getColumnIndex("age")));
+                                + "  age:" + boyCursor.getString(boyCursor.getColumnIndex("age"));
+                        Log.e("xfy", result);
+                        builder.append(result)
+                                .append("\r\n");
                     }
+                    tvResult.setText(builder.toString());
                     boyCursor.close();
                 }
                 sqLiteDatabase.setTransactionSuccessful();

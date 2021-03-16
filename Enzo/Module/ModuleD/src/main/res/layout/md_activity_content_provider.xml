@@ -41,5 +41,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="查看表中数据" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>
