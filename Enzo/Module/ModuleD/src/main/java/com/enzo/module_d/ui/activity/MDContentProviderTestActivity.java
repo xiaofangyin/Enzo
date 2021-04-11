@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
-import com.enzo.module_d.model.db.ContentResolverManager;
 import com.enzo.module_d.model.db.DbOpenHelper;
 
 import java.util.Random;
@@ -113,7 +112,7 @@ public class MDContentProviderTestActivity extends BaseActivity {
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("name", edtBoyName.getText().toString());
                     contentValues.put("age", new Random().nextInt(100));
-                    ContentResolverManager.getInstance().insert(boyUri, contentValues);
+                    getContentResolver().insert(boyUri, contentValues);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -124,7 +123,7 @@ public class MDContentProviderTestActivity extends BaseActivity {
             public void onClick(View v) {
                 try {
                     Uri boyUri = Uri.parse(URI_PATH);
-                    ContentResolverManager.getInstance().delete(boyUri, "name = ?", new String[]{edtBoyName.getText().toString()});
+                    getContentResolver().delete(boyUri, "name = ?", new String[]{edtBoyName.getText().toString()});
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

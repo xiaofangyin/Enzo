@@ -84,7 +84,7 @@ public class MyFirstContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         String tableName = getTableName(uri);
-        LogUtil.d("insert table name: " + tableName);
+        LogUtil.d("insert table name: " + tableName + ",uri: " + uri);
         if (TextUtils.isEmpty(tableName)) {
             throw new IllegalArgumentException("Unsupported URI:" + uri);
         }
@@ -96,7 +96,7 @@ public class MyFirstContentProvider extends ContentProvider {
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         String tableName = getTableName(uri);
-        LogUtil.d("delete table name: " + tableName);
+        LogUtil.d("delete table name: " + tableName + ",uri: " + uri);
         if (TextUtils.isEmpty(tableName)) {
             throw new IllegalArgumentException("Unsupported URI:" + uri);
         }
