@@ -14,13 +14,14 @@ import android.widget.TextView;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
 import com.enzo.module_d.R;
+import com.enzo.module_d.model.db.ContentResolverManager;
 import com.enzo.module_d.model.db.DbOpenHelper;
 
 import java.util.Random;
 
-public class MDContentResolverActivity extends BaseActivity {
+public class MDContentProviderTestActivity extends BaseActivity {
 
-    private static final String URI_PATH = "content://com.enzo.module_d.MyFirstContentProvider/boy";
+    public static final String URI_PATH = "content://com.enzo.module_d.MyFirstContentProvider/boy";
     private EditText edtBoyName;
     private TextView tvResult;
     private SQLiteDatabase sqLiteDatabase;
@@ -51,7 +52,7 @@ public class MDContentResolverActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        sqLiteDatabase = new DbOpenHelper(MDContentResolverActivity.this).getWritableDatabase();
+        sqLiteDatabase = new DbOpenHelper(MDContentProviderTestActivity.this).getWritableDatabase();
     }
 
     @Override
@@ -109,11 +110,10 @@ public class MDContentResolverActivity extends BaseActivity {
             public void onClick(View v) {
                 try {
                     Uri boyUri = Uri.parse(URI_PATH);
-
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("name", edtBoyName.getText().toString());
                     contentValues.put("age", new Random().nextInt(100));
-                    getContentResolver().insert(boyUri, contentValues);
+                    ContentResolverManager.getInstance().insert(boyUri, contentValues);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -124,7 +124,7 @@ public class MDContentResolverActivity extends BaseActivity {
             public void onClick(View v) {
                 try {
                     Uri boyUri = Uri.parse(URI_PATH);
-                    getContentResolver().delete(boyUri, "name = ?", new String[]{edtBoyName.getText().toString()});
+                    ContentResolverManager.getInstance().delete(boyUri, "name = ?", new String[]{edtBoyName.getText().toString()});
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

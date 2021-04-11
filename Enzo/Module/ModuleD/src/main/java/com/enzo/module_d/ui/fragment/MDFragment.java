@@ -43,7 +43,7 @@ import com.enzo.module_d.ui.activity.MDBoltsActivity;
 import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDContentProviderActivity;
-import com.enzo.module_d.ui.activity.MDContentResolverActivity;
+import com.enzo.module_d.ui.activity.MDContentProviderTestActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
 import com.enzo.module_d.ui.activity.MDGroupItemDecorationActivity;
 import com.enzo.module_d.ui.activity.MDHandlerThreadActivity;
@@ -348,7 +348,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), MDContentProviderActivity.class);
             startActivity(intent);
         } else if (id == R.id.btn_content_resolver) {
-            Intent intent = new Intent(getContext(), MDContentResolverActivity.class);
+            Intent intent = new Intent(getContext(), MDContentProviderTestActivity.class);
             startActivity(intent);
         }
     }

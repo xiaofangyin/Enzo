@@ -66,6 +66,6 @@ public class App extends BaseApplication {
 
     private void initPlugins() {
         List<FLPluginInterface> pluginList = FLServiceLoader.loadList(FLPluginInterface.class);
-        SAPluginManager.getInstance().init(pluginList);
+        SAPluginManager.getInstance().init(this, pluginList);
     }
 }

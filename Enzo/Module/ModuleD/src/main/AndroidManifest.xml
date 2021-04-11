@@ -121,7 +121,7 @@
             android:name=".ui.activity.MDContentProviderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MDContentResolverActivity"
+            android:name=".ui.activity.MDContentProviderTestActivity"
             android:process=":remote_resolver"
             android:screenOrientation="portrait" />
 

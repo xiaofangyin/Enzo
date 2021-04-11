@@ -1,5 +1,7 @@
 package com.enzo.main.plugin;
 
+import android.content.Context;
+
 import com.enzo.flkit.plugin.FLPluginInterface;
 
 import java.util.ArrayList;
@@ -31,9 +33,12 @@ public class SAPluginManager {
         return mInstance;
     }
 
-    public void init(List<FLPluginInterface> list) {
+    public void init(Context context, List<FLPluginInterface> list) {
         mPluginList.clear();
         if (list != null) {
+            for (FLPluginInterface pluginInterface : list) {
+                pluginInterface.init(context);
+            }
             mPluginList.addAll(list);
         }
     }

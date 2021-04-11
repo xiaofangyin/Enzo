@@ -1,5 +1,7 @@
 package com.enzo.module_c.plugin;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.plugin.FLApplicationState;
@@ -16,6 +18,11 @@ import org.json.JSONObject;
 public class MCPluginImpl implements FLPluginInterface {
 
     public static final String PLUGIN_NAME = "Module C";
+
+    @Override
+    public void init(Context context) {
+
+    }
 
     @Override
     public int getPluginType() {

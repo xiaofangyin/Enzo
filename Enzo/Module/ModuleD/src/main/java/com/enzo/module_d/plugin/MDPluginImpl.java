@@ -1,5 +1,7 @@
 package com.enzo.module_d.plugin;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 
 import com.enzo.flkit.plugin.FLApplicationState;
@@ -7,6 +9,7 @@ import com.enzo.flkit.plugin.FLPluginBaseObject;
 import com.enzo.flkit.plugin.FLPluginBaseObjectDelegate;
 import com.enzo.flkit.plugin.FLPluginInterface;
 import com.enzo.flkit.plugin.FLPluginTypeList;
+import com.enzo.module_d.model.db.ContentResolverManager;
 import com.enzo.module_d.ui.fragment.MDFragment;
 import com.google.auto.service.AutoService;
 
@@ -16,6 +19,11 @@ import org.json.JSONObject;
 public class MDPluginImpl implements FLPluginInterface {
 
     public static final String PLUGIN_NAME = "Module D";
+
+    @Override
+    public void init(Context context) {
+        ContentResolverManager.getInstance().init(context);
+    }
 
     @Override
     public int getPluginType() {

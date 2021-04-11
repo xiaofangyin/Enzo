@@ -1,5 +1,7 @@
 package com.enzo.flkit.plugin;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONObject;
@@ -12,6 +14,8 @@ import org.json.JSONObject;
  * 各个组件自己实现，供主工程调用
  */
 public interface FLPluginInterface {
+
+    void init(Context context);
 
     int getPluginType();
 

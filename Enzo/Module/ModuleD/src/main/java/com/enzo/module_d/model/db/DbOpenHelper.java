@@ -21,7 +21,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public static final String GIRL_TABLE_NAME = "girl";
 
     //创建表-男孩（两列：主键自增长、姓名）
-    private static final String CREATE_BOY_TABLE = "create table " + BOY_TABLE_NAME + "(_id integer primary key autoincrement, name text)";
+    private static final String CREATE_BOY_TABLE = "create table " + BOY_TABLE_NAME + "(_id integer primary key autoincrement, name text,age integer)";
 
     public DbOpenHelper(Context context) {
         super(context, DATA_BASE_NAME, null, DATE_BASE_VERSION);
