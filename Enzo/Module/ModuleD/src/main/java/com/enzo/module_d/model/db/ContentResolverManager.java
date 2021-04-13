@@ -17,7 +17,6 @@ public class ContentResolverManager {
 
     private static ContentResolverManager mInstance;
     private ContentResolver contentResolver;
-    private ContentObserver contentObserver;
 
     private ContentResolverManager() {
 
@@ -36,7 +35,7 @@ public class ContentResolverManager {
 
     public void init(Context context) {
         contentResolver = context.getContentResolver();
-        contentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+        ContentObserver contentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
 
             @Override
             public void onChange(boolean selfChange, @Nullable Uri uri) {
