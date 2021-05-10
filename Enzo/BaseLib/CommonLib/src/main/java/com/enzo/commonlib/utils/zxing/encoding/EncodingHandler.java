@@ -119,8 +119,8 @@ public final class EncodingHandler {
         try {
             Canvas canvas = new Canvas(bitmap);
             canvas.drawBitmap(src, 0, 0, null);
-            canvas.scale(scaleFactor, scaleFactor, srcWidth / 2, srcHeight / 2);
-            canvas.drawBitmap(logo, (srcWidth - logoWidth) / 2, (srcHeight - logoHeight) / 2, null);
+            canvas.scale(scaleFactor, scaleFactor, srcWidth / 2f, srcHeight / 2f);
+            canvas.drawBitmap(logo, (srcWidth - logoWidth) / 2f, (srcHeight - logoHeight) / 2f, null);
             canvas.save();
             canvas.restore();
         } catch (Exception e) {
