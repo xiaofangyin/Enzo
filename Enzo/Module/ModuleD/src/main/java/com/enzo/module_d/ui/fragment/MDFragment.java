@@ -1,6 +1,9 @@
 package com.enzo.module_d.ui.fragment;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -30,6 +34,10 @@ import com.enzo.commonlib.utils.matisse.engine.impl.GlideEngine;
 import com.enzo.commonlib.utils.matisse.internal.entity.CaptureStrategy;
 import com.enzo.commonlib.utils.statusbar.stateappbar.bar.StateAppBar;
 import com.enzo.commonlib.utils.statusbar.stateappbar.utils.StatusBarUtils;
+import com.enzo.commonlib.utils.toast.ToastUtil;
+import com.enzo.commonlib.widget.popup.EasyPopup;
+import com.enzo.commonlib.widget.popup.XGravity;
+import com.enzo.commonlib.widget.popup.YGravity;
 import com.enzo.flkit.plugin.FLHostDelegateManager;
 import com.enzo.flkit.router.MainRouterPath;
 import com.enzo.flkit.router.ModuleDRouterPath;
@@ -79,7 +87,7 @@ import java.util.List;
  * 邮   箱: xiaofywork@163.com
  */
 @Route(path = ModuleDRouterPath.MODULE_D_FRAGMENT)
-public class MDFragment extends BaseFragment implements View.OnClickListener {
+public class MDFragment extends BaseFragment implements View.OnClickListener, View.OnLongClickListener {
 
     private static final int REQUEST_CODE_CHOOSE_AVATAR = 101;
     private TextView tvName;
@@ -127,6 +135,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initListener(View rootView) {
+        rootView.findViewById(R.id.tv_my_resume).setOnLongClickListener(this);
         rootView.findViewById(R.id.me_icon).setOnClickListener(this);
         rootView.findViewById(R.id.btn_aidl).setOnClickListener(this);
         rootView.findViewById(R.id.btn_app_upgrade).setOnClickListener(this);
@@ -356,5 +365,46 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), MDContentProviderTestActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        int id = v.getId();
+        if (id == R.id.tv_my_resume) {
+            EasyPopup mCirclePop = EasyPopup.create()
+                    .setContentView(v.getContext(), R.layout.md_popup_layout_copy)
+//                    .setAnimationStyle(R.style.ma_RightTopPopAnim)
+                    .setFocusAndOutsideEnable(true)
+                    .setBackgroundDimEnable(false)
+                    .setDimValue(0.4f)
+                    .setOnViewListener(new EasyPopup.OnViewListener() {
+                        @Override
+                        public void initViews(View view, final EasyPopup popup) {
+                            final TextView tvCopy = view.findViewById(R.id.tv_copy);
+                            tvCopy.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ClipboardManager clipboard = (ClipboardManager) v.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                                    ClipData clipData = ClipData.newPlainText(null, tvCopy.getText().toString());// 把数据复到剪贴板
+                                    clipboard.setPrimaryClip(clipData);
+                                    ToastUtil.show("已复制");
+                                    popup.dismiss();
+                                }
+                            });
+                        }
+                    })
+                    .apply();
+
+            mCirclePop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    LogUtil.e("onDismiss: mCirclePop");
+                }
+            });
+
+            mCirclePop.showAtAnchorView(v, YGravity.ABOVE, XGravity.CENTER, 0, 0);
+            return true;
+        }
+        return false;
     }
 }
