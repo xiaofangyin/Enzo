@@ -90,10 +90,8 @@ public class MDCreateQRCodeActivity extends BaseActivity {
         paint.setAntiAlias(true);
         paint.setDither(true);
         canvas.drawARGB(0, 0, 0, 0);
-
         paint.setColor(Color.WHITE);
         canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
