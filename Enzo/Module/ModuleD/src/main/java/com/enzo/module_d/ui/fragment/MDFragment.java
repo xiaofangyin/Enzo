@@ -140,6 +140,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_notification).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bar_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_qr_code).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_create_qr_code).setOnClickListener(this);
         rootView.findViewById(R.id.btn_matisse).setOnClickListener(this);
         rootView.findViewById(R.id.btn_shadow).setOnClickListener(this);
         rootView.findViewById(R.id.btn_task_queue).setOnClickListener(this);
@@ -157,7 +158,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_ultimate).setOnClickListener(this);
         rootView.findViewById(R.id.btn_content_provider).setOnClickListener(this);
         rootView.findViewById(R.id.btn_content_resolver).setOnClickListener(this);
-        rootView.findViewById(R.id.btn_create_qr_code).setOnClickListener(this);
     }
 
     @Override
@@ -301,6 +301,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         } else if (id == R.id.btn_qr_code) {
             Intent intent = new Intent(getContext(), MDScanQrCodeActivity.class);
             startActivity(intent);
+        } else if (id == R.id.btn_create_qr_code) {
+            Intent intent = new Intent(getContext(), MDCreateQRCodeActivity.class);
+            startActivity(intent);
         } else if (id == R.id.btn_matisse) {
             Intent intent = new Intent(getContext(), MDMatisseActivity.class);
             startActivity(intent);
@@ -351,9 +354,6 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_content_resolver) {
             Intent intent = new Intent(getContext(), MDContentProviderTestActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.btn_create_qr_code) {
-            Intent intent = new Intent(getContext(), MDCreateQRCodeActivity.class);
             startActivity(intent);
         }
     }
