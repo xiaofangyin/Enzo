@@ -191,5 +191,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="跨进程内容解析者" />
+
+        <Button
+            android:id="@+id/btn_create_qr_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="生成二维码" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

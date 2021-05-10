@@ -127,6 +127,16 @@
         <activity
             android:name=".ui.activity.MDUltimateActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDContentProviderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDContentProviderTestActivity"
+            android:process=":remote_resolver"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDCreateQRCodeActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

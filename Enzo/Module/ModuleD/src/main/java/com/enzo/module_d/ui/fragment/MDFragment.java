@@ -44,6 +44,7 @@ import com.enzo.module_d.ui.activity.MDBossCompanyDetailActivity;
 import com.enzo.module_d.ui.activity.MDCalendarActivity;
 import com.enzo.module_d.ui.activity.MDContentProviderActivity;
 import com.enzo.module_d.ui.activity.MDContentProviderTestActivity;
+import com.enzo.module_d.ui.activity.MDCreateQRCodeActivity;
 import com.enzo.module_d.ui.activity.MDFlowLayoutActivity;
 import com.enzo.module_d.ui.activity.MDGroupItemDecorationActivity;
 import com.enzo.module_d.ui.activity.MDHandlerThreadActivity;
@@ -156,6 +157,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_ultimate).setOnClickListener(this);
         rootView.findViewById(R.id.btn_content_provider).setOnClickListener(this);
         rootView.findViewById(R.id.btn_content_resolver).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_create_qr_code).setOnClickListener(this);
     }
 
     @Override
@@ -349,6 +351,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.btn_content_resolver) {
             Intent intent = new Intent(getContext(), MDContentProviderTestActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_create_qr_code) {
+            Intent intent = new Intent(getContext(), MDCreateQRCodeActivity.class);
             startActivity(intent);
         }
     }
