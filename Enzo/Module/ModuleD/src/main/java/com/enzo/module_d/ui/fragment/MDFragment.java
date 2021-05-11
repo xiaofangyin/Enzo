@@ -60,6 +60,7 @@ import com.enzo.module_d.ui.activity.MDMatisseActivity;
 import com.enzo.module_d.ui.activity.MDNotificationActivity;
 import com.enzo.module_d.ui.activity.MDProgressActivity;
 import com.enzo.module_d.ui.activity.MDRetrofitActivity;
+import com.enzo.module_d.ui.activity.MDRoomTestActivity;
 import com.enzo.module_d.ui.activity.MDRulerActivity;
 import com.enzo.module_d.ui.activity.MDScanBarCodeActivity;
 import com.enzo.module_d.ui.activity.MDScanQrCodeActivity;
@@ -167,6 +168,7 @@ public class MDFragment extends BaseFragment implements View.OnClickListener, Vi
         rootView.findViewById(R.id.btn_ultimate).setOnClickListener(this);
         rootView.findViewById(R.id.btn_content_provider).setOnClickListener(this);
         rootView.findViewById(R.id.btn_content_resolver).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_room).setOnClickListener(this);
     }
 
     @Override
@@ -363,6 +365,9 @@ public class MDFragment extends BaseFragment implements View.OnClickListener, Vi
             startActivity(intent);
         } else if (id == R.id.btn_content_resolver) {
             Intent intent = new Intent(getContext(), MDContentProviderTestActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_room) {
+            Intent intent = new Intent(getContext(), MDRoomTestActivity.class);
             startActivity(intent);
         }
     }

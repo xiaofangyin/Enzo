@@ -127,6 +127,9 @@
         <activity
             android:name=".ui.activity.MDCreateQRCodeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDRoomTestActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>

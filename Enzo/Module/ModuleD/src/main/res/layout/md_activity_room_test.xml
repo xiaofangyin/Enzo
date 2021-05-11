@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <EditText
+            android:id="@+id/edt_anim_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="请输入名字" />
+
+        <EditText
+            android:id="@+id/edt_anim_type"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="请输入类型" />
+
+        <EditText
+            android:id="@+id/edt_anim_play_date"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="请输入时间" />
+
+        <Button
+            android:id="@+id/btn_add_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="增" />
+
+        <Button
+            android:id="@+id/btn_delete_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="删" />
+
+        <Button
+            android:id="@+id/btn_modify_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="改" />
+
+        <Button
+            android:id="@+id/btn_check_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="查" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

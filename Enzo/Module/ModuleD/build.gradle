@@ -60,4 +60,7 @@ dependencies {
     //auto-service
     annotationProcessor rootProject.ext.dependencies.auto_service
     compileOnly rootProject.ext.dependencies.auto_service
+    //room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 }

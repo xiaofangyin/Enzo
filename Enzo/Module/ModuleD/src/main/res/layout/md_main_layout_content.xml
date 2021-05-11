@@ -198,5 +198,10 @@
             android:layout_height="wrap_content"
             android:text="跨进程内容解析者" />
 
+        <Button
+            android:id="@+id/btn_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="room" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
