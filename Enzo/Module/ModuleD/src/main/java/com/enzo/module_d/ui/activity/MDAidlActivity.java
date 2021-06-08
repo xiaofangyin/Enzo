@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,9 +16,8 @@ import android.widget.TextView;
 import com.enzo.commonlib.base.BaseActivity;
 import com.enzo.commonlib.utils.common.LogUtil;
 import com.enzo.commonlib.widget.headerview.HeadWidget;
-import com.enzo.module_d.ICalculateAidlInterface;
 import com.enzo.module_d.R;
-import com.enzo.module_d.model.impl.ICalculateAidlImpl;
+import com.example.contentresolver.IMyAidlInterface;
 
 /**
  * 文 件 名: MDAidlActivity
@@ -30,21 +30,6 @@ public class MDAidlActivity extends BaseActivity {
     private EditText edtText1;
     private EditText edtText2;
     private TextView tvResult;
-    private ICalculateAidlInterface aidl;
-
-    private final ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            LogUtil.d("MDAidlActivity onServiceConnected...test1111");
-            aidl = ICalculateAidlInterface.Stub.asInterface(service);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            LogUtil.d("MDAidlActivity onServiceDisconnected...test2222");
-            aidl = null;
-        }
-    };
 
     @Override
     public void initHeader() {
@@ -77,8 +62,7 @@ public class MDAidlActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         LogUtil.d("init data...");
-        Intent intent = new Intent(this, ICalculateAidlImpl.class);
-        bindService(intent, conn, Context.BIND_AUTO_CREATE);
+        startAidl();
     }
 
     @Override
@@ -94,7 +78,7 @@ public class MDAidlActivity extends BaseActivity {
                     int num2 = Integer.parseInt(str2);
                     try {
                         if (aidl != null) {
-                            tvResult.setText(String.valueOf(aidl.add(num1, num2)));
+                            tvResult.setText(String.valueOf(aidl.service(num1, num2)));
                         } else {
                             tvResult.setText("服务未连接!");
                         }
@@ -105,6 +89,30 @@ public class MDAidlActivity extends BaseActivity {
             }
         });
     }
+
+    private void startAidl() {
+        Intent intent = new Intent();
+        intent.setPackage("com.example.contentresolver");
+        intent.setAction("com.example.contentresolver.aidlservice");
+        bindService(intent, conn, Context.BIND_AUTO_CREATE);
+    }
+
+    private IMyAidlInterface aidl;
+
+    private final ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d("xfy", "onServiceConnected");
+            aidl = IMyAidlInterface.Stub.asInterface(service);
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.d("xfy", "onServiceDisconnected");
+            aidl = null;
+        }
+    };
 
     @Override
     protected void onDestroy() {
