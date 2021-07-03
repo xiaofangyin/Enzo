@@ -70,6 +70,6 @@ public class MDPluginImpl implements FLPluginInterface {
 
     @Override
     public void onReleaseResources() {
-
+        ContentResolverManager.getInstance().onDestroy();
     }
 }
