@@ -14,14 +14,24 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders.put("AMAP_KAY_VALUE", '76102ad5248952675e465b405894263f')
-        //网络环境是否为正式环境
+        // 网络环境是否为正式环境
         buildConfigField("Boolean", "PROD_ENV", 'false')
-        //是否开启log
+        // 是否开启log
         buildConfigField("Boolean", "LOG_OPEN", 'true')
-        //是否是组件开发模式
+        // 是否是组件开发模式
         buildConfigField("Boolean", "IS_MODULE", String.valueOf(rootProject.ext.module.isModule))
+
+
+        // Schema export directory is not provided to the annotation processor so we cannot export the schema.
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+
     }
-    signingConfigs { //gradle assembleRelease
+    signingConfigs { // gradle assembleRelease
         release {
             storeFile file(STOREFILE)
             storePassword KEYSTORE_PASSWORD
@@ -52,15 +62,15 @@ android {
     flavorDimensions "normal"
 
     productFlavors {
-        beta {//用于公司内日常发包测试
+        beta {// 用于公司内日常发包测试
             applicationId "com.enzo.test"
             versionCode 1
             versionName "1.0.0"
 
             manifestPlaceholders.put("AMAP_KAY_VALUE", '5d093b10b2f886a36d3018d0b6cdf358')
-            //网络环境是否为正式环境
+            // 网络环境是否为正式环境
             buildConfigField("Boolean", "PROD_ENV", 'false')
-            //是否开启log
+            // 是否开启log
             buildConfigField("Boolean", "LOG_OPEN", 'true')
         }
         qihoo_360 {
