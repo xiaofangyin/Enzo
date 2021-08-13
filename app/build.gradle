@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders.put("AMAP_KAY_VALUE", '76102ad5248952675e465b405894263f')
+        // 网络环境是否为正式环境
+        buildConfigField("Boolean", "PROD_ENV", 'false')
+        // 是否开启log
+        buildConfigField("Boolean", "LOG_OPEN", 'true')
+        // 是否是组件开发模式
+        buildConfigField("Boolean", "IS_MODULE", String.valueOf(rootProject.ext.module.isModule))
+
+
+        // Schema export directory is not provided to the annotation processor so we cannot export the schema.
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+
+    }
+    signingConfigs { // gradle assembleRelease
+        release {
+            storeFile file(STOREFILE)
+            storePassword KEYSTORE_PASSWORD
+            keyAlias KEYALIAS
+            keyPassword KEY_PASSWORD
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true // 是否混淆
+            zipAlignEnabled true // 是否zip对齐
+            shrinkResources true // 是否删除无用资源（前提：minifyEnabled为true）
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release  //调用 keystore 的规则
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "enzo_${defaultConfig.versionName}_${buildTime()}_${variant.productFlavors[0].name}.apk"
+                }
+            }
+        }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            signingConfig signingConfigs.release  //调用 keystore 的规则
+        }
+    }
+
+    flavorDimensions "normal"
+
+    productFlavors {
+        beta {// 用于公司内日常发包测试
+            applicationId "com.enzo.test"
+            versionCode 1
+            versionName "1.0.0"
+
+            manifestPlaceholders.put("AMAP_KAY_VALUE", '5d093b10b2f886a36d3018d0b6cdf358')
+            // 网络环境是否为正式环境
+            buildConfigField("Boolean", "PROD_ENV", 'false')
+            // 是否开启log
+            buildConfigField("Boolean", "LOG_OPEN", 'true')
+        }
+        qihoo_360 {
+
+        }
+
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders.put("CHANNEL_ID", name)
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation project(':Module:Main')
+    implementation project(':Module:ModuleA')
+    implementation project(':Module:ModuleB')
+    implementation project(':Module:ModuleC')
+    implementation project(':Module:ModuleD')
+    debugImplementation 'com.idescout.sql:sqlscout-server:4.1'
+    releaseImplementation 'com.idescout.sql:sqlscout-server-noop:4.1'
+}
+
+static def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}

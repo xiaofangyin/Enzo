@@ -1,0 +1,25 @@
+每个ThreadLocal只能存储一个数据，如果需要存储多个值的话，可以定义多个ThreadLocal。ThreadLocal在内部维护了一个ThreadLocalMap用来存储这些值。
+ThreadLocalMap并没有去实现Map接口，它定义了一个Entry数组，每个Entry以<key,value>的形式来保存值，其中key为当前ThreadLocal本身，value为要保存的
+
+    public void set(T value) {
+        Thread t = Thread.currentThread();
+        ThreadLocalMap map = getMap(t);
+        if (map != null)
+            map.set(this, value);
+        else
+            createMap(t, value);
+    }
+
+    public T get() {
+        Thread t = Thread.currentThread();
+        ThreadLocalMap map = getMap(t);
+        if (map != null) {
+            ThreadLocalMap.Entry e = map.getEntry(this);
+            if (e != null) {
+                @SuppressWarnings("unchecked")
+                T result = (T)e.value;
+                return result;
+            }
+        }
+        return setInitialValue();
+    }

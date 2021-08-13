@@ -1,0 +1,20 @@
+<resources>
+
+    <dimen name="fab_size_normal">56dp</dimen>
+    <dimen name="fab_size_mini">40dp</dimen>
+    <dimen name="fab_shadow_size">12dp</dimen>
+
+    <!--matisse-->
+    <dimen name="matisse_media_grid_size">48dp</dimen>
+    <dimen name="matisse_media_grid_spacing">4dp</dimen>
+    <dimen name="matisse_album_item_height">72dp</dimen>
+
+    <!--RMSwitch-->
+    <dimen name="rm_switch_standard_height">26dp</dimen>
+    <dimen name="rm_switch_standard_width">57.2dp</dimen>
+    <dimen name="rm_triswitch_standard_width">67.6dp</dimen>
+
+    <dimen name="rm_switch_android_height">22dp</dimen>
+    <dimen name="rm_switch_android_width">48.4dp</dimen>
+    <dimen name="rm_triswitch_android_width">57.2dp</dimen>
+</resources>

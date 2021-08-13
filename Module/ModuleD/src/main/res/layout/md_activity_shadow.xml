@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!--View颜色-->
+        <TextView
+            android:id="@+id/tv_color_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="View颜色：" />
+
+        <EditText
+            android:id="@+id/et_color"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="渐变色以英文逗号隔开"
+            android:textSize="13sp" />
+
+        <!--View圆角-->
+        <TextView
+            android:id="@+id/tv_radius_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="View圆角：" />
+
+        <EditText
+            android:id="@+id/et_radius"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="如：8"
+            android:textSize="13sp" />
+
+        <!--阴影颜色-->
+        <TextView
+            android:id="@+id/tv_shadowcolor_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="阴影颜色：" />
+
+        <EditText
+            android:id="@+id/et_shadowcolor"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="如：#99000000"
+            android:textSize="13sp" />
+
+        <!--横向偏移-->
+        <TextView
+            android:id="@+id/tv_offsetX_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="横向偏移：" />
+
+        <EditText
+            android:id="@+id/et_offsetX"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="如：4"
+            android:textSize="13sp" />
+
+        <!--纵向偏移-->
+        <TextView
+            android:id="@+id/tv_offsetY_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="纵向偏移：" />
+
+        <EditText
+            android:id="@+id/et_offsetY"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="如：3"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="确定" />
+
+        <RelativeLayout
+            android:id="@+id/tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="Shadow Test"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

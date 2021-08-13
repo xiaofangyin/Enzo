@@ -1,0 +1,20 @@
+ext {
+    android = [
+            applicationId    : "com.enzo.xiaofy",
+            compileSdkVersion: 30,//代表着编译的时候，会采用该api的规范进行代码检查和警告，但是并不会编译进apk中。
+            minSdkVersion    : 23,//代表着最低版本，在编译的时候兼容到该参数指定最低版本api。
+            targetSdkVersion : 30,//代表着目标版本，在编译的时候会将该版本的api编译进apk中。
+            versionCode      : 1,
+            versionName      : '1.0.0',
+    ]
+
+    module = [
+            isModule: false,//isModule是“集成开发模式”和“组件开发模式”的切换开关
+    ]
+
+    dependencies = [
+            arouter           : 'com.alibaba:arouter-api:1.4.0',
+            arouter_annotation: 'com.alibaba:arouter-compiler:1.2.1',
+            auto_service      : "com.google.auto.service:auto-service:1.0-rc4",
+    ]
+}

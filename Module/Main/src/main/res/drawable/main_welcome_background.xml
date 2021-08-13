@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!--<rotate xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:drawable="@drawable/sr_examination_result_unsafe_item_progressbar_bg"--><!--android:fromDegrees="0"--><!--android:pivotX="50%"--><!--android:pivotY="50%"--><!--android:toDegrees="360">--><!--</rotate>-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="90"
+        android:endColor="#FFFFDA44"
+        android:startColor="#FFF8AC59" />
+</shape>

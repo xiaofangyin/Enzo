@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rm_switch_view_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/rm_switch_view_bkg"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY" />
+
+    <com.enzo.commonlib.widget.togglebutton.android.SquareImageView
+        android:id="@+id/rm_switch_view_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:scaleType="fitCenter" />
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_common_bg"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btn_add_task_low"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加任务_low" />
+
+        <Button
+            android:id="@+id/btn_add_task_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加任务_default" />
+
+        <Button
+            android:id="@+id/btn_add_definite_task_high"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加不定时间任务_high" />
+
+        <Button
+            android:id="@+id/btn_add_undefinite_task_high"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加定事件任务_high" />
+
+        <Button
+            android:id="@+id/btn_clear_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="清空任务" />
+
+        <TextView
+            android:id="@+id/tv_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/color_white" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,134 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.enzo.module_d">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+        <service
+            android:name=".model.impl.ICalculateAidlImpl"
+            android:exported="true" />
+
+        <provider
+            android:name=".model.db.MyFirstContentProvider"
+            android:authorities="com.enzo.module_d.MyFirstContentProvider"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.activity.MDBossCompanyDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDLoadingLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDStructureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDCalendarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDNotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDScanBarCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDScanQrCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDMatisseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDLighterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDDialogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDFragmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDGridViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDListViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDRecyclerViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDRelativeLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDScrollViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lighter.MDViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDAVLoadingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDShadowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDTaskQueueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDProgressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDScrollingImageViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDBannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDRulerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDTimePickerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDTimePickerActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDFlowLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDViewPagerIndicatorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDAidlActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDRetrofitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDGroupItemDecorationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDHandlerThreadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDBoltsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDUltimateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDContentProviderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDContentProviderTestActivity"
+            android:process=":remote_resolver"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDCreateQRCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MDRoomTestActivity"
+            android:screenOrientation="portrait" />
+
+    </application>
+</manifest>

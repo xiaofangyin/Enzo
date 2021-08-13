@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mc_white">#ffffff</color>
+    <color name="mc_black">#000000</color>
+    <color name="mc_orange">#ff7f00</color>
+    <color name="mc_pink">#f08080</color>
+    <color name="mc_blue">#3498db</color>
+    <color name="mc_red">#db3434</color>
+    <color name="mc_green">#11b900</color>
+    <color name="mc_yellow">#ffff00</color>
+</resources>

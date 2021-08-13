@@ -1,0 +1,3 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">>
+    <string name="mb_news_name" translatable="false">ModuleB</string>
+</resources>

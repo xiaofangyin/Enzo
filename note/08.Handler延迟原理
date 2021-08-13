@@ -1,0 +1,6 @@
+可以看到这里也是一个for循环遍历队列，核心变量就是nextPollTimeoutMillis。
+可以看到，计算出nextPollTimeoutMillis后就调用nativiePollOnce这个native方法。
+这里的话大概可以猜到他的运行机制，因为他是根据执行时间进行排序的，
+那传入的这个nextPollTimeoutMillis应该就是休眠时间，类似于java的sleep(time)。
+休眠到下一次message的时候就执行。那如果我在这段时间又插入了一个新的message怎么办，
+所以handler每次插入message都会唤醒线程，重新计算插入后，再走一次这个休眠流程。

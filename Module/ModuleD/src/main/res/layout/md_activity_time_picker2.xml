@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_12_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="12小时制" />
+
+                <com.enzo.commonlib.widget.picker.picker.TimePickerView
+                    android:id="@+id/time_picker_auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:tpv_hourRightText="时"
+                    app:tpv_is24Hour="false"
+                    app:tpv_minuteRightText="分"
+                    app:tpv_rightTextMarginLeft="5dp"
+                    app:tpv_secondRightText="秒"
+                    app:tpv_textSize="22sp"
+                    app:tpv_widthWeightMode="true" />
+
+                <TextView
+                    android:id="@+id/tv_24_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="24小时制" />
+
+                <com.enzo.commonlib.widget.picker.picker.TimePickerView
+                    android:id="@+id/time_picker_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:tpv_hourRightText=":"
+                    app:tpv_is24Hour="true"
+                    app:tpv_minuteRightText=":"
+                    app:tpv_rightTextColor="@color/color_dark_black"
+                    app:tpv_rightTextGravity="top"
+                    app:tpv_rightTextSize="20sp"
+                    app:tpv_secondRightText=" "
+                    app:tpv_textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="年月日" />
+
+                <com.enzo.commonlib.widget.picker.picker.DatePickerView
+                    android:id="@+id/date_picker_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:dpv_cyclic="false"
+                    app:dpv_dayRightText="日"
+                    app:dpv_dividerType="wrap"
+                    app:dpv_endYear="2088"
+                    app:dpv_monthRightText="月"
+                    app:dpv_rightTextMarginLeft="10dp"
+                    app:dpv_selectedDay="4"
+                    app:dpv_selectedMonth="5"
+                    app:dpv_selectedTextColor="@color/color_green"
+                    app:dpv_selectedYear="2000"
+                    app:dpv_showDivider="true"
+                    app:dpv_startYear="1988"
+                    app:dpv_textSize="22sp"
+                    app:dpv_yearRightText="年" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</LinearLayout>

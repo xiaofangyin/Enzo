@@ -1,0 +1,26 @@
+android 8.0
+
+app启动流程：
+1.Luancher 进程通过binder向AMS发起startActivity请求
+2.AMS收到请求， ActivityStarter解析flag，启动模式等，ActivityStack处理activity栈
+然后AMS通过socket调用到Zygote，fork新的app进程
+3.app进程创建后，再通过binder向AMS发起attachApplication请求
+4.AMS通过binder调用发送scheduleLaunchActivity到app进程
+5.APP进程的binder线程ApplicationThread接收到请求，通过handler发送LAUNCH_ACTIVITY消息到主线程
+6.ActivityThread接收到消息，执行到handleLaunchActivity，开始Activity的生命周期
+
+
+
+Activity启动流程：
+1.Activity   ->   startActivity()   ->   startActivityForResult()   ->     mInstrumentation.execStartActivity
+2.Instrumentation   ->   ActivityManager.getService().startActivity()
+
+3.ActivityManagerService(IActivityManager.Stub的实现类)   ->   startActivityAsUser()   ->   ActivityTaskManagerService.startActivityAsUser()
+4.ActivityTaskManagerService   ->   ActivityStarter.startActivityMayWait()
+.
+.
+.
+
+5.ApplicationThread(ActivityThread内部类)   ->   scheduleLaunchActivity(){sendMessage(H.LAUNCH_ACTIVITY, r);}
+6.ActivityThread   ->   H.handleLaunchActivity()   ->   performLaunchActivity()   ->   mInstrumentation.callActivityOnCreate()
+7.Activity   ->   onCreate()

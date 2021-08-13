@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fl_defaultState" format="boolean" />
+
+    <declare-styleable name="FlToggleButton">
+        <attr name="fl_defaultState" />
+    </declare-styleable>
+</resources>

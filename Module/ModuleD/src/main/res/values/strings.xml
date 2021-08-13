@@ -1,0 +1,4 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">>
+    <string name="md_news_name" translatable="false">ModuleD</string>
+    <string name="md_error_gif" translatable="false">长宽不小于 %1$dpx，且大小不超过 %2$sM。</string>
+</resources>

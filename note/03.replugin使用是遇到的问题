@@ -1,0 +1,17 @@
+
+3.context异常，当前是的上下文是谁的，这个要明确。宿主or插件。
+
+5.插件相关权限要提前在宿主中注册。
+
+7.intent传serializable对象失败。
+检测是否serializable对象里面是否有id，建议用Parcelable来传值。
+
+13.插件可以复用主程序的资源,可以的，因为会同时把host和plugin的Context传递给插件.
+
+15.插件中引用AAR中的activity,会出现白屏.参见issue
+
+17.大部分Context导致的问题，要明白是宿主的Context还是插件的Context。我们当前是在哪里使用的Context。使用宿主资源建       议用getIdentifier，最好还不要资源混淆宿主源文件。
+
+18.插件app好像不兼容百度地图,因为Windows环境下编译时，大小写不区分导致的问题（实际上也是百度地图Jar包生成时出现       了问题，明明是a，但文件名变成了A）
+
+21.加固问题。宿主加固没问题，插件加固目前是不可以的

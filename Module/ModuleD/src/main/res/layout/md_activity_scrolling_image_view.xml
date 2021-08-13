@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scrolling_image_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_dark_black"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="1dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_background" />
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="1.9dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_foreground" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@mipmap/md_scrolling_van" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="-1dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_background" />
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="-1.9dp"
+            scrolling_image_view:src="@mipmap/md_scrolling_foreground" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:scaleType="fitXY"
+            android:src="@mipmap/md_layer_1" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:src="@mipmap/md_layer_2" />
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed=".3dp"
+            scrolling_image_view:src="@mipmap/md_layer_3" />
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed=".6dp"
+            scrolling_image_view:src="@mipmap/md_layer_4" />
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed=".9dp"
+            scrolling_image_view:src="@mipmap/md_layer_5" />
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="1.5dp"
+            scrolling_image_view:src="@mipmap/md_layer_6" />
+
+        <com.enzo.commonlib.widget.scrollingimageview.ScrollingImageView
+            android:id="@+id/scroll_image_view_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            scrolling_image_view:speed="1.7dp"
+            scrolling_image_view:src="@mipmap/md_layer_7" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_skull_3" />
+
+        <com.enzo.commonlib.widget.waveview.WaveView
+            android:id="@+id/wave_view"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom" />
+    </FrameLayout>
+
+</LinearLayout>

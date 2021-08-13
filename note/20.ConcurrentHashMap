@@ -1,0 +1,40 @@
+1.ConcurrentHashMap中主要实体类就是三个：ConcurrentHashMap（整个Hash表）,Segment（段），HashEntry（节点）
+
+    static final class Segment<K,V> extends ReentrantLock implements Serializable {
+        transient volatile int count;
+        transient int modCount;
+        transient int threshold;
+        transient volatile HashEntry<K,V>[] table;
+        final float loadFactor;
+    }
+
+    详细解释一下Segment里面的成员变量的意义：
+    count：Segment中元素的数量
+    modCount：对table的大小造成影响的操作的数量（比如put或者remove操作）
+    threshold：阈值，Segment里面元素的数量超过这个值依旧就会对Segment进行扩容
+    table：链表数组，数组中的每一个元素代表了一个链表的头部
+    loadFactor：负载因子，用于确定threshold
+
+2.Segment中的元素是以HashEntry的形式存放在链表数组中的，看一下HashEntry的结构：
+
+    static final class HashEntry<K,V> {
+        final K key;
+        final int hash;
+        volatile V value;
+        final HashEntry<K,V> next;
+    }
+
+3.ConcurrentHashMap的初始化
+public ConcurrentHashMap(int initialCapacity,float loadFactor, int concurrencyLevel) {
+    ...
+}
+        CurrentHashMap的初始化一共有三个参数，一个initialCapacity，表示初始的容量，一个loadFactor，表示负载参数，
+    最后一个是concurrentLevel，代表ConcurrentHashMap内部的Segment的数量，ConcurrentLevel一经指定，不可改变，
+    后续如果ConcurrentHashMap的元素数量增加导致ConcurrentHashMap需要扩容，ConcurrentHashMap不会增加Segment的数量，
+    而只会增加Segment中链表数组的容量大小，这样的好处是扩容过程不需要对整个ConcurrentHashMap做rehash，而只需要
+    对Segment里面的元素做一次rehash就可以了。
+
+4.锁分离
+        通过HashTable分析知道，Synchronized是针对整张hash表的，即每次锁住整张表，而ConcurrentHashMap允许多个修改操作并发进行。
+    其关键是采用了锁分离技术。ConcurrentHashMap内部使用段（segment）来表示这些不同的部分，每个段就是一个小的hashtable。
+    但是size()和containsValue()，则可能需要锁住整个表。

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_gray">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMTristateSwitch
+                    android:id="@+id/rm_triswitch1"
+                    android:layout_width="86dp"
+                    android:layout_height="40dp"
+                    app:forceAspectRatio="false"
+                    app:state="left"
+                    app:switchBkgLeftColor="#F44336"
+                    app:switchBkgMiddleColor="#9E9E9E"
+                    app:switchBkgRightColor="#4CAF50"
+                    app:switchToggleLeftColor="#F44336"
+                    app:switchToggleLeftImage="@drawable/sad"
+                    app:switchToggleMiddleColor="#9E9E9E"
+                    app:switchToggleMiddleImage="@drawable/neutral"
+                    app:switchToggleRightColor="#4CAF50"
+                    app:switchToggleRightImage="@drawable/happy" />
+
+                <TextView
+                    android:id="@+id/txt_rm_triswitch_state1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_triswitch1"
+                    android:layout_alignStart="@+id/rm_triswitch1"
+                    android:layout_alignLeft="@+id/rm_triswitch1"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMTristateSwitch
+                    android:id="@+id/rm_triswitch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:state="middle"
+                    app:switchBkgLeftColor="#FF80AB"
+                    app:switchBkgMiddleColor="#9E9E9E"
+                    app:switchBkgRightColor="#2196F3"
+                    app:switchDesign="slim"
+                    app:switchToggleLeftColor="#EC407A"
+                    app:switchToggleLeftImage="@drawable/female"
+                    app:switchToggleMiddleColor="#616161"
+                    app:switchToggleMiddleImage="@drawable/transgender"
+                    app:switchToggleRightColor="#1976D2"
+                    app:switchToggleRightImage="@drawable/male" />
+
+                <TextView
+                    android:id="@+id/txt_rm_triswitch_state2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_triswitch2"
+                    android:layout_alignStart="@+id/rm_triswitch2"
+                    android:layout_alignLeft="@+id/rm_triswitch2"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMTristateSwitch
+                    android:id="@+id/rm_triswitch3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:right_to_left="true"
+                    app:state="right"
+                    app:switchToggleLeftColor="@color/colorPrimary"
+                    app:switchToggleLeftImage="@drawable/cancel"
+                    app:switchToggleMiddleColor="@color/colorPrimary"
+                    app:switchToggleMiddleImage="@drawable/maybe"
+                    app:switchToggleRightColor="@color/colorPrimary"
+                    app:switchToggleRightImage="@drawable/confirm" />
+
+                <TextView
+                    android:id="@+id/txt_rm_triswitch_state3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_triswitch3"
+                    android:layout_alignStart="@+id/rm_triswitch3"
+                    android:layout_alignLeft="@+id/rm_triswitch3"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMTristateSwitch
+                    android:id="@+id/rm_triswitch4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txt_rm_triswitch_state4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_triswitch4"
+                    android:layout_alignStart="@+id/rm_triswitch4"
+                    android:layout_alignLeft="@+id/rm_triswitch4"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMTristateSwitch
+                    android:id="@+id/rm_triswitch5"
+                    android:layout_width="86dp"
+                    android:layout_height="40dp"
+                    app:switchBkgLeftColor="#616161"
+                    app:switchToggleLeftColor="#616161"
+                    app:switchToggleMiddleColor="#616161"
+                    app:switchToggleRightColor="#616161" />
+
+                <TextView
+                    android:id="@+id/txt_rm_triswitch_state5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_triswitch5"
+                    android:layout_alignStart="@+id/rm_triswitch5"
+                    android:layout_alignLeft="@+id/rm_triswitch5"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMTristateSwitch
+                    android:id="@+id/rm_triswitch6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:switchBkgLeftColor="#FBC02D"
+                    app:switchDesign="android"
+                    app:switchToggleLeftColor="#9E9E9E"
+                    app:switchToggleMiddleColor="#616161"
+                    app:switchToggleRightColor="#424242" />
+
+                <TextView
+                    android:id="@+id/txt_rm_triswitch_state6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_triswitch6"
+                    android:layout_alignStart="@+id/rm_triswitch6"
+                    android:layout_alignLeft="@+id/rm_triswitch6"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch7"
+                    android:layout_width="56dp"
+                    android:layout_height="40dp"
+                    app:checked="true"
+                    app:forceAspectRatio="false"
+                    app:switchBkgCheckedColor="#4CAF50"
+                    app:switchBkgNotCheckedColor="#F44336"
+                    app:switchToggleCheckedColor="#4CAF50"
+                    app:switchToggleCheckedImage="@drawable/happy"
+                    app:switchToggleNotCheckedColor="#F44336"
+                    app:switchToggleNotCheckedImage="@drawable/sad" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch7"
+                    android:layout_alignStart="@+id/rm_switch7"
+                    android:layout_alignLeft="@+id/rm_switch7"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:switchBkgCheckedColor="#2196F3"
+                    app:switchBkgNotCheckedColor="#FF80AB"
+                    app:switchDesign="slim"
+                    app:switchToggleCheckedColor="#1976D2"
+                    app:switchToggleCheckedImage="@drawable/male"
+                    app:switchToggleNotCheckedColor="#EC407A"
+                    app:switchToggleNotCheckedImage="@drawable/female" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch2"
+                    android:layout_alignStart="@+id/rm_switch2"
+                    android:layout_alignLeft="@+id/rm_switch2"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:checked="true"
+                    app:switchToggleCheckedColor="@color/colorPrimary"
+                    app:switchToggleCheckedImage="@drawable/confirm"
+                    app:switchToggleNotCheckedColor="@color/colorPrimary"
+                    app:switchToggleNotCheckedImage="@drawable/cancel" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch3"
+                    android:layout_alignStart="@+id/rm_switch3"
+                    android:layout_alignLeft="@+id/rm_switch3"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch4"
+                    android:layout_alignStart="@+id/rm_switch4"
+                    android:layout_alignLeft="@+id/rm_switch4"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch5"
+                    android:layout_width="56dp"
+                    android:layout_height="wrap_content"
+                    app:checked="true"
+                    app:switchBkgCheckedColor="#4CAF50"
+                    app:switchBkgNotCheckedColor="#F44336"
+                    app:switchToggleCheckedColor="#F44336"
+                    app:switchToggleNotCheckedColor="#4CAF50" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch5"
+                    android:layout_alignStart="@+id/rm_switch5"
+                    android:layout_alignLeft="@+id/rm_switch5"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch6"
+                    android:layout_width="52dp"
+                    android:layout_height="wrap_content"
+                    app:forceAspectRatio="false"
+                    app:switchBkgCheckedColor="#4CAF50"
+                    app:switchBkgNotCheckedColor="#F44336"
+                    app:switchToggleCheckedColor="#F44336"
+                    app:switchToggleNotCheckedColor="#4CAF50" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch6"
+                    android:layout_alignStart="@+id/rm_switch6"
+                    android:layout_alignLeft="@+id/rm_switch6"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:switchBkgCheckedColor="@color/color_dark_black"
+                    app:switchBkgNotCheckedColor="@color/color_dark_black"
+                    app:switchToggleCheckedColor="@color/color_white" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch8"
+                    android:layout_alignStart="@+id/rm_switch8"
+                    android:layout_alignLeft="@+id/rm_switch8"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch1"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch1"
+                    android:layout_alignStart="@+id/rm_switch1"
+                    android:layout_alignLeft="@+id/rm_switch1"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <com.enzo.commonlib.widget.togglebutton.android.RMSwitch
+                    android:id="@+id/rm_switch9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:switchDesign="android"
+                    app:switchToggleNotCheckedColor="#9E9E9E" />
+
+                <TextView
+                    android:id="@+id/txt_rm_switch_state9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rm_switch9"
+                    android:layout_alignStart="@+id/rm_switch9"
+                    android:layout_alignLeft="@+id/rm_switch9"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

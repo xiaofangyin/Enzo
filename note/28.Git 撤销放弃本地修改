@@ -1,0 +1,17 @@
+一，未使用 git add 缓存代码时
+git checkout -- filepathname
+git checkout .
+
+可以使用 git checkout -- filepathname (比如： git checkout -- readme.md  ，不要忘记中间的 “--” ，不写就成了检出分支了！！)。
+放弃所有的文件修改可以使用 git checkout .  命令。
+此命令用来放弃掉所有还没有加入到缓存区（就是 git add 命令）的修改：内容修改与整个文件删除。但是此命令不会删除掉刚新建的文件。
+因为刚新建的文件还没已有加入到 git 的管理系统中。所以对于git是未知的。自己手动删除就好了。
+
+二，已经使用了  git add 缓存了代码。
+git reset HEAD filepathname 来放弃指定文件的缓存
+git reset HEAD .            放弃所以的缓存可以使用
+在使用本命令后，本地的修改并不会消失，而是回到了如（一）所示的状态。继续用（一）中的操作，就可以放弃本地的修改。
+
+三，已经用 git commit  提交了代码
+1.git reset --hard commitid   回退到任意版本
+2.git reset --hard HEAD~或者git reset --hard HEAD~1  ~后面的数字表示回退几次提交 不写的话默认是一次

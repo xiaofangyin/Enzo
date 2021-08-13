@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.enzo.skin_laoder"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "${variant.productFlavors[0].name}_v${variant.versionName}.skin"
+            }
+    }
+
+    flavorDimensions "normal"
+
+    productFlavors {
+
+        major {
+
+        }
+
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders.put("CHANNEL_ID", name)
+        }
+    }
+}
+
+dependencies {
+
+}

@@ -1,0 +1,35 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.enzo.main">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <activity
+            android:name=".ui.activity.SASplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/main_WelLauncher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.activity.SAMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SAAddDeviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SAAdvertActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SAAddDeviceActivity2"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

@@ -1,0 +1,82 @@
+相似点：这两个同步方式有很多相似之处，他们都是加锁方式同步，而且都是阻塞式同步，也就是说当一个线程获取对象锁之后，
+        进入同步块，其他访问该同步块的线程都必须阻塞在该同步块外面等待，而进行线程阻塞和唤醒的代价是比较高的(操作系统需
+        要在用户态和内核态之间来回切换，代价很高，不过可以通过对锁优化进行改善)。
+
+功能区别：这两种方式最大的区别就是对于synchronized来说，它是Java语言关键字，是原生语法层面的互斥，需要jvm实现。
+         而ReentrantLock他是jdk1.5之后提供的API层面的互斥锁，需要lock()和unlock()方法配合try/finally语句来完成
+
+便利性：很明显Synchronized的使用方便简洁，并且由编译器去保证锁的加锁和释放锁，而ReentrantLock则需要手动声
+        明加锁和释放锁的方法，为了避免忘记手动释放锁，最好是在finally中声明释放锁。
+
+锁的细粒度和灵活度：很明显ReenTrantLock优于Synchronized
+
+1.Synchronized:
+            Synchronized经过编译后，会在同步块前后分别形成monitorenter和monitorexit两个字节码指令，在执行monitorenter
+        指令时，首先要尝试获取对象锁，如果对象没有别锁定，或者当前已经拥有这个对象锁，把锁的计数器加1，相应的在执行
+        monitorexit指令时，会将计数器减1，当计数器为0时，锁就被释放了。如果获取锁失败，那当前线程就要阻塞，
+        直到对象锁被另一个线程释放为止。
+
+        public class SynDemo{
+
+            public static void main(String[] arg){
+                Runnable t1=new MyThread();
+                new Thread(t1,"t1").start();
+                new Thread(t1,"t2").start();
+            }
+
+        }
+        class MyThread implements Runnable {
+
+            @Override
+            public void run() {
+                synchronized (this) {
+                    for(int i=0;i<10;i++)
+                        System.out.println(Thread.currentThread().getName()+":"+i);
+                }
+
+            }
+
+        }
+
+2.ReentrantLock:
+    由于ReentrantLock是java.util.concurrent包下面提供的一套互斥锁，相比Synchronized类提供了一些高级的功能，主要有一下三项：
+    2.1 等待可中断，持有锁的线程长期不释放的时候，正在等待的线程可以选择放弃等待，这相当于Synchronized来说可以避免出现死锁的情况。
+        通过lock.lockInterruptibly()来实现这个机制。
+
+    2.2 公平锁，多个线程等待同一个锁时，必须按照申请锁的时间顺序获得锁，Synchronized锁非公平锁，ReentrantLock默认的构造函数是创
+        建的非公平锁，可以通过参数true设为公平锁，但公平锁表现的性能不是很好。
+        公平锁、非公平锁的创建方式：
+
+        //创建一个非公平锁，默认是非公平锁
+        Lock lock = new ReentrantLock();
+        Lock lock = new ReentrantLock(false);
+        //创建一个公平锁，构造传参true
+        Lock lock = new ReentrantLock(true);
+
+    2.3 锁绑定多个条件，一个ReentrantLock对象可以同时绑定对个对象。ReenTrantLock提供了一个Condition（条件）类，用来实现分组唤醒
+        需要唤醒的线程们，而不是像synchronized要么随机唤醒一个线程要么唤醒全部线程。
+
+ReentrantLock用法如下：
+        public class SynDemo{
+
+            public static void main(String[] arg){
+                Runnable t1=new MyThread();
+                new Thread(t1,"t1").start();
+                new Thread(t1,"t2").start();
+            }
+
+        }
+        class MyThread implements Runnable {
+
+            private Lock lock=new ReentrantLock();
+            public void run() {
+                    lock.lock();
+                    try{
+                        for(int i=0;i<5;i++)
+                            System.out.println(Thread.currentThread().getName()+":"+i);
+                    }finally{
+                        lock.unlock();
+                    }
+            }
+
+        }

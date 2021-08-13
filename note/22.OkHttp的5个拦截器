@@ -1,0 +1,22 @@
+1>：RetryAndFollowUpInterceptor：重试拦截器
+    处理重试的一个拦截器，会去处理一些异常，只要不是致命的异常就会重新发起一次请求（把Request给下级），如果是致命的异常就会抛给上一级；
+    会去处理一些重定向等等，比如 3xx、307、407，处理的方式就是：从头部的Location中获取一个新的url地址，生成一个新的请求交给下一级（相当于重新发起一次请求）；
+
+2>：BridgeInterceptor：基础的拦截器
+    a：做一个简单的处理，设置一些通用的请求头，Cookie、Connection、Content-Type、Content-Length；
+    b：做一些返回的处理，如果返回的数据被压缩了，采用 ZipSource，保存Cookie；
+
+3>：CacheInterceptor：缓存拦截器
+    在缓存可用的情况下，读取本地的缓存的数据，如果没有直接去服务器读取数据，如果有，首先先判断是否有缓存策略，然后判断是否过期，
+    如果没有过期，直接从缓存中读，如果过期了，你需要添加一些之前的头部信息，比如：If - Modified - Since，这个时候后台服务器有
+    可能给你返回 304，代表你还是可以拿本地缓存，每次读取到新的响应后做一次缓存，这样的话，可以保证下一次从缓冲可以拿到；
+
+4>：ConnectInterceptor：连接的拦截器
+    调用findHealthyConnection()：找到一个连接，首先判断有没有健康的，没有就创建（建立socket，握手连接），连接缓存，得到一条结论就是：
+    OkHttp是基于原生的 Socket + okio（原生IO的封装）；因为原生的io类太多，所以采用okio；
+    HttpCodec：里面封装了 okio 的 Source（输入流）和 Sink（输出流）， 我们通过 HttpCodec就可以操作 Socket的输入输出流，就可以给服务器读数据和写数据；
+
+5>：CallServerInterceptor：
+    给服务器写数据和读取数据；
+    写头部信息，写body表单信息等等；
+

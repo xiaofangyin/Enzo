@@ -1,0 +1,8 @@
+1.首先java的四种引用，强、软、弱、虚四种引用，配合ReferenceQueue使用，在构造弱引用时传入ReferenceQueue，
+    在垃圾回收之前，会将引用放入队列中，可以通过队列中是否有对象的引用来判断对象是否被回收；
+
+2.具体就是在Application中注册ActivityLifecycleCallbacks监听activity的生命周期，在onDestory的时候
+    ，新建一个弱引用传入队列，在线程空闲的时候，会尝试清除队列的弱引用，如果成功则没有发生泄漏，如果失败，
+    则尝试GC，GC之后再次尝试清除弱引用，如果失败则发生了内存泄漏
+
+3.Fragment也类似，在Activity创建时获取到FragmentManager注册一个fragmentLifecycleCallbacks，然后观察fragment；

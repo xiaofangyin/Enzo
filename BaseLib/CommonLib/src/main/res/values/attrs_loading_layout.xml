@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="LoadingLayout">
+    <attr name="com_loadingView" format="reference" />
+    <attr name="com_errorView" format="reference" />
+    <attr name="com_emptyView" format="reference" />
+  </declare-styleable>
+
+</resources>

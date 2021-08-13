@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="FLCSeekBar">
+        <attr name="cells" format="integer" />
+        <attr name="lineHeight" format="dimension" />
+        <attr name="lineColorSelected" format="color" />
+        <attr name="lineColorUnSelected" format="color" />
+        <attr name="circleColorEdge" format="color" />
+        <attr name="bitmapThumb" format="reference" />
+    </declare-styleable>
+</resources>

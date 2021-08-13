@@ -1,0 +1,32 @@
+    可能有的朋友会问了，既然是长耗时的操作，那么Thread也可以完成啊。没错，在程序里面很多耗时工作我们也可以通过Thread来完成，
+那么还需要Service干嘛呢。接下来就为大家解释以下Service和Thread的区别。
+
+首先要说明的是，进程是系统最小资源分配单位，而线程是则是最小的执行单位，线程需要的资源通过它所在的进程获取。
+
+Service与Thread的区别：
+    Thread：Thread 是程序执行的最小单元，可以用 Thread 来执行一些异步的操作。
+    Service：Service 是android的一种机制，当它运行的时候如果是Local Service，那么对应的 Service 是运行在主进程的main 线程上的。
+            如果是Remote Service，那么对应的 Service 则是运行在独立进程的 main 线程上。
+
+    Thread 的运行是独立的，也就是说当一个 Activity 被 finish 之后，如果没有主动停止 Thread 或者 Thread 里的 run 方法没有
+执行完毕的话，Thread 也会一直执行。因此这里会出现一个问题：当 Activity 被 finish 之后，不再持有该 Thread 的引用，也就
+是不能再控制该Thread。另一方面，没有办法在不同的 Activity 中对同一 Thread 进行控制。
+    例如：如果 一个Thread 需要每隔一段时间连接服务器校验数据，该Thread需要在后台一直运行。这时候如果创建该Thread的Activity
+被结束了而该Thread没有停止，那么将没有办法再控制该Thread，除非kill掉该程序的进程。这时候如果创建并启动一个 Service ，
+在 Service 里面创建、运行并控制该 Thread，这样便解决了该问题(因为任何 Activity 都可以控制同一个Service，而系统也只会创建一个对应 Service 的实例)。
+因此可以把 Service 想象成一种消息服务，可以在任何有 Context 的地方调用 Context.startService、Context.stopService、Context.bindService、
+Context.unbindService来控制它，也可以在 Service 里注册 BroadcastReceiver，通过发送 broadcast 来达到控制的目的，这些都是 Thread 做不到的。
+
+    不少Android初学者都可能会有这样的疑惑，Service和Thread到底有什么关系呢？什么时候应该用Service，什么时候又应该用Thread？答案可能会有点让你吃惊，
+因为Service和Thread之间没有任何关系！
+    之所以有不少人会把它们联系起来，主要就是因为Service的后台概念。Thread我们大家都知道，是用于开启一个子线程，在这里去执行一些耗时操作就不会阻塞主线程的运行。
+而Service我们最初理解的时候，总会觉得它是用来处理一些后台任务的，一些比较耗时的操作也可以放在这里运行，这就会让人产生混淆了。但是，如果我告诉你Service其实
+是运行在主线程里的，你还会觉得它和Thread有什么关系吗？让我们看一下这个残酷的事实吧。
+    你可能会惊呼，这不是坑爹么！？那我要Service又有何用呢？其实大家不要把后台和子线程联系在一起就行了，这是两个完全不同的概念。Android的后台就是指，它的运行是完
+全不依赖UI的。即使Activity被销毁，或者程序被关闭，只要进程还在，Service就可以继续运行。比如说一些应用程序，始终需要与服务器之间始终保持着心跳连接，就可以使
+用Service来实现。你可能又会问，前面不是刚刚验证过Service是运行在主线程里的么？在这里一直执行着心跳连接，难道就不会阻塞主线程的运行吗？当然会，但是我们可以在
+Service中再创建一个子线程，然后在这里去处理耗时逻辑就没问题了。
+    额，既然在Service里也要创建一个子线程，那为什么不直接在Activity里创建呢？这是因为Activity很难对Thread进行控制，当Activity被销毁之后，就没有任何其它的办法可
+以再重新获取到之前创建的子线程的实例。而且在一个Activity中创建的子线程，另一个Activity无法对其进行操作。但是Service就不同了，所有的Activity都可以与Service进
+行关联，然后可以很方便地操作其中的方法，即使Activity被销毁了，之后只要重新与Service建立关联，就又能够获取到原有的Service中Binder的实例。因此，使用Service来处
+理后台任务，Activity就可以放心地finish，完全不需要担心无法对后台任务进行控制的情况。

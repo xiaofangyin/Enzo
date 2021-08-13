@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_common_bg"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/btn_cancel_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="清除所有" />
+
+            <Button
+                android:id="@+id/btn_send_simple_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="发送最简单的通知" />
+
+            <Button
+                android:id="@+id/btn_send_add_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="发送通知添加action" />
+
+            <Button
+                android:id="@+id/btn_send_can_not_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设置通知栏左右滑动不删除" />
+
+            <Button
+                android:id="@+id/btn_send_custom_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="发送自定义布局" />
+
+            <Button
+                android:id="@+id/btn_send_three_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="连续发送3条冬至" />
+
+            <Button
+                android:id="@+id/btn_send_click_auto_dismiss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="用户单击通知后自动消失" />
+
+            <Button
+                android:id="@+id/btn_send_add_audio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设置铃声效果" />
+
+            <Button
+                android:id="@+id/btn_send_add_vibrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设置震动效果" />
+
+            <Button
+                android:id="@+id/btn_send_only_once"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="通知只执行一次,与默认的效果一样" />
+
+            <Button
+                android:id="@+id/btn_send_with_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="带有进度条的通知栏" />
+
+            <Button
+                android:id="@+id/btn_send_android_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Android 8.0 适配问题" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

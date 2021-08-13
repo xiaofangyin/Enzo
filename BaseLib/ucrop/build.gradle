@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //只适配armeabi的APP可以跑在armeabi,x86,x86_64,armeabi-v7a,arm64-v8上
+        //只适配armeabi-v7a可以运行在armeabi-v7a和arm64-v8a
+        //只适配arm64-v8a 可以运行在arm64-v8a上
+        //以性能换兼容就arm64-v8,以兼容换性能armeabi,二者稍微平衡一点的就armeabi-v7a
+        //ndk { abiFilters "armeabi-v7a" }//大厂一般选这个
+        ndk { abiFilters "armeabi", "armeabi-v7a", "arm64-v8a" }// 其他忽略
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    resourcePrefix 'ucrop_'
+
+    sourceSets.main {
+        jni.srcDirs = []
+    }
+
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.exifinterface:exifinterface:1.1.0-beta01"
+    implementation "androidx.transition:transition:1.2.0-rc01"
+    implementation "com.squareup.okhttp3:okhttp:4.7.2"
+}

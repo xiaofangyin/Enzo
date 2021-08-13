@@ -1,0 +1,7 @@
+热修复实现原理：
+
+要想实现热更新我们需要拿到PathClassLoader中的DexPathList对象然后在拿到他当中的Element[]数组将我们已经修复
+的Element插入到数组的前面，这样在类加载时候就会先拿到我们已经修复的class了达到动态替换的效果。
+
+加载我们自己的dex文件需要用到DexClassLoader，然后通过反射取出DexClassLoader中的DexPathList对象中的
+Element[]数组插入到PathClassLoader中Element[]数组前面即可。

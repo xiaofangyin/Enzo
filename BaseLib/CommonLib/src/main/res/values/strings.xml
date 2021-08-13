@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">>
+    <string name="app_name">Enzo</string>
+
+    <string name="net_error">网络异常</string>
+
+    <string name="balance_text">剩余金额</string>
+
+    <string name="collection_pull_to_refresh">下拉刷新</string>
+    <string name="collection_release_refresh">释放刷新</string>
+    <string name="collection_refresh_done">刷新完成</string>
+    <string name="collection_refresh_failed">刷新失败</string>
+    <string name="collection_refreshing">正在刷新...</string>
+    <string name="collection_loading_more">正在加载...</string>
+    <string name="collection_no_more_data">没有更多数据咯</string>
+    <string name="collection_load_failed">加载失败，点我再试试...</string>
+
+    <string name="album_name_all">全部</string>
+    <string name="button_preview">预览</string>
+    <string name="button_apply_default">使用</string>
+    <string name="button_apply">使用(%1$d)</string>
+    <string name="button_back">返回</string>
+    <string name="photo_grid_capture">拍一张</string>
+    <string name="empty_text">还没有图片或视频</string>
+    <string name="button_ok">我知道了</string>
+    <string name="error_over_count">最多只能选择 %1$d 个文件</string>
+    <string name="error_file_type">不支持的文件类型</string>
+    <string name="error_type_conflict">不能同时选择图片和视频</string>
+    <string name="error_no_video_activity">没有支持视频预览的应用</string>
+</resources>

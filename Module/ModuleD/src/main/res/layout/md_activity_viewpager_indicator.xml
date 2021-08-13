@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_dark_black"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.enzo.commonlib.widget.indicator.noscroll.ViewPagerIndicator
+        android:id="@+id/md_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_major_c1" />
+
+    <com.enzo.commonlib.widget.indicator.scroll.ScrollViewPagerIndicator
+        android:id="@+id/md_scroll_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_major_c1" />
+
+    <com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator
+        android:id="@+id/md_magic_indicator"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_major_c1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <com.enzo.commonlib.widget.indicator.magicindicator.MagicIndicator
+        android:id="@+id/md_magic_indicator2"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_major_c1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+</LinearLayout>

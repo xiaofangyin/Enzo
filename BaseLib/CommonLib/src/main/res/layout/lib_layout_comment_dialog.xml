@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/dialog_comment_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@color/color_f5"
+        android:gravity="top"
+        android:hint="有何高见，展开讲讲"
+        android:maxHeight="80dp"
+        android:maxLength="200"
+        android:padding="10dp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/ugc_post_detail_send_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingEnd="16dp"
+        android:paddingStart="20dp">
+
+        <ImageView
+            android:id="@+id/ugc_post_detail_send_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/icon_comment_disable" />
+
+        <TextView
+            android:id="@+id/ugc_post_detail_send_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            android:textColor="@color/color_d9"
+            android:textSize="10sp" />
+    </LinearLayout>
+</LinearLayout>

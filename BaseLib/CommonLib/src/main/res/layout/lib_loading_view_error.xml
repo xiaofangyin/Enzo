@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loading_error_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/ab_page_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerInside"
+        android:src="@mipmap/icon_loading_layout_wrong" />
+
+    <TextView
+        android:id="@+id/ab_tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ab_page_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="加载出错"
+        android:textColor="#999999"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ab_tv_error"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="点击屏幕重新加载"
+        android:textColor="#999999"
+        android:textSize="16sp" />
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <Button
+            android:id="@+id/btn_single_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="运行一个单个任务" />
+
+        <Button
+            android:id="@+id/btn_continueWith"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="continueWith" />
+
+        <Button
+            android:id="@+id/btn_onSuccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="onSuccess" />
+
+        <Button
+            android:id="@+id/btn_sync_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="顺序任务" />
+
+        <Button
+            android:id="@+id/btn_parallel_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="并行任务" />
+
+        <Button
+            android:id="@+id/btn_delay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="异常" />
+    </LinearLayout>
+</LinearLayout>

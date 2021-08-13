@@ -1,0 +1,48 @@
+Client
+
+    | aidl.add(3,5)
+
+Proxy
+
+ private static class Proxy implements com.enzo.module_c.ICalculateInterface{
+        add(int a, int b){
+            mRemote.transact(Stub.TRANSACTION_add, _data, _reply, 0);
+        }
+ }
+
+    |
+
+Stub(抽象类，没有实现aidl接口的方法)
+abstract class Stub extends android.os.Binder implements ICalculateInterface{
+    @Override
+    public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException{
+        switch(code){
+                case TRANSACTION_add:
+                    {
+                      data.enforceInterface(descriptor);
+                      int _arg0;
+                      _arg0 = data.readInt();
+                      int _arg1;
+                      _arg1 = data.readInt();
+                      int _result = this.add(_arg0, _arg1);
+                      reply.writeNoException();
+                      reply.writeInt(_result);
+                      return true;
+                    }
+        }
+    }
+}
+
+    |
+
+Service
+
+    private final IBinder iBinder = new ICalculateInterface.Stub() {
+
+        @Override
+        public int add(int a, int b) throws RemoteException {
+            LogUtil.d("a + b = " + (a + b));
+            ToastUtil.show("ModuleC 计算结果: " + (a + b));
+            return a + b;
+        }
+    };

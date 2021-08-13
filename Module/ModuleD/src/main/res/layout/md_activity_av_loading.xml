@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.enzo.commonlib.widget.headerview.HeadWidget
+        android:id="@+id/header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallTrianglePath"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallScale"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="LineScale"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="LineScaleParty"
+                app:indicator_color="#ffB5B5B5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallScaleMultiple"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallPulseSync"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallBeat"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="LineScalePulseOut"
+                app:indicator_color="#ffB5B5B5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="LineScalePulseOutRapid"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallScaleRipple"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallScaleRippleMultiple"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallSpinFadeLoader"
+                app:indicator_color="#ffB5B5B5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="LineSpinFadeLoader"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="TriangleSkewSpin"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="Pacman"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallGridBeat"
+                app:indicator_color="#ffB5B5B5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallRotate"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="CubeTransition"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallZigZag"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallZigZagDeflect"
+                app:indicator_color="#ffB5B5B5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallClipRotatePulse"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="SquareSpin"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallClipRotateMultiple"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallPulseRise"
+                app:indicator_color="#ffB5B5B5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallPulse"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallGridPulse"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="BallClipRotate"
+                app:indicator_color="#ffB5B5B5" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:indicator="SemiCircleSpin"
+                app:indicator_color="#ffB5B5B5" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

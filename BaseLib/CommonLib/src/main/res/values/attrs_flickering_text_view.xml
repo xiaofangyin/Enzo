@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--录制视频控件-->
+    <declare-styleable name="MovieRecorderView">
+        <!-- 开始是否打开摄像头 -->
+        <attr name="is_open_camera" format="boolean" />
+        <!-- 一次拍摄最长时间 -->
+        <attr name="record_max_time" format="integer" />
+        <!-- 视频分辨率宽度 -->
+        <attr name="record_width" format="integer" />
+        <!-- 视频分辨率高度 -->
+        <attr name="record_height" format="integer" />
+    </declare-styleable>
+
+    <!-- FlickeringTextView -->
+    <declare-styleable name="FlickeringTextView">
+        <attr name="flickeringColor" format="color" />
+    </declare-styleable>
+
+    <!-- RingProgressBar -->
+    <declare-styleable name="RingProgressBar">
+        <attr name="startColor" format="color" />
+        <attr name="centerColor" format="color" />
+        <attr name="endColor" format="color" />
+        <attr name="max" format="float" />
+        <attr name="mProgress" format="float" />
+    </declare-styleable>
+</resources>

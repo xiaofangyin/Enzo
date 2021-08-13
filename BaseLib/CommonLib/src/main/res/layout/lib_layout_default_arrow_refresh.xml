@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_333"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/refresh_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/collection_pull_to_refresh"
+            android:textColor="@color/color_white"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_toStartOf="@id/refresh_status_tv">
+
+            <ImageView
+                android:id="@+id/refresh_arrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_refresh_arrow" />
+
+            <com.enzo.commonlib.widget.avi.AVLoadingIndicatorView
+                android:id="@+id/av_progressbar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:visibility="invisible"
+                app:indicator="BallSpinFadeLoader"
+                app:indicator_color="#ffB5B5B5" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
